@@ -674,6 +674,9 @@ class SteamStyleApp:
         hover_bg = default_style.pop('hover_bg', self.colors['button_hover'])
         normal_bg = default_style.get('bg', self.colors['button_bg'])
         
+        # Check if scaling effects should be disabled
+        disable_scaling = kwargs.pop('disable_scaling', False)
+        
         # Whitelist valid tkinter Button options
         allowed_button_keys = {
             'activebackground', 'activeforeground', 'anchor', 'background', 'bg',
@@ -721,17 +724,18 @@ class SteamStyleApp:
         
         button.bind('<Button-1>', on_click)
         
-        # Add subtle scale effect on hover for premium feel
-        def on_enter_scale(e):
-            current_font = default_style.get('font', ("Arial", 10))
-            if isinstance(current_font, tuple) and len(current_font) >= 2:
-                button.configure(font=(current_font[0], current_font[1] + 1))
-        
-        def on_leave_scale(e):
-            button.configure(font=default_style.get('font', ("Arial", 10)))
-        
-        button.bind('<Enter>', on_enter_scale)
-        button.bind('<Leave>', on_leave_scale)
+        # Add subtle scale effect on hover for premium feel (only if not disabled)
+        if not disable_scaling:
+            def on_enter_scale(e):
+                current_font = default_style.get('font', ("Arial", 10))
+                if isinstance(current_font, tuple) and len(current_font) >= 2:
+                    button.configure(font=(current_font[0], current_font[1] + 1))
+            
+            def on_leave_scale(e):
+                button.configure(font=default_style.get('font', ("Arial", 10)))
+            
+            button.bind('<Enter>', on_enter_scale)
+            button.bind('<Leave>', on_leave_scale)
         
         return button
     
@@ -825,8 +829,25 @@ class SteamStyleApp:
         )
         self.drop_label.pack(expand=True, fill=tk.BOTH, padx=40, pady=40)
         
-        # Make the frame clickable
+        # Make the entire area clickable and add hover effects
+        def drop_enter(e):
+            self.drop_frame.configure(bg=self.colors['button_secondary_hover'])
+            self.drop_label.configure(bg=self.colors['button_secondary_hover'])
+        
+        def drop_leave(e):
+            self.drop_frame.configure(bg=self.colors['card_bg'])
+            self.drop_label.configure(bg=self.colors['card_bg'])
+        
+        # Bind hover and click events to both frame and label
+        self.drop_frame.bind('<Enter>', drop_enter)
+        self.drop_frame.bind('<Leave>', drop_leave)
         self.drop_frame.bind('<Button-1>', self.select_files)
+        self.drop_frame.configure(cursor="hand2")
+        
+        self.drop_label.bind('<Enter>', drop_enter)
+        self.drop_label.bind('<Leave>', drop_leave)
+        self.drop_label.bind('<Button-1>', self.select_files)
+        self.drop_label.configure(cursor="hand2")
         
         # Bottom button frame with modern styling and better spacing
         self.bottom_frame = tk.Frame(main_frame, bg=self.colors['bg'])
@@ -862,6 +883,20 @@ class SteamStyleApp:
             pady=12
         )
         self.god_mode_button.pack(side=tk.LEFT, padx=(20, 0))
+        
+        # Import/Export button (next to God Mode) with modern styling - DISABLED
+        self.import_export_button = self.create_modern_button(
+            left_button_frame,
+            text="📤 Import/Export",
+            command=self.show_import_export_dev_message,
+            font=self.font_button,
+            bg='#666666',  # Grayed out
+            hover_bg='#666666',  # No hover effect
+            fg='#999999',  # Muted text color
+            padx=25,
+            pady=12
+        )
+        self.import_export_button.pack(side=tk.LEFT, padx=(20, 0))
         
         # Right button group
         right_button_frame = tk.Frame(self.bottom_frame, bg=self.colors['bg'])
@@ -1015,13 +1050,28 @@ class SteamStyleApp:
                 content = f.read()
                 
             lines = content.split('\n')
-            modified = False
+            
+            # Check if file contains LUATOOLS: UPDATES DISABLED! line
+            if any('-- LUATOOLS: UPDATES DISABLED!' in line for line in lines):
+                # If updates are disabled, uncomment any --setManifestid lines
+                modified = False
+                for i, line in enumerate(lines):
+                    if line.strip().startswith('--setManifestid'):
+                        lines[i] = line[2:]  # Remove the -- prefix
+                        modified = True
+                
+                if modified:
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write('\n'.join(lines))
+                    return "updates_disabled_modified"
+                return "updates_disabled"
             
             # Check if file contains addappid line
             has_addappid = any('addappid' in line.lower() for line in lines)
             if not has_addappid:
                 return "no_addappid"
             
+            modified = False
             for i, line in enumerate(lines):
                 if line.strip().startswith('setManifestid'):
                     lines[i] = '--' + line
@@ -1229,7 +1279,11 @@ class SteamStyleApp:
                 self.log_message(f"Processing {app_id}.lua...")
                 
                 patch_result = self.patch_lua_file(file_path)
-                if patch_result == "no_addappid":
+                if patch_result == "updates_disabled":
+                    self.log_message(f"⏸️ Skipped {app_id}.lua - Updates disabled", self.colors['warning'])
+                elif patch_result == "updates_disabled_modified":
+                    self.log_message(f"⏸️ Skipped {app_id}.lua - Updates disabled (uncommented setManifestid)", self.colors['warning'])
+                elif patch_result == "no_addappid":
                     invalid_files.append(app_id)
                     self.log_message(f"✗ Skipped {app_id}.lua - No addappid line found", self.colors['error'])
                 elif patch_result:
@@ -1623,6 +1677,302 @@ class SteamStyleApp:
             command=self.save_and_exit_settings
         )
         self.save_exit_button.pack(pady=(20, 0))
+        
+    def open_import_export(self):
+        """Open the Import/Export menu"""
+        # Hide main UI
+        for widget in self.root.winfo_children():
+            widget.pack_forget()
+            
+        # Create Import/Export frame
+        self.import_export_frame = tk.Frame(self.root, bg=self.colors['bg'])
+        self.import_export_frame.pack(fill=tk.BOTH, expand=True, padx=30, pady=30)
+        
+        # Check if we already have cached Steam API data
+        if hasattr(self, '_steam_api_cache') and hasattr(self, '_steam_api_cache_timestamp'):
+            # Check if cache is less than 1 hour old (3600 seconds)
+            if time.time() - self._steam_api_cache_timestamp < 3600:
+                print("[IMPORT/EXPORT] Using cached Steam API data")
+                # Use cached data to show menu immediately
+                self.show_import_export_menu()
+                return
+        
+        # Create loading frame
+        self.import_export_loading_frame = tk.Frame(self.import_export_frame, bg=self.colors['bg'])
+        self.import_export_loading_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Loading message
+        self.import_export_loading_label = tk.Label(
+            self.import_export_loading_frame,
+            text="Loading Steam game data...",
+            font=('Segoe UI', 14),
+            fg=self.colors['text'],
+            bg=self.colors['bg']
+        )
+        self.import_export_loading_label.pack(pady=(50, 20))
+        
+        # Progress bar
+        self.import_export_progress_bar = ttk.Progressbar(
+            self.import_export_loading_frame,
+            mode='indeterminate',
+            length=400
+        )
+        self.import_export_progress_bar.pack(pady=(0, 30))
+        self.import_export_progress_bar.start()
+        
+        # Start loading data in background thread
+        self.load_import_export_data()
+        
+        # Function should end here - all UI elements are created by show_import_export_menu()
+        return
+        
+    def load_import_export_data(self):
+        """Load Steam API data for Import/Export menu in background thread"""
+        def load_thread():
+            try:
+                # Call Steam API
+                response = httpx.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
+                response.raise_for_status()
+                steam_data = response.json()
+                
+                # Cache the Steam API data for future use
+                self._steam_api_cache = steam_data
+                self._steam_api_cache_timestamp = time.time()
+                print(f"[IMPORT/EXPORT] Cached Steam API data with {len(steam_data.get('applist', {}).get('apps', []))} apps")
+                
+                # Update UI on main thread
+                self.root.after(0, self.show_import_export_menu)
+                
+            except httpx.RequestError as e:
+                self.root.after(0, lambda: self.show_import_export_error(f"Network error: {str(e)}"))
+            except httpx.HTTPStatusError as e:
+                self.root.after(0, lambda: self.show_import_export_error(f"HTTP error: {e.response.status_code}"))
+            except json.JSONDecodeError as e:
+                self.root.after(0, lambda: self.show_import_export_error(f"Invalid JSON response: {str(e)}"))
+            except Exception as e:
+                self.root.after(0, lambda: self.show_import_export_error(f"Unexpected error: {str(e)}"))
+        
+        # Start background thread
+        threading.Thread(target=load_thread, daemon=True).start()
+        
+    def show_import_export_menu(self):
+        """Show the Import/Export menu after Steam data is loaded"""
+        # Hide loading frame
+        if hasattr(self, 'import_export_loading_frame'):
+            self.import_export_loading_frame.pack_forget()
+        
+        # Title
+        title_label = tk.Label(
+            self.import_export_frame,
+            text="📤 Import/Export",
+            font=('Segoe UI', 24, 'bold'),
+            fg=self.colors['accent'],
+            bg=self.colors['bg']
+        )
+        title_label.pack(pady=(20, 10))
+        
+        # Subtitle
+        subtitle_label = tk.Label(
+            self.import_export_frame,
+            text="Import and Export Lua's",
+            font=('Segoe UI', 12),
+            fg=self.colors['text_secondary'],
+            bg=self.colors['bg']
+        )
+        subtitle_label.pack(pady=(0, 30))
+        
+        # Main content frame
+        content_frame = tk.Frame(self.import_export_frame, bg=self.colors['bg'])
+        content_frame.pack(fill=tk.BOTH, expand=True, padx=30, pady=(0, 30))
+        
+        # Import section (clickable)
+        import_frame = self.create_modern_frame(content_frame, bg=self.colors['card_bg'])
+        import_frame.pack(fill=tk.X, pady=(0, 20))
+        
+        # Make import frame clickable
+        import_frame.bind("<Button-1>", lambda e: self.import_section_clicked())
+        import_frame.configure(cursor="hand2")
+        
+        import_title = tk.Label(
+            import_frame,
+            text="📥 Import",
+            font=('Segoe UI', 16, 'bold'),
+            fg=self.colors['text'],
+            bg=self.colors['card_bg']
+        )
+        import_title.pack(pady=(20, 10))
+        
+        import_desc = tk.Label(
+            import_frame,
+            text="Import configuration files, game lists, or other data",
+            font=('Segoe UI', 10),
+            fg=self.colors['text_secondary'],
+            bg=self.colors['card_bg']
+        )
+        import_desc.pack(pady=(0, 20))
+        
+        # Export section (clickable)
+        export_frame = self.create_modern_frame(content_frame, bg=self.colors['card_bg'])
+        export_frame.pack(fill=tk.X, pady=(0, 20))
+        
+        # Make export frame clickable
+        export_frame.bind("<Button-1>", lambda e: self.export_section_clicked())
+        export_frame.configure(cursor="hand2")
+        
+        export_title = tk.Label(
+            export_frame,
+            text="📤 Export",
+            font=('Segoe UI', 16, 'bold'),
+            fg=self.colors['text'],
+            bg=self.colors['card_bg']
+        )
+        export_title.pack(pady=(20, 10))
+        
+        export_desc = tk.Label(
+            export_frame,
+            text="Export your current configuration, game lists, or other data",
+            font=('Segoe UI', 10),
+            fg=self.colors['text_secondary'],
+            bg=self.colors['card_bg']
+        )
+        export_desc.pack(pady=(0, 20))
+        
+        # Now make all frame elements clickable and highlightable (after both frames are defined)
+        def import_enter(e):
+            import_frame.configure(bg=self.colors['button_secondary_hover'])
+            import_title.configure(bg=self.colors['button_secondary_hover'])
+            import_desc.configure(bg=self.colors['button_secondary_hover'])
+        
+        def import_leave(e):
+            import_frame.configure(bg=self.colors['card_bg'])
+            import_title.configure(bg=self.colors['card_bg'])
+            import_desc.configure(bg=self.colors['card_bg'])
+        
+        def export_enter(e):
+            export_frame.configure(bg=self.colors['button_secondary_hover'])
+            export_title.configure(bg=self.colors['button_secondary_hover'])
+            export_desc.configure(bg=self.colors['button_secondary_hover'])
+        
+        def export_leave(e):
+            export_frame.configure(bg=self.colors['card_bg'])
+            export_title.configure(bg=self.colors['card_bg'])
+            export_desc.configure(bg=self.colors['card_bg'])
+        
+        # Bind hover and click events to import frame elements
+        import_frame.bind("<Enter>", import_enter)
+        import_frame.bind("<Leave>", import_leave)
+        import_title.bind("<Enter>", import_enter)
+        import_title.bind("<Leave>", import_leave)
+        import_desc.bind("<Enter>", import_enter)
+        import_desc.bind("<Leave>", import_leave)
+        import_title.bind("<Button-1>", lambda e: self.import_section_clicked())
+        import_desc.bind("<Button-1>", lambda e: self.import_section_clicked())
+        
+        # Bind hover and click events to export frame elements
+        export_frame.bind("<Enter>", export_enter)
+        export_frame.bind("<Leave>", export_leave)
+        export_title.bind("<Enter>", export_enter)
+        export_title.bind("<Leave>", export_leave)
+        export_desc.bind("<Enter>", export_enter)
+        export_desc.bind("<Leave>", export_leave)
+        export_title.bind("<Button-1>", lambda e: self.export_section_clicked())
+        export_desc.bind("<Button-1>", lambda e: self.export_section_clicked())
+        
+        # Bottom button frame
+        bottom_button_frame = tk.Frame(self.import_export_frame, bg=self.colors['bg'])
+        bottom_button_frame.pack(fill=tk.X, padx=30, pady=(0, 20))
+        
+        # Back button (centered)
+        back_button = self.create_modern_button(
+            bottom_button_frame,
+            text="← Back to Main Menu",
+            command=self.back_to_main_from_import_export,
+            font=('Segoe UI', 10),
+            bg=self.colors['button_secondary'],
+            hover_bg=self.colors['button_secondary_hover'],
+            padx=25,
+            pady=10
+        )
+        back_button.pack(expand=True)
+        
+    def show_import_export_error(self, error_message):
+        """Show error message in Import/Export interface"""
+        # Hide loading frame
+        if hasattr(self, 'import_export_loading_frame'):
+            self.import_export_loading_frame.pack_forget()
+        
+        # Create error frame
+        error_frame = tk.Frame(self.import_export_frame, bg=self.colors['bg'])
+        error_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Error icon/message
+        error_label = tk.Label(
+            error_frame,
+            text="❌ Error Loading Data",
+            font=('Segoe UI', 18, 'bold'),
+            fg='#ff6b6b',
+            bg=self.colors['bg']
+        )
+        error_label.pack(pady=(50, 20))
+        
+        # Error details
+        error_details = tk.Label(
+            error_frame,
+            text=error_message,
+            font=('Segoe UI', 12),
+            fg=self.colors['text'],
+            bg=self.colors['bg'],
+            wraplength=600
+        )
+        error_details.pack(pady=(0, 30))
+        
+        # Retry button
+        retry_button = tk.Button(
+            error_frame,
+            text="Retry",
+            font=('Segoe UI', 10),
+            bg=self.colors['button_bg'],
+            fg=self.colors['text'],
+            activebackground=self.colors['button_hover'],
+            activeforeground=self.colors['text'],
+            relief=tk.FLAT,
+            padx=30,
+            pady=10,
+            cursor='hand2',
+            command=lambda: self.retry_import_export_load(error_frame)
+        )
+        retry_button.pack(pady=(0, 20))
+        
+        # Back button
+        back_button = tk.Button(
+            error_frame,
+            text="Back",
+            font=('Segoe UI', 10),
+            bg=self.colors['button_bg'],
+            fg=self.colors['text'],
+            activebackground=self.colors['button_hover'],
+            activeforeground=self.colors['text'],
+            relief=tk.FLAT,
+            padx=10,
+            pady=3,
+            cursor='hand2',
+            command=self.back_to_main_from_import_export
+        )
+        back_button.pack()
+        
+    def retry_import_export_load(self, error_frame):
+        """Retry loading Import/Export data"""
+        # Remove error frame
+        error_frame.destroy()
+        
+        # Show loading frame again
+        if hasattr(self, 'import_export_loading_frame'):
+            self.import_export_loading_frame.pack(fill=tk.BOTH, expand=True)
+            if hasattr(self, 'import_export_progress_bar'):
+                self.import_export_progress_bar.start()
+        
+        # Start loading again
+        self.load_import_export_data()
         
     def refresh_api_list(self):
         """Refresh the display of API list in downloader settings"""
@@ -2165,8 +2515,9 @@ class SteamStyleApp:
         
     def show_god_mode_error(self, error_message):
         """Show error message in God Mode interface"""
-        # Hide loading frame
-        self.loading_frame.pack_forget()
+        # Hide loading frame if it exists
+        if hasattr(self, 'loading_frame'):
+            self.loading_frame.pack_forget()
         
         # Create error frame
         error_frame = tk.Frame(self.god_mode_frame, bg=self.colors['bg'])
@@ -2232,9 +2583,11 @@ class SteamStyleApp:
         # Remove error frame
         error_frame.destroy()
         
-        # Show loading frame again
-        self.loading_frame.pack(fill=tk.BOTH, expand=True)
-        self.progress_bar.start()
+        # Show loading frame again if it exists
+        if hasattr(self, 'loading_frame'):
+            self.loading_frame.pack(fill=tk.BOTH, expand=True)
+        if hasattr(self, 'progress_bar'):
+            self.progress_bar.start()
         
         # Start loading again
         self.load_god_mode_data()
@@ -2313,8 +2666,9 @@ class SteamStyleApp:
         self.god_mode_game_list = game_list
         self.god_mode_steam_data = steam_data
         
-        # Hide loading frame
-        self.loading_frame.pack_forget()
+        # Hide loading frame if it exists
+        if hasattr(self, 'loading_frame'):
+            self.loading_frame.pack_forget()
         
         # Create main content frame
         content_frame = tk.Frame(self.god_mode_frame, bg=self.colors['bg'])
@@ -2431,6 +2785,23 @@ class SteamStyleApp:
             command=self.open_download_manager
         )
         download_manager_button.pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Update Disabler button (upload symbol)
+        update_disabler_button = tk.Button(
+            button_frame,
+            text="⬆",  # Upload symbol
+            font=('Segoe UI', 12),
+            bg=self.colors['button_bg'],
+            fg=self.colors['text'],
+            activebackground=self.colors['button_hover'],
+            activeforeground=self.colors['text'],
+            relief=tk.FLAT,
+            width=3,  # Make it round/square
+            height=1,
+            cursor='hand2',
+            command=self.open_update_disabler
+        )
+        update_disabler_button.pack(side=tk.LEFT, padx=(0, 10))
         
         # Settings button (cog emoji)
         settings_button = tk.Button(
@@ -3029,7 +3400,13 @@ class SteamStyleApp:
                 
                 # First, patch the file (add "--" to setManifestid lines)
                 patch_result = self.patch_lua_file(lua_file)
-                if patch_result == "no_addappid":
+                if patch_result == "updates_disabled":
+                    print(f"[INFO] Skipped {filename} - Updates disabled")
+                    continue  # Skip this file
+                elif patch_result == "updates_disabled_modified":
+                    print(f"[INFO] Skipped {filename} - Updates disabled (uncommented setManifestid)")
+                    continue  # Skip this file
+                elif patch_result == "no_addappid":
                     invalid_files.append(app_id)
                     continue  # Skip this file
                 elif patch_result:
@@ -3395,9 +3772,16 @@ class SteamStyleApp:
 
     def open_download_manager(self):
         """Open the download manager interface"""
+        # Check if god_mode_frame exists
+        if not hasattr(self, 'god_mode_frame'):
+            messagebox.showerror("Error", "God Mode interface not available. Please open God Mode first.")
+            return
+            
         # Hide current God Mode content
         for widget in self.god_mode_frame.winfo_children():
-            if widget != self.loading_frame:
+            if hasattr(self, 'loading_frame') and widget != self.loading_frame:
+                widget.pack_forget()
+            elif not hasattr(self, 'loading_frame'):
                 widget.pack_forget()
         
         # Create download manager frame
@@ -3477,14 +3861,15 @@ class SteamStyleApp:
         queue_frame = tk.Frame(self.download_manager_frame, bg=self.colors['secondary_bg'])
         queue_frame.pack(fill=tk.BOTH, expand=True, padx=20)
         
-        queue_title = tk.Label(
+        # Store reference to queue title for live updates
+        self.queue_title_label = tk.Label(
             queue_frame,
             text="Download Queue:",
             font=('Segoe UI', 12, 'bold'),
             fg=self.colors['text'],
             bg=self.colors['secondary_bg']
         )
-        queue_title.pack(anchor='w', padx=15, pady=(15, 10))
+        self.queue_title_label.pack(anchor='w', padx=15, pady=(15, 10))
         
         # Create scrollable queue list
         queue_canvas = tk.Canvas(queue_frame, bg=self.colors['secondary_bg'], highlightthickness=0)
@@ -3508,11 +3893,22 @@ class SteamStyleApp:
         
         queue_canvas.bind("<Configure>", on_canvas_configure)
         
+        # Bind mouse wheel to the entire download manager frame for scrolling anywhere
+        def _on_mousewheel(event):
+            # Scroll the queue canvas when mouse wheel is used anywhere in the download manager
+            queue_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        # Bind to the download manager frame to catch all mouse wheel events
+        self.download_manager_frame.bind("<MouseWheel>", _on_mousewheel)
+        
         # Update the queue display
         self.update_download_queue_display()
         
         # Update back button state based on current queue status
         self.update_god_mode_back_button()
+        
+        # Update queue title text immediately
+        self.update_queue_title_text()
         
         # Check if we should start downloads when the button is pressed
         dont_start_until_button = self.settings.get('dont_start_downloads_until_button_pressed', False)
@@ -3630,6 +4026,7 @@ class SteamStyleApp:
         
         print(f"[QUEUE] Queue size: {len(self.download_queue)} items")
         self.update_download_queue_display()
+        self.update_queue_title_text()
         
         # Update button states
         self.update_god_mode_buttons()
@@ -3715,6 +4112,7 @@ class SteamStyleApp:
             
             # Update the display and return early for multi-threaded mode
             self.update_download_queue_display()
+            self.update_queue_title_text()
             return
         
         # Continue with original single-threaded logic if max_threads is 1
@@ -3727,6 +4125,7 @@ class SteamStyleApp:
         
         # Update the display immediately
         self.update_download_queue_display()
+        self.update_queue_title_text()
         
         # Start download in separate thread
         def download_thread():
@@ -3807,6 +4206,9 @@ class SteamStyleApp:
         # Update button states
         self.update_god_mode_buttons()
         
+        # Update queue title text immediately
+        self.update_queue_title_text()
+        
         # Process next item in queue
         if self.download_queue:
             print(f"[QUEUE] Processing next item in queue ({len(self.download_queue)} remaining)")
@@ -3882,6 +4284,9 @@ class SteamStyleApp:
         
         # Update button states
         self.update_god_mode_buttons()
+        
+        # Update queue title text immediately
+        self.update_queue_title_text()
         
         # Check if we should process more downloads from the queue
         self.process_download_queue()
@@ -4013,12 +4418,51 @@ class SteamStyleApp:
             # Add failed downloads
             for item in self.failed_downloads:
                 self.create_queue_item(item, self.queue_scrollable_frame)
-                
         except (tk.TclError, AttributeError):
             # Frame became invalid during item creation, clear reference
             self.queue_scrollable_frame = None
             return
-
+        
+        # Update the queue title text
+        self.update_queue_title_text()
+    
+    def update_queue_title_text(self):
+        """Update the queue title text to show current status"""
+        # Check if the queue title label exists and is valid
+        if not hasattr(self, 'queue_title_label') or not self.queue_title_label:
+            return
+        
+        try:
+            # Test if the label is still valid and exists
+            if not self.queue_title_label.winfo_exists():
+                # Label has been destroyed, clear the reference
+                self.queue_title_label = None
+                return
+        except (tk.TclError, AttributeError):
+            # Label has been destroyed, clear the reference
+            self.queue_title_label = None
+            return
+        
+        # Calculate total items in various states
+        queued_count = len(self.download_queue)
+        active_count = len(self.active_downloads)
+        current_download_count = 1 if self.current_download else 0
+        
+        # Total items that are not complete
+        total_incomplete = queued_count + active_count + current_download_count
+        
+        try:
+            if total_incomplete > 0:
+                # There are items in queue or downloading
+                self.queue_title_label.config(text=f"Download Queue: {total_incomplete}")
+            else:
+                # All downloads are complete
+                self.queue_title_label.config(text="Download Queue Complete!")
+        except (tk.TclError, AttributeError):
+            # Label was destroyed during the config operation, clear the reference
+            self.queue_title_label = None
+            return
+        
     def create_queue_item(self, item, parent_frame):
         """Create a queue item display"""
         try:
@@ -4159,6 +4603,7 @@ class SteamStyleApp:
         self.download_queue.append(item)
         print(f"[RETRY] Added back to queue (Queue size: {len(self.download_queue)})")
         self.update_download_queue_display()
+        self.update_queue_title_text()
         
         # Update button states
         self.update_god_mode_buttons()
@@ -4984,6 +5429,9 @@ class SteamStyleApp:
         # Update button states
         self.update_god_mode_buttons()
         
+        # Update queue title text
+        self.update_queue_title_text()
+        
     def clear_finished_downloads(self):
         """Clear only completed and failed downloads from the queue"""
         self.completed_downloads.clear()
@@ -4997,6 +5445,7 @@ class SteamStyleApp:
         # Update download manager display if it's open
         if hasattr(self, 'queue_scrollable_frame') and self.queue_scrollable_frame.winfo_exists():
             self.update_download_queue_display()
+            self.update_queue_title_text()
 
     def create_game_card(self, game, parent_frame):
         """Create a game card widget for the God Mode games list"""
@@ -5202,9 +5651,60 @@ class SteamStyleApp:
             bg=bg_color,
             anchor='w',
             wraplength=0,  # No text wrapping
-            justify=tk.LEFT
+            justify=tk.LEFT,
+            cursor='hand2'  # Show hand cursor on hover
         )
         game_name_label.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+        
+        # Add hover effect to show it's clickable
+        def on_enter(event):
+            game_name_label.configure(fg=self.colors['accent'])
+        
+        def on_leave(event):
+            game_name_label.configure(fg=text_color)
+        
+        game_name_label.bind('<Enter>', on_enter)
+        game_name_label.bind('<Leave>', on_leave)
+        
+        # Add click bindings to game name
+        def open_steamdb(event):
+            """Open SteamDB page for the game"""
+            import webbrowser
+            app_id = str(game['app_id'])
+            url = f"https://steamdb.info/app/{app_id}/"
+            webbrowser.open(url)
+        
+        def open_lua_file(event):
+            """Open the .lua file in default text editor"""
+            if is_installed and game.get('lua_file'):
+                import webbrowser
+                import os
+                import subprocess
+                
+                # Get Steam installation path
+                steam_path = self.get_steam_install_path()
+                if steam_path:
+                    lua_file_path = os.path.join(steam_path, 'config', 'stplug-in', game['lua_file'])
+                    if os.path.exists(lua_file_path):
+                        try:
+                            # Try to open with default text editor
+                            if os.name == 'nt':  # Windows
+                                os.startfile(lua_file_path)
+                            else:  # Linux/Mac
+                                subprocess.run(['xdg-open', lua_file_path])
+                        except Exception as e:
+                            # Fallback to webbrowser for some systems
+                            webbrowser.open(f"file://{lua_file_path}")
+                    else:
+                        messagebox.showerror("Error", f"Could not find {game['lua_file']}")
+                else:
+                    messagebox.showerror("Error", "Could not find Steam installation path")
+        
+        # Bind left-click to open SteamDB
+        game_name_label.bind('<Button-1>', open_steamdb)
+        
+        # Bind right-click to open .lua file
+        game_name_label.bind('<Button-3>', open_lua_file)
         
         # Game info frame
         info_frame = tk.Frame(game_frame, bg=bg_color)
@@ -5496,6 +5996,14 @@ class SteamStyleApp:
         
         # Bind escape key to close
         settings_window.bind('<Escape>', lambda e: settings_window.destroy())
+        
+        # Bind mouse wheel to the entire settings window for scrolling anywhere
+        def _on_mousewheel(event):
+            # Scroll the canvas when mouse wheel is used anywhere in the settings window
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        # Bind to the settings window to catch all mouse wheel events
+        settings_window.bind("<MouseWheel>", _on_mousewheel)
 
     def refresh_game_display_with_settings(self):
         """Refresh the game display with current settings applied"""
@@ -5678,6 +6186,942 @@ class SteamStyleApp:
                     download_button.config(state='disabled')
         except Exception as e:
             print(f"[BUTTON_CREATION] Error creating buttons: {e}")
+
+    def import_settings_placeholder(self):
+        """Placeholder function for importing settings"""
+        messagebox.showinfo("Import Settings", "Import Settings functionality coming soon!")
+    
+    def import_games_placeholder(self):
+        """Placeholder function for importing game list"""
+        messagebox.showinfo("Import Game List", "Import Game List functionality coming soon!")
+    
+    def export_settings_placeholder(self):
+        """Placeholder function for exporting settings"""
+        messagebox.showinfo("Export Settings", "Export Settings functionality coming soon!")
+    
+    def export_games_placeholder(self):
+        """Placeholder function for exporting game list"""
+        messagebox.showinfo("Export Game List", "Export Game List functionality coming soon!")
+    
+    def import_section_clicked(self):
+        """Placeholder function for import section click"""
+        messagebox.showinfo("Import Section", "Import functionality coming soon!")
+    
+    def export_section_clicked(self):
+        """Open the export menu to select games from Steam depot keys"""
+        self.open_export_menu()
+    
+    def open_export_menu(self):
+        """Open the export menu to select games from Steam depot keys"""
+        # Hide current Import/Export content
+        for widget in self.import_export_frame.winfo_children():
+            widget.pack_forget()
+        
+        # Create export menu frame
+        self.export_menu_frame = tk.Frame(self.import_export_frame, bg=self.colors['bg'])
+        self.export_menu_frame.pack(fill=tk.BOTH, expand=True, padx=30, pady=30)
+        
+        # Title (removed to save space)
+        
+        # Search and controls frame
+        search_frame = tk.Frame(self.export_menu_frame, bg=self.colors['bg'])
+        search_frame.pack(fill=tk.X, pady=(20, 20))
+        
+        # Left side - Search
+        search_left_frame = tk.Frame(search_frame, bg=self.colors['bg'])
+        search_left_frame.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        
+        search_label = tk.Label(
+            search_left_frame,
+            text="🔍 Search Games:",
+            font=('Segoe UI', 12, 'bold'),
+            fg=self.colors['text'],
+            bg=self.colors['bg']
+        )
+        search_label.pack(side=tk.LEFT, padx=(0, 10))
+        
+        self.export_search_var = tk.StringVar()
+        self.export_search_var.trace('w', self.filter_export_games)
+        search_entry = tk.Entry(
+            search_left_frame,
+            textvariable=self.export_search_var,
+            font=('Segoe UI', 12),
+            bg=self.colors['card_bg'],
+            fg=self.colors['text'],
+            relief=tk.FLAT,
+            bd=0,
+            highlightbackground=self.colors['border_light'],
+            highlightthickness=1
+        )
+        search_entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 20))
+        
+        # Right side - Controls
+        controls_frame = tk.Frame(search_frame, bg=self.colors['bg'])
+        controls_frame.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        # Hide unknown games checkbox
+        self.hide_unknown_games_var = tk.BooleanVar(value=True)  # Default to checked
+        self.hide_unknown_games_var.trace('w', self.filter_export_games)
+        hide_unknown_checkbox = tk.Checkbutton(
+            controls_frame,
+            text="Hide Unknown Games",
+            variable=self.hide_unknown_games_var,
+            bg=self.colors['bg'],
+            activebackground=self.colors['bg'],
+            selectcolor=self.colors['accent'],
+            fg=self.colors['text'],
+            activeforeground=self.colors['text'],
+            font=('Segoe UI', 10)
+        )
+        hide_unknown_checkbox.pack(side=tk.TOP, pady=(0, 10))
+        
+        # Button frame for select/deselect
+        button_frame = tk.Frame(controls_frame, bg=self.colors['bg'])
+        button_frame.pack(side=tk.TOP)
+        
+        # Select all button
+        select_all_button = self.create_modern_button(
+            button_frame,
+            text="☑ Select All",
+            command=self.select_all_export_games,
+            font=('Segoe UI', 10),
+            bg=self.colors['button_secondary'],
+            hover_bg=self.colors['button_secondary_hover'],
+            padx=15,
+            pady=6,
+            width=12,
+            height=1,
+            disable_scaling=True
+        )
+        select_all_button.pack(side=tk.LEFT, padx=(0, 5))
+        
+        # Deselect all button
+        deselect_all_button = self.create_modern_button(
+            button_frame,
+            text="☐ Deselect All",
+            command=self.deselect_all_export_games,
+            font=('Segoe UI', 10),
+            bg=self.colors['button_secondary'],
+            hover_bg=self.colors['button_secondary_hover'],
+            padx=15,
+            pady=6,
+            width=12,
+            height=1,
+            disable_scaling=True
+        )
+        deselect_all_button.pack(side=tk.LEFT)
+        
+        # Games list frame with scrollbar
+        list_frame = tk.Frame(self.export_menu_frame, bg=self.colors['bg'])
+        list_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 20))
+        
+        # Create canvas and scrollbar for games list
+        self.export_canvas = tk.Canvas(
+            list_frame,
+            bg=self.colors['bg'],
+            highlightthickness=0
+        )
+        self.export_scrollbar = ttk.Scrollbar(
+            list_frame,
+            orient="vertical",
+            command=self.export_canvas.yview
+        )
+        self.export_scrollable_frame = tk.Frame(
+            self.export_canvas,
+            bg=self.colors['bg']
+        )
+        
+        # Configure canvas to expand with window
+        self.export_scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.export_canvas.configure(scrollregion=self.export_canvas.bbox("all"))
+        )
+        
+        # Create window in canvas and configure it to expand
+        self.export_canvas.create_window((0, 0), window=self.export_scrollable_frame, anchor="nw", width=self.export_canvas.winfo_width())
+        self.export_canvas.configure(yscrollcommand=self.export_scrollbar.set)
+        
+        # Bind canvas resize to update scrollable frame width
+        self.export_canvas.bind('<Configure>', self._on_export_canvas_configure)
+        
+        # Pack canvas and scrollbar
+        self.export_canvas.pack(side="left", fill="both", expand=True)
+        self.export_scrollbar.pack(side="right", fill="y")
+        
+        # Bind mouse wheel to canvas
+        self.export_canvas.bind("<MouseWheel>", self._on_export_mousewheel)
+        
+        # Bottom buttons frame
+        bottom_frame = tk.Frame(self.export_menu_frame, bg=self.colors['bg'])
+        bottom_frame.pack(fill=tk.X, pady=(20, 0))
+        
+        # Back button
+        back_button = self.create_modern_button(
+            bottom_frame,
+            text="← Back to Import/Export",
+            command=self.back_to_import_export_from_export_menu,
+            font=('Segoe UI', 10),
+            bg=self.colors['button_secondary'],
+            hover_bg=self.colors['button_secondary_hover'],
+            padx=25,
+            pady=10,
+            width=20,
+            height=1,
+            disable_scaling=True
+        )
+        back_button.pack(side=tk.LEFT)
+        
+        # Export selected button
+        export_selected_button = self.create_modern_button(
+            bottom_frame,
+            text="📤 Export Selected Games",
+            command=self.export_selected_games,
+            font=('Segoe UI', 10),
+            bg=self.colors['accent'],
+            hover_bg=self.colors['accent_hover'],
+            padx=25,
+            pady=10,
+            width=20,
+            height=1,
+            disable_scaling=True
+        )
+        export_selected_button.pack(side=tk.RIGHT)
+        
+        # Load depot keys and populate games list
+        self.load_depot_keys_and_populate_export_games()
+        
+        # Bind mouse wheel to the entire export menu frame for scrolling anywhere
+        def _on_export_menu_mousewheel(event):
+            # Scroll the export canvas when mouse wheel is used anywhere in the export menu
+            self.export_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        # Bind to the export menu frame to catch all mouse wheel events
+        self.export_menu_frame.bind("<MouseWheel>", _on_export_menu_mousewheel)
+        
+        # Also bind mouse wheel to all major child widgets for comprehensive coverage
+        def bind_mousewheel_to_widget(widget):
+            widget.bind("<MouseWheel>", _on_export_menu_mousewheel)
+            # Recursively bind to all child widgets
+            for child in widget.winfo_children():
+                bind_mousewheel_to_widget(child)
+        
+        # Bind mouse wheel to all child widgets in the export menu
+        bind_mousewheel_to_widget(self.export_menu_frame)
+    
+    def _on_export_mousewheel(self, event):
+        """Handle mouse wheel scrolling in export games list"""
+        self.export_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+    
+    def _on_export_canvas_configure(self, event):
+        """Handle canvas resize to ensure scrollable frame expands properly"""
+        # Update the width of the scrollable frame to match canvas width
+        canvas_width = event.width
+        self.export_canvas.itemconfig(
+            self.export_canvas.find_withtag("all")[0], 
+            width=canvas_width
+        )
+    
+    def load_depot_keys_and_populate_export_games(self):
+        """Load depot keys from Steam config.vdf and populate export games list"""
+        try:
+            # Get Steam installation path
+            steam_path = self.get_steam_install_path()
+            if not steam_path:
+                messagebox.showerror("Error", "Could not find Steam installation path")
+                return
+            
+            # Look for config.vdf in Steam/config directory
+            config_path = os.path.join(steam_path, "config", "config.vdf")
+            if not os.path.exists(config_path):
+                messagebox.showerror("Error", f"Could not find Steam config file at:\n{config_path}")
+                return
+            
+            # Read and parse config.vdf
+            depot_keys = self.parse_steam_config_vdf(config_path)
+            if not depot_keys:
+                messagebox.showerror("Error", "No depot decryption keys found in Steam config")
+                return
+            
+            # Store depot keys for later use
+            self.export_depot_keys = depot_keys
+            
+            # Populate games list
+            self.populate_export_games_list(depot_keys)
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to load depot keys:\n{str(e)}")
+            print(f"[EXPORT] Error loading depot keys: {e}")
+    
+    def parse_steam_config_vdf(self, config_path):
+        """Parse Steam config.vdf file to extract depot decryption keys"""
+        depot_keys = {}
+        
+        try:
+            with open(config_path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+            
+            # Find the "depots" section
+            depots_start = content.find('"depots"')
+            if depots_start == -1:
+                print("[EXPORT] No depots section found in config.vdf")
+                return depot_keys
+            
+            # Extract the depots section content
+            depots_content = content[depots_start:]
+            
+            # Find all depot entries with their decryption keys
+            import re
+            depot_pattern = r'"(\d+)"\s*\{\s*"DecryptionKey"\s*"([a-fA-F0-9]+)"'
+            matches = re.findall(depot_pattern, depots_content)
+            
+            for app_id, decryption_key in matches:
+                depot_keys[app_id] = decryption_key
+                print(f"[EXPORT] Found depot key for App ID {app_id}: {decryption_key[:16]}...")
+            
+            print(f"[EXPORT] Total depot keys found: {len(depot_keys)}")
+            return depot_keys
+            
+        except Exception as e:
+            print(f"[EXPORT] Error parsing config.vdf: {e}")
+            return depot_keys
+    
+    def populate_export_games_list(self, depot_keys):
+        """Populate the export games list with games from depot keys"""
+        # Clear existing list
+        for widget in self.export_scrollable_frame.winfo_children():
+            widget.destroy()
+        
+        # Store all games for filtering
+        self.all_export_games = []
+        
+        # Create a fast lookup dictionary for Steam app names
+        steam_app_lookup = {}
+        if hasattr(self, '_steam_api_cache') and self._steam_api_cache:
+            for app in self._steam_api_cache.get('applist', {}).get('apps', []):
+                app_id = str(app.get('appid'))
+                game_name = app.get('name', 'Unknown Game')
+                steam_app_lookup[app_id] = game_name
+            print(f"[EXPORT] Created lookup for {len(steam_app_lookup)} Steam apps")
+        
+        # Create games list
+        for app_id, decryption_key in depot_keys.items():
+            # Get game name from Steam lookup dictionary
+            game_name = steam_app_lookup.get(app_id, f"Unknown Game (App ID: {app_id})")
+            
+            # Create game item frame
+            game_frame = tk.Frame(self.export_scrollable_frame, bg=self.colors['card_bg'])
+            game_frame.pack(fill=tk.X, pady=2, padx=5)
+            
+            # Checkbox for selection
+            var = tk.BooleanVar()
+            checkbox = tk.Checkbutton(
+                game_frame,
+                variable=var,
+                bg=self.colors['card_bg'],
+                activebackground=self.colors['card_bg'],
+                selectcolor=self.colors['accent'],
+                fg=self.colors['text'],
+                activeforeground=self.colors['text']
+            )
+            checkbox.pack(side=tk.LEFT, padx=(10, 15))
+            
+            # Game info
+            info_frame = tk.Frame(game_frame, bg=self.colors['card_bg'])
+            info_frame.pack(side=tk.LEFT, fill=tk.X, expand=True)
+            
+            # Game name
+            name_label = tk.Label(
+                info_frame,
+                text=game_name,
+                font=('Segoe UI', 11, 'bold'),
+                fg=self.colors['text'],
+                bg=self.colors['card_bg'],
+                anchor='w'
+            )
+            name_label.pack(anchor='w')
+            
+            # App ID
+            app_id_label = tk.Label(
+                info_frame,
+                text=f"App ID: {app_id}",
+                font=('Segoe UI', 9),
+                fg=self.colors['text_secondary'],
+                bg=self.colors['card_bg'],
+                anchor='w'
+            )
+            app_id_label.pack(anchor='w')
+            
+            # Store game data
+            game_data = {
+                'app_id': app_id,
+                'game_name': game_name,
+                'decryption_key': decryption_key,
+                'var': var,
+                'frame': game_frame
+            }
+            self.all_export_games.append(game_data)
+        
+        print(f"[EXPORT] Populated {len(self.all_export_games)} games from depot keys")
+        
+        # Update scroll region
+        self.export_canvas.update_idletasks()
+        self.export_canvas.configure(scrollregion=self.export_canvas.bbox("all"))
+        
+        # Apply initial filtering since "Hide Unknown Games" is checked by default
+        if hasattr(self, 'hide_unknown_games_var') and self.hide_unknown_games_var.get():
+            self.filter_export_games()
+    
+    def get_game_name_from_cache(self, app_id):
+        """Get game name from cached Steam API data"""
+        if hasattr(self, '_steam_api_cache') and self._steam_api_cache:
+            # Steam API returns data in format: {"applist": {"apps": [{"appid": 123, "name": "Game"}]}}
+            apps = self._steam_api_cache.get('applist', {}).get('apps', [])
+            
+            # Convert app_id to int for comparison (Steam API uses integers)
+            try:
+                app_id_int = int(app_id)
+                for app in apps:
+                    if app.get('appid') == app_id_int:
+                        return app.get('name', f"Unknown Game (App ID: {app_id})")
+            except ValueError:
+                # If app_id can't be converted to int, try string comparison
+                for app in apps:
+                    if str(app.get('appid')) == app_id:
+                        return app.get('name', f"Unknown Game (App ID: {app_id})")
+            
+            print(f"[EXPORT] App ID {app_id} not found in Steam cache")
+        return None
+    
+    def filter_export_games(self, *args):
+        """Filter export games based on search text and hide unknown games setting"""
+        visible_games = self._get_visible_export_games()
+        
+        # Hide all games first
+        for game_data in self.all_export_games:
+            game_data['frame'].pack_forget()
+        
+        # Show only visible games
+        for game_data in visible_games:
+            game_data['frame'].pack(fill=tk.X, pady=2, padx=5)
+        
+        # Update scroll region
+        self.export_canvas.update_idletasks()
+        self.export_canvas.configure(scrollregion=self.export_canvas.bbox("all"))
+    
+    def select_all_export_games(self):
+        """Select all visible export games"""
+        visible_games = self._get_visible_export_games()
+        for game_data in visible_games:
+            game_data['var'].set(True)
+    
+    def deselect_all_export_games(self):
+        """Deselect all export games"""
+        for game_data in self.all_export_games:
+            game_data['var'].set(False)
+    
+    def _get_visible_export_games(self):
+        """Get list of currently visible export games based on filters"""
+        visible_games = []
+        search_text = self.export_search_var.get().lower()
+        hide_unknown = self.hide_unknown_games_var.get()
+        
+        for game_data in self.all_export_games:
+            game_name = game_data['game_name'].lower()
+            app_id = game_data['app_id'].lower()
+            
+            # Check if game should be hidden due to unknown status
+            if hide_unknown and "unknown game" in game_name:
+                continue
+            
+            # Check if game matches search text
+            if not search_text or search_text in game_name or search_text in app_id:
+                visible_games.append(game_data)
+        
+        return visible_games
+    
+    def export_selected_games(self):
+        """Export selected games with their decryption keys to a file"""
+        selected_games = []
+        
+        for game_data in self.all_export_games:
+            if game_data['var'].get():
+                selected_games.append({
+                    'app_id': game_data['app_id'],
+                    'game_name': game_data['game_name'],
+                    'decryption_key': game_data['decryption_key']
+                })
+        
+        if not selected_games:
+            messagebox.showinfo("No Selection", "Please select at least one game to export.")
+            return
+        
+        try:
+            # Import tkinter file dialog
+            from tkinter import filedialog
+            
+            # Open file save dialog
+            filename = filedialog.asksaveasfilename(
+                title="Save Export File",
+                defaultextension=".luatools",
+                filetypes=[("LuaTools Export", "*.luatools"), ("All Files", "*.*")],
+                initialfile="export.luatools"
+            )
+            
+            # Check if user cancelled the dialog
+            if not filename:
+                print("[EXPORT] User cancelled file save dialog")
+                return
+            
+            # Write selected games to file
+            with open(filename, 'w', encoding='utf-8') as f:
+                for game in selected_games:
+                    f.write(f"{game['app_id']}:{game['decryption_key']}\n")
+            
+            # Show success message
+            messagebox.showinfo(
+                "Export Complete", 
+                f"Exported {len(selected_games)} decryption keys to {os.path.basename(filename)}"
+            )
+            
+            print(f"[EXPORT] Successfully exported {len(selected_games)} games to {filename}")
+            
+        except Exception as e:
+            error_msg = f"Failed to export games:\n{str(e)}"
+            messagebox.showerror("Export Error", error_msg)
+            print(f"[EXPORT] Error during export: {e}")
+    
+    def back_to_import_export_from_export_menu(self):
+        """Return to Import/Export menu from export menu"""
+        # Clean up export menu frame
+        if hasattr(self, 'export_menu_frame'):
+            self.export_menu_frame.destroy()
+            delattr(self, 'export_menu_frame')
+        
+        # Show Import/Export menu again
+        self.show_import_export_menu()
+    
+    def back_to_main_from_import_export(self):
+        """Return to main UI from Import/Export menu"""
+        # Clean up Import/Export frame
+        if hasattr(self, 'import_export_frame'):
+            self.import_export_frame.destroy()
+            delattr(self, 'import_export_frame')
+            
+        # Show main UI again
+        self.setup_ui()
+
+    def open_update_disabler(self):
+        """Open the Update Disabler popup menu"""
+        # Create popup window
+        popup = tk.Toplevel(self.root)
+        popup.title("Update Disabler")
+        popup.geometry("500x600")
+        popup.configure(bg=self.colors['bg'])
+        
+        # Center the popup window
+        self.center_popup(popup)
+        
+        # Make popup modal
+        popup.transient(self.root)
+        popup.grab_set()
+        
+        # Title
+        title_label = tk.Label(
+            popup,
+            text="Update Disabler",
+            font=('Segoe UI', 18, 'bold'),
+            fg=self.colors['text'],
+            bg=self.colors['bg']
+        )
+        title_label.pack(pady=(20, 10))
+        
+        # AppID input frame (full width)
+        input_frame = tk.Frame(popup, bg=self.colors['bg'])
+        input_frame.pack(fill=tk.X, padx=20, pady=(0, 20))
+        
+        # Center the input elements within the full-width frame
+        center_frame = tk.Frame(input_frame, bg=self.colors['bg'])
+        center_frame.pack(expand=True)
+        
+        # AppID label
+        appid_label = tk.Label(
+            center_frame,
+            text="AppID:",
+            font=('Segoe UI', 12),
+            fg=self.colors['text'],
+            bg=self.colors['bg']
+        )
+        appid_label.pack(side=tk.LEFT, padx=(0, 10))
+        
+        # AppID entry
+        appid_var = tk.StringVar()
+        appid_entry = tk.Entry(
+            center_frame,
+            textvariable=appid_var,
+            font=('Segoe UI', 12),
+            bg=self.colors['secondary_bg'],
+            fg=self.colors['text'],
+            insertbackground=self.colors['text'],
+            relief=tk.FLAT,
+            width=15
+        )
+        appid_entry.pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Disable Updates button
+        disable_button = tk.Button(
+            center_frame,
+            text="Disable Updates",
+            font=('Segoe UI', 10),
+            bg=self.colors['button_bg'],
+            fg=self.colors['text'],
+            activebackground=self.colors['button_hover'],
+            activeforeground=self.colors['text'],
+            relief=tk.FLAT,
+            padx=15,
+            pady=5,
+            cursor='hand2',
+            command=lambda: self.disable_updates_for_app(appid_var.get(), popup)
+        )
+        disable_button.pack(side=tk.LEFT, padx=(0, 10))
+        
+        # Close button (next to Disable Updates)
+        close_button = tk.Button(
+            center_frame,
+            text="Close",
+            font=('Segoe UI', 10),
+            bg=self.colors['button_bg'],
+            fg=self.colors['text'],
+            activebackground=self.colors['button_hover'],
+            activeforeground=self.colors['text'],
+            relief=tk.FLAT,
+            padx=15,
+            pady=5,
+            cursor='hand2',
+            command=popup.destroy
+        )
+        close_button.pack(side=tk.LEFT)
+        
+        # Separator
+        separator = tk.Frame(popup, height=2, bg=self.colors['secondary_bg'])
+        separator.pack(fill=tk.X, padx=20, pady=(0, 20))
+        
+        # Disabled apps list title (centered)
+        list_title = tk.Label(
+            popup,
+            text="Currently Disabled Apps:",
+            font=('Segoe UI', 14, 'bold'),
+            fg=self.colors['text'],
+            bg=self.colors['bg']
+        )
+        list_title.pack(pady=(0, 10))
+        
+        # Create scrollable frame for disabled apps (full width)
+        canvas = tk.Canvas(popup, bg=self.colors['bg'], highlightthickness=0)
+        scrollbar = ttk.Scrollbar(popup, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas, bg=self.colors['bg'])
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        # Create window that will expand to fill canvas width
+        window_id = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # Configure canvas to expand properly
+        def configure_canvas(event):
+            canvas.itemconfig(window_id, width=event.width)
+        canvas.bind('<Configure>', configure_canvas)
+        
+        # Make canvas expand to fill available space
+        canvas.pack(side="left", fill="both", expand=True, padx=(20, 0))
+        scrollbar.pack(side="right", fill="y", padx=(0, 20))
+        
+        # Store references for later use
+        popup.scrollable_frame = scrollable_frame
+        popup.canvas = canvas
+        
+        # Bind mouse wheel scrolling to the popup window
+        popup.bind("<MouseWheel>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        popup.bind("<Button-4>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        popup.bind("<Button-5>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        
+        # Bind mouse wheel scrolling to the canvas
+        canvas.bind("<MouseWheel>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        canvas.bind("<Button-4>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        canvas.bind("<Button-5>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        
+        # Bind mouse wheel scrolling to the scrollable frame
+        scrollable_frame.bind("<MouseWheel>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        scrollable_frame.bind("<Button-4>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        scrollable_frame.bind("<Button-5>", lambda e: self._on_update_disabler_mousewheel(e, popup))
+        
+        # Populate the disabled apps list
+        self.populate_disabled_apps_list(popup)
+
+    def populate_disabled_apps_list(self, popup):
+        """Populate the list of currently disabled apps"""
+        # Get Steam installation path
+        steam_path = self.get_steam_install_path()
+        if not steam_path:
+            return
+        
+        stplugin_path = os.path.join(steam_path, 'config', 'stplug-in')
+        if not os.path.exists(stplugin_path):
+            return
+        
+        # Find all .lua files
+        lua_files, disabled_files = self.find_lua_files(stplugin_path)
+        
+        # Check which files have the updates disabled marker
+        disabled_apps = []
+        
+        for lua_file in lua_files:
+            try:
+                with open(lua_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Check if file contains LUATOOLS: UPDATES DISABLED! line
+                if '-- LUATOOLS: UPDATES DISABLED!' in content:
+                    app_id = self.extract_app_id(lua_file)
+                    if app_id:
+                        # Get game name from Steam API cache if available
+                        game_name = "Unknown Game"
+                        if hasattr(self, '_steam_api_cache'):
+                            for app in self._steam_api_cache.get('applist', {}).get('apps', []):
+                                if str(app.get('appid')) == str(app_id):
+                                    game_name = app.get('name', 'Unknown Game')
+                                    break
+                        
+                        disabled_apps.append({
+                            'app_id': app_id,
+                            'game_name': game_name,
+                            'file_path': lua_file
+                        })
+            except Exception as e:
+                print(f"Error reading {lua_file}: {e}")
+                continue
+        
+        # Sort by game name
+        disabled_apps.sort(key=lambda x: x['game_name'].lower())
+        
+        # Clear existing content
+        for widget in popup.scrollable_frame.winfo_children():
+            widget.destroy()
+        
+        if not disabled_apps:
+            # Show "no disabled apps" message
+            no_apps_label = tk.Label(
+                popup.scrollable_frame,
+                text="No apps currently have updates disabled",
+                font=('Segoe UI', 12),
+                fg=self.colors['text'],
+                bg=self.colors['bg']
+            )
+            no_apps_label.pack(pady=20, padx=20)
+            return
+        
+        # Create app cards
+        for app in disabled_apps:
+            app_frame = tk.Frame(popup.scrollable_frame, bg=self.colors['secondary_bg'], relief=tk.FLAT, bd=1)
+            app_frame.pack(fill=tk.X, padx=10, pady=5)
+            
+            # App info (left side) - with proper spacing for X button
+            info_frame = tk.Frame(app_frame, bg=self.colors['secondary_bg'])
+            info_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(10, 50), pady=10)
+            
+            # Game name
+            name_label = tk.Label(
+                info_frame,
+                text=app['game_name'],
+                font=('Segoe UI', 12, 'bold'),
+                fg=self.colors['text'],
+                bg=self.colors['secondary_bg']
+            )
+            name_label.pack(anchor=tk.W)
+            
+            # App ID
+            appid_label = tk.Label(
+                info_frame,
+                text=f"App ID: {app['app_id']}",
+                font=('Segoe UI', 10),
+                fg=self.colors['text'],
+                bg=self.colors['secondary_bg']
+            )
+            appid_label.pack(anchor=tk.W)
+            
+            # Enable button (right side) - positioned to not overlap text
+            enable_button = tk.Button(
+                app_frame,
+                text="✕",  # X symbol
+                font=('Segoe UI', 12, 'bold'),
+                bg='#ff6b6b',  # Red color
+                fg='white',
+                activebackground='#ff5252',
+                activeforeground='white',
+                relief=tk.FLAT,
+                width=3,
+                height=1,
+                cursor='hand2',
+                command=lambda a=app: self.enable_updates_for_app(a, popup)
+            )
+            enable_button.pack(side=tk.RIGHT, padx=10, pady=10)
+        
+        # Update canvas scroll region
+        popup.canvas.update_idletasks()
+        popup.canvas.configure(scrollregion=popup.canvas.bbox("all"))
+
+    def disable_updates_for_app(self, app_id, popup):
+        """Disable updates for a specific app by adding the marker and uncommenting setManifestid lines"""
+        if not app_id or not app_id.strip():
+            messagebox.showwarning("Invalid AppID", "Please enter a valid AppID")
+            return
+        
+        app_id = app_id.strip()
+        
+        # Get Steam installation path
+        steam_path = self.get_steam_install_path()
+        if not steam_path:
+            messagebox.showerror("Error", "Could not find Steam installation path")
+            return
+        
+        stplugin_path = os.path.join(steam_path, 'config', 'stplug-in')
+        if not os.path.exists(stplugin_path):
+            messagebox.showerror("Error", "Could not find stplug-in directory")
+            return
+        
+        # Look for the .lua file
+        lua_file_path = os.path.join(stplugin_path, f"{app_id}.lua")
+        if not os.path.exists(lua_file_path):
+            messagebox.showerror("Error", f"Could not find {app_id}.lua file in stplug-in directory")
+            return
+        
+        try:
+            # Read the file
+            with open(lua_file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            lines = content.split('\n')
+            
+            # Check if updates are already disabled
+            if '-- LUATOOLS: UPDATES DISABLED!' in content:
+                messagebox.showinfo("Already Disabled", f"Updates for {app_id} are already disabled")
+                return
+            
+            # Add the updates disabled marker at the beginning
+            lines.insert(0, '-- LUATOOLS: UPDATES DISABLED!')
+            
+            # Uncomment all setManifestid lines (remove -- prefix)
+            modified = False
+            for i, line in enumerate(lines):
+                if line.strip().startswith('--setManifestid'):
+                    lines[i] = line[2:]  # Remove the -- prefix
+                    modified = True
+            
+            # Write the modified file
+            with open(lua_file_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(lines))
+            
+            # Get game name for display
+            game_name = "Unknown Game"
+            if hasattr(self, '_steam_api_cache'):
+                for app in self._steam_api_cache.get('applist', {}).get('apps', []):
+                    if str(app.get('appid')) == str(app_id):
+                        game_name = app.get('name', 'Unknown Game')
+                        break
+            
+            # Show success message
+            messagebox.showinfo(
+                "Updates Disabled", 
+                f"Updates have been disabled for {game_name} (App ID: {app_id})\n\n"
+                f"The file has been modified and setManifestid lines have been uncommented."
+            )
+            
+            # Refresh the disabled apps list
+            self.populate_disabled_apps_list(popup)
+            
+            # Clear the AppID input
+            for widget in popup.winfo_children():
+                if isinstance(widget, tk.Frame) and widget.winfo_children():
+                    for child in widget.winfo_children():
+                        if isinstance(child, tk.Entry):
+                            child.delete(0, tk.END)
+                            break
+            
+            # Refresh the main game list if God Mode is open
+            if hasattr(self, 'god_mode_frame') and hasattr(self, 'god_mode_game_list'):
+                self.refresh_game_display_only()
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to disable updates for {app_id}: {str(e)}")
+
+    def enable_updates_for_app(self, app, popup):
+        """Enable updates for a specific app by removing the marker and commenting setManifestid lines"""
+        app_id = app['app_id']
+        game_name = app['game_name']
+        file_path = app['file_path']
+        
+        try:
+            # Read the file
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            lines = content.split('\n')
+            
+            # Remove the updates disabled marker
+            if '-- LUATOOLS: UPDATES DISABLED!' in lines:
+                lines.remove('-- LUATOOLS: UPDATES DISABLED!')
+            
+            # Comment all setManifestid lines (add -- prefix)
+            modified = False
+            for i, line in enumerate(lines):
+                if line.strip().startswith('setManifestid'):
+                    lines[i] = '--' + line
+                    modified = True
+            
+            # Write the modified file
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(lines))
+            
+            # Show success message
+            messagebox.showinfo(
+                "Updates Enabled", 
+                f"Updates have been enabled for {game_name} (App ID: {app_id})\n\n"
+                f"The file has been modified and setManifestid lines have been commented out."
+            )
+            
+            # Refresh the disabled apps list
+            self.populate_disabled_apps_list(popup)
+            
+            # Refresh the main game list if God Mode is open
+            if hasattr(self, 'god_mode_frame') and hasattr(self, 'god_mode_game_list'):
+                self.refresh_game_display_only()
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to enable updates for {app_id}: {str(e)}")
+
+    def _on_update_disabler_mousewheel(self, event, popup):
+        """Handle mouse wheel scrolling in the Update Disabler popup"""
+        try:
+            if event.delta:
+                # Windows
+                popup.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+            elif event.num == 4:
+                # Linux scroll up
+                popup.canvas.yview_scroll(-1, "units")
+            elif event.num == 5:
+                # Linux scroll down
+                popup.canvas.yview_scroll(1, "units")
+        except:
+            pass
+
+    def show_import_export_dev_message(self):
+        """Show development message for Import/Export feature"""
+        messagebox.showinfo(
+            "Currently In Development",
+            "Currently In Development, if you know anything about how decryption keys are extracted pls dm me on discord @malonin0807"
+        )
 
 def main():
     root = tk.Tk()
