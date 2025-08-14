@@ -1382,7 +1382,7 @@ class SteamStyleApp:
         # Version number with modern styling
         version_label = tk.Label(
             title_frame,
-            text="v2.2",
+            text="v2.3",
             font=("Arial", 14),
             fg=self.colors['text_muted'],
             bg=self.colors['bg']
