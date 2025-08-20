@@ -72,7 +72,7 @@ except ImportError:
     py7zr = None
 
 # Version and repository configuration
-__version__ = "2.4"  # Your current version
+__version__ = "2.5"  # Your current version
 __github_repo__ = "madoiscool/LuaTools"  # Replace with your actual repo
 
 class SteamStyleApp:
