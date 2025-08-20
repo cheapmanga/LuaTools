@@ -71,6 +71,10 @@ try:
 except ImportError:
     py7zr = None
 
+# Version and repository configuration
+__version__ = "2.4"  # Your current version
+__github_repo__ = "madoiscool/LuaTools"  # Replace with your actual repo
+
 class SteamStyleApp:
     def __init__(self, root):
         self.root = root
@@ -207,6 +211,10 @@ class SteamStyleApp:
         except Exception:
             self.http_client = None
         
+        # Check for updates 3 seconds after startup (non-blocking) - only if not disabled
+        if not self.settings.get('dont_prompt_update', False):
+            self.root.after(3000, self.check_for_updates)
+        
     def center_window(self):
         """Center the window on the screen"""
         self.root.update_idletasks()
@@ -342,7 +350,8 @@ class SteamStyleApp:
             'search_results_limit': 5,
             'installed_games_shown_limit': 25,
             'show_file_names': False,
-            'dont_start_downloads_until_button_pressed': False
+            'dont_start_downloads_until_button_pressed': False,
+            'dont_prompt_update': False  # New setting for update prompt
         }
         
         try:
@@ -1382,7 +1391,7 @@ class SteamStyleApp:
         # Version number with modern styling
         version_label = tk.Label(
             title_frame,
-            text="v2.3",
+            text=f"v{__version__}",
             font=("Arial", 14),
             fg=self.colors['text_muted'],
             bg=self.colors['bg']
@@ -1462,37 +1471,62 @@ class SteamStyleApp:
             "Timeout for Steam API requests. Set to 0 to skip API calls and show only App IDs"
         )
         
+        # Don't prompt update setting
+        self.create_checkbox_setting(
+            settings_container,
+            "Don't prompt update",
+            "dont_prompt_update",
+            "Disable automatic update prompt"
+        )
+        
 
         
-        # Button container for bottom buttons
-        button_frame = tk.Frame(self.settings_frame, bg=self.colors['bg'])
-        button_frame.pack(pady=(20, 0))
+        # Top button container
+        top_button_frame = tk.Frame(self.settings_frame, bg=self.colors['bg'])
+        top_button_frame.pack(pady=(20, 0))
         
-        # Downloader Settings button (bottom left)
+        # Downloader Settings button (top left)
         downloader_settings_button = self.create_modern_button(
-            button_frame,
+            top_button_frame,
             text="📥 Downloader Settings",
             command=self.open_downloader_settings,
             font=("Arial", 12),
-            bg=self.colors['button_secondary'],
-            hover_bg=self.colors['button_secondary_hover'],
+            bg='#87CEEB',  # Light blue color
             padx=30,
-            pady=12
+            pady=12,
+            disable_scaling=True
         )
-        downloader_settings_button.pack(side=tk.LEFT, padx=(0, 10))
+        downloader_settings_button.pack(side=tk.LEFT)
         
-        # Save and Exit button (bottom right) with modern styling
+        # Credits button (top right)
+        credits_button = self.create_modern_button(
+            top_button_frame,
+            text="👑 Credits",
+            command=self.show_credits,
+            font=("Arial", 12),
+            bg='#8A2BE2',  # Purple color
+            padx=30,
+            pady=12,
+            disable_scaling=True
+        )
+        credits_button.pack(side=tk.RIGHT)
+        
+        # Bottom button container for Save and Exit
+        bottom_button_frame = tk.Frame(self.settings_frame, bg=self.colors['bg'])
+        bottom_button_frame.pack(pady=(20, 0))
+        
+        # Save and Exit button (centered at bottom)
         back_button = self.create_modern_button(
-            button_frame,
+            bottom_button_frame,
             text="💾 Save and Exit",
             command=self.save_and_exit_settings,
-            font=("Arial", 12),
+            font=("Arial", 14, "bold"),  # Bigger font
             bg=self.colors['success'],
-            hover_bg=self.colors['success_hover'],
-            padx=35,
-            pady=12
+            padx=40,  # More padding for bigger button
+            pady=15,   # More padding for bigger button
+            disable_scaling=True
         )
-        back_button.pack(side=tk.LEFT)
+        back_button.pack(expand=True)
         
     def open_downloader_settings(self):
         """Open the downloader settings submenu"""
@@ -3208,6 +3242,164 @@ class SteamStyleApp:
             
         # Show main UI again
         self.setup_ui()
+        
+    def show_credits(self):
+        """Show credits window with content from GitHub"""
+        try:
+            # Create credits window
+            credits_window = tk.Toplevel(self.root)
+            credits_window.title("Credits - LuaTools")
+            credits_window.geometry("500x400")
+            credits_window.configure(bg=self.colors['bg'])
+            credits_window.transient(self.root)
+            credits_window.grab_set()
+            
+            # Center the window on screen
+            credits_window.update_idletasks()
+            # Get screen dimensions
+            screen_width = credits_window.winfo_screenwidth()
+            screen_height = credits_window.winfo_screenheight()
+            # Calculate center position
+            x = (screen_width // 2) - (500 // 2)
+            y = (screen_height // 2) - (400 // 2)
+            # Ensure window is fully visible on screen
+            x = max(0, min(x, screen_width - 500))
+            y = max(0, min(y, screen_height - 400))
+            credits_window.geometry("+%d+%d" % (x, y))
+            
+            # Title
+            title_label = tk.Label(
+                credits_window,
+                text="🏆 Credits",
+                font=("Arial", 20, "bold"),
+                fg=self.colors['accent'],
+                bg=self.colors['bg']
+            )
+            title_label.pack(pady=(20, 10))
+            
+            # Subtitle
+            subtitle_label = tk.Label(
+                credits_window,
+                text="Special thanks to:",
+                font=("Arial", 12),
+                fg=self.colors['text_secondary'],
+                bg=self.colors['bg']
+            )
+            subtitle_label.pack(pady=(0, 20))
+            
+            # Create scrollable text area for credits
+            credits_container = tk.Frame(credits_window, bg=self.colors['card_bg'], relief=tk.FLAT, bd=1)
+            credits_container.pack(fill=tk.BOTH, expand=True, padx=20, pady=(0, 20))
+            
+            # Create canvas and scrollbar
+            credits_canvas = tk.Canvas(
+                credits_container,
+                bg=self.colors['card_bg'],
+                highlightthickness=0,
+                bd=0
+            )
+            credits_scrollbar = ttk.Scrollbar(
+                credits_container,
+                orient="vertical",
+                command=credits_canvas.yview
+            )
+            
+            # Create the scrollable frame for the text
+            credits_scrollable_frame = tk.Frame(
+                credits_canvas,
+                bg=self.colors['card_bg']
+            )
+            
+            # Configure the canvas
+            credits_canvas.configure(yscrollcommand=credits_scrollbar.set)
+            
+            # Create a window in the canvas for the scrollable frame
+            canvas_window = credits_canvas.create_window((0, 0), window=credits_scrollable_frame, anchor="nw")
+            
+            # Configure the canvas to expand with the window
+            def on_canvas_configure(event):
+                credits_canvas.configure(scrollregion=credits_canvas.bbox("all"))
+                credits_canvas.itemconfig(canvas_window, width=event.width)
+            
+            def on_frame_configure(event):
+                credits_canvas.configure(scrollregion=credits_canvas.bbox("all"))
+            
+            credits_canvas.bind('<Configure>', on_canvas_configure)
+            credits_scrollable_frame.bind('<Configure>', on_frame_configure)
+            
+            # Pack the canvas and scrollbar
+            credits_canvas.pack(side="left", fill="both", expand=True)
+            credits_scrollbar.pack(side="right", fill="y")
+            
+            # Create the text widget inside the scrollable frame
+            credits_text = tk.Text(
+                credits_scrollable_frame,
+                wrap=tk.WORD,
+                font=("Consolas", 12),
+                bg=self.colors['card_bg'],
+                fg=self.colors['text'],
+                insertbackground=self.colors['text'],
+                selectbackground=self.colors['accent'],
+                selectforeground=self.colors['text'],
+                relief=tk.FLAT,
+                bd=0,
+                padx=20,
+                pady=20,
+                yscrollcommand=credits_scrollbar.set
+            )
+            credits_text.pack(fill=tk.BOTH, expand=True)
+            
+            # Load credits from GitHub
+            def load_credits():
+                try:
+                    import httpx
+                    response = httpx.get("https://raw.githubusercontent.com/madoiscool/lt_api_links/refs/heads/main/credits", timeout=10)
+                    if response.status_code == 200:
+                        credits_content = response.text
+                        credits_text.insert(tk.END, credits_content)
+                    else:
+                        credits_text.insert(tk.END, "Failed to load credits from GitHub.\n\nError: " + str(response.status_code))
+                except Exception as e:
+                    credits_text.insert(tk.END, f"Failed to load credits from GitHub.\n\nError: {str(e)}")
+                
+                credits_text.config(state=tk.DISABLED)  # Make read-only
+                
+                # Update scroll region after loading content
+                credits_scrollable_frame.update_idletasks()
+                credits_canvas.configure(scrollregion=credits_canvas.bbox("all"))
+            
+            # Load credits in background
+            credits_window.after(100, load_credits)
+            
+            # Bind mouse wheel to the credits text for scrolling
+            def _on_credits_mousewheel(event):
+                credits_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            
+            credits_text.bind("<MouseWheel>", _on_credits_mousewheel)
+            credits_canvas.bind("<MouseWheel>", _on_credits_mousewheel)
+            
+            # Close button
+            close_button = tk.Button(
+                credits_window,
+                text="Close",
+                command=credits_window.destroy,
+                font=("Arial", 12),
+                bg=self.colors['button_bg'],
+                fg=self.colors['text'],
+                activebackground=self.colors['button_hover'],
+                activeforeground=self.colors['text'],
+                relief=tk.FLAT,
+                padx=30,
+                pady=10,
+                cursor='hand2'
+            )
+            close_button.pack(pady=(0, 20))
+            
+            # Bind escape key to close
+            credits_window.bind('<Escape>', lambda e: credits_window.destroy())
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to open credits window: {str(e)}")
         
     def back_to_main(self):
         """Return to main UI from settings or God Mode"""
@@ -5950,7 +6142,7 @@ class SteamStyleApp:
             self.root.after(100, self.refresh_game_display_with_settings)
             
             settings_window.destroy()
-            messagebox.showinfo("Settings Saved", "Game list settings have been saved and applied successfully!")
+            # Settings saved silently - no popup needed
         
         save_button = tk.Button(
             button_frame,
@@ -6703,13 +6895,13 @@ class SteamStyleApp:
     def back_to_main_from_import_export(self):
         """Return to main UI from Import/Export menu"""
         # Clean up Import/Export frame
-        if hasattr(self, 'import_export_frame'):
-            self.import_export_frame.destroy()
-            delattr(self, 'import_export_frame')
+        if hasattr(self, 'export_menu_frame'):
+            self.export_menu_frame.destroy()
+            delattr(self, 'export_menu_frame')
             
         # Show main UI again
         self.setup_ui()
-
+    
     def open_update_disabler(self):
         """Open the Update Disabler popup menu"""
         # Create popup window
@@ -6859,7 +7051,7 @@ class SteamStyleApp:
         
         # Populate the disabled apps list
         self.populate_disabled_apps_list(popup)
-
+    
     def populate_disabled_apps_list(self, popup):
         """Populate the list of currently disabled apps"""
         # Get Steam installation path
@@ -6945,7 +7137,7 @@ class SteamStyleApp:
             appid_label = tk.Label(
                 info_frame,
                 text=f"App ID: {app['app_id']}",
-                font=('Segoe UI', 10),
+                font=('Segoe UI', 12, 'bold'),
                 fg=self.colors['text'],
                 bg=self.colors['secondary_bg']
             )
@@ -7122,6 +7314,620 @@ class SteamStyleApp:
             "Currently In Development",
             "Currently In Development, if you know anything about how decryption keys are extracted pls dm me on discord @malonin0807"
         )
+
+    # ===== UPDATE SYSTEM METHODS =====
+    
+    def check_for_updates(self):
+        """Check for updates in a separate thread"""
+        threading.Thread(target=self._check_updates, daemon=True).start()
+    
+    def _check_updates(self):
+        """Check for updates from GitHub"""
+        try:
+            # GitHub API endpoint for latest release
+            api_url = f"https://api.github.com/repos/{__github_repo__}/releases/latest"
+            
+            response = httpx.get(api_url, timeout=10)
+            if response.status_code == 200:
+                latest_release = response.json()
+                latest_version = latest_release['tag_name']  # Gets "6.5" from tag
+                current_version = __version__  # Your app has "6.4"
+                
+                print(f"Current version: {current_version}")
+                print(f"Latest version: {latest_version}")
+                
+                if self.compare_versions(latest_version, current_version) > 0:
+                    # Update available - show notification in main thread
+                    self.root.after(0, lambda: self.show_update_notification(latest_release))
+                    
+        except Exception as e:
+            print(f"Update check failed: {e}")
+    
+    def compare_versions(self, version1, version2):
+        """Compare two version strings (e.g., '6.5' vs '6.4')"""
+        try:
+            # Simple version comparison for your format
+            v1_parts = [float(x) for x in version1.split('.')]
+            v2_parts = [float(x) for x in version2.split('.')]
+            
+            # Pad with zeros if needed
+            max_len = max(len(v1_parts), len(v2_parts))
+            v1_parts.extend([0] * (max_len - len(v1_parts)))
+            v2_parts.extend([0] * (max_len - len(v2_parts)))
+            
+            for i in range(max_len):
+                if v1_parts[i] > v2_parts[i]:
+                    return 1
+                elif v1_parts[i] < v2_parts[i]:
+                    return -1
+            
+            return 0  # Versions are equal
+            
+        except Exception:
+            # Fallback: string comparison
+            return 1 if version1 > version2 else (-1 if version1 < version2 else 0)
+    
+    def show_update_notification(self, release_info):
+        """Show update available notification with GitHub release notes"""
+        latest_version = release_info['tag_name']  # Gets "6.5"
+        release_notes = release_info.get('body', 'No release notes available.')
+        
+        # Create update dialog
+        update_window = tk.Toplevel(self.root)
+        update_window.title("Update Available")
+        update_window.geometry("600x500")  # Made wider and taller for better readability
+        update_window.configure(bg='#0f1419')
+        update_window.transient(self.root)
+        update_window.grab_set()
+        
+        # Center the window on screen
+        update_window.update_idletasks()
+        x = (update_window.winfo_screenwidth() // 2) - (600 // 2)
+        y = (update_window.winfo_screenheight() // 2) - (500 // 2)
+        update_window.geometry("+%d+%d" % (x, y))
+        
+        # Title
+        title_label = tk.Label(
+            update_window,
+            text=f"Update Available: {latest_version}",
+            font=("Arial", 18, "bold"),
+            fg='#ffffff',
+            bg='#0f1419'
+        )
+        title_label.pack(pady=(20, 10))
+        
+        # Current version info
+        current_label = tk.Label(
+            update_window,
+            text=f"Current version: {__version__}",
+            font=("Arial", 12),
+            fg='#888888',
+            bg='#0f1419'
+        )
+        current_label.pack()
+        
+        # Release notes section
+        notes_frame = tk.Frame(update_window, bg='#0f1419')
+        notes_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=(20, 10))
+        
+        # Release notes title
+        notes_label = tk.Label(
+            notes_frame,
+            text="📝 Release Notes:",
+            font=("Arial", 14, "bold"),
+            fg='#ffffff',
+            bg='#0f1419'
+        )
+        notes_label.pack(anchor='w', pady=(0, 10))
+        
+        # Create scrollable text area for release notes
+        notes_container = tk.Frame(notes_frame, bg='#1a1f2e', relief=tk.FLAT, bd=1)
+        notes_container.pack(fill=tk.BOTH, expand=True)
+        
+        # Create canvas and scrollbar for the release notes
+        notes_canvas = tk.Canvas(
+            notes_container,
+            bg='#1a1f2e',
+            highlightthickness=0,
+            bd=0
+        )
+        notes_scrollbar = ttk.Scrollbar(
+            notes_container,
+            orient="vertical",
+            command=notes_canvas.yview
+        )
+        
+        # Create the scrollable frame for the text
+        notes_scrollable_frame = tk.Frame(
+            notes_canvas,
+            bg='#1a1f2e'
+        )
+        
+        # Configure the canvas
+        notes_canvas.configure(yscrollcommand=notes_scrollbar.set)
+        
+        # Create a window in the canvas for the scrollable frame
+        canvas_window = notes_canvas.create_window((0, 0), window=notes_scrollable_frame, anchor="nw")
+        
+        # Configure the canvas to expand with the window
+        def on_canvas_configure(event):
+            notes_canvas.configure(scrollregion=notes_canvas.bbox("all"))
+            # Update the width of the scrollable frame to match the canvas
+            notes_canvas.itemconfig(canvas_window, width=event.width)
+        
+        def on_frame_configure(event):
+            notes_canvas.configure(scrollregion=notes_canvas.bbox("all"))
+        
+        notes_canvas.bind('<Configure>', on_canvas_configure)
+        notes_scrollable_frame.bind('<Configure>', on_frame_configure)
+        
+        # Pack the canvas and scrollbar
+        notes_canvas.pack(side="left", fill="both", expand=True)
+        notes_scrollbar.pack(side="right", fill="y")
+        
+        # Create the text widget inside the scrollable frame
+        notes_text = tk.Text(
+            notes_scrollable_frame,
+            wrap=tk.WORD,
+            font=("Consolas", 10),  # Monospace font for better formatting
+            bg='#1a1f2e',
+            fg='#ffffff',
+            insertbackground='#ffffff',
+            selectbackground='#007acc',
+            selectforeground='#ffffff',
+            relief=tk.FLAT,
+            bd=0,
+            padx=15,
+            pady=15
+        )
+        notes_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Insert the release notes
+        notes_text.insert(tk.END, release_notes)
+        notes_text.config(state=tk.DISABLED)  # Make read-only
+        
+        # Bind mouse wheel to the notes text for scrolling
+        def _on_notes_mousewheel(event):
+            notes_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        notes_text.bind("<MouseWheel>", _on_notes_mousewheel)
+        notes_canvas.bind("<MouseWheel>", _on_notes_mousewheel)
+        
+        # Buttons frame
+        button_frame = tk.Frame(update_window, bg='#0f1419')
+        button_frame.pack(pady=(20, 25))
+        
+        # Download button
+        download_btn = tk.Button(
+            button_frame,
+            text="⬇️ Download Update",
+            command=lambda: self.download_update(release_info),
+            font=("Arial", 12, "bold"),
+            bg='#007acc',
+            fg='#ffffff',
+            relief=tk.FLAT,
+            padx=25,
+            pady=10,
+            cursor='hand2'
+        )
+        download_btn.pack(side=tk.LEFT, padx=(0, 15))
+        
+
+        
+        # Later button
+        later_btn = tk.Button(
+            button_frame,
+            text="⏰ Later",
+            command=update_window.destroy,
+            font=("Arial", 12),
+            bg='#2d3748',
+            fg='#ffffff',
+            relief=tk.FLAT,
+            padx=25,
+            pady=10,
+            cursor='hand2'
+        )
+        later_btn.pack(side=tk.LEFT)
+        
+        # Bind mouse wheel to the entire update window for scrolling anywhere
+        def _on_update_window_mousewheel(event):
+            notes_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        update_window.bind("<MouseWheel>", _on_update_window_mousewheel)
+    
+    def download_update(self, release_info):
+        """Start the standalone CMD updater"""
+        try:
+            # Find the executable asset
+            assets = release_info.get('assets', [])
+            exe_asset = None
+            
+            for asset in assets:
+                if asset['name'].endswith('.exe'):
+                    exe_asset = asset
+                    break
+            
+            if not exe_asset:
+                messagebox.showerror("Error", "No executable found in release")
+                return
+            
+            # Download URL
+            download_url = exe_asset['browser_download_url']
+            
+            # Create and run the standalone CMD updater
+            self.create_cmd_updater(download_url, release_info)
+            
+        except Exception as e:
+            messagebox.showerror("Update Error", f"Failed to start update: {e}")
+    
+    # Old download progress methods removed - replaced with clean CMD updater
+    
+    # Old create_updater_script method removed - replaced with clean CMD updater
+    def create_updater_script(self):
+        """Create a temporary updater script (DEPRECATED - use create_cmd_updater instead)"""
+        import tempfile
+        
+        # Get the current executable name (either the .exe or the script)
+        if getattr(sys, 'frozen', False):
+            # Running as executable
+            current_exe = sys.executable
+        else:
+            # Running as script, use the script name
+            current_exe = os.path.abspath(sys.argv[0])
+        
+        # Create the script in the temp directory, not in the same directory as the exe
+        temp_dir = tempfile.gettempdir()
+        script_path = os.path.join(temp_dir, f"updater_{int(time.time())}.py")
+        
+        updater_code = f'''
+import os
+import sys
+import time
+import subprocess
+import shutil
+
+print("=== UPDATER SCRIPT STARTED ===")
+print(f"Python version: {{sys.version}}")
+print(f"Current working directory: {{os.getcwd()}}")
+print(f"Files in current directory: {{os.listdir('.')}}")
+
+def wait_for_file_unlock(file_path, max_wait=30):
+    """Wait for file to be unlocked, with retry logic"""
+    print(f"Waiting for file to be unlocked: {{file_path}}")
+    start_time = time.time()
+    while time.time() - start_time < max_wait:
+        try:
+            # Try to open the file for writing to check if it's locked
+            with open(file_path, 'r+b') as f:
+                pass
+            print(f"File {{file_path}} is now unlocked!")
+            return True  # File is unlocked
+        except (PermissionError, OSError) as e:
+            elapsed = int(time.time() - start_time)
+            print(f"File still locked, waiting... ({{elapsed}}s) - Error: {{e}}")
+            time.sleep(1)
+    print(f"File {{file_path}} is still locked after {{max_wait}} seconds!")
+    return False  # File still locked after max wait
+
+def update_app():
+    try:
+        print("\\n=== STARTING UPDATE PROCESS ===")
+        
+        # Current executable path (this is the extracted one in _MEI folder)
+        current_exe = r"{current_exe}"
+        
+        print(f"Current executable: {{current_exe}}")
+        print(f"Current executable exists: {{os.path.exists(current_exe)}}")
+        
+        # Find the ORIGINAL executable path (not the extracted one)
+        # When running from PyInstaller, we need to find the actual .exe file
+        if getattr(sys, 'frozen', False):
+            # We're running from PyInstaller, find the original exe
+            # Look for LuaTools.exe in common locations
+            possible_paths = [
+                os.path.join(os.getcwd(), "LuaTools.exe"),  # Current working directory
+                os.path.join(os.path.dirname(os.getcwd()), "LuaTools.exe"),  # Parent directory
+                os.path.join(os.path.expanduser("~"), "Downloads", "LuaTools.exe"),  # Downloads folder
+                os.path.join(os.path.expanduser("~"), "Desktop", "LuaTools.exe"),  # Desktop
+            ]
+            
+            original_exe = None
+            for path in possible_paths:
+                if os.path.exists(path):
+                    original_exe = path
+                    break
+            
+            if not original_exe:
+                print("ERROR: Could not find original LuaTools.exe!")
+                print("Searched in:", possible_paths)
+                input("Press Enter to continue...")
+                return
+                
+            print(f"Found original executable: {{original_exe}}")
+        else:
+            # Running from source, use current script
+            original_exe = current_exe
+            print(f"Running from source, using: {{original_exe}}")
+        
+        # Find update.exe in the original directory
+        exe_dir = os.path.dirname(original_exe)
+        update_exe_path = os.path.join(exe_dir, "update.exe")
+        
+        print(f"Looking for update.exe at: {{update_exe_path}}")
+        print("Waiting for update.exe to be ready...")
+        
+        # Wait longer for file to be fully released
+        time.sleep(5)
+        
+        # Check if update.exe exists
+        try:
+            if not os.path.exists(update_exe_path):
+                print("ERROR: update.exe not found!")
+                print(f"Files in exe directory: {{os.listdir(exe_dir) if os.path.exists(exe_dir) else 'Directory not accessible'}}")
+                input("Press Enter to continue...")
+                return
+            
+            # Get file size safely
+            try:
+                file_size = os.path.getsize(update_exe_path)
+                print(f"update.exe found! Size: {{file_size}} bytes")
+            except Exception as e:
+                print(f"Warning: Could not get file size: {{e}}")
+                print("update.exe found but size unknown")
+            
+            print("Checking if update.exe is accessible...")
+        except Exception as e:
+            print(f"ERROR: Failed to check update.exe: {{e}}")
+            input("Press Enter to continue...")
+            return
+        
+        # Wait for file to be unlocked
+        try:
+            if not wait_for_file_unlock(update_exe_path, max_wait=30):
+                print("ERROR: update.exe is still locked after 30 seconds!")
+                input("Press Enter to continue...")
+                return
+        except Exception as e:
+            print(f"ERROR: Failed to check file lock: {{e}}")
+            input("Press Enter to continue...")
+            return
+        
+        print("Creating backup of current executable...")
+        
+        # Create backup with retry logic
+        backup_name = original_exe + ".backup"
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                shutil.copy2(original_exe, backup_name)
+                print(f"Backup created successfully: {{backup_name}}")
+                break
+            except Exception as e:
+                if attempt == max_retries - 1:
+                    print(f"Failed to create backup after {{max_retries}} attempts: {{e}}")
+                    input("Press Enter to continue...")
+                    return
+                print(f"Backup attempt {{attempt + 1}} failed, retrying... Error: {{e}}")
+                time.sleep(2)
+        
+        print("Replacing executable...")
+        
+        # Replace executable with retry logic
+        for attempt in range(max_retries):
+            try:
+                shutil.move(update_exe_path, original_exe)
+                print("Executable replaced successfully!")
+                break
+            except Exception as e:
+                if attempt == max_retries - 1:
+                    print(f"Failed to replace executable after {{max_retries}} attempts: {{e}}")
+                    print("Restoring from backup...")
+                    try:
+                        shutil.copy2(backup_name, original_exe)
+                        print("Backup restored successfully!")
+                    except Exception as restore_error:
+                        print(f"Failed to restore backup: {{restore_error}}")
+                    input("Press Enter to continue...")
+                    return
+                print(f"Replace attempt {{attempt + 1}} failed, retrying... Error: {{e}}")
+                time.sleep(3)
+        
+        print("Update complete!")
+        
+        # Clean up backup
+        try:
+            os.remove(backup_name)
+            print("Backup cleaned up successfully!")
+        except Exception as e:
+            print(f"Failed to clean up backup (this is normal): {{e}}")
+        
+        print("\\n=== UPDATE PROCESS COMPLETE ===")
+        print("Exiting with success code 0")
+        sys.exit(0)
+        
+    except Exception as e:
+        print(f"\\n=== UPDATE FAILED ===")
+        print(f"Error: {{e}}")
+        import traceback
+        traceback.print_exc()
+        input("Press Enter to continue...")
+
+if __name__ == "__main__":
+    print("\\n=== MAIN BLOCK EXECUTED ===")
+    update_app()
+    print("\\n=== UPDATER SCRIPT FINISHED ===")
+'''
+        
+        # Write to the temp directory path we created
+        with open(script_path, 'w') as f:
+            f.write(updater_code)
+        
+        return script_path
+    
+    def test_updater_script(self):
+        """Test method to verify updater script creation and execution"""
+        try:
+            print("[TEST] Creating test updater script...")
+            updater_script = self.create_updater_script()
+            print(f"[TEST] Updater script created: {updater_script}")
+            
+            # Read the script content to verify it was created correctly
+            with open(updater_script, 'r') as f:
+                content = f.read()
+                print(f"[TEST] Script size: {len(content)} characters")
+                print(f"[TEST] Script contains 'update_app': {'update_app' in content}")
+                print(f"[TEST] Script contains 'if __name__': {'if __name__' in content}")
+            
+            # Clean up test file
+            os.remove(updater_script)
+            print("[TEST] Test updater script cleaned up")
+            
+        except Exception as e:
+            print(f"[TEST] Error testing updater script: {e}")
+    
+    def create_cmd_updater(self, download_url, release_info):
+        """Create and run a standalone CMD updater"""
+        try:
+            # Get current executable path
+            if getattr(sys, 'frozen', False):
+                current_exe = sys.executable
+            else:
+                current_exe = os.path.abspath(sys.argv[0])
+            
+            # Get the directory containing the executable
+            exe_dir = os.path.dirname(current_exe)
+            
+            # Create CMD updater script
+            cmd_script = os.path.join(exe_dir, "update.cmd")
+            
+            # Create the CMD script content (using ASCII-compatible characters)
+            cmd_content = f'''@echo off
+title LuaTools Updater, let this cook then just relaunch LuaTools
+color 0A
+
+echo.
+echo ================================================================
+echo                      LuaTools Updater                         
+echo                        v{__version__}                       
+echo ================================================================
+echo.
+echo Current Version: {__version__}
+echo Latest Version: {release_info.get('tag_name', 'Unknown')}
+echo.
+echo ================================================================
+echo.
+
+REM Close all instances of LuaTools.exe
+echo [1/4] Closing all LuaTools instances...
+taskkill /f /im "LuaTools.exe" >nul 2>&1
+timeout /t 2 /nobreak >nul
+echo [OK] All LuaTools instances closed
+echo.
+
+REM Download the update
+echo [2/4] Downloading update...
+echo URL: {download_url}
+echo.
+
+REM Use PowerShell to download with progress
+powershell -Command "& {{$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri '{download_url}' -OutFile 'update.exe' -UseBasicParsing}}"
+
+if not exist "update.exe" (
+    echo [ERROR] Download failed!
+    echo Please check your internet connection and try again.
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [OK] Download completed!
+echo.
+
+REM Create backup
+echo [3/4] Doing some cool shit...
+if exist "{os.path.basename(current_exe)}.backup" del "{os.path.basename(current_exe)}.backup"
+copy "{os.path.basename(current_exe)}" "{os.path.basename(current_exe)}.backup" >nul
+if exist "{os.path.basename(current_exe)}.backup" (
+    echo [OK] Backup created successfully
+) else (
+    echo [ERROR] Backup creation failed
+    pause
+    exit /b 1
+)
+echo.
+
+REM Replace executable
+echo [4/4] Replacing executable...
+if exist "{os.path.basename(current_exe)}" (
+    del "{os.path.basename(current_exe)}" >nul 2>&1
+    timeout /t 1 /nobreak >nul
+)
+ren "update.exe" "{os.path.basename(current_exe)}"
+if exist "{os.path.basename(current_exe)}" (
+    echo [OK] Executable replaced successfully
+    echo [OK] Update completed successfully!
+) else (
+    echo [ERROR] Executable replacement failed
+    echo Restoring from backup...
+    copy "{os.path.basename(current_exe)}.backup" "{os.path.basename(current_exe)}" >nul
+    pause
+    exit /b 1
+)
+echo.
+
+REM Clean up and finish
+echo [5/5] Finalizing update...
+del "{os.path.basename(current_exe)}.backup" >nul 2>&1
+echo.
+echo ================================================================
+echo [COMPLETE] Update finished successfully!
+echo.
+echo Updated to {release_info.get('tag_name', 'Unknown')}!
+echo You can now re-open LuaTools and it will be latest version.
+echo.
+echo (btw ignore the bat not found or smth error just close this cmd)
+echo.
+echo ================================================================
+echo.
+echo.
+del "%~f0" >nul 2>&1
+exit
+'''
+            
+            # Write the CMD script with proper encoding
+            with open(cmd_script, 'w', encoding='utf-8') as f:
+                f.write(cmd_content)
+            
+            print(f"[UPDATE] Created CMD updater: {cmd_script}")
+            
+            # Show confirmation dialog
+            result = messagebox.askyesno(
+                "Start Update", 
+                f"Update to version {release_info.get('tag_name', 'Unknown')}?\n\n"
+                "LuaTools will close and the updater will handle everything automatically.\n\n"
+                "Continue?"
+            )
+            
+            if result:
+                print("[UPDATE] User confirmed update, starting CMD updater...")
+                
+                # Start the CMD updater with explicit CMD window
+                subprocess.Popen(['cmd', '/k', cmd_script], creationflags=subprocess.CREATE_NEW_CONSOLE)
+                
+                # Close the main application
+                print("[UPDATE] Closing main application...")
+                self.root.quit()
+            else:
+                print("[UPDATE] User cancelled update")
+                # Clean up the CMD script
+                try:
+                    os.remove(cmd_script)
+                except:
+                    pass
+                
+        except Exception as e:
+            print(f"[UPDATE] Failed to create CMD updater: {e}")
+            messagebox.showerror("Update Error", f"Failed to create updater: {e}")
 
 def main():
     root = tk.Tk()
