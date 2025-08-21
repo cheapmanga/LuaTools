@@ -1,16 +1,3 @@
-"""
-LuaTools - Steam Tools Application
-
-This application provides various Steam-related tools including:
-- Game management and installation
-- Download management with multiple API support
-- System tray integration
-- Copy-to-clipboard functionality with visual feedback
-
-IMPORTANT: Copy functions use timer-based visual feedback that prevents
-conflicts when clicked multiple times rapidly. Each copy operation cancels
-any existing timer before scheduling a new one.
-"""
 
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext, filedialog
