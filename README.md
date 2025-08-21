@@ -1,4 +1,4 @@
-LuaTools AppID Manager for ST
+LuaTools is an AppID Manager for ST
 
 Join Discord for the sauce
 
