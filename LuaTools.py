@@ -1,3 +1,17 @@
+"""
+LuaTools - Steam Tools Application
+
+This application provides various Steam-related tools including:
+- Game management and installation
+- Download management with multiple API support
+- System tray integration
+- Copy-to-clipboard functionality with visual feedback
+
+IMPORTANT: Copy functions use timer-based visual feedback that prevents
+conflicts when clicked multiple times rapidly. Each copy operation cancels
+any existing timer before scheduling a new one.
+"""
+
 import tkinter as tk
 from tkinter import ttk, messagebox, scrolledtext, filedialog
 import tkinter.font as tkfont
@@ -72,7 +86,7 @@ except ImportError:
     py7zr = None
 
 # Version and repository configuration
-__version__ = "2.5"  # Your current version
+__version__ = "2.6"  # Your current version
 __github_repo__ = "madoiscool/LuaTools"  # Replace with your actual repo
 
 class SteamStyleApp:
@@ -82,20 +96,26 @@ class SteamStyleApp:
         self.root.geometry("900x700")
         self.root.configure(bg='#0f1419')  # Modern deep dark blue-black
         
-        # Set window icon
-        try:
-            # Try to set the icon from the same directory as the script/executable
-            if getattr(sys, 'frozen', False):
-                # Running as executable
-                icon_path = os.path.join(os.path.dirname(sys.executable), 'icon.ico')
-            else:
-                # Running as script
-                icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.ico')
-            
-            if os.path.exists(icon_path):
-                self.root.iconbitmap(icon_path)
-        except Exception as e:
-            print(f"Could not set window icon: {e}")
+        # Store icon path for later use
+        if getattr(sys, 'frozen', False):
+            # Running as executable
+            self.icon_path = os.path.join(os.path.dirname(sys.executable), 'icon.ico')
+        else:
+            # Running as script
+            self.icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.ico')
+        
+        # Set basic window icon (will be enhanced later for executables)
+        if os.path.exists(self.icon_path):
+            try:
+                self.root.iconbitmap(self.icon_path)
+                print(f"Basic window icon set: {self.icon_path}")
+            except Exception as e:
+                print(f"Could not set basic window icon: {e}")
+        else:
+            print(f"Icon file not found at: {self.icon_path}")
+        
+        # Initialize timer management for copy operations
+        self.copy_timers = {}
         
         # Hide window until it's centered
         self.root.withdraw()
@@ -105,6 +125,10 @@ class SteamStyleApp:
         
         # Show the window after centering
         self.root.deiconify()
+        
+        # Now that the window is shown, set the proper icon for executables
+        if getattr(sys, 'frozen', False):
+            self.root.after(50, self.set_executable_icon)
         
         # Store original window procedure for drag and drop
         self.original_wndproc = None
@@ -183,7 +207,13 @@ class SteamStyleApp:
         self.create_modern_button = self.create_modern_button
         self.create_modern_frame = self.create_modern_frame
         
+        # Store icon path for use in other windows
+        self.icon_path = icon_path if 'icon_path' in locals() and os.path.exists(icon_path) else None
+        
         self.setup_ui()
+        
+        # Set up Steam directories on first launch
+        self.setup_steam_directories()
         
         # Initialize download queue
         self.download_queue = []
@@ -211,10 +241,423 @@ class SteamStyleApp:
         except Exception:
             self.http_client = None
         
+        # Apply minimize behavior based on settings
+        self.apply_minimize_setting()
+        
         # Check for updates 3 seconds after startup (non-blocking) - only if not disabled
         if not self.settings.get('dont_prompt_update', False):
             self.root.after(3000, self.check_for_updates)
         
+                # Force refresh icon after window is shown (for better compatibility)
+        if getattr(sys, 'frozen', False):
+            self.root.after(100, self.force_refresh_icon)
+            # Also try to refresh after a longer delay
+            self.root.after(1000, self.force_refresh_icon)
+    
+    def set_window_icon(self, window):
+        """Set the icon for a window (main window or popup)"""
+        if self.icon_path and os.path.exists(self.icon_path):
+            try:
+                # For executables, try Windows API first
+                if getattr(sys, 'frozen', False):
+                    try:
+                        import ctypes
+                        hwnd = window.winfo_id()
+                        # Load the icon from the executable itself
+                        icon_handle = ctypes.windll.shell32.ExtractIconW(0, sys.executable, 0)
+                        if icon_handle:
+                            # Send WM_SETICON message to set the icon
+                            ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 0, icon_handle)  # WM_SETICON
+                            ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 1, icon_handle)  # WM_SETICON for small icon
+                            print(f"Icon set for window {window} using Windows API")
+                        else:
+                            # Fallback to iconbitmap
+                            window.iconbitmap(self.icon_path)
+                            print(f"Icon set for window {window} using iconbitmap")
+                    except Exception as e:
+                        print(f"Windows API icon setting failed for {window}: {e}")
+                        # Fallback to iconbitmap
+                        window.iconbitmap(self.icon_path)
+                        print(f"Icon set for window {window} using fallback method")
+                else:
+                    # Running as script, use normal method
+                    window.iconbitmap(self.icon_path)
+                    print(f"Icon set for window {window} from script")
+            except Exception as e:
+                print(f"Could not set icon for window {window}: {e}")
+        else:
+            print(f"No icon available to set for window: {window}")
+    
+    def force_refresh_icon(self):
+        """Force refresh the window icon using multiple methods"""
+        if not getattr(sys, 'frozen', False):
+            return
+            
+        try:
+            import ctypes
+            
+            print("Attempting to force refresh window icon...")
+            
+            # Method 1: Try to set icon using Windows API icon extraction
+            hwnd = self.root.winfo_id()
+            icon_handle = ctypes.windll.shell32.ExtractIconW(0, sys.executable, 0)
+            if icon_handle:
+                # Send WM_SETICON message to set the icon
+                ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 0, icon_handle)  # WM_SETICON
+                ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 1, icon_handle)  # WM_SETICON for small icon
+                print("Window icon refreshed using Windows API icon extraction")
+                return
+            else:
+                print("Could not extract icon from executable")
+            
+            # Method 2: Try to set icon using executable path
+            try:
+                self.root.iconbitmap(default=sys.executable)
+                print("Window icon refreshed using executable path")
+                return
+            except Exception as e:
+                print(f"Executable path icon setting failed: {e}")
+            
+            # Method 3: Try to set icon using iconbitmap with executable
+            try:
+                self.root.iconbitmap(sys.executable)
+                print("Window icon refreshed using iconbitmap with executable")
+                return
+            except Exception as e:
+                print(f"iconbitmap with executable failed: {e}")
+            
+            # Method 4: Try to use the icon.ico file if it exists
+            if self.icon_path and os.path.exists(self.icon_path):
+                try:
+                    self.root.iconbitmap(self.icon_path)
+                    print("Window icon refreshed using icon.ico file")
+                    return
+                except Exception as e:
+                    print(f"icon.ico file icon setting failed: {e}")
+            
+            # Method 5: Try using wm_iconbitmap (alternative method)
+            try:
+                self.root.wm_iconbitmap(sys.executable)
+                print("Window icon refreshed using wm_iconbitmap")
+                return
+            except Exception as e:
+                print(f"wm_iconbitmap failed: {e}")
+            
+            # Method 6: Try to set icon using Windows registry method
+            try:
+                self.set_icon_via_registry()
+                print("Window icon refreshed using registry method")
+                return
+            except Exception as e:
+                print(f"Registry method failed: {e}")
+                
+        except Exception as e:
+            print(f"Force refresh icon failed: {e}")
+    
+    def set_executable_icon(self):
+        """Set the proper icon for executables after window is shown"""
+        try:
+            import ctypes
+            
+            print("Setting executable icon after window creation...")
+            print(f"Executable path: {sys.executable}")
+            
+            # Set the taskbar icon ID
+            myappid = 'luatools.app.1.0'
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+            print("Taskbar icon ID set")
+            
+            # Get the window handle
+            hwnd = self.root.winfo_id()
+            print(f"Window handle: {hwnd}")
+            
+            # Try to extract icon from executable
+            icon_handle = ctypes.windll.shell32.ExtractIconW(0, sys.executable, 0)
+            if icon_handle:
+                print(f"Icon handle extracted: {icon_handle}")
+                # Send WM_SETICON message to set the icon
+                ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 0, icon_handle)  # WM_SETICON
+                ctypes.windll.user32.SendMessageW(hwnd, 0x0080, 1, icon_handle)  # WM_SETICON for small icon
+                print("Executable icon set successfully using Windows API")
+                
+                # Also try to set the icon using iconbitmap with the executable
+                try:
+                    self.root.iconbitmap(sys.executable)
+                    print("Executable icon also set using iconbitmap")
+                except Exception as e:
+                    print(f"iconbitmap with executable failed: {e}")
+            else:
+                print("WARNING: Could not extract icon from executable - this means PyInstaller didn't embed the icon properly")
+                print("This usually means the --icon flag in PyInstaller didn't work or the icon file is corrupted")
+                
+                # Try alternative methods
+                try:
+                    self.root.iconbitmap(sys.executable)
+                    print("Executable icon set using iconbitmap with executable path")
+                except Exception as e:
+                    print(f"iconbitmap with executable path failed: {e}")
+                    
+                    # Try with the icon.ico file
+                    if self.icon_path and os.path.exists(self.icon_path):
+                        try:
+                            self.root.iconbitmap(self.icon_path)
+                            print("Executable icon set using icon.ico file")
+                        except Exception as e2:
+                            print(f"icon.ico file failed: {e2}")
+                
+        except Exception as e:
+            print(f"set_executable_icon failed: {e}")
+    
+    def set_icon_via_registry(self):
+        """Try to set icon using Windows registry method"""
+        try:
+            import winreg
+            
+            # Try to get the icon from the executable's registry entry
+            key_path = r"SOFTWARE\Classes\Applications\LuaTools.exe\DefaultIcon"
+            try:
+                with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path) as key:
+                    icon_path, _ = winreg.QueryValueEx(key, "")
+                    if os.path.exists(icon_path):
+                        self.root.iconbitmap(icon_path)
+                        return True
+            except:
+                pass
+            
+            # Try alternative registry path
+            key_path = r"SOFTWARE\Classes\Applications\LuaTools.exe\shell\open\command"
+            try:
+                with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path) as key:
+                    exe_path, _ = winreg.QueryValueEx(key, "")
+                    if os.path.exists(exe_path):
+                        self.root.iconbitmap(exe_path)
+                        return True
+            except:
+                pass
+                
+        except Exception as e:
+            print(f"Registry icon method failed: {e}")
+        
+        return False
+    
+    def safe_after_configure(self, widget, attribute, value, delay, original_value):
+        """
+        Safely schedule a widget configuration change with conflict prevention.
+        
+        This method prevents the issue where rapid clicking on copy buttons
+        can cause the visual feedback (like "Copied!" text) to get stuck
+        because multiple timers are scheduled simultaneously.
+        
+        Args:
+            widget: The Tkinter widget to configure
+            attribute: The attribute to temporarily change (e.g., 'text', 'bg')
+            value: The temporary value to set
+            delay: Delay in milliseconds before restoring original value
+            original_value: The value to restore after the delay
+        """
+        # Cancel any existing timer for this widget and attribute
+        timer_key = f'_timer_{attribute}'
+        if hasattr(widget, timer_key):
+            self.root.after_cancel(getattr(widget, timer_key))
+        
+        # Schedule the configuration change
+        timer_id = self.root.after(delay, lambda: widget.configure(**{attribute: original_value}))
+        setattr(widget, timer_key, timer_id)
+    
+    def manage_copy_timer(self, widget_id, timer_id):
+        """
+        Manage copy timers globally to prevent conflicts.
+        
+        Args:
+            widget_id: Unique identifier for the widget
+            timer_id: The timer ID to store
+        """
+        # Cancel any existing timer for this widget
+        if widget_id in self.copy_timers:
+            try:
+                self.root.after_cancel(self.copy_timers[widget_id])
+                print(f"Cancelled previous timer {self.copy_timers[widget_id]} for widget {widget_id}")
+            except Exception as e:
+                print(f"Error cancelling previous timer: {e}")
+        
+        # Store the new timer
+        self.copy_timers[widget_id] = timer_id
+        print(f"Stored timer {timer_id} for widget {widget_id}")
+    
+    def clear_copy_timer(self, widget_id):
+        """
+        Clear a copy timer for a specific widget.
+        
+        Args:
+            widget_id: Unique identifier for the widget
+        """
+        if widget_id in self.copy_timers:
+            try:
+                self.root.after_cancel(self.copy_timers[widget_id])
+                del self.copy_timers[widget_id]
+                print(f"Cleared timer for widget {widget_id}")
+            except Exception as e:
+                print(f"Error clearing timer: {e}")
+    
+    def clear_all_copy_timers(self):
+        """
+        Clear all copy timers (useful for debugging or cleanup).
+        """
+        print(f"Clearing all copy timers: {len(self.copy_timers)} active")
+        for widget_id, timer_id in list(self.copy_timers.items()):
+            try:
+                self.root.after_cancel(timer_id)
+                print(f"Cancelled timer {timer_id} for widget {widget_id}")
+            except Exception as e:
+                print(f"Error cancelling timer {timer_id}: {e}")
+        self.copy_timers.clear()
+        print("All copy timers cleared")
+    
+    def debug_copy_timers(self):
+        """
+        Debug method to show all active copy timers.
+        """
+        print(f"Active copy timers: {len(self.copy_timers)}")
+        for widget_id, timer_id in self.copy_timers.items():
+            print(f"  Widget {widget_id}: Timer {timer_id}")
+    
+    def force_restore_all_copy_text(self):
+        """
+        Force restore all copy text that might be stuck.
+        This is useful for debugging when text gets stuck.
+        """
+        print("Force restoring all copy text...")
+        # Clear all timers first
+        self.clear_all_copy_timers()
+        
+        # You can add specific widget restoration logic here if needed
+        print("All copy text should be restored")
+    
+    def handle_copy_app_id(self, label_widget, app_id):
+        """
+        Handle copying app ID to clipboard with proper timer management.
+        
+        Args:
+            label_widget: The label widget to update
+            app_id: The app ID to copy
+        """
+        # Create unique widget ID for timer management
+        widget_id = f"app_id_{app_id}"
+        
+        print(f"Handling copy for App ID {app_id}, widget {widget_id}")
+        
+        # Copy the app ID to clipboard
+        self.root.clipboard_clear()
+        self.root.clipboard_append(str(app_id))
+        print(f"Copied App ID {app_id} to clipboard")
+        
+        # Store original text and set appropriate "Copied!" text
+        try:
+            # Get the original text (not the current "Copied!" text)
+            if not hasattr(label_widget, '_original_text'):
+                original_text = label_widget.cget('text')
+                label_widget._original_text = original_text
+            else:
+                original_text = label_widget._original_text
+            
+            # Determine if this is from download manager or game manager
+            if "App ID:" in original_text:
+                copied_text = "Copied AppID!"
+            else:
+                copied_text = "Copied!"
+            label_widget.configure(text=copied_text)
+            print(f"Set label text to '{copied_text}' for {app_id}")
+        except Exception as e:
+            print(f"Error setting label text: {e}")
+            return
+        
+        # Schedule text restoration using global timer management
+        def restore_text():
+            try:
+                # Always restore to the original text, regardless of current state
+                if hasattr(label_widget, '_original_text'):
+                    label_widget.configure(text=label_widget._original_text)
+                    print(f"Restored text for {app_id} to original")
+                else:
+                    # Fallback: try to restore to what we think is original
+                    label_widget.configure(text=original_text)
+                    print(f"Restored text for {app_id} using fallback")
+                # Clear the timer from global management
+                self.clear_copy_timer(widget_id)
+            except Exception as e:
+                print(f"Error restoring text: {e}")
+        
+        timer_id = self.root.after(1000, restore_text)
+        self.manage_copy_timer(widget_id, timer_id)
+        print(f"Scheduled timer {timer_id} for widget {widget_id}")
+    
+    def handle_copy_file_name(self, label_widget, file_name):
+        """
+        Handle copying file name to clipboard with proper timer management.
+        
+        Args:
+            label_widget: The label widget to update
+            file_name: The file name to copy
+        """
+        # Create unique widget ID for timer management
+        widget_id = f"file_name_{hash(file_name)}"
+        
+        print(f"Handling copy for file name {file_name}, widget {widget_id}")
+        
+        # Copy the file name to clipboard
+        self.root.clipboard_clear()
+        self.root.clipboard_append(file_name)
+        print(f"Copied file name {file_name} to clipboard")
+        
+        # Store original background and set visual feedback
+        try:
+            original_bg = label_widget.cget('bg')
+            label_widget.configure(bg='#4a4a4a')
+            print(f"Set label background to feedback color for {file_name}")
+        except Exception as e:
+            print(f"Error setting label background: {e}")
+            return
+        
+        # Schedule background restoration using global timer management
+        def restore_background():
+            try:
+                label_widget.configure(bg=original_bg)
+                print(f"Restored background for {file_name}")
+                # Clear the timer from global management
+                self.clear_copy_timer(widget_id)
+            except Exception as e:
+                print(f"Error restoring background: {e}")
+        
+        timer_id = self.root.after(200, restore_background)
+        self.manage_copy_timer(widget_id, timer_id)
+        print(f"Scheduled timer {timer_id} for widget {widget_id}")
+    
+    def force_restore_all_copy_text(self):
+        """
+        Force restore all copy text that might be stuck.
+        This is useful for debugging when text gets stuck.
+        """
+        print("Force restoring all copy text...")
+        # Clear all timers first
+        self.clear_all_copy_timers()
+        
+        # You can add specific widget restoration logic here if needed
+        print("All copy text should be restored")
+    
+    def force_restore_text_immediately(self, label_widget, app_id):
+        """
+        Force restore text immediately for a specific widget.
+        This is useful for debugging when text gets stuck.
+        """
+        try:
+            if hasattr(label_widget, '_original_text'):
+                label_widget.configure(text=label_widget._original_text)
+                print(f"Force restored text for {app_id}")
+            else:
+                print(f"No original text stored for {app_id}")
+        except Exception as e:
+            print(f"Error force restoring text: {e}")
+    
     def center_window(self):
         """Center the window on the screen"""
         self.root.update_idletasks()
@@ -337,6 +780,7 @@ class SteamStyleApp:
             'api_timeout': 10,
             'max_download_threads': 3,  # New setting for concurrent downloads
             'theme': 'steam_dark',
+            'minimize_to_tray': False,
             # Legacy single API settings (for backward compatibility)
             'manifest_download_url': '',
             'manifest_good_status_code': 200,
@@ -355,9 +799,14 @@ class SteamStyleApp:
         }
         
         try:
+            print(f"Loading settings from: {self.settings_file}")
             if os.path.exists(self.settings_file):
+                print("Settings file exists, loading...")
                 with open(self.settings_file, 'r', encoding='utf-8') as f:
-                    loaded_settings = json.load(f)
+                    content = f.read()
+                    print(f"Settings file content length: {len(content)} characters")
+                    loaded_settings = json.loads(content)
+                    print(f"Settings loaded successfully, keys: {list(loaded_settings.keys())}")
                     
                     # Migration: Convert legacy single API settings to new multi-API format
                     if 'api_list' not in loaded_settings and 'manifest_download_url' in loaded_settings:
@@ -384,13 +833,18 @@ class SteamStyleApp:
                     for key, value in default_settings.items():
                         if key not in loaded_settings:
                             loaded_settings[key] = value
+                    
+                    print(f"Final settings after merge: {list(loaded_settings.keys())}")
                     return loaded_settings
             else:
+                print("Settings file does not exist, creating default...")
                 # Create default settings file
                 self.save_settings(default_settings)
                 return default_settings
         except Exception as e:
             print(f"Error loading settings: {e}")
+            import traceback
+            traceback.print_exc()
             return default_settings
     
     def save_settings(self, settings=None):
@@ -1128,6 +1582,9 @@ class SteamStyleApp:
         results_window.geometry("600x500")
         results_window.configure(bg=self.colors['bg'])
         
+        # Set window icon
+        self.set_window_icon(results_window)
+        
         # Center the popup window
         self.center_popup(results_window)
         
@@ -1460,6 +1917,14 @@ class SteamStyleApp:
             "Auto-restart Steam after patching",
             "auto_restart_steam",
             "Automatically restart Steam when patching is complete"
+        )
+
+        # Minimize to system tray setting
+        self.create_checkbox_setting(
+            settings_container,
+            "Minimize to system tray",
+            "minimize_to_tray",
+            "When closing the window, hide to the system tray instead of exiting"
         )
         
         # API timeout setting
@@ -2228,6 +2693,111 @@ class SteamStyleApp:
         if index < len(self.settings.get('api_list', [])):
             self.settings['api_list'][index]['unavailable_code'] = code
     
+    def load_free_apis_from_download(self):
+        """Load free APIs from GitHub raw link (non-UI version for downloads)"""
+        import json  # Import json for manual parsing
+        
+        try:
+            # Safety check: ensure http_client is initialized and valid
+            if not hasattr(self, 'http_client') or self.http_client is None:
+                print("[WARNING] http_client not initialized or None, initializing now...")
+                try:
+                    self.http_client = httpx.Client(
+                        http2=True,
+                        follow_redirects=True,
+                        headers={"User-Agent": "Mozilla/5.0"}
+                    )
+                    print("[WARNING] http_client initialized successfully")
+                except Exception as e:
+                    print(f"[WARNING] Failed to initialize http_client: {e}")
+                    self.http_client = None
+            
+            # Use persistent HTTP client for speed
+            client = self.http_client or httpx.Client(http2=True, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
+            
+            # Load APIs from GitHub raw link
+            url = 'https://raw.githubusercontent.com/madoiscool/lt_api_links/refs/heads/main/load_free_manifest_apis'
+            print(f"[DOWNLOAD] Fetching free APIs from: {url}")
+            
+            response = client.get(url)
+            response.raise_for_status()
+            
+            # Get raw text first for debugging
+            raw_text = response.text
+            print(f"[DOWNLOAD] Raw response length: {len(raw_text)}")
+            
+            # Try to parse JSON
+            try:
+                api_data = response.json()
+                print(f"[DOWNLOAD] JSON parsed successfully: {type(api_data)}")
+            except Exception as json_error:
+                print(f"[DOWNLOAD] JSON parse error: {json_error}")
+                
+                # Try to fix common GitHub raw file issues
+                cleaned_text = raw_text.strip()
+                
+                # Check if it starts with "api_list" (missing opening brace)
+                if cleaned_text.startswith('"api_list"'):
+                    print(f"[DOWNLOAD] Detected missing opening brace, cleaning and wrapping in {{}}")
+                    
+                    # Remove trailing comma and clean up the end
+                    if cleaned_text.endswith(',\n'):
+                        cleaned_text = cleaned_text[:-2]  # Remove trailing ",\n"
+                    elif cleaned_text.endswith(','):
+                        cleaned_text = cleaned_text[:-1]  # Remove trailing ","
+                    
+                    # Remove any trailing whitespace/newlines
+                    cleaned_text = cleaned_text.rstrip()
+                    
+                    fixed_json = "{" + cleaned_text + "}"
+                    print(f"[DOWNLOAD] Fixed JSON: {repr(fixed_json)}")
+                    
+                    try:
+                        api_data = json.loads(fixed_json)
+                        print(f"[DOWNLOAD] Fixed JSON parsed successfully!")
+                    except Exception as fix_error:
+                        print(f"[DOWNLOAD] Fix attempt failed: {fix_error}")
+                        
+                        # Last resort: manually extract the array content
+                        try:
+                            # Find the start and end of the array
+                            start_idx = cleaned_text.find('[')
+                            end_idx = cleaned_text.rfind(']')
+                            if start_idx != -1 and end_idx != -1:
+                                array_content = cleaned_text[start_idx:end_idx+1]
+                                manual_json = '{"api_list": ' + array_content + '}'
+                                print(f"[DOWNLOAD] Manual JSON: {repr(manual_json)}")
+                                api_data = json.loads(manual_json)
+                                print(f"[DOWNLOAD] Manual JSON parsed successfully!")
+                            else:
+                                raise ValueError("Could not find array brackets")
+                        except Exception as manual_error:
+                            print(f"[DOWNLOAD] Manual JSON also failed: {manual_error}")
+                            raise ValueError(f"JSON parsing failed and could not be fixed: {json_error}. Raw response: {raw_text[:100]}...")
+                else:
+                    raise ValueError(f"JSON parsing failed: {json_error}. Raw response: {raw_text[:100]}...")
+            
+            # Validate response structure
+            if 'api_list' not in api_data:
+                print(f"[DOWNLOAD] Missing 'api_list' key. Available keys: {list(api_data.keys())}")
+                raise ValueError("Invalid response: 'api_list' key not found")
+            
+            print(f"[DOWNLOAD] Found {len(api_data['api_list'])} APIs")
+            
+            # Update settings
+            self.settings['api_list'] = api_data['api_list']
+            
+            # Save settings immediately
+            self.save_settings()
+            
+            print(f"[DOWNLOAD] Successfully loaded and saved {len(api_data['api_list'])} free APIs")
+            return True
+            
+        except Exception as e:
+            error_msg = f"Failed to load FREE APIs: {str(e)}"
+            print(f"[DOWNLOAD] {error_msg}")
+            return False
+    
     def load_free_apis(self):
         """Load free APIs from GitHub raw link and update settings"""
         import json  # Import json for manual parsing
@@ -2260,6 +2830,20 @@ class SteamStyleApp:
         
         def load_thread():
             try:
+                # Safety check: ensure http_client is initialized and valid
+                if not hasattr(self, 'http_client') or self.http_client is None:
+                    print("[WARNING] http_client not initialized or None, initializing now...")
+                    try:
+                        self.http_client = httpx.Client(
+                            http2=True,
+                            follow_redirects=True,
+                            headers={"User-Agent": "Mozilla/5.0"}
+                        )
+                        print("[WARNING] http_client initialized successfully")
+                    except Exception as e:
+                        print(f"[WARNING] Failed to initialize http_client: {e}")
+                        self.http_client = None
+                
                 # Use persistent HTTP client for speed
                 client = self.http_client or httpx.Client(http2=True, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
                 
@@ -2740,6 +3324,110 @@ class SteamStyleApp:
         )
         search_entry.pack(side=tk.LEFT)
         
+        # Add right-click context menu for copy functionality
+        def show_search_context_menu(event):
+            # Create context menu
+            context_menu = tk.Menu(search_entry, tearoff=0)
+            
+            # Add copy option (only if text is selected)
+            if search_entry.selection_present():
+                context_menu.add_command(
+                    label="Copy",
+                    command=lambda: copy_selected_text()
+                )
+            
+            # Add copy all option (always available)
+            context_menu.add_command(
+                label="Copy All",
+                command=lambda: copy_all_text()
+            )
+            
+            # Add paste option (always available)
+            context_menu.add_command(
+                label="Paste",
+                command=lambda: paste_text()
+            )
+            
+            # Add separator
+            context_menu.add_separator()
+            
+            # Add select all option
+            context_menu.add_command(
+                label="Select All",
+                command=lambda: search_entry.select_range(0, tk.END)
+            )
+            
+            # Show context menu at cursor position
+            try:
+                context_menu.tk_popup(event.x_root, event.y_root)
+            finally:
+                context_menu.grab_release()
+        
+        def copy_selected_text():
+            """Copy selected text to clipboard"""
+            try:
+                selected_text = search_entry.selection_get()
+                self.root.clipboard_clear()
+                self.root.clipboard_append(selected_text)
+            except tk.TclError:
+                pass  # No text selected
+        
+        def copy_all_text():
+            """Copy all text to clipboard"""
+            all_text = search_entry.get()
+            if all_text:
+                self.root.clipboard_clear()
+                self.root.clipboard_append(all_text)
+        
+        def paste_text():
+            """Paste text from clipboard with automatic Steam URL shortening"""
+            try:
+                clipboard_text = self.root.clipboard_get()
+                
+                # Check if it's a Steam store URL and extract app ID
+                import re
+                steam_url_pattern = r'store\.steampowered\.com/app/(\d+)'
+                match = re.search(steam_url_pattern, clipboard_text)
+                
+                if match:
+                    # Extract just the app ID
+                    app_id = match.group(1)
+                    search_entry.focus_set()
+                    search_entry.delete(0, tk.END)
+                    search_entry.insert(0, app_id)
+                else:
+                    # Regular paste for non-Steam URLs
+                    search_entry.focus_set()
+                    search_entry.delete(0, tk.END)
+                    search_entry.insert(0, clipboard_text)
+                    
+            except tk.TclError:
+                pass  # Clipboard empty or invalid
+        
+        # Bind right-click to show context menu
+        search_entry.bind('<Button-3>', show_search_context_menu)
+        
+        # Bind paste event to automatically process Steam URLs
+        def on_paste(event):
+            # Wait a moment for the paste to complete, then process
+            self.root.after(10, process_pasted_text)
+        
+        def process_pasted_text():
+            """Process pasted text and shorten Steam URLs to app IDs"""
+            current_text = search_entry.get()
+            if current_text:
+                import re
+                steam_url_pattern = r'store\.steampowered\.com/app/(\d+)'
+                match = re.search(steam_url_pattern, current_text)
+                
+                if match:
+                    # Extract just the app ID
+                    app_id = match.group(1)
+                    search_entry.delete(0, tk.END)
+                    search_entry.insert(0, app_id)
+        
+        search_entry.bind('<<Paste>>', on_paste)
+        
         # Create a cache for faster searching (store as instance variables)
         self.steam_search_cache = []
         self.installed_games_dict = {str(game['app_id']): game for game in game_list}
@@ -2940,6 +3628,9 @@ class SteamStyleApp:
         def filter_games(*args):
             nonlocal search_after_id
             
+            # Reset all failed buttons to download state immediately when search starts
+            self.reset_all_failed_buttons_to_download()
+            
             # Cancel previous search
             if search_after_id:
                 self.root.after_cancel(search_after_id)
@@ -2948,6 +3639,9 @@ class SteamStyleApp:
             search_after_id = self.root.after(300, lambda: perform_search())
         
         def perform_search():
+            # Reset all failed buttons to download state when search is performed
+            self.reset_all_failed_buttons_to_download()
+            
             search_term = search_var.get().lower()
             filtered_games = []
             total_results_found = 0  # Track total results before limit
@@ -3120,6 +3814,20 @@ class SteamStyleApp:
         
     def refresh_god_mode_data(self):
         """Refresh the God Mode data by reloading from Steam API"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if there are any active downloads
         has_active_downloads = len(self.download_queue) > 0 or self.current_download is not None
         
@@ -3173,6 +3881,9 @@ class SteamStyleApp:
         )
         self.progress_bar.pack(pady=(0, 30))
         self.progress_bar.start()
+        
+        # Reset all failed buttons to download state before refreshing
+        self.reset_all_failed_buttons_to_download()
         
         # Start loading again
         self.load_god_mode_data()
@@ -3253,6 +3964,9 @@ class SteamStyleApp:
             credits_window.configure(bg=self.colors['bg'])
             credits_window.transient(self.root)
             credits_window.grab_set()
+            
+            # Set window icon
+            self.set_window_icon(credits_window)
             
             # Center the window on screen
             credits_window.update_idletasks()
@@ -3403,6 +4117,20 @@ class SteamStyleApp:
         
     def back_to_main(self):
         """Return to main UI from settings or God Mode"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if there are any active downloads
         has_active_downloads = len(self.download_queue) > 0 or self.current_download is not None
         
@@ -3689,6 +4417,9 @@ class SteamStyleApp:
         results_window.geometry("500x400")
         results_window.configure(bg=self.colors['bg'])
         
+        # Set window icon
+        self.set_window_icon(results_window)
+        
         # Center the popup window
         self.center_popup(results_window)
         
@@ -3807,8 +4538,44 @@ class SteamStyleApp:
             enabled_apis = [api for api in api_list if api.get('enabled', True)]
             
             if not enabled_apis:
-                print(f"[DOWNLOAD] ERROR: No enabled APIs configured for {app_id}")
-                return False, "No enabled APIs configured"
+                print(f"[DOWNLOAD] No enabled APIs configured for {app_id}")
+                
+                # Ask user if they want to fetch free APIs
+                result = messagebox.askyesno(
+                    "No APIs Found",
+                    "No API's Found, Fetch Free Ones?",
+                    icon='question'
+                )
+                
+                if result:
+                    # User chose to fetch free APIs
+                    print(f"[DOWNLOAD] User chose to fetch free APIs for {app_id}")
+                    try:
+                        # Run the auto-fetch free APIs script (non-UI version)
+                        success = self.load_free_apis_from_download()
+                        
+                        if success:
+                            # Check if APIs were successfully loaded
+                            api_list = self.settings.get('api_list', [])
+                            enabled_apis = [api for api in api_list if api.get('enabled', True)]
+                            
+                            if enabled_apis:
+                                print(f"[DOWNLOAD] Successfully loaded {len(enabled_apis)} free APIs, retrying download")
+                                # Retry the download with the new APIs
+                                return self.download_manifest(app_id, game_name)
+                            else:
+                                print(f"[DOWNLOAD] Failed to load free APIs for {app_id}")
+                                return False, "Failed to load free APIs"
+                        else:
+                            print(f"[DOWNLOAD] Failed to load free APIs for {app_id}")
+                            return False, "Failed to load free APIs"
+                    except Exception as e:
+                        print(f"[DOWNLOAD] Error loading free APIs: {e}")
+                        return False, f"Error loading free APIs: {str(e)}"
+                else:
+                    # User chose not to fetch free APIs
+                    print(f"[DOWNLOAD] User declined to fetch free APIs for {app_id}")
+                    return False, "No enabled APIs configured"
             
             # Get timeout setting
             api_timeout = self.settings.get('api_request_timeout', 15)
@@ -3818,6 +4585,20 @@ class SteamStyleApp:
                 print(f"[DOWNLOAD] ERROR: Failed to create download directory for {app_id}")
                 return False, "Failed to create download directory"
 
+            # Safety check: ensure http_client is initialized and valid
+            if not hasattr(self, 'http_client') or self.http_client is None:
+                print("[WARNING] http_client not initialized or None, initializing now...")
+                try:
+                    self.http_client = httpx.Client(
+                        http2=True,
+                        follow_redirects=True,
+                        headers={"User-Agent": "Mozilla/5.0"}
+                    )
+                    print("[WARNING] http_client initialized successfully")
+                except Exception as e:
+                    print(f"[WARNING] Failed to initialize http_client: {e}")
+                    self.http_client = None
+            
             # Ensure we have a client; fall back to a transient one if needed
             client = self.http_client or httpx.Client(http2=True, follow_redirects=True, headers={"User-Agent": "Mozilla/5.0"})
 
@@ -4134,6 +4915,20 @@ class SteamStyleApp:
             self.god_mode_back_button = None
             return
         
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if there are any active downloads (queued or in progress)
         has_active_downloads = len(self.download_queue) > 0 or self.current_download is not None
         
@@ -4170,6 +4965,20 @@ class SteamStyleApp:
             self.god_mode_refresh_button = None
             return
         
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if there are any active downloads (queued or in progress)
         has_active_downloads = len(self.download_queue) > 0 or self.current_download is not None
         
@@ -4204,6 +5013,20 @@ class SteamStyleApp:
 
     def add_to_download_queue(self, app_id, game_name):
         """Add a download to the queue"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         print(f"[QUEUE] Adding {game_name} (App ID: {app_id}) to download queue")
         download_item = {
             'app_id': app_id,
@@ -4244,6 +5067,20 @@ class SteamStyleApp:
 
     def process_download_queue(self):
         """Process the download queue"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         if not self.download_queue:
             return
             
@@ -4339,6 +5176,11 @@ class SteamStyleApp:
 
     def finish_download(self, success, message, stats=None):
         """Finish a download and process next in queue"""
+        # Safety check: ensure queued_games is initialized
+        if not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         print(f"[QUEUE] Finishing download: {self.current_download['game_name']} - Success: {success}")
         
         # Update current download status
@@ -4413,6 +5255,11 @@ class SteamStyleApp:
 
     def finish_single_download(self, app_id_str, success, message, stats=None):
         """Finish a single download in multi-threaded mode"""
+        # Safety check: ensure queued_games is initialized
+        if not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         if app_id_str not in self.active_downloads:
             print(f"[QUEUE] Warning: finish_single_download called for unknown app_id {app_id_str}")
             return
@@ -4450,6 +5297,12 @@ class SteamStyleApp:
                 download_item['game_name']
             )
         else:
+            # Download failed - update the game card button state
+            self.update_game_card_button_after_failed_download(
+                download_item['app_id'], 
+                download_item['game_name']
+            )
+            
             download_item['status'] = 'failed'
             download_item['error_message'] = message  # Store error message
             print(f"[QUEUE] Download failed: {message}")
@@ -4567,6 +5420,20 @@ class SteamStyleApp:
 
     def update_download_queue_display(self):
         """Update the download queue display"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if download manager is open and frame exists
         if not hasattr(self, 'queue_scrollable_frame') or not self.queue_scrollable_frame:
             return
@@ -4620,6 +5487,20 @@ class SteamStyleApp:
     
     def update_queue_title_text(self):
         """Update the queue title text to show current status"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         # Check if the queue title label exists and is valid
         if not hasattr(self, 'queue_title_label') or not self.queue_title_label:
             return
@@ -4698,9 +5579,25 @@ class SteamStyleApp:
                 font=('Segoe UI', 9),
                 fg=self.colors['accent'],
                 bg=self.colors['bg'],
-                anchor='w'
+                anchor='w',
+                cursor='hand2'  # Show hand cursor on hover
             )
             app_id_label.pack(anchor='w')
+            
+            # Add single-click to copy app ID to clipboard
+            def copy_app_id(event):
+                # Use the class method for copy operations
+                self.handle_copy_app_id(app_id_label, item['app_id'])
+                return 'break'
+            
+            # Bind single-click to copy app ID
+            app_id_label.bind('<Button-1>', copy_app_id)
+            
+            # Add right-click for debugging (force restore text)
+            def force_restore_debug(event):
+                self.force_restore_text_immediately(app_id_label, item['app_id'])
+                return 'break'
+            app_id_label.bind('<Button-3>', force_restore_debug)
             
             # Show download statistics for completed downloads
             if item['status'] == 'completed' and 'file_size_mb' in item:
@@ -4925,6 +5822,155 @@ class SteamStyleApp:
                 
         except Exception as e:
             print(f"[UPDATE] Error updating game card after download: {e}")
+    
+    def update_game_card_button_after_failed_download(self, app_id, game_name):
+        """Update a game card button after a failed download to reset from 'Queued' to 'Download'"""
+        try:
+            print(f"[UPDATE] Updating game card button after failed download for {game_name} (App ID: {app_id})")
+            
+            # Find the scrollable frame that contains the game cards
+            if hasattr(self, 'god_mode_frame') and self.god_mode_frame.winfo_exists():
+                for widget in self.god_mode_frame.winfo_children():
+                    if widget.winfo_name() == '!frame2':  # Games frame
+                        games_frame = widget
+                        
+                        # Find the canvas and scrollable frame
+                        for child in games_frame.winfo_children():
+                            if isinstance(child, tk.Canvas):
+                                canvas = child
+                                # Get the scrollable frame from the canvas
+                                scrollable_frame = None
+                                for item in canvas.find_all():
+                                    if canvas.type(item) == 'window':
+                                        # itemcget returns the Tk path name; convert to widget
+                                        window_path = canvas.itemcget(item, 'window')
+                                        try:
+                                            scrollable_frame = self.root.nametowidget(window_path)
+                                        except Exception:
+                                            scrollable_frame = None
+                                        break
+                                
+                                if scrollable_frame:
+                                    # Find the specific game card
+                                    for card in scrollable_frame.winfo_children():
+                                        if isinstance(card, tk.Frame):
+                                            # Check if this card contains the app_id we're looking for
+                                            if self.card_contains_app_id(card, app_id):
+                                                print(f"[UPDATE] Found game card for {app_id}, resetting button...")
+                                                # Reset the button to 'Download' state
+                                                self.reset_game_card_button_after_failure(card)
+                                                return
+                                    break
+                        break
+                        
+        except Exception as e:
+            print(f"[UPDATE] Error updating game card button after failed download: {e}")
+    
+    def reset_game_card_button_after_failure(self, card):
+        """Reset a game card's download button after a failed download to show 'Failed' temporarily"""
+        try:
+            # Find the download button in the card
+            def find_download_button(widget):
+                if isinstance(widget, tk.Button):
+                    # Check if this is a download button (not action buttons like enable/disable)
+                    button_text = widget.cget('text')
+                    if button_text in ['Download', 'Queued']:
+                        return widget
+                
+                # Search children recursively
+                for child in widget.winfo_children():
+                    result = find_download_button(child)
+                    if result:
+                        return result
+                return None
+            
+            download_button = find_download_button(card)
+            
+            if download_button:
+                # Set button to 'Failed' state with red color
+                download_button.config(
+                    state='normal',
+                    text='Failed',
+                    bg='#ff4444',  # Red color for failed state
+                    cursor='hand2'
+                )
+                print(f"[UPDATE] Set download button to 'Failed' state (red)")
+            else:
+                print(f"[UPDATE] Could not find download button to set failed state")
+                
+        except Exception as e:
+            print(f"[UPDATE] Error setting game card button to failed state: {e}")
+    
+    def reset_all_failed_buttons_to_download(self):
+        """Reset all 'Failed' buttons back to 'Download' state"""
+        try:
+            print(f"[UPDATE] Resetting all failed buttons to download state")
+            
+            # Find the scrollable frame that contains the game cards
+            if hasattr(self, 'god_mode_frame') and self.god_mode_frame.winfo_exists():
+                for widget in self.god_mode_frame.winfo_children():
+                    if widget.winfo_name() == '!frame2':  # Games frame
+                        games_frame = widget
+                        
+                        # Find the canvas and scrollable frame
+                        for child in games_frame.winfo_children():
+                            if isinstance(child, tk.Canvas):
+                                canvas = child
+                                # Get the scrollable frame from the canvas
+                                scrollable_frame = None
+                                for item in canvas.find_all():
+                                    if canvas.type(item) == 'window':
+                                        # itemcget returns the Tk path name; convert to widget
+                                        window_path = canvas.itemcget(item, 'window')
+                                        try:
+                                            scrollable_frame = self.root.nametowidget(window_path)
+                                        except Exception:
+                                            scrollable_frame = None
+                                        break
+                                
+                                if scrollable_frame:
+                                    # Find all game cards and reset failed buttons
+                                    for card in scrollable_frame.winfo_children():
+                                        if isinstance(card, tk.Frame):
+                                            self.reset_single_failed_button(card)
+                                    break
+                        break
+                        
+        except Exception as e:
+            print(f"[UPDATE] Error resetting all failed buttons: {e}")
+    
+    def reset_single_failed_button(self, card):
+        """Reset a single failed button back to download state"""
+        try:
+            # Find the download button in the card
+            def find_download_button(widget):
+                if isinstance(widget, tk.Button):
+                    # Check if this is a download button
+                    button_text = widget.cget('text')
+                    if button_text == 'Failed':
+                        return widget
+                
+                # Search children recursively
+                for child in widget.winfo_children():
+                    result = find_download_button(child)
+                    if result:
+                        return result
+                return None
+            
+            download_button = find_download_button(card)
+            
+            if download_button:
+                # Reset button back to 'Download' state
+                download_button.config(
+                    state='normal',
+                    text='Download',
+                    bg=self.colors['accent'],
+                    cursor='hand2'
+                )
+                print(f"[UPDATE] Reset failed button back to 'Download' state")
+                
+        except Exception as e:
+            print(f"[UPDATE] Error resetting single failed button: {e}")
 
     def update_game_card_in_ui(self, app_id, game_data):
         """Find and update a specific game card in the UI"""
@@ -4943,7 +5989,12 @@ class SteamStyleApp:
                                 scrollable_frame = None
                                 for item in canvas.find_all():
                                     if canvas.type(item) == 'window':
-                                        scrollable_frame = canvas.itemcget(item, 'window')
+                                        # itemcget returns the Tk path name; convert to widget
+                                        window_path = canvas.itemcget(item, 'window')
+                                        try:
+                                            scrollable_frame = self.root.nametowidget(window_path)
+                                        except Exception:
+                                            scrollable_frame = None
                                         break
                                 
                                 if scrollable_frame:
@@ -5245,7 +6296,11 @@ class SteamStyleApp:
                                 scrollable_frame = None
                                 for item in canvas.find_all():
                                     if canvas.type(item) == 'window':
-                                        scrollable_frame = canvas.itemcget(item, 'window')
+                                        window_path = canvas.itemcget(item, 'window')
+                                        try:
+                                            scrollable_frame = self.root.nametowidget(window_path)
+                                        except Exception:
+                                            scrollable_frame = None
                                         break
                                 
                                 if scrollable_frame:
@@ -5566,12 +6621,20 @@ class SteamStyleApp:
                                             
                                             # Add double-click to copy file name
                                             def copy_file_name(event):
+                                                # Prevent multiple simultaneous copy operations
+                                                if hasattr(file_name_label, '_copy_bg_timer_id'):
+                                                    self.root.after_cancel(file_name_label._copy_bg_timer_id)
+                                                
                                                 self.root.clipboard_clear()
                                                 self.root.clipboard_append(game['lua_file'])
                                                 # Visual feedback
                                                 original_bg = file_name_label.cget('bg')
                                                 file_name_label.configure(bg='#4a4a4a')
-                                                self.root.after(200, lambda: file_name_label.configure(bg=original_bg))
+                                                
+                                                # Schedule background restoration and store timer ID
+                                                timer_id = self.root.after(200, lambda: file_name_label.configure(bg=original_bg))
+                                                file_name_label._copy_bg_timer_id = timer_id
+                                                
                                                 return 'break'
                                             
                                             file_name_label.bind('<Double-Button-1>', copy_file_name)
@@ -5606,6 +6669,20 @@ class SteamStyleApp:
 
     def clear_download_queue(self):
         """Clear the download queue and reset current download"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         self.download_queue.clear()
         self.current_download = None
         self.completed_downloads.clear()
@@ -5626,6 +6703,20 @@ class SteamStyleApp:
         
     def clear_finished_downloads(self):
         """Clear only completed and failed downloads from the queue"""
+        # Safety check: ensure download_queue and queued_games are initialized
+        if not hasattr(self, 'download_queue'):
+            print("[WARNING] download_queue not initialized, initializing now...")
+            self.download_queue = []
+            self.completed_downloads = []
+            self.failed_downloads = []
+            self.current_download = None
+            self.active_downloads = {}
+            self.download_threads = {}
+            self.queued_games = set()
+        elif not hasattr(self, 'queued_games'):
+            print("[WARNING] queued_games not initialized, initializing now...")
+            self.queued_games = set()
+        
         self.completed_downloads.clear()
         self.failed_downloads.clear()
         
@@ -5798,6 +6889,11 @@ class SteamStyleApp:
                 # Update button to show it's been queued
                 action_button.config(state='disabled', text='Queued', bg='#FFA500')  # Orange
             
+            # Safety check: ensure queued_games is initialized
+            if not hasattr(self, 'queued_games'):
+                print("[WARNING] queued_games not initialized, initializing now...")
+                self.queued_games = set()
+            
             # Check if game is queued
             app_id_str = str(game['app_id'])
             is_queued = app_id_str in self.queued_games
@@ -5932,18 +7028,19 @@ class SteamStyleApp:
         )
         app_id_value_label.pack(side=tk.LEFT)
         
-        # Add double-click to select all text (copy to clipboard)
-        def select_all(event):
-            # Copy the app ID to clipboard
-            self.root.clipboard_clear()
-            self.root.clipboard_append(str(game['app_id']))
-            # Visual feedback - briefly change background color
-            original_bg = app_id_value_label.cget('bg')
-            app_id_value_label.configure(bg='#4a4a4a')
-            self.root.after(200, lambda: app_id_value_label.configure(bg=original_bg))
+        # Add single-click to copy app ID to clipboard
+        def copy_app_id(event):
+            # Use the class method for copy operations
+            self.handle_copy_app_id(app_id_value_label, game['app_id'])
             return 'break'
         
-        app_id_value_label.bind('<Double-Button-1>', select_all)
+        app_id_value_label.bind('<Button-1>', copy_app_id)
+        
+        # Add right-click for debugging (force restore text)
+        def force_restore_debug(event):
+            self.force_restore_text_immediately(app_id_value_label, game['app_id'])
+            return 'break'
+        app_id_value_label.bind('<Button-3>', force_restore_debug)
         
         # Show game file name if setting is enabled
         show_file_names = self.settings.get('show_file_names', False)
@@ -5971,12 +7068,8 @@ class SteamStyleApp:
             
             # Add double-click to copy file name
             def copy_file_name(event):
-                self.root.clipboard_clear()
-                self.root.clipboard_append(game['lua_file'])
-                # Visual feedback
-                original_bg = file_name_label.cget('bg')
-                file_name_label.configure(bg='#4a4a4a')
-                self.root.after(200, lambda: file_name_label.configure(bg=original_bg))
+                # Use the class method for file name copy operations
+                self.handle_copy_file_name(file_name_label, game['lua_file'])
                 return 'break'
             
             file_name_label.bind('<Double-Button-1>', copy_file_name)
@@ -5990,6 +7083,9 @@ class SteamStyleApp:
         settings_window.title("Game List Settings")
         settings_window.geometry("500x400")
         settings_window.configure(bg=self.colors['bg'])
+        
+        # Set window icon
+        self.set_window_icon(settings_window)
         
         # Center the window
         self.center_popup(settings_window)
@@ -6354,6 +7450,11 @@ class SteamStyleApp:
                     
                     # Update button to show it's been queued
                     download_button.config(state='disabled', text='Queued', bg='#FFA500')  # Orange
+                
+                # Safety check: ensure queued_games is initialized
+                if not hasattr(self, 'queued_games'):
+                    print("[WARNING] queued_games not initialized, initializing now...")
+                    self.queued_games = set()
                 
                 # Check if game is queued
                 app_id_str = str(game['app_id'])
@@ -6910,6 +8011,9 @@ class SteamStyleApp:
         popup.geometry("500x600")
         popup.configure(bg=self.colors['bg'])
         
+        # Set window icon
+        self.set_window_icon(popup)
+        
         # Center the popup window
         self.center_popup(popup)
         
@@ -7379,6 +8483,9 @@ class SteamStyleApp:
         update_window.configure(bg='#0f1419')
         update_window.transient(self.root)
         update_window.grab_set()
+        
+        # Set window icon
+        self.set_window_icon(update_window)
         
         # Center the window on screen
         update_window.update_idletasks()
@@ -7928,11 +9035,378 @@ exit
         except Exception as e:
             print(f"[UPDATE] Failed to create CMD updater: {e}")
             messagebox.showerror("Update Error", f"Failed to create updater: {e}")
+    
+    def setup_system_tray(self):
+        """Set up system tray icon to minimize instead of close (non-blocking)."""
+        try:
+            # Check Windows version and compatibility
+            import platform
+            if platform.system() != 'Windows':
+                raise Exception("System tray is only supported on Windows")
+            
+            print(f"Windows version: {platform.platform()}")
+            
+            # Test pystray import with timeout to prevent hanging
+            import threading
+            import time
+            
+            # Try to import pystray with a timeout
+            pystray_imported = False
+            pystray_module = None
+            
+            def import_pystray():
+                nonlocal pystray_imported, pystray_module
+                try:
+                    import pystray
+                    pystray_module = pystray
+                    pystray_imported = True
+                except Exception as e:
+                    print(f"pystray import failed: {e}")
+            
+            import_thread = threading.Thread(target=import_pystray, daemon=True)
+            import_thread.start()
+            import_thread.join(timeout=5)  # 5 second timeout
+            
+            if not pystray_imported:
+                print("pystray import timed out or failed")
+                raise Exception("pystray library import failed or timed out")
+            
+            print("pystray imported successfully")
+            
+            # Test PIL import
+            try:
+                from PIL import Image
+                print("PIL/Pillow imported successfully")
+            except ImportError as pil_error:
+                print(f"PIL/Pillow import failed: {pil_error}")
+                raise Exception("Pillow (PIL) library not available - required for system tray")
+            
+            # Resolve icon path - try multiple locations
+            icon_path = None
+            if getattr(sys, 'frozen', False):
+                # Running as executable
+                possible_paths = [
+                    os.path.join(os.path.dirname(sys.executable), 'icon.ico'),
+                    os.path.join(os.path.dirname(sys.executable), '..', 'icon.ico'),
+                    os.path.join(os.path.dirname(sys.executable), '..', '..', 'icon.ico'),
+                ]
+                for path in possible_paths:
+                    if os.path.exists(path):
+                        icon_path = path
+                        break
+            else:
+                # Running as script
+                icon_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.ico')
+            
+            # Load or create icon
+            try:
+                if icon_path and os.path.exists(icon_path):
+                    print(f"Attempting to load icon from: {icon_path}")
+                    img = Image.open(icon_path)
+                    img = img.resize((16, 16), Image.Resampling.LANCZOS)
+                    print(f"System tray icon loaded successfully from: {icon_path}")
+                else:
+                    print(f"Icon path not found: {icon_path}")
+                    # Create a default colored icon
+                    img = Image.new('RGB', (16, 16), color=(79, 70, 229))  # Indigo color
+                    print("Created default colored icon for system tray")
+            except Exception as e:
+                print(f"Failed to load icon: {e}")
+                print(f"Creating fallback icon...")
+                img = Image.new('RGB', (16, 16), color=(79, 70, 229))
+            
+            # Define safe UI callbacks that hop back to Tk thread
+            def on_restore(icon=None, item=None):
+                self.root.after(0, self.restore_from_tray)
+            
+            def on_exit(icon=None, item=None):
+                self.root.after(0, self.exit_from_tray)
+            
+            # Create the tray icon with left-click handler
+            self.tray_icon = pystray_module.Icon(
+                "luatools",
+                img,
+                "LuaTools",
+                menu=pystray_module.Menu(
+                    pystray_module.MenuItem("Restore", on_restore, default=True),
+                    pystray_module.MenuItem("Exit", on_exit)
+                )
+            )
+            
+            # Add left-click handler to restore window
+            def on_tray_clicked(icon, event):
+                try:
+                    # Check if it's a left click
+                    if hasattr(event, 'button') and event.button == 1:
+                        self.root.after(0, self.restore_from_tray)
+                except Exception as e:
+                    print(f"Tray click handler error: {e}")
+                    # Fallback: restore on any click
+                    self.root.after(0, self.restore_from_tray)
+            
+            # Set the click handler
+            self.tray_icon.on_click = on_tray_clicked
+            
+            # Set up the close protocol BEFORE starting the tray icon
+            def on_closing():
+                if self.settings.get('minimize_to_tray', False):
+                    print("Minimizing to system tray...")
+                    self.root.withdraw()  # Hide the window
+                    self.set_tray_visible(True)  # Show the tray icon
+                else:
+                    print("Closing application...")
+                    self.exit_from_tray()
+            
+            self.root.protocol("WM_DELETE_WINDOW", on_closing)
+            
+            # Start the tray icon in a separate thread with timeout
+            def run_tray():
+                try:
+                    print("Starting tray icon...")
+                    # Set a timeout for the tray icon run
+                    self.tray_icon.run()
+                    print("Tray icon run completed")
+                except Exception as e:
+                    print(f"Tray icon run error: {e}")
+            
+            tray_thread = threading.Thread(target=run_tray, daemon=True)
+            tray_thread.start()
+            
+            # Wait a moment to see if the tray icon starts successfully
+            time.sleep(0.5)
+            
+            # Keep tray icon hidden initially
+            self.tray_icon.visible = False
+            
+            print("System tray setup completed successfully")
+            
+        except Exception as e:
+            print(f"Failed to create system tray icon: {e}")
+            print("Attempting alternative system tray approach...")
+            
+            # Try alternative approach with simpler setup
+            try:
+                from PIL import Image
+                import threading
+                
+                # Create a simple icon
+                img = Image.new('RGB', (16, 16), color=(79, 70, 229))
+                
+                # Try to create tray icon with minimal configuration
+                self.tray_icon = pystray_module.Icon("luatools", img, "LuaTools")
+                
+                # Set up basic close protocol
+                def on_closing():
+                    if self.settings.get('minimize_to_tray', False):
+                        print("Minimizing to system tray (alternative method)...")
+                        self.root.withdraw()
+                        self.tray_icon.visible = True
+                    else:
+                        self.exit_from_tray()
+                
+                self.root.protocol("WM_DELETE_WINDOW", on_closing)
+                
+                # Start in background
+                def run_simple():
+                    try:
+                        self.tray_icon.run()
+                    except Exception as e2:
+                        print(f"Alternative tray method also failed: {e2}")
+                
+                threading.Thread(target=run_simple, daemon=True).start()
+                self.tray_icon.visible = False
+                
+                print("Alternative system tray method succeeded")
+                return
+                
+            except Exception as alt_e:
+                print(f"Alternative method also failed: {alt_e}")
+                raise Exception(f"Failed to create system tray icon: {e}")
+    
+    def restore_from_tray(self):
+        """Restore the window from system tray."""
+        try:
+            print("Restoring window from system tray...")
+            # Hide the tray icon
+            self.set_tray_visible(False)
+            # Show the window
+            self.root.deiconify()
+            self.root.lift()
+            self.root.focus_force()
+            print("Window restored successfully")
+        except Exception as e:
+            print(f"Error restoring from tray: {e}")
+    
+    def set_tray_visible(self, visible):
+        """Set the system tray icon visibility"""
+        try:
+            if hasattr(self, "tray_icon") and self.tray_icon:
+                self.tray_icon.visible = bool(visible)
+                print(f"Tray icon visibility set to: {visible}")
+            else:
+                print("No tray icon available to set visibility")
+        except Exception as e:
+            print(f"Error setting tray visibility: {e}")
+    
+    def exit_from_tray(self):
+        """Exit the application cleanly from the tray."""
+        try:
+            print("Exiting from system tray...")
+            if hasattr(self, "tray_icon") and self.tray_icon:
+                self.tray_icon.visible = False
+                # Stop the tray icon thread
+                self.tray_icon.stop()
+                print("Tray icon stopped")
+        except Exception as e:
+            print(f"Error stopping tray icon: {e}")
+        
+        print("Quitting application...")
+        self.root.quit()
+    
+    def show_tray_message(self, title, message):
+        """Show a system tray notification message"""
+        try:
+            # Try to show a Windows notification
+            import ctypes
+            ctypes.windll.user32.MessageBoxW(0, message, title, 0x40)  # 0x40 = MB_ICONINFORMATION
+        except:
+            # Fallback to simple messagebox
+            messagebox.showinfo(title, message)
+    
+    def apply_minimize_setting(self):
+        """Apply minimize behavior based on settings (tray vs close)."""
+        try:
+            # Debug: print all settings to see what's loaded
+            print("Current settings:")
+            for key, value in self.settings.items():
+                print(f"  {key}: {value}")
+            
+            minimize_setting = self.settings.get('minimize_to_tray', False)
+            print(f"Applying minimize setting: minimize_to_tray = {minimize_setting}")
+            print(f"Setting type: {type(minimize_setting)}")
+            
+            if minimize_setting:
+                print("Setting up system tray...")
+                try:
+                    self.setup_system_tray()
+                    print("System tray setup completed successfully")
+                except Exception as e:
+                    print(f"System tray setup failed: {e}")
+                    print("Falling back to simple minimize behavior")
+                    self.setup_simple_minimize()
+            else:
+                print("Setting up normal close behavior")
+                # Ensure close quits
+                def on_closing():
+                    self.root.quit()
+                self.root.protocol("WM_DELETE_WINDOW", on_closing)
+                print("Normal close behavior set")
+        except Exception as e:
+            print(f"Failed to apply minimize setting: {e}")
+            import traceback
+            traceback.print_exc()
+    
+    def setup_steam_directories(self):
+        """Set up Steam directories on first launch"""
+        try:
+            # Get Steam installation path from registry
+            steam_path = self.get_steam_install_path()
+            if not steam_path:
+                print("[SETUP] Steam installation path not found in registry")
+                return
+            
+            print(f"[SETUP] Found Steam path: {steam_path}")
+            
+            # Check/create config folder
+            config_path = os.path.join(steam_path, "config")
+            if not os.path.exists(config_path):
+                os.makedirs(config_path)
+                print(f"[SETUP] Created config folder: {config_path}")
+            
+            # Check/create stplug-in folder
+            stplugin_path = os.path.join(config_path, "stplug-in")
+            if not os.path.exists(stplugin_path):
+                os.makedirs(stplugin_path)
+                print(f"[SETUP] Created stplug-in folder: {stplugin_path}")
+                
+                # Show popup about the created folder
+                self.root.after(1000, self.show_stplugin_created_popup)
+            
+        except Exception as e:
+            print(f"[SETUP] Error setting up Steam directories: {e}")
+    
+    def show_stplugin_created_popup(self):
+        """Show popup when stplug-in folder was created"""
+        messagebox.showinfo(
+            "stplug-in Folder Created",
+            "stplug-in folder was not found but was just created, this might mean you don't have st. "
+            "Make sure you have steam tools downloaded for applied app-ids to show up on steam :)"
+        )
+    
+    def setup_simple_minimize(self):
+        """Fallback minimize behavior when system tray is not available"""
+        print("Setting up simple minimize behavior (fallback)")
+        
+        def on_closing():
+            # Respect user setting; if OFF just quit
+            if self.settings.get('minimize_to_tray', False):
+                print("Minimizing window (simple mode)")
+                self.root.withdraw()
+                self.show_tray_message("LuaTools minimized", "Right-click the main window to restore or exit")
+            else:
+                print("Closing application (simple mode)")
+                self.root.quit()
+        
+        # Bind the close event
+        self.root.protocol("WM_DELETE_WINDOW", on_closing)
+        
+        # Add right-click context menu to the window for restore/exit options
+        def show_context_menu(event):
+            # Create context menu
+            context_menu = tk.Menu(self.root, tearoff=0)
+            context_menu.add_command(label="Restore", command=self.restore_simple)
+            context_menu.add_separator()
+            context_menu.add_command(label="Exit", command=self.root.quit)
+            
+            # Show context menu at cursor position
+            try:
+                context_menu.tk_popup(event.x_root, event.y_root)
+            finally:
+                context_menu.grab_release()
+        
+        # Bind right-click to show context menu
+        self.root.bind('<Button-3>', show_context_menu)
+        
+        print("Simple minimize behavior set up successfully")
+    
+    def restore_simple(self):
+        """Restore window from simple minimize (no system tray)"""
+        try:
+            print("Restoring window from simple minimize")
+            self.root.deiconify()
+            self.root.lift()
+            self.root.focus_force()
+        except Exception as e:
+            print(f"Error restoring from simple minimize: {e}")
 
 def main():
-    root = tk.Tk()
-    app = SteamStyleApp(root)
-    root.mainloop()
+    try:
+        print("Starting LuaTools application...")
+        root = tk.Tk()
+        print("Tkinter root window created successfully")
+        
+        print("Creating SteamStyleApp instance...")
+        app = SteamStyleApp(root)
+        print("SteamStyleApp instance created successfully")
+        
+        print("Starting main event loop...")
+        root.mainloop()
+        print("Main event loop ended")
+    except Exception as e:
+        print(f"Error in main function: {e}")
+        import traceback
+        traceback.print_exc()
+        input("Press Enter to exit...")  # Keep console open to see error
 
 if __name__ == "__main__":
     main() 
