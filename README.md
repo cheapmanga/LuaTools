@@ -3,14 +3,6 @@
 </p>
 
 # LuaTools
-<div style="display: flex; flex-direction: row; justify-content: center; gap: 10px;">
-  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Setup.exe?displayAssetName=true&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Portable.zip?displayAssetName=true&style=for-the-badge" />
-</div>
-<div style="display: flex; flex-direction: row; justify-content: center; gap: 10px;">
-  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
-</div>
 <p>
   <img align="right" height="250" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
 
@@ -25,6 +17,26 @@
   It ships fully translated in 29 languages and auto-updates via Velopack.
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
 </p>
+
+## Statistics
+<div>
+  <p>Downloads across <b>all releases</b></p>
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
+</div>
+<div>
+  <p>Downloads on the <b>latest release</b></p>
+  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
+</div>
+
+<a href="https://www.star-history.com/?repos=madoiscool%2Fluatools&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=madoiscool/luatools&type=date&theme=dark&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=madoiscool/luatools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=madoiscool/luatools&type=date&legend=top-left&sealed_token=1SX6CDP2N0Emx5IbGfQmEz4TxM11iXtfLKL9K1utRzINJPEDv55f5XEYjliBUB1No6wbcWbMs-cSzO65OC7kAlMLAHJXjqmDoeRCM6hVtW9xd7fyg8cr2DG4gATwkgym1JvgPs4_PeGi6XMAm7_2CVXU9UxRLBW_GP4-Qmd3-AosSRCM1Nkm7dEr2_Ut" />
+ </picture>
+</a>
 
 ## Requirements
 
