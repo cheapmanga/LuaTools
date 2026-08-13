@@ -18,14 +18,14 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
     private DateTime _lastRefresh;    // refresh-button cooldown
     private int _filteredCount;       // count of the filtered list (drives TotalPages)
 
-    // When true, a CurrentPage change won't re-slice — used while SetFiltered resets/clamps the page,
+    // When true, a CurrentPage change won't re-slice. Used while SetFiltered resets/clamps the page,
     // since it does its own single slice at the end (avoids slicing the stale _filtered list twice).
     private bool _suppressPageSlice;
 
     /// <summary>Set by the view to scroll the grid back to the top (on page change).</summary>
     public Action? ScrollToTop { get; set; }
 
-    /// <summary>The current page of filtered items — shown in the virtualized grid. (When the page size
+    /// <summary>The current page of filtered items. Shown in the virtualized grid. (When the page size
     /// is "All" this holds the entire filtered list, i.e. a single infinite-scroll behaviour.)</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasItems))]
@@ -42,7 +42,7 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
     [ObservableProperty] private string _emptyMessage = "";
 
     // Single source of truth: the grid shows iff there are items; "empty" only when a load finished
-    // with no results. Cards render only when not loading — keeps the spinner from co-rendering over
+    // with no results. Cards render only when not loading. Keeps the spinner from co-rendering over
     // the grid.
     public bool HasItems => Items.Count > 0;
     public bool ShowItems => HasItems && !IsLoading;
@@ -83,7 +83,7 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
     partial void OnSelectedPageSizeChanged(string value)
     {
         SavePageSizeSetting(PageSize);
-        // Page size changed the pagination, not the filter — reset to page 1 and re-slice the existing
+        // Page size changed the pagination, not the filter. Reset to page 1 and re-slice the existing
         // _filtered list (no re-filter needed).
         _suppressPageSlice = true;
         CurrentPage = 1;
@@ -120,13 +120,13 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
     /// <summary>Persist the chosen page size (0 = "All"). Overridden by subclasses that have settings.</summary>
     protected virtual void SavePageSizeSetting(int size) { }
 
-    /// <summary>Hook fired after the visible page is (re)built — e.g. to warm the slice's cover images.
+    /// <summary>Hook fired after the visible page is (re)built, e.g. to warm the slice's cover images.
     /// Default is a no-op.</summary>
     protected virtual void OnPageSliced(IReadOnlyList<T> slice) { }
 
     /// <summary>Replace the filtered+sorted master list and render its current page. This is the single
     /// entry point subclasses call after (re)building their filter result.</summary>
-    /// <param name="resetPage">True (default) for a user-initiated filter/search/sort change — jump back
+    /// <param name="resetPage">True (default) for a user-initiated filter/search/sort change. Jump back
     /// to page 1. False for passive re-renders so the user stays on their current page; the page is still
     /// clamped into range.</param>
     protected void SetFiltered(IEnumerable<T> filtered, bool resetPage = true)
@@ -145,7 +145,7 @@ public abstract partial class PagedListViewModel<T> : ObservableObject
     }
 
     /// <summary>Render the current page from <see cref="_filtered"/> into <see cref="Items"/>. With page
-    /// size "All" this shows the whole filtered list. Re-slices only — never re-filters — so it's cheap
+    /// size "All" this shows the whole filtered list. Re-slices only (never re-filters), so it's cheap
     /// to call on page changes.</summary>
     private void ApplyPageSlice()
     {

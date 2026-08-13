@@ -15,7 +15,7 @@ public class CoverCache
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LuaToolsGui", "covers");
 
     // Reject only truncated/empty bodies. We don't gate on a size threshold: some legit covers are
-    // tiny (e.g. Undertale 391540's header.jpg is ~5 KB — mostly black, highly compressible), and a
+    // tiny (e.g. Undertale 391540's header.jpg is ~5 KB. Mostly black, highly compressible), and a
     // size gate wrongly rejected them. Validity is decided by JPEG magic bytes instead (see IsJpeg).
     private const int MinValidBytes = 512;
 
@@ -96,7 +96,7 @@ public class CoverCache
             // A 404 throws (caught below); a real cover is a JPEG. Reject error/HTML bodies that
             // slip through with a 200 by checking the magic bytes, not the size.
             if (bytes.Length < MinValidBytes || !IsJpeg(bytes)) return null;
-            // The predictable CDN URL can serve Steam's grey placeholder (a valid JPEG) — reject it so
+            // The predictable CDN URL can serve Steam's grey placeholder (a valid JPEG). Reject it so
             // the caller falls back to the real appdetails header_image.
             if (IsHeaderCapsulePlaceholder(bytes)) return null;
 
@@ -114,7 +114,7 @@ public class CoverCache
         }
         catch
         {
-            return null; // 404 / offline / write error — caller decides on fallback
+            return null; // 404 / offline / write error: caller decides on fallback
         }
         finally
         {

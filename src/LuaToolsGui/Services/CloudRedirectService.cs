@@ -6,7 +6,7 @@ using LuaToolsGui.Models;
 namespace LuaToolsGui.Services;
 
 /// <summary>
-/// Downloads + launches CloudRedirect.exe — the user-facing CloudRedirect GUI manager (Selectively11). The
+/// Downloads + launches CloudRedirect.exe. The user-facing CloudRedirect GUI manager (Selectively11). The
 /// exe is fetched once from the latest GitHub release (via <see cref="GithubProxy"/>, so it works in blocked
 /// regions) and cached under %AppData%\LuaToolsGui\cloudredirect. It self-updates, so we always grab the
 /// latest asset and don't track versions. The Mode page's "Manage" button (shown when CloudRedirect is the
@@ -43,7 +43,7 @@ public class CloudRedirectService(GithubProxy gh)
             if (asset is null) return null;
 
             Directory.CreateDirectory(ToolDir);
-            await gh.DownloadAsync(asset.DownloadUrl, ExePath, progress, ct); // single exe — no zip to extract
+            await gh.DownloadAsync(asset.DownloadUrl, ExePath, progress, ct); // single exe, no zip to extract
 
             return File.Exists(ExePath) ? ExePath : null;
         }
@@ -52,7 +52,7 @@ public class CloudRedirectService(GithubProxy gh)
         finally { _gate.Release(); }
     }
 
-    /// <summary>Download (if needed) and launch the CloudRedirect GUI. Fire-and-forget — its window opens and
+    /// <summary>Download (if needed), and launch the CloudRedirect GUI. Fire-and-forget. Its window opens and
     /// we don't wait for it. Returns false if the tool couldn't be downloaded or started.</summary>
     public async Task<bool> LaunchAsync(IProgress<double?>? progress, CancellationToken ct = default)
     {

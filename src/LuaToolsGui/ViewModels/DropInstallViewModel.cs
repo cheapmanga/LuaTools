@@ -140,11 +140,11 @@ public partial class DropInstallViewModel : ObservableObject
     private async Task<bool> ConfirmIfOverwriteAsync(string path, long appId, bool isZip)
     {
         string? existing = _installer.ReadInstalledLua(appId);
-        if (existing is null) return false; // fresh install — no confirm
+        if (existing is null) return false; // fresh install, no confirm
 
         var oldLua = LuaFileParser.Parse(existing, appId);
         var newLua = isZip ? ExtractLuaFromZip(path, appId) : LuaFileParser.Parse(path, appId);
-        if (newLua is null) return false; // can't diff — just install (caller proceeds)
+        if (newLua is null) return false; // can't diff. Just install (caller proceeds)
 
         var diff = LuaFileParser.Diff(oldLua, newLua);
         await _appList.EnsureLoadedAsync();

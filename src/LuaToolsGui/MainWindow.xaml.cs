@@ -9,7 +9,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
 {
     private readonly SettingsService _settings;
     private System.Windows.Forms.NotifyIcon? _trayIcon;
-    private bool _reallyExiting; // true once the user picks tray "Exit" — lets the close go through
+    private bool _reallyExiting; // true once the user picks tray "Exit". Lets the close go through
 
     public MainWindow(MainViewModel viewModel, IServiceProvider services, SettingsService settings)
     {
@@ -27,7 +27,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         {
             RootNavigation.Navigate(typeof(HomeView));
             try { await viewModel.InitializeAsync(); }
-            catch { /* auth restore failed (e.g. offline) — UI still loads as guest */ }
+            catch { /* auth restore failed (e.g. offline). UI still loads as guest */ }
         };
     }
 
@@ -40,7 +40,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
             using var stream = Application.GetResourceStream(new Uri("pack://application:,,,/icon.ico"))?.Stream;
             if (stream is not null) _trayIcon.Icon = new System.Drawing.Icon(stream);
         }
-        catch { /* fall back to no icon — tray menu still works */ }
+        catch { /* fall back to no icon. Tray menu still works */ }
 
         _trayIcon.DoubleClick += (_, _) => RestoreFromTray();
 
@@ -53,7 +53,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
 
     /// <summary>Clicking the window's close (X) button hides to the tray instead of quitting, when the
     /// MinimizeToTray setting is on OR the app was launched with --tray-locked (the loader passes this to
-    /// keep the backend alive — session-only, doesn't touch the saved setting). Either way, only the tray
+    /// keep the backend alive. Session-only, doesn't touch the saved setting). Either way, only the tray
     /// "Exit" item (which sets _reallyExiting) actually closes the app.</summary>
     private void OnWindowClosing(object? sender, System.ComponentModel.CancelEventArgs e)
     {
@@ -67,7 +67,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         _trayIcon?.Dispose();
 
         // ShutdownMode is OnExplicitShutdown (a silent/--minimized launch never shows a window, so
-        // OnLastWindowClose would otherwise tear the app down before it does anything) — so a real
+        // OnLastWindowClose would otherwise tear the app down before it does anything), so a real
         // window close has to ask for shutdown itself instead of relying on the window count.
         Application.Current.Shutdown();
     }
@@ -103,7 +103,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         if (_trayIcon is not null) _trayIcon.Visible = true;
     }
 
-    /// <summary>Pop a Windows balloon from the tray icon — reports a silent install's outcome.</summary>
+    /// <summary>Pop a Windows balloon from the tray icon. Reports a silent install's outcome.</summary>
     public void ShowInstallNotification(string message, bool error)
     {
         if (_trayIcon is null) return;
@@ -136,7 +136,7 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
     /// <summary>Switch to Mode (used by Home's mode status row).</summary>
     public void NavigateToMode() => RootNavigation.Navigate(typeof(ModeView));
 
-    // "Restart Steam" is an action, not a page — run the command, don't leave it selected.
+    // "Restart Steam" is an action, not a page: run the command, don't leave it selected.
     private void RestartSteam_Click(object sender, RoutedEventArgs e)
     {
         if (DataContext is MainViewModel vm) vm.RestartSteamCommand.Execute(null);

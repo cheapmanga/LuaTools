@@ -53,7 +53,7 @@ public class SteamAppListCache
             return;
         }
 
-        // Both sources failed — fall back to a stale cache if we have one.
+        // Both sources failed: fall back to a stale cache if we have one.
         try
         {
             if (_names.IsEmpty && File.Exists(CacheFile))
@@ -62,7 +62,7 @@ public class SteamAppListCache
                 if (map is not null) foreach (var (k, v) in map) _names[k] = v;
             }
         }
-        catch { /* give up — names fall back to lua-parsed / appid */ }
+        catch { /* give up. Names fall back to lua-parsed / appid */ }
     }
 
     /// <summary>Download one source. Morrenus is a flat [{appid,name}]; Steam nests under applist.apps.</summary>

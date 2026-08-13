@@ -6,13 +6,13 @@ namespace LuaToolsGui.Services;
 /// Toggles individual depot lines in a lua's TEXT, for the Builds page's per-depot switches.
 ///
 /// <para>
-/// Both switches work by commenting a line in or out — that's the only mechanism the lua format has,
+/// Both switches work by commenting a line in or out. That's the only mechanism the lua format has,
 /// and it's exactly what "Auto Update Apps" already does to manifest pins:
 /// </para>
 /// <list type="bullet">
-/// <item><b>Lock</b> — <c>setManifestid(depot, "…")</c>. Active = pinned to that manifest. Commented out =
+/// <item><b>Lock</b>. <c>setManifestid(depot, "…")</c>. Active = pinned to that manifest. Commented out =
 /// Steam is free to update the depot.</item>
-/// <item><b>Enable</b> — <c>addappid(depot, 1, "key")</c>. Active = the decryption key applies. Commented
+/// <item><b>Enable</b>. <c>addappid(depot, 1, "key")</c>. Active = the decryption key applies. Commented
 /// out = the depot isn't unlocked at all.</item>
 /// </list>
 ///
@@ -27,12 +27,12 @@ public static class LuaEditor
     // preserving the original indentation.
     private const string CommentPrefix = @"^(?<indent>\s*)(?<comment>--\s*)?";
 
-    /// <summary>Matches setManifestid(&lt;depot&gt;, … — commented or not.</summary>
+    /// <summary>Matches setManifestid(&lt;depot&gt;, …. Commented or not.</summary>
     private static Regex PinLine(long depotId) =>
         new(CommentPrefix + @"(?<body>setManifestid\s*\(\s*" + depotId + @"\s*[,)])",
             RegexOptions.IgnoreCase);
 
-    /// <summary>Matches addappid(&lt;depot&gt;… — commented or not, keyed or bare.</summary>
+    /// <summary>Matches addappid(&lt;depot&gt;…. Commented or not, keyed or bare.</summary>
     private static Regex AddAppIdLine(long depotId) =>
         new(CommentPrefix + @"(?<body>addappid\s*\(\s*" + depotId + @"\s*[,)])",
             RegexOptions.IgnoreCase);
@@ -48,7 +48,7 @@ public static class LuaEditor
     /// <summary>
     /// Comment in/out every line matching <paramref name="line"/>. An id can legitimately appear on more
     /// than one line (e.g. a bare <c>addappid(id)</c> plus a keyed <c>addappid(id, 1, "key")</c>), and
-    /// leaving one of them behind would half-apply the toggle — so all matches are rewritten.
+    /// leaving one of them behind would half-apply the toggle, so all matches are rewritten.
     /// </summary>
     private static string Rewrite(string lua, Regex line, bool active)
     {

@@ -34,7 +34,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
 
     public async Task<List<SteamSearchResult>> SearchAsync(string query, CancellationToken ct = default)
     {
-        // Calls Steam's public store-search directly (no lua.tools, no auth) — guests can search.
+        // Calls Steam's public store-search directly (no lua.tools, no auth). Guests can search.
         var url = $"{AppConfig.SteamStoreSearchUrl}?term={Uri.EscapeDataString(query)}&l=english&cc=US";
         var res = await _http.GetAsync(url, ct);
         if (!res.IsSuccessStatusCode) return [];
@@ -64,7 +64,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
             var data = await ReadJsonAsync<SteamFeaturedResponse>(res, ct);
 
             // Steam's featuredcategories genuinely repeats appids within a list (e.g. top_sellers returns
-            // the same game 2–3×), so DistinctBy the appid — keeps the first, preserving Steam's order.
+            // the same game 2–3×), so DistinctBy the appid. Keeps the first, preserving Steam's order.
             static List<SteamFeaturedItem> Clean(SteamFeaturedCategory? c) =>
                 (c?.Items ?? [])
                     .Where(i => i.Type == 0 && i.Id > 0 && !string.IsNullOrEmpty(i.LargeCapsuleImage))
@@ -77,9 +77,9 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         catch { return ([], []); }
     }
 
-    /// <summary>Public endpoint — no auth required.</summary>
+    /// <summary>Public endpoint, no auth required.</summary>
     /// <summary>Game metadata straight from Steam's appdetails (cached to details\&lt;appid&gt;.json via the
-    /// throttle, interactive priority) — no lua.tools proxy. ANY fetch path funnels through here (normal /
+    /// throttle, interactive priority), no lua.tools proxy. ANY fetch path funnels through here (normal /
     /// DLC / fast / plugin add), so this is also where the header image gets warmed into covers\.</summary>
     public async Task<GameDetails?> GetDetailsAsync(string appid, CancellationToken ct = default)
     {
@@ -93,7 +93,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
     /// <summary>Source name → "available" | "unavailable" | other status.</summary>
     public async Task<Dictionary<string, string>> CheckSourcesAsync(string appid, CancellationToken ct = default)
     {
-        // Calls the manifest backend directly (no lua.tools, no auth) — the backend is gated
+        // Calls the manifest backend directly (no lua.tools, no auth). The backend is gated
         // by a fixed User-Agent rather than a token, so guests can check availability.
         var req = new HttpRequestMessage(HttpMethod.Get, $"{AppConfig.ManifestBackendUrl}/check_apis?appid={appid}");
         req.Headers.TryAddWithoutValidation("User-Agent", AppConfig.ManifestBackendUserAgent);
@@ -104,7 +104,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
 
     /// <summary>
     /// The standard lua.tools daily download usage (25/day), counted live from the user_downloads
-    /// table via Supabase REST — the same source the website reads. RLS scopes it to the signed-in
+    /// table via Supabase REST. The same source the website reads. RLS scopes it to the signed-in
     /// user, so no user id is needed. Null on failure / not signed in.
     /// </summary>
     public async Task<StandardUsage?> GetStandardUsageAsync(CancellationToken ct = default)
@@ -124,7 +124,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
             using var res = await _http.SendAsync(req, ct);
             if (!res.IsSuccessStatusCode) return null;
 
-            // Content-Range: "0-24/25"  (or "*/0" when empty) — the count is after the slash.
+            // Content-Range: "0-24/25"  (or "*/0" when empty). The count is after the slash.
             string? range = res.Content.Headers.TryGetValues("Content-Range", out var v) ? v.FirstOrDefault()
                           : (res.Headers.TryGetValues("Content-Range", out var hv) ? hv.FirstOrDefault() : null);
             int used = 0;
@@ -134,7 +134,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         }
         catch
         {
-            return null; // decorative — never block on it
+            return null; // decorative, never block on it
         }
     }
 
@@ -172,7 +172,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
 
     // ── Denuvo fixes ────────────────────────────────────────────────
 
-    /// <summary>Public — every game that has at least one Denuvo fix, plus the tag catalogue.</summary>
+    /// <summary>Public. Every game that has at least one Denuvo fix, plus the tag catalogue.</summary>
     public async Task<DenuvoListingsResponse?> GetDenuvoListingsAsync(CancellationToken ct = default)
     {
         var res = await _http.GetAsync("/api/denuvo/listings", ct);
@@ -180,7 +180,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         return await ReadJsonAsync<DenuvoListingsResponse>(res, ct);
     }
 
-    /// <summary>Public — one game's fixes (id/title/desc/tags + which download slots exist).</summary>
+    /// <summary>Public. One game's fixes (id/title/desc/tags + which download slots exist).</summary>
     public async Task<DenuvoFixesResponse?> GetDenuvoFixesAsync(string appid, CancellationToken ct = default)
     {
         var res = await _http.GetAsync($"/api/denuvo/fixes?appid={Uri.EscapeDataString(appid)}", ct);
@@ -189,7 +189,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
     }
 
     /// <summary>
-    /// Auth — download a fix's "manifest" or "fix" slot. The endpoint returns a short-lived signed
+    /// Auth: download a fix's "manifest" or "fix" slot. The endpoint returns a short-lived signed
     /// R2 URL (counts toward 25/day); we then fetch the file from that URL. Caller must be signed in.
     /// </summary>
     public async Task<DownloadedFile> DownloadDenuvoAsync(
@@ -200,9 +200,9 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
             $"/api/denuvo/download?fix={Uri.EscapeDataString(fixId)}&slot={Uri.EscapeDataString(slot)}", ct);
         var signed = await ReadJsonAsync<DenuvoDownloadResponse>(res, ct);
         if (string.IsNullOrWhiteSpace(signed?.Url))
-            throw new ApiException("The download link was empty — try again.");
+            throw new ApiException(Resources.Strings.Api_Err_EmptyDownloadLink);
 
-        // 2. Fetch the file from R2 (no auth header — the signed URL carries its own credentials).
+        // 2. Fetch the file from R2 (no auth header: the signed URL carries its own credentials).
         return await DownloadFromUrlAsync(signed.Url, fallbackName, progress, ct);
     }
 
@@ -219,15 +219,18 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         var res = await _http.SendAsync(req, completion, ct);
         if (res.IsSuccessStatusCode) return res;
 
-        string message = $"Request failed ({(int)res.StatusCode})";
+        string message = string.Format(Resources.Strings.Api_Err_RequestFailed, (int)res.StatusCode);
         try
         {
             var err = JsonSerializer.Deserialize<ApiError>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
+            // Deliberately NOT localized: this text comes from the lua.tools API, which serves English
+            // only. There is no key to look up, and a server message is more specific than our generic
+            // fallback, so it wins. The fallback above and the 401 case below are the localizable parts.
             if (!string.IsNullOrWhiteSpace(err?.Error)) message = err.Error;
         }
         catch { /* non-JSON error body */ }
 
-        if (res.StatusCode == HttpStatusCode.Unauthorized) message = "Session expired — please sign in again.";
+        if (res.StatusCode == HttpStatusCode.Unauthorized) message = Resources.Strings.Api_Err_SessionExpired;
         throw new ApiException(message, res.StatusCode);
     }
 
@@ -249,7 +252,7 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         var req = new HttpRequestMessage(HttpMethod.Get, url);
         var res = await _http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
         if (!res.IsSuccessStatusCode)
-            throw new ApiException($"Download failed ({(int)res.StatusCode}).", res.StatusCode);
+            throw new ApiException(string.Format(Resources.Strings.Api_Err_DownloadFailed, (int)res.StatusCode), res.StatusCode);
         return await SaveResponseAsync(res, fallbackName, progress, ct);
     }
 

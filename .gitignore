@@ -19,7 +19,7 @@ AGENTS.md
 *.suo
 TestResults/
 
-# Third-party binary reference material — kept locally, never committed.
+# Third-party binary reference material. Kept locally, never committed.
 # These are other projects' compiled artifacts (no redistribution licence) and
 # nothing in the build references them.
 OpenSteamTool-releases/

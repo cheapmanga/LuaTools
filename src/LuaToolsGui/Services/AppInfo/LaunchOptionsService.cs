@@ -41,7 +41,7 @@ public class LaunchOptionsService
     public LaunchOptionsService(SteamService steam, LaunchModStore store)
         : this(() => steam.EffectivePath is { } p ? Path.Combine(p, "appcache", "appinfo.vdf") : null,
                SteamService.IsSteamRunning, steam.StopSteam, () => steam.StartSteam(), store,
-               // Backups live NEXT TO appinfo.vdf, on Steam's own drive — deliberately not %AppData%.
+               // Backups live NEXT TO appinfo.vdf, on Steam's own drive. Deliberately not %AppData%.
                // The file is ~373 MB and the system drive is often the tightest on space (this dev
                // machine had 874 MB free), so parking copies there would fill it in two applies. Same
                // drive also makes the copy a local one rather than a cross-volume transfer.
@@ -87,7 +87,7 @@ public class LaunchOptionsService
         uint changeNumber = file.Entries[appId].ChangeNumber;
 
         // If Steam updated the app since we snapshotted it, the snapshot describes a version that no
-        // longer exists — refresh it from what's live now.
+        // longer exists. Refresh it from what's live now.
         _store.Rebase(appId, changeNumber, current);
 
         return new LaunchState(appId, changeNumber, current,
@@ -105,7 +105,7 @@ public class LaunchOptionsService
     public IReadOnlyList<LaunchOption>? StageRestore(int appId) => _store.Get(appId)?.Original;
 
     /// <summary>
-    /// Re-apply the staged edits for these apps — what the drift notice's "Re-apply" button runs, given
+    /// Re-apply the staged edits for these apps: what the drift notice's "Re-apply" button runs, given
     /// the ids from <see cref="FindDrifted"/>. Ids no longer in the store are skipped rather than
     /// failing the batch: between the drift check and the user clicking, an app can have been restored.
     /// </summary>
@@ -122,7 +122,7 @@ public class LaunchOptionsService
     /// Write every staged edit into appinfo.vdf.
     ///
     /// <para>
-    /// Steam MUST be closed first — it holds the file and rewrites it from its own in-memory state, so
+    /// Steam MUST be closed first: it holds the file and rewrites it from its own in-memory state, so
     /// writing underneath it is pointless. This mirrors SteamEdit, which kills Steam, writes, and
     /// relaunches. <paramref name="restartSteam"/> controls whether it's brought back up.
     /// </para>
@@ -148,7 +148,7 @@ public class LaunchOptionsService
                 {
                     var root = file.ReadApp(appId);
                     var body = root?.GetTable("appinfo");
-                    if (root is null || body is null) continue;   // app vanished from appinfo — skip it
+                    if (root is null || body is null) continue;   // app vanished from appinfo. Skip it
                     LaunchOption.WriteAll(body, options);
                     replacements[appId] = root;
                 }
@@ -174,7 +174,7 @@ public class LaunchOptionsService
     }
 
     /// <summary>
-    /// Which staged edits no longer match what's in appinfo — i.e. Steam has overwritten them. Runs off
+    /// Which staged edits no longer match what's in appinfo, i.e. Steam has overwritten them. Runs off
     /// the UI thread; returns an empty list when nothing is staged so the common case costs nothing.
     /// </summary>
     public IReadOnlyList<int> FindDrifted()
@@ -196,7 +196,7 @@ public class LaunchOptionsService
         }
         catch
         {
-            return [];   // unreadable/locked cache — nothing actionable to report
+            return [];   // unreadable/locked cache. Nothing actionable to report
         }
     }
 
@@ -230,7 +230,7 @@ public class LaunchOptionsService
         }
         catch
         {
-            // A failed backup shouldn't block the edit — the .tmp swap is the real safety net.
+            // A failed backup shouldn't block the edit: the .tmp swap is the real safety net.
         }
     }
 }

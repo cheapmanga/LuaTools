@@ -19,7 +19,7 @@ public partial class MainViewModel : ObservableObject
 
     private static string ReadVersion()
     {
-        // InformationalVersion carries the csproj <Version> (may have a "+commit" suffix — trim it).
+        // InformationalVersion carries the csproj <Version> (may have a "+commit" suffix. Trim it).
         var info = Assembly.GetExecutingAssembly()
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
         var ver = info ?? Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "?";

@@ -7,7 +7,7 @@ namespace LuaToolsGui.Services;
 /// One depot/app entry declared in a lua file via addappid / setManifestid.
 /// <para>
 /// <paramref name="ManifestId"/> is an ACTIVE version pin. <paramref name="CommentedManifestId"/> is a
-/// pin that exists in the file but is commented out — which is the normal state after an install with
+/// pin that exists in the file but is commented out, which is the normal state after an install with
 /// the "Auto Update Apps" setting on (see <see cref="LuaInstaller"/>). The two must stay distinct: a
 /// commented pin means "Steam keeps this updated", not "pinned to this manifest".
 /// </para>
@@ -17,7 +17,7 @@ public record LuaEntry(long Id, bool HasKey, string? ManifestId, string? Comment
 /// <summary>Parsed contents of a stplug-in lua file.
 /// <para>
 /// <paramref name="Entries"/> is what the lua ACTIVELY declares. <paramref name="DisabledEntries"/> are
-/// ids whose addappid line exists but is commented out — switched off from the Builds page. They're kept
+/// ids whose addappid line exists but is commented out. Switched off from the Builds page. They're kept
 /// out of Entries so the install-time before/after diff still means "what this lua unlocks", but the
 /// Builds page needs them to keep showing a switched-off depot (otherwise disabling one would make its
 /// row vanish from "In lua", taking the switch with it).
@@ -33,7 +33,7 @@ public record LuaContents(
     public int DepotCount => Entries.Count(e => e.HasKey);
     public int DlcCount => Entries.Count(e => !e.HasKey && e.Id != BaseAppId);
 
-    /// <summary>True when this lua pins at least one depot to a fixed manifest — i.e. it's locked to a
+    /// <summary>True when this lua pins at least one depot to a fixed manifest, i.e. it's locked to a
     /// specific build rather than tracking whatever Steam ships.</summary>
     public bool HasActivePins => ActivePins.Count > 0;
 }
@@ -71,7 +71,7 @@ public static partial class LuaFileParser
     {
         if (string.IsNullOrWhiteSpace(raw)) return null;
         string s = raw.Trim();
-        // Reject commented-out code (e.g. "setManifestid(...)", "addappid(...)") — not a human name.
+        // Reject commented-out code (e.g. "setManifestid(...)", "addappid(...)"), not a human name.
         if (s.Contains("setManifestid", StringComparison.OrdinalIgnoreCase) ||
             s.Contains("addappid", StringComparison.OrdinalIgnoreCase) ||
             s.Contains("addtoken", StringComparison.OrdinalIgnoreCase))
@@ -100,7 +100,7 @@ public static partial class LuaFileParser
             // distinct (a multiline regex with \s* was collapsing the whole file into one match).
             foreach (string rawLine in text.Split('\n'))
             {
-                // Trim both ends — a trailing '\r' (from CRLF files) would break the $-anchored regex.
+                // Trim both ends: a trailing '\r' (from CRLF files) would break the $-anchored regex.
                 string line = rawLine.Trim();
                 bool commented = line.StartsWith("--");
 
@@ -111,14 +111,14 @@ public static partial class LuaFileParser
                 if (pin.Success && long.TryParse(pin.Groups[1].Value, out long depot))
                     (commented ? commentedManifests : manifests)[depot] = pin.Groups[2].Value;
 
-                // A commented-out addappid is a DISABLED declaration, not an active one — matched against
+                // A commented-out addappid is a DISABLED declaration, not an active one. Matched against
                 // the line with its "--" stripped so it can still be recognised and reported separately.
                 var m = AddAppIdRegex().Match(commented ? line.TrimStart('-', ' ') : line);
                 if (!m.Success || !long.TryParse(m.Groups[1].Value, out long id)) continue;
 
                 bool hasKey = m.Groups[2].Success && !string.IsNullOrEmpty(m.Groups[2].Value);
 
-                // Keep the best (longest) trailing comment seen for this id — it's the human name
+                // Keep the best (longest) trailing comment seen for this id. It's the human name
                 // ('addappid(2784471, …) -- Depot 2784471'). Captured for commented-out lines too, and
                 // BEFORE the disabled branch below returns: switching a depot off must not also strip its
                 // name off the row, leaving a bare "Depot".
@@ -161,7 +161,7 @@ public static partial class LuaFileParser
         }
         catch
         {
-            return null; // unreadable / malformed — caller shows "couldn't read"
+            return null; // unreadable / malformed. Caller shows "couldn't read"
         }
     }
 

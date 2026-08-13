@@ -42,7 +42,7 @@ public record AppOverview(
     public bool HasDeveloper => Developers.Count > 0;
 
     /// <summary>
-    /// Developer and publisher are the SAME studio for roughly 40% of apps — showing both lines then
+    /// Developer and publisher are the SAME studio for roughly 40% of apps. Showing both lines then
     /// just reads as a duplicated typo, so the publisher line is only worth rendering when it differs.
     /// </summary>
     public bool HasDistinctPublisher =>
@@ -62,7 +62,7 @@ public class SteamAppInfoCache
 {
     private static readonly string Dir =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LuaToolsGui");
-    // Full raw appdetails 'data' blob per appid — the single on-disk source of truth. Name + header image
+    // Full raw appdetails 'data' blob per appid: the single on-disk source of truth. Name + header image
     // (the fast in-RAM index below) are derived from these on demand; there is no separate appinfo.json.
     private static readonly string DetailsDir = Path.Combine(Dir, "details");
 
@@ -133,14 +133,14 @@ public class SteamAppInfoCache
     }
 
     /// <summary>Fetch an app's name + header image from Steam (throttled, retries on 429/403). Null on
-    /// failure. Pulls the FULL appdetails payload and caches the whole blob (for filters) — name/header
-    /// are derived from it — so each app is only ever fetched once.</summary>
+    /// failure. Pulls the FULL appdetails payload and caches the whole blob (for filters). Name/header
+    /// are derived from it, so each app is only ever fetched once.</summary>
     public async Task<SteamAppInfo?> ResolveAsync(long appid, CancellationToken ct = default)
     {
         if (_cache.TryGetValue(appid, out var cached)) return cached;
 
-        // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve —
-        // this is metadata only, not purchasing, so a neutral region is correct.
+        // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve.
+        // This is metadata only, not purchasing, so a neutral region is correct.
         var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l=english";
 
         const int maxAttempts = 3; // initial + 2 retries
@@ -174,7 +174,7 @@ public class SteamAppInfoCache
                 var info = new SteamAppInfo(name, image);
                 _cache[appid] = info; // warm the session RAM index
 
-                // Persist the whole 'data' blob (this is the full payload) — the single on-disk source of
+                // Persist the whole 'data' blob (this is the full payload). The single on-disk source of
                 // truth; name + header image are re-derived from it (no separate appinfo.json).
                 _ = SaveFullDetailsAsync(appid, data.GetRawText());
                 return info;
@@ -266,7 +266,7 @@ public class SteamAppInfoCache
             // Adult content via Steam's official content_descriptors taxonomy (region-independent).
             // Only the genuinely-adult tier counts: id 3 = "Adult Only Sexual Content", 4 = "Frequent
             // Nudity or Sexual Content". We deliberately EXCLUDE id 1 ("Some Nudity or Sexual Content")
-            // because that's the mainstream-M tier — it flags AAA games like Ghost of Tsushima / Ready or
+            // because that's the mainstream-M tier. It flags AAA games like Ghost of Tsushima / Ready or
             // Not that aren't "adult". (id 2 = violence/gore, 5 = general mature also excluded.) Absent → non-adult.
             bool isAdult = false;
             if (d.TryGetProperty("content_descriptors", out var cd) &&
@@ -288,7 +288,7 @@ public class SteamAppInfoCache
 
     /// <summary>
     /// Blurb + studio + genres from the cached blob, for the Manage flyout. Null when the app has no
-    /// cached details yet, or the blob is the "{}" delisted marker — the caller collapses the section
+    /// cached details yet, or the blob is the "{}" delisted marker. The caller collapses the section
     /// rather than rendering an empty shell.
     /// </summary>
     public AppOverview? GetOverview(long appid)
@@ -346,7 +346,7 @@ public class SteamAppInfoCache
     }
 
     /// <summary>Fetch (if needed) + build the app's <see cref="GameDetails"/> straight from Steam's
-    /// appdetails — replacing the old lua.tools/api/steam/details proxy, which was just this endpoint with
+    /// appdetails. Replacing the old lua.tools/api/steam/details proxy, which was just this endpoint with
     /// 7 fields mapped. Interactive priority (beats the Manage backfill). Null if delisted/unavailable.</summary>
     public async Task<GameDetails?> ResolveGameDetailsAsync(long appid, CancellationToken ct = default)
     {
@@ -402,8 +402,8 @@ public class SteamAppInfoCache
     {
         if (HasFullDetails(appid)) return true;
 
-        // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve —
-        // this is metadata only, not purchasing, so a neutral region is correct.
+        // cc=us so region-blocked games (e.g. titles banned in the user's country) still resolve.
+        // This is metadata only, not purchasing, so a neutral region is correct.
         var url = $"https://store.steampowered.com/api/appdetails?appids={appid}&cc=us&l=english";
         const int maxAttempts = 3;
         for (int attempt = 0; attempt < maxAttempts; attempt++)
@@ -482,8 +482,8 @@ public class SteamAppInfoCache
     private int _interactiveWaiting;
 
     /// <summary>Burst up to MaxPerWindow, then pace at the edge of the window (never trips 429). Interactive
-    /// callers (default) take priority; <paramref name="background"/> callers yield the next slot — and the
-    /// gate during a cap-wait — to any waiting interactive request.</summary>
+    /// callers (default) take priority; <paramref name="background"/> callers yield the next slot, and the
+    /// gate during a cap-wait. To any waiting interactive request.</summary>
     private async Task ThrottleAsync(CancellationToken ct, bool background = false)
     {
         if (!background) Interlocked.Increment(ref _interactiveWaiting);

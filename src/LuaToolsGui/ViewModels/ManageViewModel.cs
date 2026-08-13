@@ -16,7 +16,7 @@ public partial class LuaTileViewModel : ObservableObject
     public string FilePath { get; }
     public DateTime AddedAt { get; }
     // Invariant culture so the month is always the 3-letter abbreviation ("Jun", not "June" or a
-    // localized long form), 2-digit year ("'26") — keeps the combined "Added … • Released …" line
+    // localized long form), 2-digit year ("'26"). Keeps the combined "Added … • Released …" line
     // short enough to fit the card.
     public string AddedLabel =>
         "Added " + AddedAt.ToString(@"MMM d, \'yy", System.Globalization.CultureInfo.InvariantCulture);
@@ -71,7 +71,7 @@ public partial class LuaTileViewModel : ObservableObject
         AddedAt = addedAt;
         _name = name;
         _nameIsPlaceholder = nameIsPlaceholder;
-        // Cover stays blank until resolved — avoids flashing Steam's "Header Capsule" placeholder.
+        // Cover stays blank until resolved: avoids flashing Steam's "Header Capsule" placeholder.
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public partial class LuaTileViewModel : ObservableObject
     /// </summary>
     public async Task EnsureResolvedAsync(SteamAppInfoCache appInfo, CoverCache covers)
     {
-        // Refresh the release label whenever a card is (re)shown — its details may have backfilled
+        // Refresh the release label whenever a card is (re)shown. Its details may have backfilled
         // since the last ApplyFilter pass. Cheap (reads the memoized filter cache).
         if (string.IsNullOrEmpty(ReleaseLabel)) OnUi(() => UpdateReleaseLabel(appInfo));
 
@@ -112,7 +112,7 @@ public partial class LuaTileViewModel : ObservableObject
     /// <summary>
     /// Ensure the cover image FILE exists on disk (no decode, no UI). Used by the background prefetch
     /// so the visible page can decode instantly. Order: disk → CDN guess → appdetails header_image.
-    /// Only flags "no cover" when Steam definitively has none — never on a transient rate-limit.
+    /// Only flags "no cover" when Steam definitively has none, never on a transient rate-limit.
     /// </summary>
     public static async Task<string?> ResolveCoverFileAsync(
         long appId, SteamAppInfoCache appInfo, CoverCache covers, Action<string>? onName = null)
@@ -133,7 +133,7 @@ public partial class LuaTileViewModel : ObservableObject
             local = await covers.EnsureAsync(appId, info!.HeaderImage!);
 
         // info != null means appdetails answered (so an empty header = genuinely no cover).
-        // info == null means we couldn't reach it (rate-limited/offline) — don't give up, retry later.
+        // info == null means we couldn't reach it (rate-limited/offline). Don't give up, retry later.
         if (local is null && info is not null) covers.MarkMissing(appId);
         return local;
     }
@@ -146,7 +146,7 @@ public partial class LuaTileViewModel : ObservableObject
             var bmp = new BitmapImage();
             bmp.BeginInit();
             bmp.CacheOption = BitmapCacheOption.OnLoad; // load fully, release the file handle
-            bmp.DecodePixelWidth = 248;                 // tile width — faster decode, less memory
+            bmp.DecodePixelWidth = 248;                 // tile width. Faster decode, less memory
             bmp.UriSource = new Uri(path, UriKind.Absolute);
             bmp.EndInit();
             bmp.Freeze();
@@ -160,7 +160,7 @@ public partial class LuaTileViewModel : ObservableObject
 
     private void SetName(string name)
     {
-        _nameIsPlaceholder = false; // got a real name — don't re-resolve
+        _nameIsPlaceholder = false; // got a real name. Don't re-resolve
         OnUi(() => Name = name);
     }
 
@@ -233,7 +233,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     // How many library apps still lack cached details while a filter is active (can't be filtered yet).
     // The text updates as the count ticks down. HasPendingDetails (which drives the spinner's
-    // Visibility) is a SEPARATE bool that only flips at the 0/non-0 boundary — so a count change
+    // Visibility) is a SEPARATE bool that only flips at the 0/non-0 boundary, so a count change
     // doesn't re-fire the visibility binding and restart the ProgressRing animation.
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(FilterPendingText))]
@@ -289,12 +289,12 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     partial void OnSearchTextChanged(string value) => ApplyFilter();
 
-    /// <summary>Called by the view as a tile scrolls into view — resolves its cover (cached after).</summary>
+    /// <summary>Called by the view as a tile scrolls into view. Resolves its cover (cached after).</summary>
     public void ResolveTile(LuaTileViewModel tile) => _ = tile.EnsureResolvedAsync(_appInfo, _covers);
 
     /// <summary>
     /// Open a game's detail flyout by appid (Home "recently added" / Add page "Reveal"). Re-scans if
-    /// the tile isn't found — the library may be stale (e.g. the game was removed then re-added, or
+    /// the tile isn't found. The library may be stale (e.g. the game was removed then re-added, or
     /// this VM hasn't loaded yet). If it's genuinely gone, tell the user instead of failing silently.
     /// </summary>
     public async Task OpenDetailForAppIdAsync(long appId)
@@ -328,7 +328,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         // was never resolved and the pullout image is blank. Ensure it here (idempotent).
         await tile.EnsureResolvedAsync(_appInfo, _covers);
 
-        // No cached blob yet (the background backfill hasn't reached this game) — fetch it at
+        // No cached blob yet (the background backfill hasn't reached this game). Fetch it at
         // interactive priority, then fill the section in. Re-checked afterwards because the user can
         // close the flyout or switch games while that request is in flight.
         if (Overview is null && await _appInfo.EnsureFullDetailsAsync(tile.AppId) && SelectedTile == tile)
@@ -346,7 +346,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [RelayCommand]
     private void ManageBuild(LuaTileViewModel tile) => NavigateToBuilds?.Invoke(tile.AppId);
 
-    /// <summary>Set by App — opens the launch-option editor for a game (appid, name).</summary>
+    /// <summary>Set by App. Opens the launch-option editor for a game (appid, name).</summary>
     public Action<long, string>? OpenLaunchOptions { get; set; }
 
     /// <summary>Edit this game's Steam launch options (the entries behind the Play button).</summary>
@@ -493,7 +493,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
             }
             else failed++;
         }
-        // Rebuild the (filtered) grid in one pass — reliable refresh vs. per-item Tiles.Remove on the
+        // Rebuild the (filtered) grid in one pass: reliable refresh vs. per-item Tiles.Remove on the
         // virtualized panel, which didn't always visually update when filters were active.
         ApplyFilter();
         SelectedCount = _all.Count(t => t.IsSelected);
@@ -540,7 +540,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         tile.SelectionChanged = null;
         _all.Remove(tile);
         if (SelectedTile == tile) CloseDetail();
-        ApplyFilter(); // rebuild the (filtered) grid in one pass — reliable virtualized refresh
+        ApplyFilter(); // rebuild the (filtered) grid in one pass. Reliable virtualized refresh
     }
 
     /// <summary>Scan config\stplug-in for &lt;appid&gt;.lua files. Called when the page is shown.</summary>
@@ -568,7 +568,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
                 return;
             }
 
-            // Bulk game-name list (downloaded once, cached) — gives every game a name with no rate limit.
+            // Bulk game-name list (downloaded once, cached). Gives every game a name with no rate limit.
             await _appList.EnsureLoadedAsync();
 
             var tiles = await Task.Run(() =>
@@ -578,7 +578,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
                         var info = new FileInfo(f.Path);
                         string? name = _appList.GetName(f.AppId) ?? ParseLuaName(f.Path) ?? _appInfo.GetCached(f.AppId)?.Name;
                         bool placeholder = name is null;
-                        // Base = when added to the folder; if edited since (LastWrite later), use that — newer is more relevant.
+                        // Base = when added to the folder; if edited since (LastWrite later), use that. Newer is more relevant.
                         var added = info.LastWriteTime > info.CreationTime ? info.LastWriteTime : info.CreationTime;
                         return new LuaTileViewModel(f.AppId, f.Path, added, name ?? string.Format(Resources.Strings.Common_AppFallback, f.AppId), placeholder);
                     })
@@ -601,7 +601,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     /// <summary>
-    /// Warm cover FILES for the whole library in the background (download only — no decode, no UI),
+    /// Warm cover FILES for the whole library in the background (download only, no decode, no UI),
     /// so when you jump to any page it decodes instantly from disk.
     /// </summary>
     private void StartCoverPrefetch(IReadOnlyList<LuaTileViewModel> tiles)
@@ -666,8 +666,8 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private void RefreshPendingCount() =>
         PendingDetailsCount = _all.Count(t => _appInfo.GetFilterData(t.AppId) is null);
 
-    /// <param name="resetPage">True (default) for a user-initiated filter/search/sort/page-size change —
-    /// jump back to page 1. False for passive re-renders (backfill completing) so the user stays on
+    /// <param name="resetPage">True (default) for a user-initiated filter/search/sort/page-size change.
+    /// Jump back to page 1. False for passive re-renders (backfill completing) so the user stays on
     /// their current page; the page is still clamped into range below.</param>
     private void ApplyFilter(bool resetPage = true)
     {
@@ -679,7 +679,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         // Text search (name / appid).
         if (!string.IsNullOrEmpty(q)) result = result.Where(t => t.Matches(q));
 
-        // Detail-based filters. A tile with no cached details yet can't be confirmed to match — keep
+        // Detail-based filters. A tile with no cached details yet can't be confirmed to match. Keep
         // it visible while details are still being fetched.
         result = result.Where(t =>
         {
@@ -696,7 +696,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         var list = result.ToList();
         list = SortTiles(list);
 
-        // How many library apps still lack details — shown always while backfilling (even with no
+        // How many library apps still lack details: shown always while backfilling (even with no
         // filters), since on startup nothing's filtered but details are still loading.
         PendingDetailsCount = _all.Count(t => _appInfo.GetFilterData(t.AppId) is null);
 
@@ -781,7 +781,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         RebuildOptionList(YearOptions, years.OrderByDescending(y => y).Select(y => y.ToString()));
     }
 
-    /// <summary>Sync a dropdown's options to <paramref name="values"/> WITHOUT a full Clear() — clearing
+    /// <summary>Sync a dropdown's options to <paramref name="values"/> WITHOUT a full Clear(). Clearing
     /// drops the ComboBox's bound SelectedItem (which made Type/Genre/Year render blank). "Any" stays
     /// at index 0; we add new values and remove stale ones in place.</summary>
     private static void RebuildOptionList(ObservableCollection<string> target, IEnumerable<string> values)
@@ -816,7 +816,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
                 return string.IsNullOrWhiteSpace(name) ? null : name;
             }
         }
-        catch { /* unreadable — fall back to appid */ }
+        catch { /* unreadable. Fall back to appid */ }
         return null;
     }
 }

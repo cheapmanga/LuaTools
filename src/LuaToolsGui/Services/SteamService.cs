@@ -56,7 +56,7 @@ public class SteamService(SettingsService settings)
 
     /// <summary>Kill any running steam.exe (and its tree) and wait for it to exit. Safe to call when
     /// Steam isn't running. Use before changing Steam's files so they aren't locked.</summary>
-    /// <summary>True while a Steam client process is running — appinfo.vdf can't be edited under it.</summary>
+    /// <summary>True while a Steam client process is running. Appinfo.vdf can't be edited under it.</summary>
     public static bool IsSteamRunning()
     {
         var procs = Process.GetProcessesByName("steam");
@@ -115,13 +115,13 @@ public class SteamService(SettingsService settings)
             }
             catch
             {
-                // Inaccessible key — try the next one
+                // Inaccessible key: try the next one
             }
         }
         return null;
     }
 
-    /// <summary>Registry values vary (forward vs back slashes, casing) — canonicalize to a Windows path.</summary>
+    /// <summary>Registry values vary (forward vs back slashes, casing). Canonicalize to a Windows path.</summary>
     private static string Normalize(string path)
     {
         try { return Path.GetFullPath(path.Trim().Replace('/', '\\')); }

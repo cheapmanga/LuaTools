@@ -9,7 +9,7 @@ using LuaToolsGui.Services.AppInfo;
 
 namespace LuaToolsGui.ViewModels;
 
-/// <summary>Bindable wrapper around a <see cref="LaunchOption"/> — the model is a plain POCO because it
+/// <summary>Bindable wrapper around a <see cref="LaunchOption"/>. The model is a plain POCO because it
 /// also gets serialized into the mod store.</summary>
 public partial class LaunchEntryViewModel : ObservableObject
 {
@@ -79,7 +79,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
     private LaunchState? _state;
 
     /// <summary>What the entry list looked like when it was loaded, in the exact shape a save would
-    /// produce — so comparing against it answers "would saving change anything?".</summary>
+    /// produce, so comparing against it answers "would saving change anything?".</summary>
     private List<LaunchOption> _baseline = [];
 
     /// <summary>Entries we've hooked <see cref="INotifyPropertyChanged"/> on, so field edits (not just
@@ -94,7 +94,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
         ["windows", "macos", "linux", ""];
 
     /// <summary>Common branch names, by frequency across 3,575 real entries that use BetaKey. It's a
-    /// free-text BRANCH NAME (1,794 distinct values in the wild), not a yes/no — hence an editable
+    /// free-text BRANCH NAME (1,794 distinct values in the wild), not a yes/no, hence an editable
     /// combo rather than a checkbox.</summary>
     public ObservableCollection<string> BranchOptions { get; } =
         ["", "beta", "default", "development", "test", "legacy", "steam_legacy", "experimental"];
@@ -117,7 +117,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
 
     public bool HasSelection => Selected is not null;
 
-    /// <summary>True once this game has a stored edit — enables Restore.</summary>
+    /// <summary>True once this game has a stored edit. Enables Restore.</summary>
     [ObservableProperty] private bool _isModded;
 
     /// <summary>True when the entry list no longer matches <see cref="_baseline"/>.</summary>
@@ -189,7 +189,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
             InstallPath = state.InstallDir;
             IsModded = state.IsModded;
 
-            // Show the staged edit if there is one — that's what the user last asked for, even if Steam
+            // Show the staged edit if there is one: that's what the user last asked for, even if Steam
             // has since overwritten the live file.
             var source = _launch.Store.Get((int)appId)?.Desired ?? state.Current;
             Entries.Clear();
@@ -197,7 +197,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
             Selected = Entries.FirstOrDefault();
 
             // Baseline comes back out through ToOption() rather than from `source` directly, so it's
-            // identical to what a save would write — otherwise trimming alone would read as an edit.
+            // identical to what a save would write. Otherwise trimming alone would read as an edit.
             _baseline = Entries.Select(e => e.ToOption()).ToList();
             LaunchOption.Renumber(_baseline);
             IsDirty = false;
@@ -250,7 +250,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
 
     /// <summary>
     /// Reorder within the list. This only becomes durable because <see cref="Save"/> renumbers the keys
-    /// 0,1,2… in list order — Steam takes the running order from the <c>config.launch</c> KEY, not from
+    /// 0,1,2… in list order. Steam takes the running order from the <c>config.launch</c> KEY, not from
     /// the order entries happen to sit in the file, so moving an entry while keeping its original key
     /// would change nothing outside this dialog. (SteamEdit does the same: it reads entries
     /// <c>OrderBy(key)</c> and rewrites them as <c>Count.ToString()</c>.)
@@ -267,7 +267,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
 
     // ── save / restore ──────────────────────────────────────────────
 
-    /// <summary>Save is only offered when there's an actual change to write — applying closes Steam, so
+    /// <summary>Save is only offered when there's an actual change to write. Applying closes Steam, so
     /// a no-op save is worse than useless.</summary>
     public bool CanSave => _state is not null && Error is null && IsDirty;
 
@@ -318,7 +318,7 @@ public partial class LaunchOptionsViewModel : ObservableObject
     private void Cancel() => CloseWith?.Invoke(false);
 
     /// <summary>
-    /// Write into appinfo.vdf. Steam is closed first — it owns the file and regenerates it from its own
+    /// Write into appinfo.vdf. Steam is closed first. It owns the file and regenerates it from its own
     /// in-memory state, so writing underneath a running client achieves nothing.
     /// </summary>
     private void ApplyToSteam(IReadOnlyDictionary<int, IReadOnlyList<LaunchOption>> edits)

@@ -3,14 +3,14 @@ using System.Text.RegularExpressions;
 namespace LuaToolsGui.Services;
 
 /// <summary>
-/// Pulls a Steam appid out of a link — what makes dragging a SteamDB/store URL onto the drop box install
+/// Pulls a Steam appid out of a link: what makes dragging a SteamDB/store URL onto the drop box install
 /// that game.
 /// </summary>
 public static partial class SteamLinkParser
 {
     /// <summary>
     /// Appids are well under this. <c>steam://rungameid/</c> encodes a COMPOSITE 64-bit id for non-Steam
-    /// shortcuts and mods, which is not an appid — without this guard one of those would be handed to the
+    /// shortcuts and mods, which is not an appid. Without this guard one of those would be handed to the
     /// installer as a game id.
     /// </summary>
     private const long MaxAppId = 2_000_000_000;
@@ -44,7 +44,7 @@ public static partial class SteamLinkParser
 
         foreach (var regex in new[] { SteamDbRegex(), StoreRegex(), CommunityRegex(), SteamProtocolRegex() })
         {
-            // Dragged text can carry more than one URL (a selection, a multi-line paste) — first wins.
+            // Dragged text can carry more than one URL (a selection, a multi-line paste). First wins.
             var match = regex.Match(text);
             if (match.Success && long.TryParse(match.Groups[1].Value, out long appId)
                               && appId > 0 && appId < MaxAppId)

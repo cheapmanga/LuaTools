@@ -89,7 +89,7 @@
     </UserControl.Resources>
 
     <!-- In-window overlay (dim scrim + centered card). Same pattern as the Add-page confirm dialog,
-         NOT a Popup — a Popup gets a system drop-shadow around its rectangular surface ("boxed glow"). -->
+         NOT a Popup. A Popup gets a system drop-shadow around its rectangular surface ("boxed glow"). -->
     <Grid
         Background="#99000000"
         Visibility="{Binding IsConfirming, Converter={StaticResource BoolToVis}}">

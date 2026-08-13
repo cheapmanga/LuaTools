@@ -6,8 +6,8 @@ namespace LuaToolsGui.Services;
 
 /// <summary>
 /// Headless add pipeline for the Steam store plugin. Mirrors the logic of
-/// <c>DownloadViewModel.FetchAsync</c>/<c>DownloadFromSourceAsync</c> — dynamic sources, synthesized
-/// Hubcap/Sadie source, key-gating, usage badges, FastFetch auto-download — but uses only the underlying
+/// <c>DownloadViewModel.FetchAsync</c>/<c>DownloadFromSourceAsync</c>. Dynamic sources, synthesized
+/// Hubcap/Sadie source, key-gating, usage badges, FastFetch auto-download, but uses only the underlying
 /// SERVICES (never the UI view model), so the app window stays silent. The plugin polls state via the
 /// HTTP server; when FastFetch is off it picks a source with <see cref="Pick"/>.
 /// </summary>
@@ -119,7 +119,7 @@ public class PluginAddService(
             var nameTask = string.IsNullOrEmpty(state.GameName) ? SafeGetGameNameAsync(appId) : null;
             string? key = settings.HubcapApiKey;
 
-            // Hubcap/Sadie is the priority source. When a key is set, check ITS availability first — and in
+            // Hubcap/Sadie is the priority source. When a key is set, check ITS availability first, and in
             // FastFetch, if Hubcap can serve this game, download straight from it and skip the lua.tools
             // CheckSources call entirely (a lua.tools source would never be picked over Hubcap anyway).
             bool hubcapAvailable = false;
@@ -192,7 +192,7 @@ public class PluginAddService(
                 PublishSources(state, rows, appId);
 
                 var best = rows.FirstOrDefault(r => r.CanDownload);
-                if (best is null) { state.Error = "No available source for this game."; PluginLog.Log($"PluginAdd.Check appid={appId} FastFetch: no downloadable source"); return; }
+                if (best is null) { state.Error = Resources.Strings.Err_NoSourceAvailable; PluginLog.Log($"PluginAdd.Check appid={appId} FastFetch: no downloadable source"); return; }
                 await DownloadAsync(appId, state, best);
                 return;
             }
@@ -226,7 +226,7 @@ public class PluginAddService(
 
     /// <summary>Fill the usage-counter badges on the (already-published) rows, best-effort and
     /// concurrently: the Hubcap "12/25" badge + real lock state, and the standard "X/25" badge. A failure
-    /// leaves the affected rows without a badge — the picker stays fully usable. Row fields are mutated in
+    /// leaves the affected rows without a badge. The picker stays fully usable. Row fields are mutated in
     /// place; the status poll re-serializes them, so the badges appear on the next tick.</summary>
     private async Task FillBadgesAsync(List<SourceRow> rows, List<SourceRow> keyRows, string? key)
     {
@@ -291,7 +291,7 @@ public class PluginAddService(
                 ? await hubcap.DownloadManifestAsync(appId.ToString(), settings.HubcapApiKey ?? "", progress)
                 : await api.DownloadManifestAsync(appId.ToString(), row.Name, state.GameName, progress);
 
-            // Some sources (e.g. Luie) return a BARE .lua, not a zip — sniff the bytes and install
+            // Some sources (e.g. Luie) return a BARE .lua, not a zip. Sniff the bytes and install
             // accordingly (same as DownloadViewModel.InstallZipAndReport). Trusting the extension /
             // always unzipping throws "End of Central Directory record could not be found".
             var result = IsZip(dl.FilePath)

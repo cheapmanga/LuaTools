@@ -31,7 +31,7 @@ public sealed class VdfProperty(string name, VdfType type, object value)
 
     public VdfTable? AsTable() => Value as VdfTable;
 
-    /// <summary>Decode a string value for display. Lossy for the rare non-UTF-8 blob — which is exactly
+    /// <summary>Decode a string value for display. Lossy for the rare non-UTF-8 blob, which is exactly
     /// why the raw bytes are what's stored, so an untouched value still writes back unchanged.</summary>
     public string AsText() => Value is byte[] b ? Encoding.UTF8.GetString(b) : Value?.ToString() ?? "";
 
@@ -45,7 +45,7 @@ public sealed class VdfProperty(string name, VdfType type, object value)
 /// A binary-VDF object: an ORDERED LIST of properties, deliberately not a dictionary.
 ///
 /// <para>
-/// The format permits the SAME KEY TWICE inside one object — 15 of the 176,869 apps in a real
+/// The format permits the SAME KEY TWICE inside one object. 15 of the 176,869 apps in a real
 /// appinfo.vdf do it (app 46830 lists <c>/silent</c> twice). A dictionary silently collapses those,
 /// which shortens the re-serialized blob and corrupts the file. Order also has to be preserved exactly,
 /// since the bytes are hashed.
@@ -71,8 +71,8 @@ public sealed class VdfTable
         return table;
     }
 
-    /// <summary>Set a string value, or remove the key entirely when <paramref name="value"/> is empty —
-    /// real launch entries omit unused optionals rather than storing <c>""</c>.</summary>
+    /// <summary>Set a string value, or remove the key entirely when <paramref name="value"/> is empty.
+    /// Real launch entries omit unused optionals rather than storing <c>""</c>.</summary>
     public void SetText(string name, string? value)
     {
         if (string.IsNullOrEmpty(value)) { Remove(name); return; }
@@ -87,7 +87,7 @@ public sealed class VdfTable
                 Items.RemoveAt(i);
     }
 
-    /// <summary>Deep copy — used to snapshot a launch table before it's edited.</summary>
+    /// <summary>Deep copy. Used to snapshot a launch table before it's edited.</summary>
     public VdfTable Clone()
     {
         var copy = new VdfTable();
@@ -195,7 +195,7 @@ public static class BinaryVdf
     /// <summary>
     /// Read a NUL-terminated string as RAW BYTES. Not decoded: a handful of old apps (17390, 42990,
     /// 96800…) carry text that isn't valid UTF-8, and decoding with replacement turns each bad byte
-    /// into U+FFFD — which re-encodes to three bytes and silently changes the blob's length.
+    /// into U+FFFD, which re-encodes to three bytes and silently changes the blob's length.
     /// </summary>
     public static byte[] ReadCStringBytes(Stream s)
     {

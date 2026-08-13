@@ -36,7 +36,7 @@ public partial class FixesView : UserControl
     private static void Open(string? url)
     {
         if (string.IsNullOrWhiteSpace(url)) return;
-        try { SteamService.OpenUrl(url); } catch { /* bad/blocked URL — ignore */ }
+        try { SteamService.OpenUrl(url); } catch { /* bad/blocked URL. Ignore */ }
     }
 
     // MarkdownViewer hosts its own (non-scrolling) FlowDocumentScrollViewer that swallows the mouse

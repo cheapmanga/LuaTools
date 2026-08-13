@@ -7,8 +7,8 @@ namespace LuaToolsGui.Services;
 
 /// <summary>
 /// Anonymous app-launch analytics via a self-hosted Umami instance. Posts a single "app_launch" event
-/// per launch to Umami's /api/send (the same endpoint the browser script calls). No personal data —
-/// just an event name + app version. Best-effort fire-and-forget: never throws, never blocks startup.
+/// per launch to Umami's /api/send (the same endpoint the browser script calls). No personal data.
+/// Just an event name + app version. Best-effort fire-and-forget: never throws, never blocks startup.
 /// </summary>
 public class AnalyticsService
 {
@@ -45,7 +45,7 @@ public class AnalyticsService
             };
             // Umami's bot filter SILENTLY DROPS events from non-standard User-Agents (it still returns
             // 200 but with a {"beep":"boop"} body and records nothing). A custom "LuaToolsDesktop/x"
-            // suffix tripped that filter — so we send a plain, standard Windows Chrome UA. The launch is
+            // suffix tripped that filter, so we send a plain, standard Windows Chrome UA. The launch is
             // still identifiable in the dashboard via the "app_launch" event name + desktop.lua.tools host.
             req.Headers.TryAddWithoutValidation(
                 "User-Agent",
@@ -55,7 +55,7 @@ public class AnalyticsService
         }
         catch
         {
-            // Telemetry must never affect the app — swallow everything.
+            // Telemetry must never affect the app: swallow everything.
         }
     }
 }

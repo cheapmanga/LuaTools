@@ -85,7 +85,7 @@ public class SteamDepotInfoCacheTests
 
     /// <summary>
     /// A failure must not be permanent. Caching it forever meant one blip left a game showing "couldn't
-    /// load depot info" for the whole session, with Refresh unable to clear it — the null WAS the
+    /// load depot info" for the whole session, with Refresh unable to clear it. The null WAS the
     /// cached answer.
     /// </summary>
     [Fact]
@@ -107,7 +107,7 @@ public class SteamDepotInfoCacheTests
         Assert.Equal(2, stub.Calls);
     }
 
-    /// <summary>The TTL applies to failures only — a success that's an hour old is still served.</summary>
+    /// <summary>The TTL applies to failures only. A success that's an hour old is still served.</summary>
     [Fact]
     public async Task Success_IsNotExpiredByTheFailureTtl()
     {

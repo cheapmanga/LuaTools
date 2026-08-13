@@ -62,7 +62,7 @@ public class SteamlessService(GithubProxy gh, SteamLibraryService library, Steam
             string zipPath = Path.Combine(ToolDir, "steamless.zip");
             await gh.DownloadAsync(asset.DownloadUrl, zipPath, progress, ct);
 
-            // Extract the WHOLE zip — the CLI needs its plugin DLLs alongside it.
+            // Extract the WHOLE zip: the CLI needs its plugin DLLs alongside it.
             ZipFile.ExtractToDirectory(zipPath, ToolDir, overwriteFiles: true);
             try { File.Delete(zipPath); } catch { /* leftover zip is harmless */ }
 
@@ -99,7 +99,7 @@ public class SteamlessService(GithubProxy gh, SteamLibraryService library, Steam
                 string unpacked = exe + ".unpacked.exe";
                 if (File.Exists(unpacked))
                 {
-                    // Back the original up (only once — never clobber a known-good .bak), then swap in.
+                    // Back the original up (only once, never clobber a known-good .bak), then swap in.
                     string bak = exe + ".bak";
                     if (!File.Exists(bak)) File.Copy(exe, bak);
                     File.Delete(exe);
@@ -108,7 +108,7 @@ public class SteamlessService(GithubProxy gh, SteamLibraryService library, Steam
                 }
                 else
                 {
-                    unchanged++; // no SteamStub DRM, or Steamless declined — leave it as-is
+                    unchanged++; // no SteamStub DRM, or Steamless declined. Leave it as-is
                 }
             }
             catch (OperationCanceledException) { throw; }

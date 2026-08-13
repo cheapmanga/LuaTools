@@ -5,7 +5,7 @@ using Xunit;
 namespace LuaToolsGui.Tests;
 
 /// <summary>
-/// Tests for <see cref="LuaVault"/>, which rewrites the file Steam actually loads — so its failure mode
+/// Tests for <see cref="LuaVault"/>, which rewrites the file Steam actually loads, so its failure mode
 /// is "the user's luas are gone/wrong", not a visible error. Runs entirely against temp directories via
 /// the internal test constructor.
 /// </summary>
@@ -17,14 +17,14 @@ public class LuaVaultTests : IDisposable
     private readonly string _plugIn;
     private readonly LuaVault _vault;
 
-    // A lua whose pins are COMMENTED OUT — what "Auto Update Apps" (on by default) produces.
+    // A lua whose pins are COMMENTED OUT: what "Auto Update Apps" (on by default) produces.
     private const string AutoUpdatingLua = """
         addappid(386940)
         addappid(228983,0,"aabb")
         --setManifestid(228983,"111111111")
         """;
 
-    // The same game PINNED to a build — pins live.
+    // The same game PINNED to a build: pins live.
     private const string PinnedBuildLua = """
         addappid(386940)
         addappid(228983,0,"aabb")
@@ -108,8 +108,8 @@ public class LuaVaultTests : IDisposable
         Assert.Empty(_vault.GetVariants(AppId));
     }
 
-    /// <summary>A build lua dropped in with no &lt;appid&gt;.lua alongside it loads nothing until applied —
-    /// so it gets applied, and becomes the active variant.</summary>
+    /// <summary>A build lua dropped in with no &lt;appid&gt;.lua alongside it loads nothing until applied.
+    /// So it gets applied, and becomes the active variant.</summary>
     [Fact]
     public void ApplyBuildIfNothingLive_ActivatesADroppedInBuild()
     {
@@ -186,7 +186,7 @@ public class LuaVaultTests : IDisposable
         Assert.Equal(PinnedBuildLua, ReadLive());
         Assert.Equal(build.Hash, _vault.GetActiveHash(AppId));
         Assert.Equal(build.Hash, _vault.GetActiveVariant(AppId)!.Hash);
-        // The pin survived — not commented out.
+        // The pin survived, not commented out.
         Assert.Contains("\nsetManifestid(228983,\"222222222\")", ReadLive().Replace("\r\n", "\n"));
     }
 
@@ -273,7 +273,7 @@ public class LuaVaultTests : IDisposable
 
     /// <summary>
     /// The bug this replaced: every install of a plain lua used to append another "default" variant, so
-    /// re-adding a game from a different generator (Luie vs Hubcap — same game, different bytes, so the
+    /// re-adding a game from a different generator (Luie vs Hubcap. Same game, different bytes, so the
     /// content-addressed de-dupe couldn't collapse them) left two identical-looking rows in the switcher.
     /// </summary>
     [Fact]
@@ -302,7 +302,7 @@ public class LuaVaultTests : IDisposable
     [Fact]
     public void SyncDefaultFromLive_CollapsesTwoDefaultsKeepingTheLiveOne()
     {
-        // Two defaults, the SECOND of which is live — so "keep the newest" alone would drop the wrong one.
+        // Two defaults, the SECOND of which is live, so "keep the newest" alone would drop the wrong one.
         WriteLive(AutoUpdatingLua);
         _vault.SyncDefaultFromLive(AppId);
         string olderLive = _vault.GetVariants(AppId).Single().Hash;
@@ -319,7 +319,7 @@ public class LuaVaultTests : IDisposable
         Assert.Equal(olderLive, _vault.GetActiveHash(AppId));
     }
 
-    /// <summary>A saved build being live means the build is active — the Default keeps its own bytes so
+    /// <summary>A saved build being live means the build is active. The Default keeps its own bytes so
     /// switching back to it still works.</summary>
     [Fact]
     public void SyncDefaultFromLive_LeavesTheDefaultAloneWhileASavedBuildIsLive()
@@ -341,7 +341,7 @@ public class LuaVaultTests : IDisposable
     }
 
     /// <summary>
-    /// Mid-edit, the diverged bytes belong to the build being edited — not to the Default. Without this
+    /// Mid-edit, the diverged bytes belong to the build being edited, not to the Default. Without this
     /// the sync would swallow the edit and "Save to &lt;build&gt;" would have nothing to write back to.
     /// </summary>
     [Fact]
@@ -369,7 +369,7 @@ public class LuaVaultTests : IDisposable
     /// <summary>
     /// Switching builds overwrites the live file. If what was sitting there was an unsaved working copy,
     /// <see cref="LuaVault.Apply"/> capturing it first is the only thing standing between the user and
-    /// losing it — this must not depend on the Builds page having refreshed beforehand.
+    /// losing it. This must not depend on the Builds page having refreshed beforehand.
     /// </summary>
     [Fact]
     public void Apply_CapturesUnsavedLiveBytesBeforeOverwritingThem()
@@ -440,7 +440,7 @@ public class LuaVaultTests : IDisposable
         Assert.Equal("pre-nerf", updated.Label);
         Assert.Equal(LuaVariantKind.Build, updated.Kind);
 
-        // Still exactly one variant — an update, not a fork.
+        // Still exactly one variant: an update, not a fork.
         var only = Assert.Single(_vault.GetVariants(AppId));
         Assert.Equal(updated.Hash, only.Hash);
         Assert.Equal(edited, _vault.ReadText(AppId, updated.Hash));

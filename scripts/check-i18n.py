@@ -31,7 +31,7 @@ PLACEHOLDER_RE = re.compile(r'\{(\d+)\}')
 PENDING_TRANSLATION: set[str] = set()
 # Empty on purpose: every key is translated in all 29 languages, so the parity check above is
 # unconditional. Add a key here ONLY while its feature's UI is still moving, and clear it again
-# as soon as the translations land — anything listed is English-only for every user.
+# as soon as the translations land. Anything listed is English-only for every user.
 
 
 
@@ -60,7 +60,7 @@ def main():
         try:
             tr = parse(path)
         except ET.ParseError as e:
-            problems.append(f"{name}: INVALID XML — {e}")
+            problems.append(f"{name}: INVALID XML. {e}")
             continue
 
         missing = base_keys - set(tr) - PENDING_TRANSLATION
@@ -95,8 +95,8 @@ def main():
             print("  -", k)
     stale = PENDING_TRANSLATION - base_keys
     if stale:
-        print(f"\nNOTE: {len(stale)} PENDING_TRANSLATION entr(ies) no longer exist in Strings.resx — "
-              f"drop them from the list: {', '.join(sorted(stale))}")
+        print(f"\nNOTE: {len(stale)} PENDING_TRANSLATION entr(ies) no longer exist in Strings.resx. "
+              f"Drop them from the list: {', '.join(sorted(stale))}")
     return 0
 
 

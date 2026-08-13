@@ -427,7 +427,7 @@
                                                     PreviewMouseWheel="Markdown_PreviewMouseWheel"
                                                     Visibility="{Binding Description, Converter={StaticResource NullToCollapsed}}">
                                                     <markdig:MarkdownViewer.Resources>
-                                                        <!-- Compact, dark-themed overrides — the library defaults are
+                                                        <!-- Compact, dark-themed overrides. The library defaults are
                                                              document-sized (huge headings) and too big for the flyout. -->
                                                         <Style x:Key="{x:Static markdig:Styles.DocumentStyleKey}" TargetType="{x:Type FlowDocument}">
                                                             <Setter Property="FontFamily" Value="Segoe UI" />

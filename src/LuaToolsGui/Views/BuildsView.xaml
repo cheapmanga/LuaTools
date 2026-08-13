@@ -158,7 +158,7 @@
             </Button>
 
             <!-- Lock = keep the setManifestid pin. Hidden outright when the depot has no pin line to
-                 comment in/out — there'd be nothing to toggle, and a permanently-greyed tickbox on most
+                 comment in/out. There'd be nothing to toggle, and a permanently-greyed tickbox on most
                  rows is just noise. Auto column, so the info block reclaims the space. -->
             <CheckBox
                 Grid.Column="2"
@@ -289,7 +289,7 @@
                     Content="{x:Static res:Strings.Builds_Action_SaveAsNew}"
                     Icon="{ui:SymbolIcon Bookmark24}"
                     Visibility="{Binding HasEditBase, Converter={StaticResource BoolToVis}}" />
-                <!-- Jump to this game on the Manage page (its detail flyout) — the return trip for
+                <!-- Jump to this game on the Manage page (its detail flyout). The return trip for
                      Manage's "Manage Build". Disabled rather than hidden so the header doesn't reflow
                      when you select a game. -->
                 <ui:Button
@@ -359,9 +359,8 @@
                     </ListBox>
 
                     <!-- Pager. Deliberately minimal: prev / "Page x of y" / next. The base VM also exposes
-                         windowed PageNumbers (as Manage renders) but there's no room for them here, and
-                         the list is a picker, not a browsing grid. Always shown — even on a single page —
-                         so the results-per-page control stays reachable; the arrows just disable. -->
+                         windowed PageNumbers (as Manage renders), but there's no room for them here, and
+                         the list is a picker, not a browsing grid. Always shown (even on a single page), so the results-per-page control stays reachable; the arrows just disable. -->
                     <StackPanel Grid.Row="2" Margin="0,8,0,0">
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <ui:Button

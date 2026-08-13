@@ -42,9 +42,9 @@ public class SteamFeaturedItem
 {
     [JsonPropertyName("id")] public long Id { get; set; }
     [JsonPropertyName("name")] public string Name { get; set; } = "";
-    // 616×353 capsule — the nice wide art for a featured card.
+    // 616×353 capsule. The nice wide art for a featured card.
     [JsonPropertyName("large_capsule_image")] public string? LargeCapsuleImage { get; set; }
-    [JsonPropertyName("type")] public int Type { get; set; } // 0 = game; non-zero are bundles/etc. — skip
+    [JsonPropertyName("type")] public int Type { get; set; } // 0 = game; non-zero are bundles/etc., so skip
 }
 
 public class GameDetails
@@ -89,7 +89,7 @@ public class DlcInfo
     [JsonPropertyName("depots")] public List<DlcDepot> Depots { get; set; } = [];
 }
 
-/// <summary>Hubcap (hubcapmanifest.com) <c>/api/v1/user/stats</c> response — usage for the user's own key.</summary>
+/// <summary>Hubcap (hubcapmanifest.com) <c>/api/v1/user/stats</c> response. Usage for the user's own key.</summary>
 public class HubcapStats
 {
     [JsonPropertyName("user_id")] public string UserId { get; set; } = "";
@@ -99,7 +99,7 @@ public class HubcapStats
     [JsonPropertyName("api_key_expires_at")] public string? ApiKeyExpiresAt { get; set; }
 }
 
-/// <summary>Hubcap <c>/api/v1/status/{appid}</c> response — whether a manifest exists (free, no usage count).</summary>
+/// <summary>Hubcap <c>/api/v1/status/{appid}</c> response. Whether a manifest exists (free, no usage count).</summary>
 public class HubcapManifestStatus
 {
     [JsonPropertyName("status")] public string Status { get; set; } = "";
@@ -119,7 +119,7 @@ public class SupporterStatus
     [JsonPropertyName("isSupporter")] public bool IsSupporter { get; set; }
 }
 
-/// <summary>Response from /api/auth/code/redeem — a Discord bot login code exchanged for a magic-link token.</summary>
+/// <summary>Response from /api/auth/code/redeem. A Discord bot login code exchanged for a magic-link token.</summary>
 public class CodeRedeemResponse
 {
     [JsonPropertyName("user_id")] public string UserId { get; set; } = "";

@@ -6,13 +6,13 @@ using System.Text.Json.Serialization;
 
 namespace LuaToolsGui.Services;
 
-/// <summary>How a stored lua came to be. Stored VALUES are English keys used in switch/equality —
-/// never localize them (the display label is localized separately).</summary>
+/// <summary>How a stored lua came to be. Stored VALUES are English keys used in switch/equality.
+/// Never localize them (the display label is localized separately).</summary>
 public static class LuaVariantKind
 {
     /// <summary>A plain &lt;appid&gt;.lua with no build identity (what everyone had before builds existed).</summary>
     public const string Default = "default";
-    /// <summary>Came from a &lt;appid&gt;_&lt;buildid&gt;.lua — pinned to one Steam build.</summary>
+    /// <summary>Came from a &lt;appid&gt;_&lt;buildid&gt;.lua. Pinned to one Steam build.</summary>
     public const string Build = "build";
     /// <summary>Hand-edited / saved by the user from the Builds page editor.</summary>
     public const string Preset = "preset";
@@ -20,7 +20,7 @@ public static class LuaVariantKind
 
 /// <summary>
 /// One stored lua for a game. <see cref="Hash"/> is the SHA-256 of the file's bytes AND its filename in
-/// the vault — so "which variant is live right now" is answered by hashing Steam's copy, never by a
+/// the vault, so "which variant is live right now" is answered by hashing Steam's copy, never by a
 /// stored flag that could drift out of sync.
 /// </summary>
 public record LuaVariant(
@@ -59,8 +59,8 @@ internal class VaultIndex
 
     /// <summary>
     /// The variant the live lua was last based on, recorded the moment an edit made it diverge. This is
-    /// what an in-place Save overwrites. Persisted (not just held in memory) so closing the page — or the
-    /// app — doesn't turn "Save" into "Save as new" behind the user's back. Null when the live lua
+    /// what an in-place Save overwrites. Persisted (not just held in memory), so closing the page, or the
+    /// app. Doesn't turn "Save" into "Save as new" behind the user's back. Null when the live lua
     /// matches a stored variant, i.e. there's nothing pending.
     /// </summary>
     public string? EditBaseHash { get; set; }
@@ -71,13 +71,13 @@ internal class VaultIndex
 /// though Steam only ever reads ONE file per game (config\stplug-in\&lt;appid&gt;.lua).
 ///
 /// <para>
-/// Layout — files are content-addressed (the name IS the sha256 of the bytes):
+/// Layout: files are content-addressed (the name IS the sha256 of the bytes):
 /// <code>
 /// %AppData%\LuaToolsGui\luavault\&lt;appid&gt;\index.json
 /// %AppData%\LuaToolsGui\luavault\&lt;appid&gt;\&lt;sha256&gt;.lua
 /// </code>
-/// That gives dedupe for free, and makes <see cref="GetActiveHash"/> a pure function of what's on disk
-/// — so it stays correct even when Steam, another tool, or the user overwrites the live file behind
+/// That gives dedupe for free, and makes <see cref="GetActiveHash"/> a pure function of what's on disk,
+/// so it stays correct even when Steam, another tool, or the user overwrites the live file behind
 /// our back. index.json holds only metadata; the bytes are always the source of truth.
 /// </para>
 /// </summary>
@@ -93,7 +93,7 @@ public class LuaVault
 
     /// <summary>
     /// Test seam: point the vault at throwaway directories instead of %AppData% and the real Steam
-    /// install. Worth having — this class rewrites the files Steam loads, so "it destroys your luas" is
+    /// install. Worth having. This class rewrites the files Steam loads, so "it destroys your luas" is
     /// the failure mode, and that's not something to only find out by hand.
     /// </summary>
     internal LuaVault(Func<string?> stPlugInDir, string root)
@@ -113,7 +113,7 @@ public class LuaVault
     private readonly object _gate = new();
 
     /// <summary>Raised (with the appid) after any change to a game's variants, so the Builds page can
-    /// refresh. May fire on a background thread — handlers must marshal to the UI thread.</summary>
+    /// refresh. May fire on a background thread. Handlers must marshal to the UI thread.</summary>
     public event Action<long>? VaultChanged;
 
     private string AppDir(long appId) => Path.Combine(_root, appId.ToString());
@@ -135,7 +135,7 @@ public class LuaVault
 
     /// <summary>
     /// The hash of the lua Steam is actually using right now, or null if there's no live file. Compare
-    /// against <see cref="LuaVariant.Hash"/> to find the active variant — a hash matching NOTHING means
+    /// against <see cref="LuaVariant.Hash"/> to find the active variant. A hash matching NOTHING means
     /// the live file has changed since the last <see cref="SyncDefaultFromLive"/> (a fresh install, a
     /// hand edit, another tool), and that sync is what adopts those bytes as the Default.
     /// </summary>
@@ -146,7 +146,7 @@ public class LuaVault
     }
 
     /// <summary>
-    /// Cheap "has this game been captured at all" check — a directory probe, no index parse. The game
+    /// Cheap "has this game been captured at all" check. A directory probe, no index parse. The game
     /// list calls this per game on every filter pass, so it must not read/hash anything.
     /// </summary>
     public bool HasVariants(long appId) => Directory.Exists(AppDir(appId));
@@ -160,7 +160,7 @@ public class LuaVault
 
     /// <summary>
     /// Loose &lt;appid&gt;_&lt;buildid&gt;.lua files sitting directly in stplug-in. Steam only ever reads
-    /// &lt;appid&gt;.lua, so these are INERT where they are — dropping one in the folder does nothing until
+    /// &lt;appid&gt;.lua, so these are INERT where they are. Dropping one in the folder does nothing until
     /// it's applied. Surfacing them lets the Builds page offer builds the user already has on disk.
     /// </summary>
     public IEnumerable<(long AppId, string BuildId, string Path)> EnumerateLooseBuildLuas()
@@ -176,7 +176,7 @@ public class LuaVault
         }
     }
 
-    /// <summary>Store any loose build-named luas for this app as build variants (idempotent — the
+    /// <summary>Store any loose build-named luas for this app as build variants (idempotent. The
     /// content-addressed capture no-ops once they're already in).</summary>
     public void AdoptLooseBuildLuas(long appId)
     {
@@ -188,15 +188,15 @@ public class LuaVault
     /// <summary>
     /// Make a stored build live when the game has NO &lt;appid&gt;.lua at all, and return it.
     /// <para>
-    /// Dropping &lt;appid&gt;_&lt;buildid&gt;.lua into stplug-in does nothing on its own — Steam only reads
-    /// &lt;appid&gt;.lua — so a game in that state is loading nothing, and applying the build is plainly what
+    /// Dropping &lt;appid&gt;_&lt;buildid&gt;.lua into stplug-in does nothing on its own. Steam only reads
+    /// &lt;appid&gt;.lua, so a game in that state is loading nothing, and applying the build is plainly what
     /// putting the file there meant. Deliberately does NOTHING when a live lua already exists: silently
     /// swapping which version of a game the user runs is not a decision to make on their behalf.
     /// </para>
     /// </summary>
     public LuaVariant? ApplyBuildIfNothingLive(long appId)
     {
-        if (GetActiveHash(appId) is not null) return null; // something is already live — leave it alone
+        if (GetActiveHash(appId) is not null) return null; // something is already live. Leave it alone
 
         var build = GetVariants(appId).FirstOrDefault(v => v.BuildId is not null); // newest first
         if (build is null) return null;
@@ -291,28 +291,28 @@ public class LuaVault
                 SaveIndex(appId, index);
             }
 
-            // Fired outside the lock — a handler that reads back (the Builds page does) must not be able
+            // Fired outside the lock: a handler that reads back (the Builds page does) must not be able
             // to re-enter the index mid-write.
             if (changed) VaultChanged?.Invoke(appId);
             return result;
         }
         catch
         {
-            return null; // the vault is a convenience — a failure here must never break an install
+            return null; // the vault is a convenience. A failure here must never break an install
         }
     }
 
     /// <summary>
     /// Point the Default SLOT at whatever Steam is running. Unlike builds and presets, of which there can
-    /// be many, a game has exactly one Default: it's the working copy — the live lua when that lua isn't
+    /// be many, a game has exactly one Default: it's the working copy. The live lua when that lua isn't
     /// one of the saved ones.
     ///
     /// <para>Four branches, in order:</para>
     /// <list type="bullet">
-    /// <item>no live file — nothing to do.</item>
-    /// <item>live matches a stored build/preset — THAT one is active; the Default keeps its own bytes so
+    /// <item>no live file. Nothing to do.</item>
+    /// <item>live matches a stored build/preset. THAT one is active; the Default keeps its own bytes so
     /// switching back to it still works.</item>
-    /// <item>an in-place edit is pending (<see cref="GetEditBase"/>) — the diverged bytes belong to the
+    /// <item>an in-place edit is pending (<see cref="GetEditBase"/>). The diverged bytes belong to the
     /// build being edited, not to the Default. Without this, editing a build would fold the edit into the
     /// Default and "Save to &lt;build&gt;" would have nothing left to write back to.</item>
     /// <item>otherwise the live bytes ARE the Default: the previous default's entry AND file are dropped
@@ -321,7 +321,7 @@ public class LuaVault
     ///
     /// <para>
     /// That last branch is destructive by design (the user's call): the Default follows stplug-in, so
-    /// anything overwriting the live lua — this app, SteamTools, a hand edit — replaces it with no undo.
+    /// anything overwriting the live lua (this app, SteamTools, a hand edit) replaces it with no undo.
     /// Builds and presets are never touched, so saving a preset is how a lua is kept.
     /// </para>
     /// </summary>
@@ -363,7 +363,7 @@ public class LuaVault
 
                     Directory.CreateDirectory(AppDir(appId));
                     File.Copy(live, VariantPath(appId, liveHash), overwrite: true);
-                    // Steam's copy is always <appid>.lua, so its name can't carry a build id — this is
+                    // Steam's copy is always <appid>.lua, so its name can't carry a build id. This is
                     // only ever "default", even when the bytes happen to be pinned.
                     index.Variants.Add(Describe(appId, live, liveHash, LuaVariantKind.Default, null, null));
                     changed = true;
@@ -375,7 +375,7 @@ public class LuaVault
         }
         catch
         {
-            return false; // the vault is a convenience — never break an install or a page load over it
+            return false; // the vault is a convenience, never break an install or a page load over it
         }
     }
 
@@ -407,7 +407,7 @@ public class LuaVault
     }
 
     /// <summary>
-    /// Make a stored variant the one Steam uses. Copies the bytes VERBATIM — deliberately NOT through
+    /// Make a stored variant the one Steam uses. Copies the bytes VERBATIM. Deliberately NOT through
     /// <see cref="LuaInstaller"/>, whose "Auto Update Apps" transform comments out setManifestid lines.
     /// Running that here would un-pin the very build the user just chose.
     /// </summary>
@@ -420,7 +420,7 @@ public class LuaVault
         try
         {
             // Capture the outgoing lua FIRST. Switching builds overwrites the live file, and if what was
-            // sitting there was an unsaved working copy this is its only chance to be kept — "the Builds
+            // sitting there was an unsaved working copy this is its only chance to be kept. "the Builds
             // page probably refreshed and synced already" is not a guarantee to hang a destructive
             // overwrite on. Core variant so the whole swap raises one VaultChanged, not two.
             SyncDefaultFromLiveCore(appId);
@@ -428,7 +428,7 @@ public class LuaVault
             Directory.CreateDirectory(Path.GetDirectoryName(live)!);
             File.Copy(source, live, overwrite: true);
             StampNow(live);
-            SetEditBase(appId, null); // live matches a stored variant again — no pending edit
+            SetEditBase(appId, null); // live matches a stored variant again, no pending edit
             VaultChanged?.Invoke(appId);
             return true;
         }
@@ -487,7 +487,7 @@ public class LuaVault
 
     /// <summary>
     /// Remember which variant the live lua is being edited from. Call this BEFORE the first write that
-    /// makes it diverge — once it has, the base is no longer derivable from the bytes.
+    /// makes it diverge. Once it has, the base is no longer derivable from the bytes.
     /// </summary>
     public void SetEditBase(long appId, string? hash)
     {
@@ -501,7 +501,7 @@ public class LuaVault
     }
 
     /// <summary>
-    /// Overwrite an existing variant with new text, KEEPING its identity — label, kind and build id all
+    /// Overwrite an existing variant with new text, KEEPING its identity. Label, kind and build id all
     /// travel across. The stored file is content-addressed, so its name changes with its bytes: this
     /// writes the new file, repoints the index entry, and drops the old one. That's why "save to the
     /// build I'm on" isn't a plain file write.
@@ -519,11 +519,11 @@ public class LuaVault
             {
                 var index = LoadIndex(appId);
                 int i = index.Variants.FindIndex(v => v.Hash == oldHash);
-                if (i < 0) return null; // the base is gone (deleted?) — caller falls back to a new preset
+                if (i < 0) return null; // the base is gone (deleted?). Caller falls back to a new preset
 
                 var old = index.Variants[i];
 
-                // The edited bytes already exist under another entry — keep that one rather than creating
+                // The edited bytes already exist under another entry. Keep that one rather than creating
                 // a duplicate, and retire the entry we were editing.
                 int existing = index.Variants.FindIndex(v => v.Hash == newHash);
                 if (existing >= 0 && existing != i)
@@ -574,7 +574,7 @@ public class LuaVault
     }
 
     /// <summary>Forget a variant (index entry + file). Refuses to delete the one Steam is currently
-    /// using — that would leave the live lua orphaned with no way back.</summary>
+    /// using. That would leave the live lua orphaned with no way back.</summary>
     public bool Delete(long appId, string hash)
     {
         if (GetActiveHash(appId) == hash) return false;

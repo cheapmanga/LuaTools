@@ -7,7 +7,7 @@ namespace LuaToolsGui.Services;
 /// <summary>
 /// One depot of an app. If DlcAppId is set, this depot ships files for that DLC. IsShared marks a
 /// redistributable pulled from another app (VC++, DirectX). Os/Language only present when declared.
-/// PublicManifestId is the manifest Steam currently ships on the public branch — compare it against a
+/// PublicManifestId is the manifest Steam currently ships on the public branch. Compare it against a
 /// lua's setManifestid pin to tell "pinned to the latest build" from "pinned to an older one".
 /// </summary>
 public record ContentDepot(long Id, long Size, long? DlcAppId, bool IsShared, string? Os, string? Language,
@@ -19,8 +19,8 @@ public record ContentDepot(long Id, long Size, long? DlcAppId, bool IsShared, st
 /// <summary>
 /// Authoritative depot list for an app, from api.steamcmd.net (same data SteamDB shows). Includes
 /// shared redistributables (flagged IsShared) so the UI can bucket them separately. DlcIds is the
-/// app's full declared DLC list (extended.listofdlc) — many have no depot (store-only entitlements).
-/// LaunchExes are the main Windows game executables (relative paths) from config.launch — the exact
+/// app's full declared DLC list (extended.listofdlc). Many have no depot (store-only entitlements).
+/// LaunchExes are the main Windows game executables (relative paths) from config.launch. The exact
 /// exe(s) Steam runs, used to target Steamless DRM removal (empty if the manifest has no launch config).
 /// PublicBuildId is the build the public branch is on right now, so the Builds page can show how far
 /// behind a pinned lua is (null when the app declares no branches).
@@ -31,7 +31,7 @@ public record AppDepotInfo(long AppId, IReadOnlyList<ContentDepot> Depots, IRead
 public class SteamDepotInfo
 {
     /// <summary>
-    /// How long a FAILED lookup is remembered. Successes are kept for the whole session — depot manifests
+    /// How long a FAILED lookup is remembered. Successes are kept for the whole session. Depot manifests
     /// don't move often enough to re-fetch per navigation, and <see cref="Invalidate"/> covers the case
     /// where they have. A failure is different: caching it forever meant one blip or one 15s timeout gave
     /// that game a permanent "couldn't load depot info", with no way back short of restarting the app.
@@ -64,7 +64,7 @@ public class SteamDepotInfo
         // FetchAsync drops its own de-dupe entry in a finally, which is correct ONLY when it actually
         // suspends: GetOrAdd stores the task after the factory returns, so a fetch that completes
         // synchronously (a stubbed handler, a socket that had the response ready) runs that finally
-        // before the entry exists, and the completed task then sits in _inFlight forever — served in
+        // before the entry exists, and the completed task then sits in _inFlight forever. Served in
         // place of every future fetch. Sweep it here, where the entry is known to be stored.
         if (task.IsCompleted) _inFlight.TryRemove(appId, out _);
         return task;
@@ -102,7 +102,7 @@ public class SteamDepotInfo
                     if (entry.Value.ValueKind != JsonValueKind.Object) continue;
                     var v = entry.Value;
 
-                    // Shared redistributable (VC++, DirectX, …) — belongs to another app. Keep it, flagged.
+                    // Shared redistributable (VC++, DirectX, …). Belongs to another app. Keep it, flagged.
                     bool isShared = v.TryGetProperty("depotfromapp", out _);
 
                     long? dlcAppId = v.TryGetProperty("dlcappid", out var dlcEl) && long.TryParse(dlcEl.GetString(), out long dlc)
@@ -132,7 +132,7 @@ public class SteamDepotInfo
                     ? buildEl.GetString()
                     : buildEl.ToString();
 
-            // Full declared DLC list — includes store-only DLC with no depot of their own.
+            // Full declared DLC list: includes store-only DLC with no depot of their own.
             var dlcIds = new List<long>();
             if (app.TryGetProperty("extended", out var ext) &&
                 ext.TryGetProperty("listofdlc", out var listEl) &&

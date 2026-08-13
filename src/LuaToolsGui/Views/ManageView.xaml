@@ -411,7 +411,7 @@
             Visibility="{Binding ShowItems, Converter={StaticResource BoolToVis}}">
 
             <!-- Centered group: ‹ prev | page numbers (fixed-width zone) | › next. The numbers live in a
-                 fixed-width column so ‹/› never move — you can rapid-click them without re-aiming — and
+                 fixed-width column so ‹/› never move (you can rapid-click them without re-aiming), and
                  the whole group is centered on the bar (independent of the right-side dropdown). -->
             <Grid
                 HorizontalAlignment="Center"

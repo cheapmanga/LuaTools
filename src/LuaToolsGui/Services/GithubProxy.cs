@@ -5,12 +5,12 @@ namespace LuaToolsGui.Services;
 
 /// <summary>
 /// Makes GitHub requests resilient in regions where github.com / api.github.com are blocked or throttled
-/// (e.g. China). Every GitHub request — API JSON or a release-asset binary — is tried DIRECT first, and
+/// (e.g. China). Every GitHub request (API JSON or a release-asset binary) is tried DIRECT first, and
 /// on failure (network error or non-success) re-tried through each capability-matched mirror (see
 /// <see cref="AppConfig.GithubApiMirrors"/> / <see cref="AppConfig.GithubDownloadMirrors"/>) by prefixing
 /// the full GitHub URL: "<mirror>https://github.com/...". The first usable response wins.
 ///
-/// USE THIS FOR ALL GITHUB REQUESTS. Don't call api.github.com / github.com directly — route the URL
+/// USE THIS FOR ALL GITHUB REQUESTS. Don't call api.github.com / github.com directly. Route the URL
 /// through <see cref="SendAsync"/> (API/metadata) or <see cref="DownloadAsync"/> (asset binaries) so the
 /// mirror fallback applies everywhere automatically.
 /// </summary>
@@ -28,12 +28,12 @@ public class GithubProxy
 
     /// <summary>Candidate URLs to try in order: the direct URL, then each CAPABILITY-MATCHED mirror-prefixed
     /// variant. api.github.com URLs get the API mirror(s); everything else (github.com downloads, raw,
-    /// objects) gets the download mirror(s) — never the wrong class, which would be a guaranteed-wasted hop
+    /// objects) gets the download mirror(s), never the wrong class, which would be a guaranteed-wasted hop
     /// (an API mirror 400s a download; a download mirror 403s the API). Public so the Velopack auto-update
     /// downloader can reuse the same direct→mirror fallback.</summary>
     public static IEnumerable<string> Candidates(string url)
     {
-        yield return url; // direct first — fastest when GitHub is reachable
+        yield return url; // direct first. Fastest when GitHub is reachable
         if (!IsGithub(url)) yield break;
         var mirrors = url.StartsWith("https://api.github.com/", StringComparison.OrdinalIgnoreCase)
             ? AppConfig.GithubApiMirrors
@@ -64,11 +64,11 @@ public class GithubProxy
             }
             catch (OperationCanceledException) when (ct.IsCancellationRequested)
             {
-                throw; // user cancellation, not a mirror failure — don't keep trying
+                throw; // user cancellation, not a mirror failure. Don't keep trying
             }
             catch
             {
-                // network error for this candidate — fall through to the next mirror
+                // network error for this candidate. Fall through to the next mirror
             }
         }
         return lastResponse; // null if every attempt threw; else the last failed response

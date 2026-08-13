@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace LuaToolsGui.Services.AppInfo;
 
 /// <summary>
-/// One entry behind Steam's Play button — <c>config.launch.&lt;n&gt;</c> in appinfo.
+/// One entry behind Steam's Play button: <c>config.launch.&lt;n&gt;</c> in appinfo.
 ///
 /// <para>
 /// Field frequency across 64,117 real entries: <c>executable</c> 100%, <c>config</c> 91%
@@ -21,8 +21,8 @@ public sealed class LaunchOption
 
     /// <summary>
     /// The key this entry was READ from, which stays put when <see cref="Index"/> is renumbered.
-    /// Needed because <see cref="WriteAll"/> looks the old table up to carry across keys we don't model
-    /// — after a reorder, looking it up by the NEW index would graft a different entry's extra keys
+    /// Needed because <see cref="WriteAll"/> looks the old table up to carry across keys we don't model.
+    /// After a reorder, looking it up by the NEW index would graft a different entry's extra keys
     /// (e.g. Half-Life's per-entry vacmodulefilename) onto this one. Empty for entries we created.
     /// </summary>
     public string SourceIndex { get; set; } = "";
@@ -72,7 +72,7 @@ public sealed class LaunchOption
 
     /// <summary>
     /// Apply this entry onto a VDF table, preserving any keys we don't model (some entries carry
-    /// <c>vacmodulefilename</c>, <c>description_loc</c>, …) — rewriting from scratch would drop them.
+    /// <c>vacmodulefilename</c>, <c>description_loc</c>, …). Rewriting from scratch would drop them.
     /// </summary>
     public VdfTable ToTable(VdfTable? existing = null)
     {
@@ -95,7 +95,7 @@ public sealed class LaunchOption
         }
         else
         {
-            // Only drop `config` if we're the ones who emptied it — an entry that never had one stays
+            // Only drop `config` if we're the ones who emptied it. An entry that never had one stays
             // without one, and one whose only config keys we don't model keeps them.
             if (table.GetTable("config") is { } cfg && cfg.Items.Count == 0) table.Remove("config");
         }
@@ -139,7 +139,7 @@ public sealed class LaunchOption
         config.Items.Add(VdfProperty.Table("launch", launch));
     }
 
-    /// <summary>Renumber to 0,1,2… in list order — what makes a reorder actually take effect.</summary>
+    /// <summary>Renumber to 0,1,2… in list order. What makes a reorder actually take effect.</summary>
     public static void Renumber(IReadOnlyList<LaunchOption> options)
     {
         for (int i = 0; i < options.Count; i++) options[i].Index = i.ToString();

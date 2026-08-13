@@ -23,7 +23,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
 {
     private bool AutoUpdate => settings.AutoUpdateApps;
 
-    /// <summary>Raised (with the appid) whenever a lua is successfully installed — via any path (plugin,
+    /// <summary>Raised (with the appid) whenever a lua is successfully installed, via any path (plugin,
     /// drag-drop, Add page, Fixes). The UI subscribes to refresh the library live. May fire on a
     /// background thread, so handlers must marshal to the UI thread.</summary>
     public event Action<long>? Installed;
@@ -34,7 +34,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
 
     /// <summary>
     /// The Steam build id a lua file name declares (&lt;appid&gt;_&lt;buildid&gt;.lua), or null for a plain
-    /// &lt;appid&gt;.lua. This is the ONLY place build identity comes from — the file name, whether that's a
+    /// &lt;appid&gt;.lua. This is the ONLY place build identity comes from. The file name, whether that's a
     /// staged download (which keeps the server's Content-Disposition name) or an entry inside a zip.
     /// </summary>
     public static string? BuildIdFromFileName(string path)
@@ -45,18 +45,18 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
 
     /// <summary>
     /// A lua named &lt;appid&gt;_&lt;buildid&gt;.lua must keep its manifest pins, even with "Auto Update Apps"
-    /// on. Those pins ARE the build — installing it de-pinned would hand the user whatever version Steam
+    /// on. Those pins ARE the build. Installing it de-pinned would hand the user whatever version Steam
     /// ships today while calling it the build they picked. Same reasoning as a Denuvo fix's forceLocked.
     /// </summary>
     private static bool KeepPinsFor(string? buildId, bool forceLocked) => forceLocked || buildId is not null;
 
     /// <summary>
     /// Store what was just written to stplug-in. Called with the INSTALLED file (not the staged source) so
-    /// the stored bytes are exactly what Steam reads — which is what makes this variant resolve as the
+    /// the stored bytes are exactly what Steam reads, which is what makes this variant resolve as the
     /// active one.
     ///
     /// <para>
-    /// A build lua (<c>&lt;appid&gt;_&lt;buildid&gt;.lua</c>) is captured as its own variant — those
+    /// A build lua (<c>&lt;appid&gt;_&lt;buildid&gt;.lua</c>) is captured as its own variant. Those
     /// accumulate, that's the point of the switcher. A plain lua instead re-points the single Default slot
     /// via <see cref="LuaVault.SyncDefaultFromLive"/>: capturing it would append a second "default" row
     /// every time a game was re-added from a different generator, which is exactly the bug this replaced.
@@ -71,12 +71,12 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
             else
                 vault.SyncDefaultFromLive(appId);
         }
-        catch { /* the vault is a convenience — a hiccup here must never fail an install */ }
+        catch { /* the vault is a convenience. A hiccup here must never fail an install */ }
     }
 
     /// <summary>Record a just-installed appid in the "recently added" list (cache.json's LoadedAppIds), so
-    /// the store-page plugin can surface it in the "games added since last Steam restart" popup. Best-effort
-    /// — a caching hiccup must never fail an install. Also fires <see cref="Installed"/> so the app's own
+    /// the store-page plugin can surface it in the "games added since last Steam restart" popup. Best-effort.
+    /// A caching hiccup must never fail an install. Also fires <see cref="Installed"/> so the app's own
     /// Home/Manage library views refresh (this is the single chokepoint every lua install passes through).</summary>
     private void RecordLoaded(long appId)
     {
@@ -86,7 +86,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
         catch { /* a subscriber blowing up must never fail an install */ }
     }
 
-    // setManifestid(depot, "manifestid", ...) — pins a depot to a fixed version. Commenting it out
+    // setManifestid(depot, "manifestid", ...). Pins a depot to a fixed version. Commenting it out
     // (and skipping the .manifest) lets Steam fetch the latest, so the app auto-updates.
     [GeneratedRegex(@"^(\s*)(setManifestid\s*\()", RegexOptions.IgnoreCase)]
     private static partial Regex SetManifestLineRegex();
@@ -138,7 +138,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
     public InstallResult InstallLua(string luaPath, long appId, bool forceLocked = false, string? source = null)
     {
         string? dir = steam.StPlugInDir;
-        if (dir is null) return InstallResult.Fail("Steam location not found — set it in Settings.");
+        if (dir is null) return InstallResult.Fail(Resources.Strings.Err_SteamNotFound);
 
         try
         {
@@ -170,7 +170,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
             File.SetCreationTime(path, now);
             File.SetLastWriteTime(path, now);
         }
-        catch { /* timestamp is cosmetic — never fail an install over it */ }
+        catch { /* timestamp is cosmetic, never fail an install over it */ }
     }
 
     /// <summary>
@@ -222,7 +222,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
                     AppIdFromFileName(entry.Name) is { } id)
                     return id;
         }
-        catch { /* unreadable zip — caller handles null */ }
+        catch { /* unreadable zip. Caller handles null */ }
         return null;
     }
 
@@ -237,7 +237,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
     public InstallResult InstallManifestFile(string manifestPath)
     {
         string? dir = steam.DepotCacheDir;
-        if (dir is null) return InstallResult.Fail("Steam location not found — set it in Settings.");
+        if (dir is null) return InstallResult.Fail(Resources.Strings.Err_SteamNotFound);
         try
         {
             Directory.CreateDirectory(dir);
@@ -259,7 +259,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
 
     /// <summary>
     /// Extract a manifest zip into Steam: the .lua → stplug-in (renamed to &lt;appid&gt;.lua),
-    /// every *.manifest → depotcache. Zips may carry no manifests — that's fine. Best-effort.
+    /// every *.manifest → depotcache. Zips may carry no manifests. That's fine. Best-effort.
     /// <paramref name="forceLocked"/> keeps manifest pins (for Denuvo fixes).
     /// </summary>
     public InstallResult InstallZip(string zipPath, long appId, bool forceLocked = false, string? source = null)
@@ -267,11 +267,11 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
         string? plugDir = steam.StPlugInDir;
         string? depotDir = steam.DepotCacheDir;
         if (plugDir is null || depotDir is null)
-            return InstallResult.Fail("Steam location not found — set it in Settings.");
+            return InstallResult.Fail(Resources.Strings.Err_SteamNotFound);
 
         ZipArchive archive;
         try { archive = ZipFile.OpenRead(zipPath); }
-        catch (Exception ex) { return InstallResult.Fail($"Couldn't open the download: {ex.Message}"); }
+        catch (Exception ex) { return InstallResult.Fail(string.Format(Resources.Strings.Err_OpenDownloadFailed, ex.Message)); }
 
         bool luaInstalled = false;
         int manifestCount = 0;
@@ -297,7 +297,7 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
                     : Path.Combine(depotDir, name);
 
                 // Manifest filenames are content-addressed (the id is a hash of the content), so an
-                // existing one is byte-identical — skip it. Avoids needless work and, importantly, the
+                // existing one is byte-identical. Skip it. Avoids needless work and, importantly, the
                 // "file in use" failure when Steam is running and already has that manifest open.
                 if (isManifest && File.Exists(dest))
                 {

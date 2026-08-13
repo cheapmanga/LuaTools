@@ -196,7 +196,7 @@
                     </StackPanel>
                 </Border>
 
-                <!-- "What this does" — fills the page and explains the plugin at a glance. -->
+                <!-- "What this does". Fills the page and explains the plugin at a glance. -->
                 <TextBlock
                     Margin="2,26,0,0"
                     FontSize="11"

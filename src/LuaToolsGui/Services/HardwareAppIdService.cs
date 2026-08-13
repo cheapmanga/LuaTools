@@ -34,7 +34,7 @@ public class HardwareAppIdService
     public bool IsBlacklisted(long appId) => _ids.Contains(appId);
 
     /// <summary>Ensure the blacklist is reasonably fresh: refetch from GitHub if the cache is stale or empty,
-    /// else no-op. Runs at most once per session. Never throws — on failure the seeded/stale set stays.</summary>
+    /// else no-op. Runs at most once per session. Never throws. On failure the seeded/stale set stays.</summary>
     public Task EnsureFreshAsync() => _loadTask ??= RefreshIfStaleAsync();
 
     private async Task RefreshIfStaleAsync()

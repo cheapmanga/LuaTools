@@ -25,11 +25,11 @@ public class CefInjectorService : IHostedService
     private int _cdpId;
 
     // CDP is opened by the `.cef-enable-remote-debugging` junction PluginInstallerService manages, not by
-    // the loader DLL anymore — and Steam's own internal logic hardcodes this port. Confirmed this can't be
+    // the loader DLL anymore, and Steam's own internal logic hardcodes this port. Confirmed this can't be
     // changed (file content has no effect on it), so unlike the old hook-based design (which deliberately
-    // picked the uncommon 42067 to dodge collisions), this is stuck with 8080 — a commonly-occupied port
+    // picked the uncommon 42067 to dodge collisions), this is stuck with 8080. A commonly-occupied port
     // (dev servers, Docker, etc.). PluginInstallerService.IsPort8080BusyAsync() surfaces a best-effort
-    // warning for that case (probing /json to rule out Steam's own CDP server before warning — a bare bind
+    // warning for that case (probing /json to rule out Steam's own CDP server before warning. A bare bind
     // test can't tell "someone else has it" from "Steam has it and it's working correctly"); there is no
     // fallback port to switch to.
     private const string CefDebugUrl = "http://127.0.0.1:8080/json";
@@ -54,11 +54,11 @@ public class CefInjectorService : IHostedService
     }
 
     /// <summary>(Re)reads luatools.js + the polyfill from disk into memory. Called once at startup, and
-    /// again by PluginInstallerService right after install/uninstall — the file-finding paths get checked
+    /// again by PluginInstallerService right after install/uninstall. The file-finding paths get checked
     /// exactly once otherwise, so a plugin installed/updated/removed after launch would silently never take
     /// effect until the app was restarted (the app is commonly launched by the loader BEFORE anything is
-    /// installed, so this isn't just a theoretical edge case). _luatoolsJs/_polyfillJs are plain strings —
-    /// reassignment is atomic, so this is safe to call while InjectionLoop is concurrently reading them; the
+    /// installed, so this isn't just a theoretical edge case). _luatoolsJs/_polyfillJs are plain strings.
+    /// Reassignment is atomic, so this is safe to call while InjectionLoop is concurrently reading them; the
     /// next poll cycle (~1s) just picks up the new content, no page reload needed.</summary>
     public async Task ReloadPluginFilesAsync()
     {
@@ -97,7 +97,7 @@ public class CefInjectorService : IHostedService
     }
 
     // Loop cadence: tick fast (drain queued RPCs every tick so the page's calls resolve in ~150ms rather
-    // than the old ~1s), but only refresh the tab list + re-inject on every Nth tick (~1s) — injection
+    // than the old ~1s), but only refresh the tab list + re-inject on every Nth tick (~1s). Injection
     // doesn't need to be fast, and the liveness/re-inject logic is unchanged, just decoupled from the drain.
     private const int TickMs = 150;
     private const int InjectEveryTicks = 7; // 7 * 150ms ≈ 1s
@@ -115,8 +115,8 @@ public class CefInjectorService : IHostedService
                 // ── Slow cadence (~1s): discover store tabs, ensure luatools.js is injected ──
                 if (tick % InjectEveryTicks == 0)
                 {
-                    // Millennium may also be present and running its own plugin loader on this same page —
-                    // that's fine now. The polyfill (BuildInlinePolyfill) only takes over "luatools" calls and
+                    // Millennium may also be present and running its own plugin loader on this same page.
+                    // That's fine now. The polyfill (BuildInlinePolyfill) only takes over "luatools" calls and
                     // passes everything else through to Millennium's real window.Millennium if one exists, so
                     // the two no longer need to be mutually exclusive.
                     var tabsJson = await _http.GetStringAsync(CefDebugUrl, ct);
@@ -126,7 +126,7 @@ public class CefInjectorService : IHostedService
 
                         // Inject luatools.js into every store-page tab whose JS context isn't already alive.
                         // Steam reuses the same CDP tab ID across SPA-style navigation (Home <-> store pages),
-                        // but navigating to a different page wipes the JS context entirely — so "already
+                        // but navigating to a different page wipes the JS context entirely, so "already
                         // injected by tab ID" is the wrong signal. Check liveness in the CURRENT context every
                         // cycle instead (window.__LuaToolsReady, set as the last statement of luatools.js's
                         // main IIFE) and re-inject whenever it's gone.
@@ -230,11 +230,11 @@ public class CefInjectorService : IHostedService
             ["StartLuaToolsAdd"] = ("POST", "/add/{appid}"),
             ["GetLuaToolsAddStatus"] = ("GET", "/add-status/{appid}"),
             ["PickLuaToolsAddSource"] = ("POST", "/add-source/{appid}"),
-            // Menu actions (Settings, Fixes, Restart Steam) — same mixed-content problem, same fix.
+            // Menu actions (Settings, Fixes, Restart Steam). Same mixed-content problem, same fix.
             ["OpenSettings"] = ("POST", "/open/settings"),
             ["OpenFix"] = ("POST", "/open/fix/{appid}"),
             ["RestartSteam"] = ("POST", "/restart-steam"),
-            // Open an external URL (Discord link, etc.) and check-for-updates — also route
+            // Open an external URL (Discord link, etc.), and check-for-updates. Also route
             // through the bridge (previously used a dead direct-fetch to a proxy port).
             ["OpenExternalUrl"] = ("POST", "/open-url"),
             ["CheckForUpdatesNow"] = ("POST", "/check-updates"),
@@ -278,14 +278,14 @@ public class CefInjectorService : IHostedService
         }
     }
 
-    /// <summary>Return the reused (or freshly opened) CDP socket for a tab. Throws if the connect fails —
-    /// the caller evicts on any exception.</summary>
+    /// <summary>Return the reused (or freshly opened) CDP socket for a tab. Throws if the connect fails.
+    /// The caller evicts on any exception.</summary>
     private async Task<ClientWebSocket> GetSocketAsync(string tabId, string wsUrl, CancellationToken ct)
     {
         if (_sockets.TryGetValue(tabId, out var existing))
         {
             if (existing.State == WebSocketState.Open) return existing;
-            EvictSocket(tabId); // stale (closed/aborted) — drop and reopen below
+            EvictSocket(tabId); // stale (closed/aborted). Drop and reopen below
         }
 
         var ws = new ClientWebSocket();
@@ -321,7 +321,7 @@ public class CefInjectorService : IHostedService
 
             // Each CDP message is one WS message (possibly multi-frame). Read whole messages until we get
             // the one carrying our id. We never enable any CDP domain, so in practice the only traffic is
-            // our own responses — the id check is just defensive against any stray event frames.
+            // our own responses. The id check is just defensive against any stray event frames.
             while (!linked.Token.IsCancellationRequested)
             {
                 var sb = new StringBuilder();
@@ -336,10 +336,10 @@ public class CefInjectorService : IHostedService
                 var responseText = sb.ToString();
                 JsonElement root;
                 try { using var doc = JsonDocument.Parse(responseText); root = doc.RootElement.Clone(); }
-                catch { continue; } // unparseable frame — keep reading
+                catch { continue; } // unparseable frame. Keep reading
 
                 if (!(root.TryGetProperty("id", out var idEl) && idEl.TryGetInt32(out var rid) && rid == id))
-                    continue; // an event or a different id — not our response yet
+                    continue; // an event or a different id, not our response yet
 
                 if (root.TryGetProperty("result", out var cdpResult) &&
                     cdpResult.TryGetProperty("result", out var evalResult) &&
@@ -373,7 +373,7 @@ public class CefInjectorService : IHostedService
     private string? FindLuaToolsJs()
     {
         string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        // The frontend is no longer bundled with the app — PluginInstallerService downloads it from
+        // The frontend is no longer bundled with the app. PluginInstallerService downloads it from
         // GitHub releases into %AppData%\LuaToolsGui\plugin. If it isn't installed yet, nothing injects.
         string[] candidates =
         {
@@ -398,13 +398,13 @@ public class CefInjectorService : IHostedService
     }
 
     /// <summary>Real Millennium (if present on this page) already defines window.Millennium.callServerMethod
-    /// as one shared object used by every Millennium plugin, routed server-side by the pluginName argument —
-    /// it is NOT per-plugin namespaced. Blindly overwriting it (the old behavior) broke every other
+    /// as one shared object used by every Millennium plugin, routed server-side by the pluginName argument.
+    /// It is NOT per-plugin namespaced. Blindly overwriting it (the old behavior) broke every other
     /// Millennium plugin on the page whenever both injectors were active, not just LuaTools. This only takes
     /// over "luatools" calls and passes every other pluginName through to the real callServerMethod
     /// unchanged, so this app's CDP injection can coexist with Millennium instead of requiring it be absent.
     /// _pending/_readyResponses are attached directly onto whichever object ends up as window.Millennium
-    /// (fake or real) under their original names — ProcessSingleTab's polling reads/writes those regardless
+    /// (fake or real) under their original names. ProcessSingleTab's polling reads/writes those regardless
     /// of which case this is.</summary>
     private string BuildInlinePolyfill()
     {

@@ -6,7 +6,7 @@ namespace LuaToolsGui.Tests;
 
 /// <summary>
 /// Which row the build switcher treats as live. This shipped broken: mid-edit the live lua matches no
-/// stored variant, nothing was active, and the selection fell through to whatever sorted first — moving
+/// stored variant, nothing was active, and the selection fell through to whatever sorted first. Moving
 /// the user off the build they were editing and routing their next depot toggle into the Default's
 /// stored copy instead of the live file.
 /// </summary>
@@ -28,7 +28,7 @@ public class BuildsActiveHashTests
     public void LiveMatchingNothing_ResolvesToTheVariantBeingEdited() =>
         Assert.Equal("aaa", BuildsViewModel.ResolveActiveHash("edited", Stored, editBase: "aaa"));
 
-    /// <summary>No base to fall back on — no row matches, which is the honest answer. Must not throw.</summary>
+    /// <summary>No base to fall back on, no row matches, which is the honest answer. Must not throw.</summary>
     [Fact]
     public void LiveMatchingNothing_WithNoEditBase_LeavesNothingActive()
     {

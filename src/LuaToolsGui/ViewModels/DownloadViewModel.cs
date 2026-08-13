@@ -23,11 +23,11 @@ public partial class SourceRowViewModel : ObservableObject
     public bool IsAvailable => Status == "available";
     public string StatusLabel => Status.ToUpperInvariant();
 
-    /// <summary>Hide the status badge when availability is unknown (e.g. a Hubcap row with no key set —
-    /// we can't check, so we don't show a misleading badge; the "needs key" hint covers it instead).</summary>
+    /// <summary>Hide the status badge when availability is unknown (e.g. a Hubcap row with no key set.
+    /// We can't check, so we don't show a misleading badge; the "needs key" hint covers it instead).</summary>
     public bool ShowStatus => Status != "unknown";
 
-    /// <summary>Hubcap key not configured — show a hint instead of a download button.</summary>
+    /// <summary>Hubcap key not configured. Show a hint instead of a download button.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanDownload))]
     private bool _isLocked;
@@ -105,7 +105,7 @@ public partial class DownloadViewModel : ObservableObject
     public bool HasTopSellers => TopSellers.Count > 0;
     public bool HasNewReleases => NewReleases.Count > 0;
 
-    /// <summary>Show the featured strips only when the user hasn't started anything — no text typed, no
+    /// <summary>Show the featured strips only when the user hasn't started anything, no text typed, no
     /// results open, no game loaded, no install banner. Once they search or pick a game, the strips hide.</summary>
     public bool ShowFeatured =>
         (TopSellers.Count > 0 || NewReleases.Count > 0)
@@ -198,7 +198,7 @@ public partial class DownloadViewModel : ObservableObject
             await FetchCommand.ExecuteAsync(null);
 
         // In FastFetch the chain (fetch → download → install) completes inline by the time we get here,
-        // and the overwrite overlay is skipped in silent mode — so the outcome is fully settled. Report
+        // and the overwrite overlay is skipped in silent mode, so the outcome is fully settled. Report
         // InstallStatus on success/handled-failure, else whatever Error the chain left behind.
         if (onComplete is not null)
         {
@@ -215,7 +215,7 @@ public partial class DownloadViewModel : ObservableObject
     /// FetchAsync pipeline the app UI uses (dynamic sources + Hubcap synth + key-gating + usage +
     /// FastFetch auto-download). The plugin polls state via the HTTP server and, when FastFetch is
     /// off, picks a source with <see cref="DownloadSourceByNameAsync"/>. Unlike ProtocolInstall this
-    /// does NOT force FastFetch — it respects the user's setting so the plugin popup matches the app.</summary>
+    /// does NOT force FastFetch. It respects the user's setting so the plugin popup matches the app.</summary>
     public async Task StartPluginAddAsync(long appId)
     {
         _silentInstall = true; // headless: no surfaced window to confirm an overwrite on
@@ -239,7 +239,7 @@ public partial class DownloadViewModel : ObservableObject
         if (HasDetails) await FetchCommand.ExecuteAsync(null);
     }
 
-    /// <summary>Plugin picked a source by name (FastFetch-off path) — download+install it headlessly.</summary>
+    /// <summary>Plugin picked a source by name (FastFetch-off path). Download+install it headlessly.</summary>
     public Task DownloadSourceByNameAsync(string name)
     {
         _silentInstall = true;
@@ -288,7 +288,7 @@ public partial class DownloadViewModel : ObservableObject
     [ObservableProperty] private bool _fastFetch;
     partial void OnFastFetchChanged(bool value) => _settings.FastFetch = value;
 
-    /// <summary>Re-sync the FastFetch toggle from the saved setting when the Add view appears — the Settings
+    /// <summary>Re-sync the FastFetch toggle from the saved setting when the Add view appears. The Settings
     /// page exposes the same toggle, and both VMs are singletons that otherwise only read it at startup.</summary>
     public void SyncFastFetch() => FastFetch = _settings.FastFetch;
 
@@ -313,7 +313,7 @@ public partial class DownloadViewModel : ObservableObject
 
     /// <summary>
     /// Pre-fill from the Manage page "Update" action and fetch the app's details directly. The appid
-    /// is authoritative here, so resolve it straight away — don't route through search (bare numbers
+    /// is authoritative here, so resolve it straight away. Don't route through search (bare numbers
     /// are now treated as title queries, not appids, so the text path would search instead of resolve).
     /// </summary>
     public void SeedSearch(long appId)
@@ -388,7 +388,7 @@ public partial class DownloadViewModel : ObservableObject
         }
         catch (OperationCanceledException) { /* superseded by newer input */ }
         catch (ApiException ex) { Error = ex.Message; }
-        catch { /* network hiccup during typing — ignore */ }
+        catch { /* network hiccup during typing. Ignore */ }
         finally
         {
             if (_searchCts == cts) IsSearching = false;
@@ -496,7 +496,7 @@ public partial class DownloadViewModel : ObservableObject
                 }
                 DlcInfo = await _api.GetDlcInfoAsync(Details.AppId.ToString(), Details.BaseAppId);
                 DlcDepots.Clear();
-                // Included depots first, then missing — mirrors the website ordering
+                // Included depots first, then missing: mirrors the website ordering
                 foreach (var d in DlcInfo?.Depots.OrderByDescending(d => d.Included) ?? Enumerable.Empty<DlcDepot>())
                     DlcDepots.Add(d);
             }
@@ -504,7 +504,7 @@ public partial class DownloadViewModel : ObservableObject
             {
                 var statuses = await _api.CheckSourcesAsync(Details.AppId.ToString());
 
-                // The manifest backend no longer reports the Hubcap/Morrenus source — synthesize it
+                // The manifest backend no longer reports the Hubcap/Morrenus source. Synthesize it
                 // ourselves from a direct Hubcap status check (or show it locked if no key is set).
                 await AddHubcapSourceAsync(statuses, Details.AppId.ToString());
 
@@ -660,7 +660,7 @@ public partial class DownloadViewModel : ObservableObject
             if (source.NeedsKey) await ApplyHubcapStateAsync(); // refresh the key's X/Y usage badge
             else await RefreshStandardUsageAsync(); // non-Hubcap usage just changed (counts toward 25/day)
 
-            // If a lua for this game is already installed, confirm with a before/after diff first — unless
+            // If a lua for this game is already installed, confirm with a before/after diff first, unless
             // this is a silent install, which has no surfaced window and just overwrites.
             string? existing = _installer.ReadInstalledLua(appId);
             if (!_silentInstall && existing is not null && await ShowOverwriteConfirmAsync(existing, download.FilePath, appId))
@@ -684,7 +684,7 @@ public partial class DownloadViewModel : ObservableObject
         }
     }
 
-    /// <summary>DLC lua: download and install silently (it's just an unlock — no confirm).</summary>
+    /// <summary>DLC lua: download and install silently (it's just an unlock, no confirm).</summary>
     [RelayCommand]
     private async Task GenerateDlcAsync()
     {
@@ -702,7 +702,7 @@ public partial class DownloadViewModel : ObservableObject
 
             var result = _installer.InstallLua(download.FilePath, appId);
             ReportInstall(result);
-            DeleteStaged(download.FilePath); // installed — drop the temp staging copy
+            DeleteStaged(download.FilePath); // installed. Drop the temp staging copy
             await RefreshStandardUsageAsync(); // DLC generate counts toward 25/day
         }
         catch (ApiException ex)
@@ -726,7 +726,7 @@ public partial class DownloadViewModel : ObservableObject
     {
         var oldLua = LuaFileParser.Parse(oldLuaPath, appId);
         var newLua = ExtractLuaFromZip(newZipPath, appId);
-        if (newLua is null) { InstallZipAndReport(newZipPath, appId); return false; } // can't diff — just install
+        if (newLua is null) { InstallZipAndReport(newZipPath, appId); return false; } // can't diff. Just install
 
         var diff = LuaFileParser.Diff(oldLua, newLua);
 
@@ -769,7 +769,7 @@ public partial class DownloadViewModel : ObservableObject
     private void CancelOverwrite()
     {
         IsConfirmingOverwrite = false;
-        if (_pendingInstall is { } p) DeleteStaged(p.zipPath); // not installing — don't leave it in temp
+        if (_pendingInstall is { } p) DeleteStaged(p.zipPath); // not installing. Don't leave it in temp
         _pendingInstall = null;
         InstallStatus = Resources.Strings.Add_Status_Cancelled;
         InstallFailed = false;
@@ -779,12 +779,12 @@ public partial class DownloadViewModel : ObservableObject
     {
         _installedAppId = appId; // remember for the banner's Reveal, even after the search is cleared
         // The download is always saved as "<appid>.zip", but some sources return a BARE .lua (no zip
-        // wrapper) — unzipping that throws "End of Central Directory record could not be found". Sniff
+        // wrapper). Unzipping that throws "End of Central Directory record could not be found". Sniff
         // the bytes instead of trusting the extension: real zips start with "PK\x03\x04".
         ReportInstall(IsZip(zipPath)
             ? _installer.InstallZip(zipPath, appId)
             : _installer.InstallLua(zipPath, appId));
-        DeleteStaged(zipPath); // installed into Steam — the temp staging copy is no longer needed
+        DeleteStaged(zipPath); // installed into Steam. The temp staging copy is no longer needed
     }
 
     /// <summary>Best-effort delete of a staged download after it's been installed, so nothing piles
@@ -949,7 +949,7 @@ public partial class DownloadViewModel : ObservableObject
 
     /// <summary>
     /// Extract an appid from a Steam/SteamDB store URL (…/app/&lt;id&gt;), or from a bare number of 5+
-    /// digits. Short numbers go through normal title search instead — game titles like "007", "500"
+    /// digits. Short numbers go through normal title search instead. Game titles like "007", "500"
     /// or "1942" are numbers too. Tradeoff: very old games with short appids (e.g. 500 = Left 4 Dead)
     /// won't auto-resolve from a bare number and must be searched or pasted as a URL.
     /// </summary>

@@ -28,7 +28,7 @@ public class ImagePathToSourceConverter : IValueConverter
         }
         catch
         {
-            return null; // bad path/URL — show nothing
+            return null; // bad path/URL. Show nothing
         }
     }
 
@@ -99,7 +99,7 @@ public class EqualityMultiConverter : IMultiValueConverter
 /// <summary>Maps a Manage filter/sort option's stored value (an English key like "Recently added" or
 /// "Any") to its localized DISPLAY label, leaving the stored value itself unchanged so all the
 /// switch/equality logic in ManageViewModel keeps working. Unknown values (Steam genres/types/years)
-/// pass through verbatim — they're data, not UI chrome.</summary>
+/// pass through verbatim. They're data, not UI chrome.</summary>
 public class FilterOptionDisplayConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
@@ -116,7 +116,7 @@ public class FilterOptionDisplayConverter : IValueConverter
             "Metacritic" => Resources.Strings.Manage_Sort_Metacritic,
             "Most reviewed" => Resources.Strings.Manage_Sort_MostReviewed,
             "All" => Resources.Strings.Manage_PageSize_All, // page-size dropdown
-            _ => s, // genre/type/year/page-number data — show as-is
+            _ => s, // genre/type/year/page-number data. Show as-is
         } : value;
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>

@@ -12,7 +12,7 @@ public sealed class LaunchMod
     /// one, the app has been updated and the snapshot is re-based rather than trusted.</summary>
     public uint ChangeNumber { get; set; }
 
-    /// <summary>The app's launch entries BEFORE we touched them. A whole snapshot, not a diff — a diff
+    /// <summary>The app's launch entries BEFORE we touched them. A whole snapshot, not a diff. A diff
     /// against a file Steam rewrites at will is worthless.</summary>
     public List<LaunchOption> Original { get; set; } = [];
 
@@ -26,7 +26,7 @@ public sealed class LaunchMod
 /// Persists launch-option edits so they survive Steam rewriting appinfo.vdf.
 ///
 /// <para>
-/// Steam regenerates appinfo from PICS on login, app updates and store browsing — it rewrote the file
+/// Steam regenerates appinfo from PICS on login, app updates and store browsing. It rewrote the file
 /// twice during development. A one-shot edit therefore silently disappears. This mirrors what SteamEdit
 /// does with its mods.dat: keep the desired state plus a pre-edit snapshot in our own file, and
 /// re-apply when the live appinfo no longer matches.
@@ -63,8 +63,8 @@ public class LaunchModStore
         lock (_gate) return _mods.GetValueOrDefault(appId);
     }
 
-    /// <summary>Record an edit. The snapshot is only captured the FIRST time a game is modified —
-    /// re-saving must not overwrite the original with our own previous edit.</summary>
+    /// <summary>Record an edit. The snapshot is only captured the FIRST time a game is modified.
+    /// Re-saving must not overwrite the original with our own previous edit.</summary>
     public void Save(int appId, uint changeNumber, IReadOnlyList<LaunchOption> current,
                      IReadOnlyList<LaunchOption> desired)
     {
@@ -97,7 +97,7 @@ public class LaunchModStore
     }
 
     /// <summary>
-    /// Re-base a stored snapshot when Steam has updated the app since it was taken — SteamEdit's trick.
+    /// Re-base a stored snapshot when Steam has updated the app since it was taken. SteamEdit's trick.
     /// Without this, "restore original" would write back launch entries from a version of the game that
     /// no longer exists.
     /// </summary>
@@ -134,7 +134,7 @@ public class LaunchModStore
         }
     }
 
-    /// <summary>Atomic write (tmp → move) with a .bak, same as SettingsService — a torn file here loses
+    /// <summary>Atomic write (tmp → move) with a .bak, same as SettingsService. A torn file here loses
     /// every recorded edit AND the snapshots needed to undo them.</summary>
     private void Persist()
     {
@@ -159,7 +159,7 @@ public class LaunchModStore
         }
     }
 
-    /// <summary>True when two entry lists differ in any field we manage — used to detect that Steam has
+    /// <summary>True when two entry lists differ in any field we manage. Used to detect that Steam has
     /// overwritten our edits.</summary>
     public static bool Differs(IReadOnlyList<LaunchOption> a, IReadOnlyList<LaunchOption> b)
     {

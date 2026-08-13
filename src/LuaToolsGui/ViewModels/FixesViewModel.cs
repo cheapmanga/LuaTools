@@ -202,7 +202,7 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
         if (SelectedTagId is { } tag) shown = shown.Where(g => g.TagIds.Contains(tag));
         if (q.Length > 0) shown = shown.Where(g => g.Matches(q));
 
-        // Hand the filtered list to the base — it slices the visible page and (via OnPageSliced) warms
+        // Hand the filtered list to the base: it slices the visible page and (via OnPageSliced) warms
         // that page's covers.
         SetFiltered(shown);
     }
@@ -246,8 +246,8 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
             {
                 _allFixes = data.Fixes.Select(f => new FixItemVm(f)).ToList();
 
-                // Build the per-game filter pills from the distinct tags across this game's fixes —
-                // but only when there's more than one (a single tag is no filter).
+                // Build the per-game filter pills from the distinct tags across this game's fixes.
+                // But only when there's more than one (a single tag is no filter).
                 var distinct = _allFixes.SelectMany(f => f.Tags)
                     .GroupBy(t => t.Id).Select(g => g.First())
                     .OrderBy(t => t.Name).ToList();
@@ -258,7 +258,7 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
                 ApplyFixFilter();
             }
         }
-        catch { /* leave empty — flyout shows "no fixes" */ }
+        catch { /* leave empty. Flyout shows "no fixes" */ }
         finally { IsLoadingFixes = false; }
     }
 
@@ -340,7 +340,7 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
         var result = isZip
             ? installer.InstallZip(file.FilePath, appId, forceLocked: true)
             : installer.InstallLuaFile(file.FilePath, appId, forceLocked: true);
-        DeleteStaged(file.FilePath); // consumed by the install — drop the temp staging copy
+        DeleteStaged(file.FilePath); // consumed by the install. Drop the temp staging copy
 
         if (result.AnyFailed)
         {
@@ -356,7 +356,7 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
             : string.Format(Resources.Strings.Fixes_Toast_FixInstalled_Restart, gameName));
     }
 
-    /// <summary>Fix slot: only applicable if the game is installed — extract the zip into its folder.</summary>
+    /// <summary>Fix slot: only applicable if the game is installed. Extract the zip into its folder.</summary>
     private void ApplyFix(DownloadedFile file, long appId, string gameName)
     {
         string? installDir = library.GetInstallDir(appId);
@@ -395,7 +395,7 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
         }
         finally
         {
-            DeleteStaged(file.FilePath); // archive is disposed by now — drop the temp staging copy
+            DeleteStaged(file.FilePath); // archive is disposed by now. Drop the temp staging copy
         }
     }
 

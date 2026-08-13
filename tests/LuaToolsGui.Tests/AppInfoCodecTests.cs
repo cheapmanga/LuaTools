@@ -7,8 +7,8 @@ using Xunit;
 namespace LuaToolsGui.Tests;
 
 /// <summary>
-/// Tests for the appinfo.vdf codec, built around the three things that corrupt the file SILENTLY —
-/// each one was a real bug in the Python prototype this was ported from:
+/// Tests for the appinfo.vdf codec, built around the three things that corrupt the file SILENTLY.
+/// Each one was a real bug in the Python prototype this was ported from:
 /// <list type="number">
 /// <item>duplicate keys in one object (15 of 176,869 real apps) collapsing if a dictionary is used;</item>
 /// <item>non-UTF-8 strings inflating when decoded with replacement;</item>
@@ -35,7 +35,7 @@ public class AppInfoCodecTests : IDisposable
     private string WriteSampleFile()
     {
         // TRAP 2b: the STRING TABLE itself carries entries that aren't valid UTF-8. Decoding those for
-        // lookup and re-encoding on write inflates each bad byte to a 3-byte U+FFFD — which made a
+        // lookup and re-encoding on write inflates each bad byte to a 3-byte U+FFFD, which made a
         // no-edit rebuild of the real file come out 12 bytes long. The raw bytes must be written back.
         byte[][] strings =
         [
@@ -152,7 +152,7 @@ public class AppInfoCodecTests : IDisposable
     }
 
     /// <summary>Decoding with replacement turns each bad byte into U+FFFD, which re-encodes to three
-    /// bytes — the blob silently changes length. Raw bytes must survive an edit elsewhere.</summary>
+    /// bytes. The blob silently changes length. Raw bytes must survive an edit elsewhere.</summary>
     [Fact]
     public void NonUtf8String_SurvivesAnEditToAnotherField()
     {
@@ -251,7 +251,7 @@ public class AppInfoCodecTests : IDisposable
         Assert.Equal("windows", after[1].OsList);
     }
 
-    /// <summary>Unused optionals are omitted, matching Steam — `executable` is the only field present in
+    /// <summary>Unused optionals are omitted, matching Steam. `executable` is the only field present in
     /// 100% of real entries, and writing empty keys diverges from every one of them.</summary>
     [Fact]
     public void EmptyOptionalFields_AreOmittedNotWrittenBlank()
@@ -284,7 +284,7 @@ public class AppInfoCodecTests : IDisposable
 
     /// <summary>
     /// Reordering renumbers the keys, because Steam's running order comes from the key rather than from
-    /// file position. The unmodelled keys must follow their OWN entry across the renumber — matching the
+    /// file position. The unmodelled keys must follow their OWN entry across the renumber. Matching the
     /// old table by the new index instead of the source index would graft entry 0's extras onto entry 1.
     /// </summary>
     [Fact]
@@ -316,7 +316,7 @@ public class AppInfoCodecTests : IDisposable
         Assert.Equal("a.dat", written.GetTable("1")!.GetText("vacmodulefilename"));
     }
 
-    /// <summary>Gaps are normal — 1,892 real apps have non-contiguous launch indices — so a new entry
+    /// <summary>Gaps are normal (1,892 real apps have non-contiguous launch indices), so a new entry
     /// appends past the highest rather than filling holes or renumbering.</summary>
     [Fact]
     public void NextIndex_AppendsPastTheHighestAndIgnoresGaps()

@@ -9,9 +9,9 @@ using LuaToolsGui.Models;
 namespace LuaToolsGui.Services;
 
 /// <summary>
-/// Talks to Hubcap (hubcapmanifest.com) DIRECTLY with the user's own API key — no lua.tools proxy.
+/// Talks to Hubcap (hubcapmanifest.com) DIRECTLY with the user's own API key, no lua.tools proxy.
 /// Stats and manifest downloads authenticate via <c>?api_key={key}</c>; the free status check uses a
-/// <c>Bearer</c> header (per the Hubcap API). Stats/status calls never throw — they return null on any
+/// <c>Bearer</c> header (per the Hubcap API). Stats/status calls never throw. They return null on any
 /// failure so the UI degrades gracefully; only the explicit download surfaces errors to the caller.
 /// </summary>
 public partial class HubcapService
@@ -33,10 +33,10 @@ public partial class HubcapService
     [GeneratedRegex("^smm_[0-9a-f]{96}$")]
     private static partial Regex KeyFormatRegex();
 
-    /// <summary>Local format check — Hubcap keys are "smm_" followed by 96 lowercase hex chars.</summary>
+    /// <summary>Local format check. Hubcap keys are "smm_" followed by 96 lowercase hex chars.</summary>
     public static bool IsValidKeyFormat(string? key) => key is not null && KeyFormatRegex().IsMatch(key);
 
-    /// <summary>Usage stats for a key. Null on any network/auth failure — never throws.</summary>
+    /// <summary>Usage stats for a key. Null on any network/auth failure, never throws.</summary>
     public async Task<HubcapStats?> GetStatsAsync(string key, CancellationToken ct = default)
     {
         try
@@ -73,10 +73,10 @@ public partial class HubcapService
         {
             string message = res.StatusCode switch
             {
-                HttpStatusCode.Unauthorized => "Your Hubcap key is invalid or expired.",
-                HttpStatusCode.TooManyRequests => "Your Hubcap daily limit has been reached.",
-                HttpStatusCode.NotFound => "No Hubcap manifest is available for this app.",
-                _ => $"Hubcap download failed ({(int)res.StatusCode}).",
+                HttpStatusCode.Unauthorized => Resources.Strings.Hubcap_Err_InvalidKey,
+                HttpStatusCode.TooManyRequests => Resources.Strings.Hubcap_Err_LimitReached,
+                HttpStatusCode.NotFound => Resources.Strings.Hubcap_Err_NoManifest,
+                _ => string.Format(Resources.Strings.Hubcap_Err_DownloadFailed, (int)res.StatusCode),
             };
             throw new ApiException(message, res.StatusCode);
         }

@@ -5,7 +5,7 @@ using Xunit;
 namespace LuaToolsGui.Tests;
 
 /// <summary>
-/// Tests for <see cref="LuaEditor"/> — the per-depot Lock/On switches on the Builds page. These rewrite
+/// Tests for <see cref="LuaEditor"/>. The per-depot Lock/On switches on the Builds page. These rewrite
 /// the file Steam loads, so a sloppy match is how you'd silently disable the wrong depot (or the base
 /// app, breaking the whole lua).
 /// </summary>
@@ -50,7 +50,7 @@ public class LuaEditorTests
         Assert.Equal(Lua, LuaEditor.SetDepotLocked(Lua, 228985, locked: false));
     }
 
-    /// <summary>Round-tripping must return the exact original text — otherwise the content hash drifts and
+    /// <summary>Round-tripping must return the exact original text. Otherwise the content hash drifts and
     /// a variant stops matching itself.</summary>
     [Fact]
     public void Lock_RoundTripsExactly()
@@ -67,7 +67,7 @@ public class LuaEditorTests
         string result = LuaEditor.SetDepotEnabled(Lua, 228983, enabled: false);
 
         Assert.Contains("--addappid(228983,0,\"aabb\")", result);
-        // Only that depot — the others keep their keys.
+        // Only that depot: the others keep their keys.
         Assert.Contains("\naddappid(228985,0,\"ccdd\")", result.Replace("\r\n", "\n"));
         Assert.StartsWith("addappid(386940, 1, \"basekey\")", result);
     }
@@ -99,7 +99,7 @@ public class LuaEditorTests
         Assert.Contains("\naddappid(386940)", "\n" + result.Replace("\r\n", "\n"));
     }
 
-    /// <summary>Ids are matched exactly — 228983 must never catch 2289830 or 22898.</summary>
+    /// <summary>Ids are matched exactly. 228983 must never catch 2289830 or 22898.</summary>
     [Fact]
     public void Toggles_DoNotMatchIdsBySubstring()
     {
@@ -127,7 +127,7 @@ public class LuaEditorTests
         Assert.Equal(indented, LuaEditor.SetDepotEnabled(off, 228983, enabled: true));
     }
 
-    /// <summary>CRLF files must not be silently rewritten to LF — that alone would change every hash.</summary>
+    /// <summary>CRLF files must not be silently rewritten to LF. That alone would change every hash.</summary>
     [Fact]
     public void Toggles_PreserveCrlfLineEndings()
     {
@@ -183,7 +183,7 @@ public class LuaEditorTests
 
     /// <summary>
     /// A depot the user switched off must still be reported (as disabled), or its row would drop out of
-    /// "In lua" on the Builds page and take the switch with it — leaving no way to switch it back on.
+    /// "In lua" on the Builds page and take the switch with it. Leaving no way to switch it back on.
     /// </summary>
     [Fact]
     public void Parser_ReportsDisabledDepotsSeparatelyFromActiveOnes()

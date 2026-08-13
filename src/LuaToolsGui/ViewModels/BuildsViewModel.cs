@@ -22,11 +22,11 @@ public record DepotRow(
 
     /// <summary>
     /// The lock switch needs a setManifestid line to comment in/out. Without one there's nothing to
-    /// toggle — we'd have to invent a manifest id, which is not something to guess at.
+    /// toggle. We'd have to invent a manifest id, which is not something to guess at.
     /// </summary>
     public bool CanLock => CanToggle && (ManifestId is not null || CommentedManifestId is not null);
 
-    /// <summary>The enable switch is offered for anything the lua declares, except the base app — turning
+    /// <summary>The enable switch is offered for anything the lua declares, except the base app. Turning
     /// THAT off doesn't disable a depot, it breaks the whole file.</summary>
     public bool CanEnable => CanToggle && !IsBaseApp;
 
@@ -72,8 +72,8 @@ public record DepotRow(
     /// <summary>Greyed out when the pin exists but isn't in force (commented out).</summary>
     public bool IsPinActive => ManifestId is not null;
 
-    /// <summary>Shown only when this lua is pinned to something OTHER than what Steam ships now —
-    /// that's the whole point of picking an older build, so it's worth calling out.</summary>
+    /// <summary>Shown only when this lua is pinned to something OTHER than what Steam ships now.
+    /// That's the whole point of picking an older build, so it's worth calling out.</summary>
     public string? OutdatedLabel =>
         ManifestId is not null && PublicManifestId is not null && ManifestId != PublicManifestId
             ? string.Format(Resources.Strings.Builds_ManifestLatest, PublicManifestId)
@@ -83,7 +83,7 @@ public record DepotRow(
 }
 
 /// <summary>
-/// One row in the build switcher — always a stored <see cref="LuaVariant"/>. There is no "unsaved
+/// One row in the build switcher, always a stored <see cref="LuaVariant"/>. There is no "unsaved
 /// changes" row any more: live bytes matching no saved build or preset ARE the Default, captured by
 /// <see cref="LuaVault.SyncDefaultFromLive"/> before this list is built.
 /// </summary>
@@ -94,14 +94,14 @@ public partial class VariantRowViewModel : ObservableObject
     public string Hash => Variant.Hash;
     public string? BuildId => Variant.BuildId;
 
-    /// <summary>True when this row is what Steam is using right now — including when the live lua is
+    /// <summary>True when this row is what Steam is using right now, including when the live lua is
     /// this variant plus an unsaved edit (see <see cref="HasPendingEdit"/>).</summary>
     [ObservableProperty] private bool _isActive;
 
     /// <summary>
     /// True when the live lua is this variant with changes that haven't been saved back to it. Without
     /// surfacing this, a build mid-edit is indistinguishable from a saved one and switching away
-    /// discards the work silently — the header's "Save to &lt;build&gt;" button being the only hint.
+    /// discards the work silently. The header's "Save to &lt;build&gt;" button being the only hint.
     /// </summary>
     public bool HasPendingEdit { get; init; }
 
@@ -131,7 +131,7 @@ public partial class VariantRowViewModel : ObservableObject
 /// Pick a game on the left, switch which stored lua is live on the right.
 ///
 /// <para>
-/// <b>Named "Depots" in the UI</b>, and its stored luas are "presets" there — the type names here
+/// <b>Named "Depots" in the UI</b>, and its stored luas are "presets" there. The type names here
 /// (Builds*, <see cref="LuaVariantKind.Build"/>, <c>Builds_*</c> resource keys) predate that and were
 /// deliberately left alone: the codebase already has <see cref="SteamDepotInfo"/> and
 /// <see cref="DepotRow"/> for actual Steam depots, so a DepotsViewModel beside them would be worse than
@@ -185,8 +185,8 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         // dropdown blank. Snap it to the default and persist, rather than showing an empty box.
         if (!PageSizeOptions.Contains(SelectedPageSize)) SelectedPageSize = "10";
 
-        // Any install (Add page, drag-drop, plugin) captures into the vault on a background thread —
-        // refresh so a new build shows up without the user leaving the page.
+        // Any install (Add page, drag-drop, plugin) captures into the vault on a background thread.
+        // Refresh so a new build shows up without the user leaving the page.
         _vault.VaultChanged += appId => OnUi(() =>
         {
             if (ActiveGame?.AppId == appId) RefreshVariants();
@@ -194,8 +194,8 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     // Paging (Items/PageSize/CurrentPage/PrevPage/NextPage/…), IsLoading, EmptyMessage and IsEmpty are
-    // inherited from PagedListViewModel<LuaTileViewModel>. The Builds pager renders only prev/label/next
-    // — PageNumbers exists on the base but is deliberately not bound.
+    // inherited from PagedListViewModel<LuaTileViewModel>. The Builds pager renders only prev/label/next.
+    // PageNumbers exists on the base but is deliberately not bound.
     protected override void SavePageSizeSetting(int size) => _settings.BuildsPageSize = size;
 
     // ── Game list (left) ────────────────────────────────────────────
@@ -204,7 +204,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     partial void OnSearchTextChanged(string value) => ApplyGameFilter();
 
     /// <summary>
-    /// The row highlighted in the list. This goes NULL on every page change — the base hands `Items` a
+    /// The row highlighted in the list. This goes NULL on every page change. The base hands `Items` a
     /// brand-new collection, and the ListBox pushes null back through the binding when the selected item
     /// isn't in it. So it can't be what the right-hand panel reads; see <see cref="ActiveGame"/>.
     /// </summary>
@@ -223,7 +223,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     partial void OnSelectedGameChanged(LuaTileViewModel? value)
     {
-        if (value is null) return; // a page change, not a deselection — keep showing the current game
+        if (value is null) return; // a page change, not a deselection. Keep showing the current game
         ActiveGame = value;
     }
 
@@ -277,9 +277,9 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
             var games = await Task.Run(() =>
             {
                 // Three sources, because a game can be manageable here without Steam currently loading it:
-                //   1. installed  — a live <appid>.lua Steam reads
-                //   2. loose      — <appid>_<buildid>.lua sitting in stplug-in, inert until applied
-                //   3. vaulted    — stored builds whose live lua has since been deleted
+                //   1. installed: a live <appid>.lua Steam reads
+                //   2. loose: <appid>_<buildid>.lua sitting in stplug-in, inert until applied
+                //   3. vaulted: stored builds whose live lua has since been deleted
                 var installed = LuaInstaller.EnumerateInstalled(dir).ToDictionary(f => f.AppId, f => f.Path);
                 var appIds = new HashSet<long>(installed.Keys);
                 foreach (var (appId, _, _) in _vault.EnumerateLooseBuildLuas()) appIds.Add(appId);
@@ -317,7 +317,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         }
     }
 
-    /// <summary>Filtering only — badges are computed by <see cref="RefreshBadgesAsync"/>, not here. This
+    /// <summary>Filtering only. Badges are computed by <see cref="RefreshBadgesAsync"/>, not here. This
     /// runs on every search keystroke, and badging hashes files off disk. Search spans the WHOLE library,
     /// not just the visible page; the base re-slices and resets to page 1.</summary>
     private void ApplyGameFilter()
@@ -327,7 +327,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     /// <summary>Recompute every game's "currently running" badge off the UI thread (one file hash + index
-    /// read per vaulted game — fine once per load, far too slow per keystroke).</summary>
+    /// read per vaulted game. Fine once per load, far too slow per keystroke).</summary>
     private async Task RefreshBadgesAsync()
     {
         var games = _allGames.ToList();
@@ -337,7 +337,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     /// <summary>
-    /// The label shown next to a game in the list — what it's currently running. A game with nothing
+    /// The label shown next to a game in the list: what it's currently running. A game with nothing
     /// captured yet is untracked, not mislabelled, so it gets no badge; the same goes for a live hash the
     /// vault hasn't seen, which only happens before this game's first
     /// <see cref="LuaVault.SyncDefaultFromLive"/> and resolves to "Default" the moment it runs.
@@ -380,10 +380,10 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         SelectedGame = Items.FirstOrDefault(g => g.AppId == appId);    // highlights the row
     }
 
-    /// <summary>Called by the view as a game row scrolls into view — resolves its cover (cached after).</summary>
+    /// <summary>Called by the view as a game row scrolls into view. Resolves its cover (cached after).</summary>
     public void ResolveGame(LuaTileViewModel game) => _ = game.EnsureResolvedAsync(_appInfo, _covers);
 
-    /// <summary>Set by App — the reverse of Manage's "Manage Build": open this game on the Manage page.</summary>
+    /// <summary>Set by App. The reverse of Manage's "Manage Build": open this game on the Manage page.</summary>
     public Action<long>? NavigateToManage { get; set; }
 
     [RelayCommand]
@@ -393,7 +393,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     /// <summary>
-    /// Reload the page. Drops the selected game's cached depot info first — that's a session-long memory
+    /// Reload the page. Drops the selected game's cached depot info first. That's a session-long memory
     /// cache, so without this Refresh rebuilt the list and re-read the vault but still showed the "latest
     /// build on Steam" figures fetched the first time the game was opened. Only the selected game's data
     /// is on screen, so there's nothing to gain from clearing the rest.
@@ -409,7 +409,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     public ObservableCollection<VariantRowViewModel> Variants { get; } = [];
 
-    /// <summary>The row the user has highlighted. Selecting only STAGES a switch — Apply performs it, so
+    /// <summary>The row the user has highlighted. Selecting only STAGES a switch. Apply performs it, so
     /// a stray click can't silently swap which version of a game Steam downloads.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanApply))]
@@ -418,7 +418,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     private VariantRowViewModel? _selectedVariant;
 
     /// <summary>Set while a depot switch rebuilds the variant list, so the reselection it causes doesn't
-    /// fire its own (spinner-showing) depot reload — the caller does one quiet reload instead.</summary>
+    /// fire its own (spinner-showing) depot reload. The caller does one quiet reload instead.</summary>
     private bool _suppressDepotReload;
 
     partial void OnSelectedVariantChanged(VariantRowViewModel? value)
@@ -429,7 +429,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     }
 
     /// <summary>
-    /// True when the selected row IS the live lua — including when the live file is that preset plus
+    /// True when the selected row IS the live lua, including when the live file is that preset plus
     /// unsaved changes (<see cref="ResolveActiveHash"/> keeps such a row active).
     ///
     /// <para>
@@ -437,7 +437,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <see cref="EditLive"/> both have to answer "is the thing on screen the live file?", and when they
     /// disagreed the table described a preset's pre-edit bytes while edits went to the live file: a depot
     /// toggle wrote, the table reloaded from the stored copy, the switch sprang back, and the next click
-    /// asked for the state it already thought it had — which <c>EditLive</c> then discarded as a no-op.
+    /// asked for the state it already thought it had, which <c>EditLive</c> then discarded as a no-op.
     /// Two clicks, one write, no error.
     /// </para>
     /// </summary>
@@ -451,7 +451,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     /// <summary>
     /// Re-entrancy guard. The capture calls below raise <see cref="LuaVault.VaultChanged"/>, whose handler
-    /// calls straight back into here — the inner pass would fill the list, then the outer pass would
+    /// calls straight back into here. The inner pass would fill the list, then the outer pass would
     /// resume past its own Clear() and append everything a second time (every build listed twice).
     /// </summary>
     private bool _refreshingVariants;
@@ -473,27 +473,27 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         if (ActiveGame is not { } game) return;
 
         // Point the single Default slot at the live lua before showing anything, so a lua that matches no
-        // saved build — a fresh install, a hand edit, another tool — is listed as the Default rather than
+        // saved build (a fresh install, a hand edit, another tool) is listed as the Default rather than
         // going unrepresented.
         _vault.SyncDefaultFromLive(game.AppId);
-        // Pick up any <appid>_<buildid>.lua the user already dropped in stplug-in — Steam ignores those
+        // Pick up any <appid>_<buildid>.lua the user already dropped in stplug-in. Steam ignores those
         // files, so without this they'd sit there looking installed while doing nothing.
         _vault.AdoptLooseBuildLuas(game.AppId);
 
-        // A dropped-in build lua is inert until it's the <appid>.lua Steam reads — see the method's docs
+        // A dropped-in build lua is inert until it's the <appid>.lua Steam reads. See the method's docs
         // for why this only fires when the game has nothing live at all.
         _vault.ApplyBuildIfNothingLive(game.AppId);
 
         string? liveHash = _vault.GetActiveHash(game.AppId);
         var stored = _vault.GetVariants(game.AppId);
 
-        // Mid-edit the live bytes match nothing stored — they're a divergence FROM a variant, and that
+        // Mid-edit the live bytes match nothing stored. They're a divergence FROM a variant, and that
         // variant is what the user is looking at. Resolve it so the row stays active and selected.
         string? editBase = _vault.GetEditBase(game.AppId);
         string? activeHash = ResolveActiveHash(liveHash, stored, editBase);
         string? pendingHash = activeHash != liveHash ? activeHash : null;
 
-        // Live matches a stored variant exactly, so nothing is pending — drop any edit base still on
+        // Live matches a stored variant exactly, so nothing is pending. Drop any edit base still on
         // record. Only Apply/SaveText/UpdateVariant clear it otherwise, so undoing an edit by hand (toggle
         // a depot off, then on) left the header offering "Save to <preset>" with nothing left to save.
         if (pendingHash is null && editBase is not null) _vault.SetEditBase(game.AppId, null);
@@ -523,10 +523,10 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// Usually just "the one whose bytes match the live lua". The case worth naming is an edit in
     /// progress: writing to the live file makes it match NOTHING (the variant it came from still holds
     /// its pre-edit bytes under its old content hash), so the answer has to be the variant it diverged
-    /// FROM — recorded as the edit base. Returning null there instead meant no row was active, the
+    /// FROM: recorded as the edit base. Returning null there instead meant no row was active, the
     /// selection fell through to whatever sorted first (the Default, which
     /// <see cref="LuaVault.SyncDefaultFromLive"/> re-captures so it usually is), and the user was moved
-    /// off the build they were editing mid-edit — taking the next depot toggle with them, into the
+    /// off the build they were editing mid-edit. Taking the next depot toggle with them, into the
     /// Default's stored copy.
     /// </para>
     ///
@@ -538,7 +538,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         if (liveHash is null) return null;                              // nothing installed
         if (stored.Any(v => v.Hash == liveHash)) return liveHash;       // ordinary case
 
-        // Diverged. Fall back to the live hash when there's no usable base — no row matches, which is
+        // Diverged. Fall back to the live hash when there's no usable base, no row matches, which is
         // the honest answer, and it must not throw. After a SyncDefaultFromLive this shouldn't arise.
         return editBase is not null && stored.Any(v => v.Hash == editBase) ? editBase : liveHash;
     }
@@ -588,7 +588,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         IsRenaming = true;
     }
 
-    /// <summary>Save the new name. Only sets the label — the build id and file are untouched, so a
+    /// <summary>Save the new name. Only sets the label. The build id and file are untouched, so a
     /// renamed build still knows which build it is.</summary>
     [RelayCommand]
     private void CommitRename()
@@ -607,7 +607,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     [ObservableProperty] private bool _isEditing;
     [ObservableProperty] private string _editorText = "";
 
-    /// <summary>Edit the LIVE lua (what Steam actually reads), not the selected variant — editing a
+    /// <summary>Edit the LIVE lua (what Steam actually reads), not the selected variant. Editing a
     /// stored copy the user isn't running would be a confusing no-op.</summary>
     [RelayCommand]
     private void Edit()
@@ -624,7 +624,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         EditorText = "";
     }
 
-    /// <summary>Write the editor's text to stplug-in and store it — updating the build it came from
+    /// <summary>Write the editor's text to stplug-in and store it. Updating the build it came from
     /// when there is one, else letting the Default slot pick the new bytes up (see
     /// <see cref="SaveInPlace"/>).</summary>
     [RelayCommand]
@@ -646,7 +646,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     /// <summary>
     /// Put the live lua back into the variant it was edited from, keeping that variant's name and build
-    /// id. With no base — the edit started from the Default — there is nothing to save: the Default
+    /// id. With no base (the edit started from the Default) there is nothing to save: the Default
     /// tracks the live lua, so syncing the slot IS the save. "Save as preset" stays available as its own
     /// button for when the user wants to keep a named copy.
     /// </summary>
@@ -658,7 +658,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         string? baseHash = _vault.GetEditBase(game.AppId);
         if (baseHash is null) { _vault.SyncDefaultFromLive(game.AppId); return; }
 
-        // Saving doesn't change a single byte of the live lua — it just gives it a home — so the depot
+        // Saving doesn't change a single byte of the live lua (it just gives it a home), so the depot
         // table is already correct. UpdateVariant raises VaultChanged, so suppress across it too.
         LuaVariant? updated;
         _suppressDepotReload = true;
@@ -673,7 +673,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         }
         finally { _suppressDepotReload = false; }
 
-        if (updated is null) { SaveAsPreset(); return; } // base vanished — don't lose the edit
+        if (updated is null) { SaveAsPreset(); return; } // base vanished. Don't lose the edit
 
         _ = LoadDepotsAsync(quiet: true);
         _toast.Show(Resources.Strings.Builds_Title,
@@ -688,7 +688,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     public bool HasEditBase => EditBaseVariant is not null;
 
-    /// <summary>e.g. Save to “Build 24410208” — names the target so an overwrite is never a surprise.</summary>
+    /// <summary>e.g. Save to “Build 24410208”. Names the target so an overwrite is never a surprise.</summary>
     public string SaveInPlaceLabel => EditBaseVariant is { } v
         ? string.Format(Resources.Strings.Builds_Action_SaveTo, v.DisplayLabel)
         : Resources.Strings.Builds_Action_SaveAsPreset;
@@ -721,12 +721,12 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     [ObservableProperty] private string? _depotError;
 
     /// <summary>True while inspecting a build that ISN'T the one Steam is running. The switches still
-    /// work — they edit that build in place — but the change lands differently (saved immediately, Steam
+    /// work (they edit that build in place), but the change lands differently (saved immediately, Steam
     /// unaffected until Apply), so it's worth saying so.</summary>
     [ObservableProperty] private bool _editingInactiveBuild;
 
-    // Unfiltered rows as BuildRows produced them. The public lists below are the SEARCHED view of these
-    // — filtering must never re-run BuildRows, which re-parses the lua and re-reads steamcmd.
+    // Unfiltered rows as BuildRows produced them. The public lists below are the SEARCHED view of these.
+    // Filtering must never re-run BuildRows, which re-parses the lua and re-reads steamcmd.
     private IReadOnlyList<DepotRow> _allInLua = [];
     private IReadOnlyList<DepotRow> _allMissing = [];
     private IReadOnlyList<DepotRow> _allUnknown = [];
@@ -744,7 +744,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         OnPropertyChanged(nameof(HasNoDepotMatches));
     }
 
-    /// <summary>True when a search is active and matched nothing anywhere — drives a "no matches" line so
+    /// <summary>True when a search is active and matched nothing anywhere. Drives a "no matches" line so
     /// a filtered-to-empty table doesn't just look broken.</summary>
     public bool HasNoDepotMatches =>
         !string.IsNullOrWhiteSpace(DepotSearchText) && !IsLoadingDepots
@@ -797,14 +797,14 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     [RelayCommand]
     private static void OpenSteamDb(DepotRow row) => SteamService.OpenUrl(row.SteamDbUrl);
 
-    /// <summary>Pin/unpin one depot — comments its setManifestid line in or out.</summary>
+    /// <summary>Pin/unpin one depot. Comments its setManifestid line in or out.</summary>
     [RelayCommand]
     private void ToggleLock(DepotRow row)
     {
         if (row.CanLock) EditLive(row, text => LuaEditor.SetDepotLocked(text, row.ToggleId, !row.IsLocked));
     }
 
-    /// <summary>Switch one depot on/off — comments its addappid (decryption key) line in or out.</summary>
+    /// <summary>Switch one depot on/off. Comments its addappid (decryption key) line in or out.</summary>
     [RelayCommand]
     private void ToggleEnabled(DepotRow row)
     {
@@ -818,25 +818,25 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// Two routes, because there are two different things on screen:
     /// </para>
     /// <list type="bullet">
-    /// <item><b>The live lua</b> (the row Steam is running) — write the file Steam reads. If that row is
+    /// <item><b>The live lua</b> (the row Steam is running). Write the file Steam reads. If that row is
     /// the Default, the edit lands in the Default slot immediately: <see cref="RememberEditBase"/> skips
     /// the Default, so no edit base is parked, and the <see cref="LuaVault.SyncDefaultFromLive"/> inside
     /// the refresh below adopts the new bytes. If it's a BUILD or preset, an edit base IS parked, the
     /// header's "Save to &lt;name&gt;" appears, and that row stays selected and badged ACTIVE with an
-    /// "unsaved" marker — see <see cref="ResolveActiveHash"/>, which exists because the row silently
+    /// "unsaved" marker: see <see cref="ResolveActiveHash"/>, which exists because the row silently
     /// losing its ACTIVE state here is what used to dump the user back on the Default mid-edit.</item>
-    /// <item><b>A build that isn't applied</b> — write straight into that stored variant, keeping its
+    /// <item><b>A build that isn't applied</b>. Write straight into that stored variant, keeping its
     /// name and build id. There's no live file to park a pending edit in (the live lua is a *different*
     /// variant), so this saves immediately; Steam is untouched until the user hits Apply.</item>
     /// </list>
     ///
     /// <para>
-    /// Editing must never be routed to the live file while a non-live variant is displayed — the table
+    /// Editing must never be routed to the live file while a non-live variant is displayed. The table
     /// on screen and the file being changed would be two different luas.
     /// </para>
     ///
     /// <para>
-    /// <b>Two deliberate omissions, both reviewed — they look like oversights and aren't:</b>
+    /// <b>Two deliberate omissions, both reviewed. They look like oversights and aren't:</b>
     /// </para>
     /// <list type="bullet">
     /// <item><b>No Save step, and no undo, for a toggle on the Default.</b> The Default is the working
@@ -860,10 +860,10 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         if (string.IsNullOrEmpty(before)) return;
 
         string after = edit(before);
-        if (after == before) return; // already in that state — don't churn the file or the UI
+        if (after == before) return; // already in that state. Don't churn the file or the UI
 
         // Suppress from BEFORE the write: both write paths raise VaultChanged, whose handler refreshes
-        // the variants and reselects — which would fire its own spinner-showing reload before we got to
+        // the variants and reselects, which would fire its own spinner-showing reload before we got to
         // guard it. Only the redundant depot reloads are held off; one quiet pass runs at the end.
         bool ok;
         string? newHash = null;
@@ -902,11 +902,11 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>
     /// Record which variant the live lua is about to diverge FROM, so Save can put the edit back where it
     /// came from. Must run BEFORE the write: afterwards the bytes match nothing and the origin is lost.
-    /// A no-op once already diverged — the base is the variant the run of edits started at, not the last
+    /// A no-op once already diverged: the base is the variant the run of edits started at, not the last
     /// one touched.
     ///
     /// <para>
-    /// The DEFAULT is deliberately never a base. It isn't a saved thing you write back to — it's the
+    /// The DEFAULT is deliberately never a base. It isn't a saved thing you write back to. It's the
     /// working copy, and it follows the live lua on its own (<see cref="LuaVault.SyncDefaultFromLive"/>).
     /// Setting it as a base would both offer a pointless "Save to Default" button and, worse, park an
     /// EditBaseHash that makes the sync skip its own slot.
@@ -925,7 +925,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// </summary>
     /// <param name="quiet">
     /// True when re-reading after a depot switch. The rows are already on screen and every input is
-    /// cached in memory — blanking the table and showing "Loading depot info…" because a checkbox
+    /// cached in memory. Blanking the table and showing "Loading depot info…" because a checkbox
     /// changed just makes the list flash. Leaves the current rows visible and swaps them at the end.
     /// </param>
     private async Task LoadDepotsAsync(bool quiet = false)
@@ -933,7 +933,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         long token = ++_depotLoadToken;
         if (ActiveGame is not { } game)
         {
-            // Clear the unfiltered rows too — leaving them would let a later filter pass resurrect the
+            // Clear the unfiltered rows too: leaving them would let a later filter pass resurrect the
             // previous game's depots.
             _allInLua = []; _allMissing = []; _allUnknown = [];
             InLua = []; Missing = []; Unknown = []; DepotError = null; IsLoadingDepots = false;
@@ -956,7 +956,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         bool editingLive = SelectionDescribesLive;
         EditingInactiveBuild = !editingLive;
 
-        // Read from wherever the edits GO. For a preset that isn't applied that's its stored copy — the
+        // Read from wherever the edits GO. For a preset that isn't applied that's its stored copy. The
         // point of the switcher, inspecting one before committing to it. For the live row it must be the
         // live file: mid-edit the stored copy is the PRE-edit bytes, and describing those put the switches
         // back the way they were before the user touched them (see SelectionDescribesLive).
@@ -1003,7 +1003,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>
     /// Every id the lua declares, active or switched off, keyed by id. Disabled entries have to be
     /// included or a depot the user just switched off would drop out of "In lua" and take its switch
-    /// with it — the row has to stay put so it can be switched back on.
+    /// with it. The row has to stay put so it can be switched back on.
     /// </summary>
     private static Dictionary<long, LuaEntry> Declarations(LuaContents? lua)
     {
@@ -1030,7 +1030,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
     /// <summary>
     /// Split depots three ways: In-lua (declared), Missing (real depots the lua lacks), and Unknown
-    /// (noise — unnamed DLC, 0-byte/broken depots, shared redists). DLC named from the caches.
+    /// (noise. Unnamed DLC, 0-byte/broken depots, shared redists). DLC named from the caches.
     /// </summary>
     private void BuildRows(AppDepotInfo info, LuaContents? lua)
     {
@@ -1071,7 +1071,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                 : $"https://steamdb.info/depot/{d.Id}/";
 
             // The switches act on the id the lua actually DECLARES. For a DLC that's the DLC app id, not
-            // the depot id — toggling the depot id would rewrite a line that doesn't exist.
+            // the depot id. Toggling the depot id would rewrite a line that doesn't exist.
             long declId = declared.ContainsKey(d.Id) ? d.Id : d.DlcAppId ?? d.Id;
             declared.TryGetValue(declId, out var entry);
             bool inLua = entry is not null;
@@ -1086,7 +1086,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         }
 
         // In lua = the lua declares this id (a keyed depot OR a keyless DLC entitlement) or its DLC app
-        // id — including declarations the user has switched off, so they can switch them back on.
+        // id, including declarations the user has switched off, so they can switch them back on.
         bool IsInLua(ContentDepot d) => declared.ContainsKey(d.Id) || (d.DlcAppId is { } a && declared.ContainsKey(a));
 
         // Unknown = noise to tuck away: shared redists, unnamed DLC, or 0-byte/broken depots.

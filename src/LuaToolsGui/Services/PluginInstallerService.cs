@@ -20,12 +20,12 @@ public sealed record PluginStatus(
     bool UpdateAvailable,
     bool MillenniumPresent,
     bool Offline,          // couldn't reach GitHub
-    bool Port8080Busy);    // something other than Steam's own CDP server is listening on CDP's fixed port — warn only, see IsPort8080BusyAsync
+    bool Port8080Busy);    // something other than Steam's own CDP server is listening on CDP's fixed port. Warn only, see IsPort8080BusyAsync
 
 /// <summary>
 /// Installs / updates / removes the LuaTools store-page plugin from GitHub releases (the app is the plugin
-/// MANAGER — it doesn't bundle the frontend). Each release of <c>madoiscool/LTSP</c> carries
-/// <c>plugin.zip</c> (the frontend, extracted to %AppData%\LuaToolsGui\plugin — where CefInjectorService
+/// MANAGER: it doesn't bundle the frontend). Each release of <c>madoiscool/LTSP</c> carries
+/// <c>plugin.zip</c> (the frontend, extracted to %AppData%\LuaToolsGui\plugin, where CefInjectorService
 /// reads it) plus one loader DLL per <see cref="Slots"/> entry, dropped into the Steam install root
 /// (steam.exe loads it). Modeled on <see cref="UnlockerService"/>: fetch release JSON, download assets
 /// via <see cref="GithubProxy"/> (mirror fallback), verify each by its sha256 digest, then place. The DLL
@@ -33,10 +33,10 @@ public sealed record PluginStatus(
 /// and relaunches it if it was up.
 ///
 /// CDP itself (the debug bridge <see cref="CefInjectorService"/> connects through) is NOT opened by the
-/// DLL anymore — install/uninstall also manages a `.cef-enable-remote-debugging` NTFS junction next to
+/// DLL anymore: install/uninstall also manages a `.cef-enable-remote-debugging` NTFS junction next to
 /// Steam's exe, which makes Steam self-enable CDP on its own (fixed port 8080, confirmed not
-/// configurable; verified on both Windows 10 and 11). That leaves the DLL with one remaining job —
-/// "launch LuaTools.exe when Steam opens" — with no CDP hook, no load-timing race, and no dual-slot
+/// configurable; verified on both Windows 10 and 11). That leaves the DLL with one remaining job:
+/// "launch LuaTools.exe when Steam opens", with no CDP hook, no load-timing race, and no dual-slot
 /// redundancy needed anymore.
 /// </summary>
 public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjectorService injector)
@@ -47,8 +47,8 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     /// <summary>The one DLL-proxy slot the loader ships as. <c>winmm.dll</c> is loaded dynamically (audio)
     /// by steam.exe, is never a KnownDLL on Win10 or Win11, and isn't claimed by Millennium (wsock32/
-    /// version) or OpenSteamTool (dwmapi/xinput). Its old weakness — load timing isn't guaranteed relative
-    /// to steamwebhelper's launch — no longer matters now that CDP is opened by the junction instead of a
+    /// version), or OpenSteamTool (dwmapi/xinput). Its old weakness (load timing isn't guaranteed relative
+    /// to steamwebhelper's launch) no longer matters now that CDP is opened by the junction instead of a
     /// hook this DLL installs: there's no launch to catch a deadline for anymore, just "eventually load
     /// while Steam is running." Other slots were each dead ends: bcrypt is KnownDLLs-forced on Win10,
     /// and psapi and dbghelp don't load reliably enough.</summary>
@@ -75,8 +75,8 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     // `.cef-enable-remote-debugging` next to Steam's exe, created as an NTFS JUNCTION (not a plain file)
     // pointing at a target that's deliberately chosen to never exist. Steam's own internal logic treats
     // its mere presence as "self-enable CDP debugging" (fixed port 8080) without needing to resolve the
-    // target — but Millennium's cleanup code (health_check.cc) calls `std::filesystem::exists()` first,
-    // which DOES try to resolve the junction, fails since the target is nonexistent, and reports false —
+    // target, but Millennium's cleanup code (health_check.cc) calls `std::filesystem::exists()` first,
+    // which DOES try to resolve the junction, fails since the target is nonexistent, and reports false,
     // so Millennium's removal code never even runs. A plain file does not survive that cleanup; the
     // junction does. Verified live this session on both Windows 10 and 11, including with a real
     // Millennium instance loaded. `mklink /j` is shelled out to because directory junctions (unlike
@@ -85,14 +85,14 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     // of just severing the link.
     private const string CdpMarkerName = ".cef-enable-remote-debugging";
     private const string CdpMarkerJunctionTarget = @"C:\fuckass\folder\that\shall\never\exist\die\millennium";
-    private const int CdpPort = 8080; // Steam's own fixed default — confirmed not configurable via the marker's content.
+    private const int CdpPort = 8080; // Steam's own fixed default: confirmed not configurable via the marker's content.
     private string? CdpMarkerPath => SteamDir is { } s ? Path.Combine(s, CdpMarkerName) : null;
 
-    /// <summary>True only if <paramref name="path"/> is already a real reparse point (junction/symlink) —
+    /// <summary>True only if <paramref name="path"/> is already a real reparse point (junction/symlink).
     /// NOT just "something exists there". A bare Exists check used to treat a stale plain file (from before
     /// this session's junction fix) or a leftover plain directory (e.g. a partially-failed rmdir) as
     /// "already present" and permanently skip creating a real junction, silently leaving CDP broken for
-    /// that install forever (nothing else ever re-touches the marker once the plugin's up to date — see
+    /// that install forever (nothing else ever re-touches the marker once the plugin's up to date; see
     /// CreateCdpMarkerJunction's own doc comment).</summary>
     private static bool IsReparsePoint(string path)
     {
@@ -105,9 +105,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     }
 
     /// <summary>Idempotent, self-healing: safe to call on every status check, not just on install. If a
-    /// REAL junction is already there, no-op. If something else is there — a stale plain marker file from
+    /// REAL junction is already there, no-op. If something else is there (a stale plain marker file from
     /// before this session's junction fix, or any other leftover cruft that isn't actually a reparse
-    /// point — it's cleared first, since a plain file at this path doesn't survive Millennium's cleanup and
+    /// point), it's cleared first, since a plain file at this path doesn't survive Millennium's cleanup and
     /// silently breaks CDP forever otherwise.</summary>
     private static void CreateCdpMarkerJunction(string path)
     {
@@ -117,7 +117,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             if (Directory.Exists(path)) Directory.Delete(path, recursive: true);
             else if (File.Exists(path)) File.Delete(path);
         }
-        catch { /* best effort — mklink below just no-ops/fails harmlessly if this didn't clear it */ }
+        catch { /* best effort; mklink below just no-ops/fails harmlessly if this didn't clear it */ }
 
         var psi = new System.Diagnostics.ProcessStartInfo("cmd.exe", $"/c mklink /j \"{path}\" \"{CdpMarkerJunctionTarget}\"")
         {
@@ -149,12 +149,12 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     /// <summary>Best-effort check for whether CDP's fixed port is occupied by something OTHER than Steam's
     /// own CDP server. A bare bind-test can't make that distinction: once the junction is doing its job and
     /// CDP is actually up, Steam itself is the one holding the port, so a bind fails for the exact same
-    /// reason a hostile squatter would cause it to fail — the two are indistinguishable to
+    /// reason a hostile squatter would cause it to fail. The two are indistinguishable to
     /// <see cref="System.Net.Sockets.TcpListener"/>. This produced a live false positive (warning fired
     /// against Steam's own working CDP server). Fixed by, on a bind failure, asking whatever's on the port
-    /// for <c>/json</c> — CDP answers with a JSON array of debug targets; only treat it as "busy" in the
+    /// for <c>/json</c>. CDP answers with a JSON array of debug targets; only treat it as "busy" in the
     /// user-facing sense if that probe does NOT look like CDP. The port can't be changed regardless
-    /// (confirmed: file content has no effect on it), so this stays detection-only — a false
+    /// (confirmed: file content has no effect on it), so this stays detection-only. A false
     /// positive/negative here never blocks install/uninstall.</summary>
     private static async Task<bool> IsPort8080BusyAsync()
     {
@@ -255,20 +255,20 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     public async Task<PluginStatus> GetStatusAsync(bool force = false, CancellationToken ct = default)
     {
         bool frontend = File.Exists(LuatoolsJsPath);
-        // "installed" if AT LEAST ONE slot's proxy is present — a partial/mid-migration state still counts
+        // "installed" if AT LEAST ONE slot's proxy is present. A partial/mid-migration state still counts
         // as installed and eligible for auto-update, rather than showing "not installed". An OLD loader
-        // (psapi/dbghelp) also still counts — otherwise a user who hasn't migrated shows "not installed"
+        // (psapi/dbghelp) also still counts. Otherwise a user who hasn't migrated shows "not installed"
         // and the auto-update gate (UpdateAvailable) never fires, stranding them on the dead loader.
         bool anySlotPresent = Slots.Any(slot => SlotPath(slot) is { } p && File.Exists(p));
         bool legacy = LegacyDllPaths.Any(File.Exists);
         bool loader = anySlotPresent || legacy;
 
         // Self-heal the CDP junction on every status check, not just when InstallAsync happens to run.
-        // InstallAsync only fires on a fresh install or when a version bump makes UpdateAvailable true — once
+        // InstallAsync only fires on a fresh install or when a version bump makes UpdateAvailable true. Once
         // the plugin is fully up to date, nothing else ever re-touches the marker. If it's ever removed after
         // that point (inconsistent Millennium-version cleanup, AV quarantining the reparse point, a Steam
         // repair, manual deletion), CDP silently stops working and the ONLY thing that used to fix it was a
-        // full uninstall+reinstall (forces InstallAsync unconditionally) — exactly the workaround users have
+        // full uninstall+reinstall (forces InstallAsync unconditionally). Exactly the workaround users have
         // been reporting. GetStatusAsync runs on every Steam-open poke, so checking here closes that gap
         // continuously instead of only at version-bump time. Cheap when already correct (single attribute
         // check, no shellout) and only touches the loader DLL is actually installed.
@@ -351,19 +351,19 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             if (!File.Exists(LuatoolsJsPath))
                 return (false, Resources.Strings.Plugin_Err_NoLuatoolsJs);
 
-            // Get the frontend live in THIS running process immediately — don't wait on the Steam restart
+            // Get the frontend live in THIS running process immediately. Don't wait on the Steam restart
             // below. A relaunched LuaTools.exe would hit the single-instance mutex against this very
             // process (the one the user is using right now to click Install) and exit quietly without ever
             // taking over, so nothing would otherwise pick up the new file until a manual app restart.
             await injector.ReloadPluginFilesAsync();
 
-            // 2) Loader DLLs → Steam root — but ONLY when at least one slot actually changed, OR a legacy
+            // 2) Loader DLLs → Steam root, but ONLY when at least one slot actually changed, OR a legacy
             //    slot is still present and must be removed. Both slots are always installed/updated
             //    together (never partially out of date relative to each other). The DLLs are locked while
             //    Steam runs, so either condition means stopping+restarting Steam; a frontend-only update
             //    (the common case) skips all of that and applies with zero Steam disruption.
             // Testing switch: when `.luatools-dll-update-disabled` is present, never touch any on-disk DLL
-            // (so hand-placed test builds aren't clobbered) — and thus never stop/restart Steam for it either.
+            // (so hand-placed test builds aren't clobbered), and thus never stop/restart Steam for it either.
             bool legacyPresent = LegacyDllPaths.Any(File.Exists);
             bool anySlotNeedsUpdate = Slots.Any(slot =>
                 SlotPath(slot) is not { } cur || !File.Exists(cur) || Sha256OfFile(cur) != slotShas[slot]);
@@ -377,17 +377,17 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 foreach (var slot in Slots)
                 {
                     File.Copy(slotDlPaths[slot], Path.Combine(steamDir, slot.DllAsset), overwrite: true);
-                    // Each proxy forwards to <name>_real.dll — a copy of the machine's own matching
+                    // Each proxy forwards to <name>_real.dll. A copy of the machine's own matching
                     // System32 file. Refresh it on every DLL update so it always matches the current OS build.
                     if (SlotRealPath(slot) is { } real && File.Exists(slot.SystemSourcePath))
                         File.Copy(slot.SystemSourcePath, real, overwrite: true);
                 }
-                // Remove any legacy slot (psapi/dbghelp + their _real) — leaving one would run the loader
+                // Remove any legacy slot (psapi/dbghelp + their _real). Leaving one would run the loader
                 // payload an extra time (double LuaTools launch / CDP hook).
                 foreach (var legacy in LegacyDllPaths)
                     if (File.Exists(legacy)) { try { File.Delete(legacy); } catch { /* locked/again next time */ } }
 
-                // 3) A live Millennium luatools plugin would inject the frontend redundantly — disable it in
+                // 3) A live Millennium luatools plugin would inject the frontend redundantly. Disable it in
                 //    Millennium's config (reversibly) so LuaLoader is the sole injector (leaves the Millennium
                 //    mod itself alone). Steam is stopped here, so the edit can't be clobbered and takes effect
                 //    on the restart below. Also migrate away any leftover folder-rename from older builds.
@@ -400,7 +400,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 if (wasRunning) steam.StartSteam();
             }
 
-            // Ensure the CDP marker junction exists — independent of whether the DLL itself changed (a
+            // Ensure the CDP marker junction exists: independent of whether the DLL itself changed (a
             // filesystem-only op, doesn't need Steam stopped). Needed here for the very first install (before
             // any GetStatusAsync call would see `loader` true); GetStatusAsync's own check is what keeps this
             // self-healing on every subsequent Steam-open, not just at install/update time. See its
@@ -423,7 +423,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     /// <summary>Silent auto-update: if an update is available for an already-installed plugin, apply it
     /// (frontend silently; DLL change stops/swaps/restarts Steam). Returns true if an update was applied.
-    /// Fire-and-forget safe — swallows offline/errors. Called from the app's Steam-open update flow.</summary>
+    /// Fire-and-forget safe: swallows offline/errors. Called from the app's Steam-open update flow.</summary>
     public async Task<bool> AutoUpdateAsync(CancellationToken ct = default)
     {
         try
@@ -443,7 +443,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         {
             try
             {
-                // Read the manifest BEFORE the FrontendDir delete below wipes it — it holds the exact
+                // Read the manifest BEFORE the FrontendDir delete below wipes it. It holds the exact
                 // enabledPlugins entries we stripped from Millennium's config at install time.
                 var manifest = ReadManifest();
 
@@ -461,7 +461,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 if (CdpMarkerPath is { } markerPath) RemoveCdpMarkerJunction(markerPath);
                 if (Directory.Exists(FrontendDir)) Directory.Delete(FrontendDir, recursive: true);
 
-                // Give Millennium its luatools plugin back — we're the ones who disabled it. Steam is
+                // Give Millennium its luatools plugin back: we're the ones who disabled it. Steam is
                 // stopped here, so the edit sticks and applies on the restart below.
                 if (MillenniumPresent)
                     SetMillenniumLuatoolsEnabled(enable: true, restore: manifest?.DisabledMillenniumEntries);
@@ -486,7 +486,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     /// and serializing those through custom options without a resolver throws
     /// "JsonSerializerOptions instance must specify a TypeInfoResolver". Removal-only writes happen to work
     /// without it (all surviving nodes are JsonElement-backed from Parse), so the failure would only ever
-    /// surface on uninstall — silently, inside the best-effort catch.</summary>
+    /// surface on uninstall. Silently, inside the best-effort catch.</summary>
     private static readonly JsonSerializerOptions ConfigWriteOpts = new()
     {
         WriteIndented = true,
@@ -510,7 +510,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     /// <summary>True if an enabledPlugins entry refers to our plugin. The entry's leading space-delimited
     /// token is the plugin id; Millennium versions store it as <c>luatools</c>, <c>luatools LUA</c>
-    /// (name + backend), or — from the old rename — <c>luatools.disabled-by-luatools[ LUA]</c>.</summary>
+    /// (name + backend), or (from the old rename) <c>luatools.disabled-by-luatools[ LUA]</c>.</summary>
     private static bool IsLuatoolsEntry(string entry)
     {
         string token = entry.Split(' ', 2)[0];
@@ -542,7 +542,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 if (!enable)
                 {
                     // Record only the nested (real) array's removals for restore; the flat dotted key is a
-                    // stray duplicate some builds write — scrub it, but never restore into it.
+                    // stray duplicate some builds write. Scrub it, but never restore into it.
                     var removed = new List<string>();
                     if (NestedEnabled(root) is { } nested)
                         for (int i = nested.Count - 1; i >= 0; i--)
@@ -580,7 +580,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
                 if (changed) File.WriteAllText(path, root.ToJsonString(ConfigWriteOpts));
             }
-            catch { /* best effort per file — a locked/invalid config must not fail install/uninstall */ }
+            catch { /* best effort per file. A locked/invalid config must not fail install/uninstall */ }
         }
         return removedMap;
     }

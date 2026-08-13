@@ -127,7 +127,7 @@ public partial class HomeViewModel : ObservableObject
         }
     }
 
-    /// <summary>Called when the page is shown — refresh everything.</summary>
+    /// <summary>Called when the page is shown. Refresh everything.</summary>
     public async Task LoadAsync()
     {
         RefreshSteam();
@@ -191,7 +191,7 @@ public partial class HomeViewModel : ObservableObject
                     long appid = long.Parse(f.name);
                     var info = new FileInfo(f.path);
                     string? name = _appList.GetName(appid) ?? _appInfo.GetCached(appid)?.Name;
-                    // Base = when added to the folder; if edited since (LastWrite later), use that — newer is more relevant.
+                    // Base = when added to the folder; if edited since (LastWrite later), use that. Newer is more relevant.
                     var added = info.LastWriteTime > info.CreationTime ? info.LastWriteTime : info.CreationTime;
                     return new LuaTileViewModel(appid, f.path, added, name ?? string.Format(Resources.Strings.Common_AppFallback, appid), name is null);
                 })

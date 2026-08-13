@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LuaToolsGui.Services.AppInfo;
 
-/// <summary>Thrown when appinfo.vdf isn't a format we understand — a Steam-side version bump.</summary>
+/// <summary>Thrown when appinfo.vdf isn't a format we understand. A Steam-side version bump.</summary>
 public class AppInfoFormatException(string message) : Exception(message);
 
 /// <summary>Where one app's record sits in the file, and its parsed metadata.</summary>
@@ -20,7 +20,7 @@ public sealed record AppInfoEntry(int AppId, long Offset, int Size, uint ChangeN
 /// [v29] string table at the header offset: count u32, then NUL-terminated UTF-8
 /// </code>
 /// <para>
-/// <c>size</c> counts the bytes AFTER the size field — i.e. meta + blob. The meta block is 60 bytes on
+/// <c>size</c> counts the bytes AFTER the size field, i.e. meta + blob. The meta block is 60 bytes on
 /// v28+ (40 on v27, which has no binary SHA-1):
 /// <c>infoState(4) lastUpdated(4) picsToken(8) sha1_text(20) changeNumber(4) sha1_binary(20)</c>.
 /// </para>
@@ -56,7 +56,7 @@ public sealed class AppInfoFile : IDisposable
     ///
     /// <para>
     /// A few table entries aren't valid UTF-8. Decoding them to a string and re-encoding turns each bad
-    /// byte into U+FFFD — three bytes instead of one — so a no-edit rebuild came out 12 bytes larger.
+    /// byte into U+FFFD (three bytes instead of one), so a no-edit rebuild came out 12 bytes larger.
     /// Keeping the original bytes makes the rebuild exact; only newly interned keys are encoded.
     /// </para>
     /// </summary>
@@ -98,7 +98,7 @@ public sealed class AppInfoFile : IDisposable
         {
             byte[] raw = BinaryVdf.ReadCStringBytes(_file);
             _stringBytes.Add(raw);
-            Strings.Add(Encoding.UTF8.GetString(raw));   // lookup/display only — raw is what's written
+            Strings.Add(Encoding.UTF8.GetString(raw));   // lookup/display only. Raw is what's written
         }
     }
 
@@ -184,7 +184,7 @@ public sealed class AppInfoFile : IDisposable
                 BinaryVdf.Write(blob, replacement, Intern, IndexedKeys);
                 byte[] bytes = blob.ToArray();
 
-                // sha1_binary is exactly SHA1(blob) — verified against 3,000 apps and against
+                // sha1_binary is exactly SHA1(blob). Verified against 3,000 apps and against
                 // SteamEdit's own writer. Leaving it stale would ship a hash of the pre-edit bytes.
                 // sha1_text is NOT reproducible from the blob (it hashes Steam's own text rendering),
                 // so it and changeNumber are carried over untouched.

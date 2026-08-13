@@ -5,7 +5,7 @@ using Xunit;
 namespace LuaToolsGui.Tests;
 
 /// <summary>
-/// Tests for <see cref="Program.MatchOsLanguage"/> — the OS-display-language → supported-UI-tag mapping.
+/// Tests for <see cref="Program.MatchOsLanguage"/>. The OS-display-language → supported-UI-tag mapping.
 /// Regression guard for the bug where a region-qualified OS culture (e.g. Spanish "es-ES") fell through
 /// to English instead of mapping to its neutral resource ("es").
 /// </summary>
@@ -107,9 +107,9 @@ public class LanguageDetectionTests
 
     // ── Unsupported languages fall back to English ───────────────────────────────────────────────────
     [Theory]
-    [InlineData("he-IL")]   // Hebrew — not shipped
-    [InlineData("hi-IN")]   // Hindi — not shipped
-    [InlineData("af-ZA")]   // Afrikaans — not shipped
+    [InlineData("he-IL")]   // Hebrew, not shipped
+    [InlineData("hi-IN")]   // Hindi, not shipped
+    [InlineData("af-ZA")]   // Afrikaans, not shipped
     [InlineData("")]        // invariant culture
     public void Unsupported_FallsBackToEnglish(string os) =>
         Assert.Equal("en", Match(os));

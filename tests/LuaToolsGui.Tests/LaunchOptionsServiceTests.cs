@@ -149,7 +149,7 @@ public class LaunchOptionsServiceTests : IDisposable
 
         _service.Stage(AppId, state.ChangeNumber, state.Current, desired);
 
-        // Staging alone must not touch appinfo — applying is a separate, confirmed step.
+        // Staging alone must not touch appinfo: applying is a separate, confirmed step.
         Assert.Equal(2, _service.Read(AppId)!.Current.Count);
         Assert.True(_service.Read(AppId)!.IsModded);
 
@@ -259,7 +259,7 @@ public class LaunchOptionsServiceTests : IDisposable
         WriteAppInfo(_appInfo, [("0", "Game.exe", "windows"), ("1", "nw", "linux")]);
         Assert.Equal([AppId], _service.FindDrifted());
 
-        // 999999 was never staged — it must not stop AppId being written.
+        // 999999 was never staged: it must not stop AppId being written.
         var result = _service.Reapply([AppId, 999999], restartSteam: false);
 
         Assert.True(result.Ok);

@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace LuaToolsGui.Services;
 
-/// <summary>App-tracked bookkeeping (not user settings) — install fingerprints, cached digests, etc.</summary>
+/// <summary>App-tracked bookkeeping (not user settings). Install fingerprints, cached digests, etc.</summary>
 public class CacheData
 {
     // ── OpenSteamTools install fingerprint (Mode page up-to-date check) ──
@@ -17,7 +17,7 @@ public class CacheData
 
     // ── Donate Keys dedup (permanent) ────────────────────────────────
     // Appids whose decryption keys have already been donated. The backend accepts each depot only
-    // once per IP, so this is permanent — a donated appid is never re-sent.
+    // once per IP, so this is permanent. A donated appid is never re-sent.
     public List<string> DonatedAppIds { get; set; } = [];
 
     // ── Hardware appid blacklist (refreshed from GitHub, ~14-day TTL) ──
@@ -32,12 +32,12 @@ public class CacheData
 
     // ── First-run onboarding ─────────────────────────────────────────
     // True once the user has seen (and dismissed) the welcome overlay, or the app decided they're
-    // already set up. Kept in cache (not settings) — it's app bookkeeping, not a user preference.
+    // already set up. Kept in cache (not settings). It's app bookkeeping, not a user preference.
     public bool OnboardingComplete { get; set; }
 }
 
 /// <summary>
-/// Persists internal app state to %AppData%\LuaToolsGui\cache.json — distinct from user-facing
+/// Persists internal app state to %AppData%\LuaToolsGui\cache.json. Distinct from user-facing
 /// settings (SettingsService). Use this for values the app records about itself (versions/hashes
 /// of installed components, cached lookups), not for choices the user makes.
 /// </summary>

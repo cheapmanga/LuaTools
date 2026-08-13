@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace LuaToolsGui.Models;
 
-// ── /api/denuvo/listings (public) — the game grid ───────────────────
+// ── /api/denuvo/listings (public). The game grid ───────────────────
 
 public class DenuvoListingsResponse
 {
@@ -27,7 +27,7 @@ public class DenuvoTag
     [JsonPropertyName("color")] public string? Color { get; set; }
 }
 
-// ── /api/denuvo/fixes?appid= (public) — per-game fix detail ──────────
+// ── /api/denuvo/fixes?appid= (public). Per-game fix detail ──────────
 
 public class DenuvoFixesResponse
 {
@@ -50,7 +50,7 @@ public class DenuvoFix
     [JsonPropertyName("createdAt")] public string? CreatedAt { get; set; }
 }
 
-// ── /api/denuvo/download?fix=&slot= (auth) — returns a signed URL ────
+// ── /api/denuvo/download?fix=&slot= (auth). Returns a signed URL ────
 
 public class DenuvoDownloadResponse
 {

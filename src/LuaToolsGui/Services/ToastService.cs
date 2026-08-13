@@ -6,7 +6,7 @@ using Wpf.Ui.Controls;
 namespace LuaToolsGui.Services;
 
 /// <summary>
-/// App-wide bottom-right toast feedback. Thin wrapper over Wpf.Ui's SnackbarService — the presenter
+/// App-wide bottom-right toast feedback. Thin wrapper over Wpf.Ui's SnackbarService. The presenter
 /// is attached once from MainWindow (see App.OnStartup). Safe to call from any thread.
 /// </summary>
 public class ToastService
@@ -39,7 +39,7 @@ public class ToastService
 
     /// <summary>
     /// Show a PERSISTENT toast with an action button (no auto-dismiss; user-closable). Used for the
-    /// "update ready" prompt — the action runs <paramref name="onAction"/> (e.g. restart).
+    /// "update ready" prompt: the action runs <paramref name="onAction"/> (e.g. restart).
     /// </summary>
     public void ShowAction(string title, string message, string actionLabel, Action onAction, bool error = false)
     {
@@ -54,7 +54,7 @@ public class ToastService
                 Title = title,
                 Appearance = error ? ControlAppearance.Caution : ControlAppearance.Secondary,
                 Icon = new SymbolIcon(SymbolRegular.ArrowSync24),
-                // No "infinite" sentinel exists — Timeout is how long it's VISIBLE (Zero = dismiss
+                // No "infinite" sentinel exists: Timeout is how long it's VISIBLE (Zero = dismiss
                 // instantly), so use a very large value to effectively persist until acted on / closed.
                 Timeout = TimeSpan.FromDays(1),
                 IsCloseButtonEnabled = true,

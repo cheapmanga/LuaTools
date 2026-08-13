@@ -78,7 +78,7 @@ public partial class DropZone : UserControl
             if (data.GetDataPresent(format) && data.GetData(format) is string s && s.Length > 0)
                 return s;
 
-        // These two arrive as a MemoryStream rather than a string, and are null-terminated — decode and
+        // These two arrive as a MemoryStream rather than a string, and are null-terminated. Decode and
         // cut at the terminator, or the appid regexes run against whatever trails it.
         foreach (var (format, encoding) in new[]
                  {
@@ -100,7 +100,7 @@ public partial class DropZone : UserControl
         return null;
     }
 
-    // "Browse files…" — a non-drag way to add files. Feeds the same VM install path as a drop.
+    // "Browse files…". A non-drag way to add files. Feeds the same VM install path as a drop.
     private async void OnBrowseClick(object sender, RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog

@@ -10,7 +10,7 @@ namespace LuaToolsGui.Tests;
 public class SteamLinkParserTests
 {
     [Theory]
-    // SteamDB — the id sits in the same slot on every sub-page.
+    // SteamDB: the id sits in the same slot on every sub-page.
     [InlineData("https://steamdb.info/app/648800/", 648800)]
     [InlineData("https://steamdb.info/app/648800/depots/", 648800)]
     [InlineData("https://steamdb.info/app/648800/patchnotes/", 648800)]
@@ -29,7 +29,7 @@ public class SteamLinkParserTests
         Assert.Equal(expected, SteamLinkParser.AppIdFrom(text));
 
     [Theory]
-    // A DEPOT id, not an app id — installing it would fetch a different game entirely.
+    // A DEPOT id, not an app id: installing it would fetch a different game entirely.
     [InlineData("https://steamdb.info/depot/648801/")]
     // A PACKAGE id, likewise.
     [InlineData("https://steamdb.info/sub/12345/")]

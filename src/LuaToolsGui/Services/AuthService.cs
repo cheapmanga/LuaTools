@@ -71,7 +71,7 @@ public class AuthService
         }
         catch
         {
-            ClearSession(); // revoked/expired — fall back to guest
+            ClearSession(); // revoked/expired. Fall back to guest
             AuthStateChanged?.Invoke();
             return false;
         }
@@ -185,7 +185,7 @@ public class AuthService
             }
             catch (OperationCanceledException)
             {
-                throw new AuthException("Sign-in timed out — no response from the browser.");
+                throw new AuthException(Resources.Strings.Auth_Err_Timeout);
             }
 
             string? code = HttpUtility.ParseQueryString(ctx.Request.Url?.Query ?? "").Get("code");
@@ -193,7 +193,7 @@ public class AuthService
 
             if (code is null && error is null)
             {
-                // Favicon or stray request — ignore and keep waiting
+                // Favicon or stray request: ignore and keep waiting
                 ctx.Response.StatusCode = 404;
                 ctx.Response.Close();
                 continue;
@@ -224,10 +224,10 @@ public class AuthService
         var res = await _http.SendAsync(req, ct);
         string body = await res.Content.ReadAsStringAsync(ct);
         if (!res.IsSuccessStatusCode)
-            throw new AuthException($"Token exchange failed ({(int)res.StatusCode}): {body}");
+            throw new AuthException(string.Format(Resources.Strings.Auth_Err_TokenExchangeFailed, (int)res.StatusCode, body));
 
         return JsonSerializer.Deserialize<SupabaseSession>(body)
-               ?? throw new AuthException("Token exchange returned an empty session.");
+               ?? throw new AuthException(Resources.Strings.Auth_Err_TokenExchangeEmpty);
     }
 
     // ── Token access / refresh ──────────────────────────────────────
@@ -235,7 +235,7 @@ public class AuthService
     /// <summary>Returns a valid access token, refreshing first when close to expiry. Throws for guests.</summary>
     public async Task<string> GetValidAccessTokenAsync()
     {
-        if (_refreshToken is null) throw new AuthException("Not signed in.");
+        if (_refreshToken is null) throw new AuthException(Resources.Strings.Auth_Err_NotSignedIn);
 
         if (_expiresAt <= DateTimeOffset.UtcNow.AddMinutes(2))
         {
@@ -266,10 +266,10 @@ public class AuthService
         var res = await _http.SendAsync(req);
         string body = await res.Content.ReadAsStringAsync();
         if (!res.IsSuccessStatusCode)
-            throw new AuthException($"Session refresh failed ({(int)res.StatusCode}).");
+            throw new AuthException(string.Format(Resources.Strings.Auth_Err_RefreshFailed, (int)res.StatusCode));
 
         var session = JsonSerializer.Deserialize<SupabaseSession>(body)
-                      ?? throw new AuthException("Session refresh returned an empty session.");
+                      ?? throw new AuthException(Resources.Strings.Auth_Err_RefreshEmpty);
         ApplySession(session);
     }
 
@@ -337,7 +337,7 @@ public class AuthService
             JsonSerializer.SerializeToUtf8Bytes(auth), null, DataProtectionScope.CurrentUser);
 
         // The token file can be momentarily locked (another instance, AV, indexer). A failed
-        // write must never break sign-in: the session is already live in memory — persisting is
+        // write must never break sign-in: the session is already live in memory. Persisting is
         // a convenience for next launch. Retry briefly, then give up silently.
         for (int attempt = 0; ; attempt++)
         {
@@ -352,7 +352,7 @@ public class AuthService
             }
             catch
             {
-                return; // locked/denied — stay signed in for this session, just don't persist
+                return; // locked/denied. Stay signed in for this session, just don't persist
             }
         }
     }

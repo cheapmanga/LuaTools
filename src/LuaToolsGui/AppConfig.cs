@@ -17,7 +17,7 @@ public static class AppConfig
     // startup lets the app prompt the user to re-link their full lua.tools account.
     public const string BotAccountEmailDomain = "@bot.lua.tools";
 
-    // Hubcap (hubcapmanifest.com) — the app talks to this directly with the user's own API key
+    // Hubcap (hubcapmanifest.com): the app talks to this directly with the user's own API key
     // (no lua.tools proxy). Key + stats are managed in Settings; key-gated source downloads hit it.
     public const string HubcapBaseUrl = "https://hubcapmanifest.com";
 
@@ -31,7 +31,7 @@ public static class AppConfig
 
     // Public upstream APIs the app calls directly (no lua.tools proxy needed for guest browsing).
     public const string SteamStoreSearchUrl = "https://store.steampowered.com/api/storesearch/";
-    // Steam's storefront "featured categories" (top sellers, new releases, etc.) — drives the Add page's
+    // Steam's storefront "featured categories" (top sellers, new releases, etc.). Drives the Add page's
     // featured strips. Public, no auth.
     public const string SteamFeaturedUrl = "https://store.steampowered.com/api/featuredcategories";
 
@@ -41,18 +41,18 @@ public static class AppConfig
     public const string HardwareAppIdListUrl =
         "https://raw.githubusercontent.com/jsnli/steamappidlist/master/data/hardware_appid.json";
 
-    // Steamless (atom0s) — strips SteamStub DRM from a game's .exe. Downloaded via GithubProxy and
+    // Steamless (atom0s): strips SteamStub DRM from a game's .exe. Downloaded via GithubProxy and
     // cached locally; the "Remove Steam DRM" Manage action runs Steamless.CLI.exe against the game's exe.
     public const string SteamlessRepo = "atom0s/Steamless";
 
-    // CloudRedirect (Selectively11) — the Mode page "Manage" button downloads the latest CloudRedirect.exe
+    // CloudRedirect (Selectively11): the Mode page "Manage" button downloads the latest CloudRedirect.exe
     // GUI manager from here and launches it. (Separate from the CLI fixer used by the mode install flow.)
     public const string CloudRedirectRepo = "Selectively11/CloudRedirect";
     public const string ManifestBackendUrl = "http://167.235.229.108";
     public const string ManifestBackendUserAgent = "secretgoonpoon";
 
     // The donate-keys endpoint gates on a DIFFERENT User-Agent than the manifest backend (it 403s
-    // otherwise) — this matches the LuaTools plugin's config.USER_AGENT.
+    // otherwise). This matches the LuaTools plugin's config.USER_AGENT.
     public const string DonateKeysUserAgent = "discord(dot)gg/luatools";
 
     // ── Umami analytics (anonymous app-launch counting) ──────────────
@@ -63,7 +63,7 @@ public static class AppConfig
     /// <summary>
     /// Public GitHub repos hosting Velopack release assets, in priority order. The auto-updater reads its
     /// feed from the FIRST repo; if that whole repo is unreachable or gone (e.g. banned / DMCA'd / account
-    /// removed — a failure the GitHub proxy mirrors can't fix, since they'd still point at a dead repo), it
+    /// removed. A failure the GitHub proxy mirrors can't fix, since they'd still point at a dead repo), it
     /// falls through to the next. Mirror repos are populated MANUALLY (re-upload the same Velopack assets to
     /// the backup only if the primary goes down). Each is still individually proxied for blocked regions.
     /// TODO: set the real primary repo before the first `vpk upload`; add a backup repo URL when one exists.
@@ -71,7 +71,7 @@ public static class AppConfig
     public static readonly string[] GithubReleasesRepos =
     [
         "https://github.com/madoiscool/LuaTools",   // primary
-        "https://github.com/mendy-tools/LuaTools",  // backup — create this repo + re-upload the Velopack
+        "https://github.com/mendy-tools/LuaTools",  // backup. Create this repo + re-upload the Velopack
                                                     // assets ONLY if the primary goes down (404s harmlessly
                                                     // until then; UpdateService just falls through past it).
     ];
@@ -89,9 +89,9 @@ public static class AppConfig
     // ── GitHub proxy mirrors (for blocked/throttled regions, e.g. China) ──────────────
     // github.com / api.github.com are often unreachable in some countries. Any GitHub request is tried
     // DIRECT first, then prefixed onto the MATCHING mirrors ("<mirror>https://<github-url>") until one works.
-    // Two capability classes — GithubProxy.Candidates picks by URL so we never make a guaranteed-wasted hop
+    // Two capability classes: GithubProxy.Candidates picks by URL so we never make a guaranteed-wasted hop
     // (an API mirror 400s a download; a download mirror 403s the API):
-    //   • API metadata (api.github.com): ONLY our self-hosted lua.tools/gh proxy can serve it — server-side
+    //   • API metadata (api.github.com): ONLY our self-hosted lua.tools/gh proxy can serve it. Server-side
     //     PAT (60→5000/hr) + cache. No PUBLIC proxy serves the REST API (they all 403 it), so there's no
     //     public backup here. Fixes the plugin release-metadata lookup in China / under rate-limit. 404s
     //     harmlessly until the /api/gh route is deployed, then lights up automatically.

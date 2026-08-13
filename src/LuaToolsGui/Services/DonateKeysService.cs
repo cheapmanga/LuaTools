@@ -38,7 +38,7 @@ public partial class DonateKeysService(SettingsService settings, SteamService st
             var pairs = ExtractKeys(File.ReadAllText(configPath));
             if (pairs.Count == 0) return;
 
-            // Dedup against everything we've ever donated — the backend accepts a depot only once per
+            // Dedup against everything we've ever donated: the backend accepts a depot only once per
             // IP, so re-sending is wasted. Only genuinely-new keys (newly installed games) get sent.
             var donated = new HashSet<string>(cache.GetDonatedAppIds());
             var fresh = pairs.Where(p => !donated.Contains(p.appid)).ToList();
@@ -60,7 +60,7 @@ public partial class DonateKeysService(SettingsService settings, SteamService st
         }
         catch
         {
-            // Background task — never surface errors. Unsent keys retry on the next launch.
+            // Background task, never surface errors. Unsent keys retry on the next launch.
         }
     }
 
@@ -88,7 +88,7 @@ public partial class DonateKeysService(SettingsService settings, SteamService st
                 }
                 else
                 {
-                    Walk(child); // keep descending — DecryptionKey nests deep under depots/<appid>
+                    Walk(child); // keep descending. DecryptionKey nests deep under depots/<appid>
                 }
             }
         }

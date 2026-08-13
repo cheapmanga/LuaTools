@@ -13,7 +13,7 @@ public static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // MUST run before any WPF/UI work — handles Velopack install/update hooks,
+        // MUST run before any WPF/UI work: handles Velopack install/update hooks,
         // then no-ops on a normal launch.
         VelopackApp.Build().Run();
 
@@ -57,10 +57,10 @@ public static class Program
             if (protocolUrl is not null)
                 Services.ProtocolService.WritePending(protocolUrl);
 
-            // Already running (possibly hidden in the tray) — poke the live instance to surface its
+            // Already running (possibly hidden in the tray). Poke the live instance to surface its
             // window, then bow out. This is what users expect when they relaunch the app.
             // Exception: a --minimized relaunch explicitly wants to stay silent (this is what our
-            // Steam DLL hijack passes on every launch — steam.exe loads it into more than one
+            // Steam DLL hijack passes on every launch: steam.exe loads it into more than one
             // process/thread per boot, so DllMain and this whole Main() can legitimately run more
             // than once in the same Steam startup). Don't surface the window for that duplicate.
             if (!startMinimized)
@@ -73,11 +73,11 @@ public static class Program
                         signal.Dispose();
                     }
                 }
-                catch { /* best effort — if signalling fails, just exit quietly */ }
+                catch { /* best effort. If signalling fails, just exit quietly */ }
             }
 
             // A --tray-locked relaunch (the loader passes this) asks the live instance to switch close-to-tray
-            // on for the session — otherwise, if the app was already open WITHOUT the flag when the loader
+            // on for the session. Otherwise, if the app was already open WITHOUT the flag when the loader
             // ran, it would stay killable by a window close (this second process exits without the live one
             // ever learning about the flag).
             if (trayLocked)
@@ -108,7 +108,7 @@ public static class Program
             return;
         }
 
-        // First instance — store the URL so App.OnStartup can route it.
+        // First instance: store the URL so App.OnStartup can route it.
         StartupUrl = protocolUrl;
         StartMinimized = startMinimized;
         SessionTrayLock = trayLocked;
@@ -142,7 +142,7 @@ public static class Program
     internal static EventWaitHandle? EnableTrayLockSignal;
 
     /// <summary>Named event a --tray-locked second instance (the loader relaunching on Steam-open) sets to
-    /// ask the running app to re-run its update flow — otherwise an already-running app would never update
+    /// ask the running app to re-run its update flow. Otherwise an already-running app would never update
     /// just from the user opening Steam.</summary>
     private const string RecheckUpdatesEventName = "LuaToolsGui.RecheckUpdates";
 
@@ -157,7 +157,7 @@ public static class Program
 
     /// <summary>True when launched with --tray-locked (the loader DLL passes this): the window's close
     /// button minimizes to the tray for THIS session regardless of the saved MinimizeToTray setting, so the
-    /// backend can't be killed by an accidental window close — only the tray "Exit" item fully quits. This
+    /// backend can't be killed by an accidental window close. Only the tray "Exit" item fully quits. This
     /// is in-memory only and never written to settings, so a normal launch keeps the user's real setting.</summary>
     internal static bool SessionTrayLock;
 
@@ -192,7 +192,7 @@ public static class Program
         }
         catch
         {
-            // Never let a culture problem stop the app from launching — fall through to default (English).
+            // Never let a culture problem stop the app from launching. Fall through to default (English).
         }
     }
 
@@ -211,7 +211,7 @@ public static class Program
     /// Falls back to "en". Internal-visible for tests.</summary>
     internal static string MatchOsLanguage(CultureInfo os)
     {
-        // 1. Exact match — handles tags we ship verbatim (e.g. "pt-BR", "pt-PT", "zh-Hant", "es-419").
+        // 1. Exact match: handles tags we ship verbatim (e.g. "pt-BR", "pt-PT", "zh-Hant", "es-419").
         if (IsSupported(os.Name)) return os.Name;
 
         string two = os.TwoLetterISOLanguageName; // "es", "fr", "pt", "zh", "nb"/"nn"...

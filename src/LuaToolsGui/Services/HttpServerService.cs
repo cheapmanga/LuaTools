@@ -95,7 +95,7 @@ public class HttpServerService : IHostedService
                 }
             }
         }
-        _log.LogWarning("api.json not found — using fallback sources");
+        _log.LogWarning("api.json not found, using fallback sources");
         _apiSources = new()
         {
             new("Ryuu", "http://167.235.229.108/<appid>", 200),
@@ -111,7 +111,7 @@ public class HttpServerService : IHostedService
         try { _listener.Start(); }
         catch (HttpListenerException)
         {
-            _log.LogWarning("HttpListener could not start on 127.0.0.1:6767 — attempting netsh reservation");
+            _log.LogWarning("HttpListener could not start on 127.0.0.1:6767, attempting netsh reservation");
             try
             {
                 var psi = new System.Diagnostics.ProcessStartInfo("netsh", "http add urlacl url=http://127.0.0.1:6767/ user=Everyone")
@@ -173,7 +173,7 @@ public class HttpServerService : IHostedService
                 PluginLog.Log($"HTTP {req.HttpMethod} {path}");
             (int status, string body) = path switch
             {
-                // Answer CORS preflight FIRST — otherwise it matches a POST route (the
+                // Answer CORS preflight FIRST. Otherwise it matches a POST route (the
                 // matchers ignore method) and returns non-2xx, so the browser blocks the
                 // real request (this is why JSON POSTs like /add-source did nothing).
                 _ when req.HttpMethod == "OPTIONS" => (204, ""),
@@ -243,7 +243,7 @@ public class HttpServerService : IHostedService
 
     // ── Steam-plugin add: drive + reflect the real DownloadViewModel ──
 
-    /// <summary>Trigger the fully headless add (PluginAddService — dynamic sources, Hubcap, key-gating,
+    /// <summary>Trigger the fully headless add (PluginAddService. Dynamic sources, Hubcap, key-gating,
     /// usage, FastFetch auto-download). Uses services only; the app window is never touched.</summary>
     private async Task<(int, string)> HandleAdd(long appId, HttpListenerRequest req)
     {
@@ -325,7 +325,7 @@ public class HttpServerService : IHostedService
     private async Task<(int, string)> HandleCheckSources(long appId)
     {
         // Dynamic source list from the app's real manifest backend (same call the app's
-        // DownloadViewModel uses). Sources have no per-source URL — downloads go through
+        // DownloadViewModel uses). Sources have no per-source URL. Downloads go through
         // the app's authenticated proxy by source NAME (see HandleDownload).
         try
         {
@@ -400,7 +400,7 @@ public class HttpServerService : IHostedService
         {
             state.Cts?.Cancel();
             state.Status = "cancelled";
-            state.Error = "Cancelled by user";
+            state.Error = Resources.Strings.Err_CancelledByUser;
             _downloads[appId] = state;
             return (200, Json(new { success = true }));
         }
@@ -519,7 +519,7 @@ public class HttpServerService : IHostedService
     {
         var ids = _cache.GetLoadedAppIds();
         // Resolve appid → game name so the plugin's "Added Games" popup shows names, not just numbers
-        // (it renders item.name || item.appid). Names are best-effort — a missing one falls back to the id.
+        // (it renders item.name || item.appid). Names are best-effort. A missing one falls back to the id.
         var names = _services.GetRequiredService<SteamAppListCache>();
         try { await names.EnsureLoadedAsync(); } catch { /* offline / not cached yet → ids only */ }
         var apps = ids.Select(id => new { appid = id, name = names.GetName(id) }).ToList();
@@ -620,7 +620,7 @@ public class HttpServerService : IHostedService
         catch (OperationCanceledException)
         {
             state.Status = "cancelled";
-            state.Error = "Cancelled by user";
+            state.Error = Resources.Strings.Err_CancelledByUser;
         }
         catch (Exception ex)
         {

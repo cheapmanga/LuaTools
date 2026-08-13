@@ -44,7 +44,7 @@ public partial class SteamLibraryService(SteamService steam)
                 if (Directory.Exists(full)) return full;
             }
         }
-        catch { /* unreadable VDF/ACF or odd path — treat as not found */ }
+        catch { /* unreadable VDF/ACF or odd path. Treat as not found */ }
         return null;
     }
 

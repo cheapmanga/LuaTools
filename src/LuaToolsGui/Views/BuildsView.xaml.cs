@@ -37,7 +37,7 @@ public partial class BuildsView : UserControl
         return null;
     }
 
-    // Both fire as a virtualized game row is realized/scrolled into view — resolve its cover.
+    // Both fire as a virtualized game row is realized/scrolled into view. Resolve its cover.
     // EnsureResolvedAsync is idempotent (skips if a cover is already loaded), so double-firing is safe.
     private void GameRow_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
     {

@@ -8,7 +8,7 @@ namespace LuaToolsGui.Tests;
 /// Tests for the two pieces of build-switching that fail SILENTLY when they're wrong:
 /// <list type="bullet">
 /// <item><see cref="LuaFileParser"/> telling an active manifest pin from one that "Auto Update Apps"
-/// commented out — get this wrong and the Builds page reports a lua as pinned to a build when Steam is
+/// commented out. Get this wrong and the Builds page reports a lua as pinned to a build when Steam is
 /// actually free to update it.</item>
 /// <item><see cref="LuaInstaller.BuildIdFromFileName"/>, the ONLY source of build identity. A missed
 /// match doesn't error, it just quietly files the download as a plain lua with no build.</item>
@@ -109,7 +109,7 @@ public class LuaBuildTests
         Assert.Equal(expected, LuaInstaller.BuildIdFromFileName(path));
 
     [Theory]
-    [InlineData("386940.lua")]              // plain lua — no build identity
+    [InlineData("386940.lua")]              // plain lua, no build identity
     [InlineData("386940 (1).lua")]          // browser duplicate suffix
     [InlineData("Steamtools.lua")]
     [InlineData("386940_.lua")]             // trailing separator, no digits

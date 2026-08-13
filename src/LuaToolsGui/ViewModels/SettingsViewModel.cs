@@ -42,7 +42,7 @@ public partial class SettingsViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(ShowBotLinkBanner))]
     private bool _isBotProvisioned;
 
-    /// <summary>Session-only — resets next launch so the banner re-checks on every startup.</summary>
+    /// <summary>Session-only. Resets next launch so the banner re-checks on every startup.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowBotLinkBanner))]
     private bool _botBannerDismissed;
@@ -93,7 +93,7 @@ public partial class SettingsViewModel : ObservableObject
             else
                 key.DeleteValue(RunValueName, throwOnMissingValue: false);
         }
-        catch { /* registry write blocked — setting is still saved, just not applied this run */ }
+        catch { /* registry write blocked. Setting is still saved, just not applied this run */ }
     }
 
     /// <summary>Minimize to the system tray instead of the taskbar. Persisted via SettingsService.</summary>
@@ -159,7 +159,7 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     // ── Hubcap API key ──────────────────────────────────────────────
-    /// <summary>The key the user is typing/pasting. Starts blank — the saved key is never shown back.</summary>
+    /// <summary>The key the user is typing/pasting. Starts blank. The saved key is never shown back.</summary>
     [ObservableProperty] private string _hubcapKeyInput = "";
 
     /// <summary>Status line under the key box (usage/expiry on success, or an error). Null = hidden.</summary>
@@ -201,7 +201,7 @@ public partial class SettingsViewModel : ObservableObject
         HubcapStats is { DailyLimit: > 0 } ? (double)HubcapStats.DailyUsage / HubcapStats.DailyLimit : 0;
 
     /// <summary>Show the usage card whenever a key is configured. It renders a loading state until stats
-    /// arrive — never blank — so the section can't look broken while the fetch is in flight or after a
+    /// arrive (never blank), so the section can't look broken while the fetch is in flight or after a
     /// transient failure (the key input is collapsed once configured, so this card is the only content).</summary>
     public bool ShowHubcapStats => HubcapIsKeyConfigured;
 
@@ -217,7 +217,7 @@ public partial class SettingsViewModel : ObservableObject
     /// <summary>Set by App: actually relaunch the app (used after a language change).</summary>
     public Action? RequestRestart { get; set; }
 
-    /// <summary>Show the "language changed — restart now?" toast. Wired here so the VM stays UI-agnostic;
+    /// <summary>Show the "language changed. Restart now?" toast. Wired here so the VM stays UI-agnostic;
     /// App provides the toast + restart action.</summary>
     public Action? RequestRestartPrompt { get; set; }
 
@@ -233,7 +233,7 @@ public partial class SettingsViewModel : ObservableObject
         _autoUpdateApps = settings.AutoUpdateApps; // init from saved value (default ON) without triggering Save
         _fastFetch = settings.FastFetch;
         _donateKeys = settings.DonateKeys;
-        _startWithWindows = settings.StartWithWindows; // default OFF — init without triggering the registry write
+        _startWithWindows = settings.StartWithWindows; // default OFF. Init without triggering the registry write
         _minimizeToTray = settings.MinimizeToTray;
         _hubcapIsKeyConfigured = !string.IsNullOrEmpty(settings.HubcapApiKey);
 
@@ -279,7 +279,7 @@ public partial class SettingsViewModel : ObservableObject
     /// <summary>The 6-char code the user typed from the Discord <c>/login</c> DM.</summary>
     [ObservableProperty] private string _codeInput = "";
 
-    /// <summary>True while redeeming — disables the Redeem button via <see cref="CanRedeemCode"/>.</summary>
+    /// <summary>True while redeeming. Disables the Redeem button via <see cref="CanRedeemCode"/>.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CanRedeemCode))]
     private bool _isRedeemingCode;
@@ -356,7 +356,7 @@ public partial class SettingsViewModel : ObservableObject
 
     // ── Hubcap key management ───────────────────────────────────────
 
-    /// <summary>Called by the View when loaded — auto-refreshes stats if a key is saved.</summary>
+    /// <summary>Called by the View when loaded. Auto-refreshes stats if a key is saved.</summary>
     public void OnViewLoaded()
     {
         if (HubcapIsKeyConfigured)
@@ -407,7 +407,7 @@ public partial class SettingsViewModel : ObservableObject
             var stats = await _hubcap.GetStatsAsync(key);
             if (stats is null)
             {
-                // Could be a bad/expired key (401) or a network problem — both surface as null.
+                // Could be a bad/expired key (401), or a network problem. Both surface as null.
                 ShowHubcapStatus(Resources.Strings.Settings_HubcapKeyError, isError: true);
                 return;
             }
@@ -441,7 +441,7 @@ public partial class SettingsViewModel : ObservableObject
         HubcapKeyStatusColor = isError ? "#f87171" : "#22c55e";
     }
 
-    /// <summary>"4/10 today" — appends "· expires yyyy-MM-dd" when the key has an expiry.</summary>
+    /// <summary>"4/10 today". Appends "· expires yyyy-MM-dd" when the key has an expiry.</summary>
     private static string FormatHubcapStats(HubcapStats stats)
     {
         string usage = string.Format(Resources.Strings.Settings_HubcapKeyOk, stats.DailyUsage, stats.DailyLimit);

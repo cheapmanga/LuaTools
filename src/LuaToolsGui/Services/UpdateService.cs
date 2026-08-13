@@ -10,7 +10,7 @@ namespace LuaToolsGui.Services;
 /// Resilience is two-layered: (1) <see cref="ProxiedFileDownloader"/> routes each repo's feed + package
 /// downloads through GitHub mirrors for blocked/throttled regions (e.g. China); (2) it tries each repo in
 /// <see cref="AppConfig.GithubReleasesRepos"/> in order, so if the PRIMARY repo is gone entirely
-/// (banned / DMCA'd / account removed — something the mirrors can't fix) it falls through to a backup repo.
+/// (banned / DMCA'd / account removed. Something the mirrors can't fix) it falls through to a backup repo.
 /// </para>
 /// </summary>
 public class UpdateService
@@ -24,7 +24,7 @@ public class UpdateService
                     downloader: new ProxiedFileDownloader())))
             .ToArray();
 
-    // The manager whose repo actually produced the staged update — apply against this same one.
+    // The manager whose repo actually produced the staged update. Apply against this same one.
     private UpdateManager? _stagedMgr;
     private UpdateInfo? _staged;
 
@@ -46,7 +46,7 @@ public class UpdateService
             try
             {
                 var info = await mgr.CheckForUpdatesAsync();
-                // A reachable repo returning null means we're already up to date — STOP. Don't fall
+                // A reachable repo returning null means we're already up to date. STOP. Don't fall
                 // through to a backup (it may lag behind the primary and would offer no/older update).
                 // Backups exist for an UNreachable primary, which surfaces as an exception below.
                 if (info is null) return;
@@ -55,14 +55,14 @@ public class UpdateService
                 _stagedMgr = mgr;
                 _staged = info;
                 UpdateReady?.Invoke();
-                return; // staged from this repo — done
+                return; // staged from this repo. Done
             }
             catch
             {
-                // This repo is unreachable/gone (or a download failed) — fall through to the next backup.
+                // This repo is unreachable/gone (or a download failed). Fall through to the next backup.
             }
         }
-        // Every repo failed (offline, or all repos down) — fail silently, retry next launch.
+        // Every repo failed (offline, or all repos down). Fail silently, retry next launch.
     }
 
     /// <summary>Apply the staged update now and relaunch into the new version. <paramref name="restartArgs"/>

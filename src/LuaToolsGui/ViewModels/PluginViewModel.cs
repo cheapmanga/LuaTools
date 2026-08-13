@@ -5,7 +5,7 @@ using LuaToolsGui.Services;
 namespace LuaToolsGui.ViewModels;
 
 /// <summary>
-/// "Plugin" page: the store-page plugin MANAGER. The app no longer bundles the frontend — it installs,
+/// "Plugin" page: the store-page plugin MANAGER. The app no longer bundles the frontend. It installs,
 /// updates, and removes the LuaTools plugin (the "Add via LuaTools" button on Steam store pages) by
 /// downloading it from GitHub releases via <see cref="PluginInstallerService"/>. One install path
 /// (LuaLoader); if the Millennium mod is present it just coexists (and install disables Millennium's own
@@ -27,7 +27,7 @@ public partial class PluginViewModel : ObservableObject
     [ObservableProperty] private string _frontendStatus = Resources.Strings.Plugin_Checking;
     [ObservableProperty] private string _dllStatus = Resources.Strings.Plugin_Checking;
 
-    // Per-component status flags — drive the colored status icons in the view (green check / amber
+    // Per-component status flags: drive the colored status icons in the view (green check / amber
     // warning / grey dismiss). The *Status strings above stay the row label text.
     [ObservableProperty] private bool _frontendInstalled;
     [ObservableProperty] private bool _dllOk;
@@ -47,14 +47,14 @@ public partial class PluginViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(ShowUpToDate))]
     private bool _updateAvailable;
 
-    /// <summary>True when the install button should be the loud green primary CTA — only when there's an
+    /// <summary>True when the install button should be the loud green primary CTA. Only when there's an
     /// actionable state (fresh install or an update). A healthy up-to-date "Reinstall" stays secondary.</summary>
     public bool InstallIsPrimary => !IsInstalled || UpdateAvailable;
 
-    /// <summary>Green "Up to date" pill on the version line — only when installed and nothing to update.</summary>
+    /// <summary>Green "Up to date" pill on the version line. Only when installed and nothing to update.</summary>
     public bool ShowUpToDate => IsInstalled && !UpdateAvailable;
 
-    /// <summary>True when the Millennium mod is detected — shown as a "coexisting" info line, not a card.</summary>
+    /// <summary>True when the Millennium mod is detected. Shown as a "coexisting" info line, not a card.</summary>
     [ObservableProperty] private bool _millenniumCoexisting;
 
     [ObservableProperty]

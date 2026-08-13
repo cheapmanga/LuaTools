@@ -5,7 +5,7 @@ using Xunit;
 namespace LuaToolsGui.Tests;
 
 /// <summary>
-/// Tests for the durability layer — the part that makes launch edits survive Steam rewriting
+/// Tests for the durability layer: the part that makes launch edits survive Steam rewriting
 /// appinfo.vdf. Its failure modes are silent: a lost snapshot means "restore original" can't work, and
 /// a snapshot overwritten by our own edit means restore puts back the wrong thing.
 /// </summary>
