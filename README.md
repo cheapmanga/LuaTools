@@ -1,4 +1,6 @@
-# LuaTools GUI
+# LuaTools App - https://lua.tools/app
+
+<img width="1080" height="720" alt="LuaTools_bQbIoCNECC" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
 
 A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
 
@@ -25,13 +27,6 @@ For iterative development:
 ```powershell
 dotnet watch --project src/LuaToolsGui/LuaToolsGui.csproj
 ```
-
-> **Do not run `dotnet build` while `dotnet watch` is running.** They collide on `obj/` and produce
-> spurious `CS0579` duplicate-attribute errors from the generated `_wpftmp` project. Let watch do
-> the building, or stop it first.
->
-> Editing a `.resx` file or any `x:Static` XAML binding requires a **watch restart**. Hot reload
-> can't compile new RESX into satellite assemblies or re-parse compile-time `x:Static`.
 
 ## Test
 
