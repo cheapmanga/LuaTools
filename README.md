@@ -3,6 +3,14 @@
 </p>
 
 # LuaTools
+<div style="display: flex; flex-direction: row; justify-content: center; gap: 10px;">
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Setup.exe?displayAssetName=true&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Portable.zip?displayAssetName=true&style=for-the-badge" />
+</div>
+<div style="display: flex; flex-direction: row; justify-content: center; gap: 10px;">
+  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
+</div>
 <p>
   <img align="right" height="250" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
 
