@@ -4,9 +4,9 @@
 
 # LuaTools
 
-<table>
-<tr>
-<td valign="middle">
+<table style="border:none; border-collapse:collapse;">
+<tr style="border:none; background-color:transparent;">
+<td valign="middle" style="border:none; padding:0;">
 
 [Discord](https://discord.gg/luatools) • [Website](https://lua.tools) • [Git Mirror](https://git.lua.tools/luatools)
 
@@ -20,8 +20,8 @@ It ships fully translated in 29 languages and auto-updates via Velopack.
 <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
 
 </td>
-<td width="24"></td>
-<td valign="middle" width="375">
+<td width="24" style="border:none; padding:0;"></td>
+<td valign="middle" width="375" style="border:none; padding:0;">
 <img width="375" height="250" style="width:100%; height:auto; max-width:375px;" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
 </td>
 </tr>
