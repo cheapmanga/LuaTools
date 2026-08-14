@@ -77,7 +77,7 @@
   <data name="Settings_Section_General" xml:space="preserve"><value>GENERALE</value></data>
   <data name="Settings_Section_Steam" xml:space="preserve"><value>STEAM</value></data>
   <data name="Settings_Section_Install" xml:space="preserve"><value>INSTALLAZIONE</value></data>
-  <data name="Settings_Section_Community" xml:space="preserve"><value>COMUNITÀ</value></data>
+  <data name="Settings_Section_Community" xml:space="preserve"><value>COMMUNITY</value></data>
   <data name="Settings_SignOut" xml:space="preserve"><value>Disconnetti</value></data>
   <data name="Settings_BrowsingAsGuest" xml:space="preserve"><value>Navigazione come ospite</value></data>
   <data name="Settings_GuestHint" xml:space="preserve"><value>Accedi per scaricare i manifest e gli sblocchi dei DLC</value></data>
@@ -141,7 +141,7 @@
   <data name="Home_NoModeSelected" xml:space="preserve"><value>Nessuna modalità selezionata</value></data>
   <data name="Home_ModeIs" xml:space="preserve"><value>Modalità · {0}</value></data>
   <data name="Mode_Title" xml:space="preserve"><value>Modalità</value></data>
-  <data name="Mode_Subtitle" xml:space="preserve"><value>Cambia il backend usato per sbloccare i giochi aggiunti con LuaTools — uno attivo alla volta.</value></data>
+  <data name="Mode_Subtitle" xml:space="preserve"><value>Cambia il backend utilizzato per sbloccare i giochi aggiunti con LuaTools. È attivo un solo backend alla volta.</value></data>
   <data name="Mode_CheckForUpdates" xml:space="preserve"><value>Cerca aggiornamenti</value></data>
   <data name="Mode_Active" xml:space="preserve"><value>ATTIVA</value></data>
   <data name="Mode_Recommended" xml:space="preserve"><value>CONSIGLIATO</value></data>
@@ -151,7 +151,7 @@
   <data name="Mode_Desc_Bst" xml:space="preserve"><value>Un fork open source di OpenSteamTools mantenuto attivamente dal team di LuaTools. Con correzioni e nuove funzionalità!</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>Gestisci</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>Impossibile scaricare o avviare CloudRedirect.</value></data>
-  <data name="Mode_Desc_Ost" xml:space="preserve"><value>Build notturna di OpenSteamTools dai sorgenti più recenti. Le correzioni più recenti, ma potrebbe essere meno stabile.</value></data>
+  <data name="Mode_Desc_Ost" xml:space="preserve"><value>Build Nightly di OpenSteamTools dai sorgenti più recenti. Le correzioni più recenti, ma potrebbe essere meno stabile.</value></data>
   <data name="Mode_UserManaged" xml:space="preserve"><value>Te la cavi da solo</value></data>
   <data name="Mode_Desc_Custom" xml:space="preserve"><value>Usa la tua soluzione di sblocco, non la toccheremo</value></data>
   <data name="Mode_Name_Custom" xml:space="preserve"><value>Unlocker personalizzato</value></data>
@@ -196,7 +196,7 @@
   <data name="Mode_Toast_Updated_Start" xml:space="preserve"><value>{0} è installato. Avvia Steam per usarlo.</value></data>
   <data name="Mode_Toast_InstallFailed" xml:space="preserve"><value>Installazione non riuscita</value></data>
   <data name="Mode_Toast_InstallFailed_Body" xml:space="preserve"><value>Qualcosa è andato storto.</value></data>
-  <data name="Drop_Title" xml:space="preserve"><value>Trascina qui file .lua, .manifest o .zip</value></data>
+  <data name="Drop_Title" xml:space="preserve"><value>Trascina qui i file .lua, .manifest o .zip</value></data>
   <data name="Drop_BrowseFiles" xml:space="preserve"><value>Sfoglia file…</value></data>
   <data name="Drop_Picker_Title" xml:space="preserve"><value>Scegli file .lua / .manifest / .zip</value></data>
   <data name="Drop_Picker_Filter" xml:space="preserve"><value>Lua / manifest / zip|*.lua;*.manifest;*.zip|Tutti i file|*.*</value></data>
@@ -298,7 +298,7 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Fixes_Manifest" xml:space="preserve"><value>Manifest</value></data>
   <data name="Fixes_Fix" xml:space="preserve"><value>Fix</value></data>
   <data name="Fixes_Count" xml:space="preserve"><value>{0} fix</value></data>
-  <data name="Fixes_Err_Load" xml:space="preserve"><value>Impossibile caricare i fix — controlla la connessione.</value></data>
+  <data name="Fixes_Err_Load" xml:space="preserve"><value>Impossibile caricare i fix — controlla la tua connessione.</value></data>
   <data name="Fixes_Empty_None" xml:space="preserve"><value>Nessun fix disponibile per ora.</value></data>
   <data name="Fixes_SignIn" xml:space="preserve"><value>Accedi con Discord per scaricare i fix.</value></data>
   <data name="Fixes_SignInRequired" xml:space="preserve"><value>Accesso richiesto</value></data>
@@ -318,11 +318,11 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Fixes_Toast_CouldntApply" xml:space="preserve"><value>Impossibile applicare il fix</value></data>
   <data name="Fixes_Toast_Refreshed_Title" xml:space="preserve"><value>Aggiornato</value></data>
   <data name="Fixes_Toast_Refreshed_Body" xml:space="preserve"><value>{0} giochi con fix.</value></data>
-  <data name="Add_Title" xml:space="preserve"><value>Diamoci da fare con i Lua™!</value></data>
-  <data name="Add_Subtitle" xml:space="preserve"><value>Inserisci un App ID, incolla un link Steam o cerca per nome del gioco</value></data>
+  <data name="Add_Title" xml:space="preserve"><value>Mettiamoci a Luare™!</value></data>
+  <data name="Add_Subtitle" xml:space="preserve"><value>Inserisci un App ID, incolla un link Steam o cerca il nome del gioco</value></data>
   <data name="Add_SearchPlaceholder" xml:space="preserve"><value>Inserisci un App ID o cerca giochi...</value></data>
   <data name="Add_Featured_TopSellers" xml:space="preserve"><value>I più venduti</value></data>
-  <data name="Add_Featured_NewReleases" xml:space="preserve"><value>Novità</value></data>
+  <data name="Add_Featured_NewReleases" xml:space="preserve"><value>Nuove uscite</value></data>
   <data name="Add_Released" xml:space="preserve"><value>Uscito il {0}</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>Recupera</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>Controllo…</value></data>
@@ -346,12 +346,12 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Add_SignIn_Dlc" xml:space="preserve"><value>Accedi con Discord per vedere gli sblocchi dei DLC.</value></data>
   <data name="Add_SignIn_Download" xml:space="preserve"><value>Accedi con Discord per scaricare.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Impossibile determinare il gioco base di questo DLC</value></data>
-  <data name="Add_Err_Generic" xml:space="preserve"><value>Qualcosa è andato storto — controlla la connessione e riprova.</value></data>
-  <data name="Add_Err_Download" xml:space="preserve"><value>Download non riuscito — controlla la connessione e riprova.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generazione non riuscita — controlla la connessione e riprova.</value></data>
+  <data name="Add_Err_Generic" xml:space="preserve"><value>Qualcosa è andato storto — controlla la tua connessione e riprova.</value></data>
+  <data name="Add_Err_Download" xml:space="preserve"><value>Download non riuscito — controlla la tua connessione e riprova.</value></data>
+  <data name="Add_Err_Generate" xml:space="preserve"><value>Generazione non riuscita — controlla la tua connessione e riprova.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Sostituire «{0}»?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Nessuna modifica a depot/DLC — stesso contenuto.</value></data>
-  <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installazione annullata — i file esistenti sono invariati.</value></data>
+  <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installazione annullata — i file esistenti rimangono invariati.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Impossibile installare {0} file — chiudi Steam (o usa Riavvia Steam) e riprova.</value></data>
   <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} aggiunto — lua + {1} manifest. Riavvia Steam per applicare.</value></data>
   <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} aggiunto — Steam recupererà i manifest. Riavvia Steam per applicare.</value></data>
@@ -375,14 +375,14 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Nessuna fonte disponibile trovata per questo gioco</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· tramite {0}</value></data>
   <data name="Plugin_Title" xml:space="preserve"><value>Plugin LuaTools</value></data>
-  <data name="Plugin_Subtitle" xml:space="preserve"><value>Il plugin LuaTools per Steam! — Ora usa LuaLoader invece di Shittenium</value></data>
+  <data name="Plugin_Subtitle" xml:space="preserve"><value>Il plugin LuaTools per Steam! — Ora usa LuaLoader invece di Merdennium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Stato</value></data>
   <data name="Plugin_Badge_UpdateAvailable" xml:space="preserve"><value>Aggiornamento disponibile</value></data>
   <data name="Plugin_Row_InstalledVersion" xml:space="preserve"><value>Versione installata</value></data>
   <data name="Plugin_Row_LatestVersion" xml:space="preserve"><value>Ultima versione</value></data>
   <data name="Plugin_Row_Frontend" xml:space="preserve"><value>Frontend</value></data>
   <data name="Plugin_Row_Loader" xml:space="preserve"><value>Loader (winmm.dll)</value></data>
-  <data name="Plugin_Millennium_Coexisting" xml:space="preserve"><value>Millennium rilevato — LuaTools funziona insieme a esso. L'installazione disattiva la copia di questo plugin propria di Millennium così che solo LuaLoader esegua l'iniezione.</value></data>
+  <data name="Plugin_Millennium_Coexisting" xml:space="preserve"><value>Millennium rilevato — LuaTools funziona insieme a esso. L'installazione disattiva la copia di questo plugin di Millennium, in modo che solo LuaLoader effettui l'iniezione.</value></data>
   <data name="Plugin_Footer" xml:space="preserve"><value>LuaLoader si installa nella tua cartella di Steam. Questa app funge da backend: se la chiudi dalla traybar, il plugin smetterà di funzionare!</value></data>
   <data name="Plugin_Btn_Install" xml:space="preserve"><value>Installa</value></data>
   <data name="Plugin_Btn_Update" xml:space="preserve"><value>Aggiorna</value></data>
@@ -396,7 +396,7 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Plugin_Status_OutOfDate" xml:space="preserve"><value>Non aggiornato</value></data>
   <data name="Plugin_Version_Unknown" xml:space="preserve"><value>sconosciuta</value></data>
   <data name="Plugin_Version_Offline" xml:space="preserve"><value>offline</value></data>
-  <data name="Plugin_Status_OfflineCheck" xml:space="preserve"><value>Impossibile raggiungere GitHub per controllare gli aggiornamenti.</value></data>
+  <data name="Plugin_Status_OfflineCheck" xml:space="preserve"><value>Impossibile raggiungere GitHub per controllare nuovi aggiornamenti.</value></data>
   <data name="Plugin_Status_Port8080Busy" xml:space="preserve"><value>Un altro programma sta già usando la porta 8080 — il ponte browser del plugin potrebbe non funzionare. Chiudi ciò che sta usando quella porta e reinstalla o riavvia Steam.</value></data>
   <data name="Plugin_Confirm_RestartBody" xml:space="preserve"><value>Questa operazione chiuderà e riavvierà Steam per applicare il loader. Continuare?</value></data>
   <data name="Plugin_Confirm_RestartCaption" xml:space="preserve"><value>Riavvia Steam</value></data>
@@ -464,7 +464,7 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Builds_Depot_EnableTip" xml:space="preserve"><value>Attivo: la chiave di decrittazione di questo depot viene applicata. Disattivo: il depot non viene sbloccato affatto. (Commenta o decommenta la riga addappid.)</value></data>
   <data name="Builds_Depot_Search" xml:space="preserve"><value>Cerca depot per nome, ID o tipo…</value></data>
   <data name="Builds_Depot_NoMatch" xml:space="preserve"><value>Nessun depot corrisponde alla ricerca.</value></data>
-  <data name="Builds_Depot_InactiveNote" xml:space="preserve"><value>Stai modificando un preset non applicato — le modifiche vengono salvate direttamente in esso e Steam continua a usare il preset applicato finché non premi Applica.</value></data>
+  <data name="Builds_Depot_InactiveNote" xml:space="preserve"><value>Stai modificando un preset non ancora applicato — le modifiche vengono salvate direttamente in esso e Steam continua a usare il preset applicato finché non premi Applica.</value></data>
   <data name="Manage_Action_LaunchOptions" xml:space="preserve"><value>Opzioni di avvio…</value></data>
   <data name="Launch_Title" xml:space="preserve"><value>Opzioni di avvio</value></data>
   <data name="Launch_Loading" xml:space="preserve"><value>Lettura della cache delle app di Steam…</value></data>
@@ -480,8 +480,8 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Launch_Field_Description" xml:space="preserve"><value>Etichetta (mostrata nel menu di gioco di Steam)</value></data>
   <data name="Launch_Field_Os" xml:space="preserve"><value>Sistema operativo</value></data>
   <data name="Launch_Field_Type" xml:space="preserve"><value>Tipo</value></data>
-  <data name="Launch_Field_BetaKey" xml:space="preserve"><value>Solo sul ramo</value></data>
-  <data name="Launch_Field_BetaKey_Tip" xml:space="preserve"><value>Nome del ramo a cui questa opzione è limitata — ad esempio beta, default, development. Lascia vuoto per mostrarla su tutti i rami.</value></data>
+  <data name="Launch_Field_BetaKey" xml:space="preserve"><value>Solo sul branch</value></data>
+  <data name="Launch_Field_BetaKey_Tip" xml:space="preserve"><value>Nome del branch a cui questa opzione è limitata, ad esempio beta, default, development. Lascia vuoto per mostrarlo su ogni branch.</value></data>
   <data name="Launch_Field_OwnsDlc" xml:space="preserve"><value>Solo se possiedi il DLC (App ID)</value></data>
   <data name="Launch_InstallPath" xml:space="preserve"><value>Percorso di installazione: {0}</value></data>
   <data name="Launch_SteamRestartNote" xml:space="preserve"><value>Applicare le modifiche chiude e riapre Steam.</value></data>
@@ -497,11 +497,11 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Launch_Applied_Restarted" xml:space="preserve"><value>Opzioni di avvio applicate. Steam è stato riavviato.</value></data>
   <data name="Launch_ApplyFailed" xml:space="preserve"><value>Impossibile applicare le opzioni di avvio. {0}</value></data>
   <data name="Launch_Drift_Title" xml:space="preserve"><value>Le opzioni di avvio sono state reimpostate</value></data>
-  <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam ha sovrascritto le tue opzioni di avvio per {0} gioco/giochi. Riapplicarle chiude e riapre Steam.</value></data>
+  <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam ha sovrascritto le tue opzioni di avvio per {0} gioco/i. Riapplicarle chiude e riapre Steam.</value></data>
   <data name="Launch_Drift_Action" xml:space="preserve"><value>Riapplica</value></data>
   <data name="Err_SteamNotFound" xml:space="preserve"><value>Percorso di Steam non trovato. Impostalo nelle Impostazioni.</value></data>
-  <data name="Err_GithubUnreachable" xml:space="preserve"><value>Impossibile raggiungere GitHub. Controlla la connessione e riprova.</value></data>
-  <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Impossibile raggiungere il server di aggiornamento. Controlla la connessione e riprova.</value></data>
+  <data name="Err_GithubUnreachable" xml:space="preserve"><value>Impossibile raggiungere GitHub. Controlla la tua connessione e riprova.</value></data>
+  <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Impossibile raggiungere il server di aggiornamento. Controlla la tua connessione e riprova.</value></data>
   <data name="Err_Cancelled" xml:space="preserve"><value>Annullato.</value></data>
   <data name="Err_CancelledByUser" xml:space="preserve"><value>Annullato dall'utente</value></data>
   <data name="Err_ReleaseMissingDownload" xml:space="preserve"><value>Nella release manca il download previsto.</value></data>
@@ -523,7 +523,7 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Api_Err_DownloadFailed" xml:space="preserve"><value>Download non riuscito ({0}).</value></data>
   <data name="Api_Err_RequestFailed" xml:space="preserve"><value>Richiesta non riuscita ({0})</value></data>
   <data name="Api_Err_SessionExpired" xml:space="preserve"><value>Sessione scaduta. Accedi di nuovo.</value></data>
-  <data name="Hubcap_Err_InvalidKey" xml:space="preserve"><value>La tua chiave Hubcap non è valida o è scaduta.</value></data>
+  <data name="Hubcap_Err_InvalidKey" xml:space="preserve"><value>La tua chiave Hubcap non è valida oppure è scaduta.</value></data>
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Hai raggiunto il limite giornaliero di Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nessun manifest Hubcap disponibile per questa app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Download da Hubcap non riuscito ({0}).</value></data>
