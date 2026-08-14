@@ -13,8 +13,8 @@ public partial class App : Application
 {
     private readonly IHost _host;
 
-    // True when the app was cold-started solely to run a silent install AND MinimizeToTray is off —
-    // means we auto-exit after the balloon so we don't leave a ghost tray icon behind.
+    // True when the app was cold-started solely to run a silent install AND MinimizeToTray is off,
+    // which means we auto-exit after the balloon so we don't leave a ghost tray icon behind.
     private bool _exitAfterSilentInstall;
 
     public App()
@@ -53,7 +53,7 @@ public partial class App : Application
                 services.AddSingleton<HttpServerService>();
                 services.AddHostedService(sp => sp.GetRequiredService<HttpServerService>());
                 // Also resolvable as a plain singleton (not just IHostedService) so PluginInstallerService
-                // can call ReloadPluginFilesAsync() after install/uninstall — same pattern as HttpServerService.
+                // can call ReloadPluginFilesAsync() after install/uninstall. Same pattern as HttpServerService.
                 services.AddSingleton<CefInjectorService>();
                 services.AddHostedService(sp => sp.GetRequiredService<CefInjectorService>());
                 services.AddSingleton<DownloadViewModel>();
@@ -84,15 +84,15 @@ public partial class App : Application
     private UpdateService Updates => _host.Services.GetRequiredService<UpdateService>();
 
     // Guards RunUpdateFlowAsync so overlapping triggers (startup + the re-poke a DLL/Steam restart causes)
-    // never run it concurrently — a second caller drops out immediately.
+    // never run it concurrently. A second caller drops out immediately.
     private readonly System.Threading.SemaphoreSlim _updateFlowGate = new(1, 1);
 
     /// <summary>
     /// Warn when Steam has overwritten launch options we'd applied, and offer to put them back.
     ///
     /// <para>
-    /// Steam rebuilds appinfo.vdf from PICS on login, app updates and store browsing — it did so twice
-    /// while this feature was being written — so an applied edit is not permanent. Re-applying is offered
+    /// Steam rebuilds appinfo.vdf from PICS on login, app updates and store browsing. It did so twice
+    /// while this feature was being written, so an applied edit is not permanent. Re-applying is offered
     /// but never automatic: it closes Steam, which is not something to do behind the user's back at
     /// startup. Costs nothing when no launch options have been edited (the store short-circuits on empty).
     /// </para>
@@ -104,7 +104,7 @@ public partial class App : Application
             var launch = _host.Services.GetRequiredService<Services.AppInfo.LaunchOptionsService>();
             if (launch.Store.IsEmpty) return;
 
-            // Indexing the ~373 MB cache takes a couple of seconds — never on the UI thread.
+            // Indexing the ~373 MB cache takes a couple of seconds, never on the UI thread.
             var drifted = await Task.Run(launch.FindDrifted);
             if (drifted.Count == 0) return;
 
@@ -117,7 +117,7 @@ public partial class App : Application
         }
         catch
         {
-            // Cache locked/unreadable — nothing actionable, and this must never block startup.
+            // Cache locked/unreadable: nothing actionable, and this must never block startup.
         }
     }
 
@@ -125,8 +125,8 @@ public partial class App : Application
     /// The drift notice's "Re-apply" button: confirm, then write the staged edits back into appinfo.
     ///
     /// <para>
-    /// The write runs OFF the UI thread. Unlike the launch-options dialog — which is modal, so its own
-    /// synchronous apply merely blocks a window that's already blocking — this fires with the main window
+    /// The write runs OFF the UI thread. Unlike the launch-options dialog (which is modal, so its own
+    /// synchronous apply merely blocks a window that's already blocking), this fires with the main window
     /// live, and <c>Apply</c> indexes a ~373 MB file, copies a backup and rewrites it. On the UI thread
     /// that's a multi-second freeze of the whole app.
     /// </para>
@@ -134,7 +134,7 @@ public partial class App : Application
     private static async Task ReapplyDriftedAsync(
         Services.AppInfo.LaunchOptionsService launch, IReadOnlyList<int> drifted, ToastService toast)
     {
-        // Same wording as the dialog's own prompt — closing Steam should never read as a different
+        // Same wording as the dialog's own prompt: closing Steam should never read as a different
         // decision depending on where it was triggered from.
         if (MessageBox.Show(
                 LuaToolsGui.Resources.Strings.Launch_ApplyNow_Body,
@@ -159,14 +159,14 @@ public partial class App : Application
     internal static Func<Task>? RunUpdateFlow;
 
     /// <summary>The Steam-open update flow (fully silent): update the APP first, unconditionally, before
-    /// ever touching the plugin — then, once the running app is guaranteed current, check/apply a plugin
+    /// ever touching the plugin. Then, once the running app is guaranteed current, check/apply a plugin
     /// update against it. Called on a loader (--tray-locked) launch and on the Steam-open re-check poke;
     /// safe to call repeatedly.
     /// <para>
     /// App-before-plugin is load-bearing, not just tidy ordering: the app and plugin are NOT independently
     /// safe to update out of order whenever a plugin release changes something the app's own compiled code
-    /// depends on (e.g. <see cref="Services.CefInjectorService"/>'s CDP port is a compile-time constant —
-    /// an old app build talking to a freshly-updated plugin that moved the port simply can't connect, and
+    /// depends on (e.g. <see cref="Services.CefInjectorService"/>'s CDP port is a compile-time constant.
+    /// An old app build talking to a freshly-updated plugin that moved the port simply can't connect, and
     /// won't self-heal until the app itself happens to update, which is not guaranteed to land in the same
     /// pass: the app and plugin ship from separate repos on separate cadences, so one can succeed while the
     /// other fails/lags). Restarting into the latest app FIRST, before it goes anywhere near a plugin
@@ -181,7 +181,7 @@ public partial class App : Application
             // 1) Stage + immediately apply any app update, before touching the plugin at all.
             //    ApplyAndRestart() terminates this process; the relaunched instance (launched with
             //    --tray-locked) re-enters this same flow via OnStartup once it's already current, so this
-            //    run's job ends here — there is nothing safe left for THIS process to do.
+            //    run's job ends here. There is nothing safe left for THIS process to do.
             try { await Updates.CheckAndStageAsync(); } catch { /* offline / not installed */ }
             if (Updates.HasStagedUpdate)
             {
@@ -189,7 +189,7 @@ public partial class App : Application
                 return;
             }
 
-            // 2) No app update pending — safe to check/apply a plugin update against this (already-current) app.
+            // 2) No app update pending: safe to check/apply a plugin update against this (already-current) app.
             try
             {
                 var installer = _host.Services.GetRequiredService<PluginInstallerService>();
@@ -199,12 +199,12 @@ public partial class App : Application
                     if (!st.DllMatches)
                     {
                         var t = _host.Services.GetRequiredService<ToastService>();
-                        Dispatcher.Invoke(() => t.Show("LuaTools", "Updating plugin — Steam will restart."));
+                        Dispatcher.Invoke(() => t.Show("LuaTools", "Updating plugin. Steam will restart."));
                     }
                     await installer.InstallAsync(progress: null);
                 }
             }
-            catch { /* offline / install error — retry next Steam-open */ }
+            catch { /* offline / install error. Retry next Steam-open */ }
         }
         finally { _updateFlowGate.Release(); }
     }
@@ -223,10 +223,19 @@ public partial class App : Application
                     Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads", "LuaTools");
                 if (System.IO.Directory.Exists(legacy)) System.IO.Directory.Delete(legacy, recursive: true);
             }
-            catch { /* best effort — never block startup on cleanup */ }
+            catch { /* best effort, never block startup on cleanup */ }
         });
 
         await _host.StartAsync();
+
+        // Rewrite any pre-3-mode SelectedMode BEFORE anything reads it. UnlockerService.SelectedMode
+        // would otherwise parse a legacy value to null and quietly present an unconfigured app. Users
+        // whose mode was retired outright (SteamTools, the CloudRedirect fix) have no mode now, so
+        // onboarding is forced back open: OnboardingComplete is a permanent flag that every existing
+        // user already has set, and clearing SelectedMode alone would leave them with no mode AND no
+        // overlay explaining why.
+        if (ModeMigration.Apply(_host.Services.GetRequiredService<SettingsService>()))
+            _host.Services.GetRequiredService<CacheService>().OnboardingComplete = false;
 
         var main = _host.Services.GetRequiredService<MainViewModel>();
         var settingsVm = _host.Services.GetRequiredService<SettingsViewModel>();
@@ -247,7 +256,7 @@ public partial class App : Application
                 Program.ShowWindowSignal,
                 (_, _) => Dispatcher.Invoke(() =>
                 {
-                    // A silent install relaunch stays headless — don't surface the window for it.
+                    // A silent install relaunch stays headless: don't surface the window for it.
                     string? pending = ProtocolService.TryReadPending();
                     bool silent = pending is not null && ProtocolService.Parse(pending).Silent;
                     if (!silent)
@@ -327,7 +336,7 @@ public partial class App : Application
         });
 
         // Steam regenerates appinfo.vdf from PICS, wiping launch edits. Check once at startup and
-        // OFFER to re-apply — never silently, since applying closes Steam.
+        // OFFER to re-apply, never silently, since applying closes Steam.
         _ = CheckLaunchOptionDriftAsync();
 
         // Home "recently added" + Add install banner "Reveal" → go to Manage and open that game's detail.
@@ -336,7 +345,7 @@ public partial class App : Application
         var home = _host.Services.GetRequiredService<HomeViewModel>();
         home.NavigateToGame = openInManage;
         download.NavigateToGame = openInManage;
-        builds.NavigateToManage = openInManage; // Builds "Manage" button — the reverse of "Manage Build"
+        builds.NavigateToManage = openInManage; // Builds "Manage" button: the reverse of "Manage Build"
 
         // Dragging a SteamDB / Steam store link onto either drop box installs that appid. Routed through
         // HandleProtocolUrl rather than calling ProtocolInstall directly, so a dropped link and
@@ -369,7 +378,7 @@ public partial class App : Application
             _ = builds.LoadAsync();            // a newly installed lua is a new variant in the vault
             await home.RefreshLibraryAsync();  // game appears (its cover may lag for newer titles)
 
-            // Newer titles have no guessable header URL — the classic CDN path 404s and the real header is
+            // Newer titles have no guessable header URL: the classic CDN path 404s and the real header is
             // a content-hashed store_item_assets URL that only comes from appdetails. Warm that game's
             // details at interactive priority (retries past throttling), then refresh again so its cover
             // fills in instead of staying blank until an app restart.
@@ -403,16 +412,18 @@ public partial class App : Application
             window.Show();
 
             // First-run onboarding: show the welcome overlay on a fresh install. Skip it (and mark done)
-            // when the user is already set up — BetterSteamTools (or Nightly) selected AND the plugin
-            // installed — so existing users / dev machines aren't nagged. Marking done here is permanent,
-            // so switching mode later never re-triggers onboarding.
+            // when the user is already set up (a managed mode selected AND the plugin installed), so
+            // existing users / dev machines aren't nagged. Marking done here is permanent, so switching
+            // mode later never re-triggers onboarding (only ModeMigration ever clears it again).
             var cache = _host.Services.GetRequiredService<CacheService>();
             if (!cache.OnboardingComplete)
             {
                 var unlocker = _host.Services.GetRequiredService<UnlockerService>();
                 var installer = _host.Services.GetRequiredService<PluginInstallerService>();
+                // Custom deliberately doesn't count: a first-run user can't meaningfully choose "I'll
+                // manage it myself" before they've been shown what the options are.
                 bool configured =
-                    unlocker.SelectedMode is (UnlockerMode.OpenSteamTools or UnlockerMode.OpenSteamToolsNightly)
+                    unlocker.SelectedMode is (UnlockerMode.Ost or UnlockerMode.Bst)
                     && installer.IsInstalledLocally();
                 if (configured) cache.OnboardingComplete = true;
                 else main.Onboarding.IsOpen = true;
@@ -424,7 +435,7 @@ public partial class App : Application
 
         // Background, non-blocking Steam-open update flow (app + plugin), but ONLY in the loader context
         // (--tray-locked). A manual / protocol / silent-install launch skips it, so the app never
-        // auto-updates or restarts mid-manual-use — it only happens when Steam launches us. (Velopack only
+        // auto-updates or restarts mid-manual-use. It only happens when Steam launches us. (Velopack only
         // updates to a STRICTLY HIGHER version, so every release must bump --packVersion.)
         if (Program.SessionTrayLock)
             _ = RunUpdateFlowAsync();
@@ -451,7 +462,7 @@ public partial class App : Application
     }
 
     /// <summary>Relaunch the app (used after a language change). The single-instance mutex is released
-    /// only when THIS process exits, so we start the new instance via a short delayed shell command — by
+    /// only when THIS process exits, so we start the new instance via a short delayed shell command. By
     /// the time it launches the exe, our mutex is free and the new instance won't bow out.</summary>
     private void RelaunchApp()
     {

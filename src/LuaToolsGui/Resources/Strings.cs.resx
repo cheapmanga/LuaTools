@@ -148,16 +148,17 @@
   <data name="Mode_Confirm_Body" xml:space="preserve"><value>Steam bude zavřen, aby bylo možné změnit jeho soubory, a poté se automaticky restartuje. Všechny spuštěné hry nebo stahování se zastaví.</value></data>
   <data name="Mode_Cancel" xml:space="preserve"><value>Zrušit</value></data>
   <data name="Mode_CloseSteamContinue" xml:space="preserve"><value>Zavřít Steam a pokračovat</value></data>
-  <data name="Mode_Desc_SteamTools" xml:space="preserve"><value>Starý dobrý SteamTools — vytvořený Číňany, milovaný celým světem. Odemykač, který odstartoval celý ten trend (GreenLuma neexistuje, pšt). ⚠️ AKTUÁLNĚ NEFUNGUJE, POUŽIJTE BETTERSTEAMTOOLS</value></data>
-  <data name="Mode_Desc_OpenSteamTools" xml:space="preserve"><value>Od základu předělaná verze SteamTools. Lepší než SteamTools prakticky ve všem.</value></data>
-  <data name="Mode_Desc_CloudRedirect" xml:space="preserve"><value>SteamTools s několika šikovnými záplatami — spousta oprav a vylepšení. Vrací nativní Steam Cloud přes Google Drive / OneDrive!</value></data>
+  <data name="Mode_Desc_Bst" xml:space="preserve"><value>Open source fork OpenSteamTools, který aktivně udržuje tým LuaTools. Přináší opravy a nové funkce!</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>Spravovat</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>Nepodařilo se stáhnout ani spustit CloudRedirect.</value></data>
-  <data name="Mode_Desc_OpenSteamToolsNightly" xml:space="preserve"><value>Noční sestavení BetterSteamTools (OST) z nejnovějšího zdroje. Nejnovější opravy, ale může být méně stabilní.</value></data>
+  <data name="Mode_Desc_Ost" xml:space="preserve"><value>Noční sestavení OpenSteamTools z nejnovějšího zdroje. Nejnovější opravy, ale může být méně stabilní.</value></data>
+  <data name="Mode_UserManaged" xml:space="preserve"><value>Teď je to na tobě</value></data>
+  <data name="Mode_Desc_Custom" xml:space="preserve"><value>Použij vlastní řešení odemykání, my do něj sahat nebudeme</value></data>
+  <data name="Mode_Name_Custom" xml:space="preserve"><value>Vlastní odemykač</value></data>
   <data name="Mode_Experimental" xml:space="preserve"><value>EXPERIMENTÁLNÍ</value></data>
   <data name="Mode_CloudRedirectSupport" xml:space="preserve"><value>PODPORA CLOUDREDIRECT</value></data>
-  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Vrací nativní podporu Steam Cloud přes poskytovatele úložišť třetích stran, jako jsou Google Drive / OneDrive / Cloudflare R2 a další. Zatím kompatibilní pouze s BetterSteamTools Nightly. Nezapomeňte jej po zapnutí nastavit kliknutím na "Spravovat" a poté restartujte Steam!</value></data>
-  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Vyberte BetterSteamTools Nightly, abyste mohli použít CloudRedirect.</value></data>
+  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Vrací nativní podporu Steam Cloud přes poskytovatele úložišť třetích stran, jako jsou Google Drive / OneDrive / Cloudflare R2 a další. Zatím kompatibilní pouze s OpenSteamTools / BetterSteamTools. Nezapomeňte jej po zapnutí nastavit kliknutím na "Spravovat" a poté restartujte Steam!</value></data>
+  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Vyberte OpenSteamTools / BetterSteamTools, abyste mohli použít CloudRedirect.</value></data>
   <data name="Mode_CloudRedirect_Enable" xml:space="preserve"><value>Zapnout</value></data>
   <data name="Mode_CloudRedirect_Disable" xml:space="preserve"><value>Vypnout</value></data>
   <data name="Mode_CloudRedirect_Status_Enabled" xml:space="preserve"><value>Zapnuto.</value></data>
@@ -498,4 +499,32 @@ Tím se smažou soubory .lua ze Steam\config\stplug-in. Poté restartujte Steam,
   <data name="Launch_Drift_Title" xml:space="preserve"><value>Možnosti spuštění byly resetovány</value></data>
   <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam přepsal vaše možnosti spuštění u {0} her. Opětovné použití zavře a znovu otevře Steam.</value></data>
   <data name="Launch_Drift_Action" xml:space="preserve"><value>Použít znovu</value></data>
+  <data name="Err_SteamNotFound" xml:space="preserve"><value>Umístění Steamu nenalezeno. Nastav ho v Nastavení.</value></data>
+  <data name="Err_GithubUnreachable" xml:space="preserve"><value>Nepodařilo se spojit s GitHubem. Zkontroluj připojení a zkus to znovu.</value></data>
+  <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Nepodařilo se spojit s aktualizačním serverem. Zkontroluj připojení a zkus to znovu.</value></data>
+  <data name="Err_Cancelled" xml:space="preserve"><value>Zrušeno.</value></data>
+  <data name="Err_CancelledByUser" xml:space="preserve"><value>Zrušeno uživatelem</value></data>
+  <data name="Err_ReleaseMissingDownload" xml:space="preserve"><value>V releasu chybí očekávaný soubor ke stažení.</value></data>
+  <data name="Err_ReleaseMissingFile" xml:space="preserve"><value>V releasu chybí {0}.</value></data>
+  <data name="Err_VerifyFailed" xml:space="preserve"><value>Stažený soubor neprošel ověřením (nesouhlasí sha256).</value></data>
+  <data name="Err_VerifyFailedFile" xml:space="preserve"><value>{0} neprošel ověřením (nesouhlasí sha256).</value></data>
+  <data name="Err_DownloadMissingFiles" xml:space="preserve"><value>Ve stažených souborech chybí: {0}.</value></data>
+  <data name="Err_WriteFailedCount" xml:space="preserve"><value>Nepodařilo se zapsat {0} soubor(ů). Zavři Steam a zkus to znovu.</value></data>
+  <data name="Err_WriteFailedFile" xml:space="preserve"><value>Nepodařilo se zapsat {0}. Zavři Steam a zkus to znovu.</value></data>
+  <data name="Err_OpenDownloadFailed" xml:space="preserve"><value>Nepodařilo se otevřít stažený soubor: {0}</value></data>
+  <data name="Err_NoSourceAvailable" xml:space="preserve"><value>Pro tuto hru není dostupný žádný zdroj.</value></data>
+  <data name="Auth_Err_Timeout" xml:space="preserve"><value>Vypršel časový limit přihlášení. Prohlížeč neodpověděl.</value></data>
+  <data name="Auth_Err_TokenExchangeFailed" xml:space="preserve"><value>Výměna tokenu selhala ({0}): {1}</value></data>
+  <data name="Auth_Err_TokenExchangeEmpty" xml:space="preserve"><value>Výměna tokenu vrátila prázdnou relaci.</value></data>
+  <data name="Auth_Err_NotSignedIn" xml:space="preserve"><value>Nejsi přihlášen.</value></data>
+  <data name="Auth_Err_RefreshFailed" xml:space="preserve"><value>Obnovení relace selhalo ({0}).</value></data>
+  <data name="Auth_Err_RefreshEmpty" xml:space="preserve"><value>Obnovení relace vrátilo prázdnou relaci.</value></data>
+  <data name="Api_Err_EmptyDownloadLink" xml:space="preserve"><value>Odkaz ke stažení byl prázdný. Zkus to znovu.</value></data>
+  <data name="Api_Err_DownloadFailed" xml:space="preserve"><value>Stahování selhalo ({0}).</value></data>
+  <data name="Api_Err_RequestFailed" xml:space="preserve"><value>Požadavek selhal ({0})</value></data>
+  <data name="Api_Err_SessionExpired" xml:space="preserve"><value>Relace vypršela. Přihlas se znovu.</value></data>
+  <data name="Hubcap_Err_InvalidKey" xml:space="preserve"><value>Tvůj klíč Hubcap je neplatný nebo vypršel.</value></data>
+  <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Dosáhl jsi denního limitu Hubcap.</value></data>
+  <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Pro tuto aplikaci není dostupný žádný manifest Hubcap.</value></data>
+  <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Stahování z Hubcap selhalo ({0}).</value></data>
 </root>

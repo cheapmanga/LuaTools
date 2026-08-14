@@ -7,8 +7,10 @@ public class AppSettings
 {
     public string? SteamPathOverride { get; set; }
 
-    // ── Unlocker mode (Mode page) — user's chosen backend ────────────
-    public string? SelectedMode { get; set; }                  // "SteamTools" | "OpenSteamTools"
+    // ── Unlocker mode (Mode page). User's chosen backend ────────────
+    // "Ost" | "Bst" | "Custom". Older builds wrote "SteamTools" | "OpenSteamTools" |
+    // "OpenSteamToolsNightly" | "CloudRedirect"; see ModeMigration, which rewrites those on startup.
+    public string? SelectedMode { get; set; }
 
     // ── Install behavior ─────────────────────────────────────────────
     // When true (default), installs comment out setManifestid() lines and skip copying .manifest
@@ -28,7 +30,7 @@ public class AppSettings
     // (→ default 24) is distinguishable from an explicit choice.
     public int? FixesPageSize { get; set; }
 
-    // Builds-page game-list results-per-page. 0 = "All". Kept separate from ManagePageSize — the Builds
+    // Builds-page game-list results-per-page. 0 = "All". Kept separate from ManagePageSize. The Builds
     // list is a narrow sidebar, so a size that suits the Manage grid rarely suits both.
     public int? BuildsPageSize { get; set; }
 
@@ -36,7 +38,7 @@ public class AppSettings
     public string? Language { get; set; }
 
     // The user's own Hubcap (hubcapmanifest.com) API key ("smm_…"). Null = not configured; key-gated
-    // sources stay locked until set. Stored locally — the app calls Hubcap directly with it.
+    // sources stay locked until set. Stored locally. The app calls Hubcap directly with it.
     public string? HubcapApiKey { get; set; }
 
     // When true, register the app to launch on Windows sign-in (HKCU …\Run). Nullable so "never set"
@@ -109,7 +111,7 @@ public class SettingsService
     }
 
     /// <summary>Builds-page game-list results-per-page (default 10). 0 = "All". Smaller than the other
-    /// pages' 24 — this list is a narrow sidebar next to the build detail, not a full-width grid.</summary>
+    /// pages' 24. This list is a narrow sidebar next to the build detail, not a full-width grid.</summary>
     public int BuildsPageSize
     {
         get => _settings.BuildsPageSize ?? 10; // default 10
@@ -157,8 +159,8 @@ public class SettingsService
     private void Load()
     {
         // Prefer the primary file; fall back to the last-good .bak. Crucially, NEVER silently reset a
-        // corrupt-but-present file to defaults (a later Save would then overwrite it and lose real data) —
-        // move it aside to .corrupt so it's preserved and can't be clobbered.
+        // corrupt-but-present file to defaults (a later Save would then overwrite it and lose real data).
+        // Move it aside to .corrupt so it's preserved and can't be clobbered.
         if (TryLoad(FilePath)) return;
         PreserveCorrupt(FilePath);
         if (TryLoad(BakPath)) return;
@@ -221,7 +223,7 @@ public class SettingsService
         string json = JsonSerializer.Serialize(_settings, new JsonSerializerOptions { WriteIndented = true });
 
         // Atomic write: fill a temp file, then rename it over the target. A crash/kill mid-write can only
-        // ever truncate the .tmp — the live settings.json is replaced by an atomic move (same-volume rename)
+        // ever truncate the .tmp. The live settings.json is replaced by an atomic move (same-volume rename)
         // and is therefore never left half-written. (This class of loss is exactly what a forced kill during
         // a plain WriteAllText caused.) A .bak of the last good file is kept as a second recovery source.
         File.WriteAllText(TmpPath, json);

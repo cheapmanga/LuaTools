@@ -148,16 +148,17 @@
   <data name="Mode_Confirm_Body" xml:space="preserve"><value>Steam sera fermé afin que ses fichiers puissent être modifiés, puis redémarré automatiquement. Tous les jeux ou téléchargements en cours seront arrêtés.</value></data>
   <data name="Mode_Cancel" xml:space="preserve"><value>Annuler</value></data>
   <data name="Mode_CloseSteamContinue" xml:space="preserve"><value>Fermer Steam et continuer</value></data>
-  <data name="Mode_Desc_SteamTools" xml:space="preserve"><value>Le bon vieux SteamTools — créé par les Chinois, adoré dans le monde entier. Le débloqueur qui a lancé toute la tendance (GreenLuma n'existe pas, chut). ⚠️ NE FONCTIONNE PAS ACTUELLEMENT, UTILISEZ BETTERSTEAMTOOLS</value></data>
-  <data name="Mode_Desc_OpenSteamTools" xml:space="preserve"><value>Refonte intégrale de SteamTools. Meilleur que SteamTools sur pratiquement tous les points.</value></data>
-  <data name="Mode_Desc_CloudRedirect" xml:space="preserve"><value>SteamTools avec quelques correctifs astucieux — une tonne de corrections et d'améliorations. Rétablit le Steam Cloud natif via Google Drive / OneDrive !</value></data>
+  <data name="Mode_Desc_Bst" xml:space="preserve"><value>Un fork open source d'OpenSteamTools activement maintenu par l'équipe LuaTools. Avec des correctifs et de nouvelles fonctionnalités !</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>Gérer</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>Impossible de télécharger ou de lancer CloudRedirect.</value></data>
-  <data name="Mode_Desc_OpenSteamToolsNightly" xml:space="preserve"><value>Build nocturne de BetterSteamTools (OST) depuis les dernières sources. Les correctifs les plus récents, mais peut être moins stable.</value></data>
+  <data name="Mode_Desc_Ost" xml:space="preserve"><value>Build nocturne de OpenSteamTools depuis les dernières sources. Les correctifs les plus récents, mais peut être moins stable.</value></data>
+  <data name="Mode_UserManaged" xml:space="preserve"><value>Tu te débrouilles</value></data>
+  <data name="Mode_Desc_Custom" xml:space="preserve"><value>Utilise ta propre solution de déblocage, on n'y touchera pas</value></data>
+  <data name="Mode_Name_Custom" xml:space="preserve"><value>Débloqueur personnalisé</value></data>
   <data name="Mode_Experimental" xml:space="preserve"><value>EXPÉRIMENTAL</value></data>
   <data name="Mode_CloudRedirectSupport" xml:space="preserve"><value>PRISE EN CHARGE DE CLOUDREDIRECT</value></data>
-  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Rétablit la prise en charge native de Steam Cloud via des fournisseurs de stockage tiers tels que Google Drive / OneDrive / Cloudflare R2 et bien d'autres. Compatible uniquement avec BetterSteamTools Nightly pour le moment. N'oubliez pas de le configurer en cliquant sur "Gérer" après l'avoir activé, puis redémarrez Steam !</value></data>
-  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Sélectionnez BetterSteamTools Nightly pour utiliser CloudRedirect.</value></data>
+  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Rétablit la prise en charge native de Steam Cloud via des fournisseurs de stockage tiers tels que Google Drive / OneDrive / Cloudflare R2 et bien d'autres. Compatible uniquement avec OpenSteamTools / BetterSteamTools pour le moment. N'oubliez pas de le configurer en cliquant sur "Gérer" après l'avoir activé, puis redémarrez Steam !</value></data>
+  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Sélectionnez OpenSteamTools / BetterSteamTools pour utiliser CloudRedirect.</value></data>
   <data name="Mode_CloudRedirect_Enable" xml:space="preserve"><value>Activer</value></data>
   <data name="Mode_CloudRedirect_Disable" xml:space="preserve"><value>Désactiver</value></data>
   <data name="Mode_CloudRedirect_Status_Enabled" xml:space="preserve"><value>Activé.</value></data>
@@ -498,4 +499,32 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in. Redémarrez Steam ens
   <data name="Launch_Drift_Title" xml:space="preserve"><value>Les options de lancement ont été réinitialisées</value></data>
   <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam a écrasé vos options de lancement pour {0} jeu(x). Les réappliquer ferme et rouvre Steam.</value></data>
   <data name="Launch_Drift_Action" xml:space="preserve"><value>Réappliquer</value></data>
+  <data name="Err_SteamNotFound" xml:space="preserve"><value>Emplacement de Steam introuvable. Définis-le dans les Paramètres.</value></data>
+  <data name="Err_GithubUnreachable" xml:space="preserve"><value>Impossible de joindre GitHub. Vérifie ta connexion et réessaie.</value></data>
+  <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Impossible de joindre le serveur de mise à jour. Vérifie ta connexion et réessaie.</value></data>
+  <data name="Err_Cancelled" xml:space="preserve"><value>Annulé.</value></data>
+  <data name="Err_CancelledByUser" xml:space="preserve"><value>Annulé par l'utilisateur</value></data>
+  <data name="Err_ReleaseMissingDownload" xml:space="preserve"><value>Le téléchargement attendu est absent de la version.</value></data>
+  <data name="Err_ReleaseMissingFile" xml:space="preserve"><value>{0} est absent de la version.</value></data>
+  <data name="Err_VerifyFailed" xml:space="preserve"><value>Échec de la vérification du téléchargement (sha256 incorrect).</value></data>
+  <data name="Err_VerifyFailedFile" xml:space="preserve"><value>Échec de la vérification de {0} (sha256 incorrect).</value></data>
+  <data name="Err_DownloadMissingFiles" xml:space="preserve"><value>Élément manquant dans le téléchargement : {0}.</value></data>
+  <data name="Err_WriteFailedCount" xml:space="preserve"><value>Impossible d'écrire {0} fichier(s). Ferme Steam et réessaie.</value></data>
+  <data name="Err_WriteFailedFile" xml:space="preserve"><value>Impossible d'écrire {0}. Ferme Steam et réessaie.</value></data>
+  <data name="Err_OpenDownloadFailed" xml:space="preserve"><value>Impossible d'ouvrir le téléchargement : {0}</value></data>
+  <data name="Err_NoSourceAvailable" xml:space="preserve"><value>Aucune source disponible pour ce jeu.</value></data>
+  <data name="Auth_Err_Timeout" xml:space="preserve"><value>Délai de connexion dépassé. Aucune réponse du navigateur.</value></data>
+  <data name="Auth_Err_TokenExchangeFailed" xml:space="preserve"><value>Échec de l'échange de jeton ({0}) : {1}</value></data>
+  <data name="Auth_Err_TokenExchangeEmpty" xml:space="preserve"><value>L'échange de jeton a renvoyé une session vide.</value></data>
+  <data name="Auth_Err_NotSignedIn" xml:space="preserve"><value>Non connecté.</value></data>
+  <data name="Auth_Err_RefreshFailed" xml:space="preserve"><value>Échec de l'actualisation de la session ({0}).</value></data>
+  <data name="Auth_Err_RefreshEmpty" xml:space="preserve"><value>L'actualisation de la session a renvoyé une session vide.</value></data>
+  <data name="Api_Err_EmptyDownloadLink" xml:space="preserve"><value>Le lien de téléchargement était vide. Réessaie.</value></data>
+  <data name="Api_Err_DownloadFailed" xml:space="preserve"><value>Échec du téléchargement ({0}).</value></data>
+  <data name="Api_Err_RequestFailed" xml:space="preserve"><value>Échec de la requête ({0})</value></data>
+  <data name="Api_Err_SessionExpired" xml:space="preserve"><value>Session expirée. Reconnecte-toi.</value></data>
+  <data name="Hubcap_Err_InvalidKey" xml:space="preserve"><value>Ta clé Hubcap est invalide ou expirée.</value></data>
+  <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Ta limite quotidienne Hubcap est atteinte.</value></data>
+  <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Aucun manifeste Hubcap n'est disponible pour cette app.</value></data>
+  <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Échec du téléchargement Hubcap ({0}).</value></data>
 </root>

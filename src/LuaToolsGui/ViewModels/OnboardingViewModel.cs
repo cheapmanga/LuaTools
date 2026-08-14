@@ -48,7 +48,7 @@ public partial class OnboardingViewModel : ObservableObject
 
     [ObservableProperty] private bool _isSigningIn;
 
-    // The two yes/no choices — both default to "yes".
+    // The two yes/no choices: both default to "yes".
     [ObservableProperty] private bool _applyRecommended = true;
     [ObservableProperty] private bool _installPlugin = true;
 
@@ -77,7 +77,7 @@ public partial class OnboardingViewModel : ObservableObject
         finally { IsSigningIn = false; }
     }
 
-    /// <summary>"Let's go!" — mark onboarding done, close the overlay immediately, then apply the chosen
+    /// <summary>"Let's go!". Mark onboarding done, close the overlay immediately, then apply the chosen
     /// actions in the background. Closing first means a long-running (Steam-restarting) install can never
     /// leave the welcome dialog stuck.</summary>
     [RelayCommand]
@@ -87,7 +87,7 @@ public partial class OnboardingViewModel : ObservableObject
         bool applyRecommended = ApplyRecommended;
         bool installPlugin = InstallPlugin;
 
-        _cache.OnboardingComplete = true; // seen — never show again
+        _cache.OnboardingComplete = true; // seen, never show again
         IsOpen = false;                    // dismiss now, before any slow work
 
         if (applyRecommended || installPlugin)
@@ -103,7 +103,7 @@ public partial class OnboardingViewModel : ObservableObject
         try
         {
             // Close Steam ONCE up front so both installs run against a stopped Steam, then relaunch it once
-            // at the end — avoids the double restart of letting each installer manage Steam separately.
+            // at the end. Avoids the double restart of letting each installer manage Steam separately.
             // (The plugin installer only relaunches Steam if it was up when it ran; since we pre-stopped it,
             // it won't, and our StartSteam below is the single relaunch.)
             await Task.Run(_steam.StopSteam);
@@ -111,7 +111,7 @@ public partial class OnboardingViewModel : ObservableObject
             if (applyRecommended)
             {
                 _settings.FastFetch = true;
-                var result = await _unlocker.InstallAsync(UnlockerMode.OpenSteamTools);
+                var result = await _unlocker.InstallAsync(UnlockerMode.Bst); // the Recommended mode
                 if (!result.Success)
                     _toast.Show(Resources.Strings.Onboarding_Title, result.Error ?? "", error: true);
             }

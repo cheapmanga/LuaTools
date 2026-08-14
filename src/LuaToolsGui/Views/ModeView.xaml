@@ -146,23 +146,15 @@
                                     <StackPanel
                                         Grid.Column="1"
                                         VerticalAlignment="Center">
+                                        <!-- Hidden on the active Custom card: nothing to install or update there. -->
                                         <ui:Button
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Center"
                                             Command="{Binding DataContext.InstallCommand, ElementName=Root}"
                                             CommandParameter="{Binding}"
                                             Content="{Binding ButtonText}"
-                                            IsEnabled="{Binding DataContext.NotBusy, ElementName=Root}" />
-                                        <!-- CloudRedirect-only: opens its GUI manager (active mode only). -->
-                                        <ui:Button
-                                            Margin="0,8,0,0"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Center"
-                                            Command="{Binding DataContext.ManageCloudRedirectCommand, ElementName=Root}"
-                                            Content="{x:Static res:Strings.Mode_CloudRedirect_Manage}"
-                                            Icon="{ui:SymbolIcon Cloud24}"
                                             IsEnabled="{Binding DataContext.NotBusy, ElementName=Root}"
-                                            Visibility="{Binding ShowManage, Converter={StaticResource BoolToVis}}" />
+                                            Visibility="{Binding ShowActionButton, Converter={StaticResource BoolToVis}}" />
                                     </StackPanel>
                                 </Grid>
                             </Border>

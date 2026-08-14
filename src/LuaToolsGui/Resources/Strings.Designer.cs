@@ -124,12 +124,12 @@ public static class Strings
     public static string Mode_Confirm_Body => Get(nameof(Mode_Confirm_Body));
     public static string Mode_Cancel => Get(nameof(Mode_Cancel));
     public static string Mode_CloseSteamContinue => Get(nameof(Mode_CloseSteamContinue));
-    public static string Mode_Desc_SteamTools => Get(nameof(Mode_Desc_SteamTools));
-    public static string Mode_Desc_OpenSteamTools => Get(nameof(Mode_Desc_OpenSteamTools));
-    public static string Mode_Desc_CloudRedirect => Get(nameof(Mode_Desc_CloudRedirect));
+    public static string Mode_Desc_Ost => Get(nameof(Mode_Desc_Ost));
+    public static string Mode_Desc_Bst => Get(nameof(Mode_Desc_Bst));
+    public static string Mode_Name_Custom => Get(nameof(Mode_Name_Custom));
+    public static string Mode_Desc_Custom => Get(nameof(Mode_Desc_Custom));
     public static string Mode_CloudRedirect_Manage => Get(nameof(Mode_CloudRedirect_Manage));
     public static string Mode_CloudRedirect_LaunchFailed => Get(nameof(Mode_CloudRedirect_LaunchFailed));
-    public static string Mode_Desc_OpenSteamToolsNightly => Get(nameof(Mode_Desc_OpenSteamToolsNightly));
     public static string Mode_Experimental => Get(nameof(Mode_Experimental));
     public static string Mode_CloudRedirectSupport => Get(nameof(Mode_CloudRedirectSupport));
     public static string Mode_CloudRedirect_AddonDesc => Get(nameof(Mode_CloudRedirect_AddonDesc));
@@ -160,6 +160,7 @@ public static class Strings
     public static string Mode_NotInstalled => Get(nameof(Mode_NotInstalled));
     public static string Mode_UpToDate => Get(nameof(Mode_UpToDate));
     public static string Mode_UpdateAvailable => Get(nameof(Mode_UpdateAvailable));
+    public static string Mode_UserManaged => Get(nameof(Mode_UserManaged));
     public static string Mode_Btn_Reinstall => Get(nameof(Mode_Btn_Reinstall));
     public static string Mode_Btn_Update => Get(nameof(Mode_Btn_Update));
     public static string Mode_Btn_Install => Get(nameof(Mode_Btn_Install));
@@ -396,7 +397,7 @@ public static class Strings
         public static string Plugin_Err_NoLuatoolsJs => Get(nameof(Plugin_Err_NoLuatoolsJs));
 
     // ── Builds page ──
-    // NOT YET TRANSLATED — English-only for now (Get falls back to the English resx for any culture
+    // NOT YET TRANSLATED: English-only for now (Get falls back to the English resx for any culture
     // whose Strings.<tag>.resx is missing the key). See Resources/README.md → "Pending translation".
     public static string Builds_Title => Get(nameof(Builds_Title));
     public static string Builds_Subtitle => Get(nameof(Builds_Subtitle));
@@ -477,4 +478,34 @@ public static class Strings
     public static string Launch_Drift_Title => Get(nameof(Launch_Drift_Title));
     public static string Launch_Drift_Body => Get(nameof(Launch_Drift_Body));
     public static string Launch_Drift_Action => Get(nameof(Launch_Drift_Action));
+
+    // Service error messages, surfaced to the user via toasts / MessageBox.
+    public static string Err_SteamNotFound => Get(nameof(Err_SteamNotFound));
+    public static string Err_GithubUnreachable => Get(nameof(Err_GithubUnreachable));
+    public static string Err_UpdateServerUnreachable => Get(nameof(Err_UpdateServerUnreachable));
+    public static string Err_Cancelled => Get(nameof(Err_Cancelled));
+    public static string Err_CancelledByUser => Get(nameof(Err_CancelledByUser));
+    public static string Err_ReleaseMissingDownload => Get(nameof(Err_ReleaseMissingDownload));
+    public static string Err_ReleaseMissingFile => Get(nameof(Err_ReleaseMissingFile));
+    public static string Err_VerifyFailed => Get(nameof(Err_VerifyFailed));
+    public static string Err_VerifyFailedFile => Get(nameof(Err_VerifyFailedFile));
+    public static string Err_DownloadMissingFiles => Get(nameof(Err_DownloadMissingFiles));
+    public static string Err_WriteFailedCount => Get(nameof(Err_WriteFailedCount));
+    public static string Err_WriteFailedFile => Get(nameof(Err_WriteFailedFile));
+    public static string Err_OpenDownloadFailed => Get(nameof(Err_OpenDownloadFailed));
+    public static string Err_NoSourceAvailable => Get(nameof(Err_NoSourceAvailable));
+    public static string Auth_Err_Timeout => Get(nameof(Auth_Err_Timeout));
+    public static string Auth_Err_TokenExchangeFailed => Get(nameof(Auth_Err_TokenExchangeFailed));
+    public static string Auth_Err_TokenExchangeEmpty => Get(nameof(Auth_Err_TokenExchangeEmpty));
+    public static string Auth_Err_NotSignedIn => Get(nameof(Auth_Err_NotSignedIn));
+    public static string Auth_Err_RefreshFailed => Get(nameof(Auth_Err_RefreshFailed));
+    public static string Auth_Err_RefreshEmpty => Get(nameof(Auth_Err_RefreshEmpty));
+    public static string Api_Err_EmptyDownloadLink => Get(nameof(Api_Err_EmptyDownloadLink));
+    public static string Api_Err_DownloadFailed => Get(nameof(Api_Err_DownloadFailed));
+    public static string Api_Err_RequestFailed => Get(nameof(Api_Err_RequestFailed));
+    public static string Api_Err_SessionExpired => Get(nameof(Api_Err_SessionExpired));
+    public static string Hubcap_Err_InvalidKey => Get(nameof(Hubcap_Err_InvalidKey));
+    public static string Hubcap_Err_LimitReached => Get(nameof(Hubcap_Err_LimitReached));
+    public static string Hubcap_Err_NoManifest => Get(nameof(Hubcap_Err_NoManifest));
+    public static string Hubcap_Err_DownloadFailed => Get(nameof(Hubcap_Err_DownloadFailed));
 }

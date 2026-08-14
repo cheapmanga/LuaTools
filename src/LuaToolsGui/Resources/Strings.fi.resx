@@ -148,16 +148,17 @@
   <data name="Mode_Confirm_Body" xml:space="preserve"><value>Steam suljetaan, jotta sen tiedostoja voidaan muuttaa, ja käynnistetään sitten automaattisesti uudelleen. Kaikki käynnissä olevat pelit tai lataukset pysähtyvät.</value></data>
   <data name="Mode_Cancel" xml:space="preserve"><value>Peruuta</value></data>
   <data name="Mode_CloseSteamContinue" xml:space="preserve"><value>Sulje Steam ja jatka</value></data>
-  <data name="Mode_Desc_SteamTools" xml:space="preserve"><value>Hyvä vanha SteamTools — kiinalaisten rakentama, maailman rakastama. Avaaja, joka aloitti koko trendin (GreenLumaa ei ole olemassa, shh). ⚠️ EI TOIMI TÄLLÄ HETKELLÄ, KÄYTÄ ALLA OLEVAA BETTERSTEAMTOOLS:TÄ</value></data>
-  <data name="Mode_Desc_OpenSteamTools" xml:space="preserve"><value>Alusta asti uudelleenrakennettu versio SteamToolsista. Parempi kuin SteamTools käytännössä kaikin tavoin.</value></data>
-  <data name="Mode_Desc_CloudRedirect" xml:space="preserve"><value>SteamTools muutamalla näppärällä paikalla — valtavasti korjauksia ja parannuksia. Tuo natiivin Steam Cloudin takaisin Google Driven / OneDriven kautta!</value></data>
+  <data name="Mode_Desc_Bst" xml:space="preserve"><value>Avoimen lähdekoodin fork OpenSteamToolsista, jota LuaTools-tiimi ylläpitää aktiivisesti. Korjauksia ja uusia ominaisuuksia!</value></data>
   <data name="Mode_CloudRedirect_Manage" xml:space="preserve"><value>Hallinta</value></data>
   <data name="Mode_CloudRedirect_LaunchFailed" xml:space="preserve"><value>CloudRedirectin lataaminen tai käynnistäminen epäonnistui.</value></data>
-  <data name="Mode_Desc_OpenSteamToolsNightly" xml:space="preserve"><value>BetterSteamToolsin (OST) yöllinen koontiversio uusimmasta lähdekoodista. Uusimmat korjaukset, mutta voi olla epävakaampi.</value></data>
+  <data name="Mode_Desc_Ost" xml:space="preserve"><value>OpenSteamToolsin yöllinen koontiversio uusimmasta lähdekoodista. Uusimmat korjaukset, mutta voi olla epävakaampi.</value></data>
+  <data name="Mode_UserManaged" xml:space="preserve"><value>Nyt olet omillasi</value></data>
+  <data name="Mode_Desc_Custom" xml:space="preserve"><value>Käytä omaa avausratkaisuasi, me emme koske siihen</value></data>
+  <data name="Mode_Name_Custom" xml:space="preserve"><value>Oma unlocker</value></data>
   <data name="Mode_Experimental" xml:space="preserve"><value>KOKEELLINEN</value></data>
   <data name="Mode_CloudRedirectSupport" xml:space="preserve"><value>CLOUDREDIRECT-TUKI</value></data>
-  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Palauttaa natiivin Steam Cloud -tuen kolmannen osapuolen tallennuspalveluiden, kuten Google Drive / OneDrive / Cloudflare R2 ja muiden, kautta. Toistaiseksi yhteensopiva vain BetterSteamTools Nightlyn kanssa. Muista määrittää se napsauttamalla "Hallinta" käyttöönoton jälkeen ja käynnistä sitten Steam uudelleen!</value></data>
-  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Valitse BetterSteamTools Nightly käyttääksesi CloudRedirectiä.</value></data>
+  <data name="Mode_CloudRedirect_AddonDesc" xml:space="preserve"><value>Palauttaa natiivin Steam Cloud -tuen kolmannen osapuolen tallennuspalveluiden, kuten Google Drive / OneDrive / Cloudflare R2 ja muiden, kautta. Toistaiseksi yhteensopiva vain OpenSteamTools / BetterSteamToolsin kanssa. Muista määrittää se napsauttamalla "Hallinta" käyttöönoton jälkeen ja käynnistä sitten Steam uudelleen!</value></data>
+  <data name="Mode_CloudRedirect_Locked" xml:space="preserve"><value>Valitse OpenSteamTools / BetterSteamTools käyttääksesi CloudRedirectiä.</value></data>
   <data name="Mode_CloudRedirect_Enable" xml:space="preserve"><value>Ota käyttöön</value></data>
   <data name="Mode_CloudRedirect_Disable" xml:space="preserve"><value>Poista käytöstä</value></data>
   <data name="Mode_CloudRedirect_Status_Enabled" xml:space="preserve"><value>Käytössä.</value></data>
@@ -498,4 +499,32 @@ Tämä poistaa .lua-tiedostot sijainnista Steam\config\stplug-in. Käynnistä St
   <data name="Launch_Drift_Title" xml:space="preserve"><value>Käynnistysvalinnat nollattiin</value></data>
   <data name="Launch_Drift_Body" xml:space="preserve"><value>Steam on korvannut käynnistysvalintasi {0} pelin osalta. Uudelleen käyttöönotto sulkee Steamin ja avaa sen uudelleen.</value></data>
   <data name="Launch_Drift_Action" xml:space="preserve"><value>Ota käyttöön uudelleen</value></data>
+  <data name="Err_SteamNotFound" xml:space="preserve"><value>Steamin sijaintia ei löytynyt. Aseta se asetuksissa.</value></data>
+  <data name="Err_GithubUnreachable" xml:space="preserve"><value>GitHubiin ei saatu yhteyttä. Tarkista yhteytesi ja yritä uudelleen.</value></data>
+  <data name="Err_UpdateServerUnreachable" xml:space="preserve"><value>Päivityspalvelimeen ei saatu yhteyttä. Tarkista yhteytesi ja yritä uudelleen.</value></data>
+  <data name="Err_Cancelled" xml:space="preserve"><value>Peruutettu.</value></data>
+  <data name="Err_CancelledByUser" xml:space="preserve"><value>Käyttäjä peruutti</value></data>
+  <data name="Err_ReleaseMissingDownload" xml:space="preserve"><value>Julkaisusta puuttuu odotettu lataus.</value></data>
+  <data name="Err_ReleaseMissingFile" xml:space="preserve"><value>Julkaisusta puuttuu {0}.</value></data>
+  <data name="Err_VerifyFailed" xml:space="preserve"><value>Lataus ei läpäissyt varmennusta (sha256 ei täsmää).</value></data>
+  <data name="Err_VerifyFailedFile" xml:space="preserve"><value>{0} ei läpäissyt varmennusta (sha256 ei täsmää).</value></data>
+  <data name="Err_DownloadMissingFiles" xml:space="preserve"><value>Latauksesta puuttuu: {0}.</value></data>
+  <data name="Err_WriteFailedCount" xml:space="preserve"><value>{0} tiedoston kirjoitus epäonnistui. Sulje Steam ja yritä uudelleen.</value></data>
+  <data name="Err_WriteFailedFile" xml:space="preserve"><value>Tiedoston {0} kirjoitus epäonnistui. Sulje Steam ja yritä uudelleen.</value></data>
+  <data name="Err_OpenDownloadFailed" xml:space="preserve"><value>Latausta ei voitu avata: {0}</value></data>
+  <data name="Err_NoSourceAvailable" xml:space="preserve"><value>Tälle pelille ei ole saatavilla lähdettä.</value></data>
+  <data name="Auth_Err_Timeout" xml:space="preserve"><value>Kirjautuminen aikakatkaistiin. Selain ei vastannut.</value></data>
+  <data name="Auth_Err_TokenExchangeFailed" xml:space="preserve"><value>Tunnuksen vaihto epäonnistui ({0}): {1}</value></data>
+  <data name="Auth_Err_TokenExchangeEmpty" xml:space="preserve"><value>Tunnuksen vaihto palautti tyhjän istunnon.</value></data>
+  <data name="Auth_Err_NotSignedIn" xml:space="preserve"><value>Et ole kirjautunut sisään.</value></data>
+  <data name="Auth_Err_RefreshFailed" xml:space="preserve"><value>Istunnon päivitys epäonnistui ({0}).</value></data>
+  <data name="Auth_Err_RefreshEmpty" xml:space="preserve"><value>Istunnon päivitys palautti tyhjän istunnon.</value></data>
+  <data name="Api_Err_EmptyDownloadLink" xml:space="preserve"><value>Latauslinkki oli tyhjä. Yritä uudelleen.</value></data>
+  <data name="Api_Err_DownloadFailed" xml:space="preserve"><value>Lataus epäonnistui ({0}).</value></data>
+  <data name="Api_Err_RequestFailed" xml:space="preserve"><value>Pyyntö epäonnistui ({0})</value></data>
+  <data name="Api_Err_SessionExpired" xml:space="preserve"><value>Istunto vanheni. Kirjaudu uudelleen sisään.</value></data>
+  <data name="Hubcap_Err_InvalidKey" xml:space="preserve"><value>Hubcap-avaimesi on virheellinen tai vanhentunut.</value></data>
+  <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Päivittäinen Hubcap-rajasi on täynnä.</value></data>
+  <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Tälle sovellukselle ei ole Hubcap-manifestia.</value></data>
+  <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-lataus epäonnistui ({0}).</value></data>
 </root>
