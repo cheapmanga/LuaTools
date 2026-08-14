@@ -20,14 +20,8 @@
 
 ## Statistics
 <div>
-  <p>Downloads across <b>all releases</b></p>
-  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
-</div>
-<div>
-  <p>Downloads on the <b>latest release</b></p>
-  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Portable.zip?displayAssetName=false&style=for-the-badge" />
-  <img src="https://img.shields.io/github/downloads/Madoiscool/Luatools/latest/LuaTools-win-Setup.exe?displayAssetName=false&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Setup.exe?displayAssetName=true&style=for-the-badge" />
+  <img src="https://img.shields.io/github/downloads/madoiscool/luatools/LuaTools-win-Portable.zip?displayAssetName=true&style=for-the-badge" />
 </div>
 
 <a href="https://www.star-history.com/?repos=madoiscool%2Fluatools&type=date&legend=top-left">
