@@ -3,20 +3,29 @@
 </p>
 
 # LuaTools
-<p>
-  <img align="right" height="250" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
 
-  [Discord](https://discord.gg/luatools) • [Website](https://lua.tools) • [Git Mirror](https://git.lua.tools/luatools)
-  
-  A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
-    
-  LuaTools browses and installs manifest sources, edits `stplug-in` lua files (depot pinning,
-  per-depot enable/disable), manages unlocker modes, and injects a companion plugin into Steam's
-  store pages.
-  
-  It ships fully translated in 29 languages and auto-updates via Velopack.
-  <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
-</p>
+<table>
+<tr>
+<td valign="middle">
+
+[Discord](https://discord.gg/luatools) • [Website](https://lua.tools) • [Git Mirror](https://git.lua.tools/luatools)
+
+A Windows desktop client for managing Steam manifest/lua configurations, built with WPF on .NET 8.
+
+LuaTools browses and installs manifest sources, edits `stplug-in` lua files (depot pinning,
+per-depot enable/disable), manages unlocker modes, and injects a companion plugin into Steam's
+store pages.
+
+It ships fully translated in 29 languages and auto-updates via Velopack.
+<br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
+
+</td>
+<td width="24"></td>
+<td valign="middle" width="375">
+<img width="375" height="250" style="width:100%; height:auto; max-width:375px;" src="https://github.com/user-attachments/assets/df083fb0-9be7-4690-9f0f-c8b0a73da881" />
+</td>
+</tr>
+</table>
 
 ## Statistics
 <div>
