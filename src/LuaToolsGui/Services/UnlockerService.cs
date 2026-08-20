@@ -75,6 +75,27 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
     public string? SelectedModeDisplayName =>
         SelectedMode is { } m ? Def(m).DisplayName : null;
 
+    /// <summary>
+    /// Make sure the active OST/BST install is watching <c>config/stplug-in</c>, so luas written there
+    /// hot-reload instead of needing a Steam restart.
+    /// </summary>
+    /// <remarks>
+    /// The app no longer tells users to restart Steam after a lua change, because OST/BST re-read any
+    /// directory listed in <c>opensteamtool.toml</c>'s <c>[lua] paths</c>. That makes this registration
+    /// load-bearing rather than a nicety: previously it ran only inside <see cref="InstallAsync"/>, so a
+    /// user who set their unlocker up outside this app got neither hot-reload nor restart advice.
+    ///
+    /// Safe to call repeatedly — the underlying edit is targeted, comment-preserving and append-only, and
+    /// no-ops when the path is already present. Skipped for <c>Custom</c>, whose unlocker we know nothing
+    /// about, and when no mode is selected.
+    /// </remarks>
+    public void EnsureLuaPathRegistered()
+    {
+        if (SelectedMode is not (UnlockerMode.Ost or UnlockerMode.Bst)) return;
+        if (steam.EffectivePath is not { } root) return;
+        try { EnsureOpenSteamToolLuaPath(root); } catch { /* config tweak is best-effort */ }
+    }
+
     // ── State query ─────────────────────────────────────────────────
 
     /// <summary>Query GitHub + local files → this mode's status. Returns Unknown on any failure/offline.

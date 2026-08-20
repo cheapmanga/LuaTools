@@ -558,7 +558,6 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         RefreshVariants();
         _toast.Show(Resources.Strings.Builds_Title,
             string.Format(Resources.Strings.Builds_Apply_Done, variant.DisplayLabel));
-        OfferRestartSteam();
     }
 
     [RelayCommand]
@@ -641,7 +640,6 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
         IsEditing = false;
         SaveInPlace();
-        OfferRestartSteam();
     }
 
     /// <summary>
@@ -842,9 +840,9 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <item><b>No Save step, and no undo, for a toggle on the Default.</b> The Default is the working
     /// copy, so flipping a switch rewrites the live lua and replaces the stored Default, discarding what
     /// was there. Keeping a state before experimenting is what "Save as preset" is for.</item>
-    /// <item><b>No <c>OfferRestartSteam</c>.</b> <see cref="Apply"/> and <see cref="SaveEdit"/> both
-    /// prompt; this must not, because a modal dialog on every switch flip would be unusable. The live lua
-    /// changes right away but Steam won't read it until it restarts.</item>
+    /// <item><b>No restart prompt anywhere on this page.</b> OST/BST watch <c>config/stplug-in</c>, so
+    /// rewriting the live lua applies it immediately. <see cref="Apply"/> and <see cref="SaveEdit"/> used
+    /// to prompt; none of them do now, and a modal on every switch flip would have been unusable anyway.</item>
     /// </list>
     /// </summary>
     private void EditLive(DepotRow row, Func<string, string> edit)
@@ -1116,17 +1114,6 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         if (gb >= 1) return $"{gb:0.##} GB";
         double mb = bytes / 1024d / 1024d;
         return $"{mb:0.#} MB";
-    }
-
-    private void OfferRestartSteam()
-    {
-        var r = MessageBox.Show(
-            Resources.Strings.Manage_RestartSteam_Ask,
-            Resources.Strings.Manage_RestartSteam_Title,
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (r == MessageBoxResult.Yes && !_steam.RestartSteam())
-            MessageBox.Show(Resources.Strings.Manage_RestartSteam_Failed,
-                Resources.Strings.Manage_RestartSteam_Title, MessageBoxButton.OK, MessageBoxImage.Warning);
     }
 
     private static void OnUi(Action action)

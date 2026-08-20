@@ -502,19 +502,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
             MessageBox.Show(string.Format(Resources.Strings.Manage_RemoveFailed_Count, failed),
                 Resources.Strings.Manage_RemoveFailed_Title, MessageBoxButton.OK, MessageBoxImage.Warning);
 
-        OfferRestartSteam();
-    }
-
-    private void OfferRestartSteam()
-    {
-        var r = MessageBox.Show(
-            Resources.Strings.Manage_RestartSteam_Ask,
-            Resources.Strings.Manage_RestartSteam_Title,
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
-        if (r == MessageBoxResult.Yes && !_steam.RestartSteam())
-            MessageBox.Show(Resources.Strings.Manage_RestartSteam_Failed,
-                Resources.Strings.Manage_RestartSteam_Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+        // No restart prompt: OST/BST watch config/stplug-in, so deleting a lua un-applies it live.
     }
 
     /// <summary>Delete one lua file; returns false (and warns, unless silent) on failure.</summary>

@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(e)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} instalat(e) în Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} fișier(e) au eșuat — închide Steam și încearcă din nou.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Repornește Steam pentru a aplica.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Caută după nume sau App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Se încarcă…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -278,11 +277,11 @@
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Elimină fișierul lua</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Elimini „{0}” (App ID {1})?
 
-Aceasta șterge fișierul .lua din Steam\config\stplug-in. Repornește Steam după aceea pentru ca modificarea să aibă efect.</value></data>
+Aceasta șterge fișierul .lua din Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Elimină fișierele lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Elimini {0} fișiere lua?
 
-Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam după aceea pentru ca modificările să aibă efect.</value></data>
+Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Eliminare eșuată</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Fișierul nu a putut fi șters:
 {0}</value></data>
@@ -290,7 +289,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} fișiere nu au putut fi șterse.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Repornește Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Repornești Steam acum pentru ca modificările să aibă efect?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Steam nu a putut fi găsit sau pornit. Setează-i locația în Setări.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Remedieri</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Se încarcă remedierile…</value></data>
@@ -307,8 +305,7 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Instalare eșuată</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Nu s-a putut instala — închide Steam (sau repornește-l) și încearcă din nou.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Remediere instalată</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifestul {0} instalat — Steam repornește.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifestul {0} instalat. Repornește Steam pentru a aplica.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifestul {0} a fost instalat.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Joc negăsit</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Instalează mai întâi {0} în Steam, apoi aplică remedierea.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Remediere aplicată parțial</value></data>
@@ -353,8 +350,8 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Nicio modificare de depozit/DLC — același conținut.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Instalare anulată — fișierele existente au rămas neschimbate.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Nu s-au putut instala {0} fișier(e) — închide Steam (sau folosește Repornește Steam) și încearcă din nou.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} adăugat — lua + {1} manifest(e). Repornește Steam pentru a aplica.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} adăugat — Steam va prelua manifestele. Repornește Steam pentru a aplica.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Adăugat {0}: lua + {1} manifest(e).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Adăugat {0}. Steam va descărca manifestele.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Deschide pe SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>PARTAJAT</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Aceasta înlocuiește lua-ul instalat. Verifică ce se modifică:</value></data>
@@ -451,9 +448,9 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Ștergi această presetare?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>„{0}” va fi eliminată din presetările tale salvate. Acest lucru nu afectează jocul în sine.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Presetarea aflată în uz nu poate fi ștearsă.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Se folosește acum „{0}”. Repornește Steam pentru a avea efect.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Se folosește acum „{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Nu s-a putut schimba presetarea — fișierul lua ar putea fi în uz.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Salvat. Repornește Steam pentru a avea efect.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Salvat.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Nu s-a putut salva — fișierul lua ar putea fi în uz.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Salvat ca presetare.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Salvează în „{0}”</value></data>
@@ -527,4 +524,34 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Ai atins limita zilnică Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nu există manifest Hubcap pentru această aplicație.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Descărcarea Hubcap a eșuat ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Descărcări</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Descărcări</value></data>
+  <data name="Downloads_Subtitle" xml:space="preserve"><value>Descărcări de manifeste și fixuri, puse la coadă și instalate pe rând.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nicio descărcare în curs. Cele pornite din Adaugă sau Fixuri apar aici.</value></data>
+  <data name="Downloads_History_Empty" xml:space="preserve"><value>Încă nu există descărcări finalizate.</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Coadă</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Istoric</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>În coadă</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Se descarcă</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Te așteaptă</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Se instalează</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Gata</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Eșuat</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Anulat</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Anulează</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Reîncearcă</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Elimină</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Mută mai sus</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Mută mai jos</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Șterge istoricul</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Verifică</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} din {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Au rămas {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Necesită acțiune</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Întreruptă la închiderea aplicației.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Deblocare DLC</value></data>
+  <data name="Downloads_Concurrency" xml:space="preserve"><value>Simultan</value></data>
+  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Descărcări simultane</value></data>
+  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Câte descărcări rulează în același timp. Instalările se fac întotdeauna una câte una.</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Instalează întâi jocul pentru a aplica un fix.</value></data>
 </root>
