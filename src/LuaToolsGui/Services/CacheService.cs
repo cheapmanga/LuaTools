@@ -34,6 +34,11 @@ public class CacheData
     // True once the user has seen (and dismissed) the welcome overlay, or the app decided they're
     // already set up. Kept in cache (not settings). It's app bookkeeping, not a user preference.
     public bool OnboardingComplete { get; set; }
+
+    // ── Downloads tab history ────────────────────────────────────────
+    // Finished downloads shown in the Downloads tab, newest first, capped. Records only: a queued job
+    // holds delegates and can't be serialized, so nothing here is resumable.
+    public List<Downloads.DownloadHistoryRecord> DownloadHistory { get; set; } = [];
 }
 
 /// <summary>
@@ -112,6 +117,21 @@ public class CacheService
         Save();
     }
 
+    // ── Downloads tab history ────────────────────────────────────────
+
+    /// <summary>Finished downloads, newest first.</summary>
+    public IReadOnlyList<Downloads.DownloadHistoryRecord> GetDownloadHistory() => _cache.DownloadHistory;
+
+    /// <summary>Replace the history, keeping only the newest <paramref name="cap"/> entries.</summary>
+    public void SaveDownloadHistory(IEnumerable<Downloads.DownloadHistoryRecord> records, int cap = 100)
+    {
+        _cache.DownloadHistory = records
+            .OrderByDescending(r => r.CompletedAtMs)
+            .Take(cap)
+            .ToList();
+        Save();
+    }
+
     /// <summary>Clear the loaded-apps notification list (ReadLoadedApps → DismissLoadedApps).</summary>
     public void ClearLoadedAppIds()
     {
@@ -157,7 +177,8 @@ public class CacheService
             && _cache.HardwareAppIds.Count == 0
             && _cache.HardwareAppIdsFetchedAtMs == 0
             && _cache.LoadedAppIds.Count == 0
-            && !_cache.OnboardingComplete;
+            && !_cache.OnboardingComplete
+            && _cache.DownloadHistory.Count == 0;
         if (empty)
         {
             try { if (File.Exists(FilePath)) File.Delete(FilePath); } catch { /* best effort */ }

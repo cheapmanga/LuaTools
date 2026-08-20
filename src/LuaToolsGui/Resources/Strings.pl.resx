@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(ów)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>Zainstalowano {0} w Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} plik(ów) nie powiodło się — zamknij Steam i spróbuj ponownie.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Uruchom ponownie Steam, aby zastosować.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Szukaj według nazwy lub App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Ładowanie…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -278,11 +277,11 @@
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Usuń plik lua</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Usunąć „{0}” (App ID {1})?
 
-Spowoduje to usunięcie jego pliku .lua z Steam\config\stplug-in. Następnie uruchom ponownie Steam, aby zmiana zaczęła obowiązywać.</value></data>
+Spowoduje to usunięcie pliku .lua z Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Usuń pliki lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Usunąć {0} plików lua?
 
-Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie uruchom ponownie Steam, aby zmiany zaczęły obowiązywać.</value></data>
+Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Usuwanie nie powiodło się</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Nie udało się usunąć pliku:
 {0}</value></data>
@@ -290,7 +289,6 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>Nie udało się usunąć {0} plików.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Uruchom ponownie Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Uruchomić ponownie Steam teraz, aby zmiany zaczęły obowiązywać?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Nie udało się znaleźć ani uruchomić Steam. Ustaw jego lokalizację w Ustawieniach.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Poprawki</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Ładowanie poprawek…</value></data>
@@ -307,8 +305,7 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Instalacja nie powiodła się</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Nie udało się zainstalować — zamknij Steam (lub uruchom go ponownie) i spróbuj ponownie.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Zainstalowano poprawkę</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest {0} zainstalowany — Steam uruchamia się ponownie.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest {0} zainstalowany. Uruchom ponownie Steam, aby zastosować.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Zainstalowano manifest {0}.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Nie znaleziono gry</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Najpierw zainstaluj {0} w Steam, a następnie zastosuj poprawkę.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Poprawka zastosowana częściowo</value></data>
@@ -353,8 +350,8 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Brak zmian depotu/DLC — ta sama zawartość.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Anulowano instalację — istniejące pliki pozostały bez zmian.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Nie udało się zainstalować {0} plik(ów) — zamknij Steam (lub użyj Uruchom ponownie Steam) i spróbuj ponownie.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Dodano {0} — lua + {1} manifest(ów). Uruchom ponownie Steam, aby zastosować.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Dodano {0} — Steam pobierze manifesty. Uruchom ponownie Steam, aby zastosować.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Dodano {0}: lua + {1} manifest(ów).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Dodano {0}. Steam pobierze manifesty.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Otwórz w SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>WSPÓŁDZIELONY</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>To zastąpi zainstalowany lua. Sprawdź, co się zmienia:</value></data>
@@ -451,9 +448,9 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Usunąć to ustawienie?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>„{0}” zostanie usunięte z zapisanych ustawień. Nie wpływa to na samą grę.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Nie można usunąć ustawienia, które jest w użyciu.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Używana jest teraz „{0}”. Uruchom Steam ponownie, aby zmiana zadziałała.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Używana jest teraz „{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Nie udało się przełączyć ustawienia — plik lua może być w użyciu.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Zapisano. Uruchom Steam ponownie, aby zmiana zadziałała.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Zapisano.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Nie udało się zapisać — plik lua może być w użyciu.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Zapisano jako ustawienie.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Zapisz w „{0}”</value></data>
@@ -527,4 +524,34 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Osiągnięto dzienny limit Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Brak manifestu Hubcap dla tej aplikacji.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Pobieranie z Hubcap nie powiodło się ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Pobieranie</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Pobieranie</value></data>
+  <data name="Downloads_Subtitle" xml:space="preserve"><value>Pobieranie manifestów i poprawek, kolejkowane i instalowane po kolei.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nic się teraz nie pobiera. To, co uruchomisz w Dodaj lub Poprawki, pojawi się tutaj.</value></data>
+  <data name="Downloads_History_Empty" xml:space="preserve"><value>Brak ukończonych pobrań.</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Kolejka</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Historia</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>W kolejce</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Pobieranie</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Czeka na Ciebie</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Instalowanie</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Gotowe</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Niepowodzenie</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Anulowano</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Anuluj</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>W górę</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>W dół</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Wyczyść historię</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Sprawdź</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} z {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Pozostało {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Wymaga działania</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Przerwano przy zamykaniu aplikacji.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Odblokowanie DLC</value></data>
+  <data name="Downloads_Concurrency" xml:space="preserve"><value>Jednocześnie</value></data>
+  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Równoczesne pobierania</value></data>
+  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Ile pobrań działa jednocześnie. Instalacje zawsze wykonują się pojedynczo.</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Najpierw zainstaluj grę, aby zastosować poprawkę.</value></data>
 </root>

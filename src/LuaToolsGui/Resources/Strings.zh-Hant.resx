@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} 個資訊清單</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>已安裝 {0} 到 Steam。</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} 個檔案失敗——請關閉 Steam 後重試。</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 重新啟動 Steam 以套用。</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>依名稱或 App ID 搜尋...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>載入中…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID：{0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>共享倉庫</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>刪除 lua 檔案</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>刪除「{0}」（App ID {1}）？
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>移除「{0}」（App ID {1}）？
 
-這會從 Steam\config\stplug-in 中刪除其 .lua 檔案。刪除後請重新啟動 Steam 以使變更生效。</value></data>
+這會從 Steam\config\stplug-in 刪除它的 .lua 檔案。</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>刪除 lua 檔案</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>刪除 {0} 個 lua 檔案？
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>移除 {0} 個 lua 檔案？
 
-這會從 Steam\config\stplug-in 中刪除這些 .lua 檔案。刪除後請重新啟動 Steam 以使變更生效。</value></data>
+這會從 Steam\config\stplug-in 刪除這些 .lua 檔案。</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>刪除失敗</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>無法刪除檔案：
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>有 {0} 個檔案無法刪除。</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>重新啟動 Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>立即重新啟動 Steam 以使變更生效？</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>無法找到或啟動 Steam。請在設定中設定其位置。</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>修正</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>正在載入修正…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>安裝失敗</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>無法安裝——請關閉 Steam（或使用「重新啟動 Steam」）後重試。</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>修正已安裝</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} 資訊清單已安裝——Steam 正在重新啟動。</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} 資訊清單已安裝。重新啟動 Steam 以套用。</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>已安裝 {0} 的資訊清單。</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>找不到遊戲</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>請先在 Steam 中安裝 {0}，然後再套用修正。</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>修正部分套用</value></data>
@@ -353,8 +350,8 @@
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>倉庫/DLC 無變更——內容相同。</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>安裝已取消——現有檔案保持不變。</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>無法安裝 {0} 個檔案——請關閉 Steam（或使用「重新啟動 Steam」）後重試。</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>已新增 {0}——lua + {1} 個資訊清單。重新啟動 Steam 以套用。</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>已新增 {0}——Steam 將自動擷取資訊清單。重新啟動 Steam 以套用。</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>已新增 {0}：lua + {1} 個資訊清單。</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>已新增 {0}。Steam 將擷取資訊清單。</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>在 SteamDB 中開啟</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>共享</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>這將取代已安裝的 lua。請檢視變更內容：</value></data>
@@ -451,9 +448,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>刪除這個預設集？</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>「{0}」將從你儲存的預設集中移除。這不會影響遊戲本身。</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>無法刪除正在使用的預設集。</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>已切換到「{0}」。重新啟動 Steam 後生效。</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>現在使用「{0}」。</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>切換預設集失敗 — lua 檔案可能正被占用。</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>已儲存。重新啟動 Steam 後生效。</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>已儲存。</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>儲存失敗 — lua 檔案可能正被占用。</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>已另存為預設集。</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>儲存到「{0}」</value></data>
@@ -527,4 +524,34 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>已達到每日 Hubcap 上限。</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>此應用程式沒有可用的 Hubcap 資訊清單。</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 下載失敗（{0}）。</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>下載</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>下載</value></data>
+  <data name="Downloads_Subtitle" xml:space="preserve"><value>資訊清單與修正檔的下載，依序排隊並安裝。</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>目前沒有下載。你在「新增」或「修正」頁面開始的下載會顯示在這裡。</value></data>
+  <data name="Downloads_History_Empty" xml:space="preserve"><value>尚無已完成的下載。</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>佇列</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>歷史紀錄</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>排隊中</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>下載中</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>等待你確認</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>安裝中</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>已完成</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>失敗</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>已取消</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>重試</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>移除</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>上移</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>下移</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>清除歷史紀錄</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>檢視</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} / {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>剩餘 {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>需要操作</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>應用程式關閉時被中斷。</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC 解鎖</value></data>
+  <data name="Downloads_Concurrency" xml:space="preserve"><value>同時進行</value></data>
+  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>同時下載數</value></data>
+  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>同時進行的下載數量。安裝一律逐一進行。</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>請先安裝遊戲，才能套用修正。</value></data>
 </root>

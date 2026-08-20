@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="LuaToolsGui.Views.FixesView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -476,7 +476,7 @@
                                                         CommandParameter="{Binding}"
                                                         Content="{x:Static res:Strings.Fixes_Manifest}"
                                                         Icon="{ui:SymbolIcon Document24}"
-                                                        IsEnabled="{Binding DataContext.NotBusy, ElementName=Root}"
+                                                        IsEnabled="{Binding CanDownloadManifest}"
                                                         Visibility="{Binding HasManifest, Converter={StaticResource BoolToVis}}" />
                                                     <ui:Button
                                                         Appearance="Primary"
@@ -484,9 +484,27 @@
                                                         CommandParameter="{Binding}"
                                                         Content="{x:Static res:Strings.Fixes_Fix}"
                                                         Icon="{ui:SymbolIcon Wrench24}"
-                                                        IsEnabled="{Binding DataContext.NotBusy, ElementName=Root}"
+                                                        IsEnabled="{Binding CanDownloadFix}"
+                                                        ToolTip="{Binding FixHint}"
+                                                        ToolTipService.ShowOnDisabled="True"
                                                         Visibility="{Binding HasFix, Converter={StaticResource BoolToVis}}" />
                                                 </StackPanel>
+
+                                                <!--  Per-slot progress, bound straight to the queue item.  -->
+                                                <ProgressBar
+                                                    Height="4"
+                                                    Margin="0,8,0,0"
+                                                    IsIndeterminate="{Binding ManifestItem.IsIndeterminate, FallbackValue=False}"
+                                                    Maximum="100"
+                                                    Value="{Binding ManifestItem.Percent, Mode=OneWay, FallbackValue=0}"
+                                                    Visibility="{Binding ManifestItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
+                                                <ProgressBar
+                                                    Height="4"
+                                                    Margin="0,8,0,0"
+                                                    IsIndeterminate="{Binding FixItem.IsIndeterminate, FallbackValue=False}"
+                                                    Maximum="100"
+                                                    Value="{Binding FixItem.Percent, Mode=OneWay, FallbackValue=0}"
+                                                    Visibility="{Binding FixItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
                                             </StackPanel>
                                         </Border>
                                     </DataTemplate>
@@ -494,16 +512,6 @@
                             </ItemsControl>
                         </StackPanel>
                     </ScrollViewer>
-
-                    <!-- Progress while downloading -->
-                    <ProgressBar
-                        Grid.Row="3"
-                        Height="6"
-                        Margin="0,10,0,0"
-                        IsIndeterminate="{Binding DataContext.IsProgressIndeterminate, ElementName=Root}"
-                        Maximum="100"
-                        Value="{Binding DataContext.Progress, ElementName=Root}"
-                        Visibility="{Binding DataContext.IsBusy, ElementName=Root, Converter={StaticResource BoolToVis}}" />
                 </Grid>
             </Border>
         </Grid>

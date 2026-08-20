@@ -548,12 +548,41 @@
                                         Visibility="{Binding IsLocked, Converter={StaticResource BoolToVis}}" />
                                 </Grid>
 
+                                <!--  Progress is owned by the shared download queue; this row is just a view onto it.  -->
                                 <ProgressBar
                                     Margin="0,8,0,0"
-                                    IsIndeterminate="{Binding IsProgressIndeterminate}"
+                                    IsIndeterminate="{Binding QueueItem.IsIndeterminate, FallbackValue=False}"
                                     Maximum="100"
-                                    Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}"
-                                    Value="{Binding Progress, Mode=OneWay}" />
+                                    Visibility="{Binding QueueItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}"
+                                    Value="{Binding QueueItem.Percent, Mode=OneWay, FallbackValue=0}" />
+
+                                <StackPanel
+                                    Margin="0,5,0,0"
+                                    Orientation="Horizontal"
+                                    Visibility="{Binding QueueItem.ShowProgress, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding QueueItem.SizeLabel}" />
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Text="{Binding QueueItem.RateLabel}" />
+                                    <TextBlock
+                                        Margin="8,0,0,0"
+                                        FontSize="11"
+                                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                        Text="{Binding QueueItem.EtaLabel}" />
+                                </StackPanel>
+
+                                <!--  Queued behind something else: say so, since nothing is moving yet.  -->
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding QueueItem.StatusLabel}"
+                                    Visibility="{Binding QueueItem.CanReorder, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}" />
                             </StackPanel>
                         </Border>
                     </DataTemplate>

@@ -208,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} маніфест(ів)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} встановлено в Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> Не вдалося обробити {0} файл(ів) — закрийте Steam і повторіть спробу.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Перезапустіть Steam, щоб застосувати.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Пошук за назвою або App ID...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Завантаження…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App ID: {0}</value></data>
@@ -276,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Спільне депо</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Видалити файл lua</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>Видалити «{0}» (App ID {1})?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>Вилучити «{0}» (App ID {1})?
 
-Це видалить його файл .lua з Steam\config\stplug-in. Потім перезапустіть Steam, щоб зміна набула чинності.</value></data>
+Це вилучить його файл .lua з Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Видалити файли lua</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Видалити {0} файлів lua?
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Вилучити файлів lua: {0}?
 
-Це видалить файли .lua з Steam\config\stplug-in. Потім перезапустіть Steam, щоб зміни набули чинності.</value></data>
+Це вилучить файли .lua з Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Не вдалося видалити</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Не вдалося видалити файл:
 {0}</value></data>
@@ -290,7 +289,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>Не вдалося видалити {0} файлів.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Перезапустити Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Перезапустити Steam зараз, щоб зміни набули чинності?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Не вдалося знайти або запустити Steam. Укажіть його розташування в Налаштуваннях.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Фікси</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Завантаження фіксів…</value></data>
@@ -307,8 +305,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Помилка встановлення</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Не вдалося встановити — закрийте Steam (або перезапустіть Steam) і спробуйте ще раз.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Фікс встановлено</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Маніфест {0} встановлено — Steam перезапускається.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Маніфест {0} встановлено. Перезапустіть Steam, щоб застосувати.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Маніфест {0} встановлено.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Гру не знайдено</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Спочатку встановіть {0} у Steam, а потім застосуйте фікс.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Фікс застосовано частково</value></data>
@@ -353,8 +350,8 @@
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Немає змін депо/DLC — той самий вміст.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Встановлення скасовано — наявні файли не змінено.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Не вдалося встановити {0} файл(ів) — закрийте Steam (або скористайтеся «Перезапустити Steam») і спробуйте ще раз.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} додано — lua + {1} маніфест(ів). Перезапустіть Steam, щоб застосувати.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} додано — Steam завантажить маніфести. Перезапустіть Steam, щоб застосувати.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Додано {0}: lua + маніфестів: {1}.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Додано {0}. Steam завантажить маніфести.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Відкрити в SteamDB</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>СПІЛЬНИЙ</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Це замінить встановлений lua. Перегляньте, що зміниться:</value></data>
@@ -451,9 +448,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Видалити цей пресет?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>«{0}» буде вилучено зі збережених пресетів. На саму гру це не впливає.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Не можна видалити пресет, який зараз використовується.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Тепер використовується «{0}». Перезапустіть Steam, щоб зміни набули чинності.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Тепер використовується «{0}».</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Не вдалося перемкнути пресет — файл lua може бути зайнятий.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Збережено. Перезапустіть Steam, щоб зміни набули чинності.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Збережено.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Не вдалося зберегти — файл lua може бути зайнятий.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Збережено як пресет.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Зберегти в «{0}»</value></data>
@@ -527,4 +524,34 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Досягнуто денний ліміт Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Для цього застосунку немає маніфесту Hubcap.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Не вдалося завантажити з Hubcap ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="Downloads_Subtitle" xml:space="preserve"><value>Завантаження маніфестів і фіксів, ставляться в чергу й встановлюються по порядку.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Зараз нічого не завантажується. Те, що ви запустите в «Додати» або «Фікси», з'явиться тут.</value></data>
+  <data name="Downloads_History_Empty" xml:space="preserve"><value>Завершених завантажень ще немає.</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Черга</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Історія</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>У черзі</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Завантаження</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Очікує на вас</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Встановлення</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Готово</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Помилка</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Скасовано</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Повторити</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Вилучити</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Вгору</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Вниз</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Очистити історію</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Переглянути</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} з {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Залишилось {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Потрібна дія</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Перервано під час закриття застосунку.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Розблокування DLC</value></data>
+  <data name="Downloads_Concurrency" xml:space="preserve"><value>Одночасно</value></data>
+  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Одночасні завантаження</value></data>
+  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Скільки завантажень виконується одночасно. Встановлення завжди відбувається по одному.</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Спочатку встановіть гру, щоб застосувати фікс.</value></data>
 </root>
