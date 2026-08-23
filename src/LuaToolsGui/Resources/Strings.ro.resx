@@ -526,8 +526,7 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Descărcarea Hubcap a eșuat ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Descărcări</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Descărcări</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Descărcări de manifeste și fixuri, puse la coadă și instalate pe rând.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Nicio descărcare în curs. Cele pornite din Adaugă sau Fixuri apar aici.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nicio descărcare în curs. Hai, descarcă ceva!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Încă nu există descărcări finalizate.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Coadă</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Istoric</value></data>
@@ -550,8 +549,29 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Necesită acțiune</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Întreruptă la închiderea aplicației.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Deblocare DLC</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Simultan</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Descărcări simultane</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Câte descărcări rulează în același timp. Instalările se fac întotdeauna una câte una.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Instalează întâi jocul pentru a aplica un fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>În pauză</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Se verifică…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pauză</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Reia</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Fișiere depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depouri · {0} din {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Nu s-a putut obține descărcătorul de depouri.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Nu s-au găsit chei de decriptare pentru acest joc.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depoul {0} a eșuat: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>S-au descărcat {0} depouri în {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Descarcă</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Alege depourile de descărcat</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Descarcă {0} depouri ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Acest depou nu declară nicio versiune de descărcat.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Selectează tot</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Niciun depou selectat</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Alege unde să salvezi fișierele depoului</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Spațiu insuficient pe disc: necesită {0}, doar {1} liberi.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Salvează în</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Necesită {0} · {1} liberi pe {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Autentifică-te ca să descarci acest depou.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Autentifică-te ca să descarci depouri.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>se obține manifestul</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nu s-a putut obține manifestul acestui depou.</value></data>
 </root>

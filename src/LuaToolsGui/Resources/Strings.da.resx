@@ -526,8 +526,7 @@ Dette sletter .lua-filerne fra Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-download mislykkedes ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Downloads af manifester og fixes, sat i kø og installeret i rækkefølge.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Ingen downloads lige nu. Dem, du starter under Tilføj eller Fixes, vises her.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Ingen downloads lige nu. Kom i gang – hent noget!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Ingen færdige downloads endnu.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kø</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historik</value></data>
@@ -550,8 +549,29 @@ Dette sletter .lua-filerne fra Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Handling kræves</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Afbrudt da appen blev lukket.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-oplåsning</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Ad gangen</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Samtidige downloads</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Hvor mange downloads der kører samtidig. Installationer kører altid én ad gangen.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installér spillet først for at anvende et fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Sat på pause</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verificerer…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Genoptag</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depotfiler</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depoter · {0} af {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Kunne ikke hente depot-downloaderen.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Ingen dekrypteringsnøgler fundet til dette spil.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} fejlede: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Hentede {0} depoter til {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Hent</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Vælg depoter, der skal hentes</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Hent {0} depoter ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Dette depot angiver ingen version at hente.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Vælg alle</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Ingen depoter valgt</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Vælg, hvor depotfilerne skal gemmes</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Ikke nok diskplads: kræver {0}, kun {1} ledig.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Gem i</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Kræver {0} · {1} ledig på {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Log ind for at hente dette depot.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Log ind for at hente depoter.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>henter manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kunne ikke hente dette depots manifest.</value></data>
 </root>

@@ -526,8 +526,7 @@ Dies löscht die .lua-Dateien aus Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-Download fehlgeschlagen ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Downloads von Manifesten und Fixes, der Reihe nach eingereiht und installiert.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Derzeit keine Downloads. Was du unter Hinzufügen oder Fixes startest, erscheint hier.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Derzeit keine Downloads. Lad dir was runter!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Noch keine abgeschlossenen Downloads.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Warteschlange</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Verlauf</value></data>
@@ -550,8 +549,29 @@ Dies löscht die .lua-Dateien aus Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Aktion erforderlich</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Beim Schließen der App unterbrochen.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-Freischaltung</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Gleichzeitig</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Gleichzeitige Downloads</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Wie viele Downloads gleichzeitig laufen. Installationen laufen immer einzeln.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installiere zuerst das Spiel, um einen Fix anzuwenden.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Pausiert</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Wird geprüft…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Fortsetzen</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot-Dateien</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} von {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Der Depot-Downloader konnte nicht geladen werden.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Keine Entschlüsselungsschlüssel für dieses Spiel gefunden.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} fehlgeschlagen: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} Depots nach {1} heruntergeladen.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Herunterladen</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Depots zum Herunterladen auswählen</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} Depots herunterladen ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Dieses Depot gibt keine herunterladbare Version an.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Alle auswählen</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Keine Depots ausgewählt</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Speicherort für die Depot-Dateien wählen</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Nicht genug Speicherplatz: benötigt {0}, nur {1} frei.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Speichern in</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Benötigt {0} · {1} frei auf {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Melde dich an, um dieses Depot zu laden.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Zum Laden von Depots anmelden.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>Manifest wird geholt</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Das Manifest dieses Depots konnte nicht geladen werden.</value></data>
 </root>

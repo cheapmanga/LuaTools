@@ -21,7 +21,9 @@ public class ManifestJobFactory(
     LuaInstaller installer,
     SteamLibraryService library,
     CoverCache covers,
-    ToastService toast)
+    ToastService toast,
+    DepotDownloaderService depotTool,
+    SteamDepotInfo depotInfo)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -40,7 +42,7 @@ public class ManifestJobFactory(
             title,
             SourceMeta.Get(sourceName).DisplayName ?? sourceName,
             covers.GetLocalPath(appId),
-            (progress, ct) => needsKey
+            (_, progress, ct) => needsKey
                 ? hubcap.DownloadManifestAsync(appId.ToString(), settings.HubcapApiKey ?? "", progress, ct)
                 : api.DownloadManifestAsync(appId.ToString(), sourceName, gameName, progress, ct),
             (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
@@ -63,7 +65,7 @@ public class ManifestJobFactory(
             title,
             Resources.Strings.Downloads_Kind_Dlc,
             covers.GetLocalPath(appId),
-            (progress, ct) => api.GenerateDlcAsync(appId.ToString(), baseAppId, gameName, progress, ct),
+            (_, progress, ct) => api.GenerateDlcAsync(appId.ToString(), baseAppId, gameName, progress, ct),
             (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
             ConfirmAsync: null,
             OnFinished: onFinished,
@@ -87,7 +89,7 @@ public class ManifestJobFactory(
             gameName,
             fixTitle,
             covers.GetLocalPath(appId),
-            (progress, ct) =>
+            (_, progress, ct) =>
             {
                 // Verify the game is on disk BEFORE the request. /api/denuvo/download spends a slot of
                 // the server-side daily limit and the fix zip is game binaries, so discovering "not
@@ -106,6 +108,220 @@ public class ManifestJobFactory(
             ConfirmAsync: null,
             OnFinished: onFinished);
     }
+
+    /// <summary>
+    /// Raw depot content for a game. ONE queue item covers the whole selection; internally it runs the
+    /// downloader once per depot, in list order.
+    /// </summary>
+    /// <remarks>
+    /// Sequential by necessity, not preference: the tool's <c>-manifestfile</c> is a single value applied
+    /// to every depot in its own loop, so a batched call would feed them all the same manifest.
+    /// </remarks>
+    public DownloadJob CreateDepotJob(
+        long appId, string gameName, IReadOnlyList<DepotSelection> selections, string outDir,
+        Action<DownloadItem, JobResult?>? onFinished = null)
+    {
+        long totalSize = selections.Sum(s => s.Size);
+        return new DownloadJob(
+            DownloadKind.Depot,
+            $"depot:{appId}",
+            appId,
+            gameName,
+            Resources.Strings.Downloads_Kind_Depot,
+            covers.GetLocalPath(appId),
+            (item, progress, ct) => RunDepotsAsync(item, appId, gameName, selections, outDir, totalSize, progress, ct),
+            // Nothing to install: the depots were written straight to outDir.
+            (_, _, _) => Task.FromResult(new JobResult(true,
+                string.Format(Resources.Strings.Depot_Status_Done, selections.Count, outDir), outDir)),
+            ConfirmAsync: null,
+            OnFinished: onFinished);
+    }
+
+    private async Task<DownloadedFile> RunDepotsAsync(
+        DownloadItem item, long appId, string gameName, IReadOnlyList<DepotSelection> selections,
+        string outDir, long totalSize, IProgress<DownloadProgress> progress, CancellationToken ct)
+    {
+        var keys = depotTool.ResolveKeys(appId);
+        if (keys.Count == 0) throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoKeys);
+
+        // Refuse up front rather than part-way through. The downloader pre-allocates every file at its
+        // full size BEFORE fetching a byte, so a short disk fails almost immediately — but only after it
+        // has already created multi-GB of zero-filled files. Checking here also gives a message that says
+        // what's actually wrong instead of a raw allocation error.
+        long needed = selections.Where(s => !item.CompletedDepots.Contains(s.DepotId)).Sum(s => s.Size);
+        if (needed > 0 && DepotDownloaderService.FreeSpaceFor(outDir) is { } free && free < needed)
+            throw new DownloadAbortedException(string.Format(
+                Resources.Strings.Depot_Err_NoSpace, ByteFormat.Size(needed), ByteFormat.Size(free)));
+
+        // Sampled ONCE, before anything runs. Checking it inside the loop would be self-fulfilling:
+        // the first depot creates outDir, so every later depot would see it and think a previous session
+        // had written there. (Harmless in cost — a depot whose files don't exist yet validates nothing —
+        // but the intent is "did an earlier run leave partial files here", which is only true up front.)
+        bool outDirExisted = Directory.Exists(outDir);
+
+        string keysFile = DepotDownloaderService.WriteKeysFile(keys);
+        try
+        {
+            long done = 0;
+            for (int i = 0; i < selections.Count; i++)
+            {
+                ct.ThrowIfCancellationRequested();
+                var sel = selections[i];
+
+                // Resume skips what's already finished rather than re-hashing tens of GB.
+                if (item.CompletedDepots.Contains(sel.DepotId)) { done += sel.Size; continue; }
+
+                string step = string.Format(Resources.Strings.Downloads_Depots_Progress, i + 1, selections.Count);
+                OnUi(() => item.Detail = step);
+
+                // A shared redistributable carries no gid or size in the game's own app-info (it's a
+                // three-field stub pointing at the owning app), so both are resolved here rather than at
+                // pick time. Cached per app by SteamDepotInfo, and the owner is app 228980 for nearly
+                // every game, so this costs one lookup per session across all downloads.
+                var sized = await ResolveSharedAsync(sel, ct);
+                // The up-front total assumed 0 bytes for a shared depot. Correct it now we know better,
+                // so the overall bar stays honest instead of finishing early.
+                totalSize += sized.Size - sel.Size;
+
+                // Resolve the manifest, fetching it into depotcache if Steam doesn't already have it.
+                // This is what lets a depot be downloaded at all when the game was added with
+                // "Auto Update Apps" on, which comments out the pins and skips the manifest files.
+                var ready = sized with { ManifestPath = await EnsureManifestAsync(item, sized, step, ct) };
+
+                // Only the FIRST depot after a resume is the partially-written one, so only it needs the
+                // (expensive) re-hash. Consume the flag so later depots download at full speed.
+                //
+                // An existing output folder forces the same treatment even on a fresh item: it means a
+                // previous session already wrote here, and CompletedDepots does not survive an app
+                // restart. Skipping validation there would hand back a half-written file reported as
+                // complete, which is this tool's worst failure mode.
+                bool validate = item.NeedsValidate || outDirExisted;
+                item.NeedsValidate = false;
+                if (validate) OnUi(() => item.Status = DownloadStatus.Verifying);
+
+                long baseBytes = done;
+                bool sawBytes = false;
+                var relay = new ProgressRelay<double>(f =>
+                {
+                    // First real progress means hashing is over and bytes are moving again.
+                    if (validate && !sawBytes)
+                    {
+                        sawBytes = true;
+                        OnUi(() => item.Status = DownloadStatus.Downloading);
+                    }
+                    progress.Report(new DownloadProgress(baseBytes + (long)(f * ready.Size), totalSize));
+                });
+
+                var res = await depotTool.RunAsync(appId, ready, keysFile, outDir, validate, relay, ct);
+                if (!res.Ok)
+                    throw new DownloadAbortedException(res.Error == "tool"
+                        ? Resources.Strings.Depot_Err_Tool
+                        : string.Format(Resources.Strings.Depot_Err_Failed, sel.DepotId, res.Error ?? ""));
+
+                item.CompletedDepots.Add(sel.DepotId);
+                done += ready.Size;
+                progress.Report(new DownloadProgress(done, totalSize));
+            }
+
+            OnUi(() => item.Detail = null);
+            // Sentinel for the queue's file plumbing: a directory, so the staged-file cleanup no-ops on it.
+            return new DownloadedFile(outDir, gameName);
+        }
+        finally
+        {
+            DeleteStaged(keysFile); // holds decryption keys; never leave it lying around
+        }
+    }
+
+    /// <summary>
+    /// Fill in a shared depot's manifest id and size from the app that actually owns its content.
+    /// Returns the selection unchanged for an ordinary depot (one that already declares its own gid).
+    /// </summary>
+    private async Task<DepotSelection> ResolveSharedAsync(DepotSelection sel, CancellationToken ct)
+    {
+        if (sel.ManifestId is not null || sel.FromAppId is not { } owner) return sel;
+
+        var info = await depotInfo.GetAsync(owner, ct);
+        if (info?.Depots.FirstOrDefault(d => d.Id == sel.DepotId) is not { PublicManifestId: not null } owned)
+            throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoManifest);
+
+        return sel with { ManifestId = owned.PublicManifestId, Size = owned.Size };
+    }
+
+    /// <summary>
+    /// The depotcache path for a depot's manifest, fetching it from the API and installing it there if
+    /// it's missing. Never returns null — it throws with a user-facing reason instead.
+    /// </summary>
+    private async Task<string> EnsureManifestAsync(
+        DownloadItem item, DepotSelection sel, string step, CancellationToken ct)
+    {
+        // Already on disk (a previous run, a pinned install, or Steam's own copy): no request at all.
+        if (depotTool.ResolveManifestPath(sel.DepotId, sel.ManifestId!) is { } have) return have;
+
+        if (!depotTool.CanFetchManifests)
+            throw new DownloadAbortedException(Resources.Strings.Depot_Err_SignIn);
+
+        OnUi(() => item.Detail = $"{step} · {Resources.Strings.Downloads_Depot_FetchingManifest}");
+
+        DownloadedFile staged;
+        try
+        {
+            staged = await api.DownloadDepotManifestAsync(sel.DepotId, sel.ManifestId!, null, ct);
+        }
+        catch (AuthException)
+        {
+            // Signed out between opening the picker and the download starting.
+            throw new DownloadAbortedException(Resources.Strings.Depot_Err_SignIn);
+        }
+
+        // The API is expected to serve raw manifest bytes, but has been observed returning them inside
+        // a ZIP (a single entry named "z"). Sniff rather than assume, exactly as InstallManifest does for
+        // lua/zip: writing the wrapper into depotcache yields a file SteamKit rejects with
+        // "Unrecognized magic value 4034B50" (0x04034B50 being the PK header), and it is sticky
+        // once written because InstallManifestFile skips an existing destination.
+        string unzipDir = Path.Combine(Path.GetDirectoryName(staged.FilePath)!, "mf_" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            string manifestFile = staged.FilePath;
+            if (IsZip(staged.FilePath))
+            {
+                Directory.CreateDirectory(unzipDir);
+                using var archive = ZipFile.OpenRead(staged.FilePath);
+                var entry = archive.Entries.FirstOrDefault(e => !string.IsNullOrEmpty(e.Name))
+                    ?? throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoManifest);
+
+                // InstallManifestFile names the destination after this file, so it must already carry
+                // the <depot>_<manifest>.manifest name; the entry inside the zip is just called "z".
+                manifestFile = Path.Combine(unzipDir, $"{sel.DepotId}_{sel.ManifestId}.manifest");
+                entry.ExtractToFile(manifestFile, overwrite: true);
+            }
+
+            // Check BEFORE writing. A bad file that reaches depotcache is sticky, so every later run
+            // resolves it locally and fails identically with no way back short of deleting it by hand.
+            if (!IsSteamManifest(manifestFile))
+                throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoManifest);
+
+            // Reuse the same depotcache write that manifest installs already use: it keeps the
+            // <depot>_<manifest>.manifest name, skips an identical existing file and stamps the mtime.
+            var result = installer.InstallManifestFile(manifestFile);
+            if (result.AnyFailed)
+                throw new DownloadAbortedException(result.Error ?? Resources.Strings.Depot_Err_NoManifest);
+        }
+        finally
+        {
+            DeleteStaged(staged.FilePath);
+            try { if (Directory.Exists(unzipDir)) Directory.Delete(unzipDir, recursive: true); } catch { }
+        }
+
+        OnUi(() => item.Detail = step);
+
+        return depotTool.ResolveManifestPath(sel.DepotId, sel.ManifestId!)
+               ?? throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoManifest);
+    }
+
+    /// <summary>Marshal an observable-property write onto the dispatcher (this runs on a worker).</summary>
+    private static void OnUi(Action a) =>
+        System.Windows.Application.Current?.Dispatcher.InvokeAsync(a);
 
     // ── Install phases ───────────────────────────────────────────────
 
@@ -240,6 +456,22 @@ public class ManifestJobFactory(
             using var fs = File.OpenRead(path);
             Span<byte> sig = stackalloc byte[4];
             return fs.Read(sig) == 4 && sig[0] == 0x50 && sig[1] == 0x4B && sig[2] == 0x03 && sig[3] == 0x04;
+        }
+        catch { return false; }
+    }
+
+    /// <summary>
+    /// True if the file starts with Steam's depot-manifest magic (0x71F617D0, little-endian on disk).
+    /// A cheap guard against storing something that merely arrived under a .manifest name.
+    /// </summary>
+    private static bool IsSteamManifest(string path)
+    {
+        try
+        {
+            using var fs = File.OpenRead(path);
+            Span<byte> sig = stackalloc byte[4];
+            return fs.Read(sig) == 4 &&
+                   sig[0] == 0xD0 && sig[1] == 0x17 && sig[2] == 0xF6 && sig[3] == 0x71;
         }
         catch { return false; }
     }

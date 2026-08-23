@@ -81,6 +81,14 @@
                                 Text="{x:Static res:Strings.Downloads_ActionRequired}" />
                         </Border>
 
+                        <!--  Multi-step detail, e.g. a depot job's "Depots - 3 of 12".  -->
+                        <TextBlock
+                            Margin="0,4,0,0"
+                            FontSize="11"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="{Binding Detail}"
+                            Visibility="{Binding HasDetail, Converter={StaticResource BoolToVis}}" />
+
                         <ProgressBar
                             Height="4"
                             Margin="0,8,0,0"
@@ -129,6 +137,21 @@
                             CommandParameter="{Binding}"
                             Content="{x:Static res:Strings.Downloads_Action_Review}"
                             Visibility="{Binding NeedsAction, Converter={StaticResource BoolToVis}}" />
+                        <ui:Button
+                            Margin="4,0,0,0"
+                            Command="{Binding DataContext.PauseCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            Icon="{ui:SymbolIcon Pause24}"
+                            ToolTip="{x:Static res:Strings.Downloads_Action_Pause}"
+                            Visibility="{Binding CanPause, Converter={StaticResource BoolToVis}}" />
+                        <ui:Button
+                            Margin="4,0,0,0"
+                            Appearance="Primary"
+                            Command="{Binding DataContext.ResumeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding}"
+                            Content="{x:Static res:Strings.Downloads_Action_Resume}"
+                            Icon="{ui:SymbolIcon Play24}"
+                            Visibility="{Binding CanResume, Converter={StaticResource BoolToVis}}" />
                         <ui:Button
                             Margin="4,0,0,0"
                             Command="{Binding DataContext.MoveUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
@@ -215,39 +238,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--  Header: title + subtitle, concurrency picker  -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <StackPanel>
-                <TextBlock
-                    FontSize="22"
-                    FontWeight="Bold"
-                    Text="{x:Static res:Strings.Downloads_Title}" />
-                <TextBlock
-                    Margin="0,3,0,0"
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="{x:Static res:Strings.Downloads_Subtitle}"
-                    TextWrapping="Wrap" />
-            </StackPanel>
-
-            <StackPanel
-                Grid.Column="1"
-                VerticalAlignment="Top"
-                Orientation="Horizontal">
-                <TextBlock
-                    Margin="0,0,8,0"
-                    VerticalAlignment="Center"
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="{x:Static res:Strings.Downloads_Concurrency}" />
-                <ComboBox
-                    Width="70"
-                    ItemsSource="{Binding ConcurrencyOptions}"
-                    SelectedItem="{Binding MaxConcurrent, Mode=TwoWay}" />
-            </StackPanel>
-        </Grid>
+        <!--  Header: title  -->
+        <TextBlock
+            FontSize="22"
+            FontWeight="Bold"
+            Text="{x:Static res:Strings.Downloads_Title}" />
 
         <ScrollViewer
             Grid.Row="1"

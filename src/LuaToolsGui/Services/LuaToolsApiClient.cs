@@ -158,6 +158,26 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         return DownloadFileAsync(url, $"{appid}.zip", progress, ct);
     }
 
+    /// <summary>
+    /// One depot's raw <c>.manifest</c> by id, so a depot download no longer depends on Steam happening
+    /// to have the file in its depotcache.
+    /// </summary>
+    /// <remarks>
+    /// Unlike every other endpoint here the ids go in the PATH, not the query string. Auth is the same
+    /// Bearer token as the rest, and the response is raw bytes on 200 / a JSON error otherwise, which
+    /// <see cref="SendAsync"/> already turns into an <see cref="ApiException"/>.
+    ///
+    /// <para>This one writes no history row and does NOT consume the daily download cap. It is instead
+    /// limited to 120 requests per 10 minutes per user, and only cache misses count. A large game is
+    /// ~20 depots, comfortably inside that — which is why manifests are fetched lazily per depot at
+    /// download time rather than eagerly when the picker opens.</para>
+    /// </remarks>
+    public Task<DownloadedFile> DownloadDepotManifestAsync(
+        long depotId, string manifestId,
+        IProgress<DownloadProgress>? progress, CancellationToken ct = default)
+        => DownloadFileAsync($"/api/givemethemanifestpunk/{depotId}/{manifestId}",
+                             $"{depotId}_{manifestId}.manifest", progress, ct);
+
     public Task<DownloadedFile> GenerateDlcAsync(
         string appid, string baseAppId, string? gameName,
         IProgress<DownloadProgress>? progress, CancellationToken ct = default)

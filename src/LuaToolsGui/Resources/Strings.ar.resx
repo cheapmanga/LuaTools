@@ -552,8 +552,7 @@
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>فشل التنزيل من Hubcap ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>التنزيلات</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>التنزيلات</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>تنزيلات الملفات والإصلاحات، تُوضع في قائمة الانتظار وتُثبَّت بالترتيب.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>لا توجد تنزيلات الآن. ما تبدأه من صفحة الإضافة أو الإصلاحات يظهر هنا.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>لا توجد تنزيلات الآن. ابدأ بتنزيل شيء ما!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>لا توجد تنزيلات مكتملة بعد.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>قائمة الانتظار</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>السجل</value></data>
@@ -576,8 +575,29 @@
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>مطلوب إجراء</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>توقّف عند إغلاق التطبيق.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>فتح DLC</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>في وقت واحد</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>التنزيلات المتزامنة</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>عدد التنزيلات التي تعمل في الوقت نفسه. التثبيت يتم دائمًا واحدًا تلو الآخر.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>ثبّت اللعبة أولاً لتطبيق الإصلاح.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>متوقف مؤقتًا</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>جارٍ التحقق…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>إيقاف مؤقت</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>استئناف</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>ملفات المستودع</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>المستودعات · {0} من {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>تعذّر الحصول على أداة تنزيل المستودعات.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>لم يتم العثور على مفاتيح فك تشفير لهذه اللعبة.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>فشل المستودع {0}: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>تم تنزيل {0} مستودع إلى {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>تنزيل</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>اختر المستودعات المراد تنزيلها</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>تنزيل {0} مستودع ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>هذا المستودع لا يعلن عن أي إصدار للتنزيل.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>تحديد الكل</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>لم يتم اختيار أي مستودع</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>اختر مكان حفظ ملفات المستودع</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>لا توجد مساحة كافية على القرص: يحتاج {0}، والمتاح {1} فقط.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>حفظ في</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>يحتاج {0} · متاح {1} على {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل هذا المستودع.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل المستودعات.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>جارٍ جلب الملف</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>تعذّر الحصول على ملف manifest لهذا المستودع.</value></data>
 </root>

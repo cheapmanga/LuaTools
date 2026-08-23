@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LuaToolsGui.Services;
 using LuaToolsGui.Services.Downloads;
 
 namespace LuaToolsGui.ViewModels;
@@ -14,10 +13,9 @@ public partial class DownloadsViewModel : ObservableObject
 {
     private readonly DownloadQueue _queue;
 
-    public DownloadsViewModel(DownloadQueue queue, SettingsService settings)
+    public DownloadsViewModel(DownloadQueue queue)
     {
         _queue = queue;
-        _maxConcurrent = settings.MaxConcurrentDownloads;
 
         _queue.Items.CollectionChanged += (_, _) => RaiseCounts();
         _queue.History.CollectionChanged += (_, _) => RaiseCounts();
@@ -34,14 +32,6 @@ public partial class DownloadsViewModel : ObservableObject
     public bool HasHistory => _queue.History.Count > 0;
     public bool IsEmpty => !HasItems;
 
-    /// <summary>How many downloads run at once. Persisted, and applied to the live queue immediately.</summary>
-    [ObservableProperty] private int _maxConcurrent;
-
-    partial void OnMaxConcurrentChanged(int value) => _queue.MaxConcurrent = value;
-
-    /// <summary>Options for the concurrency dropdown.</summary>
-    public IReadOnlyList<int> ConcurrencyOptions { get; } = [1, 2, 3, 4, 5];
-
     private void RaiseCounts()
     {
         OnPropertyChanged(nameof(HasItems));
@@ -56,6 +46,13 @@ public partial class DownloadsViewModel : ObservableObject
 
     [RelayCommand]
     private void Retry(DownloadItem item) => _queue.Retry(item);
+
+    /// <summary>Depot downloads only — see <see cref="DownloadItem.CanPause"/>.</summary>
+    [RelayCommand]
+    private void Pause(DownloadItem item) => _queue.Pause(item);
+
+    [RelayCommand]
+    private void Resume(DownloadItem item) => _queue.Resume(item);
 
     [RelayCommand]
     private void Remove(DownloadItem item) => _queue.Remove(item);

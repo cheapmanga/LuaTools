@@ -526,8 +526,7 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-download mislukt ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Downloads van manifests en fixes, op volgorde in de wachtrij gezet en geïnstalleerd.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Geen downloads bezig. Wat je start via Toevoegen of Fixes verschijnt hier.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Geen downloads bezig. Kom op, download iets!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Nog geen voltooide downloads.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Wachtrij</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Geschiedenis</value></data>
@@ -550,8 +549,29 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Actie vereist</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Onderbroken toen de app werd afgesloten.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-ontgrendeling</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Tegelijk</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Gelijktijdige downloads</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Hoeveel downloads tegelijk lopen. Installaties gebeuren altijd één voor één.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installeer eerst de game om een fix toe te passen.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Gepauzeerd</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verifiëren…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pauzeren</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Hervatten</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depotbestanden</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} van {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Kon de depot-downloader niet ophalen.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Geen ontsleutelsleutels gevonden voor dit spel.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} mislukt: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depots gedownload naar {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Downloaden</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Kies depots om te downloaden</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} depots downloaden ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Dit depot geeft geen te downloaden versie op.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Alles selecteren</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Geen depots geselecteerd</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Kies waar de depotbestanden worden opgeslagen</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Niet genoeg schijfruimte: vereist {0}, slechts {1} vrij.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Opslaan in</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Vereist {0} · {1} vrij op {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Meld je aan om dit depot te downloaden.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Meld je aan om depots te downloaden.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest ophalen</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kon het manifest van dit depot niet ophalen.</value></data>
 </root>

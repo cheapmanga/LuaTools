@@ -4,6 +4,8 @@ using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LuaToolsGui.Services;
+using LuaToolsGui.Services.Downloads;
+using Microsoft.Win32;
 
 namespace LuaToolsGui.ViewModels;
 
@@ -35,6 +37,17 @@ public record DepotRow(
     /// declares the DLC APP id rather than the depot id, and that's the line that has to change.
     /// </summary>
     public long ToggleId { get; init; }
+
+    /// <summary>Depot size in bytes (0 for DLC entitlements with no depot of their own). Kept as a
+    /// number, not just baked into <see cref="Meta"/>, so a download selection can be totalled.</summary>
+    public long Size { get; init; }
+
+    /// <summary>Raw oslist from Steam ("windows", "macos", "linux"), or null when undeclared. Kept
+    /// separate from the prettified copy inside <see cref="Meta"/> so it can be matched on.</summary>
+    public string? Os { get; init; }
+
+    /// <summary>Owning app for a shared redistributable depot, else null. See ContentDepot.FromAppId.</summary>
+    public long? FromAppId { get; init; }
 
     /// <summary>
     /// Free-text match for the depot search box: name, depot id, DLC app id, manifest ids, and the
@@ -160,10 +173,18 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>Guards against a slow depot fetch for a game the user has since navigated away from.</summary>
     private long _depotLoadToken;
 
+    private readonly DepotDownloaderService _depotTool;
+    private readonly DownloadQueue _queue;
+    private readonly ManifestJobFactory _jobs;
+
     public BuildsViewModel(SteamService steam, LuaVault vault, SteamAppListCache appList,
         SteamAppInfoCache appInfo, CoverCache covers, SteamDepotInfo depotInfo, ToastService toast,
-        SettingsService settings)
+        SettingsService settings, DepotDownloaderService depotTool, DownloadQueue queue,
+        ManifestJobFactory jobs)
     {
+        _depotTool = depotTool;
+        _queue = queue;
+        _jobs = jobs;
         _steam = steam;
         _vault = vault;
         _appList = appList;
@@ -276,14 +297,21 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
             var games = await Task.Run(() =>
             {
-                // Three sources, because a game can be manageable here without Steam currently loading it:
+                // A game is listed while there is something here to act on:
                 //   1. installed: a live <appid>.lua Steam reads
                 //   2. loose: <appid>_<buildid>.lua sitting in stplug-in, inert until applied
-                //   3. vaulted: stored builds whose live lua has since been deleted
+                //
+                // Deliberately NOT a third "every app with vault variants" source. Every install captures
+                // a Default variant (LuaInstaller.CaptureInstalled -> SyncDefaultFromLive), so every game
+                // has a vault entry — and deleting its lua from Manage doesn't touch the vault. Including
+                // vaulted apps therefore kept deleted games on this page forever, offering a Default that
+                // mirrored a file Steam no longer had.
+                //
+                // Nothing is deleted to achieve this: the variants stay on disk untouched and the game
+                // reappears with them intact once its lua is added back. Hidden, not discarded.
                 var installed = LuaInstaller.EnumerateInstalled(dir).ToDictionary(f => f.AppId, f => f.Path);
                 var appIds = new HashSet<long>(installed.Keys);
                 foreach (var (appId, _, _) in _vault.EnumerateLooseBuildLuas()) appIds.Add(appId);
-                foreach (long appId in _vault.AppsWithVariants()) appIds.Add(appId);
 
                 return appIds
                     .Select(appId =>
@@ -713,6 +741,249 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         _toast.Show(Resources.Strings.Builds_Title, Resources.Strings.Builds_Preset_Saved);
     }
 
+    // ── Depot download (select mode) ─────────────────────────────────
+
+    /// <summary>
+    /// One tickable depot in the download picker. A separate type from <see cref="DepotRow"/> on purpose:
+    /// DepotRow is an immutable record shared by the browse table, and selection is transient state that
+    /// belongs only to this mode.
+    /// </summary>
+    public partial class DepotPickRow : ObservableObject
+    {
+        public required long DepotId { get; init; }
+        public required string Title { get; init; }
+        public required string Meta { get; init; }
+        public required long Size { get; init; }
+        public string? ManifestId { get; init; }
+
+        /// <summary>Path to the depot's manifest in Steam's depotcache, or null when Steam doesn't have
+        /// it yet — which is no longer a blocker: the run loop fetches it from the API.</summary>
+        public string? ManifestPath { get; init; }
+
+        /// <summary>True when the manifest isn't on disk and will have to be fetched during the run.</summary>
+        public bool NeedsFetch => ManifestPath is null;
+
+        /// <summary>Set when this depot can't be downloaded, saying why. Null means it can.</summary>
+        public string? BlockReason { get; init; }
+
+        public bool CanDownload => BlockReason is null;
+
+        public string? Os { get; init; }
+
+        /// <summary>
+        /// A depot built for another platform (a macOS or Linux build). Still listed and still tickable,
+        /// but not ticked by default: on DELTARUNE the macOS depot was 864 MB of the 1.7 GB a select-all
+        /// pulled down. A depot with no declared OS is shared content and counts as ours.
+        /// </summary>
+        public bool IsOtherPlatform =>
+            Os is { Length: > 0 } && !Os.Contains("windows", StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// A shared redistributable (VC++/DirectX runtimes) owned by another app. Selectable, but not
+        /// ticked by default: it's usually already installed system-wide, and its size is unknown until
+        /// download time, so select-all would otherwise add an unknowable amount.
+        /// </summary>
+        public bool IsShared => FromAppId is not null;
+
+        public long? FromAppId { get; init; }
+
+        [ObservableProperty] private bool _isSelected;
+    }
+
+
+    /// <summary>True while the depot table is in "pick what to download" mode.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsBrowseMode))]
+    private bool _isSelectMode;
+
+    /// <summary>Inverse of <see cref="IsSelectMode"/>, for collapsing the normal table.</summary>
+    public bool IsBrowseMode => !IsSelectMode;
+
+    [ObservableProperty] private IReadOnlyList<DepotPickRow> _depotPicks = [];
+
+    /// <summary>"Download 4 depots (8.2 GB)" — recomputed as boxes are ticked.</summary>
+    public string DownloadConfirmLabel => string.Format(
+        Resources.Strings.Builds_Select_Confirm,
+        DepotPicks.Count(p => p.IsSelected),
+        Services.Downloads.ByteFormat.Size(DepotPicks.Where(p => p.IsSelected).Sum(p => p.Size)));
+
+    public bool HasDepotSelection => DepotPicks.Any(p => p.IsSelected);
+
+    /// <summary>Where the selected depots will be written. Chosen per download, before committing, so
+    /// the space warning below can report against the drive that will actually receive the files.</summary>
+    [ObservableProperty] private string _depotOutDir = "";
+
+    /// <summary>
+    /// Free bytes on <see cref="DepotOutDir"/>'s volume. Cached rather than read from a computed
+    /// property: AvailableFreeSpace is a syscall and the label re-evaluates on every checkbox tick,
+    /// which cannot change free space. Refreshed when the folder changes or select mode opens.
+    /// </summary>
+    [ObservableProperty] private long? _freeBytes;
+
+    partial void OnDepotOutDirChanged(string value)
+    {
+        FreeBytes = DepotDownloaderService.FreeSpaceFor(value);
+        RaiseSpaceProps();
+    }
+
+    /// <summary>Total bytes the ticked (and downloadable) depots will need.</summary>
+    public long RequiredBytes =>
+        DepotPicks.Where(p => p is { IsSelected: true, CanDownload: true }).Sum(p => p.Size);
+
+    /// <summary>False only when we KNOW the drive is short. An unreadable drive is not a warning.</summary>
+    public bool HasEnoughSpace => FreeBytes is not { } free || free >= RequiredBytes;
+
+    /// <summary>"Needs 110 GB · 4.3 GB free on C:\" — turns red via the view when short.</summary>
+    public string SpaceLabel => FreeBytes is not { } free
+        ? ""
+        : string.Format(Resources.Strings.Builds_Select_Space,
+            Services.Downloads.ByteFormat.Size(RequiredBytes),
+            Services.Downloads.ByteFormat.Size(free),
+            DepotDownloaderService.DriveOf(DepotOutDir));
+
+    private void RaiseSpaceProps()
+    {
+        OnPropertyChanged(nameof(RequiredBytes));
+        OnPropertyChanged(nameof(HasEnoughSpace));
+        OnPropertyChanged(nameof(SpaceLabel));
+    }
+
+    /// <summary>Pick a different destination without leaving select mode or losing the ticks.</summary>
+    [RelayCommand]
+    private void ChangeDepotFolder()
+    {
+        var dialog = new OpenFolderDialog
+        {
+            Title = Resources.Strings.Builds_Select_ChooseFolder,
+            InitialDirectory = DepotOutDir,
+        };
+        if (dialog.ShowDialog() == true) DepotOutDir = dialog.FolderName;
+    }
+
+    private void OnPickChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName != nameof(DepotPickRow.IsSelected)) return;
+        OnPropertyChanged(nameof(DownloadConfirmLabel));
+        OnPropertyChanged(nameof(HasDepotSelection));
+        RaiseSpaceProps();
+    }
+
+    /// <summary>
+    /// Enter select mode. Every content depot the lua declares becomes a row, ticked by default; a depot
+    /// whose manifest isn't in Steam's depotcache is listed but unticked and disabled, because the
+    /// downloader cannot run without one.
+    /// </summary>
+    [RelayCommand]
+    private void StartDepotDownload()
+    {
+        // The header button is already gated on HasSelection; this is the belt-and-braces read, and it
+        // gives us the appid the default destination is built from.
+        if (ActiveGame is not { } game) return;
+
+        foreach (var old in DepotPicks) old.PropertyChanged -= OnPickChanged;
+
+        var picks = _allInLua
+            .Where(r => !r.IsDlc)
+            .Select(r =>
+            {
+                // An ACTIVE pin means the user deliberately locked this build, so it wins outright and
+                // must never be silently upgraded. Otherwise take the build Steam ships today: a
+                // commented-out pin means "Auto Update Apps" is on, i.e. the user wants to track latest,
+                // so downloading the build the lua originally shipped with would be the wrong version.
+                // The commented pin is a last resort only, for depots with no public manifest at all
+                // (beta-branch-only content), where it's the sole version we know of.
+                //
+                // Safe because depot decryption keys are per-DEPOT and stable across manifest versions:
+                // the key already in the lua decrypts the current manifest just as well as the old one.
+                string? mid = r.ManifestId ?? r.PublicManifestId ?? r.CommentedManifestId;
+                string? path = mid is null ? null : _depotTool.ResolveManifestPath(r.Id, mid);
+
+                // All three checks are local — opening the picker costs zero API calls however many
+                // depots the game has. Only a depot with no declared version is unreachable outright;
+                // a missing manifest is now just a fetch, provided we're signed in to make it.
+                // A shared depot has no gid here by design — its manifest lives under the owning app and
+                // is resolved at download time, so a missing id is only fatal when there's nowhere to
+                // look it up. Both checks stay local; the picker still makes zero requests.
+                string? blocked =
+                    mid is null && r.FromAppId is null ? Resources.Strings.Builds_Select_NoManifest
+                    : path is null && !_depotTool.CanFetchManifests ? Resources.Strings.Builds_Select_SignIn
+                    : null;
+
+                var pick = new DepotPickRow
+                {
+                    DepotId = r.Id,
+                    Title = r.Title,
+                    Meta = r.Meta,
+                    Size = r.Size,
+                    ManifestId = mid,
+                    ManifestPath = path,
+                    Os = r.Os,
+                    FromAppId = r.FromAppId,
+                    BlockReason = blocked,
+                };
+                pick.IsSelected = pick.CanDownload && !pick.IsOtherPlatform && !pick.IsShared;
+                return pick;
+            })
+            .ToList();
+
+        foreach (var p in picks) p.PropertyChanged += OnPickChanged;
+        DepotPicks = picks;
+
+        // Seed the destination (and with it the free-space read) before the bar first renders.
+        string defaultRoot = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "LuaTools Depots", game.AppId.ToString());
+        try { Directory.CreateDirectory(defaultRoot); } catch { /* the Change picker still opens */ }
+        DepotOutDir = defaultRoot;
+
+        IsSelectMode = true;
+        OnPropertyChanged(nameof(DownloadConfirmLabel));
+        OnPropertyChanged(nameof(HasDepotSelection));
+        RaiseSpaceProps();
+    }
+
+    [RelayCommand]
+    private void CancelDepotDownload()
+    {
+        foreach (var p in DepotPicks) p.PropertyChanged -= OnPickChanged;
+        DepotPicks = [];
+        IsSelectMode = false;
+    }
+
+    [RelayCommand]
+    private void SelectAllDepots()
+    {
+        foreach (var p in DepotPicks) p.IsSelected = p.CanDownload;
+    }
+
+    /// <summary>Queue ONE item covering the whole selection, then jump to Downloads.</summary>
+    [RelayCommand]
+    private void ConfirmDepotDownload()
+    {
+        if (ActiveGame is not { } game) return;
+
+        var selections = DepotPicks
+            .Where(p => p is { IsSelected: true, CanDownload: true })
+            .Select(p => new DepotSelection(p.DepotId, p.ManifestId, p.ManifestPath, p.Size)
+            {
+                FromAppId = p.FromAppId,
+            })
+            .ToList();
+        if (selections.Count == 0) return;
+
+        // Destination was chosen in select mode (so the space warning could report against it). Used
+        // verbatim and captured by the job closure, so Pause/Resume and Retry reuse the same folder.
+        string outDir = DepotOutDir;
+
+        string name = string.IsNullOrWhiteSpace(game.Name) ? game.AppId.ToString() : game.Name;
+        _queue.Enqueue(_jobs.CreateDepotJob(game.AppId, name, selections, outDir));
+        CancelDepotDownload();
+        RequestShowDownloads?.Invoke();
+    }
+
+    /// <summary>Set by App: navigate to the Downloads page once a depot job is queued.</summary>
+    public Action? RequestShowDownloads { get; set; }
+
     // ── Depot / DLC breakdown (moved here from the Manage flyout) ───
 
     [ObservableProperty] private bool _isLoadingDepots;
@@ -1080,7 +1351,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                 IsEnabled: active.Contains(declId),
                 CanToggle: inLua,   // anything the lua declares can be switched, in any variant
                 IsBaseApp: declId == baseAppId)
-            { ToggleId = declId };
+            { ToggleId = declId, Size = d.Size, Os = d.Os, FromAppId = d.FromAppId };
         }
 
         // In lua = the lua declares this id (a keyed depot OR a keyless DLC entitlement) or its DLC app

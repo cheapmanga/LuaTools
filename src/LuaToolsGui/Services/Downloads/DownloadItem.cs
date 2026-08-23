@@ -9,6 +9,10 @@ public enum DownloadStatus
     /// <summary>Downloaded, waiting on the user's overwrite confirmation. Holds no concurrency slot.</summary>
     AwaitingConfirmation,
     Installing,
+    /// <summary>Depot download only: the user paused it. Not terminal - Resume picks it back up.</summary>
+    Paused,
+    /// <summary>Depot download only: re-hashing on-disk chunks after a resume, before bytes move again.</summary>
+    Verifying,
     Completed,
     Failed,
     Cancelled,
@@ -42,7 +46,28 @@ public partial class DownloadItem : ObservableObject
     public string Id { get; } = Guid.NewGuid().ToString("N");
     public DownloadJob Job { get; }
     public DateTimeOffset EnqueuedAt { get; }
-    internal CancellationTokenSource Cts { get; }
+    internal CancellationTokenSource Cts { get; private set; }
+
+    /// <summary>
+    /// Set by <c>DownloadQueue.Pause</c> before it cancels the token, so the run loop can tell a pause
+    /// from a real cancellation — both surface as an OperationCanceledException, but only one of them
+    /// should settle the item.
+    /// </summary>
+    internal bool PauseRequested { get; set; }
+
+    /// <summary>
+    /// Set by Resume. Makes the next depot run pass -validate, which is MANDATORY on a resume: without
+    /// it the downloader short-circuits and reports success over a half-written, pre-allocated file.
+    /// Cleared once consumed, so only the interrupted depot pays the re-hash cost.
+    /// </summary>
+    internal bool NeedsValidate { get; set; }
+
+    /// <summary>Swap in a fresh token source so a paused item can run again.</summary>
+    internal void ResetCts()
+    {
+        try { Cts.Dispose(); } catch { /* already disposed */ }
+        Cts = new CancellationTokenSource();
+    }
 
     /// <summary>
     /// Completes when the item reaches a terminal state, with the install result (null if it never got
@@ -63,7 +88,8 @@ public partial class DownloadItem : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsActive), nameof(IsRunning), nameof(StatusLabel),
         nameof(CanCancel), nameof(CanRetry), nameof(CanRemove), nameof(CanReorder),
-        nameof(ShowProgress), nameof(NeedsAction), nameof(RateLabel), nameof(EtaLabel))]
+        nameof(ShowProgress), nameof(NeedsAction), nameof(RateLabel), nameof(EtaLabel),
+        nameof(CanPause), nameof(CanResume))]
     private DownloadStatus _status = DownloadStatus.Queued;
 
     [ObservableProperty]
@@ -89,14 +115,33 @@ public partial class DownloadItem : ObservableObject
 
     public bool HasMessage => !string.IsNullOrWhiteSpace(Message);
 
+    /// <summary>Extra sub-line while running, e.g. a depot job's "Depots - 3 of 12".</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasDetail))]
+    private string? _detail;
+
+    public bool HasDetail => !string.IsNullOrWhiteSpace(Detail);
+
+    /// <summary>
+    /// Depot ids this job already finished. Resume skips them outright rather than re-hashing tens of GB.
+    /// In-memory only: a DownloadJob holds delegates and is not serializable, so a paused item does not
+    /// survive an app restart (same as every other in-flight item).
+    /// </summary>
+    internal HashSet<long> CompletedDepots { get; } = [];
+
     public bool IsIndeterminate => TotalBytes is not > 0;
     public double Percent => TotalBytes is > 0 ? BytesRead * 100d / TotalBytes.Value : 0;
 
+    // Paused/Verifying are non-terminal, so they count as active: the item keeps its Cancel button,
+    // is never auto-dismissed, and is recorded as cancelled if the app shuts down while it sits there.
     public bool IsActive => Status is DownloadStatus.Queued or DownloadStatus.Downloading
-        or DownloadStatus.AwaitingConfirmation or DownloadStatus.Installing;
-    public bool IsRunning => Status is DownloadStatus.Downloading or DownloadStatus.Installing;
+        or DownloadStatus.AwaitingConfirmation or DownloadStatus.Installing
+        or DownloadStatus.Paused or DownloadStatus.Verifying;
+    public bool IsRunning => Status is DownloadStatus.Downloading or DownloadStatus.Installing
+        or DownloadStatus.Verifying;
 
-    public bool ShowProgress => Status is DownloadStatus.Downloading or DownloadStatus.Installing;
+    public bool ShowProgress => Status is DownloadStatus.Downloading or DownloadStatus.Installing
+        or DownloadStatus.Paused or DownloadStatus.Verifying;
     public bool NeedsAction => Status is DownloadStatus.AwaitingConfirmation;
     public bool CanCancel => IsActive;
     public bool CanRetry => Status is DownloadStatus.Failed or DownloadStatus.Cancelled;
@@ -105,12 +150,23 @@ public partial class DownloadItem : ObservableObject
     /// <summary>Reordering only means anything before the item starts; priority is its index in the queue.</summary>
     public bool CanReorder => Status is DownloadStatus.Queued;
 
+    // Pause/Resume exist only for depot downloads: they're the only job kind whose progress survives the
+    // process being killed, because the bytes are already on disk and the tool can re-validate them.
+    // Verifying counts too: re-hashing a large depot can run for minutes, and losing the Pause button
+    // for exactly that stretch is when you'd most want it. Pausing a verify is safe — validation only
+    // reads, and Resume re-validates from scratch anyway.
+    public bool CanPause => Status is (DownloadStatus.Downloading or DownloadStatus.Verifying)
+        && Job.Kind is DownloadKind.Depot;
+    public bool CanResume => Status is DownloadStatus.Paused;
+
     public string StatusLabel => Status switch
     {
         DownloadStatus.Queued => Resources.Strings.Downloads_Status_Queued,
         DownloadStatus.Downloading => Resources.Strings.Downloads_Status_Downloading,
         DownloadStatus.AwaitingConfirmation => Resources.Strings.Downloads_Status_AwaitingConfirm,
         DownloadStatus.Installing => Resources.Strings.Downloads_Status_Installing,
+        DownloadStatus.Paused => Resources.Strings.Downloads_Status_Paused,
+        DownloadStatus.Verifying => Resources.Strings.Downloads_Status_Verifying,
         DownloadStatus.Completed => Resources.Strings.Downloads_Status_Completed,
         DownloadStatus.Failed => Resources.Strings.Downloads_Status_Failed,
         _ => Resources.Strings.Downloads_Status_Cancelled,

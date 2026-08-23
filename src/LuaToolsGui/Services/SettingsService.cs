@@ -30,11 +30,6 @@ public class AppSettings
     // (→ default 24) is distinguishable from an explicit choice.
     public int? FixesPageSize { get; set; }
 
-    // How many downloads the Downloads-tab queue runs at once. Default 1 (serial): manifest and
-    // Denuvo downloads share one server-side daily limit, so parallelism buys little and risks
-    // tripping rate limits. Installs stay serialized regardless of this value.
-    public int? MaxConcurrentDownloads { get; set; }
-
     // Builds-page game-list results-per-page. 0 = "All". Kept separate from ManagePageSize. The Builds
     // list is a narrow sidebar, so a size that suits the Manage grid rarely suits both.
     public int? BuildsPageSize { get; set; }
@@ -109,13 +104,6 @@ public class SettingsService
     }
 
     /// <summary>Fixes-page results-per-page (default 24). 0 = "All" (single infinite scroll).</summary>
-    /// <summary>Downloads-tab queue concurrency. Clamped to 1..5; default 1 (serial).</summary>
-    public int MaxConcurrentDownloads
-    {
-        get => Math.Clamp(_settings.MaxConcurrentDownloads ?? 1, 1, 5);
-        set { _settings.MaxConcurrentDownloads = Math.Clamp(value, 1, 5); Save(); }
-    }
-
     public int FixesPageSize
     {
         get => _settings.FixesPageSize ?? 24; // default 24
@@ -219,7 +207,6 @@ public class SettingsService
             && _settings.ManagePageSize is null
             && _settings.FixesPageSize is null
             && _settings.BuildsPageSize is null
-            && _settings.MaxConcurrentDownloads is null
             && _settings.Language is null
             && _settings.HubcapApiKey is null
             && _settings.StartWithWindows is null

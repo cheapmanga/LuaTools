@@ -526,8 +526,7 @@
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Не вдалося завантажити з Hubcap ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Завантаження</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Завантаження</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Завантаження маніфестів і фіксів, ставляться в чергу й встановлюються по порядку.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Зараз нічого не завантажується. Те, що ви запустите в «Додати» або «Фікси», з'явиться тут.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Зараз нічого не завантажується. Завантажте вже щось!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Завершених завантажень ще немає.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Черга</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Історія</value></data>
@@ -550,8 +549,29 @@
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Потрібна дія</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Перервано під час закриття застосунку.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Розблокування DLC</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Одночасно</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Одночасні завантаження</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Скільки завантажень виконується одночасно. Встановлення завжди відбувається по одному.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Спочатку встановіть гру, щоб застосувати фікс.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Призупинено</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Перевірка…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Пауза</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Продовжити</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Файли депо</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Депо · {0} з {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Не вдалося отримати завантажувач депо.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Ключів розшифрування для цієї гри не знайдено.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Депо {0} не вдалося: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Завантажено депо: {0} до {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Завантажити</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Виберіть депо для завантаження</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Завантажити {0} депо ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Це депо не оголошує версію для завантаження.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Вибрати все</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Депо не вибрано</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Виберіть, куди зберегти файли депо</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Недостатньо місця на диску: потрібно {0}, вільно лише {1}.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Зберегти в</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Потрібно {0} · вільно {1} на {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Увійдіть, щоб завантажити це депо.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Увійдіть, щоб завантажувати депо.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>отримання manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Не вдалося отримати manifest цього депо.</value></data>
 </root>

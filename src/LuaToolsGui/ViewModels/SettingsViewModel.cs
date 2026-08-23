@@ -18,7 +18,6 @@ public partial class SettingsViewModel : ObservableObject
     private readonly AuthService _auth;
     private readonly SteamService _steam;
     private readonly HubcapService _hubcap;
-    private readonly Services.Downloads.DownloadQueue _queue;
 
     [ObservableProperty] private string? _displayName;
     [ObservableProperty] private string? _email;
@@ -67,14 +66,6 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private bool _fastFetch;
 
     partial void OnFastFetchChanged(bool value) => _settings.FastFetch = value;
-
-    /// <summary>Downloads-tab queue concurrency. Applied to the live queue, not just persisted, so a
-    /// change takes effect on whatever is already queued.</summary>
-    [ObservableProperty] private int _maxConcurrentDownloads;
-
-    public IReadOnlyList<int> ConcurrencyOptions { get; } = [1, 2, 3, 4, 5];
-
-    partial void OnMaxConcurrentDownloadsChanged(int value) => _queue.MaxConcurrent = value;
 
     /// <summary>Donate spare Steam decryption keys to the community pool. Persisted via SettingsService.</summary>
     [ObservableProperty] private bool _donateKeys;
@@ -231,19 +222,17 @@ public partial class SettingsViewModel : ObservableObject
     public Action? RequestRestartPrompt { get; set; }
 
     public SettingsViewModel(SettingsService settings, AuthService auth, SteamService steam,
-        HubcapService hubcap, Services.Downloads.DownloadQueue queue)
+        HubcapService hubcap)
     {
         _settings = settings;
         _auth = auth;
         _steam = steam;
         _hubcap = hubcap;
-        _queue = queue;
         _auth.AuthStateChanged += RefreshAccount;
         RefreshAccount();
         RefreshSteam();
         _autoUpdateApps = settings.AutoUpdateApps; // init from saved value (default ON) without triggering Save
         _fastFetch = settings.FastFetch;
-        _maxConcurrentDownloads = settings.MaxConcurrentDownloads;
         _donateKeys = settings.DonateKeys;
         _startWithWindows = settings.StartWithWindows; // default OFF. Init without triggering the registry write
         _minimizeToTray = settings.MinimizeToTray;

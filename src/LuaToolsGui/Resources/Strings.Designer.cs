@@ -509,7 +509,6 @@ public static class Strings
     // ── Downloads tab ──
     public static string Nav_Downloads => Get(nameof(Nav_Downloads));
     public static string Downloads_Title => Get(nameof(Downloads_Title));
-    public static string Downloads_Subtitle => Get(nameof(Downloads_Subtitle));
     public static string Downloads_Empty => Get(nameof(Downloads_Empty));
     public static string Downloads_History_Empty => Get(nameof(Downloads_History_Empty));
     public static string Downloads_Section_Active => Get(nameof(Downloads_Section_Active));
@@ -533,8 +532,31 @@ public static class Strings
     public static string Downloads_ActionRequired => Get(nameof(Downloads_ActionRequired));
     public static string Downloads_Err_Interrupted => Get(nameof(Downloads_Err_Interrupted));
     public static string Downloads_Kind_Dlc => Get(nameof(Downloads_Kind_Dlc));
-    public static string Downloads_Concurrency => Get(nameof(Downloads_Concurrency));
-    public static string Settings_MaxConcurrentDownloads => Get(nameof(Settings_MaxConcurrentDownloads));
-    public static string Settings_MaxConcurrentDownloads_Hint => Get(nameof(Settings_MaxConcurrentDownloads_Hint));
     public static string Fixes_NotInstalled_Hint => Get(nameof(Fixes_NotInstalled_Hint));
+
+    // ── Depot downloading ──
+    public static string Downloads_Status_Paused => Get(nameof(Downloads_Status_Paused));
+    public static string Downloads_Status_Verifying => Get(nameof(Downloads_Status_Verifying));
+    public static string Downloads_Action_Pause => Get(nameof(Downloads_Action_Pause));
+    public static string Downloads_Action_Resume => Get(nameof(Downloads_Action_Resume));
+    public static string Downloads_Kind_Depot => Get(nameof(Downloads_Kind_Depot));
+    public static string Downloads_Depots_Progress => Get(nameof(Downloads_Depots_Progress));
+    public static string Depot_Err_Tool => Get(nameof(Depot_Err_Tool));
+    public static string Depot_Err_NoKeys => Get(nameof(Depot_Err_NoKeys));
+    public static string Depot_Err_NoSpace => Get(nameof(Depot_Err_NoSpace));
+    public static string Depot_Err_Failed => Get(nameof(Depot_Err_Failed));
+    public static string Depot_Status_Done => Get(nameof(Depot_Status_Done));
+    public static string Builds_Action_Download => Get(nameof(Builds_Action_Download));
+    public static string Builds_Select_Title => Get(nameof(Builds_Select_Title));
+    public static string Builds_Select_Confirm => Get(nameof(Builds_Select_Confirm));
+    public static string Builds_Select_NoManifest => Get(nameof(Builds_Select_NoManifest));
+    public static string Builds_Select_SignIn => Get(nameof(Builds_Select_SignIn));
+    public static string Depot_Err_SignIn => Get(nameof(Depot_Err_SignIn));
+    public static string Depot_Err_NoManifest => Get(nameof(Depot_Err_NoManifest));
+    public static string Downloads_Depot_FetchingManifest => Get(nameof(Downloads_Depot_FetchingManifest));
+    public static string Builds_Select_All => Get(nameof(Builds_Select_All));
+    public static string Builds_Select_None => Get(nameof(Builds_Select_None));
+    public static string Builds_Select_ChooseFolder => Get(nameof(Builds_Select_ChooseFolder));
+    public static string Builds_Select_SaveTo => Get(nameof(Builds_Select_SaveTo));
+    public static string Builds_Select_Space => Get(nameof(Builds_Select_Space));
 }

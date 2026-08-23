@@ -41,6 +41,7 @@ public partial class App : Application
                 services.AddSingleton<HardwareAppIdService>();
                 services.AddSingleton<SteamlessService>();
                 services.AddSingleton<CloudRedirectService>();
+                services.AddSingleton<DepotDownloaderService>();
                 services.AddSingleton<UnlockerService>();
                 services.AddSingleton<PluginInstallerService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
@@ -374,6 +375,8 @@ public partial class App : Application
 
         download.NavigateToGame = openInManage;
         builds.NavigateToManage = openInManage; // Builds "Manage" button: the reverse of "Manage Build"
+        // Depot download queues one item covering the whole selection; show the user where it went.
+        builds.RequestShowDownloads = () => Dispatcher.Invoke(window.NavigateToDownloads);
 
         // Dragging a SteamDB / Steam store link onto either drop box installs that appid. Routed through
         // HandleProtocolUrl rather than calling ProtocolInstall directly, so a dropped link and
