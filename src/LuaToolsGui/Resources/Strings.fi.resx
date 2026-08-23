@@ -526,8 +526,7 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-lataus epäonnistui ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Lataukset</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Lataukset</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Manifestien ja korjausten lataukset, jonotetaan ja asennetaan järjestyksessä.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Ei latauksia juuri nyt. Lisää- tai Korjaukset-sivulta aloittamasi lataukset näkyvät tässä.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Ei latauksia juuri nyt. Lataa nyt jotain!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Ei valmiita latauksia vielä.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Jono</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historia</value></data>
@@ -550,8 +549,29 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Vaatii toimenpiteen</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Keskeytyi, kun sovellus suljettiin.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC:n avaus</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Yhtä aikaa</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Samanaikaiset lataukset</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Kuinka monta latausta suoritetaan yhtä aikaa. Asennukset tehdään aina yksi kerrallaan.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Asenna peli ensin, jotta voit ottaa korjauksen käyttöön.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Keskeytetty</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Tarkistetaan…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Keskeytä</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Jatka</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot-tiedostot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depotit · {0}/{1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Depot-latainta ei saatu haettua.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Tälle pelille ei löytynyt salauksenpurkuavaimia.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} epäonnistui: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Ladattiin {0} depotia kohteeseen {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Lataa</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Valitse ladattavat depotit</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Lataa {0} depotia ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Tämä depot ei ilmoita ladattavaa versiota.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Valitse kaikki</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Ei valittuja depoteja</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Valitse, minne depot-tiedostot tallennetaan</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Levytila ei riitä: tarvitaan {0}, vapaana vain {1}.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Tallenna kohteeseen</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Tarvitaan {0} · vapaana {1} asemassa {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Kirjaudu sisään ladataksesi tämän depotin.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Kirjaudu sisään ladataksesi depoteja.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>haetaan manifestia</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tämän depotin manifestia ei saatu haettua.</value></data>
 </root>

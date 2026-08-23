@@ -526,8 +526,7 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Falha no download do Hubcap ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Transferências</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Transferências</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Transferências de manifestos e fixes, em fila e instaladas por ordem.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Nenhuma transferência em curso. As que iniciar em Adicionar ou Fixes aparecem aqui.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nenhuma transferência em curso. Vá lá, descarregue alguma coisa!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Ainda não há transferências concluídas.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Fila</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Histórico</value></data>
@@ -550,8 +549,29 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Ação necessária</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Interrompida quando a aplicação foi fechada.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Desbloqueio de DLC</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Em simultâneo</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Transferências simultâneas</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Quantas transferências decorrem em simultâneo. As instalações são sempre uma de cada vez.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Instale o jogo primeiro para aplicar um fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Em pausa</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>A verificar…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pausar</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Retomar</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Ficheiros do depot</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} de {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Não foi possível obter o transferidor de depots.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Não foram encontradas chaves de desencriptação para este jogo.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>O depot {0} falhou: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depots transferidos para {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Transferir</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Selecione os depots a transferir</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Transferir {0} depots ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Este depot não declara nenhuma versão para transferir.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Selecionar tudo</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Nenhum depot selecionado</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Escolha onde guardar os ficheiros do depot</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Espaço em disco insuficiente: precisa de {0}, só há {1} livres.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Guardar em</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Precisa de {0} · {1} livres em {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Inicie sessão para transferir este depot.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Inicie sessão para transferir depots.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>a obter manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Não foi possível obter o manifest deste depot.</value></data>
 </root>

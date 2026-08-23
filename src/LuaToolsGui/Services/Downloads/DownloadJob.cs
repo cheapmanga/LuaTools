@@ -1,7 +1,7 @@
 namespace LuaToolsGui.Services.Downloads;
 
 /// <summary>What a queued download is for. Drives the row icon and the history label.</summary>
-public enum DownloadKind { Manifest, Dlc, DenuvoManifest, DenuvoFix }
+public enum DownloadKind { Manifest, Dlc, DenuvoManifest, DenuvoFix, Depot }
 
 /// <summary>
 /// A job refused to start for a reason the user can act on — e.g. the game a Denuvo fix targets isn't
@@ -46,16 +46,23 @@ public sealed record DownloadJob(
     string SubTitle,
     string? CoverPath,
 
-    /// <summary>Fetch the bytes to a staged file. Runs on a background thread.</summary>
-    Func<IProgress<DownloadProgress>, CancellationToken, Task<DownloadedFile>> DownloadAsync,
+    /// <summary>
+    /// Fetch the bytes to a staged file. Runs on a background thread.
+    /// </summary>
+    /// <remarks>
+    /// Receives the live <see cref="DownloadItem"/> so a multi-step job (the depot downloader, which runs
+    /// one child process per depot) can report which step it's on. Single-step jobs ignore it. Any
+    /// observable property it touches must be set on the dispatcher.
+    /// </remarks>
+    Func<DownloadItem, IProgress<DownloadProgress>, CancellationToken, Task<DownloadedFile>> DownloadAsync,
 
     /// <summary>Consume the staged file (install into Steam). Runs serialized against other installs.</summary>
     Func<DownloadedFile, DownloadItem, CancellationToken, Task<JobResult>> InstallAsync,
 
     /// <summary>
     /// Optional gate between download and install; true proceeds, false discards the staged file.
-    /// While this is awaited the item is <see cref="DownloadStatus.AwaitingConfirmation"/> and has
-    /// RELEASED its concurrency slot, so an unanswered dialog can never wedge the queue.
+    /// While this is awaited the item is <see cref="DownloadStatus.AwaitingConfirmation"/>. Nothing else
+    /// waits on it: the queue has no concurrency cap, so an unanswered dialog cannot wedge anything.
     /// </summary>
     Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? ConfirmAsync = null,
 

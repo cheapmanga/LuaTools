@@ -526,8 +526,7 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap indirmesi başarısız ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>İndirmeler</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>İndirmeler</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Manifest ve fix indirmeleri, sırayla kuyruğa alınıp kurulur.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Şu anda indirme yok. Ekle veya Fixler'den başlattıkların burada görünür.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Şu anda indirme yok. Hadi, bir şeyler indir!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Henüz tamamlanmış indirme yok.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kuyruk</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Geçmiş</value></data>
@@ -550,8 +549,29 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>İşlem gerekiyor</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Uygulama kapanınca yarıda kesildi.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC kilidi açma</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Aynı anda</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Eşzamanlı indirmeler</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Aynı anda kaç indirmenin çalışacağı. Kurulumlar her zaman teker teker yapılır.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Fix uygulamak için önce oyunu kurun.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Duraklatıldı</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Doğrulanıyor…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Duraklat</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Sürdür</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot dosyaları</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depot · {1} içinden {0}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Depot indirici alınamadı.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Bu oyun için şifre çözme anahtarı bulunamadı.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} başarısız: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} depot {1} konumuna indirildi.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>İndir</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>İndirilecek depotları seç</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} depot indir ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Bu depot indirilecek bir sürüm belirtmiyor.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Tümünü seç</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Hiç depot seçilmedi</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Depot dosyalarının kaydedileceği yeri seç</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Yeterli disk alanı yok: {0} gerekiyor, yalnızca {1} boş.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Kaydedilecek yer</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>{0} gerekiyor · {2} sürücüsünde {1} boş</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Bu depotu indirmek için giriş yap.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Depot indirmek için giriş yap.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest alınıyor</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Bu depotun manifest dosyası alınamadı.</value></data>
 </root>

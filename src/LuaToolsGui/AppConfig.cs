@@ -48,6 +48,18 @@ public static class AppConfig
     // CloudRedirect (Selectively11): the Mode page "Manage" button downloads the latest CloudRedirect.exe
     // GUI manager from here and launches it. (Separate from the CLI fixer used by the mode install flow.)
     public const string CloudRedirectRepo = "Selectively11/CloudRedirect";
+
+    // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.
+    // Powers the Depots page "Download" action.
+    //
+    // This is a RE-PACK we host ourselves, NOT the upstream SteamAutoCracks/DepotDownloaderMod repo, for two
+    // reasons: upstream ships its assets as `Release.rar` (System.IO.Compression cannot read RAR, and we're
+    // not taking a dependency just for that), and its build is framework-dependent net9.0 while this app is
+    // net8.0-windows, so users without the .NET 9 runtime couldn't run it. The asset here must be a
+    // SELF-CONTAINED, ZIPPED publish:
+    //     dotnet publish -c Release -r win-x64 --self-contained
+    // TODO: create this repo and upload the first release before the Depots download button ships.
+    public const string DepotDownloaderRepo = "madoiscool/DepotDownloaderMod";
     public const string ManifestBackendUrl = "http://167.235.229.108";
     public const string ManifestBackendUserAgent = "secretgoonpoon";
 

@@ -526,8 +526,7 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Échec du téléchargement Hubcap ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Téléchargements</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Téléchargements</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>Téléchargements de manifestes et de fixes, mis en file d'attente et installés dans l'ordre.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>Aucun téléchargement en cours. Ceux lancés depuis Ajouter ou Fixes apparaissent ici.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Aucun téléchargement en cours. Lancez-vous, téléchargez un truc !</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>Aucun téléchargement terminé pour l'instant.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>File d'attente</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historique</value></data>
@@ -550,8 +549,29 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>Action requise</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Interrompu à la fermeture de l'application.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>Déblocage de DLC</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>Simultanément</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>Téléchargements simultanés</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>Nombre de téléchargements exécutés en même temps. Les installations se font toujours une par une.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installez d'abord le jeu pour appliquer un fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>En pause</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Vérification…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Reprendre</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Fichiers du dépôt</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Dépôts · {0} sur {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Impossible de récupérer le téléchargeur de dépôts.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Aucune clé de déchiffrement trouvée pour ce jeu.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Échec du dépôt {0} : {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} dépôts téléchargés dans {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Télécharger</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Sélectionnez les dépôts à télécharger</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Télécharger {0} dépôts ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Ce dépôt ne déclare aucune version à télécharger.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Tout sélectionner</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Aucun dépôt sélectionné</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Choisissez où enregistrer les fichiers du dépôt</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Espace disque insuffisant : nécessite {0}, seulement {1} libre.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Enregistrer dans</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Nécessite {0} · {1} libre sur {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Connectez-vous pour télécharger ce dépôt.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Connectez-vous pour télécharger des dépôts.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>récupération du manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Impossible de récupérer le manifest de ce dépôt.</value></data>
 </root>

@@ -546,8 +546,7 @@
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 下载失败（{0}）。</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>下载</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>下载</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>清单和修复文件的下载，按顺序排队并安装。</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>当前没有下载。你在“添加”或“修复”页面开始的下载会显示在这里。</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>当前没有下载。快去下载点什么吧！</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>还没有已完成的下载。</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>队列</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>历史记录</value></data>
@@ -570,8 +569,29 @@
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>需要操作</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>应用关闭时被中断。</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC 解锁</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>同时进行</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>同时下载数</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>同时进行的下载数量。安装始终逐个进行。</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>请先安装游戏，然后才能应用修复。</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>已暂停</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>正在校验…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>暂停</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>继续</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>仓库文件</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>仓库 · 第 {0} 个，共 {1} 个</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>无法获取仓库下载器。</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>未找到该游戏的解密密钥。</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>仓库 {0} 失败：{1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>已将 {0} 个仓库下载到 {1}。</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>下载</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>选择要下载的仓库</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>下载 {0} 个仓库（{1}）</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>该仓库未声明可下载的版本。</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>全选</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>未选择仓库</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>选择仓库文件的保存位置</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>磁盘空间不足：需要 {0}，仅剩 {1}。</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>保存到</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>需要 {0} · {2} 剩余 {1}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>登录后可下载该仓库。</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>登录后可下载仓库。</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>正在获取 manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>无法获取该仓库的 manifest。</value></data>
 </root>

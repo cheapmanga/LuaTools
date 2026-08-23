@@ -390,33 +390,6 @@
                             VerticalAlignment="Center"
                             IsChecked="{Binding FastFetch, Mode=TwoWay}" />
                     </Grid>
-                    <Border Style="{StaticResource RowDivider}" />
-                    <!--  Downloads-tab queue concurrency. Installs stay serialized whatever this is set to.  -->
-                    <Grid Margin="14,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Medium"
-                                Text="{x:Static res:Strings.Settings_MaxConcurrentDownloads}" />
-                            <TextBlock
-                                Margin="0,4,0,0"
-                                FontSize="12"
-                                Foreground="#6b7280"
-                                Text="{x:Static res:Strings.Settings_MaxConcurrentDownloads_Hint}"
-                                TextWrapping="Wrap" />
-                        </StackPanel>
-                        <ComboBox
-                            Grid.Column="1"
-                            Width="80"
-                            Margin="12,0,0,0"
-                            VerticalAlignment="Center"
-                            ItemsSource="{Binding ConcurrencyOptions}"
-                            SelectedItem="{Binding MaxConcurrentDownloads, Mode=TwoWay}" />
-                    </Grid>
                 </StackPanel>
             </Border>
 

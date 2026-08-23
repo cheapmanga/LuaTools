@@ -19,18 +19,16 @@ namespace LuaToolsGui.Services.Downloads;
 /// locking around the collections and makes bindings safe by construction. The dispatcher is touched
 /// once per state transition plus a throttled progress tick, never once per network chunk.</para>
 ///
-/// <para><b>Why no SemaphoreSlim for the cap.</b> A semaphore can't be resized at runtime (the user can
-/// change the setting mid-queue) and can't express "start the first <i>Queued</i> item in list order",
-/// which is what makes reordering work. Instead the pump re-evaluates the list on every
-/// <see cref="Kick"/>, and priority is simply the item's index in <see cref="Items"/>.</para>
+/// <para><b>No download cap.</b> Every queued item starts as soon as the pump sees it. Downloads are
+/// the only phase that runs in parallel, so an item's index in <see cref="Items"/> stops mattering once
+/// it is in flight — reordering is only meaningful in the moment between Enqueue and the pump.</para>
 ///
-/// <para><b>Installs are always serialized</b> behind <c>_installGate</c>, independent of the download
-/// cap: <c>LuaInstaller.InstallZip</c> writes into Steam's shared depotcache with a File.Exists guard
-/// that two concurrent installs would race.</para>
+/// <para><b>Installs are always serialized</b> behind <c>_installGate</c>, and are now the only limiter
+/// in the pipeline: <c>LuaInstaller.InstallZip</c> writes into Steam's shared depotcache with a
+/// File.Exists guard that two concurrent installs would race.</para>
 /// </remarks>
 public class DownloadQueue : IHostedService
 {
-    private readonly SettingsService _settings;
     private readonly CacheService _cache;
     private readonly ILogger<DownloadQueue> _log;
 
@@ -40,16 +38,16 @@ public class DownloadQueue : IHostedService
     /// <summary>Serializes the install phase. See the remarks above.</summary>
     private readonly SemaphoreSlim _installGate = new(1, 1);
 
+    /// <summary>How long a successful item lingers in the queue before clearing itself.</summary>
+    private static readonly TimeSpan AutoDismissDelay = TimeSpan.FromSeconds(3);
+
     private readonly CancellationTokenSource _shutdown = new();
     private Task? _pump;
-    private int _running;
 
-    public DownloadQueue(SettingsService settings, CacheService cache, ILogger<DownloadQueue> log)
+    public DownloadQueue(CacheService cache, ILogger<DownloadQueue> log)
     {
-        _settings = settings;
         _cache = cache;
         _log = log;
-        _maxConcurrent = settings.MaxConcurrentDownloads;
     }
 
     private Dispatcher Dispatcher =>
@@ -61,25 +59,8 @@ public class DownloadQueue : IHostedService
     /// <summary>Finished downloads from this and previous sessions, newest first.</summary>
     public ObservableCollection<DownloadHistoryEntry> History { get; } = [];
 
-    /// <summary>Raised when <see cref="ActiveCount"/> or <see cref="MaxConcurrent"/> changes.</summary>
+    /// <summary>Raised when <see cref="ActiveCount"/> changes.</summary>
     public event Action? StateChanged;
-
-    private int _maxConcurrent;
-
-    /// <summary>How many downloads may run at once (1..5). Lowering this never cancels a running item.</summary>
-    public int MaxConcurrent
-    {
-        get => _maxConcurrent;
-        set
-        {
-            int v = Math.Clamp(value, 1, 5);
-            if (v == _maxConcurrent) return;
-            _maxConcurrent = v;
-            _settings.MaxConcurrentDownloads = v;
-            StateChanged?.Invoke();
-            Kick();
-        }
-    }
 
     public int ActiveCount => Items.Count(i => i.IsActive);
 
@@ -175,11 +156,50 @@ public class DownloadQueue : IHostedService
         Kick();
     });
 
+    /// <summary>
+    /// Pause a running depot download. Kills the child process but leaves its bytes on disk; Resume
+    /// picks up from the first unfinished depot. Only depot jobs can pause (see DownloadItem.CanPause) —
+    /// they're the only kind whose partial work survives the process dying.
+    /// </summary>
+    public void Pause(DownloadItem item) => Dispatcher.Invoke(() =>
+    {
+        if (!item.CanPause) return;
+        item.PauseRequested = true;
+        item.Status = DownloadStatus.Paused;
+        item.BytesPerSecond = 0;
+        item.Eta = null;
+        try { item.Cts.Cancel(); } catch { /* already disposed */ }
+        StateChanged?.Invoke();
+    });
+
+    /// <summary>Resume a paused depot download from the first depot it hadn't finished.</summary>
+    public void Resume(DownloadItem item) => Dispatcher.Invoke(() =>
+    {
+        if (!item.CanResume) return;
+        item.PauseRequested = false;
+        item.NeedsValidate = true;   // the interrupted depot must be re-hashed, not trusted
+        item.ResetCts();
+        item.Status = DownloadStatus.Queued;
+        StateChanged?.Invoke();
+        Kick();
+    });
+
     /// <summary>Re-enqueue a failed or cancelled item's job as a fresh item at the tail.</summary>
     public DownloadItem Retry(DownloadItem item)
     {
         Dispatcher.Invoke(() => Remove(item));
-        return Enqueue(item.Job);
+        var fresh = Enqueue(item.Job);
+
+        // A depot job's progress lives on disk, not in the item, so a retry must inherit what the failed
+        // attempt finished. Without this the new item restarts at depot 1 with NeedsValidate false, and
+        // the half-written depot that caused the failure would be skipped as "already complete" —
+        // silently leaving a corrupt install.
+        if (item.Job.Kind is DownloadKind.Depot && !ReferenceEquals(fresh, item))
+        {
+            foreach (long id in item.CompletedDepots) fresh.CompletedDepots.Add(id);
+            fresh.NeedsValidate = true;
+        }
+        return fresh;
     }
 
     /// <summary>Move a pending item up (-1) or down (+1). No-op once it has started.</summary>
@@ -241,25 +261,23 @@ public class DownloadQueue : IHostedService
         }
     }
 
-    /// <summary>Start as many queued items as the cap allows, in list order. Dispatcher thread only.</summary>
+    /// <summary>Start every queued item. Dispatcher thread only.</summary>
     private void StartEligible()
     {
-        while (_running < _maxConcurrent)
-        {
-            var next = Items.FirstOrDefault(i => i.Status == DownloadStatus.Queued
-                                                 && !i.Cts.IsCancellationRequested);
-            if (next is null) return;
+        // Snapshot first: RunItemAsync can settle an item synchronously and mutate Items re-entrantly.
+        var ready = Items.Where(i => i.Status == DownloadStatus.Queued
+                                     && !i.Cts.IsCancellationRequested).ToList();
 
-            _running++;
-            next.Status = DownloadStatus.Downloading;
+        foreach (var item in ready)
+        {
+            item.Status = DownloadStatus.Downloading;
             StateChanged?.Invoke();
-            _ = RunItemAsync(next);
+            _ = RunItemAsync(item);
         }
     }
 
     private async Task RunItemAsync(DownloadItem item)
     {
-        bool holdsSlot = true;
         DownloadedFile? file = null;
         var ct = item.Cts.Token;
 
@@ -279,21 +297,16 @@ public class DownloadQueue : IHostedService
                     DispatcherPriority.Background);
             });
 
-            file = await Task.Run(() => item.Job.DownloadAsync(sink, ct), ct);
+            file = await Task.Run(() => item.Job.DownloadAsync(item, sink, ct), ct);
 
             // ── 2. Optional confirmation gate ────────────────────────
             if (item.Job.ConfirmAsync is { } confirm)
             {
-                // Release the slot BEFORE awaiting. A dialog the user never answers must not wedge the
-                // queue — at the default concurrency of 1 that would block every later download forever.
                 await Dispatcher.InvokeAsync(() =>
                 {
                     item.Status = DownloadStatus.AwaitingConfirmation;
-                    _running--;
                     StateChanged?.Invoke();
                 });
-                holdsSlot = false;
-                Kick();
 
                 bool proceed;
                 try { proceed = await confirm(file, item, ct); }
@@ -311,11 +324,6 @@ public class DownloadQueue : IHostedService
                         Finish(item, DownloadStatus.Cancelled, Resources.Strings.Add_Status_Cancelled, null));
                     return;
                 }
-
-                // Re-take a slot for the install phase. Installs are gated separately anyway, so this
-                // is just bookkeeping to keep ActiveCount honest.
-                await Dispatcher.InvokeAsync(() => { _running++; StateChanged?.Invoke(); });
-                holdsSlot = true;
             }
 
             // ── 3. Install (always serialized) ───────────────────────
@@ -337,6 +345,9 @@ public class DownloadQueue : IHostedService
         }
         catch (OperationCanceledException)
         {
+            // A pause cancels the same token a real cancel does. Leave the item parked in Paused and
+            // keep its bytes: Resume re-enters this method and skips the depots already finished.
+            if (item.PauseRequested) return;
             if (file is not null) DeleteStaged(file.FilePath);
             await Dispatcher.InvokeAsync(() =>
                 Finish(item, DownloadStatus.Cancelled, Resources.Strings.Err_CancelledByUser, null));
@@ -354,8 +365,6 @@ public class DownloadQueue : IHostedService
         }
         finally
         {
-            if (holdsSlot)
-                await Dispatcher.InvokeAsync(() => { _running--; StateChanged?.Invoke(); });
             Kick();
         }
     }
@@ -380,6 +389,27 @@ public class DownloadQueue : IHostedService
         catch (Exception ex) { _log.LogDebug(ex, "Download OnFinished continuation threw"); }
 
         StateChanged?.Invoke();
+
+        // A successful item has nothing left to act on — History keeps the record, so clear it from the
+        // queue. Failed/Cancelled stay put: their message and Retry button are the only copy the user gets.
+        if (status == DownloadStatus.Completed) _ = AutoDismissAsync(item);
+    }
+
+    /// <summary>Drop a completed item from the queue after a beat, so the user can read the outcome first.</summary>
+    private async Task AutoDismissAsync(DownloadItem item)
+    {
+        try { await Task.Delay(AutoDismissDelay, _shutdown.Token); }
+        catch (OperationCanceledException) { return; } // shutting down; leave the list alone
+
+        try
+        {
+            await Dispatcher.InvokeAsync(() =>
+            {
+                // Re-check: the user may have dismissed it, or Retry may have swapped it out.
+                if (item.Status == DownloadStatus.Completed && Items.Contains(item)) Remove(item);
+            });
+        }
+        catch (Exception ex) { _log.LogDebug(ex, "Auto-dismiss failed"); }
     }
 
     private void PersistHistory()

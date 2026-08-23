@@ -526,8 +526,7 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 다운로드 실패 ({0}).</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>다운로드</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>다운로드</value></data>
-  <data name="Downloads_Subtitle" xml:space="preserve"><value>매니페스트와 픽스 다운로드를 순서대로 대기시키고 설치합니다.</value></data>
-  <data name="Downloads_Empty" xml:space="preserve"><value>현재 다운로드가 없습니다. 추가 또는 픽스에서 시작한 다운로드가 여기에 표시됩니다.</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>현재 다운로드가 없습니다. 뭐라도 다운로드해 보세요!</value></data>
   <data name="Downloads_History_Empty" xml:space="preserve"><value>완료된 다운로드가 아직 없습니다.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>대기열</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>기록</value></data>
@@ -550,8 +549,29 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Downloads_ActionRequired" xml:space="preserve"><value>조치 필요</value></data>
   <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>앱이 종료되어 중단되었습니다.</value></data>
   <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC 잠금 해제</value></data>
-  <data name="Downloads_Concurrency" xml:space="preserve"><value>동시 실행</value></data>
-  <data name="Settings_MaxConcurrentDownloads" xml:space="preserve"><value>동시 다운로드 수</value></data>
-  <data name="Settings_MaxConcurrentDownloads_Hint" xml:space="preserve"><value>동시에 실행할 다운로드 수입니다. 설치는 항상 하나씩 진행됩니다.</value></data>
   <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>픽스를 적용하려면 먼저 게임을 설치하세요.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>일시중지됨</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>확인 중…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>일시중지</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>재개</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>디포 파일</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>디포 · {1}개 중 {0}개</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>디포 다운로더를 가져오지 못했습니다.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>이 게임의 복호화 키를 찾을 수 없습니다.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>디포 {0} 실패: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>디포 {0}개를 {1}에 다운로드했습니다.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>다운로드</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>다운로드할 디포 선택</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>디포 {0}개 다운로드 ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>이 디포에는 다운로드할 버전이 없습니다.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>전체 선택</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>선택된 디포 없음</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>디포 파일을 저장할 위치 선택</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>디스크 공간이 부족합니다: {0} 필요, 여유 공간은 {1}뿐입니다.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>저장 위치</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>{0} 필요 · {2} 여유 공간 {1}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>로그인하면 이 디포를 다운로드할 수 있습니다.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>디포를 다운로드하려면 로그인하세요.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest 가져오는 중</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>이 디포의 manifest를 가져오지 못했습니다.</value></data>
 </root>
