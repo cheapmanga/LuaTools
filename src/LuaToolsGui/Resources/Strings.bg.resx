@@ -574,4 +574,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Влез, за да изтегляш депота.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>зарежда manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Manifest файлът за това депо не можа да бъде получен.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Подготовка · {0} от {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Изтегляне на инструмента</value></data>
 </root>

@@ -574,4 +574,6 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Jelentkezz be a depotok letöltéséhez.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest letöltése</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nem sikerült megszerezni a depot manifestjét.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Előkészítés · {0} / {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Letöltő beszerzése</value></data>
 </root>

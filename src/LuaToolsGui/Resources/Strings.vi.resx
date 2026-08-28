@@ -574,4 +574,6 @@ Thao tác này xóa các tệp .lua khỏi Steam\config\stplug-in.</value></data
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Đăng nhập để tải depot.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>đang lấy manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Không lấy được manifest của depot này.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Đang chuẩn bị · {0} trên {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Đang lấy trình tải</value></data>
 </root>

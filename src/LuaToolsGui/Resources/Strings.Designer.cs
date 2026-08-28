@@ -559,4 +559,6 @@ public static class Strings
     public static string Builds_Select_ChooseFolder => Get(nameof(Builds_Select_ChooseFolder));
     public static string Builds_Select_SaveTo => Get(nameof(Builds_Select_SaveTo));
     public static string Builds_Select_Space => Get(nameof(Builds_Select_Space));
+    public static string Downloads_Depots_Preparing => Get(nameof(Downloads_Depots_Preparing));
+    public static string Downloads_Depots_GettingTool => Get(nameof(Downloads_Depots_GettingTool));
 }

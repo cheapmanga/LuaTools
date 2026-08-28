@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using LuaToolsGui.Models;
+using LuaToolsGui.Services.Downloads;
 using Microsoft.Extensions.Logging;
 
 namespace LuaToolsGui.Services;
@@ -59,6 +60,7 @@ public partial class DepotDownloaderService(
     GithubProxy gh,
     SteamService steam,
     AuthService auth,
+    CacheService cache,
     ILogger<DepotDownloaderService> log)
 {
     /// <summary>
@@ -106,22 +108,52 @@ public partial class DepotDownloaderService(
 
     // ── Tool acquisition ─────────────────────────────────────────────
 
-    /// <summary>Ensure the tool is on disk (downloads + extracts once). Null if it couldn't be obtained.</summary>
-    public async Task<string?> EnsureToolAsync(IProgress<double?>? progress, CancellationToken ct = default)
+    /// <summary>How long an up-to-date check is trusted before we ask GitHub again.</summary>
+    /// <remarks>Matches the re-pack workflow's own poll interval; checking more often can't find
+    /// anything newer. Also keeps a 10-depot game from making 10 API calls, since RunAsync calls this
+    /// once per depot.</remarks>
+    private static readonly TimeSpan ToolCheckInterval = TimeSpan.FromHours(6);
+
+    private static bool CheckedRecently(long lastMs) =>
+        lastMs > 0 && DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - lastMs < (long)ToolCheckInterval.TotalMilliseconds;
+
+    /// <summary>
+    /// Ensure the tool is on disk and reasonably current. Null only if it couldn't be obtained at all.
+    /// </summary>
+    /// <remarks>
+    /// This used to be a bare <c>File.Exists</c>, which pinned whoever downloaded once to that build
+    /// forever. The re-pack repo now republishes on every upstream release, so the installed release tag
+    /// is recorded and re-checked at most every <see cref="ToolCheckInterval"/>.
+    ///
+    /// <para><b>A failed check never disables a working tool.</b> Every failure path below falls back to
+    /// an existing <c>ExePath</c>, so an offline user who already has the tool keeps downloading depots
+    /// exactly as before. Returning null is reserved for "there is no usable tool at all".</para>
+    /// </remarks>
+    public async Task<string?> EnsureToolAsync(IProgress<DownloadProgress>? progress, CancellationToken ct = default)
     {
-        if (File.Exists(ExePath)) return ExePath;
+        if (File.Exists(ExePath) && CheckedRecently(cache.DepotDownloaderCheckedAtMs)) return ExePath;
 
         await _toolGate.WaitAsync(ct);
+        bool have = false;
         try
         {
-            if (File.Exists(ExePath)) return ExePath; // won the race elsewhere
+            have = File.Exists(ExePath);
+            if (have && CheckedRecently(cache.DepotDownloaderCheckedAtMs)) return ExePath; // won the race
+
+            // A failed lookup still counts as "we looked". Without this the throttle only advances on
+            // success, and since RunAsync calls this once PER DEPOT, an offline 10-depot game would make
+            // ten lookups — each walking every GithubProxy mirror — where the old File.Exists check made
+            // none. Backing off costs at most one interval of update latency.
+            void RecordAttempt() =>
+                cache.DepotDownloaderCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
             string url = $"https://api.github.com/repos/{AppConfig.DepotDownloaderRepo}/releases/latest";
             using var res = await gh.SendAsync(url, ct);
             if (res is null || !res.IsSuccessStatusCode)
             {
                 log.LogDebug("DepotDownloader release lookup failed: {Status}", res?.StatusCode);
-                return null;
+                if (have) RecordAttempt();
+                return have ? ExePath : null;
             }
 
             var release = JsonSerializer.Deserialize<GithubRelease>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
@@ -129,24 +161,58 @@ public partial class DepotDownloaderService(
             if (asset is null)
             {
                 log.LogDebug("DepotDownloader release has no .zip asset");
-                return null;
+                if (have) RecordAttempt();
+                return have ? ExePath : null;
+            }
+
+            // Already on the published build: record that we looked and skip the ~37 MB download.
+            if (have && !string.IsNullOrEmpty(release!.TagName)
+                     && string.Equals(release.TagName, cache.DepotDownloaderVersion, StringComparison.Ordinal))
+            {
+                cache.DepotDownloaderCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                return ExePath;
             }
 
             Directory.CreateDirectory(ToolDir);
             string zipPath = Path.Combine(ToolDir, "depotdownloader.zip");
-            await gh.DownloadAsync(asset.DownloadUrl, zipPath, progress, ct);
+            // GithubProxy only reports a 0..1 fraction; the release tells us the real size, so convert
+            // here rather than making the caller show a meaningless "45 of 100".
+            var sink = progress is null ? null : new ProgressRelay<double?>(f =>
+                progress.Report(new DownloadProgress(
+                    (long)((f ?? 0) * asset.Size), asset.Size > 0 ? asset.Size : null)));
+            await gh.DownloadAsync(asset.DownloadUrl, zipPath, sink, ct);
+
+            // Verify before extracting over a working install: this is an executable we then run, and
+            // both UnlockerService and PluginInstallerService check the same way.
+            if (!AssetHash.Matches(zipPath, asset.Digest))
+            {
+                log.LogDebug("DepotDownloader asset digest mismatch; keeping the existing tool");
+                try { File.Delete(zipPath); } catch { }
+                if (have) RecordAttempt(); // don't re-download a bad asset on the very next depot
+                return have ? ExePath : null;
+            }
 
             // Extract the WHOLE zip: the exe needs SteamKit2.dll and friends beside it.
             ZipFile.ExtractToDirectory(zipPath, ToolDir, overwriteFiles: true);
             try { File.Delete(zipPath); } catch { /* leftover zip is harmless */ }
 
-            return File.Exists(ExePath) ? ExePath : null;
+            if (!File.Exists(ExePath))
+            {
+                if (have) RecordAttempt();
+                return have ? ExePath : null;
+            }
+
+            cache.DepotDownloaderVersion = release!.TagName;
+            cache.DepotDownloaderCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            return ExePath;
         }
         catch (OperationCanceledException) { throw; }
         catch (Exception ex)
         {
             log.LogDebug(ex, "Obtaining DepotDownloader failed");
-            return null;
+            // Same backoff as the explicit failure paths: a throwing check must not be retried per depot.
+            if (have) cache.DepotDownloaderCheckedAtMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            return have ? ExePath : null;
         }
         finally { _toolGate.Release(); }
     }

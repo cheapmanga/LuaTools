@@ -600,4 +600,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل المستودعات.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>جارٍ جلب الملف</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>تعذّر الحصول على ملف manifest لهذا المستودع.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>جارٍ التحضير · {0} من {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>جارٍ إحضار أداة التنزيل</value></data>
 </root>

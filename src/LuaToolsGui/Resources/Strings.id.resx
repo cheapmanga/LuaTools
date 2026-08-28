@@ -574,4 +574,6 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Masuk untuk mengunduh depot.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>mengambil manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tidak bisa mendapatkan manifest depot ini.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Menyiapkan · {0} dari {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Mengambil pengunduh</value></data>
 </root>

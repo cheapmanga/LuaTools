@@ -121,7 +121,6 @@ public class ManifestJobFactory(
         long appId, string gameName, IReadOnlyList<DepotSelection> selections, string outDir,
         Action<DownloadItem, JobResult?>? onFinished = null)
     {
-        long totalSize = selections.Sum(s => s.Size);
         return new DownloadJob(
             DownloadKind.Depot,
             $"depot:{appId}",
@@ -129,7 +128,7 @@ public class ManifestJobFactory(
             gameName,
             Resources.Strings.Downloads_Kind_Depot,
             covers.GetLocalPath(appId),
-            (item, progress, ct) => RunDepotsAsync(item, appId, gameName, selections, outDir, totalSize, progress, ct),
+            (item, progress, ct) => RunDepotsAsync(item, appId, gameName, selections, outDir, progress, ct),
             // Nothing to install: the depots were written straight to outDir.
             (_, _, _) => Task.FromResult(new JobResult(true,
                 string.Format(Resources.Strings.Depot_Status_Done, selections.Count, outDir), outDir)),
@@ -139,19 +138,10 @@ public class ManifestJobFactory(
 
     private async Task<DownloadedFile> RunDepotsAsync(
         DownloadItem item, long appId, string gameName, IReadOnlyList<DepotSelection> selections,
-        string outDir, long totalSize, IProgress<DownloadProgress> progress, CancellationToken ct)
+        string outDir, IProgress<DownloadProgress> progress, CancellationToken ct)
     {
         var keys = depotTool.ResolveKeys(appId);
         if (keys.Count == 0) throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoKeys);
-
-        // Refuse up front rather than part-way through. The downloader pre-allocates every file at its
-        // full size BEFORE fetching a byte, so a short disk fails almost immediately — but only after it
-        // has already created multi-GB of zero-filled files. Checking here also gives a message that says
-        // what's actually wrong instead of a raw allocation error.
-        long needed = selections.Where(s => !item.CompletedDepots.Contains(s.DepotId)).Sum(s => s.Size);
-        if (needed > 0 && DepotDownloaderService.FreeSpaceFor(outDir) is { } free && free < needed)
-            throw new DownloadAbortedException(string.Format(
-                Resources.Strings.Depot_Err_NoSpace, ByteFormat.Size(needed), ByteFormat.Size(free)));
 
         // Sampled ONCE, before anything runs. Checking it inside the loop would be self-fulfilling:
         // the first depot creates outDir, so every later depot would see it and think a previous session
@@ -159,34 +149,79 @@ public class ManifestJobFactory(
         // but the intent is "did an earlier run leave partial files here", which is only true up front.)
         bool outDirExisted = Directory.Exists(outDir);
 
+        // ── Phase 0: the downloader itself ───────────────────────────────────────────────────────────
+        // Hoisted out of the per-depot loop so the ~37 MB first fetch (and any update) happens once, with
+        // visible progress. RunAsync still calls EnsureToolAsync per depot, but those hit its fast path.
+        OnUi(() => item.Detail = Resources.Strings.Downloads_Depots_GettingTool);
+        if (await depotTool.EnsureToolAsync(progress, ct) is null)
+            throw new DownloadAbortedException(Resources.Strings.Depot_Err_Tool);
+
+        // Hand the bar back. On a fresh install the step above just drove it to 100% against the tool's
+        // own size; leaving it there would show a full bar through Phase 1 and then snap to 0% when the
+        // depots start. A null total reads as indeterminate until Phase 2 knows the real one.
+        progress.Report(new DownloadProgress(0, null));
+
+        // ── Phase 1: resolve EVERYTHING before a single byte is written ──────────────────────────────
+        // Sizes for every selection (including finished ones, so a resumed job's baseline is right), and
+        // manifests only for what's left to do. Doing this inside the download loop meant a manifest that
+        // couldn't be fetched aborted the job after earlier depots had already pulled tens of GB, and it
+        // left the free-space check below summing 0 for every unresolved shared depot.
+        var resolved = new List<DepotSelection>(selections.Count);
+        for (int i = 0; i < selections.Count; i++)
+        {
+            ct.ThrowIfCancellationRequested();
+
+            // Formatted into a local BEFORE the closure: `i` is a for-loop variable, so it is shared
+            // across iterations and would have moved on by the time the dispatcher ran the lambda.
+            string prep = string.Format(Resources.Strings.Downloads_Depots_Preparing, i + 1, selections.Count);
+            OnUi(() => item.Detail = prep);
+
+            // A shared redistributable carries no gid or size in the game's own app-info (it's a
+            // three-field stub pointing at the owning app), so both are resolved here rather than at
+            // pick time. Cached per app by SteamDepotInfo, and the owner is app 228980 for nearly
+            // every game, so this costs one lookup per session across all downloads.
+            var sized = await ResolveSharedAsync(selections[i], ct);
+
+            // Resolve the manifest, fetching it into depotcache if Steam doesn't already have it. This is
+            // what lets a depot be downloaded at all when the game was added with "Auto Update Apps" on,
+            // which comments out the pins and skips the manifest files. Skipped for a depot already
+            // finished — its bytes are on disk and nothing will re-read the manifest.
+            // `prep` (not the download-phase caption) is the step text here: EnsureManifestAsync appends
+            // "· fetching manifest" to whatever it's given, so passing the other string would relabel the
+            // row mid-pre-flight as though depots were already downloading.
+            if (!item.CompletedDepots.Contains(sized.DepotId))
+                sized = sized with { ManifestPath = await EnsureManifestAsync(item, sized, prep, ct) };
+
+            resolved.Add(sized);
+        }
+
+        // ── Phase 2: budget, now that the sizes are real ─────────────────────────────────────────────
+        // Refuse up front rather than part-way through. The downloader pre-allocates every file at its
+        // full size BEFORE fetching a byte, so a short disk fails almost immediately — but only after it
+        // has already created multi-GB of zero-filled files. Checking here also gives a message that says
+        // what's actually wrong instead of a raw allocation error.
+        long totalSize = resolved.Sum(s => s.Size);
+        long needed = resolved.Where(s => !item.CompletedDepots.Contains(s.DepotId)).Sum(s => s.Size);
+        if (needed > 0 && DepotDownloaderService.FreeSpaceFor(outDir) is { } free && free < needed)
+            throw new DownloadAbortedException(string.Format(
+                Resources.Strings.Depot_Err_NoSpace, ByteFormat.Size(needed), ByteFormat.Size(free)));
+
+        // ── Phase 3: download ────────────────────────────────────────────────────────────────────────
         string keysFile = DepotDownloaderService.WriteKeysFile(keys);
         try
         {
             long done = 0;
-            for (int i = 0; i < selections.Count; i++)
+            for (int i = 0; i < resolved.Count; i++)
             {
                 ct.ThrowIfCancellationRequested();
-                var sel = selections[i];
+                var ready = resolved[i];
 
-                // Resume skips what's already finished rather than re-hashing tens of GB.
-                if (item.CompletedDepots.Contains(sel.DepotId)) { done += sel.Size; continue; }
+                // Resume skips what's already finished rather than re-hashing tens of GB. Its size is the
+                // resolved one, so a finished shared depot no longer contributes 0 to the baseline.
+                if (item.CompletedDepots.Contains(ready.DepotId)) { done += ready.Size; continue; }
 
-                string step = string.Format(Resources.Strings.Downloads_Depots_Progress, i + 1, selections.Count);
+                string step = string.Format(Resources.Strings.Downloads_Depots_Progress, i + 1, resolved.Count);
                 OnUi(() => item.Detail = step);
-
-                // A shared redistributable carries no gid or size in the game's own app-info (it's a
-                // three-field stub pointing at the owning app), so both are resolved here rather than at
-                // pick time. Cached per app by SteamDepotInfo, and the owner is app 228980 for nearly
-                // every game, so this costs one lookup per session across all downloads.
-                var sized = await ResolveSharedAsync(sel, ct);
-                // The up-front total assumed 0 bytes for a shared depot. Correct it now we know better,
-                // so the overall bar stays honest instead of finishing early.
-                totalSize += sized.Size - sel.Size;
-
-                // Resolve the manifest, fetching it into depotcache if Steam doesn't already have it.
-                // This is what lets a depot be downloaded at all when the game was added with
-                // "Auto Update Apps" on, which comments out the pins and skips the manifest files.
-                var ready = sized with { ManifestPath = await EnsureManifestAsync(item, sized, step, ct) };
 
                 // Only the FIRST depot after a resume is the partially-written one, so only it needs the
                 // (expensive) re-hash. Consume the flag so later depots download at full speed.
@@ -216,9 +251,9 @@ public class ManifestJobFactory(
                 if (!res.Ok)
                     throw new DownloadAbortedException(res.Error == "tool"
                         ? Resources.Strings.Depot_Err_Tool
-                        : string.Format(Resources.Strings.Depot_Err_Failed, sel.DepotId, res.Error ?? ""));
+                        : string.Format(Resources.Strings.Depot_Err_Failed, ready.DepotId, res.Error ?? ""));
 
-                item.CompletedDepots.Add(sel.DepotId);
+                item.CompletedDepots.Add(ready.DepotId);
                 done += ready.Size;
                 progress.Report(new DownloadProgress(done, totalSize));
             }

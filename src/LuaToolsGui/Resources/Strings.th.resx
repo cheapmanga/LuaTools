@@ -574,4 +574,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>ลงชื่อเข้าใช้เพื่อดาวน์โหลด depot</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>กำลังดึง manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>ไม่สามารถดึง manifest ของ depot นี้ได้</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>กำลังเตรียม · {0} จาก {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>กำลังรับตัวดาวน์โหลด</value></data>
 </root>

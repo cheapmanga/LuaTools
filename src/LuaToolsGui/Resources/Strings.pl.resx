@@ -574,4 +574,6 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Zaloguj się, aby pobierać depoty.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>pobieranie manifestu</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nie udało się pobrać manifestu tego depotu.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Przygotowywanie · {0} z {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Pobieranie narzędzia</value></data>
 </root>

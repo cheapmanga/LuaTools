@@ -574,4 +574,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Autentifică-te ca să descarci depouri.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>se obține manifestul</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nu s-a putut obține manifestul acestui depou.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Se pregătește · {0} din {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Se obține descărcătorul</value></data>
 </root>

@@ -574,4 +574,6 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Logg inn for å laste ned depoter.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>henter manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Fikk ikke tak i manifestet for dette depotet.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Forbereder · {0} av {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Henter nedlasteren</value></data>
 </root>

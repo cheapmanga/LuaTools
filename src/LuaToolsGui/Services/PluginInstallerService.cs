@@ -1,8 +1,7 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
@@ -287,7 +286,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         bool dllMatches = Slots.All(slot =>
             SlotPath(slot) is { } p && File.Exists(p) &&
             AssetDigest(latest, slot.DllAsset) is { } digest &&
-            Sha256OfFile(p) == digest);
+            AssetHash.OfFile(p) == digest);
         bool installed = frontend && loader;
         // `|| legacy` keeps a leftover/locked legacy dll getting swept on subsequent auto-updates until gone.
         bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy);
@@ -331,13 +330,13 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             }
 
             // Verify each against its release asset digest before touching anything on disk.
-            string zipSha = Sha256OfFile(zipPath);
+            string zipSha = AssetHash.OfFile(zipPath);
             if (AssetDigest(latest, PluginZipAsset) is { } zd && zipSha != zd)
                 return (false, string.Format(Resources.Strings.Plugin_Err_VerifyFailed, PluginZipAsset));
             var slotShas = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, p) in slotDlPaths)
             {
-                string sha = Sha256OfFile(p);
+                string sha = AssetHash.OfFile(p);
                 slotShas[slot] = sha;
                 if (AssetDigest(latest, slot.DllAsset) is { } dd && sha != dd)
                     return (false, string.Format(Resources.Strings.Plugin_Err_VerifyFailed, slot.DllAsset));
@@ -366,7 +365,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             // (so hand-placed test builds aren't clobbered), and thus never stop/restart Steam for it either.
             bool legacyPresent = LegacyDllPaths.Any(File.Exists);
             bool anySlotNeedsUpdate = Slots.Any(slot =>
-                SlotPath(slot) is not { } cur || !File.Exists(cur) || Sha256OfFile(cur) != slotShas[slot]);
+                SlotPath(slot) is not { } cur || !File.Exists(cur) || AssetHash.OfFile(cur) != slotShas[slot]);
             bool dllNeedsUpdate = !DllUpdateDisabled && (anySlotNeedsUpdate || legacyPresent);
             if (dllNeedsUpdate)
             {
@@ -623,21 +622,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     // ── Helpers (same shape as UnlockerService's) ──
     private static string? AssetDigest(GithubRelease r, string name) =>
-        ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Digest);
+        AssetHash.ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?.Digest);
 
     private static GithubAsset? FindAsset(GithubRelease r, string name) =>
         r.Assets.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-    private static string Sha256OfFile(string path)
-    {
-        using var s = File.OpenRead(path);
-        return Convert.ToHexString(SHA256.HashData(s)).ToLowerInvariant();
-    }
-
-    private static string? ParseDigest(string? digest)
-    {
-        if (string.IsNullOrWhiteSpace(digest)) return null;
-        int colon = digest.IndexOf(':');
-        return (colon >= 0 ? digest[(colon + 1)..] : digest).Trim().ToLowerInvariant();
-    }
 }

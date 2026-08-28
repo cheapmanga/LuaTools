@@ -574,4 +574,6 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Depot indirmek için giriş yap.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>manifest alınıyor</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Bu depotun manifest dosyası alınamadı.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Hazırlanıyor · {0} / {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>İndirici alınıyor</value></data>
 </root>
