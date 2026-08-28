@@ -574,4 +574,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Увійдіть, щоб завантажувати депо.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>отримання manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Не вдалося отримати manifest цього депо.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Підготовка · {0} з {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Завантаження завантажувача</value></data>
 </root>

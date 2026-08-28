@@ -574,4 +574,6 @@ Detta raderar .lua-filerna från Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Logga in för att ladda ner depåer.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>hämtar manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kunde inte hämta depåns manifest.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Förbereder · {0} av {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Hämtar nedladdaren</value></data>
 </root>

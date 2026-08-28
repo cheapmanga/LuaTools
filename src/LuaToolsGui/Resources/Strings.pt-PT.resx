@@ -574,4 +574,6 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Inicie sessão para transferir depots.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>a obter manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Não foi possível obter o manifest deste depot.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>A preparar · {0} de {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>A obter o transferidor</value></data>
 </root>

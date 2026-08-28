@@ -574,4 +574,6 @@ Dies löscht die .lua-Dateien aus Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Zum Laden von Depots anmelden.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>Manifest wird geholt</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Das Manifest dieses Depots konnte nicht geladen werden.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Vorbereiten · {0} von {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Downloader wird geholt</value></data>
 </root>

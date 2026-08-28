@@ -574,4 +574,6 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Kirjaudu sisään ladataksesi depoteja.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>haetaan manifestia</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tämän depotin manifestia ei saatu haettua.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Valmistellaan · {0}/{1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Haetaan lataustyökalua</value></data>
 </root>

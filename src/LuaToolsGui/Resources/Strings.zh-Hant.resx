@@ -574,4 +574,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>登入後可下載倉庫。</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>正在取得 manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>無法取得這個倉庫的 manifest。</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>準備中 · {0} / {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>正在取得下載器</value></data>
 </root>

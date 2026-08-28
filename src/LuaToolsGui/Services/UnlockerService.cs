@@ -1,7 +1,6 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using LuaToolsGui.Models;
@@ -142,7 +141,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
     {
         string local = Path.Combine(root, manifest.File);
         if (!File.Exists(local)) return ModeStatus.NotInstalled;
-        return Sha256OfFile(local).Equals(manifest.Sha256, StringComparison.OrdinalIgnoreCase)
+        return AssetHash.OfFile(local).Equals(manifest.Sha256, StringComparison.OrdinalIgnoreCase)
             ? ModeStatus.UpToDate
             : ModeStatus.UpdateAvailable;
     }
@@ -159,7 +158,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
         string ostDll = Path.Combine(root, "OpenSteamTool.dll");
 
         if (nightly is not null && File.Exists(ostDll)
-            && AssetDigest(nightly, "OpenSteamTool.dll") == Sha256OfFile(ostDll))
+            && AssetDigest(nightly, "OpenSteamTool.dll") == AssetHash.OfFile(ostDll))
             return (ModeStatus.UpToDate, nightly.TagName);
 
         // Not the current nightly. Fall back to the stable mirror to tell "on stable OST" apart from
@@ -196,7 +195,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
         if (ost.Count == 0) return (ModeStatus.Unknown, null);
 
         var latest = ost[0];
-        string dwmHash = Sha256OfFile(dwmapi);
+        string dwmHash = AssetHash.OfFile(dwmapi);
 
         if (AssetDigest(latest, "dwmapi.dll") == dwmHash) return (ModeStatus.UpToDate, latest.TagName);
         // Matches an older ost- release, or is present but unrecognized → an update exists.
@@ -269,13 +268,13 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
                     if (asset is null) return ModeInstallResult.Fail(Resources.Strings.Err_ReleaseMissingDownload);
                     zipName = asset.Name;
                     zipUrl = asset.DownloadUrl;
-                    wantedZipDigest = ParseDigest(asset.Digest);
+                    wantedZipDigest = AssetHash.ParseDigest(asset.Digest);
                 }
 
                 string zipPath = Path.Combine(staging, zipName);
                 await DownloadToFileAsync(zipUrl, zipPath, progress, ct);
 
-                zipDigest = Sha256OfFile(zipPath);
+                zipDigest = AssetHash.OfFile(zipPath);
                 if (wantedZipDigest is { } want && !zipDigest.Equals(want, StringComparison.OrdinalIgnoreCase))
                     return ModeInstallResult.Fail(Resources.Strings.Err_VerifyFailed);
 
@@ -287,7 +286,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
                 // Manifest modes don't publish a zip digest, so verify the payload file the manifest
                 // DOES vouch for, once it's out of the archive.
                 if (manifest is not null && staged.TryGetValue(manifest.File, out string? payload)
-                    && !Sha256OfFile(payload).Equals(manifest.Sha256, StringComparison.OrdinalIgnoreCase))
+                    && !AssetHash.OfFile(payload).Equals(manifest.Sha256, StringComparison.OrdinalIgnoreCase))
                     return ModeInstallResult.Fail(string.Format(Resources.Strings.Err_VerifyFailedFile, manifest.File));
             }
 
@@ -365,7 +364,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
         string ostDll = Path.Combine(root, "OpenSteamTool.dll");
         if (File.Exists(ostDll))
         {
-            string ostHash = Sha256OfFile(ostDll);
+            string ostHash = AssetHash.OfFile(ostDll);
 
             var bstManifest = await FetchUpdateManifestAsync(Def(UnlockerMode.Bst), forceRefresh: false, ct);
             if (bstManifest is not null
@@ -395,8 +394,8 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
                     .ToList();
                 if (tagged is { Count: > 0 })
                 {
-                    string dwmHash = Sha256OfFile(dwmapi);
-                    string xinHash = Sha256OfFile(xinput);
+                    string dwmHash = AssetHash.OfFile(dwmapi);
+                    string xinHash = AssetHash.OfFile(xinput);
                     if (tagged.Any(r => AssetDigest(r, "dwmapi.dll") == dwmHash)
                         && tagged.Any(r => AssetDigest(r, "xinput1_4.dll") == xinHash))
                         detected = UnlockerMode.Ost;
@@ -410,7 +409,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
 
     /// <summary>Digest (hex, no prefix) of a release's same-named asset, or null if absent.</summary>
     private static string? AssetDigest(GithubRelease r, string assetName) =>
-        ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(assetName, StringComparison.OrdinalIgnoreCase))?.Digest);
+        AssetHash.ParseDigest(r.Assets.FirstOrDefault(a => a.Name.Equals(assetName, StringComparison.OrdinalIgnoreCase))?.Digest);
 
     /// <summary>The same-named asset, or null if this release doesn't have it.</summary>
     private static GithubAsset? FindAsset(GithubRelease r, string assetName) =>
@@ -587,7 +586,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
             {
                 latest = release.TagName;
                 string? wanted = AssetDigest(release, CloudRedirectDll);
-                if (wanted is not null && !Sha256OfFile(dll).Equals(wanted, StringComparison.OrdinalIgnoreCase))
+                if (wanted is not null && !AssetHash.OfFile(dll).Equals(wanted, StringComparison.OrdinalIgnoreCase))
                     updateAvailable = true;
             }
         }
@@ -645,7 +644,7 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
             Directory.CreateDirectory(staging);
             string tmp = Path.Combine(staging, CloudRedirectDll);
             await DownloadToFileAsync(asset.DownloadUrl, tmp, progress, ct);
-            if (ParseDigest(asset.Digest) is { } want && !Sha256OfFile(tmp).Equals(want, StringComparison.OrdinalIgnoreCase))
+            if (AssetHash.ParseDigest(asset.Digest) is { } want && !AssetHash.OfFile(tmp).Equals(want, StringComparison.OrdinalIgnoreCase))
                 return ModeInstallResult.Fail(string.Format(Resources.Strings.Err_VerifyFailedFile, CloudRedirectDll));
 
             try
@@ -859,20 +858,6 @@ public class UnlockerService(SteamService steam, SettingsService settings, Cache
     // Asset download routed via GithubProxy: direct, then mirrors (for blocked/throttled regions).
     private Task DownloadToFileAsync(string url, string destPath, IProgress<double?>? progress, CancellationToken ct) =>
         gh.DownloadAsync(url, destPath, progress, ct);
-
-    private static string Sha256OfFile(string path)
-    {
-        using var s = File.OpenRead(path);
-        return Convert.ToHexString(SHA256.HashData(s)).ToLowerInvariant();
-    }
-
-    /// <summary>Strip the "sha256:" prefix GitHub puts on asset digests; null if absent.</summary>
-    private static string? ParseDigest(string? digest)
-    {
-        if (string.IsNullOrWhiteSpace(digest)) return null;
-        int colon = digest.IndexOf(':');
-        return (colon >= 0 ? digest[(colon + 1)..] : digest).Trim().ToLowerInvariant();
-    }
 
     private static void StampNow(string path)
     {

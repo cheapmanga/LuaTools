@@ -53,13 +53,16 @@ public static class AppConfig
     // Powers the Depots page "Download" action.
     //
     // This is a RE-PACK we host ourselves, NOT the upstream SteamAutoCracks/DepotDownloaderMod repo, for two
-    // reasons: upstream ships its assets as `Release.rar` (System.IO.Compression cannot read RAR, and we're
-    // not taking a dependency just for that), and its build is framework-dependent net9.0 while this app is
-    // net8.0-windows, so users without the .NET 9 runtime couldn't run it. The asset here must be a
-    // SELF-CONTAINED, ZIPPED publish:
-    //     dotnet publish -c Release -r win-x64 --self-contained
-    // TODO: create this repo and upload the first release before the Depots download button ships.
-    public const string DepotDownloaderRepo = "madoiscool/DepotDownloaderMod";
+    // reasons: upstream ships its assets as `Release.rar` (System.IO.Compression cannot read RAR), and its
+    // build is framework-dependent net9.0 while this app is net8.0-windows, so users without the .NET 9
+    // runtime couldn't run it. Note that adding a RAR reader would fix only the FIRST of those.
+    //
+    // The re-pack is produced automatically by the `repack.yml` workflow in that repo: on each upstream
+    // release it rebuilds their source at that tag as a SELF-CONTAINED win-x64 publish and uploads a FLAT
+    // zip. Both properties are load-bearing for DepotDownloaderService.EnsureToolAsync, which takes the
+    // first `.zip` asset, extracts it straight into ToolDir, and then expects DepotDownloaderMod.exe at the
+    // archive ROOT (unlike PluginInstallerService, it has no single-top-level-folder hoisting).
+    public const string DepotDownloaderRepo = "mendy-tools/DepotDownloaderMod";
     public const string ManifestBackendUrl = "http://167.235.229.108";
     public const string ManifestBackendUserAgent = "secretgoonpoon";
 

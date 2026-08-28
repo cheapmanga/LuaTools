@@ -574,4 +574,6 @@ Tím se smažou soubory .lua ze Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Pro stahování depotů se přihlas.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>načítání manifestu</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nepodařilo se získat manifest tohoto depotu.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Příprava · {0} z {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Získávání nástroje</value></data>
 </root>

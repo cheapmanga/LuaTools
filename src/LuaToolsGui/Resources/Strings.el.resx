@@ -574,4 +574,6 @@
   <data name="Depot_Err_SignIn" xml:space="preserve"><value>Συνδέσου για λήψη depot.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>λήψη manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του manifest αυτού του depot.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Προετοιμασία · {0} από {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Λήψη του εργαλείου</value></data>
 </root>
