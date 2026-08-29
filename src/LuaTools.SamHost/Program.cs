@@ -15,6 +15,8 @@ namespace LuaTools.SamHost
     ///   <item><c>LuaTools.SamHost.exe &lt;appid&gt;</c> — interactive session for one game.</item>
     ///   <item><c>LuaTools.SamHost.exe --schemas</c> — one shot: achievement counts for every schema
     ///   Steam has cached. Touches no Steam connection, so the game grid can use it freely.</item>
+    ///   <item><c>LuaTools.SamHost.exe --owned</c> — one shot: reads app ids from stdin, one per line,
+    ///   and returns those the signed-in account owns. Needs Steam running.</item>
     /// </list>
     ///
     /// <para><b>Protocol</b></para>
@@ -61,6 +63,11 @@ namespace LuaTools.SamHost
             if (args.Length == 1 && args[0] == "--schemas")
             {
                 return ScanSchemas();
+            }
+
+            if (args.Length == 1 && args[0] == "--owned")
+            {
+                return FilterOwned(input);
             }
 
             long appId;
@@ -241,6 +248,65 @@ namespace LuaTools.SamHost
 
             sb.Append("]}");
             Write(sb.ToString());
+        }
+
+        /// <summary>
+        /// One shot: read app ids from stdin (one per line) and return those the account owns.
+        ///
+        /// <para>
+        /// Opened with app id 0 on purpose: a session bound to a game can only answer for that game,
+        /// while an unbound one can be asked about any app id. That is what lets the game grid drop
+        /// entries the account no longer owns — Steam's own files can't tell you that.
+        /// </para>
+        /// </summary>
+        private static int FilterOwned(StreamReader input)
+        {
+            var appIds = new List<long>();
+            string line;
+            while ((line = input.ReadLine()) != null)
+            {
+                long appId;
+                if (long.TryParse(line.Trim(), NumberStyles.None, CultureInfo.InvariantCulture, out appId))
+                {
+                    appIds.Add(appId);
+                }
+            }
+
+            using (var session = new SteamSession(0))
+            {
+                try
+                {
+                    session.Initialize();
+                }
+                catch (SessionException e)
+                {
+                    WriteError(e.Code, e.Message);
+                    return 1;
+                }
+                catch (Exception e)
+                {
+                    WriteError("steam_unavailable", e.Message);
+                    return 1;
+                }
+
+                var owned = session.FilterOwned(appIds);
+
+                var sb = new StringBuilder(32 + owned.Count * 10);
+                sb.Append("{\"ok\":true,\"owned\":[");
+                for (int i = 0; i < owned.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        sb.Append(',');
+                    }
+
+                    sb.Append(Json.Num(owned[i]));
+                }
+                sb.Append("]}");
+
+                Write(sb.ToString());
+                return 0;
+            }
         }
 
         /// <summary>

@@ -558,6 +558,7 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Resetezi TOATE statisticile și realizările pentru {0}? Steam nu are o resetare doar a realizărilor, așa că dispar și statisticile jocului. Nu se poate anula.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Progresul pentru {0} a fost resetat.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam nu rulează. Pornește Steam, autentifică-te și încearcă din nou.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam rulează, dar nu a deschis statisticile acestui joc. Cel mai probabil nu mai este în biblioteca ta — folosește Reîmprospătare ca să îl scoți din listă.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam nu a fost găsit pe acest calculator.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam rulează, dar niciun utilizator nu este autentificat.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam a răspuns pentru alt joc. Închide orice alt instrument de realizări și încearcă din nou.</value></data>

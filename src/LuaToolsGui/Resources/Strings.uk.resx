@@ -558,6 +558,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Скинути ВСЮ статистику й досягнення для {0}? У Steam немає скидання лише досягнень, тож статистика гри теж зникне. Скасувати це буде неможливо.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Прогрес {0} скинуто.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam не запущений. Запустіть Steam, увійдіть в акаунт і спробуйте ще раз.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam запущений, але не відкрив статистику цієї гри. Найімовірніше, її більше немає у вашій бібліотеці — натисніть «Оновити», щоб прибрати її зі списку.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam не знайдено на цьому комп'ютері.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam запущений, але вхід в акаунт не виконано.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam відповів щодо іншої гри. Закрийте інші програми для досягнень і спробуйте ще раз.</value></data>

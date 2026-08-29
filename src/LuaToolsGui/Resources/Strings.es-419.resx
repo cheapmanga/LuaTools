@@ -558,6 +558,7 @@ Esto borra los archivos .lua de Steam\config\stplug-in. Reinicia Steam después 
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>¿Restablecer TODAS las estadísticas y los logros de {0}? Steam no permite restablecer solo los logros, así que las estadísticas del juego también se borrarán. Esto no se puede deshacer.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Progreso restablecido para {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam no está abierto. Abre Steam, inicia sesión e inténtalo de nuevo.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam está abierto, pero no quiso abrir las estadísticas de este juego. Lo más probable es que ya no esté en tu biblioteca; usa Actualizar para quitarlo de la lista.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>No se encontró Steam en esta computadora.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam está abierto, pero no hay ningún usuario con la sesión iniciada.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam respondió con otro juego. Cierra cualquier otra herramienta de logros e inténtalo de nuevo.</value></data>
