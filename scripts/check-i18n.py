@@ -28,10 +28,52 @@ PLACEHOLDER_RE = re.compile(r'\{(\d+)\}')
 # This list IS the handoff to the translation pass. When a feature's UI is final: translate its keys
 # across every Strings.<tag>.resx, clear them from here, and this check goes back to demanding full
 # parity. Anything left here is untranslated in all 29 languages.
-PENDING_TRANSLATION: set[str] = set()
-# Empty on purpose: every key is translated in all 29 languages, so the parity check above is
-# unconditional. Add a key here ONLY while its feature's UI is still moving, and clear it again
-# as soon as the translations land. Anything listed is English-only for every user.
+PENDING_TRANSLATION: set[str] = {
+    "Ach_Card_Count",
+    "Ach_Card_CountUnknown",
+    "Ach_Detail_Loading",
+    "Ach_Detail_None",
+    "Ach_Empty_None",
+    "Ach_Err_AppIdMismatch",
+    "Ach_Err_HostMissing",
+    "Ach_Err_Load",
+    "Ach_Err_NoSchema",
+    "Ach_Err_NotLoggedIn",
+    "Ach_Err_Protected",
+    "Ach_Err_Stats",
+    "Ach_Err_SteamNotFound",
+    "Ach_Err_SteamNotRunning",
+    "Ach_Err_Timeout",
+    "Ach_Err_Unknown",
+    "Ach_Filter_All",
+    "Ach_Filter_Locked",
+    "Ach_Filter_Unlocked",
+    "Ach_HiddenDescription",
+    "Ach_Loading",
+    "Ach_LockAll",
+    "Ach_Progress",
+    "Ach_ProtectedBadge",
+    "Ach_Reset",
+    "Ach_Reset_Ask",
+    "Ach_Reset_Done",
+    "Ach_Reset_Title",
+    "Ach_Revert",
+    "Ach_Save",
+    "Ach_SearchPlaceholder",
+    "Ach_Subtitle",
+    "Ach_Title",
+    "Ach_Toast_SaveFailed",
+    "Ach_Toast_Saved",
+    "Ach_Toast_Saved_Body",
+    "Ach_UnlockAll",
+    "Ach_UnlockedOn",
+    "Ach_Unsaved",
+    "Nav_Achievements",
+}
+# The Achievements page (added 2026-08-29). Its UI is still settling, so the keys are English-only
+# for now and exempt from the parity check above. Translate them across every Strings.<tag>.resx and
+# empty this set again once the page is final. Anything listed here is untranslated in all 29
+# languages.
 
 
 
