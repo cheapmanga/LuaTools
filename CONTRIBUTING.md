@@ -31,6 +31,7 @@ To produce a local build for testing, `dotnet publish -c Release` is enough.
 |---|---|
 | `src/LuaToolsGui/` | The application: `Views/` (XAML), `ViewModels/`, `Services/`, `Models/`, `Resources/` (localization) |
 | `src/LuaToolsGui/AppConfig.cs` | All compiled-in endpoints, mirrors and public client values |
+| `src/LuaTools.SamHost/` | Headless x86 / net48 helper for the Achievements page (Steam achievement interop, vendored from gibbed's SAM). Built and copied next to `LuaTools.exe` by the app's csproj |
 | `tests/LuaToolsGui.Tests/` | xUnit tests |
 | `scripts/check-i18n.py` | Translation validator, run by CI on every RESX change |
 

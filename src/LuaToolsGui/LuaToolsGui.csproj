@@ -64,4 +64,39 @@
     <PackageReference Include="WPF-UI" Version="4.3.0" />
   </ItemGroup>
 
+  <!--
+    The achievement host (src/LuaTools.SamHost) is a separate x86 / .NET Framework 4.8 executable: it
+    has to be, since steamclient.dll is 32-bit and can't be loaded into this process. LuaTools runs it
+    rather than referencing it, so the reference below carries no assembly and the exe is copied by
+    hand into both the build output (dev runs) and the publish output (what Velopack packs).
+  -->
+  <ItemGroup>
+    <!-- Referenced only so restore + build ordering cover the host; nothing is referenced from it.
+         Without this, building LuaToolsGui.csproj on its own leaves the host unrestored and its net48
+         reference-assemblies package missing (MSB3644). SkipGetTargetFrameworkProperties is what lets
+         a net8.0-windows project point at a net48 one at all. -->
+    <ProjectReference Include="..\LuaTools.SamHost\LuaTools.SamHost.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
+      <UndefineProperties>TargetFramework</UndefineProperties>
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Target Name="_BuildSamHost">
+    <MSBuild Projects="$(MSBuildThisFileDirectory)..\LuaTools.SamHost\LuaTools.SamHost.csproj"
+             Targets="Build"
+             Properties="Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" ItemName="_SamHostOutput" />
+    </MSBuild>
+  </Target>
+
+  <Target Name="CopySamHostToOutput" AfterTargets="Build" DependsOnTargets="_BuildSamHost">
+    <Copy SourceFiles="@(_SamHostOutput)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopySamHostToPublish" AfterTargets="Publish" DependsOnTargets="_BuildSamHost">
+    <Copy SourceFiles="@(_SamHostOutput)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>

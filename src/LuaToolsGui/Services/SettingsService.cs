@@ -30,6 +30,10 @@ public class AppSettings
     // (→ default 24) is distinguishable from an explicit choice.
     public int? FixesPageSize { get; set; }
 
+    // Achievements-page game-list results-per-page. 0 = "All". Nullable so "never set" (→ default 24)
+    // is distinguishable from an explicit choice.
+    public int? AchievementsPageSize { get; set; }
+
     // Builds-page game-list results-per-page. 0 = "All". Kept separate from ManagePageSize. The Builds
     // list is a narrow sidebar, so a size that suits the Manage grid rarely suits both.
     public int? BuildsPageSize { get; set; }
@@ -108,6 +112,13 @@ public class SettingsService
     {
         get => _settings.FixesPageSize ?? 24; // default 24
         set { _settings.FixesPageSize = value; Save(); }
+    }
+
+    /// <summary>Achievements-page results-per-page (default 24). 0 = "All" (single infinite scroll).</summary>
+    public int AchievementsPageSize
+    {
+        get => _settings.AchievementsPageSize ?? 24; // default 24
+        set { _settings.AchievementsPageSize = value; Save(); }
     }
 
     /// <summary>Builds-page game-list results-per-page (default 10). 0 = "All". Smaller than the other
@@ -206,6 +217,7 @@ public class SettingsService
             && _settings.DonateKeys is null
             && _settings.ManagePageSize is null
             && _settings.FixesPageSize is null
+            && _settings.AchievementsPageSize is null
             && _settings.BuildsPageSize is null
             && _settings.Language is null
             && _settings.HubcapApiKey is null

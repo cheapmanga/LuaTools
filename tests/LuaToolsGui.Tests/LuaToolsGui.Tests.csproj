@@ -9,6 +9,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <!-- The linked SamHost sources below are compiled without nullable annotations (they target net48,
+         where the project has them off). Their nullability warnings are not actionable from here. -->
+    <NoWarn>$(NoWarn);CS8603;CS8618;CS8625</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +22,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\LuaToolsGui\LuaToolsGui.csproj" />
+  </ItemGroup>
+
+  <!-- The achievement host is x86/net48 and can't be referenced as an assembly, so its schema parser
+       (and the vendored KeyValues reader it sits on) is compiled into the test assembly from source.
+       Same code, exercised on the fixtures below. -->
+  <ItemGroup>
+    <Compile Include="..\..\src\LuaTools.SamHost\SchemaReader.cs" Link="SamHost\SchemaReader.cs" />
+    <Compile Include="..\..\src\LuaTools.SamHost\Vendor\SAM.Game\KeyValue.cs" Link="SamHost\KeyValue.cs" />
+    <Compile Include="..\..\src\LuaTools.SamHost\Vendor\SAM.Game\KeyValueType.cs" Link="SamHost\KeyValueType.cs" />
+    <Compile Include="..\..\src\LuaTools.SamHost\Vendor\SAM.Game\StreamHelpers.cs" Link="SamHost\StreamHelpers.cs" />
+    <Compile Include="..\..\src\LuaTools.SamHost\Vendor\SAM.API\Types\UserStatType.cs" Link="SamHost\UserStatType.cs" />
   </ItemGroup>
 
 </Project>
