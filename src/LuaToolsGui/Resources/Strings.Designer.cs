@@ -541,6 +541,7 @@ public static class Strings
     public static string Ach_Reset_Ask => Get(nameof(Ach_Reset_Ask));
     public static string Ach_Reset_Done => Get(nameof(Ach_Reset_Done));
     public static string Ach_Err_SteamNotRunning => Get(nameof(Ach_Err_SteamNotRunning));
+    public static string Ach_Err_NotOwned => Get(nameof(Ach_Err_NotOwned));
     public static string Ach_Err_SteamNotFound => Get(nameof(Ach_Err_SteamNotFound));
     public static string Ach_Err_NotLoggedIn => Get(nameof(Ach_Err_NotLoggedIn));
     public static string Ach_Err_AppIdMismatch => Get(nameof(Ach_Err_AppIdMismatch));

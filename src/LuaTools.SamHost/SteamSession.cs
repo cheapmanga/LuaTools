@@ -83,6 +83,40 @@ namespace LuaTools.SamHost
             _initialized = true;
         }
 
+        /// <summary>
+        /// Which of these app ids the signed-in account actually owns.
+        ///
+        /// <para>
+        /// This is the only reliable answer to "is this game still in the library?". Files on disk are
+        /// not: Steam keeps a game's cached stats schema long after the account stops owning it, so a
+        /// game that was added and then removed still looks present on disk. Asking Steam removes those
+        /// ghosts, and keeps games that are owned but not installed.
+        /// </para>
+        ///
+        /// <para>Requires a session opened with app id 0 — a connection bound to one game answers for
+        /// that game only.</para>
+        /// </summary>
+        public List<long> FilterOwned(IEnumerable<long> appIds)
+        {
+            EnsureInitialized();
+
+            var owned = new List<long>();
+            foreach (long appId in appIds)
+            {
+                if (appId <= 0 || appId > uint.MaxValue)
+                {
+                    continue;
+                }
+
+                if (_client.SteamApps008.IsSubscribedApp((uint)appId))
+                {
+                    owned.Add(appId);
+                }
+            }
+
+            return owned;
+        }
+
         /// <summary>Steam's current language for this game, used to pick localized achievement names.</summary>
         public string Language
         {

@@ -558,6 +558,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Сбросить ВСЮ статистику и достижения для {0}? В Steam нет сброса только достижений, поэтому статистика игры тоже пропадёт. Отменить это будет нельзя.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Прогресс {0} сброшен.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam не запущен. Запустите Steam, войдите в аккаунт и повторите попытку.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam запущен, но не открыл статистику этой игры. Скорее всего, её больше нет в вашей библиотеке — нажмите «Обновить», чтобы убрать её из списка.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam не найден на этом компьютере.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam запущен, но вход в аккаунт не выполнен.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam ответил по другой игре. Закройте другие программы для достижений и повторите попытку.</value></data>
