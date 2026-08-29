@@ -561,6 +561,7 @@ Bu işlem, .lua dosyalarını Steam\config\stplug-in konumundan siler. Değişik
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>{0} oyununun TÜM istatistikleri ve başarımları sıfırlansın mı? Steam'de yalnızca başarımları sıfırlama yok, dolayısıyla oyunun istatistikleri de gider. Bu geri alınamaz.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>{0} ilerlemesi sıfırlandı.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam çalışmıyor. Steam'i başlat, giriş yap ve tekrar dene.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam çalışıyor ama bu oyunun istatistiklerini açmadı. Büyük ihtimalle artık kütüphanende değil — listeden çıkarmak için Yenile'yi kullan.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Bu bilgisayarda Steam bulunamadı.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam çalışıyor ama giriş yapmış bir kullanıcı yok.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam başka bir oyun için yanıt verdi. Diğer başarım araçlarını kapat ve tekrar dene.</value></data>

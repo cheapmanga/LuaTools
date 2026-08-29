@@ -587,6 +587,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>إعادة تعيين كل الإحصاءات والإنجازات للعبة {0}؟ لا يوفّر Steam إعادة تعيين للإنجازات وحدها، لذا ستُمسح إحصاءات اللعبة أيضًا. لا يمكن التراجع عن هذا.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>تمت إعادة تعيين تقدّم {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam غير مشغَّل. شغّل Steam وسجّل الدخول ثم أعد المحاولة.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>‏Steam يعمل لكنه لم يفتح إحصاءات هذه اللعبة. على الأرجح لم تعد في مكتبتك — استخدم تحديث لإزالتها من القائمة.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>لم يتم العثور على Steam على هذا الجهاز.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam يعمل لكن لا يوجد مستخدم مسجَّل الدخول.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>ردّ Steam بخصوص لعبة أخرى. أغلق أي أداة إنجازات أخرى ثم أعد المحاولة.</value></data>

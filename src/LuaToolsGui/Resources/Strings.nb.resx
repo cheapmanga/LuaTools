@@ -561,6 +561,7 @@ Dette sletter .lua-filene fra Steam\config\stplug-in. Start Steam på nytt etter
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Nullstille ALL statistikk og alle prestasjoner for {0}? Steam har ingen nullstilling for bare prestasjoner, så spillets statistikk forsvinner også. Dette kan ikke angres.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Fremgang nullstilt for {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam kjører ikke. Start Steam, logg inn og prøv igjen.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam kjører, men ville ikke åpne statistikken for dette spillet. Det ligger mest sannsynlig ikke i biblioteket ditt lenger — bruk Oppdater for å fjerne det fra listen.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Fant ikke Steam på denne maskinen.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam kjører, men ingen bruker er logget inn.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam svarte for et annet spill. Lukk andre prestasjonsverktøy og prøv igjen.</value></data>

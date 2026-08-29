@@ -192,8 +192,8 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
         IsLoading = true;
         try
         {
-            // Two sources, both local: what's installed right now, and every game Steam has ever cached
-            // an achievement schema for (i.e. played on this machine, installed or not).
+            // Two local sources: what's installed right now, and every game Steam has ever cached an
+            // achievement schema for (i.e. played on this machine, installed or not).
             var installed = await Task.Run(() => library.EnumerateInstalled().ToList());
             var schemas = await hosts.ScanSchemasAsync();
             await appList.EnsureLoadedAsync();
@@ -201,6 +201,14 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
             var names = installed.ToDictionary(g => g.AppId, g => g.Name);
             var appIds = new HashSet<long>(names.Keys);
             appIds.UnionWith(schemas.Keys);
+
+            // Neither source proves the account still owns the game: Steam keeps a cached stats schema
+            // long after ownership goes away, so a game added through a lua and later removed would sit
+            // in the grid and fail the moment it's opened. Steam itself is the only authority, so ask
+            // it. A null answer means it couldn't be asked (Steam closed) — show everything rather than
+            // an empty page, and let the per-game error explain.
+            var owned = await hosts.FilterOwnedAsync(appIds);
+            if (owned is not null) appIds.IntersectWith(owned);
 
             _allGames = appIds
                 .Select(id => new AchievementGameCardVm(
@@ -544,7 +552,12 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     /// </summary>
     private static string Describe(AchievementHostException ex) => ex.Code switch
     {
-        "steam_not_running" or "host_gone" => Resources.Strings.Ach_Err_SteamNotRunning,
+        // The host reports "no usable Steam client" for every failure to attach, which also covers the
+        // case where Steam is up but refuses the game — typically one the account no longer owns. Only
+        // claim Steam is closed when it actually is.
+        "steam_not_running" or "host_gone" => SteamService.IsSteamRunning()
+            ? Resources.Strings.Ach_Err_NotOwned
+            : Resources.Strings.Ach_Err_SteamNotRunning,
         "steam_not_found" => Resources.Strings.Ach_Err_SteamNotFound,
         "not_logged_in" => Resources.Strings.Ach_Err_NotLoggedIn,
         "appid_mismatch" => Resources.Strings.Ach_Err_AppIdMismatch,

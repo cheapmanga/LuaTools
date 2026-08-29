@@ -561,6 +561,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Да се нулират ВСИЧКИ статистики и постижения за {0}? Steam няма нулиране само на постиженията, така че статистиките на играта също отпадат. Това не може да се върне.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Напредъкът за {0} е нулиран.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam не е стартиран. Стартирайте Steam, впишете се и опитайте отново.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam работи, но не отвори статистиките на тази игра. Най-вероятно вече не е в библиотеката ви — използвайте Опресняване, за да я махнете от списъка.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam не е намерен на този компютър.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam работи, но няма вписан потребител.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam отговори за друга игра. Затворете други инструменти за постижения и опитайте отново.</value></data>

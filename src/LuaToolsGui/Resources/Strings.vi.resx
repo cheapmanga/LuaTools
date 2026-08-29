@@ -561,6 +561,7 @@ Thao tác này sẽ xóa các tệp .lua khỏi Steam\config\stplug-in. Sau đó
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Đặt lại TOÀN BỘ thống kê và thành tựu của {0}? Steam không có tùy chọn chỉ đặt lại thành tựu, nên thống kê của trò chơi cũng mất theo. Không thể hoàn tác.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Đã đặt lại tiến trình của {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam chưa chạy. Hãy mở Steam, đăng nhập rồi thử lại.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam đang chạy nhưng không mở được thống kê của trò chơi này. Nhiều khả năng nó không còn trong thư viện của bạn — bấm Làm mới để bỏ nó khỏi danh sách.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Không tìm thấy Steam trên máy này.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam đang chạy nhưng chưa có người dùng nào đăng nhập.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam trả lời cho một trò chơi khác. Hãy đóng các công cụ thành tựu khác rồi thử lại.</value></data>
