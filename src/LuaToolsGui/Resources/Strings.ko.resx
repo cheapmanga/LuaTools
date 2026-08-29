@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>관리</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>모드</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>수정</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>도전 과제</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Steam 재시작</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>설정</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Discord로 로그인</value></data>
@@ -527,4 +528,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>일일 Hubcap 한도에 도달했습니다.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>이 앱에 사용할 수 있는 Hubcap 매니페스트가 없습니다.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 다운로드 실패 ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>도전 과제</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Steam 라이브러리에 있는 어떤 게임의 도전 과제든 해제하거나 잠글 수 있습니다. Steam이 실행 중이고 로그인되어 있어야 합니다.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Steam 라이브러리를 읽는 중…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>게임을 찾지 못했습니다. 게임을 설치하거나 한 번 실행해서 Steam이 도전 과제를 캐시하도록 하세요.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Steam 라이브러리를 읽지 못했습니다.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>도전 과제 {0}개</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>도전 과제가 아직 캐시되지 않음</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Steam에 통계를 요청하는 중…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>이 게임에는 도전 과제가 없습니다.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} 해제됨</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>도전 과제 검색...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>전체</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>해제됨</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>잠김</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>전체 해제</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>전체 잠금</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>되돌리기</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Steam에 저장</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>초기화</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>저장하지 않은 변경 {0}개</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>{0}에 해제</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>숨겨진 도전 과제</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>게임 서버가 부여 - 변경할 수 없음</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>도전 과제를 저장했습니다</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{1}에 변경 {0}개를 적용했습니다.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Steam에 저장하지 못했습니다</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>진행도 초기화</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>{0}의 모든 통계와 도전 과제를 초기화할까요? Steam에는 도전 과제만 초기화하는 기능이 없어서 게임 통계도 함께 사라집니다. 되돌릴 수 없습니다.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>{0}의 진행도를 초기화했습니다.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam이 실행 중이 아닙니다. Steam을 실행하고 로그인한 뒤 다시 시도하세요.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>이 컴퓨터에서 Steam을 찾지 못했습니다.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam은 실행 중이지만 로그인한 사용자가 없습니다.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam이 다른 게임으로 응답했습니다. 다른 도전 과제 도구를 닫고 다시 시도하세요.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam에 이 게임의 도전 과제가 캐시되어 있지 않습니다. 게임을 한 번 실행한 뒤 다시 오세요.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam이 제때 응답하지 않았습니다. 온라인 상태인지 확인하고 다시 시도하세요.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam이 이 계정에 대한 이 게임의 통계 제공을 거부했습니다.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>이 LuaTools 설치에 도전 과제 도우미가 없습니다. 다시 설치해 복원하세요.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>이 도전 과제는 게임 서버가 부여하므로 변경할 수 없습니다.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Steam과 통신하는 중 문제가 발생했습니다.</value></data>
 </root>

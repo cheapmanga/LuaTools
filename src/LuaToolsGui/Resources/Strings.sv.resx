@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Hantera</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Läge</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Fixar</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Prestationer</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Starta om Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Inställningar</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Logga in med Discord</value></data>
@@ -527,4 +528,43 @@ Detta tar bort .lua-filerna från Steam\config\stplug-in. Starta om Steam efter�
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Du har nått din dagliga Hubcap-gräns.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Det finns inget Hubcap-manifest för den här appen.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-nedladdningen misslyckades ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Prestationer</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Lås upp eller lås prestationer för vilket spel som helst i ditt Steam-bibliotek. Steam måste vara igång och inloggat.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Läser ditt Steam-bibliotek…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Inga spel hittades. Installera ett spel, eller starta ett en gång så att Steam sparar dess prestationer.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Kunde inte läsa ditt Steam-bibliotek.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} prestationer</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Prestationer är inte sparade än</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Hämtar din statistik från Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Det här spelet har inga prestationer.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} upplåsta</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Sök bland prestationer...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Alla</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Upplåsta</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Låsta</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Lås upp alla</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Lås alla</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Ångra</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Spara till Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Nollställ</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} osparad(e) ändring(ar)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Upplåst {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Dold prestation</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Delas ut av spelets servrar - kan inte ändras</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Prestationer sparade</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} ändring(ar) tillämpade på {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Kunde inte spara till Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Nollställ framsteg</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Nollställa ALL statistik och alla prestationer för {0}? Steam har ingen nollställning för enbart prestationer, så spelets statistik försvinner också. Det går inte att ångra.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Framsteg nollställda för {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam är inte igång. Starta Steam, logga in och försök igen.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam hittades inte på den här datorn.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam är igång men ingen användare är inloggad.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam svarade för ett annat spel. Stäng andra prestationsverktyg och försök igen.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam har inte sparat prestationerna för det här spelet. Starta det en gång och kom tillbaka.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam svarade inte i tid. Kontrollera att det är online och försök igen.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam vägrade lämna ut spelets statistik för ditt konto.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Prestationshjälpen saknas i den här LuaTools-installationen. Installera om för att få tillbaka den.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Den här prestationen delas ut av spelets servrar och kan inte ändras.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Något gick fel i kommunikationen med Steam.</value></data>
 </root>

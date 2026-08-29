@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Gerenciar</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modo</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Correções</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Conquistas</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Reiniciar Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Configurações</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Entrar com Discord</value></data>
@@ -527,4 +528,43 @@ Isso exclui os arquivos .lua de Steam\config\stplug-in. Reinicie o Steam depois 
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Você atingiu seu limite diário do Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nenhum manifesto do Hubcap disponível para este app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Falha no download do Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Conquistas</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Desbloqueie ou bloqueie as conquistas de qualquer jogo da sua biblioteca Steam. O Steam precisa estar aberto e com a conta conectada.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Lendo sua biblioteca Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Nenhum jogo encontrado. Instale um jogo, ou abra um uma vez para o Steam guardar as conquistas dele em cache.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Não foi possível ler sua biblioteca Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} conquistas</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Conquistas ainda não estão em cache</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Pedindo suas estatísticas ao Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Este jogo não tem conquistas.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} desbloqueadas</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Buscar conquistas...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Todas</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Desbloqueadas</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Bloqueadas</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear tudo</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear tudo</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Salvar no Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Redefinir</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} alteração(ões) não salva(s)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Desbloqueada em {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Conquista oculta</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Concedida pelos servidores do jogo - não pode ser alterada</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Conquistas salvas</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} alteração(ões) aplicada(s) em {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Não foi possível salvar no Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Redefinir progresso</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Redefinir TODAS as estatísticas e conquistas de {0}? O Steam não oferece uma redefinição só de conquistas, então as estatísticas do jogo também serão apagadas. Isso não pode ser desfeito.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Progresso de {0} redefinido.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>O Steam não está aberto. Abra o Steam, conecte-se e tente de novo.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>O Steam não foi encontrado neste computador.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>O Steam está aberto, mas nenhum usuário está conectado.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>O Steam respondeu com outro jogo. Feche qualquer outra ferramenta de conquistas e tente de novo.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>O Steam não tem as conquistas deste jogo em cache. Abra o jogo uma vez e volte aqui.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>O Steam não respondeu a tempo. Verifique se ele está online e tente de novo.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>O Steam recusou entregar as estatísticas deste jogo para a sua conta.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>O auxiliar de conquistas não está nesta instalação do LuaTools. Reinstale para recuperá-lo.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Esta conquista é concedida pelos servidores do jogo e não pode ser alterada.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Algo deu errado na comunicação com o Steam.</value></data>
 </root>

@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Hallinta</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Tila</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Korjaukset</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Saavutukset</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Käynnistä Steam uudelleen</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Asetukset</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Kirjaudu Discordilla</value></data>
@@ -527,4 +528,43 @@ Tämä poistaa .lua-tiedostot sijainnista Steam\config\stplug-in. Käynnistä St
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Päivittäinen Hubcap-rajasi on täynnä.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Tälle sovellukselle ei ole Hubcap-manifestia.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-lataus epäonnistui ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Saavutukset</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Avaa tai lukitse minkä tahansa Steam-kirjastosi pelin saavutukset. Steamin on oltava käynnissä ja kirjautuneena.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Luetaan Steam-kirjastoasi…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Pelejä ei löytynyt. Asenna peli tai käynnistä jokin kerran, jotta Steam tallentaa sen saavutukset välimuistiin.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Steam-kirjastoasi ei voitu lukea.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} saavutusta</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Saavutuksia ei ole vielä välimuistissa</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Pyydetään tilastojasi Steamilta…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Tässä pelissä ei ole saavutuksia.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} avattu</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Hae saavutuksia...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Kaikki</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Avatut</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Lukitut</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Avaa kaikki</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Lukitse kaikki</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Kumoa</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Tallenna Steamiin</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Nollaa</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} tallentamaton(ta) muutos(ta)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Avattu {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Piilotettu saavutus</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Pelin palvelimien myöntämä - ei voi muuttaa</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Saavutukset tallennettu</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} muutosta kohteeseen {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Steamiin tallentaminen epäonnistui</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Nollaa edistyminen</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Nollataanko KAIKKI pelin {0} tilastot ja saavutukset? Steamissa ei ole pelkkien saavutusten nollausta, joten myös pelin tilastot katoavat. Tätä ei voi perua.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Pelin {0} edistyminen nollattu.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam ei ole käynnissä. Käynnistä Steam, kirjaudu sisään ja yritä uudelleen.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steamia ei löytynyt tästä koneesta.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam on käynnissä, mutta kukaan ei ole kirjautuneena.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam vastasi toisen pelin puolesta. Sulje muut saavutustyökalut ja yritä uudelleen.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steamilla ei ole tämän pelin saavutuksia välimuistissa. Käynnistä peli kerran ja palaa takaisin.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam ei vastannut ajoissa. Tarkista, että se on verkossa, ja yritä uudelleen.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam kieltäytyi luovuttamasta tämän pelin tilastoja tilillesi.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Saavutusapuri puuttuu tästä LuaTools-asennuksesta. Asenna uudelleen palauttaaksesi sen.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Tämän saavutuksen myöntävät pelin palvelimet, eikä sitä voi muuttaa.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Jokin meni pieleen Steamin kanssa viestittäessä.</value></data>
 </root>

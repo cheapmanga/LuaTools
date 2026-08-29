@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Spravovat</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Režim</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Opravy</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Achievementy</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Restartovat Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Nastavení</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Přihlásit se přes Discord</value></data>
@@ -527,4 +528,43 @@ Tím se smažou soubory .lua ze Steam\config\stplug-in. Poté restartujte Steam,
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Dosáhl jsi denního limitu Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Pro tuto aplikaci není dostupný žádný manifest Hubcap.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Stahování z Hubcap selhalo ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Achievementy</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Odemkni nebo zamkni achievementy libovolné hry z tvé knihovny Steam. Steam musí běžet a být přihlášený.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Načítání tvé knihovny Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Nenalezeny žádné hry. Nainstaluj hru, nebo nějakou jednou spusť, aby si Steam uložil její achievementy.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Tvou knihovnu Steam se nepodařilo načíst.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} achievementů</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Achievementy zatím nejsou uložené</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Získávání tvých statistik ze Steamu…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Tato hra nemá žádné achievementy.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} odemčeno</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Hledat achievementy...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Vše</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Odemčené</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Zamčené</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Odemknout vše</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Zamknout vše</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Vrátit zpět</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Uložit na Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Resetovat</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Neuložené změny: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Odemčeno {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Skrytý achievement</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Uděluje server hry - nelze změnit</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Achievementy uloženy</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>Počet použitých změn u hry {1}: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Uložení na Steam se nezdařilo</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Resetovat postup</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Resetovat VŠECHNY statistiky a achievementy hry {0}? Steam neumí resetovat jen achievementy, takže zmizí i statistiky hry. Tohle nejde vrátit.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Postup hry {0} resetován.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam neběží. Spusť Steam, přihlas se a zkus to znovu.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam nebyl na tomto počítači nalezen.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam běží, ale není přihlášený žádný uživatel.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam odpověděl za jinou hru. Zavři ostatní nástroje na achievementy a zkus to znovu.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam nemá uložené achievementy této hry. Jednou ji spusť a vrať se sem.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam neodpověděl včas. Zkontroluj, že je online, a zkus to znovu.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam odmítl vydat statistiky této hry pro tvůj účet.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>V této instalaci LuaTools chybí pomocník pro achievementy. Přeinstaluj ji, aby se obnovil.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Tento achievement uděluje server hry a nelze ho změnit.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Při komunikaci se Steamem se něco pokazilo.</value></data>
 </root>
