@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Verwalten</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modus</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Fixes</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Errungenschaften</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Steam neu starten</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Einstellungen</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Mit Discord anmelden</value></data>
@@ -527,4 +528,43 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Dein tägliches Hubcap-Limit ist erreicht.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Für diese App ist kein Hubcap-Manifest verfügbar.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-Download fehlgeschlagen ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Errungenschaften</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Errungenschaften eines beliebigen Spiels aus Ihrer Steam-Bibliothek freischalten oder sperren. Steam muss laufen und angemeldet sein.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Ihre Steam-Bibliothek wird gelesen…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Keine Spiele gefunden. Installieren Sie ein Spiel oder starten Sie eines einmal, damit Steam dessen Errungenschaften zwischenspeichert.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Ihre Steam-Bibliothek konnte nicht gelesen werden.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} Errungenschaften</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Errungenschaften noch nicht zwischengespeichert</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Statistiken werden von Steam abgefragt…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Dieses Spiel hat keine Errungenschaften.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} freigeschaltet</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Errungenschaften durchsuchen...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Alle</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Freigeschaltet</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Gesperrt</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Alle freischalten</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Alle sperren</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Verwerfen</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Auf Steam speichern</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Zurücksetzen</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} nicht gespeicherte Änderung(en)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Freigeschaltet am {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Versteckte Errungenschaft</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Von den Spielservern vergeben - nicht änderbar</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Errungenschaften gespeichert</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} Änderung(en) auf {1} angewendet.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Speichern auf Steam fehlgeschlagen</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Fortschritt zurücksetzen</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>ALLE Statistiken und Errungenschaften für {0} zurücksetzen? Steam bietet kein Zurücksetzen nur für Errungenschaften, die Spielstatistiken werden also ebenfalls gelöscht. Das lässt sich nicht rückgängig machen.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Fortschritt für {0} zurückgesetzt.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam läuft nicht. Starten Sie Steam, melden Sie sich an und versuchen Sie es erneut.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam wurde auf diesem Computer nicht gefunden.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam läuft, aber es ist kein Benutzer angemeldet.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam hat für ein anderes Spiel geantwortet. Schließen Sie andere Errungenschafts-Tools und versuchen Sie es erneut.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam hat für dieses Spiel keine Errungenschaften zwischengespeichert. Starten Sie es einmal und kommen Sie dann zurück.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam hat nicht rechtzeitig geantwortet. Prüfen Sie, ob es online ist, und versuchen Sie es erneut.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam hat die Statistiken dieses Spiels für Ihr Konto nicht herausgegeben.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Der Errungenschafts-Helfer fehlt in dieser LuaTools-Installation. Installieren Sie neu, um ihn wiederherzustellen.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Diese Errungenschaft wird von den Spielservern vergeben und kann nicht geändert werden.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Bei der Kommunikation mit Steam ist ein Fehler aufgetreten.</value></data>
 </root>

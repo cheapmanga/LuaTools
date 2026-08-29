@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Διαχείριση</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Λειτουργία</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Διορθώσεις</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Επιτεύγματα</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Επανεκκίνηση Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Ρυθμίσεις</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Σύνδεση με Discord</value></data>
@@ -527,4 +528,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Έφτασες το ημερήσιο όριο του Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Δεν υπάρχει διαθέσιμο manifest Hubcap για αυτήν την εφαρμογή.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Η λήψη από το Hubcap απέτυχε ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Επιτεύγματα</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Ξεκλείδωσε ή κλείδωσε τα επιτεύγματα οποιουδήποτε παιχνιδιού της βιβλιοθήκης σου στο Steam. Το Steam πρέπει να τρέχει και να είσαι συνδεδεμένος.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Ανάγνωση της βιβλιοθήκης σου στο Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Δεν βρέθηκαν παιχνίδια. Εγκατέστησε ένα παιχνίδι ή άνοιξε ένα μία φορά, ώστε το Steam να αποθηκεύσει τα επιτεύγματά του.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Δεν ήταν δυνατή η ανάγνωση της βιβλιοθήκης σου στο Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} επιτεύγματα</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Τα επιτεύγματα δεν έχουν αποθηκευτεί ακόμη</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Ζητούνται τα στατιστικά σου από το Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Αυτό το παιχνίδι δεν έχει επιτεύγματα.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} ξεκλειδωμένα</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Αναζήτηση επιτευγμάτων...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Όλα</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Ξεκλειδωμένα</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Κλειδωμένα</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Ξεκλείδωμα όλων</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Κλείδωμα όλων</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Αναίρεση</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Αποθήκευση στο Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Επαναφορά</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Μη αποθηκευμένες αλλαγές: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Ξεκλειδώθηκε στις {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Κρυφό επίτευγμα</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Απονέμεται από τους διακομιστές του παιχνιδιού - δεν αλλάζει</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Τα επιτεύγματα αποθηκεύτηκαν</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>Αλλαγές που εφαρμόστηκαν στο {1}: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Η αποθήκευση στο Steam απέτυχε</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Επαναφορά προόδου</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Να γίνει επαναφορά ΟΛΩΝ των στατιστικών και των επιτευγμάτων για το {0}; Το Steam δεν προσφέρει επαναφορά μόνο των επιτευγμάτων, οπότε χάνονται και τα στατιστικά του παιχνιδιού. Δεν αναιρείται.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Η πρόοδος για το {0} επαναφέρθηκε.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Το Steam δεν τρέχει. Άνοιξε το Steam, συνδέσου και δοκίμασε ξανά.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Το Steam δεν βρέθηκε σε αυτόν τον υπολογιστή.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Το Steam τρέχει αλλά δεν είναι συνδεδεμένος κανένας χρήστης.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Το Steam απάντησε για άλλο παιχνίδι. Κλείσε κάθε άλλο εργαλείο επιτευγμάτων και δοκίμασε ξανά.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Το Steam δεν έχει αποθηκευμένα επιτεύγματα γι' αυτό το παιχνίδι. Άνοιξέ το μία φορά και ξαναγύρνα.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Το Steam δεν απάντησε εγκαίρως. Έλεγξε ότι είναι συνδεδεμένο και δοκίμασε ξανά.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Το Steam αρνήθηκε να δώσει τα στατιστικά αυτού του παιχνιδιού για τον λογαριασμό σου.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Ο βοηθός επιτευγμάτων λείπει από αυτήν την εγκατάσταση του LuaTools. Εγκατέστησέ την ξανά για να επανέλθει.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Αυτό το επίτευγμα απονέμεται από τους διακομιστές του παιχνιδιού και δεν μπορεί να αλλάξει.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Κάτι πήγε στραβά στην επικοινωνία με το Steam.</value></data>
 </root>

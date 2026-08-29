@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>管理</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>模式</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>修正</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>成就</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>重新啟動 Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>設定</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>使用 Discord 登入</value></data>
@@ -527,4 +528,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>已達到每日 Hubcap 上限。</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>此應用程式沒有可用的 Hubcap 資訊清單。</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap 下載失敗（{0}）。</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>成就</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>為 Steam 收藏庫中的任何遊戲解鎖或鎖定成就。Steam 必須正在執行並已登入。</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>正在讀取你的 Steam 收藏庫…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>找不到遊戲。請安裝一款遊戲，或先啟動一次，讓 Steam 快取它的成就。</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>無法讀取你的 Steam 收藏庫。</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} 個成就</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>成就尚未快取</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>正在向 Steam 要求你的統計資料…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>這款遊戲沒有成就。</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>已解鎖 {0} / {1}</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>搜尋成就...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>全部</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>已解鎖</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>未解鎖</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>全部解鎖</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>全部鎖定</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>還原</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>儲存到 Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>重設</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} 項未儲存的變更</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>解鎖於 {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>隱藏成就</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>由遊戲伺服器授予 - 無法變更</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>成就已儲存</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>已對 {1} 套用 {0} 項變更。</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>無法儲存到 Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>重設進度</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>要重設 {0} 的所有統計資料和成就嗎？Steam 沒有只重設成就的方式，遊戲的統計資料也會一併清除。此操作無法復原。</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>已重設 {0} 的進度。</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam 未執行。請啟動 Steam 並登入，然後再試一次。</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>在這台電腦上找不到 Steam。</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam 正在執行，但沒有使用者登入。</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam 回應的是另一款遊戲。請關閉其他成就工具後再試一次。</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam 沒有快取這款遊戲的成就。請先啟動一次遊戲，再回到這裡。</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam 沒有及時回應。請確認它已連線後再試一次。</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam 拒絕提供你的帳號在這款遊戲中的統計資料。</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>此 LuaTools 安裝中缺少成就小幫手。重新安裝即可還原。</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>此成就由遊戲伺服器授予，無法變更。</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>與 Steam 通訊時發生問題。</value></data>
 </root>

@@ -33,8 +33,7 @@ them as a reminder on every run. That list is the handoff to the next translatio
 UI is final, translate its keys across all the language files, clear them from `PENDING_TRANSLATION`, and
 parity is enforced again.
 
-**Currently pending:** the Builds page (multi-build switching), added 2026-07-31; the
-Achievements page (Steam achievement unlocking), added 2026-08-29.
+**Currently pending:** the Builds page (multi-build switching), added 2026-07-31.
 
 Never leave a hardcoded user-facing literal in a view as a "translate later" shortcut. Always add the key
 and reference it. That way the later pass only touches the `Strings.<tag>.resx` files, never the views.

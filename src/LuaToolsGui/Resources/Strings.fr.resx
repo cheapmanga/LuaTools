@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Gérer</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Mode</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Correctifs</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Succès</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Redémarrer Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Paramètres</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Se connecter avec Discord</value></data>
@@ -527,4 +528,43 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in. Redémarrez Steam ens
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Ta limite quotidienne Hubcap est atteinte.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Aucun manifeste Hubcap n'est disponible pour cette app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Échec du téléchargement Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Succès</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Débloquez ou verrouillez les succès de n'importe quel jeu de votre bibliothèque Steam. Steam doit être lancé et connecté.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Lecture de votre bibliothèque Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Aucun jeu trouvé. Installez un jeu, ou lancez-en un une fois pour que Steam mette ses succès en cache.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Impossible de lire votre bibliothèque Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} succès</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Succès pas encore en cache</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Récupération de vos stats auprès de Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Ce jeu n'a aucun succès.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} débloqués</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Rechercher un succès...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Tous</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Débloqués</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Verrouillés</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Tout débloquer</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Tout verrouiller</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Enregistrer sur Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Réinitialiser</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} modification(s) non enregistrée(s)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Débloqué le {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Succès caché</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Attribué par les serveurs du jeu - non modifiable</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Succès enregistrés</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} modification(s) appliquée(s) à {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Enregistrement sur Steam impossible</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Réinitialiser la progression</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Réinitialiser TOUTES les stats et tous les succès de {0} ? Steam ne propose pas de réinitialisation limitée aux succès : les statistiques du jeu partent aussi. C'est irréversible.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Progression réinitialisée pour {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam n'est pas lancé. Démarrez Steam, connectez-vous, puis réessayez.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam est introuvable sur cette machine.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam est lancé mais aucun utilisateur n'est connecté.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam a répondu pour un autre jeu. Fermez tout autre outil de succès, puis réessayez.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam n'a aucun succès en cache pour ce jeu. Lancez-le une fois, puis revenez.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam n'a pas répondu à temps. Vérifiez qu'il est en ligne, puis réessayez.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam a refusé de transmettre les stats de ce jeu pour votre compte.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>L'assistant de succès est absent de cette installation de LuaTools. Réinstallez-la pour le restaurer.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Ce succès est attribué par les serveurs du jeu et ne peut pas être modifié.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Un problème est survenu lors de la communication avec Steam.</value></data>
 </root>
