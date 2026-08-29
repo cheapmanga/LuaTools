@@ -26,6 +26,7 @@ public static class Strings
     public static string Nav_Builds => Get(nameof(Nav_Builds));
     public static string Nav_Mode => Get(nameof(Nav_Mode));
     public static string Nav_Fixes => Get(nameof(Nav_Fixes));
+    public static string Nav_Achievements => Get(nameof(Nav_Achievements));
     public static string Nav_RestartSteam => Get(nameof(Nav_RestartSteam));
     public static string Nav_Settings => Get(nameof(Nav_Settings));
     public static string Nav_SignInDiscord => Get(nameof(Nav_SignInDiscord));
@@ -508,4 +509,45 @@ public static class Strings
     public static string Hubcap_Err_LimitReached => Get(nameof(Hubcap_Err_LimitReached));
     public static string Hubcap_Err_NoManifest => Get(nameof(Hubcap_Err_NoManifest));
     public static string Hubcap_Err_DownloadFailed => Get(nameof(Hubcap_Err_DownloadFailed));
+
+    // ── Achievements ──
+    public static string Ach_Title => Get(nameof(Ach_Title));
+    public static string Ach_Subtitle => Get(nameof(Ach_Subtitle));
+    public static string Ach_Loading => Get(nameof(Ach_Loading));
+    public static string Ach_Empty_None => Get(nameof(Ach_Empty_None));
+    public static string Ach_Err_Load => Get(nameof(Ach_Err_Load));
+    public static string Ach_Card_Count => Get(nameof(Ach_Card_Count));
+    public static string Ach_Card_CountUnknown => Get(nameof(Ach_Card_CountUnknown));
+    public static string Ach_Detail_Loading => Get(nameof(Ach_Detail_Loading));
+    public static string Ach_Detail_None => Get(nameof(Ach_Detail_None));
+    public static string Ach_Progress => Get(nameof(Ach_Progress));
+    public static string Ach_SearchPlaceholder => Get(nameof(Ach_SearchPlaceholder));
+    public static string Ach_Filter_All => Get(nameof(Ach_Filter_All));
+    public static string Ach_Filter_Unlocked => Get(nameof(Ach_Filter_Unlocked));
+    public static string Ach_Filter_Locked => Get(nameof(Ach_Filter_Locked));
+    public static string Ach_UnlockAll => Get(nameof(Ach_UnlockAll));
+    public static string Ach_LockAll => Get(nameof(Ach_LockAll));
+    public static string Ach_Revert => Get(nameof(Ach_Revert));
+    public static string Ach_Save => Get(nameof(Ach_Save));
+    public static string Ach_Reset => Get(nameof(Ach_Reset));
+    public static string Ach_Unsaved => Get(nameof(Ach_Unsaved));
+    public static string Ach_UnlockedOn => Get(nameof(Ach_UnlockedOn));
+    public static string Ach_HiddenDescription => Get(nameof(Ach_HiddenDescription));
+    public static string Ach_ProtectedBadge => Get(nameof(Ach_ProtectedBadge));
+    public static string Ach_Toast_Saved => Get(nameof(Ach_Toast_Saved));
+    public static string Ach_Toast_Saved_Body => Get(nameof(Ach_Toast_Saved_Body));
+    public static string Ach_Toast_SaveFailed => Get(nameof(Ach_Toast_SaveFailed));
+    public static string Ach_Reset_Title => Get(nameof(Ach_Reset_Title));
+    public static string Ach_Reset_Ask => Get(nameof(Ach_Reset_Ask));
+    public static string Ach_Reset_Done => Get(nameof(Ach_Reset_Done));
+    public static string Ach_Err_SteamNotRunning => Get(nameof(Ach_Err_SteamNotRunning));
+    public static string Ach_Err_SteamNotFound => Get(nameof(Ach_Err_SteamNotFound));
+    public static string Ach_Err_NotLoggedIn => Get(nameof(Ach_Err_NotLoggedIn));
+    public static string Ach_Err_AppIdMismatch => Get(nameof(Ach_Err_AppIdMismatch));
+    public static string Ach_Err_NoSchema => Get(nameof(Ach_Err_NoSchema));
+    public static string Ach_Err_Timeout => Get(nameof(Ach_Err_Timeout));
+    public static string Ach_Err_Stats => Get(nameof(Ach_Err_Stats));
+    public static string Ach_Err_HostMissing => Get(nameof(Ach_Err_HostMissing));
+    public static string Ach_Err_Protected => Get(nameof(Ach_Err_Protected));
+    public static string Ach_Err_Unknown => Get(nameof(Ach_Err_Unknown));
 }

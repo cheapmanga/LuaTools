@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Headless x86 bridge to Steam's achievement API, driven by LuaTools over stdin/stdout.
+
+    Two deliberate choices, both forced by steamclient.dll:
+
+    - x86. steamclient.dll is 32-bit and its interfaces are called through the x86 `thiscall`
+      convention, so this code CANNOT run inside LuaTools (AnyCPU, i.e. 64-bit on any machine that
+      runs Steam). A separate process is the only way to reach it.
+    - net48, not net8.0. .NET Framework 4.8 ships with every supported Windows, so the host is a
+      ~50 KB exe with nothing to install. A net8.0 x86 build would need the *x86* .NET runtime,
+      which a 64-bit LuaTools user has no reason to have.
+
+    There is a second, subtler reason for a child process: SAM.API binds the app id into the Steam
+    pipe at load time (SteamAppId env var, checked against ISteamUtils::GetAppId), so one process
+    can only ever manage one game. LuaTools spawns one host per opened game and kills it on close.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>LuaTools.SamHost</AssemblyName>
+    <RootNamespace>LuaTools.SamHost</RootNamespace>
+    <AssemblyTitle>LuaTools achievement host</AssemblyTitle>
+    <Product>LuaTools</Product>
+    <Version>1.0.0</Version>
+    <Deterministic>true</Deterministic>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Vendored SAM sources are kept verbatim; don't fail the build on their style warnings. -->
+    <NoWarn>$(NoWarn);CS0649;CS0067;CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Lets net48 build from the plain .NET SDK (CI, `dotnet build`) with no targeting pack or
+         Visual Studio installed. -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
