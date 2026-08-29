@@ -252,9 +252,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>移除 Steam DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>操作</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>移除 Steam DRM？</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>这将对游戏的可执行文件运行 Steamless 以移除 SteamStub DRM。原始 .exe 会先备份为 .bak。某些游戏之后可能需要在 Steam 中验证文件。是否继续？</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>这会分两步让游戏脱离 Steam：先由 Steamless 剥掉可执行文件的 SteamStub 外壳，再由 Goldberg 模拟器替换它的 steam_api 动态库。原文件会以 .bak 保存在旁边，已经有备份的则不再改动。该游戏的 Steam 功能（覆盖层、云存档、联机）将不再可用；还原 .bak 文件，或在 Steam 中验证游戏文件，即可恢复原状。是否继续？</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>正在移除 Steam DRM…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>已处理 {0} 个，{1} 个未更改。</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>已解包 {0} 个可执行文件，替换 {1} 个 Steam API 文件，{2} 个此前已完成。</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>无法下载 Steam 模拟器。请检查网络连接后重试。</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>游戏文件夹里没有 steam_api.dll，没有可替换的文件。</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>已解包 {0} 个可执行文件，但模拟器步骤失败：{1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>未找到游戏文件夹——是否已安装？</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>无法移除 DRM。{0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>点击复制 App ID</value></data>

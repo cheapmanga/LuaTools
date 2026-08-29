@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Видалити DRM Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Дії</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Видалити DRM Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Буде запущено Steamless для виконуваного файлу гри, щоб видалити DRM SteamStub. Оригінальний .exe спершу зберігається як .bak. Деяким іграм потім може знадобитися перевірка файлів у Steam. Продовжити?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Це виводить гру зі Steam у два кроки: Steamless знімає оболонку SteamStub з виконуваних файлів, потім емулятор Goldberg замінює бібліотеки steam_api. Оригінали зберігаються поруч як .bak, а те, що вже має копію, не чіпається. Функції Steam (оверлей, хмарні збереження, мережа) для цієї гри перестануть працювати; відновлення файлів .bak або перевірка файлів гри у Steam усе поверне. Продовжити?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Видалення DRM Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} оброблено, {1} без змін.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Розпаковано виконуваних файлів: {0}, замінено файлів Steam API: {1}, уже зроблено: {2}.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Не вдалося завантажити емулятор Steam. Перевірте з'єднання та повторіть спробу.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>У теці гри немає steam_api.dll — немає чого замінювати.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Розпаковано виконуваних файлів: {0}, але крок з емулятором не вдався: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Папку гри не знайдено — її встановлено?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Не вдалося видалити DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Натисніть, щоб скопіювати App ID</value></data>

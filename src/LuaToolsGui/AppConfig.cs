@@ -45,6 +45,11 @@ public static class AppConfig
     // cached locally; the "Remove Steam DRM" Manage action runs Steamless.CLI.exe against the game's exe.
     public const string SteamlessRepo = "atom0s/Steamless";
 
+    // SteamAutoCrack (SteamAutoCracks): the tool that automates Steamless + Goldberg. Only its release
+    // package is used, for the Goldberg build it carries — gbe_fork ships Windows builds as .7z, which
+    // needs a decoder we don't have, while this package is a plain zip with the same emulator inside.
+    public const string SteamAutoCrackRepo = "SteamAutoCracks/Steam-auto-crack";
+
     // CloudRedirect (Selectively11): the Mode page "Manage" button downloads the latest CloudRedirect.exe
     // GUI manager from here and launches it. (Separate from the CLI fixer used by the mode install flow.)
     public const string CloudRedirectRepo = "Selectively11/CloudRedirect";

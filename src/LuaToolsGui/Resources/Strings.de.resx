@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam-DRM entfernen</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Aktionen</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam-DRM entfernen?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dadurch wird Steamless auf der Spiel-EXE ausgeführt, um den SteamStub-DRM zu entfernen. Die originale .exe wird zuerst als .bak gesichert. Manche Spiele benötigen danach eine Dateiüberprüfung in Steam. Fortfahren?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Das nimmt das Spiel in zwei Schritten von Steam: Steamless entfernt die SteamStub-Hülle von den Programmdateien, dann ersetzt der Goldberg-Emulator die steam_api-DLLs. Die Originale werden daneben als .bak gesichert; was bereits gesichert ist, bleibt unangetastet. Steam-Funktionen (Overlay, Cloud-Speicherstände, Online) funktionieren für dieses Spiel nicht mehr; die .bak-Dateien zurückspielen oder die Spieldateien in Steam überprüfen stellt alles wieder her. Fortfahren?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam-DRM wird entfernt…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} bearbeitet, {1} unverändert.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, {1} Steam-API-Datei(en) ersetzt, {2} bereits erledigt.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Der Steam-Emulator konnte nicht heruntergeladen werden. Verbindung prüfen und erneut versuchen.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Keine steam_api.dll im Spielordner gefunden — nichts zu ersetzen.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, aber der Emulator-Schritt ist fehlgeschlagen: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Spielordner nicht gefunden – ist es installiert?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM konnte nicht entfernt werden. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klicken, um die App-ID zu kopieren</value></data>
