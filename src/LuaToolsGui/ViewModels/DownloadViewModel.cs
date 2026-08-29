@@ -129,17 +129,29 @@ public partial class DownloadViewModel : ObservableObject
     private GameDetails? _details;
 
     /// <summary>
-    /// Number of Denuvo fixes published for the fetched game, filled in by <see cref="CheckFixesAsync"/>
-    /// after a Fetch. 0 hides the banner, which is also what a failed lookup leaves behind.
+    /// Number of published fixes for the fetched game, filled in by <see cref="CheckFixesAsync"/> after
+    /// a Fetch. 0 hides the banner, which is also what a failed lookup leaves behind.
     /// </summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasFix))]
     [NotifyPropertyChangedFor(nameof(FixBannerText))]
     private int _fixCount;
 
+    /// <summary>What kind of fixes they are ("Online Fix", "Ubisoft", …), straight from the listing.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(FixBannerText))]
+    private string _fixTags = "";
+
     public bool HasFix => FixCount > 0;
 
-    public string FixBannerText => string.Format(Resources.Strings.Add_Fix_Available, FixCount);
+    /// <summary>
+    /// The banner sentence. The kinds are named when the listing gives them, because "a fix" says very
+    /// little: the same listing covers Online Fixes, Ubisoft and Rockstar fixes, achievement fixes and
+    /// more, and telling the user which one is waiting is the whole point of the banner.
+    /// </summary>
+    public string FixBannerText => FixTags.Length > 0
+        ? string.Format(Resources.Strings.Add_Fix_Available_Tags, FixCount, FixTags)
+        : string.Format(Resources.Strings.Add_Fix_Available, FixCount);
 
     public bool HasDetails => Details is not null;
     public string GenresText => Details is null ? "" : string.Join(", ", Details.Genres);
@@ -582,8 +594,11 @@ public partial class DownloadViewModel : ObservableObject
     {
         try
         {
-            int count = await _fixes.GetFixCountAsync(appId);
-            if (Details?.AppId == appId) FixCount = count;
+            var summary = await _fixes.GetFixSummaryAsync(appId);
+            if (Details?.AppId != appId) return; // user moved on. Drop it
+
+            FixCount = summary?.Count ?? 0;
+            FixTags = summary is null ? "" : string.Join(", ", summary.Tags);
         }
         catch
         {
@@ -998,6 +1013,7 @@ public partial class DownloadViewModel : ObservableObject
         LastDownload = null;
         _fastFetchSource = null;
         FixCount = 0;
+        FixTags = "";
     }
 
     /// <summary>
