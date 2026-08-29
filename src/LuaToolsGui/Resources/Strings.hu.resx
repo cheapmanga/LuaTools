@@ -558,6 +558,7 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Visszaállítod {0} ÖSSZES statisztikáját és teljesítményét? A Steamben nincs csak teljesítményekre vonatkozó visszaállítás, így a játék statisztikái is elvesznek. Ezt nem lehet visszavonni.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>{0} haladása visszaállítva.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>A Steam nem fut. Indítsd el a Steamet, jelentkezz be, majd próbáld újra.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>A Steam fut, de nem nyitotta meg a játék statisztikáit. Valószínűleg már nincs a könyvtáradban — a Frissítés gombbal leveheted a listáról.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>A Steam nem található ezen a gépen.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>A Steam fut, de nincs bejelentkezett felhasználó.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>A Steam egy másik játékra válaszolt. Zárj be minden más teljesítménykezelőt, majd próbáld újra.</value></data>

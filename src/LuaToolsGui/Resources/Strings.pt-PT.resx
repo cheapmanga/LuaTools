@@ -558,6 +558,7 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in. Reinicie o Steam depoi
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Repor TODAS as estatísticas e proezas de {0}? O Steam não oferece uma reposição só das proezas, por isso as estatísticas do jogo também são apagadas. Isto não pode ser anulado.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Progresso de {0} reposto.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>O Steam não está aberto. Abra o Steam, inicie sessão e tente novamente.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>O Steam está aberto, mas não abriu as estatísticas deste jogo. É muito provável que já não esteja na sua biblioteca — use Atualizar para o retirar da lista.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>O Steam não foi encontrado neste computador.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>O Steam está aberto, mas não há nenhum utilizador com sessão iniciada.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>O Steam respondeu com outro jogo. Feche qualquer outra ferramenta de proezas e tente novamente.</value></data>
