@@ -558,6 +558,7 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in. Redémarrez Steam ens
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Réinitialiser TOUTES les stats et tous les succès de {0} ? Steam ne propose pas de réinitialisation limitée aux succès : les statistiques du jeu partent aussi. C'est irréversible.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Progression réinitialisée pour {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam n'est pas lancé. Démarrez Steam, connectez-vous, puis réessayez.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam tourne mais a refusé d'ouvrir les stats de ce jeu. Il n'est probablement plus dans votre bibliothèque — utilisez Actualiser pour le retirer de la liste.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam est introuvable sur cette machine.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam est lancé mais aucun utilisateur n'est connecté.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam a répondu pour un autre jeu. Fermez tout autre outil de succès, puis réessayez.</value></data>
