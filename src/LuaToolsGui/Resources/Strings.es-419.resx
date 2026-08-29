@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Gestionar</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modo</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Parches</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Logros</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Reiniciar Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Configuración</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Iniciar sesión con Discord</value></data>
@@ -527,4 +528,43 @@ Esto borra los archivos .lua de Steam\config\stplug-in. Reinicia Steam después 
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Llegaste a tu límite diario de Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>No hay ningún manifiesto de Hubcap para esta app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Falló la descarga de Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Logros</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Desbloquea o bloquea los logros de cualquier juego de tu biblioteca de Steam. Steam debe estar abierto y con la sesión iniciada.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Leyendo tu biblioteca de Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>No se encontraron juegos. Instala un juego o ábrelo una vez para que Steam guarde sus logros en caché.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>No se pudo leer tu biblioteca de Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} logros</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Logros aún no guardados en caché</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Pidiendo tus estadísticas a Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Este juego no tiene logros.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} desbloqueados</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Buscar logros...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Todos</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Desbloqueados</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Bloqueados</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear todo</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear todo</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Guardar en Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Restablecer</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} cambio(s) sin guardar</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Desbloqueado el {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Logro oculto</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Otorgado por los servidores del juego - no se puede cambiar</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Logros guardados</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} cambio(s) aplicado(s) a {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>No se pudo guardar en Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Restablecer progreso</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>¿Restablecer TODAS las estadísticas y los logros de {0}? Steam no permite restablecer solo los logros, así que las estadísticas del juego también se borrarán. Esto no se puede deshacer.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Progreso restablecido para {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam no está abierto. Abre Steam, inicia sesión e inténtalo de nuevo.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>No se encontró Steam en esta computadora.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam está abierto, pero no hay ningún usuario con la sesión iniciada.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam respondió con otro juego. Cierra cualquier otra herramienta de logros e inténtalo de nuevo.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam no tiene los logros de este juego en caché. Ábrelo una vez y vuelve.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam no respondió a tiempo. Comprueba que esté conectado e inténtalo de nuevo.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam se negó a entregar las estadísticas de este juego para tu cuenta.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Falta el asistente de logros en esta instalación de LuaTools. Reinstálala para recuperarlo.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Este logro lo otorgan los servidores del juego y no se puede cambiar.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Ocurrió un error al comunicarse con Steam.</value></data>
 </root>

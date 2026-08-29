@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Керування</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Режим</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Фікси</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Досягнення</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Перезапустити Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Налаштування</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Увійти через Discord</value></data>
@@ -527,4 +528,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Досягнуто денний ліміт Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Для цього застосунку немає маніфесту Hubcap.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Не вдалося завантажити з Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Досягнення</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Відкривайте або закривайте досягнення будь-якої гри з вашої бібліотеки Steam. Steam має бути запущений, з виконаним входом.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Читання вашої бібліотеки Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Ігор не знайдено. Установіть гру або запустіть якусь один раз, щоб Steam зберіг її досягнення.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Не вдалося прочитати вашу бібліотеку Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>Досягнень: {0}</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Досягнення ще не збережені</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Запит вашої статистики у Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>У цій грі немає досягнень.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} відкрито</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Пошук досягнень...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Усі</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Відкриті</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Закриті</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Відкрити всі</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Закрити всі</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Зберегти в Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Скинути</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Незбережених змін: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Відкрито {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Приховане досягнення</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Видається серверами гри - змінити не можна</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Досягнення збережено</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>Змін застосовано до {1}: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Не вдалося зберегти в Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Скинути прогрес</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Скинути ВСЮ статистику й досягнення для {0}? У Steam немає скидання лише досягнень, тож статистика гри теж зникне. Скасувати це буде неможливо.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Прогрес {0} скинуто.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam не запущений. Запустіть Steam, увійдіть в акаунт і спробуйте ще раз.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam не знайдено на цьому комп'ютері.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam запущений, але вхід в акаунт не виконано.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam відповів щодо іншої гри. Закрийте інші програми для досягнень і спробуйте ще раз.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>У Steam немає збережених досягнень цієї гри. Запустіть її один раз і поверніться.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam не відповів вчасно. Перевірте, що він у мережі, і спробуйте ще раз.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam відмовився видати статистику цієї гри для вашого акаунта.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>У цій інсталяції LuaTools бракує помічника досягнень. Перевстановіть її, щоб відновити його.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Це досягнення видається серверами гри, змінити його не можна.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Під час звернення до Steam щось пішло не так.</value></data>
 </root>

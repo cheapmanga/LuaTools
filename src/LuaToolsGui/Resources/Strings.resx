@@ -565,12 +565,12 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap download failed ({0}).</value></data>
   <data name="Ach_Title" xml:space="preserve"><value>Achievements</value></data>
   <data name="Ach_Subtitle" xml:space="preserve"><value>Unlock or lock achievements for any game in your Steam library. Steam must be running and signed in.</value></data>
-  <data name="Ach_Loading" xml:space="preserve"><value>Reading your Steam library...</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Reading your Steam library…</value></data>
   <data name="Ach_Empty_None" xml:space="preserve"><value>No games found. Install a game, or launch one once so Steam caches its achievements.</value></data>
   <data name="Ach_Err_Load" xml:space="preserve"><value>Couldn't read your Steam library.</value></data>
   <data name="Ach_Card_Count" xml:space="preserve"><value>{0} achievements</value></data>
   <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Achievements not cached yet</value></data>
-  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Asking Steam for your stats...</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Asking Steam for your stats…</value></data>
   <data name="Ach_Detail_None" xml:space="preserve"><value>This game has no achievements.</value></data>
   <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} unlocked</value></data>
   <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Search achievements...</value></data>

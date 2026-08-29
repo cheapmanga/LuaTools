@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Kezelés</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Mód</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Javítások</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Teljesítmények</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Steam újraindítása</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Beállítások</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Bejelentkezés Discorddal</value></data>
@@ -527,4 +528,43 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából. Ezután indítsd
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Elérted a napi Hubcap-korlátot.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Ehhez az alkalmazáshoz nincs Hubcap-manifeszt.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>A Hubcap-letöltés sikertelen ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Teljesítmények</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Oldd fel vagy zárd vissza bármelyik Steam-könyvtáradban lévő játék teljesítményeit. A Steamnek futnia kell, bejelentkezve.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>A Steam-könyvtárad beolvasása…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Nem található játék. Telepíts egy játékot, vagy indíts el egyet egyszer, hogy a Steam eltárolja a teljesítményeit.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>A Steam-könyvtáradat nem sikerült beolvasni.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} teljesítmény</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>A teljesítmények még nincsenek eltárolva</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Statisztikáid lekérése a Steamtől…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Ennek a játéknak nincsenek teljesítményei.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} feloldva</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Teljesítmények keresése...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Mind</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Feloldott</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Zárolt</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Összes feloldása</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Összes zárolása</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Visszavonás</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Mentés a Steamre</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Visszaállítás</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Nem mentett módosítások: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Feloldva: {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Rejtett teljesítmény</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>A játék szerverei ítélik oda - nem módosítható</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Teljesítmények elmentve</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{1} játékra alkalmazott módosítások: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>A Steamre mentés nem sikerült</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Haladás visszaállítása</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Visszaállítod {0} ÖSSZES statisztikáját és teljesítményét? A Steamben nincs csak teljesítményekre vonatkozó visszaállítás, így a játék statisztikái is elvesznek. Ezt nem lehet visszavonni.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>{0} haladása visszaállítva.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>A Steam nem fut. Indítsd el a Steamet, jelentkezz be, majd próbáld újra.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>A Steam nem található ezen a gépen.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>A Steam fut, de nincs bejelentkezett felhasználó.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>A Steam egy másik játékra válaszolt. Zárj be minden más teljesítménykezelőt, majd próbáld újra.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>A Steam nem tárolta el ennek a játéknak a teljesítményeit. Indítsd el egyszer, majd gyere vissza.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>A Steam nem válaszolt időben. Ellenőrizd, hogy online van-e, majd próbáld újra.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>A Steam nem adta ki ennek a játéknak a statisztikáit a fiókodhoz.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>A teljesítménysegéd hiányzik ebből a LuaTools-telepítésből. Telepítsd újra a visszaállításához.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Ezt a teljesítményt a játék szerverei ítélik oda, nem módosítható.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Hiba történt a Steammel való kommunikáció során.</value></data>
 </root>
