@@ -345,7 +345,6 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>이 DLC의 본편 게임을 확인할 수 없습니다</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>문제가 발생했습니다 — 연결을 확인하고 다시 시도하세요.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>다운로드 실패 — 연결을 확인하고 다시 시도하세요.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>생성 실패 — 연결을 확인하고 다시 시도하세요.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>"{0}"을(를) 교체할까요?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>디포/DLC 변경 없음 — 동일한 콘텐츠입니다.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>설치가 취소되었습니다 — 기존 파일은 변경되지 않았습니다.</value></data>
@@ -527,7 +526,6 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>다운로드</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>다운로드</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>현재 다운로드가 없습니다. 뭐라도 다운로드해 보세요!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>완료된 다운로드가 아직 없습니다.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>대기열</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>기록</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>대기 중</value></data>
@@ -576,4 +574,33 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>이 디포의 manifest를 가져오지 못했습니다.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>준비 중 · {0} / {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>다운로더 가져오는 중</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>도구</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET 런타임 확인 중</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack 가져오는 중</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack을 열었습니다.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>SteamAutoCrack에 필요한 .NET 런타임을 설치하지 못했습니다.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET 런타임이 설치되었지만 SteamAutoCrack을 실행하려면 Windows를 다시 시작해야 합니다.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack을 다운로드하지 못했습니다.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack을 시작하지 못했습니다.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack이 업데이트되었습니다.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>파일 할당 중</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>기존 파일 확인 중</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>다운로드 취소</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>이미 {0}이(가) 다음 위치에 기록되었습니다:
+{1}
+
+예 - 중지하고 파일 삭제
+아니요 - 중지하되 파일 유지
+취소 - 계속 다운로드</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>다운로드한 파일을 삭제하지 못했습니다. {0}에 그대로 있습니다.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App ID 복사</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>폴더에서 보기</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>복사할 수 없습니다 — 다른 앱이 클립보드를 사용 중입니다.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>{0}을(를) 열 수 없습니다 — 이동되었거나 삭제된 것 같습니다.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua에 이 depot의 복호화 키가 없습니다.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>depot {0}의 복호화 키가 잘못되었습니다.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua에 depot {0}의 복호화 키가 없습니다.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>공유 런타임 — 대개 이미 설치되어 있습니다. 그래도 받으려면 선택하세요.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>다운로드 기록에서 {0}개 항목을 모두 제거할까요? 내려받은 파일은 영향을 받지 않습니다.</value></data>
 </root>

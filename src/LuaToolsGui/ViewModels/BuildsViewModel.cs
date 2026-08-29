@@ -1,5 +1,6 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -46,8 +47,21 @@ public record DepotRow(
     /// separate from the prettified copy inside <see cref="Meta"/> so it can be matched on.</summary>
     public string? Os { get; init; }
 
+    /// <summary>Raw Steam language code ("english", "schinese", ...), null for language-neutral content.
+    /// Separate from <see cref="Meta"/> for the same reason as <see cref="Os"/>: it is matched on, not
+    /// just displayed.</summary>
+    public string? Language { get; init; }
+
     /// <summary>Owning app for a shared redistributable depot, else null. See ContentDepot.FromAppId.</summary>
     public long? FromAppId { get; init; }
+
+    /// <summary>
+    /// Size in bytes from this depot's <c>setManifestid(id, "gid", size)</c> line, or 0 when the lua
+    /// omits it. Kept separate from <see cref="Size"/> (which is app info's) because the two describe
+    /// DIFFERENT builds: this one matches the manifest the lua pins, app info's matches whatever the
+    /// public branch ships today.
+    /// </summary>
+    public long LuaSize { get; init; }
 
     /// <summary>
     /// Free-text match for the depot search box: name, depot id, DLC app id, manifest ids, and the
@@ -771,6 +785,12 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         public string? Os { get; init; }
 
         /// <summary>
+        /// The depot's Steam language code ("english", "schinese", ...), or null for language-neutral
+        /// content. Null is the important case: those depots are the actual game and are always taken.
+        /// </summary>
+        public string? Language { get; init; }
+
+        /// <summary>
         /// A depot built for another platform (a macOS or Linux build). Still listed and still tickable,
         /// but not ticked by default: on DELTARUNE the macOS depot was 864 MB of the 1.7 GB a select-all
         /// pulled down. A depot with no declared OS is shared content and counts as ours.
@@ -784,6 +804,13 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         /// download time, so select-all would otherwise add an unknowable amount.
         /// </summary>
         public bool IsShared => FromAppId is not null;
+
+        /// <summary>
+        /// Content that belongs to a DLC rather than the base game. Carried so the language fallback can
+        /// ignore it: DLC declares no language, so it is always "wanted", and letting it count as a
+        /// selection would suppress the fallback on a game whose real content is all language depots.
+        /// </summary>
+        public bool IsDlc { get; init; }
 
         public long? FromAppId { get; init; }
 
@@ -882,8 +909,20 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
         foreach (var old in DepotPicks) old.PropertyChanged -= OnPickChanged;
 
+        // Read once per picker open rather than cached: Steam's language can change without this app
+        // restarting, and it is a single registry lookup.
+        string? steamLanguage = SteamService.SteamLanguage;
+
+        // Read once, not per row: ResolveKeys parses the lua AND Steam's config.vdf on every call.
+        var keys = _depotTool.ResolveKeys(game.AppId);
+
+        // DLC is included when it actually ships bytes. Excluding every r.IsDlc row was too broad: most
+        // DLC "depots" are 0-byte entitlement markers with nothing to fetch (American Truck Simulator has
+        // 54 of them), but a real chunk of them carry content — the same game has 19 holding 2.5 GB of
+        // map and truck DLC, all of them keyed by the lua, which the picker simply never offered.
+        // Size comes straight off the depot info, so this costs no extra lookups.
         var picks = _allInLua
-            .Where(r => !r.IsDlc)
+            .Where(r => !r.IsDlc || r.Size > 0)
             .Select(r =>
             {
                 // An ACTIVE pin means the user deliberately locked this build, so it wins outright and
@@ -898,14 +937,35 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                 string? mid = r.ManifestId ?? r.PublicManifestId ?? r.CommentedManifestId;
                 string? path = mid is null ? null : _depotTool.ResolveManifestPath(r.Id, mid);
 
+                // Size, best source first:
+                //  1. the manifest itself — authoritative, and describes the exact build being fetched;
+                //  2. the lua's setManifestid size, but ONLY when an active pin is what we're downloading,
+                //     because that figure belongs to the pinned build rather than the current one;
+                //  3. app info, which matches the public branch;
+                //  4. the lua's figure anyway, for a depot app info never listed (size would be 0).
+                long size =
+                    ManifestFile.TryRead(path) is { SizeOnDisk: > 0 } mf ? mf.SizeOnDisk
+                    : r.ManifestId is not null && r.LuaSize > 0 ? r.LuaSize
+                    : r.Size > 0 ? r.Size
+                    : r.LuaSize;
+
                 // All three checks are local — opening the picker costs zero API calls however many
                 // depots the game has. Only a depot with no declared version is unreachable outright;
                 // a missing manifest is now just a fetch, provided we're signed in to make it.
                 // A shared depot has no gid here by design — its manifest lives under the owning app and
                 // is resolved at download time, so a missing id is only fatal when there's nowhere to
                 // look it up. Both checks stay local; the picker still makes zero requests.
+                // The key check matters most for DLC: a DLC depot always has a public manifest id, so the
+                // manifest test can never catch one whose key the lua simply doesn't carry — it would be
+                // offered, ticked, and then abort the whole download at the first depot.
+                //
+                // Shared depots are NOT exempt, unlike the manifest test above them. A shared depot's
+                // *manifest* is resolved from the owning app at download time, but nothing ever resolves
+                // a *key* there — ResolveKeys reads this game's lua and config.vdf and that is all the
+                // downloader will ever get. Exempting them here would only move the failure later.
                 string? blocked =
                     mid is null && r.FromAppId is null ? Resources.Strings.Builds_Select_NoManifest
+                    : !keys.ContainsKey(r.Id) ? Resources.Strings.Builds_Select_NoKey
                     : path is null && !_depotTool.CanFetchManifests ? Resources.Strings.Builds_Select_SignIn
                     : null;
 
@@ -914,25 +974,31 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                     DepotId = r.Id,
                     Title = r.Title,
                     Meta = r.Meta,
-                    Size = r.Size,
+                    Size = size,
                     ManifestId = mid,
                     ManifestPath = path,
                     Os = r.Os,
+                    Language = r.Language,
+                    IsDlc = r.IsDlc,
                     FromAppId = r.FromAppId,
                     BlockReason = blocked,
                 };
-                pick.IsSelected = pick.CanDownload && !pick.IsOtherPlatform && !pick.IsShared;
+                pick.IsSelected = pick.CanDownload && !pick.IsOtherPlatform && !pick.IsShared
+                                  && WantedLanguage(pick.Language, steamLanguage);
                 return pick;
             })
             .ToList();
+
+        // Whole-set decision, so it can only run once every row exists. Subscribing afterwards keeps it
+        // from firing OnPickChanged (and the space recalculation) once per row it flips.
+        ApplyNoLanguageMatchFallback(picks);
 
         foreach (var p in picks) p.PropertyChanged += OnPickChanged;
         DepotPicks = picks;
 
         // Seed the destination (and with it the free-space read) before the bar first renders.
         string defaultRoot = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            "LuaTools Depots", game.AppId.ToString());
+            DownloadsFolder(), "LuaTools Depots", game.AppId.ToString());
         try { Directory.CreateDirectory(defaultRoot); } catch { /* the Change picker still opens */ }
         DepotOutDir = defaultRoot;
 
@@ -950,10 +1016,88 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
         IsSelectMode = false;
     }
 
+    /// <summary>
+    /// Should this depot be ticked by default, on language grounds alone?
+    /// </summary>
+    /// <remarks>
+    /// Null language means language-NEUTRAL content — the actual game — and is always wanted. That case
+    /// carries the whole design: Witcher 3 has 39 neutral depots against 30 language ones, so a rule that
+    /// only matched languages would strip most of the game.
+    ///
+    /// English is always taken as well. It is the near-universal fallback, it is usually what a missing
+    /// or partial localisation degrades to, and it costs one depot.
+    /// </remarks>
+    private static bool WantedLanguage(string? depotLanguage, string? steamLanguage) =>
+        depotLanguage is null
+        || depotLanguage.Equals("english", StringComparison.OrdinalIgnoreCase)
+        || (steamLanguage is not null
+            && depotLanguage.Equals(steamLanguage, StringComparison.OrdinalIgnoreCase));
+
+    /// <summary>
+    /// If the language rule ticked nothing, fall back to ticking every language depot.
+    /// </summary>
+    /// <remarks>
+    /// Only when the selection is COMPLETELY empty. The obvious-looking test — "no language depot got
+    /// picked" — is wrong, because plenty of games ship no English depot at all and carry English in
+    /// their neutral content, offering language depots purely as extra localisations. Cyberpunk 2077
+    /// (10 language depots, none English) and The Witcher 3 (8, none English) both work that way, and
+    /// that test would have selected every localisation for them, which is the opposite of the point.
+    ///
+    /// An empty selection means the game is all language depots and none matched — a Japanese- or
+    /// Chinese-only release on a machine whose Steam language it doesn't offer. Taking everything there
+    /// errs toward a working install; the user can untick.
+    /// </remarks>
+    private static void ApplyNoLanguageMatchFallback(IReadOnlyList<DepotPickRow> picks)
+    {
+        // DLC is excluded from the test on purpose: it declares no language, so it is always selected,
+        // and counting it here would mean a game that ships one DLC depot never gets the fallback.
+        if (picks.Any(p => p.IsSelected && !p.IsDlc)) return; // neutral content (or a match) covers it
+
+        var languageDepots = picks.Where(p => p.Language is not null).ToList();
+        if (languageDepots.Count == 0) return;      // nothing language-specific to fall back to
+
+        foreach (var p in languageDepots)
+            p.IsSelected = p.CanDownload && !p.IsOtherPlatform && !p.IsShared;
+    }
+
     [RelayCommand]
     private void SelectAllDepots()
     {
         foreach (var p in DepotPicks) p.IsSelected = p.CanDownload;
+    }
+
+    /// <summary>
+    /// The user's Downloads folder, honouring a relocated one.
+    /// </summary>
+    /// <remarks>
+    /// There is no %DOWNLOADS% environment variable and <c>Environment.SpecialFolder</c> has no Downloads
+    /// member, so the only correct source is the Known Folder registry value. That matters here more than
+    /// usual: anyone who moved Downloads onto a bigger drive is precisely the person pulling tens of GB of
+    /// depot content, and a naive %USERPROFILE%\Downloads would send it to their system drive instead.
+    ///
+    /// Registry rather than SHGetKnownFolderPath deliberately — this codebase has no P/Invoke anywhere,
+    /// and SteamService already resolves Steam's path the same way.
+    /// </remarks>
+    private static string DownloadsFolder()
+    {
+        // FOLDERID_Downloads. "User Shell Folders" holds the unexpanded form (e.g. "%USERPROFILE%\..."),
+        // which is why it is read in preference to the expanded "Shell Folders" copy Windows keeps stale.
+        const string DownloadsGuid = "{374DE290-123F-4565-9164-39C4925E467B}";
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(
+                @"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders");
+            if (key?.GetValue(DownloadsGuid) is string raw && raw.Length > 0)
+            {
+                string expanded = Environment.ExpandEnvironmentVariables(raw);
+                if (Directory.Exists(expanded)) return expanded;
+            }
+        }
+        catch { /* unreadable registry: fall through to the profile-relative guess */ }
+
+        string profile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        string guess = Path.Combine(profile, "Downloads");
+        return Directory.Exists(guess) ? guess : profile;
     }
 
     /// <summary>Queue ONE item covering the whole selection, then jump to Downloads.</summary>
@@ -1065,6 +1209,18 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// <summary>Open a depot/DLC's SteamDB page (depot page for depots, app page for DLC).</summary>
     [RelayCommand]
     private static void OpenSteamDb(DepotRow row) => SteamService.OpenUrl(row.SteamDbUrl);
+
+    /// <summary>
+    /// Copy the GAME's app id. Takes no row: a <see cref="DepotRow"/> carries a depot id, a DLC app id
+    /// and an owning-app id, but never the app id of the game whose page this is — that is page state.
+    /// </summary>
+    [RelayCommand]
+    private void CopyAppId()
+    {
+        if (ActiveGame is not { } game) return;
+        if (!SteamService.CopyToClipboard(game.AppId.ToString()))
+            _toast.Show(Resources.Strings.Common_CopyAppId, Resources.Strings.Err_ClipboardBusy, error: true);
+    }
 
     /// <summary>Pin/unpin one depot. Comments its setManifestid line in or out.</summary>
     [RelayCommand]
@@ -1274,6 +1430,88 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     /// included or a depot the user just switched off would drop out of "In lua" and take its switch
     /// with it. The row has to stay put so it can be switched back on.
     /// </summary>
+    /// <summary>
+    /// Add depots the lua declares that Steam's app info never mentioned, so they still appear (and stay
+    /// downloadable) instead of silently vanishing.
+    /// </summary>
+    /// <remarks>
+    /// <para>Some apps require a Steam access token this app doesn't hold. steamcmd answers those with
+    /// <c>"_missing_token": true</c> and a <b>null</b> depots block — no depot list at all, not an empty
+    /// one. Risk of Rain 2, NBA 2K27, Touhou Luna Nights, Soundpad and Beam Eye Tracker all behave this
+    /// way. Without this the whole page came up blank with nothing explaining why, because "In lua" is
+    /// the intersection of the declarations and a depot list that was never delivered.</para>
+    ///
+    /// <para>Nothing is lost by falling back: the lua already carries every input a download needs — the
+    /// depot id, its decryption key, and a manifest id (usually a commented pin). Only <b>size</b> is
+    /// missing, so these rows show no MB and contribute nothing to the free-space estimate.</para>
+    ///
+    /// <para>Applied per id rather than only when the whole fetch came back empty, so it equally covers a
+    /// single depot the app info happens to omit.</para>
+    /// </remarks>
+    private static void AddDeclaredButUnlisted(
+        List<ContentDepot> items, Dictionary<long, LuaEntry> declared, long baseAppId,
+        HashSet<long> depotDlcIds)
+    {
+        var known = items.Select(d => d.Id).ToHashSet();
+
+        foreach (var (id, entry) in declared)
+        {
+            // Already covered, either as a real depot or as the DLC app id behind one.
+            if (known.Contains(id) || depotDlcIds.Contains(id)) continue;
+
+            // The base app's own addappid line is the app key, not a depot — downloading it is meaningless.
+            if (id == baseAppId) continue;
+
+            // A key means content; without one it's a store entitlement, which is what DlcAppId marks.
+            bool isDepot = entry.HasKey;
+
+            // Shared redistributables are only identifiable from the lua's comment here, and it matters:
+            // FromAppId is what keeps them off the default selection (they're usually already installed).
+            long? fromAppId = isDepot ? SharedOwnerFromComment(entry.Comment) : null;
+
+            // The lua's own setManifestid size, when it has one: without it these rows report 0 bytes,
+            // which understates the download total and leaves the free-space warning blind.
+            items.Add(new ContentDepot(id, entry.SizeOnDisk ?? 0, isDepot ? null : id,
+                fromAppId is not null,
+                Os: null, Language: isDepot ? LanguageFromComment(entry.Comment) : null)
+            { FromAppId = fromAppId });
+        }
+    }
+
+    /// <summary>
+    /// Steam's language codes, as they appear in a depot's <c>config.language</c>. Used to recognise a
+    /// synthesized depot's language from its lua comment, which is the only clue available when Steam
+    /// withheld the app info — without it a "Schinese" depot reads as language-neutral and is selected
+    /// for everyone.
+    /// </summary>
+    private static readonly HashSet<string> SteamLanguageCodes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "arabic", "bulgarian", "schinese", "tchinese", "czech", "danish", "dutch", "english", "finnish",
+        "french", "german", "greek", "hungarian", "indonesian", "italian", "japanese", "koreana",
+        "norwegian", "polish", "portuguese", "brazilian", "romanian", "russian", "spanish", "latam",
+        "swedish", "thai", "turkish", "ukrainian", "vietnamese",
+    };
+
+    /// <summary>The Steam language code a lua comment names, or null if it names something else.</summary>
+    private static string? LanguageFromComment(string? comment)
+    {
+        if (string.IsNullOrWhiteSpace(comment)) return null;
+        foreach (string word in comment.Split([' ', '	', '(', ')', ',', '-', ':'],
+                     StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            if (SteamLanguageCodes.TryGetValue(word, out string? code)) return code.ToLowerInvariant();
+        return null;
+    }
+
+    /// <summary>Owning app id from a lua comment like "VC 2019 Redist (Shared from App 228980)".</summary>
+    private static long? SharedOwnerFromComment(string? comment) =>
+        comment is not null && SharedFromAppRegex().Match(comment) is { Success: true } m
+        && long.TryParse(m.Groups[1].Value, out long owner)
+            ? owner
+            : null;
+
+    [GeneratedRegex(@"Shared\s+from\s+App\s+(\d+)", RegexOptions.IgnoreCase)]
+    private static partial Regex SharedFromAppRegex();
+
     private static Dictionary<long, LuaEntry> Declarations(LuaContents? lua)
     {
         var all = new Dictionary<long, LuaEntry>();
@@ -1317,6 +1555,8 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
             if (!depotDlcIds.Contains(dlcId))
                 items.Add(new ContentDepot(dlcId, 0, dlcId, IsShared: false, Os: null, Language: null));
 
+        AddDeclaredButUnlisted(items, declared, baseAppId, depotDlcIds);
+
         bool DlcNameKnown(long dlcId) =>
             _appList.GetName(dlcId) is not null || _appInfo.GetCached(dlcId)?.Name is not null || luaNames.ContainsKey(dlcId);
 
@@ -1351,7 +1591,10 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                 IsEnabled: active.Contains(declId),
                 CanToggle: inLua,   // anything the lua declares can be switched, in any variant
                 IsBaseApp: declId == baseAppId)
-            { ToggleId = declId, Size = d.Size, Os = d.Os, FromAppId = d.FromAppId };
+            {
+                ToggleId = declId, Size = d.Size, Os = d.Os, Language = d.Language,
+                FromAppId = d.FromAppId, LuaSize = entry?.SizeOnDisk ?? 0,
+            };
         }
 
         // In lua = the lua declares this id (a keyed depot OR a keyless DLC entitlement) or its DLC app

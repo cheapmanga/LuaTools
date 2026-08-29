@@ -345,7 +345,6 @@ Esto elimina los archivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>No se pudo determinar el juego base de este DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Algo salió mal: comprueba tu conexión e inténtalo de nuevo.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Error de descarga: comprueba tu conexión e inténtalo de nuevo.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Error de generación: comprueba tu conexión e inténtalo de nuevo.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>¿Reemplazar «{0}»?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Sin cambios de depósito/DLC: mismo contenido.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Instalación cancelada: los archivos existentes no se han modificado.</value></data>
@@ -527,7 +526,6 @@ Esto elimina los archivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Descargas</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Descargas</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>No hay descargas en curso. ¡Venga, descarga algo!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Todavía no hay descargas terminadas.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Cola</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historial</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>En cola</value></data>
@@ -576,4 +574,33 @@ Esto elimina los archivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>No se pudo obtener el manifest de este depósito.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Preparando · {0} de {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Obteniendo el descargador</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Herramienta</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Comprobando el runtime de .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Obteniendo SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack abierto.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>No se pudo instalar el runtime de .NET que necesita SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>El runtime de .NET se instaló, pero Windows debe reiniciarse antes de poder ejecutar SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>No se pudo descargar SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>No se pudo iniciar SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack actualizado.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>asignando archivos</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>comprobando archivos existentes</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Cancelar descarga</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Ya se han escrito {0} en:
+{1}
+
+Sí: detener y eliminar esos archivos
+No: detener pero conservarlos
+Cancelar: seguir descargando</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>No se pudieron eliminar los archivos descargados. Siguen en {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copiar App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Mostrar en la carpeta</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>No se pudo copiar: otra aplicación está usando el portapapeles.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>No se pudo abrir {0}: puede que se haya movido o eliminado.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>No hay clave de descifrado en el Lua para este depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>La clave de descifrado del depot {0} es incorrecta.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>No hay clave de descifrado en el Lua para el depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime compartido: normalmente ya está instalado. Marca para descargarlo igualmente.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>¿Quitar las {0} entradas del historial de descargas? Los archivos descargados no se ven afectados.</value></data>
 </root>

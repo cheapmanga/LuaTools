@@ -345,7 +345,6 @@ Detta raderar .lua-filerna från Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Det gick inte att fastställa grundspelet för denna DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Något gick fel — kontrollera din anslutning och försök igen.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Nedladdningen misslyckades — kontrollera din anslutning och försök igen.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Genereringen misslyckades — kontrollera din anslutning och försök igen.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Ersätta "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Inga depå-/DLC-ändringar — samma innehåll.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installationen avbröts — befintliga filer är oförändrade.</value></data>
@@ -527,7 +526,6 @@ Detta raderar .lua-filerna från Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Nedladdningar</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Nedladdningar</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Inga nedladdningar just nu. Kom igen – ladda ner något!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Inga färdiga nedladdningar än.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kö</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historik</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>I kö</value></data>
@@ -576,4 +574,33 @@ Detta raderar .lua-filerna från Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Kunde inte hämta depåns manifest.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Förbereder · {0} av {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Hämtar nedladdaren</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Verktyg</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Kontrollerar .NET-körtiden</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Hämtar SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack öppnades.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Kunde inte installera .NET-körtiden som SteamAutoCrack behöver.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET-körtiden installerades, men Windows måste startas om innan SteamAutoCrack kan köras.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Kunde inte hämta SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Kunde inte starta SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack uppdaterades.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allokerar filer</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>kontrollerar befintliga filer</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Avbryt nedladdning</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} har redan skrivits till:
+{1}
+
+Ja - stoppa och radera filerna
+Nej - stoppa men behåll dem
+Avbryt - fortsätt hämta</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Kunde inte radera de hämtade filerna. De finns kvar i {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Kopiera App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Visa i mapp</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kunde inte kopiera — en annan app använder urklipp.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Kunde inte öppna {0} — den kan ha flyttats eller raderats.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Ingen dekrypteringsnyckel i Lua för den här depoten.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Dekrypteringsnyckeln för depot {0} är fel.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Ingen dekrypteringsnyckel i Lua för depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Delad körtid — vanligtvis redan installerad. Kryssa i för att hämta ändå.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Ta bort alla {0} poster från hämtningshistoriken? Hämtade filer påverkas inte.</value></data>
 </root>

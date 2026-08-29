@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -366,8 +366,11 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         SteamService.RevealInExplorer(tile.FilePath);
 
     [RelayCommand]
-    private static void CopyAppId(LuaTileViewModel tile) =>
-        Clipboard.SetText(tile.AppId.ToString());
+    private void CopyAppId(LuaTileViewModel tile)
+    {
+        if (!SteamService.CopyToClipboard(tile.AppId.ToString()))
+            _toast.Show(Resources.Strings.Common_CopyAppId, Resources.Strings.Err_ClipboardBusy, error: true);
+    }
 
     [RelayCommand]
     private void Update(LuaTileViewModel tile) => NavigateToAdd?.Invoke(tile.AppId);

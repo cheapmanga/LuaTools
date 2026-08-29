@@ -1,7 +1,7 @@
-namespace LuaToolsGui.Services.Downloads;
+﻿namespace LuaToolsGui.Services.Downloads;
 
 /// <summary>What a queued download is for. Drives the row icon and the history label.</summary>
-public enum DownloadKind { Manifest, Dlc, DenuvoManifest, DenuvoFix, Depot }
+public enum DownloadKind { Manifest, Dlc, DenuvoManifest, DenuvoFix, Depot, Tool }
 
 /// <summary>
 /// A job refused to start for a reason the user can act on — e.g. the game a Denuvo fix targets isn't
@@ -12,7 +12,19 @@ public enum DownloadKind { Manifest, Dlc, DenuvoManifest, DenuvoFix, Depot }
 /// nothing was spent (no bandwidth, and no slot of the server-side daily limit). Reusing ApiException
 /// would surface the message correctly but would name the failure after a call that never happened.
 /// </remarks>
-public sealed class DownloadAbortedException(string message) : Exception(message);
+public sealed class DownloadAbortedException(string message, bool isCancellation = false) : Exception(message)
+{
+    /// <summary>
+    /// Settle the item as Cancelled rather than Failed, keeping this exception's message.
+    /// </summary>
+    /// <remarks>
+    /// For outcomes that stop the job without anything having gone wrong — the user declining an
+    /// elevation prompt, or a runtime that installed fine but wants a reboot. Those are not errors and
+    /// should not be dressed as red failures. Throwing <see cref="OperationCanceledException"/> would
+    /// give the right status but discard the specific message.
+    /// </remarks>
+    public bool IsCancellation { get; } = isCancellation;
+}
 
 /// <summary>Outcome of a job's install phase.</summary>
 /// <param name="Message">User-facing result text, already localized by the factory.</param>
@@ -74,4 +86,14 @@ public sealed record DownloadJob(
     Action<DownloadItem, JobResult?>? OnFinished = null,
 
     /// <summary>Target of the Downloads tab's "Review" / "Reveal" button (e.g. navigate to Add).</summary>
-    Action? OnReveal = null);
+    Action? OnReveal = null,
+
+    /// <summary>
+    /// Where this job writes its output, for jobs that produce a folder rather than a staged file
+    /// (depot downloads). Null for everything else.
+    /// </summary>
+    /// <remarks>
+    /// Exists so a cancel can offer to delete what was written. The path is otherwise captured only
+    /// inside the job's own closure, leaving nothing outside able to name it.
+    /// </remarks>
+    string? OutputPath = null);

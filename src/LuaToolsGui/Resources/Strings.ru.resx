@@ -345,7 +345,6 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Не удалось определить базовую игру для этого DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Что-то пошло не так — проверьте подключение и попробуйте снова.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Ошибка загрузки — проверьте подключение и попробуйте снова.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Ошибка генерации — проверьте подключение и попробуйте снова.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Заменить «{0}»?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Нет изменений депо/DLC — то же содержимое.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Установка отменена — существующие файлы не изменены.</value></data>
@@ -527,7 +526,6 @@
   <data name="Nav_Downloads" xml:space="preserve"><value>Загрузки</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Загрузки</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Сейчас ничего не загружается. Скачайте уже что-нибудь!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Завершённых загрузок пока нет.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Очередь</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>История</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>В очереди</value></data>
@@ -576,4 +574,33 @@
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Не удалось получить manifest этого депо.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Подготовка · {0} из {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Загрузка загрузчика</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Инструмент</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Проверка среды .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Загрузка SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack открыт.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Не удалось установить среду .NET, необходимую SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Среда .NET установлена, но перед запуском SteamAutoCrack нужно перезагрузить Windows.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Не удалось загрузить SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Не удалось запустить SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack обновлён.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>выделение файлов</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>проверка имеющихся файлов</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Отменить загрузку</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Уже записано {0} в:
+{1}
+
+Да - остановить и удалить эти файлы
+Нет - остановить, но оставить
+Отмена - продолжить загрузку</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Не удалось удалить загруженные файлы. Они остались в {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Копировать App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Показать в папке</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Не удалось скопировать — буфер обмена занят другим приложением.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Не удалось открыть {0} — возможно, он перемещён или удалён.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>В Lua нет ключа расшифровки для этого depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Ключ расшифровки для depot {0} неверен.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>В Lua нет ключа расшифровки для depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Общая среда выполнения — обычно уже установлена. Отметьте, чтобы всё равно скачать.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Удалить все записи ({0}) из истории загрузок? Загруженные файлы не затрагиваются.</value></data>
 </root>

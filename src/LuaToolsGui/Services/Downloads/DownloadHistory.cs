@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace LuaToolsGui.Services.Downloads;
 
@@ -16,7 +16,17 @@ public sealed record DownloadHistoryRecord(
     long Bytes,
     string Status,
     string? Message,
-    long CompletedAtMs);
+    long CompletedAtMs,
+
+    /// <summary>
+    /// What "Show in folder" opens for this entry: the installed file, or the depot output folder.
+    /// </summary>
+    /// <remarks>
+    /// Trailing and nullable so a downloads.json written before this field existed still deserializes —
+    /// the property is simply absent and lands as null, which reads as "nothing to show" and hides the
+    /// menu item rather than offering a dead path.
+    /// </remarks>
+    string? RevealPath = null);
 
 /// <summary>A finished download as shown in the Downloads tab's history list.</summary>
 public partial class DownloadHistoryEntry : ObservableObject
@@ -47,6 +57,11 @@ public partial class DownloadHistoryEntry : ObservableObject
         _ => Resources.Strings.Downloads_Status_Cancelled,
     };
 
+    /// <summary>Tool downloads carry appid 0; see <see cref="DownloadItem.CanCopyAppId"/>.</summary>
+    public bool CanCopyAppId => Record.AppId > 0;
+
+    public bool CanShowInFolder => !string.IsNullOrWhiteSpace(Record.RevealPath);
+
     public string WhenLabel =>
         DateTimeOffset.FromUnixTimeMilliseconds(Record.CompletedAtMs).LocalDateTime.ToString("g");
 
@@ -59,5 +74,6 @@ public partial class DownloadHistoryEntry : ObservableObject
         item.BytesRead,
         status.ToString(),
         item.Message,
-        DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+        item.RevealPath);
 }

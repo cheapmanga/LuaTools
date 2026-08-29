@@ -253,6 +253,32 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
     }
 
     [RelayCommand]
+    private void CopyAppId(FixGameCardVm game)
+    {
+        if (!SteamService.CopyToClipboard(game.AppId))
+            toast.Show(Resources.Strings.Common_CopyAppId, Resources.Strings.Err_ClipboardBusy, error: true);
+    }
+
+    /// <summary>
+    /// Open the game's Steam install folder — where <c>ApplyDenuvoFix</c> extracts a fix to.
+    /// </summary>
+    /// <remarks>
+    /// Resolved on click, not bound to a property: <c>GetInstallDir</c> walks libraryfolders.vdf and the
+    /// appmanifest files, which is far too much work to repeat for every card in a grid on every render.
+    /// The cost of that is the action being offered for games that aren't installed, so it reports the
+    /// same "game not found" toast the fix flow already uses rather than failing silently.
+    /// </remarks>
+    [RelayCommand]
+    private void ShowInFolder(FixGameCardVm game)
+    {
+        string? dir = long.TryParse(game.AppId, out long appId) ? library.GetInstallDir(appId) : null;
+        if (SteamService.ShowInExplorer(dir)) return;
+
+        toast.Show(Resources.Strings.Fixes_Toast_GameNotFound,
+            string.Format(Resources.Strings.Fixes_Toast_GameNotFound_Body, game.Name), error: true);
+    }
+
+    [RelayCommand]
     private async Task OpenGame(FixGameCardVm game)
     {
         SelectedGame = game;

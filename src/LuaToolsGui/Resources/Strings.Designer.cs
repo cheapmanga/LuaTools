@@ -330,7 +330,6 @@ public static class Strings
     public static string Add_Err_BaseGame => Get(nameof(Add_Err_BaseGame));
     public static string Add_Err_Generic => Get(nameof(Add_Err_Generic));
     public static string Add_Err_Download => Get(nameof(Add_Err_Download));
-    public static string Add_Err_Generate => Get(nameof(Add_Err_Generate));
     public static string Add_Confirm_Replace => Get(nameof(Add_Confirm_Replace));
     public static string Add_Confirm_NoChanges => Get(nameof(Add_Confirm_NoChanges));
     public static string Add_Status_Cancelled => Get(nameof(Add_Status_Cancelled));
@@ -510,7 +509,6 @@ public static class Strings
     public static string Nav_Downloads => Get(nameof(Nav_Downloads));
     public static string Downloads_Title => Get(nameof(Downloads_Title));
     public static string Downloads_Empty => Get(nameof(Downloads_Empty));
-    public static string Downloads_History_Empty => Get(nameof(Downloads_History_Empty));
     public static string Downloads_Section_Active => Get(nameof(Downloads_Section_Active));
     public static string Downloads_Section_History => Get(nameof(Downloads_Section_History));
     public static string Downloads_Status_Queued => Get(nameof(Downloads_Status_Queued));
@@ -561,4 +559,28 @@ public static class Strings
     public static string Builds_Select_Space => Get(nameof(Builds_Select_Space));
     public static string Downloads_Depots_Preparing => Get(nameof(Downloads_Depots_Preparing));
     public static string Downloads_Depots_GettingTool => Get(nameof(Downloads_Depots_GettingTool));
+    public static string Downloads_Kind_Tool => Get(nameof(Downloads_Kind_Tool));
+    public static string Downloads_SteamAutoCrack => Get(nameof(Downloads_SteamAutoCrack));
+    public static string Downloads_SAC_GettingRuntime => Get(nameof(Downloads_SAC_GettingRuntime));
+    public static string Downloads_SAC_GettingTool => Get(nameof(Downloads_SAC_GettingTool));
+    public static string Downloads_SAC_Launched => Get(nameof(Downloads_SAC_Launched));
+    public static string Downloads_SAC_Err_Runtime => Get(nameof(Downloads_SAC_Err_Runtime));
+    public static string Downloads_SAC_Err_Restart => Get(nameof(Downloads_SAC_Err_Restart));
+    public static string Downloads_SAC_Err_Tool => Get(nameof(Downloads_SAC_Err_Tool));
+    public static string Downloads_SAC_Err_Launch => Get(nameof(Downloads_SAC_Err_Launch));
+    public static string Downloads_SAC_Updated => Get(nameof(Downloads_SAC_Updated));
+    public static string Downloads_Depot_PreAllocating => Get(nameof(Downloads_Depot_PreAllocating));
+    public static string Downloads_Depot_Validating => Get(nameof(Downloads_Depot_Validating));
+    public static string Depot_Cancel_Title => Get(nameof(Depot_Cancel_Title));
+    public static string Depot_Cancel_Body => Get(nameof(Depot_Cancel_Body));
+    public static string Depot_Cancel_DeleteFailed => Get(nameof(Depot_Cancel_DeleteFailed));
+    public static string Common_CopyAppId => Get(nameof(Common_CopyAppId));
+    public static string Common_ShowInFolder => Get(nameof(Common_ShowInFolder));
+    public static string Err_ClipboardBusy => Get(nameof(Err_ClipboardBusy));
+    public static string Err_PathMissing => Get(nameof(Err_PathMissing));
+    public static string Builds_Select_NoKey => Get(nameof(Builds_Select_NoKey));
+    public static string Depot_Err_BadKey => Get(nameof(Depot_Err_BadKey));
+    public static string Depot_Err_NoKeyFor => Get(nameof(Depot_Err_NoKeyFor));
+    public static string Builds_Select_SharedHint => Get(nameof(Builds_Select_SharedHint));
+    public static string Downloads_ClearHistory_Confirm => Get(nameof(Downloads_ClearHistory_Confirm));
 }

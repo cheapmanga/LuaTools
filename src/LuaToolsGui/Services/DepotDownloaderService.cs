@@ -56,6 +56,26 @@ public record DepotRunResult(bool Ok, string? Error);
 /// SteamKit-derived LoginID and disconnect each other (<c>-loginid</c> is ignored on the anonymous path),
 /// and parallel multi-GB transfers only split the same bandwidth.</para>
 /// </remarks>
+/// <summary>
+/// What the downloader is doing right now, parsed from its stdout.
+/// </summary>
+/// <remarks>
+/// A big depot spends a long stretch before a single byte arrives: the tool pre-allocates every new file
+/// at full size first, and a resumed one re-hashes what is already on disk. Without this the row just
+/// reads "Downloading, 0 B of 4.49 GB" and looks hung.
+/// </remarks>
+public enum DepotPhase
+{
+    /// <summary>Fetching the depot manifest.</summary>
+    Manifest,
+    /// <summary>Creating zero-filled files at their final size. No bytes are being fetched yet.</summary>
+    PreAllocating,
+    /// <summary>Re-hashing files that already exist (a resume with -validate).</summary>
+    Validating,
+    /// <summary>Actually pulling chunks.</summary>
+    Downloading,
+}
+
 public partial class DepotDownloaderService(
     GithubProxy gh,
     SteamService steam,
@@ -101,6 +121,26 @@ public partial class DepotDownloaderService(
 
     private readonly SemaphoreSlim _toolGate = new(1, 1);
     private readonly SemaphoreSlim _runGate = new(1, 1);
+
+    /// <summary>
+    /// Map one stdout line to a phase, or null when it says nothing about phase.
+    /// </summary>
+    /// <remarks>
+    /// These are printed PER FILE, so a large depot emits thousands. The caller reports only on change.
+    /// Order matters: "Downloading depot N manifest" has to be tested before the bare
+    /// "Downloading depot N", or every manifest fetch would read as the download starting.
+    /// </remarks>
+    private const string PreAllocatingPrefix = "Pre-allocating ";
+
+    private static DepotPhase? PhaseOf(string line) => line switch
+    {
+        _ when line.StartsWith(PreAllocatingPrefix, StringComparison.Ordinal) => DepotPhase.PreAllocating,
+        _ when line.StartsWith("Validating ", StringComparison.Ordinal) => DepotPhase.Validating,
+        _ when line.StartsWith("Downloading depot ", StringComparison.Ordinal)
+               && line.EndsWith(" manifest", StringComparison.Ordinal) => DepotPhase.Manifest,
+        _ when line.StartsWith("Downloading depot ", StringComparison.Ordinal) => DepotPhase.Downloading,
+        _ => null,
+    };
 
     /// <summary>Matches the tool's per-file progress line, e.g. " 42.17% game/data.pak".</summary>
     [GeneratedRegex(@"^\s*([0-9]+(?:\.[0-9]+)?)%\s+(.+)$")]
@@ -267,9 +307,45 @@ public partial class DepotDownloaderService(
     /// </summary>
     public string? ResolveManifestPath(long depotId, string manifestId)
     {
-        if (steam.DepotCacheDir is not { } dir) return null;
-        string path = Path.Combine(dir, $"{depotId}_{manifestId}.manifest");
-        return File.Exists(path) ? path : null;
+        if (CachedManifestPath(depotId, manifestId) is not { } path) return null;
+
+        // Existence is not enough. A half-written or truncated file (a killed download, a full disk)
+        // stays on disk under the right name and would be handed to the downloader, which fails on it
+        // with a raw parse error. Requiring the file to parse AND to declare the depot and gid its name
+        // claims turns that into a clean cache miss, which the fetch path then repairs.
+        return ManifestFile.Matches(path, depotId, manifestId) ? path : null;
+    }
+
+    /// <summary>The name a depot's manifest has in depotcache, whether or not it is there.</summary>
+    private string? CachedManifestPath(long depotId, string manifestId) =>
+        steam.DepotCacheDir is { } dir
+            ? Path.Combine(dir, $"{depotId}_{manifestId}.manifest")
+            : null;
+
+    /// <summary>
+    /// Delete a cached manifest that failed validation, so a re-fetch can actually replace it.
+    /// </summary>
+    /// <remarks>
+    /// Mandatory before re-fetching, not a tidy-up: <c>LuaInstaller.InstallManifestFile</c> SKIPS a
+    /// destination that already exists (deliberately, since the name is content-addressed and Steam may
+    /// hold the file open). So a corrupt entry would survive the fetch, be handed back, and fail again
+    /// on every attempt — the download could never recover on its own.
+    /// </remarks>
+    public bool DiscardCachedManifest(long depotId, string manifestId)
+    {
+        if (CachedManifestPath(depotId, manifestId) is not { } path) return false;
+        try
+        {
+            if (!File.Exists(path)) return false;
+            File.Delete(path);
+            log.LogDebug("Discarded unreadable cached manifest {Path}", path);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            log.LogDebug(ex, "Could not discard cached manifest {Path}", path);
+            return false; // Steam holding it open; the fetch below will fail loudly rather than silently
+        }
     }
 
     /// <summary>Free bytes on the volume that will hold <paramref name="path"/>, or null if unknown.</summary>
@@ -318,7 +394,8 @@ public partial class DepotDownloaderService(
     /// </summary>
     public async Task<DepotRunResult> RunAsync(
         long appId, DepotSelection sel, string keysFile, string outDir, bool validate,
-        IProgress<double>? depotFraction, CancellationToken ct)
+        IProgress<double>? depotFraction, CancellationToken ct, IProgress<DepotPhase>? phase = null,
+        IProgress<string>? createdFile = null)
     {
         string? exe = await EnsureToolAsync(null, ct);
         if (exe is null) return new DepotRunResult(false, "tool");
@@ -365,6 +442,7 @@ public partial class DepotDownloaderService(
             string? lastError = null;
             string? lastLine = null;
 
+            DepotPhase? lastPhase = null;
             proc.OutputDataReceived += (_, e) =>
             {
                 if (e.Data is null) return;
@@ -374,8 +452,33 @@ public partial class DepotDownloaderService(
                 if (m.Success && double.TryParse(m.Groups[1].Value, NumberStyles.Float,
                         CultureInfo.InvariantCulture, out double pct))
                 {
+                    // A progress line IS the download phase; chunks are moving by definition.
+                    if (lastPhase != DepotPhase.Downloading)
+                    {
+                        lastPhase = DepotPhase.Downloading;
+                        phase?.Report(DepotPhase.Downloading);
+                    }
                     depotFraction?.Report(Math.Clamp(pct / 100d, 0d, 1d));
                     return;
+                }
+
+                string trimmed = e.Data.Trim();
+
+                // "Pre-allocating X" is printed ONLY when X did not already exist, so it is exactly the
+                // set of files this run created — which is what a cancel is allowed to delete. Anything
+                // the user already had is reported as "Validating" instead and is never recorded.
+                if (createdFile is not null
+                    && trimmed.StartsWith(PreAllocatingPrefix, StringComparison.Ordinal))
+                {
+                    string path = trimmed[PreAllocatingPrefix.Length..].Trim();
+                    if (path.Length > 0) createdFile.Report(path);
+                }
+
+                // Only on CHANGE: these are per-file, so a big depot would otherwise emit thousands.
+                if (PhaseOf(trimmed) is { } p && p != lastPhase)
+                {
+                    lastPhase = p;
+                    phase?.Report(p);
                 }
 
                 // The tool writes fatal errors to STDOUT via Console.WriteLine and leaves stderr empty
@@ -428,6 +531,103 @@ public partial class DepotDownloaderService(
             return new DepotRunResult(true, null);
         }
         finally { _runGate.Release(); }
+    }
+
+    /// <summary>
+    /// The folder DepotDownloader creates inside its output directory. Its presence is proof the
+    /// downloader actually ran there, which is what makes deleting the folder safe to offer.
+    /// </summary>
+    private const string DownloaderMarkerDir = ".DepotDownloader";
+
+    /// <summary>True when the downloader has actually written to this folder.</summary>
+    public static bool HasDownloadedContent(string? dir) =>
+        !string.IsNullOrWhiteSpace(dir)
+        && Directory.Exists(Path.Combine(dir, DownloaderMarkerDir));
+
+    /// <summary>
+    /// Delete exactly the files this download created, then tidy up after them. Returns false only if
+    /// something was left behind.
+    /// </summary>
+    /// <remarks>
+    /// <para><b>Deliberately not a recursive delete of the output folder.</b> That folder is chosen by
+    /// the user through the Change picker, so it can legitimately be an existing game directory being
+    /// repaired — wiping it would destroy an install we never created. Only paths the downloader
+    /// reported <c>Pre-allocating</c> are removed, and it prints that line only for files that did not
+    /// already exist.</para>
+    ///
+    /// <para>Every path is checked to be inside <paramref name="dir"/> before deletion, so a malformed
+    /// or hostile line in the child's stdout cannot reach outside the download folder.</para>
+    ///
+    /// <para>Call only once the child process has exited. The kill is asynchronous and the downloader
+    /// holds handles on what it pre-allocated, so deleting too early just fails.</para>
+    /// </remarks>
+    public static bool TryDeleteCreatedFiles(string? dir, IReadOnlyCollection<string> createdFiles)
+    {
+        if (string.IsNullOrWhiteSpace(dir)) return false;
+
+        string root;
+        try { root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(dir)); }
+        catch { return false; }
+
+        bool allGone = true;
+        var touched = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (string f in createdFiles)
+        {
+            try
+            {
+                // Resolved against the output folder, not our own working directory (which is ToolDir):
+                // absolute paths are unaffected, and a relative one lands where the downloader meant it.
+                string full = Path.GetFullPath(f, root);
+                // Containment check: never delete outside the folder we were given.
+                if (!full.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (File.Exists(full)) File.Delete(full);
+                if (Path.GetDirectoryName(full) is { Length: > 0 } parent) touched.Add(parent);
+            }
+            catch { allGone = false; } // locked or vanished; the folder just keeps it
+        }
+
+        // The downloader's own bookkeeping is ours by definition, so it goes too.
+        try
+        {
+            string marker = Path.Combine(root, DownloaderMarkerDir);
+            if (Directory.Exists(marker)) Directory.Delete(marker, recursive: true);
+        }
+        catch { allGone = false; }
+
+        PruneEmptyDirectories(root, touched);
+        return allGone;
+    }
+
+    /// <summary>
+    /// Remove directories left empty by the deletion, deepest first, stopping at (and keeping) the root.
+    /// </summary>
+    /// <remarks>
+    /// Walks up from the folders we actually emptied rather than scanning the whole tree. The output
+    /// directory is user-chosen and can be an existing game folder, so sweeping every empty directory
+    /// under it would delete ones that were there before this download and are none of our business.
+    /// </remarks>
+    private static void PruneEmptyDirectories(string root, HashSet<string> touched)
+    {
+        foreach (string start in touched.OrderByDescending(d => d.Length))
+        {
+            string? dir = start;
+            // Up the chain: emptying a leaf can leave its parent empty too, but never remove the root.
+            while (dir is not null
+                   && dir.Length > root.Length
+                   && dir.StartsWith(root, StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    if (!Directory.Exists(dir)) { dir = Path.GetDirectoryName(dir); continue; }
+                    if (Directory.EnumerateFileSystemEntries(dir).Any()) break; // still holds something
+                    Directory.Delete(dir);
+                }
+                catch { break; } // in use or denied: stop climbing this branch
+                dir = Path.GetDirectoryName(dir);
+            }
+        }
     }
 
     private static void TryKill(Process proc)

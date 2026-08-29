@@ -345,7 +345,6 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Tämän DLC:n peruspeliä ei voitu määrittää</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Jokin meni pieleen — tarkista yhteytesi ja yritä uudelleen.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Lataus epäonnistui — tarkista yhteytesi ja yritä uudelleen.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Luonti epäonnistui — tarkista yhteytesi ja yritä uudelleen.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Korvataanko "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Ei depo-/DLC-muutoksia — sama sisältö.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Asennus peruutettu — olemassa olevat tiedostot ennallaan.</value></data>
@@ -527,7 +526,6 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Lataukset</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Lataukset</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Ei latauksia juuri nyt. Lataa nyt jotain!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Ei valmiita latauksia vielä.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Jono</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historia</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>Jonossa</value></data>
@@ -576,4 +574,33 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tämän depotin manifestia ei saatu haettua.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Valmistellaan · {0}/{1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Haetaan lataustyökalua</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Työkalu</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Tarkistetaan .NET-ajonaikaa</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Haetaan SteamAutoCrackia</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack avattiin.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>SteamAutoCrackin tarvitsemaa .NET-ajonaikaa ei voitu asentaa.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET-ajonaika asennettiin, mutta Windows on käynnistettävä uudelleen ennen SteamAutoCrackin suorittamista.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrackia ei voitu ladata.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrackia ei voitu käynnistää.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack päivitettiin.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>varataan tiedostoja</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>tarkistetaan olemassa olevia tiedostoja</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Peruuta lataus</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Kohteeseen on jo kirjoitettu {0}:
+{1}
+
+Kyllä - pysäytä ja poista tiedostot
+Ei - pysäytä mutta säilytä ne
+Peruuta - jatka lataamista</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Ladattuja tiedostoja ei voitu poistaa. Ne ovat yhä kohteessa {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Kopioi App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Näytä kansiossa</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kopiointi epäonnistui — toinen sovellus käyttää leikepöytää.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Kohdetta {0} ei voitu avata — se on ehkä siirretty tai poistettu.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua-tiedostossa ei ole salauksenpurkuavainta tälle depotille.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Depotin {0} salauksenpurkuavain on väärä.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua-tiedostossa ei ole salauksenpurkuavainta depotille {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Jaettu suoritusympäristö — yleensä jo asennettu. Valitse ladataksesi silti.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Poistetaanko kaikki {0} merkintää lataushistoriasta? Ladattuihin tiedostoihin tämä ei vaikuta.</value></data>
 </root>

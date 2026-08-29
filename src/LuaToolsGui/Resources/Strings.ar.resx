@@ -369,7 +369,6 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>تعذّر تحديد اللعبة الأساسية لمحتوى DLC هذا</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>حدث خطأ ما — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>فشل التنزيل — تحقق من اتصالك وحاول مجددًا.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>فشل الإنشاء — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>استبدال "{0}"؟</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>لا تغييرات في المستودع/DLC — المحتوى نفسه.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>أُلغي التثبيت — تُركت الملفات الحالية دون تغيير.</value></data>
@@ -553,7 +552,6 @@
   <data name="Nav_Downloads" xml:space="preserve"><value>التنزيلات</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>التنزيلات</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>لا توجد تنزيلات الآن. ابدأ بتنزيل شيء ما!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>لا توجد تنزيلات مكتملة بعد.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>قائمة الانتظار</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>السجل</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>في الانتظار</value></data>
@@ -602,4 +600,33 @@
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>تعذّر الحصول على ملف manifest لهذا المستودع.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>جارٍ التحضير · {0} من {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>جارٍ إحضار أداة التنزيل</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>أداة</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>جارٍ فحص بيئة تشغيل ‎.NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>جارٍ إحضار SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>تم فتح SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>تعذّر تثبيت بيئة تشغيل ‎.NET التي يحتاجها SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>تم تثبيت بيئة تشغيل ‎.NET، لكن يجب إعادة تشغيل Windows قبل أن يعمل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>تعذّر تنزيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>تعذّر تشغيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>تم تحديث SteamAutoCrack.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>تخصيص الملفات</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>فحص الملفات الموجودة</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>إلغاء التنزيل</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>تمت كتابة {0} بالفعل إلى:
+{1}
+
+نعم - إيقاف وحذف تلك الملفات
+لا - إيقاف مع الاحتفاظ بها
+إلغاء - متابعة التنزيل</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>تعذّر حذف الملفات التي تم تنزيلها. لا تزال في {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>نسخ App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>إظهار في المجلد</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>تعذّر النسخ — تطبيق آخر يستخدم الحافظة.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>تعذّر فتح {0} — ربما تم نقله أو حذفه.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua لهذا الـ depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>مفتاح فك التشفير الخاص بالـ depot ‏{0} غير صحيح.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua للـ depot ‏{0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>بيئة تشغيل مشتركة — مثبّتة غالبًا بالفعل. حدّدها للتنزيل على أي حال.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>هل تريد إزالة كل الإدخالات ({0}) من سجل التنزيلات؟ لن تتأثر الملفات التي تم تنزيلها.</value></data>
 </root>

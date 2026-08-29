@@ -345,7 +345,6 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>このDLCのベースゲームを特定できませんでした</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>問題が発生しました — 接続を確認してもう一度お試しください。</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>ダウンロードに失敗しました — 接続を確認してもう一度お試しください。</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>生成に失敗しました — 接続を確認してもう一度お試しください。</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>「{0}」を置き換えますか？</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>デポ/DLCの変更なし — 同じ内容です。</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>インストールをキャンセルしました — 既存のファイルは変更されていません。</value></data>
@@ -527,7 +526,6 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Nav_Downloads" xml:space="preserve"><value>ダウンロード</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>ダウンロード</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>現在ダウンロードはありません。何かダウンロードしてみましょう！</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>完了したダウンロードはまだありません。</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>キュー</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>履歴</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>待機中</value></data>
@@ -576,4 +574,33 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>このデポの manifest を取得できませんでした。</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>準備中 · {0} / {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>ダウンローダーを取得中</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>ツール</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET ランタイムを確認中</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack を取得中</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack を開きました。</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>SteamAutoCrack に必要な .NET ランタイムをインストールできませんでした。</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET ランタイムはインストールされましたが、SteamAutoCrack を実行するには Windows の再起動が必要です。</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack をダウンロードできませんでした。</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack を起動できませんでした。</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack を更新しました。</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>ファイルを確保中</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>既存ファイルを検証中</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>ダウンロードを取消</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>すでに {0} が次の場所に書き込まれています:
+{1}
+
+はい - 停止してファイルを削除
+いいえ - 停止するがファイルは残す
+キャンセル - ダウンロードを続行</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>ダウンロード済みファイルを削除できませんでした。{0} に残っています。</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App ID をコピー</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>フォルダーに表示</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>コピーできません — 他のアプリがクリップボードを使用中です。</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>{0} を開けません — 移動または削除された可能性があります。</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua に この depot の復号キーがありません。</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>depot {0} の復号キーが正しくありません。</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua に depot {0} の復号キーがありません。</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共有ランタイム — 通常はインストール済みです。必要ならチェックしてください。</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ダウンロード履歴から {0} 件すべてを削除しますか？ダウンロード済みのファイルには影響しません。</value></data>
 </root>
