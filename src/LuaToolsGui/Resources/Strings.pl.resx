@@ -561,6 +561,7 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in. Następnie urucho
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Zresetować WSZYSTKIE statystyki i osiągnięcia gry {0}? Steam nie ma resetu wyłącznie osiągnięć, więc statystyki gry też przepadną. Tego nie da się cofnąć.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Postęp gry {0} zresetowany.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam nie jest uruchomiony. Uruchom Steama, zaloguj się i spróbuj ponownie.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam działa, ale nie otworzył statystyk tej gry. Najprawdopodobniej nie ma jej już w twojej bibliotece — użyj Odśwież, żeby usunąć ją z listy.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Nie znaleziono Steama na tym komputerze.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam działa, ale nikt nie jest zalogowany.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam odpowiedział dla innej gry. Zamknij inne narzędzia do osiągnięć i spróbuj ponownie.</value></data>

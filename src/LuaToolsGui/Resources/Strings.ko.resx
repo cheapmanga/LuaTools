@@ -561,6 +561,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>{0}의 모든 통계와 도전 과제를 초기화할까요? Steam에는 도전 과제만 초기화하는 기능이 없어서 게임 통계도 함께 사라집니다. 되돌릴 수 없습니다.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>{0}의 진행도를 초기화했습니다.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam이 실행 중이 아닙니다. Steam을 실행하고 로그인한 뒤 다시 시도하세요.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam은 실행 중이지만 이 게임의 통계를 열지 못했습니다. 라이브러리에 더 이상 없을 가능성이 큽니다 — 새로 고침을 누르면 목록에서 사라집니다.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>이 컴퓨터에서 Steam을 찾지 못했습니다.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam은 실행 중이지만 로그인한 사용자가 없습니다.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam이 다른 게임으로 응답했습니다. 다른 도전 과제 도구를 닫고 다시 시도하세요.</value></data>

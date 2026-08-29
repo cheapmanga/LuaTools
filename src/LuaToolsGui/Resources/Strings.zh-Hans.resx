@@ -581,6 +581,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>要重置 {0} 的全部统计数据和成就吗？Steam 没有只重置成就的方式，游戏的统计数据也会一并清空。此操作无法撤销。</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>已重置 {0} 的进度。</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam 未运行。请启动 Steam 并登录，然后重试。</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam 正在运行，但没有打开这款游戏的统计数据。它多半已经不在你的库中了 — 点刷新即可从列表中移除。</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>在这台电脑上未找到 Steam。</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam 正在运行，但没有用户登录。</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam 返回的是另一款游戏。请关闭其他成就工具后重试。</value></data>

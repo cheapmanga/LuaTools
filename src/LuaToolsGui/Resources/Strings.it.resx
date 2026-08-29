@@ -561,6 +561,7 @@ Questo elimina i file .lua da Steam\config\stplug-in. Riavvia Steam in seguito a
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Reimpostare TUTTE le statistiche e gli obiettivi di {0}? Steam non offre una reimpostazione dei soli obiettivi, quindi anche le statistiche del gioco verranno cancellate. L'operazione è irreversibile.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Progressi reimpostati per {0}.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam non è in esecuzione. Avvia Steam, accedi e riprova.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam è in esecuzione ma non ha aperto le statistiche di questo gioco. Molto probabilmente non è più nella tua libreria: usa Aggiorna per toglierlo dalla lista.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam non è stato trovato su questo computer.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam è in esecuzione ma nessun utente ha effettuato l'accesso.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam ha risposto per un altro gioco. Chiudi eventuali altri strumenti per gli obiettivi e riprova.</value></data>

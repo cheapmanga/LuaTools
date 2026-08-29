@@ -286,6 +286,62 @@ public class AchievementHostService
     }
 
     /// <summary>
+    /// Narrow a list of candidate app ids down to the ones the signed-in account actually owns.
+    /// Returns null when Steam can't be asked (closed, signed out), which means "don't filter" rather
+    /// than "owns nothing" — hiding the whole library because Steam is shut would be worse than
+    /// showing a stale entry.
+    /// </summary>
+    /// <remarks>
+    /// Needed because the files on disk lie: Steam keeps a game's cached stats schema after the account
+    /// stops owning it, so a game added through a lua and then removed still looks present locally.
+    /// </remarks>
+    public async Task<IReadOnlySet<long>?> FilterOwnedAsync(
+        IReadOnlyCollection<long> appIds, CancellationToken ct = default)
+    {
+        if (!IsAvailable || appIds.Count == 0) return null;
+
+        var startInfo = new ProcessStartInfo(HostPath, "--owned")
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            StandardInputEncoding = new UTF8Encoding(false),
+            StandardOutputEncoding = new UTF8Encoding(false),
+        };
+
+        try
+        {
+            using var process = Process.Start(startInfo);
+            if (process is null) return null;
+
+            var errors = process.StandardError.ReadToEndAsync(ct);
+
+            // One id per line, then close stdin: that's what tells the host the list is complete.
+            foreach (long appId in appIds)
+                await process.StandardInput.WriteLineAsync(appId.ToString().AsMemory(), ct);
+            process.StandardInput.Close();
+
+            string output = await process.StandardOutput.ReadToEndAsync(ct);
+            await errors;
+            await process.WaitForExitAsync(ct);
+
+            using var doc = JsonDocument.Parse(output);
+            if (!doc.RootElement.TryGetProperty("owned", out var owned)) return null; // an error reply
+
+            var result = new HashSet<long>();
+            foreach (var entry in owned.EnumerateArray()) result.Add(entry.GetInt64());
+            return result;
+        }
+        catch (OperationCanceledException) { throw; }
+        catch
+        {
+            return null; // Steam closed, host gone, unreadable answer: don't filter
+        }
+    }
+
+    /// <summary>
     /// appid → achievement count for every schema Steam has cached on this machine. Steam writes those
     /// files when it fetches a game's stats, so this covers what the account has actually played, and
     /// costs one short-lived process for the whole library.

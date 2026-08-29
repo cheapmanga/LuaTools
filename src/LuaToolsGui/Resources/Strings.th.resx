@@ -561,6 +561,7 @@
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>รีเซ็ตสถิติและความสำเร็จทั้งหมดของ {0} หรือไม่? Steam ไม่มีการรีเซ็ตเฉพาะความสำเร็จ ดังนั้นสถิติของเกมจะหายไปด้วย และย้อนกลับไม่ได้</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>รีเซ็ตความคืบหน้าของ {0} แล้ว</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam ไม่ได้เปิดอยู่ เปิด Steam ล็อกอิน แล้วลองใหม่</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam เปิดอยู่แต่ไม่ยอมเปิดสถิติของเกมนี้ เป็นไปได้มากว่าเกมไม่อยู่ในคลังของคุณแล้ว — กดรีเฟรชเพื่อเอาออกจากรายการ</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>ไม่พบ Steam บนเครื่องนี้</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam เปิดอยู่แต่ยังไม่มีผู้ใช้ล็อกอิน</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam ตอบกลับเป็นเกมอื่น ปิดเครื่องมือจัดการความสำเร็จอื่น แล้วลองใหม่</value></data>

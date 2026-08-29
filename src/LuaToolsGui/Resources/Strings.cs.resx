@@ -561,6 +561,7 @@ Tím se smažou soubory .lua ze Steam\config\stplug-in. Poté restartujte Steam,
   <data name="Ach_Reset_Ask" xml:space="preserve"><value>Resetovat VŠECHNY statistiky a achievementy hry {0}? Steam neumí resetovat jen achievementy, takže zmizí i statistiky hry. Tohle nejde vrátit.</value></data>
   <data name="Ach_Reset_Done" xml:space="preserve"><value>Postup hry {0} resetován.</value></data>
   <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam neběží. Spusť Steam, přihlas se a zkus to znovu.</value></data>
+  <data name="Ach_Err_NotOwned" xml:space="preserve"><value>Steam běží, ale statistiky této hry neotevřel. Nejspíš už není v tvé knihovně — tlačítkem Obnovit ji ze seznamu odstraníš.</value></data>
   <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam nebyl na tomto počítači nalezen.</value></data>
   <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam běží, ale není přihlášený žádný uživatel.</value></data>
   <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam odpověděl za jinou hru. Zavři ostatní nástroje na achievementy a zkus to znovu.</value></data>
