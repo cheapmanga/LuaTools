@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Odebrat Steam DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Akce</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Odebrat Steam DRM?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Tímto se na spustitelném souboru hry spustí Steamless, aby odstranil DRM SteamStub. Původní .exe se nejprve zazálohuje jako .bak. Některé hry mohou poté vyžadovat ověření souborů ve Steamu. Pokračovat?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Tohle sundá hru ze Steamu ve dvou krocích: Steamless sloupne obal SteamStub ze spustitelných souborů a pak emulátor Goldberg vymění knihovny steam_api. Originály se uloží vedle jako .bak a to, co už zálohu má, zůstane být. Funkce Steamu (overlay, cloudové uložení, online) pro tuhle hru přestanou fungovat; obnovení souborů .bak nebo ověření souborů hry ve Steamu to vrátí zpět. Pokračovat?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Odebírání Steam DRM…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} upraveno, {1} beze změny.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Rozbalené spustitelné soubory: {0}, vyměněné soubory Steam API: {1}, už hotové: {2}.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulátor Steamu se nepodařilo stáhnout. Zkontroluj připojení a zkus to znovu.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Ve složce hry není žádný steam_api.dll — není co vyměnit.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Rozbalené spustitelné soubory: {0}, ale krok s emulátorem selhal: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Složka hry nenalezena — je nainstalovaná?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM se nepodařilo odebrat. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Kliknutím zkopírujte App ID</value></data>

@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>ลบ DRM ของ Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>การดำเนินการ</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>ลบ DRM ของ Steam หรือไม่?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>การดำเนินการนี้จะเรียกใช้ Steamless กับไฟล์เรียกทำงานของเกมเพื่อลบ DRM SteamStub ไฟล์ .exe ต้นฉบับจะถูกสำรองเป็น .bak ก่อน บางเกมอาจต้องตรวจสอบไฟล์ใน Steam ภายหลัง ดำเนินการต่อหรือไม่?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>การทำแบบนี้จะพาเกมออกจาก Steam สองขั้นตอน: Steamless ลอกเปลือก SteamStub ออกจากไฟล์โปรแกรม จากนั้นตัวจำลอง Goldberg จะแทนที่ไฟล์ steam_api ต้นฉบับถูกสำรองไว้ข้าง ๆ เป็น .bak และไฟล์ที่มีสำรองอยู่แล้วจะไม่ถูกแตะต้อง ฟีเจอร์ของ Steam (โอเวอร์เลย์ เซฟบนคลาวด์ ออนไลน์) จะใช้กับเกมนี้ไม่ได้ คืนไฟล์ .bak หรือให้ Steam ตรวจสอบไฟล์เกมเพื่อย้อนกลับ ดำเนินการต่อหรือไม่</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>กำลังลบ DRM ของ Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>แก้ไขแล้ว {0} รายการ, ไม่เปลี่ยนแปลง {1} รายการ</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>แตกไฟล์โปรแกรมแล้ว {0} ไฟล์ แทนที่ไฟล์ Steam API แล้ว {1} ไฟล์ ทำไปแล้ว {2} ไฟล์</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>ดาวน์โหลดตัวจำลอง Steam ไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองใหม่</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>ไม่พบ steam_api.dll ในโฟลเดอร์เกม — ไม่มีอะไรให้แทนที่</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>แตกไฟล์โปรแกรมแล้ว {0} ไฟล์ แต่ขั้นตอนตัวจำลองล้มเหลว: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>ไม่พบโฟลเดอร์เกม — ติดตั้งไว้หรือไม่?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>ไม่สามารถลบ DRM ได้ {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>คลิกเพื่อคัดลอก App ID</value></data>

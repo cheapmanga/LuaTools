@@ -254,9 +254,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>إزالة حماية Steam DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>الإجراءات</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>إزالة حماية Steam DRM؟</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>سيؤدي ذلك إلى تشغيل Steamless على ملف اللعبة التنفيذي لإزالة حماية SteamStub. يُنسخ ملف .exe الأصلي احتياطيًا إلى .bak أولًا. قد تحتاج بعض الألعاب إلى التحقق من الملفات في Steam بعد ذلك. هل تريد المتابعة؟</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>يخرج هذا اللعبة من Steam على خطوتين: يزيل Steamless غلاف SteamStub عن الملفات التنفيذية، ثم يستبدل محاكي Goldberg ملفات steam_api. تُحفظ النسخ الأصلية بجانبها بامتداد ‎.bak، وما له نسخة احتياطية مسبقًا لا يُمسّ. تتوقف ميزات Steam (الواجهة، الحفظ السحابي، اللعب عبر الإنترنت) لهذه اللعبة؛ استعادة ملفات ‎.bak أو التحقق من ملفات اللعبة في Steam يعيد كل شيء. متابعة؟</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>جارٍ إزالة حماية Steam DRM…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>تمت معالجة {0}، و{1} دون تغيير.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، واستُبدل {1} ملف Steam API، و{2} تم من قبل.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>تعذّر تنزيل محاكي Steam. تحقّق من الاتصال وأعد المحاولة.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>لا يوجد steam_api.dll في مجلد اللعبة — لا شيء لاستبداله.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، لكن خطوة المحاكي فشلت: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>لم يُعثر على مجلد اللعبة — هل هي مثبَتة؟</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>تعذّرت إزالة الحماية. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>انقر لنسخ App ID</value></data>

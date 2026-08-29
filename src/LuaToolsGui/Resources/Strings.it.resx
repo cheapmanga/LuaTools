@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Rimuovi DRM di Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Azioni</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Rimuovere il DRM di Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Questo esegue Steamless sull'eseguibile del gioco per rimuovere il DRM SteamStub. Il .exe originale viene prima salvato come .bak. Alcuni giochi potrebbero richiedere una verifica dei file in Steam dopo. Continuare?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Questo toglie il gioco da Steam in due passaggi: Steamless rimuove l'involucro SteamStub dagli eseguibili, poi l'emulatore Goldberg sostituisce le DLL steam_api. Gli originali vengono salvati accanto come .bak, e ciò che ha già un backup non viene toccato. Le funzioni Steam (overlay, salvataggi cloud, online) smettono di funzionare per questo gioco; ripristinare i .bak, o verificare i file del gioco su Steam, rimette tutto a posto. Continuare?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Rimozione del DRM di Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} modificati, {1} invariati.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} eseguibile/i scompattato/i, {1} file Steam API sostituito/i, {2} già fatto/i.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Impossibile scaricare l'emulatore Steam. Controlla la connessione e riprova.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Nessun steam_api.dll nella cartella del gioco: non c'è nulla da sostituire.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} eseguibile/i scompattato/i, ma il passaggio dell'emulatore è fallito: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Cartella del gioco non trovata — è installato?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Impossibile rimuovere il DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Clicca per copiare l'App ID</value></data>

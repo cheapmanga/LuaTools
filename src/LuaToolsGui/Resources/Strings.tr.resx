@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM'sini kaldır</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Eylemler</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam DRM'si kaldırılsın mı?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Bu, SteamStub DRM'sini kaldırmak için oyunun yürütülebilir dosyasında Steamless'i çalıştırır. Orijinal .exe önce .bak olarak yedeklenir. Bazı oyunlar sonrasında Steam'de dosya doğrulaması gerektirebilir. Devam edilsin mi?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Bu, oyunu iki adımda Steam'den çıkarır: Steamless çalıştırılabilir dosyalardaki SteamStub sarmalını söker, ardından Goldberg öykünücüsü steam_api DLL'lerini değiştirir. Orijinaller yanlarına .bak olarak yedeklenir, zaten yedeği olana dokunulmaz. Steam özellikleri (overlay, bulut kayıtları, çevrimiçi) bu oyun için çalışmaz olur; .bak dosyalarını geri koymak ya da Steam'de oyun dosyalarını doğrulamak her şeyi geri alır. Devam edilsin mi?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam DRM'si kaldırılıyor…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} işlendi, {1} değişmedi.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} çalıştırılabilir dosya açıldı, {1} Steam API dosyası değiştirildi, {2} zaten yapılmıştı.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam öykünücüsü indirilemedi. Bağlantıyı kontrol edip tekrar dene.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Oyun klasöründe steam_api.dll yok — değiştirilecek bir şey yok.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} çalıştırılabilir dosya açıldı, ama öykünücü adımı başarısız oldu: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Oyun klasörü bulunamadı — yüklü mü?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM kaldırılamadı. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>App ID'yi kopyalamak için tıklayın</value></data>

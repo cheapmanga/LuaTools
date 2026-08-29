@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM を削除</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>アクション</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam DRM を削除しますか？</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>ゲームの実行ファイルに Steamless を実行して SteamStub DRM を除去します。元の .exe は先に .bak としてバックアップされます。一部のゲームでは後で Steam のファイル整合性確認が必要になる場合があります。続行しますか？</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>これはゲームを2段階でSteamから切り離します。Steamless が実行ファイルから SteamStub の殻を剥がし、続いて Goldberg エミュレーターが steam_api の DLL を差し替えます。元のファイルは隣に .bak として保存され、すでにバックアップがあるものには手を付けません。このゲームでは Steam の機能（オーバーレイ、クラウドセーブ、オンライン）が使えなくなります。.bak を戻すか、Steam でゲームファイルを検証すれば元に戻ります。続行しますか？</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam DRM を削除中…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} 件処理、{1} 件変更なし。</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>実行ファイル {0} 個を展開、Steam API ファイル {1} 個を差し替え、{2} 個は対応済み。</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam エミュレーターをダウンロードできませんでした。接続を確認して、もう一度お試しください。</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>ゲームフォルダーに steam_api.dll が見つかりません。差し替えるものがありません。</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>実行ファイル {0} 個を展開しましたが、エミュレーターの段階で失敗しました: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>ゲームフォルダーが見つかりません。インストールされていますか？</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM を削除できませんでした。{0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>クリックしてApp IDをコピー</value></data>
