@@ -14,9 +14,10 @@
   per-depot enable/disable), manages unlocker modes, and injects a companion plugin into Steam's
   store pages.
 
-  **This fork** adds an **Achievements** page: pick a game from your Steam library and unlock or lock
-  its achievements from inside LuaTools, no separate tool needed. See
-  [Achievements](#achievements) below.
+  **This fork** adds two things: an **Achievements** page — pick a game from your Steam library and
+  unlock or lock its achievements without leaving LuaTools — and a banner on the **Add** page that
+  offers a game's fixes right after a Fetch. See [Achievements](#achievements) and
+  [Fixes after a Fetch](#fixes-after-a-fetch) below.
   
   It ships fully translated in 29 languages and auto-updates via Velopack.
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
@@ -36,6 +37,15 @@ interop, running in a small helper process (`LuaTools.SamHost.exe`) that ships n
 It has to be a separate process: `steamclient.dll` is 32-bit and cannot be loaded into a 64-bit app,
 and Steam binds one app id per connection. The helper targets .NET Framework 4.8, which is part of
 Windows, so there is nothing extra to install.
+
+## Fixes after a Fetch
+
+Fetching a game on the **Add** page also checks whether it has published fixes. When it does, a banner
+names them — *"This game has 1 fix(es) available: Online Fix."* — and its button opens the Fixes page
+with that game already unfolded.
+
+The kinds come from the listing's own tags, so an Online Fix is not announced as something else. The
+lookup never holds up the Fetch, and when the listing cannot be reached there is simply no banner.
 
 ## Statistics
 <div>
