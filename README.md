@@ -13,10 +13,28 @@
   LuaTools browses and installs manifest sources, edits `stplug-in` lua files (depot pinning,
   per-depot enable/disable), manages unlocker modes, and injects a companion plugin into Steam's
   store pages.
+
+  The **Achievements** page unlocks or locks a game's Steam achievements from inside the app, with no
+  separate tool needed. See [Achievements](#achievements) below.
   
   It ships fully translated in 29 languages and auto-updates via Velopack.
   <br><sub>Found a translation error? Tell us about it over on [Discord](https://discord.gg/luatools)</sub>
 </p>
+
+## Achievements
+
+Pick a game in the grid, toggle achievements, and hit **Save to Steam**. Nothing leaves the machine
+until you save, so you can flip a dozen rows and still back out with **Revert**. Server-awarded
+achievements are shown read-only, because Steam ignores any attempt to change them.
+
+Requirements: **Steam running and signed in**, and the game's achievements cached by Steam (they are
+as soon as the game has been launched once on this machine).
+
+Under the hood this is [gibbed's Steam Achievement Manager](https://github.com/gibbed/SteamAchievementManager)
+interop, running in a small helper process (`LuaTools.SamHost.exe`) that ships next to `LuaTools.exe`.
+It has to be a separate process: `steamclient.dll` is 32-bit and cannot be loaded into a 64-bit app,
+and Steam binds one app id per connection. The helper targets .NET Framework 4.8, which is part of
+Windows, so there is nothing extra to install.
 
 ## Statistics
 <div>
@@ -47,7 +65,14 @@ You can find release builds on the [luatools website](https://lua.tools/app) or 
 - [Millennium](https://steambrew.app/): the Steam plugin framework whose injection API this app
   polyfills when Millennium isn't installed
 - [Velopack](https://velopack.io/): installer and auto-update framework
+- [Steam Achievement Manager](https://github.com/gibbed/SteamAchievementManager) by Rick (gibbed):
+  the Steam achievement interop the Achievements page is built on. Its sources are vendored under
+  `src/LuaTools.SamHost/Vendor/` under the zlib licence, unmodified; see the
+  [notice](src/LuaTools.SamHost/Vendor/NOTICE.md) there
 
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
+
+The vendored Steam Achievement Manager sources under `src/LuaTools.SamHost/Vendor/` stay under their
+own zlib licence, `src/LuaTools.SamHost/Vendor/LICENSE.txt`.

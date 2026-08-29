@@ -28,6 +28,8 @@ public partial class App : Application
                 services.AddSingleton<SteamAppListCache>();
                 services.AddSingleton<SteamAppInfoCache>();
                 services.AddSingleton<CoverCache>();
+                services.AddSingleton<AchievementIconCache>();
+                services.AddSingleton<AchievementHostService>();
                 services.AddSingleton<ToastService>();
                 services.AddSingleton<SteamDepotInfo>();
                 services.AddSingleton<LuaVault>();
@@ -64,6 +66,7 @@ public partial class App : Application
                 services.AddSingleton<HomeViewModel>();
                 services.AddSingleton<ModeViewModel>();
                 services.AddSingleton<FixesViewModel>();
+                services.AddSingleton<AchievementsViewModel>();
                 services.AddSingleton<PluginViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
@@ -74,6 +77,7 @@ public partial class App : Application
                 services.AddSingleton<BuildsView>();
                 services.AddSingleton<ModeView>();
                 services.AddSingleton<FixesView>();
+                services.AddSingleton<AchievementsView>();
                 services.AddSingleton<PluginView>();
                 services.AddSingleton<SettingsView>();
                 services.AddSingleton<MainWindow>();

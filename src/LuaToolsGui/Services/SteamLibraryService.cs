@@ -48,6 +48,46 @@ public partial class SteamLibraryService(SteamService steam)
         return null;
     }
 
+    // "appid" "480" / "name" "Spacewar" — the two keys we need out of an appmanifest, same quoted
+    // one-per-line KeyValues shape as the rest of this file.
+    [GeneratedRegex(@"""appid""\s*""(\d+)""", RegexOptions.IgnoreCase)]
+    private static partial Regex AppIdRegex();
+
+    [GeneratedRegex(@"""name""\s*""([^""]*)""", RegexOptions.IgnoreCase)]
+    private static partial Regex NameRegex();
+
+    /// <summary>
+    /// Enumerate the installed games across every library by reading each appmanifest_&lt;appid&gt;.acf.
+    /// Best-effort per file: an unreadable or half-written manifest is skipped, never fatal. The name is
+    /// the one Steam itself stores, so it's correct even for apps missing from the public app list.
+    /// </summary>
+    public IEnumerable<(long AppId, string Name)> EnumerateInstalled()
+    {
+        string? steamRoot = steam.EffectivePath;
+        if (steamRoot is null) yield break;
+
+        var seen = new HashSet<long>();
+        foreach (string library in GetLibraryRoots(steamRoot))
+        {
+            string[] manifests;
+            try { manifests = Directory.GetFiles(Path.Combine(library, "steamapps"), "appmanifest_*.acf"); }
+            catch { continue; } // library on a disconnected drive
+
+            foreach (string manifest in manifests)
+            {
+                string text;
+                try { text = File.ReadAllText(manifest); } catch { continue; }
+
+                var idMatch = AppIdRegex().Match(text);
+                if (!idMatch.Success || !long.TryParse(idMatch.Groups[1].Value, out long appId)) continue;
+                if (!seen.Add(appId)) continue; // same game listed in two libraries
+
+                var nameMatch = NameRegex().Match(text);
+                yield return (appId, nameMatch.Success ? nameMatch.Groups[1].Value : appId.ToString());
+            }
+        }
+    }
+
     /// <summary>Every Steam library root (the main install plus any added libraries).</summary>
     private static IEnumerable<string> GetLibraryRoots(string steamRoot)
     {
