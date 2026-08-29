@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>إدارة</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>الوضع</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>الإصلاحات</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>الإنجازات</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>إعادة تشغيل Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>الإعدادات</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>تسجيل الدخول عبر Discord</value></data>
@@ -553,4 +554,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>لقد بلغت حدّك اليومي في Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>لا يوجد بيان Hubcap متاح لهذا التطبيق.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>فشل التنزيل من Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>الإنجازات</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>افتح إنجازات أي لعبة في مكتبة Steam أو أغلقها. يجب أن يكون Steam قيد التشغيل ومسجَّل الدخول.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>جارٍ قراءة مكتبة Steam الخاصة بك…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>لم يتم العثور على ألعاب. ثبّت لعبة، أو شغّل واحدة مرة واحدة كي يخزّن Steam إنجازاتها.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>تعذّرت قراءة مكتبة Steam الخاصة بك.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} إنجازات</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>لم يتم تخزين الإنجازات بعد</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>جارٍ طلب إحصاءاتك من Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>هذه اللعبة لا تحتوي على إنجازات.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} مفتوحة</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>البحث في الإنجازات...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>الكل</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>مفتوحة</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>مغلقة</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>فتح الكل</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>إغلاق الكل</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>تراجع</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>حفظ في Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>إعادة تعيين</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>تغييرات غير محفوظة: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>فُتح في {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>إنجاز مخفي</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>تمنحه خوادم اللعبة - لا يمكن تغييره</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>تم حفظ الإنجازات</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>التغييرات المطبَّقة على {1}: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>تعذّر الحفظ في Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>إعادة تعيين التقدّم</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>إعادة تعيين كل الإحصاءات والإنجازات للعبة {0}؟ لا يوفّر Steam إعادة تعيين للإنجازات وحدها، لذا ستُمسح إحصاءات اللعبة أيضًا. لا يمكن التراجع عن هذا.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>تمت إعادة تعيين تقدّم {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam غير مشغَّل. شغّل Steam وسجّل الدخول ثم أعد المحاولة.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>لم يتم العثور على Steam على هذا الجهاز.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam يعمل لكن لا يوجد مستخدم مسجَّل الدخول.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>ردّ Steam بخصوص لعبة أخرى. أغلق أي أداة إنجازات أخرى ثم أعد المحاولة.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>لا توجد إنجازات مخزَّنة لهذه اللعبة في Steam. شغّلها مرة واحدة ثم عُد.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>لم يردّ Steam في الوقت المناسب. تأكد من أنه متصل ثم أعد المحاولة.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>رفض Steam تسليم إحصاءات هذه اللعبة لحسابك.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>مساعد الإنجازات مفقود من تثبيت LuaTools هذا. أعد التثبيت لاستعادته.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>هذا الإنجاز تمنحه خوادم اللعبة ولا يمكن تغييره.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>حدث خطأ ما أثناء الاتصال بـ Steam.</value></data>
 </root>

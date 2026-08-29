@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Administrer</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modus</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Fikser</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Prestasjoner</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Start Steam på nytt</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Innstillinger</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Logg inn med Discord</value></data>
@@ -527,4 +528,43 @@ Dette sletter .lua-filene fra Steam\config\stplug-in. Start Steam på nytt etter
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Du har nådd den daglige Hubcap-grensen.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Det finnes ingen Hubcap-manifest for denne appen.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-nedlastingen mislyktes ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Prestasjoner</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Lås opp eller lås prestasjoner for et hvilket som helst spill i Steam-biblioteket ditt. Steam må kjøre og være innlogget.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Leser Steam-biblioteket ditt…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Fant ingen spill. Installer et spill, eller start ett én gang slik at Steam mellomlagrer prestasjonene.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Kunne ikke lese Steam-biblioteket ditt.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} prestasjoner</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Prestasjoner er ikke mellomlagret ennå</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Henter statistikken din fra Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Dette spillet har ingen prestasjoner.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} låst opp</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Søk i prestasjoner...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Alle</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Låst opp</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Låst</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Lås opp alle</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Lås alle</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Angre</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Lagre til Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Nullstill</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} ulagret/ulagrede endring(er)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Låst opp {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Skjult prestasjon</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Tildeles av spillets servere - kan ikke endres</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Prestasjoner lagret</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} endring(er) brukt på {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Kunne ikke lagre til Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Nullstill fremgang</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Nullstille ALL statistikk og alle prestasjoner for {0}? Steam har ingen nullstilling for bare prestasjoner, så spillets statistikk forsvinner også. Dette kan ikke angres.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Fremgang nullstilt for {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam kjører ikke. Start Steam, logg inn og prøv igjen.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Fant ikke Steam på denne maskinen.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam kjører, men ingen bruker er logget inn.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam svarte for et annet spill. Lukk andre prestasjonsverktøy og prøv igjen.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam har ikke mellomlagret prestasjonene for dette spillet. Start det én gang og kom tilbake.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam svarte ikke i tide. Sjekk at det er tilkoblet og prøv igjen.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam nektet å gi ut statistikken for dette spillet på kontoen din.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Prestasjonshjelperen mangler i denne LuaTools-installasjonen. Installer på nytt for å få den tilbake.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Denne prestasjonen tildeles av spillets servere og kan ikke endres.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Noe gikk galt i kommunikasjonen med Steam.</value></data>
 </root>

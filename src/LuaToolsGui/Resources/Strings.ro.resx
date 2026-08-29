@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Gestionează</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Mod</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Remedieri</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Realizări</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Repornește Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Setări</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Conectează-te cu Discord</value></data>
@@ -527,4 +528,43 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in. Repornește Steam du
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Ai atins limita zilnică Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nu există manifest Hubcap pentru această aplicație.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Descărcarea Hubcap a eșuat ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Realizări</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Deblochează sau blochează realizările oricărui joc din biblioteca ta Steam. Steam trebuie să ruleze și să fie autentificat.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Se citește biblioteca ta Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Niciun joc găsit. Instalează un joc sau pornește unul o dată, ca Steam să îi rețină realizările.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Biblioteca ta Steam nu a putut fi citită.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} realizări</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Realizările nu sunt încă în cache</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Se cer statisticile tale de la Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Acest joc nu are realizări.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} deblocate</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Caută realizări...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Toate</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Deblocate</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Blocate</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Deblochează tot</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Blochează tot</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Anulează</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Salvează pe Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Resetează</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Modificări nesalvate: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Deblocată pe {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Realizare ascunsă</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Acordată de serverele jocului - nu poate fi schimbată</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Realizări salvate</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>Modificări aplicate la {1}: {0}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Salvarea pe Steam a eșuat</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Resetează progresul</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Resetezi TOATE statisticile și realizările pentru {0}? Steam nu are o resetare doar a realizărilor, așa că dispar și statisticile jocului. Nu se poate anula.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Progresul pentru {0} a fost resetat.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam nu rulează. Pornește Steam, autentifică-te și încearcă din nou.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Steam nu a fost găsit pe acest calculator.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam rulează, dar niciun utilizator nu este autentificat.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam a răspuns pentru alt joc. Închide orice alt instrument de realizări și încearcă din nou.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam nu are realizările acestui joc în cache. Pornește-l o dată și revino.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam nu a răspuns la timp. Verifică dacă este online și încearcă din nou.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam a refuzat să dea statisticile acestui joc pentru contul tău.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Asistentul de realizări lipsește din această instalare LuaTools. Reinstaleaz-o ca să îl recuperezi.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Această realizare este acordată de serverele jocului și nu poate fi schimbată.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Ceva n-a mers bine în comunicarea cu Steam.</value></data>
 </root>

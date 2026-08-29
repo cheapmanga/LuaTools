@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Quản lý</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Chế độ</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Bản sửa lỗi</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Thành tựu</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Khởi động lại Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Cài đặt</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Đăng nhập bằng Discord</value></data>
@@ -527,4 +528,43 @@ Thao tác này sẽ xóa các tệp .lua khỏi Steam\config\stplug-in. Sau đó
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Bạn đã đạt giới hạn Hubcap hằng ngày.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Không có manifest Hubcap cho ứng dụng này.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Tải xuống từ Hubcap thất bại ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Thành tựu</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Mở khóa hoặc khóa thành tựu của bất kỳ trò chơi nào trong thư viện Steam của bạn. Steam phải đang chạy và đã đăng nhập.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>Đang đọc thư viện Steam của bạn…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Không tìm thấy trò chơi nào. Hãy cài một trò chơi, hoặc mở một trò chơi một lần để Steam lưu thành tựu của nó.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Không thể đọc thư viện Steam của bạn.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} thành tựu</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Thành tựu chưa được lưu</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>Đang hỏi Steam về thống kê của bạn…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Trò chơi này không có thành tựu.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>Đã mở khóa {0} / {1}</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Tìm thành tựu...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Tất cả</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Đã mở khóa</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Đang khóa</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Mở khóa tất cả</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Khóa tất cả</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Hoàn tác</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Lưu lên Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Đặt lại</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>Thay đổi chưa lưu: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Mở khóa ngày {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Thành tựu ẩn</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Do máy chủ trò chơi trao - không thể thay đổi</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Đã lưu thành tựu</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>Đã áp dụng {0} thay đổi cho {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Không lưu được lên Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Đặt lại tiến trình</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Đặt lại TOÀN BỘ thống kê và thành tựu của {0}? Steam không có tùy chọn chỉ đặt lại thành tựu, nên thống kê của trò chơi cũng mất theo. Không thể hoàn tác.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Đã đặt lại tiến trình của {0}.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam chưa chạy. Hãy mở Steam, đăng nhập rồi thử lại.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>Không tìm thấy Steam trên máy này.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam đang chạy nhưng chưa có người dùng nào đăng nhập.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam trả lời cho một trò chơi khác. Hãy đóng các công cụ thành tựu khác rồi thử lại.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam chưa lưu thành tựu của trò chơi này. Hãy mở nó một lần rồi quay lại.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam không trả lời kịp. Hãy kiểm tra xem nó có trực tuyến không rồi thử lại.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam từ chối cung cấp thống kê của trò chơi này cho tài khoản của bạn.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Bản cài LuaTools này thiếu trình trợ giúp thành tựu. Hãy cài lại để khôi phục.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Thành tựu này do máy chủ trò chơi trao và không thể thay đổi.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Đã xảy ra lỗi khi liên lạc với Steam.</value></data>
 </root>

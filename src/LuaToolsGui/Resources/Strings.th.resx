@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>จัดการ</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>โหมด</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>การแก้ไข</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>ความสำเร็จ</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>รีสตาร์ท Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>การตั้งค่า</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>เข้าสู่ระบบด้วย Discord</value></data>
@@ -527,4 +528,43 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>คุณใช้ Hubcap ครบตามขีดจำกัดรายวันแล้ว</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>ไม่มี manifest ของ Hubcap สำหรับแอปนี้</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>ดาวน์โหลดจาก Hubcap ไม่สำเร็จ ({0})</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>ความสำเร็จ</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>ปลดล็อกหรือล็อกความสำเร็จของเกมใดก็ได้ในคลัง Steam ของคุณ Steam ต้องเปิดอยู่และล็อกอินแล้ว</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>กำลังอ่านคลัง Steam ของคุณ…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>ไม่พบเกม ติดตั้งเกมสักเกม หรือเปิดสักครั้งเพื่อให้ Steam เก็บความสำเร็จของเกมไว้</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>อ่านคลัง Steam ของคุณไม่ได้</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} ความสำเร็จ</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>ยังไม่มีข้อมูลความสำเร็จที่เก็บไว้</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>กำลังขอสถิติของคุณจาก Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>เกมนี้ไม่มีความสำเร็จ</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>ปลดล็อกแล้ว {0} / {1}</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>ค้นหาความสำเร็จ...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>ทั้งหมด</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>ปลดล็อกแล้ว</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>ล็อกอยู่</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>ปลดล็อกทั้งหมด</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>ล็อกทั้งหมด</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>ย้อนกลับ</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>บันทึกไปยัง Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>รีเซ็ต</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>การเปลี่ยนแปลงที่ยังไม่บันทึก: {0}</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>ปลดล็อกเมื่อ {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>ความสำเร็จที่ซ่อนอยู่</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>มอบโดยเซิร์ฟเวอร์ของเกม - แก้ไขไม่ได้</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>บันทึกความสำเร็จแล้ว</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>ใช้การเปลี่ยนแปลงกับ {1} แล้ว {0} รายการ</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>บันทึกไปยัง Steam ไม่สำเร็จ</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>รีเซ็ตความคืบหน้า</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>รีเซ็ตสถิติและความสำเร็จทั้งหมดของ {0} หรือไม่? Steam ไม่มีการรีเซ็ตเฉพาะความสำเร็จ ดังนั้นสถิติของเกมจะหายไปด้วย และย้อนกลับไม่ได้</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>รีเซ็ตความคืบหน้าของ {0} แล้ว</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>Steam ไม่ได้เปิดอยู่ เปิด Steam ล็อกอิน แล้วลองใหม่</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>ไม่พบ Steam บนเครื่องนี้</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>Steam เปิดอยู่แต่ยังไม่มีผู้ใช้ล็อกอิน</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>Steam ตอบกลับเป็นเกมอื่น ปิดเครื่องมือจัดการความสำเร็จอื่น แล้วลองใหม่</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>Steam ยังไม่มีข้อมูลความสำเร็จของเกมนี้ เปิดเกมสักครั้งแล้วกลับมาใหม่</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>Steam ตอบกลับไม่ทัน ตรวจสอบว่าออนไลน์อยู่แล้วลองใหม่</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>Steam ปฏิเสธที่จะให้สถิติของเกมนี้สำหรับบัญชีของคุณ</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>ตัวช่วยความสำเร็จหายไปจากการติดตั้ง LuaTools นี้ ติดตั้งใหม่เพื่อกู้คืน</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>ความสำเร็จนี้มอบโดยเซิร์ฟเวอร์ของเกมและแก้ไขไม่ได้</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>เกิดข้อผิดพลาดขณะติดต่อกับ Steam</value></data>
 </root>

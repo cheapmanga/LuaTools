@@ -65,6 +65,7 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Gerir</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modo</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Correções</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Proezas</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Reiniciar Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Definições</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Iniciar sessão com Discord</value></data>
@@ -527,4 +528,43 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in. Reinicie o Steam depoi
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Atingiste o teu limite diário do Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Nenhum manifesto Hubcap disponível para esta app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Falha no download do Hubcap ({0}).</value></data>
+  <data name="Ach_Title" xml:space="preserve"><value>Proezas</value></data>
+  <data name="Ach_Subtitle" xml:space="preserve"><value>Desbloqueie ou bloqueie as proezas de qualquer jogo da sua biblioteca Steam. O Steam tem de estar aberto e com sessão iniciada.</value></data>
+  <data name="Ach_Loading" xml:space="preserve"><value>A ler a sua biblioteca Steam…</value></data>
+  <data name="Ach_Empty_None" xml:space="preserve"><value>Nenhum jogo encontrado. Instale um jogo, ou abra um uma vez para que o Steam guarde as proezas em cache.</value></data>
+  <data name="Ach_Err_Load" xml:space="preserve"><value>Não foi possível ler a sua biblioteca Steam.</value></data>
+  <data name="Ach_Card_Count" xml:space="preserve"><value>{0} proezas</value></data>
+  <data name="Ach_Card_CountUnknown" xml:space="preserve"><value>Proezas ainda não estão em cache</value></data>
+  <data name="Ach_Detail_Loading" xml:space="preserve"><value>A pedir as suas estatísticas ao Steam…</value></data>
+  <data name="Ach_Detail_None" xml:space="preserve"><value>Este jogo não tem proezas.</value></data>
+  <data name="Ach_Progress" xml:space="preserve"><value>{0} / {1} desbloqueadas</value></data>
+  <data name="Ach_SearchPlaceholder" xml:space="preserve"><value>Procurar proezas...</value></data>
+  <data name="Ach_Filter_All" xml:space="preserve"><value>Todas</value></data>
+  <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Desbloqueadas</value></data>
+  <data name="Ach_Filter_Locked" xml:space="preserve"><value>Bloqueadas</value></data>
+  <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear tudo</value></data>
+  <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear tudo</value></data>
+  <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
+  <data name="Ach_Save" xml:space="preserve"><value>Guardar no Steam</value></data>
+  <data name="Ach_Reset" xml:space="preserve"><value>Repor</value></data>
+  <data name="Ach_Unsaved" xml:space="preserve"><value>{0} alteração(ões) não guardada(s)</value></data>
+  <data name="Ach_UnlockedOn" xml:space="preserve"><value>Desbloqueada a {0}</value></data>
+  <data name="Ach_HiddenDescription" xml:space="preserve"><value>Proeza oculta</value></data>
+  <data name="Ach_ProtectedBadge" xml:space="preserve"><value>Atribuída pelos servidores do jogo - não pode ser alterada</value></data>
+  <data name="Ach_Toast_Saved" xml:space="preserve"><value>Proezas guardadas</value></data>
+  <data name="Ach_Toast_Saved_Body" xml:space="preserve"><value>{0} alteração(ões) aplicada(s) em {1}.</value></data>
+  <data name="Ach_Toast_SaveFailed" xml:space="preserve"><value>Não foi possível guardar no Steam</value></data>
+  <data name="Ach_Reset_Title" xml:space="preserve"><value>Repor progresso</value></data>
+  <data name="Ach_Reset_Ask" xml:space="preserve"><value>Repor TODAS as estatísticas e proezas de {0}? O Steam não oferece uma reposição só das proezas, por isso as estatísticas do jogo também são apagadas. Isto não pode ser anulado.</value></data>
+  <data name="Ach_Reset_Done" xml:space="preserve"><value>Progresso de {0} reposto.</value></data>
+  <data name="Ach_Err_SteamNotRunning" xml:space="preserve"><value>O Steam não está aberto. Abra o Steam, inicie sessão e tente novamente.</value></data>
+  <data name="Ach_Err_SteamNotFound" xml:space="preserve"><value>O Steam não foi encontrado neste computador.</value></data>
+  <data name="Ach_Err_NotLoggedIn" xml:space="preserve"><value>O Steam está aberto, mas não há nenhum utilizador com sessão iniciada.</value></data>
+  <data name="Ach_Err_AppIdMismatch" xml:space="preserve"><value>O Steam respondeu com outro jogo. Feche qualquer outra ferramenta de proezas e tente novamente.</value></data>
+  <data name="Ach_Err_NoSchema" xml:space="preserve"><value>O Steam não tem as proezas deste jogo em cache. Abra o jogo uma vez e volte aqui.</value></data>
+  <data name="Ach_Err_Timeout" xml:space="preserve"><value>O Steam não respondeu a tempo. Verifique se está online e tente novamente.</value></data>
+  <data name="Ach_Err_Stats" xml:space="preserve"><value>O Steam recusou entregar as estatísticas deste jogo para a sua conta.</value></data>
+  <data name="Ach_Err_HostMissing" xml:space="preserve"><value>O auxiliar de proezas não está nesta instalação do LuaTools. Reinstale para o recuperar.</value></data>
+  <data name="Ach_Err_Protected" xml:space="preserve"><value>Esta proeza é atribuída pelos servidores do jogo e não pode ser alterada.</value></data>
+  <data name="Ach_Err_Unknown" xml:space="preserve"><value>Ocorreu um problema na comunicação com o Steam.</value></data>
 </root>
