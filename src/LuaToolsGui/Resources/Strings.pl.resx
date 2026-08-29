@@ -345,7 +345,6 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Nie udało się ustalić gry podstawowej dla tego DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Coś poszło nie tak — sprawdź połączenie i spróbuj ponownie.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Pobieranie nie powiodło się — sprawdź połączenie i spróbuj ponownie.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generowanie nie powiodło się — sprawdź połączenie i spróbuj ponownie.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Zastąpić „{0}”?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Brak zmian depotu/DLC — ta sama zawartość.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Anulowano instalację — istniejące pliki pozostały bez zmian.</value></data>
@@ -527,7 +526,6 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Pobieranie</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Pobieranie</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Nic się teraz nie pobiera. No dawaj, pobierz coś!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Brak ukończonych pobrań.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kolejka</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historia</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>W kolejce</value></data>
@@ -576,4 +574,33 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nie udało się pobrać manifestu tego depotu.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Przygotowywanie · {0} z {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Pobieranie narzędzia</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Narzędzie</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Sprawdzanie środowiska .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Pobieranie SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>Otwarto SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Nie udało się zainstalować środowiska .NET wymaganego przez SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Środowisko .NET zostało zainstalowane, ale Windows wymaga ponownego uruchomienia przed uruchomieniem SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nie udało się pobrać SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nie udało się uruchomić SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>Zaktualizowano SteamAutoCrack.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>przydzielanie plików</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>sprawdzanie istniejących plików</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Anuluj pobieranie</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Zapisano już {0} w:
+{1}
+
+Tak - zatrzymaj i usuń te pliki
+Nie - zatrzymaj, ale zachowaj
+Anuluj - kontynuuj pobieranie</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Nie udało się usunąć pobranych plików. Nadal są w {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Kopiuj App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Pokaż w folderze</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Nie można skopiować — inna aplikacja blokuje schowek.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Nie można otworzyć {0} — mógł zostać przeniesiony lub usunięty.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Brak klucza deszyfrującego w Lua dla tego depotu.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Klucz deszyfrujący dla depotu {0} jest nieprawidłowy.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Brak klucza deszyfrującego w Lua dla depotu {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Współdzielone środowisko — zwykle już zainstalowane. Zaznacz, aby i tak pobrać.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Usunąć wszystkie {0} wpisy z historii pobierania? Pobrane pliki pozostaną nienaruszone.</value></data>
 </root>

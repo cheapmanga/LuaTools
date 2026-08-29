@@ -345,7 +345,6 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Bu DLC'nin ana oyunu belirlenemedi</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Bir şeyler ters gitti — bağlantınızı kontrol edip tekrar deneyin.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>İndirme başarısız — bağlantınızı kontrol edip tekrar deneyin.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Oluşturma başarısız — bağlantınızı kontrol edip tekrar deneyin.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>"{0}" değiştirilsin mi?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Depo/DLC değişikliği yok — aynı içerik.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Kurulum iptal edildi — mevcut dosyalar değiştirilmedi.</value></data>
@@ -527,7 +526,6 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>İndirmeler</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>İndirmeler</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Şu anda indirme yok. Hadi, bir şeyler indir!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Henüz tamamlanmış indirme yok.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kuyruk</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Geçmiş</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>Kuyrukta</value></data>
@@ -576,4 +574,33 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Bu depotun manifest dosyası alınamadı.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Hazırlanıyor · {0} / {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>İndirici alınıyor</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Araç</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET çalışma zamanı denetleniyor</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack alınıyor</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack açıldı.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>SteamAutoCrack için gereken .NET çalışma zamanı kurulamadı.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET çalışma zamanı kuruldu, ancak SteamAutoCrack çalışmadan önce Windows'un yeniden başlatılması gerekiyor.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack indirilemedi.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack başlatılamadı.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack güncellendi.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>dosyalar ayrılıyor</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>mevcut dosyalar denetleniyor</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>İndirmeyi iptal et</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Şu konuma zaten {0} yazıldı:
+{1}
+
+Evet - durdur ve bu dosyaları sil
+Hayır - durdur ama dosyaları koru
+İptal - indirmeye devam et</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>İndirilen dosyalar silinemedi. Hâlâ {0} konumundalar.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App ID'yi kopyala</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Klasörde göster</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kopyalanamadı — panoyu başka bir uygulama kullanıyor.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>{0} açılamadı — taşınmış veya silinmiş olabilir.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua'da bu depot için şifre çözme anahtarı yok.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>{0} depot'u için şifre çözme anahtarı hatalı.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua'da {0} depot'u için şifre çözme anahtarı yok.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Paylaşılan çalışma zamanı — genelde zaten kurulu. Yine de indirmek için işaretleyin.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>İndirme geçmişindeki {0} kaydın tümü kaldırılsın mı? İndirilen dosyalar etkilenmez.</value></data>
 </root>

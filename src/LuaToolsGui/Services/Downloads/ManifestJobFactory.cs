@@ -23,7 +23,8 @@ public class ManifestJobFactory(
     CoverCache covers,
     ToastService toast,
     DepotDownloaderService depotTool,
-    SteamDepotInfo depotInfo)
+    SteamDepotInfo depotInfo,
+    SteamAutoCrackService sac)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -133,6 +134,72 @@ public class ManifestJobFactory(
             (_, _, _) => Task.FromResult(new JobResult(true,
                 string.Format(Resources.Strings.Depot_Status_Done, selections.Count, outDir), outDir)),
             ConfirmAsync: null,
+            OnFinished: onFinished,
+            OutputPath: outDir);
+    }
+
+    /// <summary>
+    /// Fetch SteamAutoCrack (installing the .NET runtime it needs first) and open it.
+    /// </summary>
+    /// <remarks>
+    /// Modelled as a queue job so the ~100 MB first run shows real progress and can be cancelled, rather
+    /// than freezing a button. It only OPENS their GUI: the shipped release has no CLI and the GUI takes
+    /// no arguments, so nothing about the actual crack can be driven from here.
+    /// </remarks>
+    /// <param name="launchWhenDone">
+    /// False for the background-update path. Finishing an update must NOT open a second SteamAutoCrack
+    /// window while the user already has one open.
+    /// </param>
+    public DownloadJob CreateSteamAutoCrackJob(
+        bool launchWhenDone = true, Action<DownloadItem, JobResult?>? onFinished = null)
+    {
+        return new DownloadJob(
+            DownloadKind.Tool,
+            "tool:steamautocrack",
+            0,
+            "SteamAutoCrack", // a product name; deliberately not localized
+            Resources.Strings.Downloads_Kind_Tool,
+            null,
+            async (item, progress, ct) =>
+            {
+                // Runtime BEFORE the 41 MB tool: no point paying for the download if the user declines
+                // the elevation prompt.
+                OnUi(() => item.Detail = Resources.Strings.Downloads_SAC_GettingRuntime);
+                var runtimeProgress = new ProgressRelay<double?>(f =>
+                {
+                    if (f is { } v) progress.Report(new DownloadProgress((long)(v * 1000), 1000));
+                });
+                var prepared = await sac.EnsureRuntimeAsync(runtimeProgress, ct);
+                if (prepared != SacPrepareResult.Ready)
+                {
+                    // Declining the prompt, and "installed but needs a reboot", are both outcomes where
+                    // nothing went wrong — they settle as Cancelled so the row isn't dressed as an error.
+                    bool notAFailure = prepared is SacPrepareResult.RuntimeDeclined
+                                              or SacPrepareResult.RuntimeNeedsRestart;
+                    throw new DownloadAbortedException(prepared switch
+                    {
+                        SacPrepareResult.RuntimeDeclined => Resources.Strings.Err_CancelledByUser,
+                        SacPrepareResult.RuntimeNeedsRestart => Resources.Strings.Downloads_SAC_Err_Restart,
+                        _ => Resources.Strings.Downloads_SAC_Err_Runtime,
+                    }, isCancellation: notAFailure);
+                }
+
+                OnUi(() => item.Detail = Resources.Strings.Downloads_SAC_GettingTool);
+                progress.Report(new DownloadProgress(0, null)); // hand the bar back before the real download
+                // force when this job was queued by the background update probe: that probe already
+                // recorded the check timestamp, so the throttle would otherwise skip this download.
+                string? exe = await sac.EnsureToolAsync(progress, force: !launchWhenDone, ct)
+                    ?? throw new DownloadAbortedException(Resources.Strings.Downloads_SAC_Err_Tool);
+
+                OnUi(() => item.Detail = null);
+                // Directory sentinel, same as CreateDepotJob: the queue's staged-file cleanup no-ops on it.
+                return new DownloadedFile(Path.GetDirectoryName(exe)!, "SteamAutoCrack");
+            },
+            (_, _, _) => Task.FromResult(
+                !launchWhenDone ? new JobResult(true, Resources.Strings.Downloads_SAC_Updated)
+                : sac.Launch() ? new JobResult(true, Resources.Strings.Downloads_SAC_Launched)
+                : new JobResult(false, Resources.Strings.Downloads_SAC_Err_Launch)),
+            ConfirmAsync: null,
             OnFinished: onFinished);
     }
 
@@ -190,7 +257,28 @@ public class ManifestJobFactory(
             // "· fetching manifest" to whatever it's given, so passing the other string would relabel the
             // row mid-pre-flight as though depots were already downloading.
             if (!item.CompletedDepots.Contains(sized.DepotId))
+            {
                 sized = sized with { ManifestPath = await EnsureManifestAsync(item, sized, prep, ct) };
+
+                // Without a key the tool cannot decrypt a single chunk, and a depot that fails aborts the
+                // whole job below — so refuse here, before anything is written, naming the depot instead
+                // of surfacing the downloader's own "No valid depot key" much later.
+                if (!keys.TryGetValue(sized.DepotId, out string? hex) || !TryParseKey(hex, out byte[] key))
+                    throw new DownloadAbortedException(
+                        string.Format(Resources.Strings.Depot_Err_NoKeyFor, sized.DepotId));
+
+                // A key that exists but is WRONG can only be caught when the manifest still has its
+                // filenames encrypted, which is the small minority — see ManifestFile.KeyLooksValid.
+                if (!ManifestFile.KeyLooksValid(sized.ManifestPath, key))
+                    throw new DownloadAbortedException(
+                        string.Format(Resources.Strings.Depot_Err_BadKey, sized.DepotId));
+            }
+
+            // The manifest's own cb_disk_original beats app info's size: it is exact, and app info may
+            // not have carried a size at all (a token-gated app returns no depot list, so those depots
+            // arrive here as 0 and would otherwise be budgeted as free).
+            if (ManifestFile.TryRead(sized.ManifestPath) is { SizeOnDisk: > 0 } info)
+                sized = sized with { Size = info.SizeOnDisk };
 
             resolved.Add(sized);
         }
@@ -220,6 +308,16 @@ public class ManifestJobFactory(
                 // resolved one, so a finished shared depot no longer contributes 0 to the baseline.
                 if (item.CompletedDepots.Contains(ready.DepotId)) { done += ready.Size; continue; }
 
+                // Re-checked per depot, not just once up front: the volume is shared with everything else
+                // on the machine, so a budget that cleared at the start can be gone by depot 12. Running
+                // out mid-download is not reported as a disk error — the tool simply stops printing, and
+                // the silence watchdog kills it ten minutes later as a "timeout", which explains nothing.
+                if (ready.Size > 0 && DepotDownloaderService.FreeSpaceFor(outDir) is { } left
+                    && left < ready.Size)
+                    throw new DownloadAbortedException(string.Format(
+                        Resources.Strings.Depot_Err_NoSpace,
+                        ByteFormat.Size(ready.Size), ByteFormat.Size(left)));
+
                 string step = string.Format(Resources.Strings.Downloads_Depots_Progress, i + 1, resolved.Count);
                 OnUi(() => item.Detail = step);
 
@@ -232,22 +330,38 @@ public class ManifestJobFactory(
                 // complete, which is this tool's worst failure mode.
                 bool validate = item.NeedsValidate || outDirExisted;
                 item.NeedsValidate = false;
-                if (validate) OnUi(() => item.Status = DownloadStatus.Verifying);
 
                 long baseBytes = done;
-                bool sawBytes = false;
                 var relay = new ProgressRelay<double>(f =>
-                {
-                    // First real progress means hashing is over and bytes are moving again.
-                    if (validate && !sawBytes)
-                    {
-                        sawBytes = true;
-                        OnUi(() => item.Status = DownloadStatus.Downloading);
-                    }
-                    progress.Report(new DownloadProgress(baseBytes + (long)(f * ready.Size), totalSize));
-                });
+                    progress.Report(new DownloadProgress(baseBytes + (long)(f * ready.Size), totalSize)));
 
-                var res = await depotTool.RunAsync(appId, ready, keysFile, outDir, validate, relay, ct);
+                // The phase is PARSED from the downloader's own output rather than guessed. A big depot
+                // pre-allocates every new file at full size before fetching a byte, so the row used to sit
+                // at "Downloading - 0 B of 4.49 GB" looking hung for minutes. Reported only on change.
+                var phases = new ProgressRelay<DepotPhase>(ph => OnUi(() =>
+                {
+                    item.Detail = ph switch
+                    {
+                        DepotPhase.PreAllocating => $"{step} · {Resources.Strings.Downloads_Depot_PreAllocating}",
+                        DepotPhase.Validating => $"{step} · {Resources.Strings.Downloads_Depot_Validating}",
+                        DepotPhase.Manifest => $"{step} · {Resources.Strings.Downloads_Depot_FetchingManifest}",
+                        _ => step,
+                    };
+
+                    // Verifying is a real status (it gates Pause and the label), so keep driving it -
+                    // but from what the tool actually reports, not from "validate was requested and no
+                    // bytes have arrived yet", which also covered pre-allocation and plain slow starts.
+                    item.Status = ph == DepotPhase.Validating
+                        ? DownloadStatus.Verifying
+                        : DownloadStatus.Downloading;
+                }));
+
+                // Recorded so a cancel can delete exactly what this download created. Collected off the
+                // UI thread on purpose: a big depot reports thousands of files and none of it is visible.
+                var created = new ProgressRelay<string>(path => item.CreatedFiles.Add(path));
+
+                var res = await depotTool.RunAsync(
+                    appId, ready, keysFile, outDir, validate, relay, ct, phases, created);
                 if (!res.Ok)
                     throw new DownloadAbortedException(res.Error == "tool"
                         ? Resources.Strings.Depot_Err_Tool
@@ -266,6 +380,18 @@ public class ManifestJobFactory(
         {
             DeleteStaged(keysFile); // holds decryption keys; never leave it lying around
         }
+    }
+
+    /// <summary>
+    /// A depot key as bytes. Keys come from a lua file and from Steam's config.vdf, so a malformed one is
+    /// a real possibility and reads the same as having no key at all: the download cannot proceed.
+    /// </summary>
+    private static bool TryParseKey(string? hex, out byte[] key)
+    {
+        key = [];
+        if (hex is not { Length: 64 }) return false; // AES-256, hex-encoded
+        try { key = Convert.FromHexString(hex); return true; }
+        catch (FormatException) { return false; }
     }
 
     /// <summary>
@@ -291,7 +417,12 @@ public class ManifestJobFactory(
         DownloadItem item, DepotSelection sel, string step, CancellationToken ct)
     {
         // Already on disk (a previous run, a pinned install, or Steam's own copy): no request at all.
+        // ResolveManifestPath only accepts a file that actually parses as this depot's manifest.
         if (depotTool.ResolveManifestPath(sel.DepotId, sel.ManifestId!) is { } have) return have;
+
+        // Nothing usable — but something may still be sitting there under the right name. It has to go
+        // before the fetch, or InstallManifestFile will skip the copy and hand the bad file straight back.
+        depotTool.DiscardCachedManifest(sel.DepotId, sel.ManifestId!);
 
         if (!depotTool.CanFetchManifests)
             throw new DownloadAbortedException(Resources.Strings.Depot_Err_SignIn);
@@ -384,7 +515,10 @@ public class ManifestJobFactory(
             string message = result.ManifestCount > 0
                 ? string.Format(Resources.Strings.Add_Status_AddedManifests, gameName, result.ManifestCount)
                 : string.Format(Resources.Strings.Add_Status_AddedFetch, gameName);
-            return new JobResult(true, message, file.FilePath);
+
+            // Where it LANDED, not where it was staged: file.FilePath is deleted by the finally below,
+            // so returning it handed callers a path guaranteed not to exist.
+            return new JobResult(true, message, installer.ReadInstalledLua(appId));
         }
         finally
         {
@@ -419,7 +553,7 @@ public class ManifestJobFactory(
 
             string message = string.Format(Resources.Strings.Fixes_Toast_FixInstalled_Body, gameName);
             toast.Show(Resources.Strings.Fixes_Toast_FixInstalled, message);
-            return new JobResult(true, message, file.FilePath);
+            return new JobResult(true, message, installer.ReadInstalledLua(appId)); // see InstallManifest
         }
         finally
         {

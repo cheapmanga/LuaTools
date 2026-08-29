@@ -345,7 +345,6 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Δεν ήταν δυνατός ο προσδιορισμός του βασικού παιχνιδιού για αυτό το DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Κάτι πήγε στραβά — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Η λήψη απέτυχε — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Η δημιουργία απέτυχε — ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Αντικατάσταση του «{0}»;</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Καμία αλλαγή depot/DLC — ίδιο περιεχόμενο.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Η εγκατάσταση ακυρώθηκε — τα υπάρχοντα αρχεία παρέμειναν αμετάβλητα.</value></data>
@@ -527,7 +526,6 @@
   <data name="Nav_Downloads" xml:space="preserve"><value>Λήψεις</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Λήψεις</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Καμία λήψη αυτή τη στιγμή. Έλα, κατέβασε κάτι!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Δεν υπάρχουν ολοκληρωμένες λήψεις ακόμη.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Ουρά</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Ιστορικό</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>Σε ουρά</value></data>
@@ -576,4 +574,33 @@
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του manifest αυτού του depot.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Προετοιμασία · {0} από {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Λήψη του εργαλείου</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Εργαλείο</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Έλεγχος του runtime .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Λήψη του SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>Το SteamAutoCrack άνοιξε.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Δεν ήταν δυνατή η εγκατάσταση του runtime .NET που χρειάζεται το SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Το runtime .NET εγκαταστάθηκε, αλλά τα Windows χρειάζονται επανεκκίνηση πριν τρέξει το SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Δεν ήταν δυνατή η εκκίνηση του SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>Το SteamAutoCrack ενημερώθηκε.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>δέσμευση αρχείων</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>έλεγχος υπαρχόντων αρχείων</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Ακύρωση λήψης</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Έχουν ήδη γραφτεί {0} στο:
+{1}
+
+Ναι - διακοπή και διαγραφή των αρχείων
+Όχι - διακοπή αλλά διατήρηση
+Άκυρο - συνέχιση της λήψης</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Δεν ήταν δυνατή η διαγραφή των ληφθέντων αρχείων. Παραμένουν στο {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Αντιγραφή App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Εμφάνιση στον φάκελο</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Δεν έγινε αντιγραφή — άλλη εφαρμογή χρησιμοποιεί το πρόχειρο.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Δεν άνοιξε το {0} — ίσως μετακινήθηκε ή διαγράφηκε.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Δεν υπάρχει κλειδί αποκρυπτογράφησης στο Lua για αυτό το depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Το κλειδί αποκρυπτογράφησης για το depot {0} είναι λάθος.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Δεν υπάρχει κλειδί αποκρυπτογράφησης στο Lua για το depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Κοινόχρηστο runtime — συνήθως ήδη εγκατεστημένο. Επιλέξτε για λήψη ούτως ή άλλως.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Να αφαιρεθούν και οι {0} καταχωρίσεις από το ιστορικό λήψεων; Τα ληφθέντα αρχεία δεν επηρεάζονται.</value></data>
 </root>

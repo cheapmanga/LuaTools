@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text.RegularExpressions;
 
 namespace LuaToolsGui.Services;
@@ -21,6 +21,12 @@ public record LuaEntry(long Id, string? Key, string? ManifestId, string? Comment
 {
     /// <summary>True when this entry carries a decryption key, i.e. it's a content depot.</summary>
     public bool HasKey => Key is not null;
+
+    /// <summary>
+    /// Size on disk from <c>setManifestid(id, "gid", size)</c>'s third argument, or null when the line
+    /// omits it. The only size available for a depot Steam's app info does not list.
+    /// </summary>
+    public long? SizeOnDisk { get; init; }
 }
 
 /// <summary>Parsed contents of a stplug-in lua file.
@@ -67,8 +73,10 @@ public static partial class LuaFileParser
         RegexOptions.IgnoreCase)]
     private static partial Regex AddAppIdRegex();
 
-    // setManifestid(depotid, "manifestid", ...)
-    [GeneratedRegex(@"setManifestid\s*\(\s*(\d+)\s*,\s*""(\d+)""", RegexOptions.IgnoreCase)]
+    // setManifestid(depotid, "manifestid", size) — the third argument is optional and is the depot's
+    // size on disk, which is the only size available for a depot Steam's app info never mentions.
+    [GeneratedRegex(@"setManifestid\s*\(\s*(\d+)\s*,\s*""(\d+)""\s*(?:,\s*(\d+))?",
+        RegexOptions.IgnoreCase)]
     private static partial Regex SetManifestRegex();
 
     // Strips a trailing "(123456) ..." / "デポ" tail that Hubcap appends to depot comments.
@@ -102,6 +110,7 @@ public static partial class LuaFileParser
             var keyById = new Dictionary<long, string?>();
             var commentById = new Dictionary<long, string>();
             var manifests = new Dictionary<long, string>();          // active pins
+            var sizes = new Dictionary<long, long>();                // setManifestid's 3rd arg
             var commentedManifests = new Dictionary<long, string>(); // pins disabled by Auto Update
             var disabledOrder = new List<long>();                    // addappid lines commented out
             var disabledKeyById = new Dictionary<long, string?>();
@@ -118,7 +127,14 @@ public static partial class LuaFileParser
                 // so a lua whose pins were commented out by "Auto Update Apps" still looked pinned.
                 var pin = SetManifestRegex().Match(line);
                 if (pin.Success && long.TryParse(pin.Groups[1].Value, out long depot))
+                {
                     (commented ? commentedManifests : manifests)[depot] = pin.Groups[2].Value;
+
+                    // Taken from a commented pin too: the line is disabled as a version LOCK, but the
+                    // size it records is still this depot's size and is otherwise unobtainable offline.
+                    if (pin.Groups[3].Success && long.TryParse(pin.Groups[3].Value, out long sz) && sz > 0)
+                        sizes.TryAdd(depot, sz);
+                }
 
                 // A commented-out addappid is a DISABLED declaration, not an active one. Matched against
                 // the line with its "--" stripped so it can still be recognised and reported separately.
@@ -155,7 +171,8 @@ public static partial class LuaFileParser
                 .Select(id => new LuaEntry(id, keyById[id],
                     manifests.TryGetValue(id, out var mid) ? mid : null,
                     commentedManifests.TryGetValue(id, out var cmid) ? cmid : null,
-                    commentById.TryGetValue(id, out var c) ? c : null))
+                    commentById.TryGetValue(id, out var c) ? c : null)
+                { SizeOnDisk = sizes.TryGetValue(id, out long sz) ? sz : null })
                 .ToList();
 
             // Ids that are ONLY commented out. An id with both an active and a commented line is active
@@ -165,7 +182,8 @@ public static partial class LuaFileParser
                 .Select(id => new LuaEntry(id, disabledKeyById[id],
                     manifests.TryGetValue(id, out var dmid) ? dmid : null,
                     commentedManifests.TryGetValue(id, out var dcmid) ? dcmid : null,
-                    commentById.TryGetValue(id, out var dc) ? dc : null))
+                    commentById.TryGetValue(id, out var dc) ? dc : null)
+                { SizeOnDisk = sizes.TryGetValue(id, out long dsz) ? dsz : null })
                 .ToList();
 
             // The base app is the first addappid id (matches how the files are generated).

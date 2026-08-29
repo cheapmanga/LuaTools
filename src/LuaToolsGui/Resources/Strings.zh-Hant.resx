@@ -345,7 +345,6 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>無法確定此 DLC 的本體遊戲</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>發生錯誤——請檢查你的連線後重試。</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>下載失敗——請檢查你的連線後重試。</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>產生失敗——請檢查你的連線後重試。</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>取代「{0}」？</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>倉庫/DLC 無變更——內容相同。</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>安裝已取消——現有檔案保持不變。</value></data>
@@ -527,7 +526,6 @@
   <data name="Nav_Downloads" xml:space="preserve"><value>下載</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>下載</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>目前沒有下載。快去下載點什麼吧！</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>尚無已完成的下載。</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>佇列</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>歷史紀錄</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>排隊中</value></data>
@@ -576,4 +574,33 @@
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>無法取得這個倉庫的 manifest。</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>準備中 · {0} / {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>正在取得下載器</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>工具</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>正在檢查 .NET 執行階段</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>正在取得 SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>已開啟 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>無法安裝 SteamAutoCrack 所需的 .NET 執行階段。</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET 執行階段已安裝，但需要重新啟動 Windows 後 SteamAutoCrack 才能執行。</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>無法下載 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>無法啟動 SteamAutoCrack。</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack 已更新。</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>正在配置檔案</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>正在驗證既有檔案</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>取消下載</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>已寫入 {0} 到：
+{1}
+
+是 - 停止並刪除這些檔案
+否 - 停止但保留檔案
+取消 - 繼續下載</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>無法刪除已下載的檔案。它們仍在 {0}。</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>複製 App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>在資料夾中顯示</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>無法複製 — 另一個應用程式正佔用剪貼簿。</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>無法開啟 {0} — 可能已被移動或刪除。</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Lua 中沒有此 depot 的解密金鑰。</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>depot {0} 的解密金鑰不正確。</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua 中沒有 depot {0} 的解密金鑰。</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共用執行階段 — 通常已安裝。如仍需下載請勾選。</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>要從下載紀錄中移除全部 {0} 筆記錄嗎？已下載的檔案不會受影響。</value></data>
 </root>

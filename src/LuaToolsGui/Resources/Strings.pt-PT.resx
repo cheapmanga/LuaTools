@@ -345,7 +345,6 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Não foi possível determinar o jogo base deste DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Algo correu mal — verifique a sua ligação e tente novamente.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Falha na transferência — verifique a sua ligação e tente novamente.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Falha na geração — verifique a sua ligação e tente novamente.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Substituir "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Sem alterações de depósito/DLC — mesmo conteúdo.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Instalação cancelada — os ficheiros existentes não foram alterados.</value></data>
@@ -527,7 +526,6 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Transferências</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Transferências</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Nenhuma transferência em curso. Vá lá, descarregue alguma coisa!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Ainda não há transferências concluídas.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Fila</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Histórico</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>Em fila</value></data>
@@ -576,4 +574,33 @@ Isto elimina os ficheiros .lua de Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Não foi possível obter o manifest deste depot.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>A preparar · {0} de {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>A obter o transferidor</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Ferramenta</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>A verificar o runtime do .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>A obter o SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack aberto.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Não foi possível instalar o runtime do .NET exigido pelo SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>O runtime do .NET foi instalado, mas o Windows precisa de reiniciar antes de o SteamAutoCrack correr.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Não foi possível transferir o SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Não foi possível iniciar o SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack atualizado.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>a alocar ficheiros</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>a verificar ficheiros existentes</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Cancelar transferência</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Já foram escritos {0} em:
+{1}
+
+Sim - parar e eliminar esses ficheiros
+Não - parar mas mantê-los
+Cancelar - continuar a transferir</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Não foi possível eliminar os ficheiros transferidos. Continuam em {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copiar App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Mostrar na pasta</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Não foi possível copiar — outra aplicação está a usar a área de transferência.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Não foi possível abrir {0} — pode ter sido movido ou eliminado.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Sem chave de desencriptação no Lua para este depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>A chave de desencriptação do depot {0} está errada.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Sem chave de desencriptação no Lua para o depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partilhado — normalmente já instalado. Marque para transferir na mesma.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Remover todas as {0} entradas do histórico de transferências? Os ficheiros transferidos não são afetados.</value></data>
 </root>

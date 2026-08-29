@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 
 namespace LuaToolsGui.Services;
@@ -40,7 +40,7 @@ public class CacheData
     // holds delegates and can't be serialized, so nothing here is resumable.
     public List<Downloads.DownloadHistoryRecord> DownloadHistory { get; set; } = [];
 
-    // ── Downloaded tool fingerprints (DepotDownloader, Steamless) ─────
+    // ── Downloaded tool fingerprints (DepotDownloader, Steamless, SteamAutoCrack) ──
     // The release tag last installed, plus when we last asked GitHub. Without these the tools were
     // fetched once by a bare File.Exists check and then pinned forever, which matters now that the
     // DepotDownloader re-pack republishes on every upstream release. CheckedAtMs is Unix-ms; 0 = never.
@@ -48,6 +48,8 @@ public class CacheData
     public long DepotDownloaderCheckedAtMs { get; set; }
     public string? SteamlessVersion { get; set; }
     public long SteamlessCheckedAtMs { get; set; }
+    public string? SteamAutoCrackVersion { get; set; }
+    public long SteamAutoCrackCheckedAtMs { get; set; }
 }
 
 /// <summary>
@@ -185,6 +187,20 @@ public class CacheService
         set { _cache.SteamlessCheckedAtMs = value; Save(); }
     }
 
+    /// <summary>Release tag of the installed SteamAutoCrack, or null if never recorded.</summary>
+    public string? SteamAutoCrackVersion
+    {
+        get => _cache.SteamAutoCrackVersion;
+        set { _cache.SteamAutoCrackVersion = string.IsNullOrWhiteSpace(value) ? null : value; Save(); }
+    }
+
+    /// <summary>Unix-ms of the last successful SteamAutoCrack release check; 0 = never.</summary>
+    public long SteamAutoCrackCheckedAtMs
+    {
+        get => _cache.SteamAutoCrackCheckedAtMs;
+        set { _cache.SteamAutoCrackCheckedAtMs = value; Save(); }
+    }
+
     /// <summary>Clear the loaded-apps notification list (ReadLoadedApps → DismissLoadedApps).</summary>
     public void ClearLoadedAppIds()
     {
@@ -240,7 +256,9 @@ public class CacheService
             && _cache.DepotDownloaderVersion is null
             && _cache.DepotDownloaderCheckedAtMs == 0
             && _cache.SteamlessVersion is null
-            && _cache.SteamlessCheckedAtMs == 0;
+            && _cache.SteamlessCheckedAtMs == 0
+            && _cache.SteamAutoCrackVersion is null
+            && _cache.SteamAutoCrackCheckedAtMs == 0;
         if (empty)
         {
             try { if (File.Exists(FilePath)) File.Delete(FilePath); } catch { /* best effort */ }

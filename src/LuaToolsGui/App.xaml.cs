@@ -40,6 +40,7 @@ public partial class App : Application
                 services.AddSingleton<GithubProxy>();
                 services.AddSingleton<HardwareAppIdService>();
                 services.AddSingleton<SteamlessService>();
+                services.AddSingleton<SteamAutoCrackService>();
                 services.AddSingleton<CloudRedirectService>();
                 services.AddSingleton<DepotDownloaderService>();
                 services.AddSingleton<UnlockerService>();

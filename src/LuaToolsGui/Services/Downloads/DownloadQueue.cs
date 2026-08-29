@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
@@ -149,10 +149,21 @@ public class DownloadQueue : IHostedService
     public void Cancel(DownloadItem item) => Dispatcher.Invoke(() =>
     {
         if (!item.IsActive) return;
-        // A queued item never entered RunItemAsync, so nothing will observe the token. Finish it here.
-        bool wasQueued = item.Status == DownloadStatus.Queued;
+
+        // Nothing is running for a Queued item (it never entered RunItemAsync) OR for a Paused one
+        // (Pause cancelled the token and RunItemAsync already returned at its PauseRequested check), so
+        // in both cases no one is left to observe the token and settle the item — this has to do it.
+        //
+        // Paused used to be missed here, which left the row stuck: Cancel appeared to do nothing, and
+        // because Paused counts as active it offered no Remove either, so Resume was the only way out.
+        bool nothingRunning = item.Status is DownloadStatus.Queued or DownloadStatus.Paused;
+
         try { item.Cts.Cancel(); } catch { }
-        if (wasQueued) Finish(item, DownloadStatus.Cancelled, Resources.Strings.Err_CancelledByUser, null);
+        if (nothingRunning)
+        {
+            item.PauseRequested = false; // settled, not parked: don't let a later path read it as a pause
+            Finish(item, DownloadStatus.Cancelled, Resources.Strings.Err_CancelledByUser, null);
+        }
         Kick();
     });
 
@@ -197,6 +208,12 @@ public class DownloadQueue : IHostedService
         if (item.Job.Kind is DownloadKind.Depot && !ReferenceEquals(fresh, item))
         {
             foreach (long id in item.CompletedDepots) fresh.CompletedDepots.Add(id);
+
+            // Same reasoning for the files themselves: they are on disk under the SAME output folder, so
+            // without this a cancel of the retry would offer to delete only what the retry re-created and
+            // orphan the rest — and with nothing recorded yet it suppresses the prompt entirely.
+            foreach (string f in item.CreatedFiles) fresh.CreatedFiles.Add(f);
+
             fresh.NeedsValidate = true;
         }
         return fresh;
@@ -227,6 +244,12 @@ public class DownloadQueue : IHostedService
     {
         History.Clear();
         PersistHistory();
+    });
+
+    /// <summary>Drop one finished download from the history. Nothing on disk is touched.</summary>
+    public void RemoveHistory(DownloadHistoryEntry entry) => Dispatcher.Invoke(() =>
+    {
+        if (History.Remove(entry)) PersistHistory();
     });
 
     private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -361,7 +384,14 @@ public class DownloadQueue : IHostedService
             string message = ex is ApiException or DownloadAbortedException
                 ? ex.Message
                 : Resources.Strings.Add_Err_Download;
-            await Dispatcher.InvokeAsync(() => Finish(item, DownloadStatus.Failed, message, null));
+
+            // Some aborts are not failures — a declined elevation prompt, or a runtime that installed but
+            // wants a reboot. Those settle as Cancelled so they don't read as something having broken.
+            var status = ex is DownloadAbortedException { IsCancellation: true }
+                ? DownloadStatus.Cancelled
+                : DownloadStatus.Failed;
+
+            await Dispatcher.InvokeAsync(() => Finish(item, status, message, null));
         }
         finally
         {
@@ -376,6 +406,10 @@ public class DownloadQueue : IHostedService
 
         item.Message = message;
         item.Status = status;
+
+        // Before the history row is built: From() copies the reveal path off the item, and settling the
+        // result (which carries it) happens further down.
+        item.RecordInstalledPath(result?.InstalledPath);
 
         History.Insert(0, new DownloadHistoryEntry(DownloadHistoryEntry.From(item, status)));
         while (History.Count > 100) History.RemoveAt(History.Count - 1);

@@ -345,7 +345,6 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Tidak dapat menentukan gim dasar untuk DLC ini</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Terjadi kesalahan — periksa koneksi Anda dan coba lagi.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Unduhan gagal — periksa koneksi Anda dan coba lagi.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Pembuatan gagal — periksa koneksi Anda dan coba lagi.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Ganti "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Tidak ada perubahan depot/DLC — konten sama.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Pemasangan dibatalkan — file yang ada tidak berubah.</value></data>
@@ -527,7 +526,6 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Unduhan</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Unduhan</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Tidak ada unduhan saat ini. Ayo, unduh sesuatu!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Belum ada unduhan yang selesai.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Antrean</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Riwayat</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>Dalam antrean</value></data>
@@ -576,4 +574,33 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Tidak bisa mendapatkan manifest depot ini.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Menyiapkan · {0} dari {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Mengambil pengunduh</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Alat</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Memeriksa runtime .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Mengambil SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack dibuka.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Tidak dapat memasang runtime .NET yang dibutuhkan SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Runtime .NET terpasang, tetapi Windows perlu dimulai ulang sebelum SteamAutoCrack bisa berjalan.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Tidak dapat mengunduh SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack diperbarui.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>mengalokasikan berkas</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>memeriksa berkas yang ada</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Batalkan unduhan</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Sudah tertulis {0} ke:
+{1}
+
+Ya - hentikan dan hapus berkas tersebut
+Tidak - hentikan tapi simpan
+Batal - lanjutkan mengunduh</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Tidak dapat menghapus berkas yang diunduh. Berkas masih ada di {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Salin App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Tampilkan di folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Tidak bisa menyalin — aplikasi lain sedang memakai papan klip.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Tidak dapat membuka {0} — mungkin sudah dipindahkan atau dihapus.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Tidak ada kunci dekripsi di Lua untuk depot ini.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Kunci dekripsi untuk depot {0} salah.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Tidak ada kunci dekripsi di Lua untuk depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime bersama — biasanya sudah terpasang. Centang untuk tetap mengunduh.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Hapus semua {0} entri dari riwayat unduhan? Berkas yang sudah diunduh tidak terpengaruh.</value></data>
 </root>

@@ -345,7 +345,6 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Kunne ikke fastslå grunnspillet for denne DLC-en</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Noe gikk galt — sjekk tilkoblingen din og prøv igjen.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Nedlasting mislyktes — sjekk tilkoblingen din og prøv igjen.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generering mislyktes — sjekk tilkoblingen din og prøv igjen.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Erstatte "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Ingen depot-/DLC-endringer — samme innhold.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installasjon avbrutt — eksisterende filer er uendret.</value></data>
@@ -527,7 +526,6 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Nedlastinger</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Nedlastinger</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Ingen nedlastinger akkurat nå. Kom i gang – last ned noe!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Ingen fullførte nedlastinger ennå.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Kø</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Historikk</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>I kø</value></data>
@@ -576,4 +574,33 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Fikk ikke tak i manifestet for dette depotet.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Forbereder · {0} av {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Henter nedlasteren</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Verktøy</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Kontrollerer .NET-kjøretid</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Henter SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack er åpnet.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Kunne ikke installere .NET-kjøretiden SteamAutoCrack trenger.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>.NET-kjøretiden ble installert, men Windows må startes på nytt før SteamAutoCrack kan kjøre.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Kunne ikke laste ned SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Kunne ikke starte SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack er oppdatert.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>tildeler filer</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>kontrollerer eksisterende filer</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Avbryt nedlasting</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} er allerede skrevet til:
+{1}
+
+Ja - stopp og slett filene
+Nei - stopp, men behold dem
+Avbryt - fortsett nedlastingen</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Kunne ikke slette de nedlastede filene. De ligger fortsatt i {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Kopier App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Vis i mappe</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kunne ikke kopiere — en annen app bruker utklippstavlen.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Kunne ikke åpne {0} — den kan være flyttet eller slettet.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Ingen dekrypteringsnøkkel i Lua for denne depoten.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Dekrypteringsnøkkelen for depot {0} er feil.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Ingen dekrypteringsnøkkel i Lua for depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Delt kjøretid — vanligvis allerede installert. Huk av for å laste ned likevel.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Fjerne alle {0} oppføringer fra nedlastingsloggen? Nedlastede filer påvirkes ikke.</value></data>
 </root>

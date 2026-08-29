@@ -345,7 +345,6 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Не вдалося визначити базову гру для цього DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Щось пішло не так — перевірте з'єднання і спробуйте ще раз.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Помилка завантаження — перевірте з'єднання і спробуйте ще раз.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Помилка генерування — перевірте з'єднання і спробуйте ще раз.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Замінити «{0}»?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Немає змін депо/DLC — той самий вміст.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Встановлення скасовано — наявні файли не змінено.</value></data>
@@ -527,7 +526,6 @@
   <data name="Nav_Downloads" xml:space="preserve"><value>Завантаження</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Завантаження</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Зараз нічого не завантажується. Завантажте вже щось!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Завершених завантажень ще немає.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Черга</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Історія</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>У черзі</value></data>
@@ -576,4 +574,33 @@
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Не вдалося отримати manifest цього депо.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Підготовка · {0} з {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Завантаження завантажувача</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Інструмент</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Перевірка середовища .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Завантаження SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack відкрито.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Не вдалося встановити середовище .NET, потрібне для SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Середовище .NET встановлено, але перед запуском SteamAutoCrack потрібно перезавантажити Windows.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Не вдалося завантажити SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Не вдалося запустити SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack оновлено.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>виділення файлів</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>перевірка наявних файлів</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Скасувати завантаження</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>Уже записано {0} у:
+{1}
+
+Так - зупинити й вилучити ці файли
+Ні - зупинити, але залишити
+Скасувати - продовжити завантаження</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Не вдалося вилучити завантажені файли. Вони залишилися в {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Копіювати App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Показати в теці</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Не вдалося скопіювати — буфер обміну зайнятий іншим застосунком.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Не вдалося відкрити {0} — можливо, його переміщено або вилучено.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>У Lua немає ключа розшифрування для цього depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Ключ розшифрування для depot {0} неправильний.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>У Lua немає ключа розшифрування для depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Спільне середовище виконання — зазвичай уже встановлене. Позначте, щоб усе одно завантажити.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Вилучити всі записи ({0}) з історії завантажень? Завантажені файли не зачіпаються.</value></data>
 </root>

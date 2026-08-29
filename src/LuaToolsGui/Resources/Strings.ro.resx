@@ -345,7 +345,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Nu s-a putut determina jocul de bază pentru acest DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Ceva nu a mers bine — verifică-ți conexiunea și încearcă din nou.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Descărcare eșuată — verifică-ți conexiunea și încearcă din nou.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generare eșuată — verifică-ți conexiunea și încearcă din nou.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Înlocuiești „{0}”?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Nicio modificare de depozit/DLC — același conținut.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Instalare anulată — fișierele existente au rămas neschimbate.</value></data>
@@ -527,7 +526,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Nav_Downloads" xml:space="preserve"><value>Descărcări</value></data>
   <data name="Downloads_Title" xml:space="preserve"><value>Descărcări</value></data>
   <data name="Downloads_Empty" xml:space="preserve"><value>Nicio descărcare în curs. Hai, descarcă ceva!</value></data>
-  <data name="Downloads_History_Empty" xml:space="preserve"><value>Încă nu există descărcări finalizate.</value></data>
   <data name="Downloads_Section_Active" xml:space="preserve"><value>Coadă</value></data>
   <data name="Downloads_Section_History" xml:space="preserve"><value>Istoric</value></data>
   <data name="Downloads_Status_Queued" xml:space="preserve"><value>În coadă</value></data>
@@ -576,4 +574,33 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Nu s-a putut obține manifestul acestui depou.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Se pregătește · {0} din {1}</value></data>
   <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Se obține descărcătorul</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Instrument</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Se verifică runtime-ul .NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Se obține SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack a fost deschis.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Nu s-a putut instala runtime-ul .NET necesar pentru SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Runtime-ul .NET a fost instalat, dar Windows trebuie repornit înainte ca SteamAutoCrack să poată rula.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nu s-a putut descărca SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nu s-a putut porni SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack a fost actualizat.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>se alocă fișierele</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>se verifică fișierele existente</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Anulează descărcarea</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>S-au scris deja {0} în:
+{1}
+
+Da - oprește și șterge acele fișiere
+Nu - oprește dar păstrează-le
+Anulare - continuă descărcarea</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Fișierele descărcate nu au putut fi șterse. Sunt încă în {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copiază App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Afișează în folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Nu s-a putut copia — altă aplicație folosește clipboardul.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Nu s-a putut deschide {0} — poate a fost mutat sau șters.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Nu există cheie de decriptare în Lua pentru acest depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Cheia de decriptare pentru depot {0} este greșită.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Nu există cheie de decriptare în Lua pentru depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partajat — de obicei deja instalat. Bifează pentru a-l descărca oricum.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Elimini toate cele {0} intrări din istoricul descărcărilor? Fișierele descărcate nu sunt afectate.</value></data>
 </root>

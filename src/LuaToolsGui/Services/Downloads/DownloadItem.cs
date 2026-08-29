@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace LuaToolsGui.Services.Downloads;
 
@@ -34,7 +34,22 @@ public partial class DownloadItem : ObservableObject
     // Sliding-window rate samples: (timestamp ticks, bytes read). Small ring, oldest trimmed by age.
     private readonly Queue<(long Ticks, long Bytes)> _samples = new();
     private static readonly TimeSpan RateWindow = TimeSpan.FromSeconds(3);
-    private const int MaxSamples = 20;
+
+    /// <summary>
+    /// Shortest interval the rate will be divided by. Depot progress arrives once per COMPLETED FILE, so
+    /// several concurrent files landing together produce samples milliseconds apart; dividing a burst by
+    /// ~10ms is what made the speed read in GB/s.
+    /// </summary>
+    private static readonly TimeSpan MinSpan = TimeSpan.FromSeconds(0.5);
+
+    /// <summary>
+    /// Cap on retained samples. Sized to outlast <see cref="RateWindow"/> at the queue's 100ms progress
+    /// throttle (~30 samples); at the old 20 the count cap silently shortened the window to about 2s.
+    /// </summary>
+    private const int MaxSamples = 64;
+
+    /// <summary>Injectable clock, so the rate window can be tested without waiting minutes in real time.</summary>
+    internal Func<DateTime> UtcNow { get; init; } = () => DateTime.UtcNow;
 
     public DownloadItem(DownloadJob job)
     {
@@ -129,6 +144,51 @@ public partial class DownloadItem : ObservableObject
     /// </summary>
     internal HashSet<long> CompletedDepots { get; } = [];
 
+    /// <summary>
+    /// Files the downloader reported creating (its "Pre-allocating" lines), so a cancel can delete
+    /// exactly those and nothing else.
+    /// </summary>
+    /// <remarks>
+    /// Accumulates across pause/resume because the item outlives both — a resumed run only
+    /// pre-allocates what is still missing, so the earlier run's paths would otherwise be forgotten
+    /// and left on disk. Not persisted: after an app restart the list is empty and cancel simply has
+    /// less to clean, which is the safe direction to fail in.
+    /// </remarks>
+    internal HashSet<string> CreatedFiles { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+    private string? _installedPath;
+
+    /// <summary>
+    /// What "Show in folder" opens: the file this job installed, or the folder it downloaded into.
+    /// Null when the job produces neither (a tool download).
+    /// </summary>
+    /// <remarks>
+    /// The <see cref="DownloadJob.OutputPath"/> fallback is deliberate — a depot job knows its folder
+    /// from the moment it is created, so the action works while the download is still running, not only
+    /// once it finishes.
+    /// </remarks>
+    public string? RevealPath => _installedPath ?? Job.OutputPath;
+
+    /// <summary>Tool jobs carry appid 0, and "Copy App ID: 0" is not worth offering.</summary>
+    public bool CanCopyAppId => AppId > 0;
+
+    public bool CanShowInFolder => !string.IsNullOrWhiteSpace(RevealPath);
+
+    /// <summary>
+    /// Record where the install landed, from the job's <see cref="JobResult"/>.
+    /// </summary>
+    /// <remarks>
+    /// Must be called BEFORE the history entry is built: <c>DownloadHistoryEntry.From</c> reads this off
+    /// the item, and <c>DownloadQueue.Finish</c> inserts the history row before it settles the result.
+    /// </remarks>
+    internal void RecordInstalledPath(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return; // keep the OutputPath fallback rather than blanking it
+        _installedPath = path;
+        OnPropertyChanged(nameof(RevealPath));
+        OnPropertyChanged(nameof(CanShowInFolder));
+    }
+
     public bool IsIndeterminate => TotalBytes is not > 0;
     public double Percent => TotalBytes is > 0 ? BytesRead * 100d / TotalBytes.Value : 0;
 
@@ -206,17 +266,31 @@ public partial class DownloadItem : ObservableObject
         BytesRead = bytesRead;
         TotalBytes = total;
 
-        long now = DateTime.UtcNow.Ticks;
+        long now = UtcNow().Ticks;
         _samples.Enqueue((now, bytesRead));
-        while (_samples.Count > MaxSamples ||
-               (_samples.Count > 1 && now - _samples.Peek().Ticks > RateWindow.Ticks))
+
+        while (_samples.Count > MaxSamples) _samples.Dequeue();
+
+        // Drop stale samples, but keep at least TWO and keep the measured span meaningful.
+        //
+        // Both floors exist because depot progress is reported once per completed file, not per chunk:
+        //   * without the two-sample floor, any gap longer than the window trimmed everything but the
+        //     newest reading, hit the "< 2" return below, and left the speed frozen at a stale value
+        //     forever — ATS has a single 8.3 GB file that reports nothing for ~166s;
+        //   * without the span floor, several concurrent files completing together left two samples
+        //     milliseconds apart, and dividing by that read as multiple GB/s.
+        while (_samples.Count > 2
+               && now - _samples.Peek().Ticks > RateWindow.Ticks
+               && now - _samples.ElementAt(1).Ticks >= MinSpan.Ticks)
             _samples.Dequeue();
 
-        if (_samples.Count < 2) return;
+        if (_samples.Count < 2) return; // the very first reading: nothing to measure against yet
 
         var (oldTicks, oldBytes) = _samples.Peek();
         double seconds = (now - oldTicks) / (double)TimeSpan.TicksPerSecond;
-        if (seconds <= 0) return;
+
+        // Too soon to say anything honest. Keep the previous figure rather than publish a spike.
+        if (seconds < MinSpan.TotalSeconds) return;
 
         double rate = (bytesRead - oldBytes) / seconds;
         BytesPerSecond = rate;
