@@ -78,7 +78,9 @@
     <ProjectReference Include="..\LuaTools.SamHost\LuaTools.SamHost.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>
-      <UndefineProperties>TargetFramework</UndefineProperties>
+      <!-- The host is x86/net48 and must not inherit this project's TFM or a win-x64 RID: publishing
+           with -r win-x64 would otherwise fail it with NETSDK1032 (RID vs PlatformTarget=x86). -->
+      <UndefineProperties>TargetFramework;RuntimeIdentifier;SelfContained;PublishReadyToRun;PublishSingleFile;PublishTrimmed</UndefineProperties>
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
@@ -86,7 +88,8 @@
   <Target Name="_BuildSamHost">
     <MSBuild Projects="$(MSBuildThisFileDirectory)..\LuaTools.SamHost\LuaTools.SamHost.csproj"
              Targets="Build"
-             Properties="Configuration=$(Configuration)">
+             Properties="Configuration=$(Configuration)"
+             RemoveProperties="TargetFramework;RuntimeIdentifier;SelfContained;PublishReadyToRun;PublishSingleFile;PublishTrimmed">
       <Output TaskParameter="TargetOutputs" ItemName="_SamHostOutput" />
     </MSBuild>
   </Target>
