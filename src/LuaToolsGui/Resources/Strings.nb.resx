@@ -628,7 +628,7 @@ Avbryt - fortsett nedlastingen</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Låst</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Lås opp alle</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Låse opp alle?</value></data>
-  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam har bare registrert {0} minutt(er) spilletid på {2}. Å låse opp {1} prestasjoner på én gang i et spill som knapt er spilt, er nettopp det Steams servere reverserer — de dukker opp og forsvinner timer senere. Å fordele dem over flere økter er tryggere. Låse opp alt likevel?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam har ingen oppføring om at {1} noen gang er startet. Å låse opp {0} prestasjoner i et spill som aldri er spilt, er nettopp det Steams servere reverserer — de dukker opp og forsvinner timer senere. Det holder som regel å starte spillet én gang, kort. Låse opp alt likevel?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Lås alle</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Angre</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Lagre til Steam</value></data>

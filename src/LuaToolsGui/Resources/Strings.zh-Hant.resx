@@ -628,7 +628,7 @@
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>未解鎖</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>全部解鎖</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>全部解鎖嗎？</value></data>
-  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam 記錄的 {2} 遊玩時數只有 {0} 分鐘。在幾乎沒玩過的遊戲上一次解鎖 {1} 個成就，正是 Steam 伺服器會撤銷的情況——先出現，幾小時後消失。分幾次解鎖比較穩妥。仍要全部解鎖嗎？</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam 沒有 {1} 曾被啟動的紀錄。在從未玩過的遊戲上解鎖 {0} 個成就，正是 Steam 伺服器會撤銷的情況——先出現，幾小時後消失。把遊戲啟動一次，哪怕很短，通常就夠了。仍要全部解鎖嗎？</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>全部鎖定</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>還原</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>儲存到 Steam</value></data>

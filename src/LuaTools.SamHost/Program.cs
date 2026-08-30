@@ -97,8 +97,7 @@ namespace LuaTools.SamHost
                 }
 
                 Write("{\"ok\":true,\"event\":\"ready\",\"appid\":" + Json.Num(appId) +
-                      ",\"language\":" + Json.Str(session.Language) +
-                      ",\"steamId\":" + Json.Str(session.SteamId.ToString(CultureInfo.InvariantCulture)) + "}");
+                      ",\"language\":" + Json.Str(session.Language) + "}");
 
                 string line;
                 while ((line = input.ReadLine()) != null)

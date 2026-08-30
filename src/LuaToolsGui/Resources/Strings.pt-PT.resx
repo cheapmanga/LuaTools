@@ -628,7 +628,7 @@ Cancelar - continuar a transferir</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Bloqueadas</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear tudo</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Desbloquear todas?</value></data>
-  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>O Steam registou apenas {0} minuto(s) de jogo em {2}. Desbloquear {1} proezas de uma vez num jogo mal jogado é exatamente o que os servidores do Steam revertem — aparecem e desaparecem horas depois. Espalhá-las por várias sessões é mais seguro. Desbloquear tudo mesmo assim?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>O Steam não tem registo de {1} alguma vez ter sido aberto. Desbloquear {0} proezas num jogo que nunca foi jogado é exatamente o que os servidores do Steam revertem — aparecem e desaparecem horas depois. Abrir o jogo uma vez, mesmo por pouco, costuma bastar. Desbloquear tudo mesmo assim?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear tudo</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Guardar no Steam</value></data>

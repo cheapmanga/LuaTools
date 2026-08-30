@@ -117,19 +117,6 @@ namespace LuaTools.SamHost
             return owned;
         }
 
-        /// <summary>
-        /// The signed-in account's 64-bit Steam id. LuaTools needs it to find this user's folder under
-        /// <c>userdata\</c>, which is where Steam records how long each game has been played.
-        /// </summary>
-        public ulong SteamId
-        {
-            get
-            {
-                EnsureInitialized();
-                return _client.SteamUser.GetSteamId();
-            }
-        }
-
         /// <summary>Steam's current language for this game, used to pick localized achievement names.</summary>
         public string Language
         {
