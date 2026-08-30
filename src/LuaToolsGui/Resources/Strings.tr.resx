@@ -629,6 +629,7 @@ Hayır - durdur ama dosyaları koru
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Tümünü aç</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Hepsi açılsın mı?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam'de {1} oyununun hiç başlatıldığına dair kayıt yok. Hiç oynanmamış bir oyunda {0} başarımı açmak, Steam sunucularının tam olarak geri aldığı şeydir — görünürler, saatler sonra kaybolurlar. Oyunu bir kez, kısaca başlatmak genelde yeter. Yine de hepsi açılsın mı?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>{1} oyununda {0} başarımı bir kerede açmak üzeresin. Steam sunucuları oynama süresiyle örtüşmeyen başarımları geri alır — görünürler, saatler sonra kaybolurlar. Birkaç oturuma yaymak daha güvenli. Yine de hepsi açılsın mı?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Tümünü kilitle</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Geri al</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Steam'e kaydet</value></data>

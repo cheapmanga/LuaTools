@@ -655,6 +655,7 @@
   <data name="Ach_UnlockAll" xml:space="preserve"><value>فتح الكل</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>فتحها كلها؟</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>لا يملك Steam أي سجل بأن {1} شُغِّلت يومًا. فتح {0} إنجازًا في لعبة لم تُلعب قط هو تحديدًا ما تتراجع عنه خوادم Steam — تظهر ثم تختفي بعد ساعات. عادةً يكفي تشغيل اللعبة مرة واحدة، ولو لوهلة. هل تفتحها كلها رغم ذلك؟</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>أنت على وشك فتح {0} إنجازًا في {1} دفعة واحدة. خوادم Steam تتراجع عن الإنجازات التي لا تتناسب مع وقت اللعب — تظهر ثم تختفي بعد ساعات. توزيعها على عدة جلسات أأمن. هل تفتحها كلها رغم ذلك؟</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>إغلاق الكل</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>تراجع</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>حفظ في Steam</value></data>

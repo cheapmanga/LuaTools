@@ -629,6 +629,7 @@ Cancelar - continuar baixando</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear tudo</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Desbloquear todas?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>O Steam não tem registro de {1} ter sido aberto alguma vez. Desbloquear {0} conquistas num jogo que nunca foi jogado é exatamente o que os servidores do Steam revertem — elas aparecem e somem horas depois. Abrir o jogo uma vez, mesmo rapidinho, costuma bastar. Desbloquear tudo mesmo assim?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Você vai desbloquear {0} conquistas de {1} de uma vez. Os servidores do Steam revertem conquistas que não batem com o tempo jogado — elas aparecem e somem horas depois. Espalhar em algumas sessões é mais seguro. Desbloquear tudo mesmo assim?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear tudo</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Salvar no Steam</value></data>

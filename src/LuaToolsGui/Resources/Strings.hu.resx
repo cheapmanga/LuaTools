@@ -629,6 +629,7 @@ Mégse - letöltés folytatása</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Összes feloldása</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Mindet feloldod?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>A Steamnek nincs feljegyzése arról, hogy a(z) {1} valaha elindult volna. {0} teljesítmény feloldása egy soha nem játszott játékban pontosan az, amit a Steam szerverei visszavonnak — megjelennek, majd órákkal később eltűnnek. Általában elég egyszer, röviden elindítani a játékot. Mégis feloldod mindet?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Mindjárt {0} teljesítményt oldasz fel egyszerre itt: {1}. A Steam szerverei visszavonják a játékidővel össze nem illő teljesítményeket — megjelennek, majd órákkal később eltűnnek. Biztonságosabb több menetre elosztani. Mégis feloldod mindet?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Összes zárolása</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Visszavonás</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Mentés a Steamre</value></data>

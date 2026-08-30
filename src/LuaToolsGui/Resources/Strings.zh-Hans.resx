@@ -649,6 +649,7 @@
   <data name="Ach_UnlockAll" xml:space="preserve"><value>全部解锁</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>全部解锁吗？</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam 没有 {1} 曾被启动的记录。在从未玩过的游戏上解锁 {0} 个成就，正是 Steam 服务器会撤销的情况——先出现，几小时后消失。把游戏启动一次，哪怕很短，通常就够了。仍然全部解锁吗？</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>即将在 {1} 中一次解锁 {0} 个成就。Steam 服务器会撤销与游戏时长不符的成就——先出现，几小时后消失。分几次解锁更稳妥。仍然全部解锁吗？</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>全部锁定</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>撤销</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>保存到 Steam</value></data>

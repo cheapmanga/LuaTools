@@ -629,6 +629,7 @@ Anulare - continuă descărcarea</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Deblochează tot</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Le deblochezi pe toate?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam nu are nicio înregistrare că {1} ar fi fost pornit vreodată. Deblocarea a {0} realizări la un joc nejucat niciodată este exact ce anulează serverele Steam — apar, apoi dispar după câteva ore. De obicei e destul să pornești jocul o dată, chiar și scurt. Deblochezi totuși tot?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Ești pe cale să deblochezi {0} realizări în {1} dintr-o dată. Serverele Steam anulează realizările care nu se potrivesc cu timpul jucat — apar, apoi dispar după câteva ore. Mai sigur e să le împarți pe mai multe sesiuni. Deblochezi totuși tot?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Blochează tot</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Anulează</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Salvează pe Steam</value></data>

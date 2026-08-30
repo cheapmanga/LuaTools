@@ -664,6 +664,7 @@ Cancel - keep downloading</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Unlock all</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Unlock them all?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam has no record of {1} ever being launched. Unlocking {0} achievements on a game that was never played is what Steam's servers roll back — they show up, then disappear hours later. Starting the game once, even briefly, is usually enough. Unlock everything anyway?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>About to unlock {0} achievements in {1} at once. Steam's servers roll back achievements that don't square with how much the game has been played — they show up, then disappear hours later. Spreading them over a few sessions is safer. Unlock everything anyway?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Lock all</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Revert</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Save to Steam</value></data>

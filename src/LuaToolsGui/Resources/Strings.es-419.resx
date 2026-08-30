@@ -629,6 +629,7 @@ Cancelar: seguir descargando</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Desbloquear todo</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>¿Desbloquearlos todos?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam no tiene registro de que {1} se haya abierto alguna vez. Desbloquear {0} logros en un juego que nunca se jugó es justo lo que revierten los servidores de Steam: aparecen y desaparecen horas después. Suele bastar con abrirlo una vez, aunque sea un momento. ¿Desbloquear todo de todos modos?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Vas a desbloquear {0} logros de {1} de golpe. Los servidores de Steam revierten los logros que no cuadran con lo jugado: aparecen y desaparecen horas después. Repartirlos en varias sesiones es más seguro. ¿Desbloquear todo de todos modos?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Bloquear todo</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Descartar</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Guardar en Steam</value></data>

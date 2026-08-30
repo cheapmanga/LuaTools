@@ -629,6 +629,7 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Odblokuj wszystkie</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Odblokować wszystkie?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam nie ma śladu, by {1} kiedykolwiek uruchomiono. Odblokowanie {0} osiągnięć w grze, w którą nigdy nie grano, to dokładnie to, co serwery Steama cofają — pojawiają się, a po kilku godzinach znikają. Zwykle wystarczy raz odpalić grę, choćby na chwilę. Odblokować mimo to wszystkie?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Zaraz odblokujesz {0} osiągnięć w {1} naraz. Serwery Steama cofają osiągnięcia, które nie pasują do czasu gry — pojawiają się, a po kilku godzinach znikają. Bezpieczniej rozłożyć je na kilka sesji. Odblokować mimo to wszystkie?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Zablokuj wszystkie</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Cofnij</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Zapisz na Steamie</value></data>

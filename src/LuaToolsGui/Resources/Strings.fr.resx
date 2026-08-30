@@ -629,6 +629,7 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Tout débloquer</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Tout débloquer ?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam n'a aucune trace de {1} lancé ne serait-ce qu'une fois. Débloquer {0} succès sur un jeu jamais joué, c'est exactement ce que les serveurs de Steam annulent — ils apparaissent, puis disparaissent quelques heures plus tard. Lancer le jeu une fois, même brièvement, suffit en général. Tout débloquer quand même ?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Tu es sur le point de débloquer {0} succès d'un coup dans {1}. Les serveurs de Steam annulent les succès qui ne collent pas au temps passé sur le jeu — ils apparaissent, puis disparaissent quelques heures plus tard. Les étaler sur plusieurs sessions est plus sûr. Tout débloquer quand même ?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Tout verrouiller</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Annuler</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Enregistrer sur Steam</value></data>
