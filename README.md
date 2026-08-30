@@ -47,6 +47,14 @@ You can find release builds on the [luatools website](https://lua.tools/app) or 
 - [Millennium](https://steambrew.app/): the Steam plugin framework whose injection API this app
   polyfills when Millennium isn't installed
 - [Velopack](https://velopack.io/): installer and auto-update framework
+- [DepotDownloaderMod](https://github.com/SteamAutoCracks/DepotDownloaderMod): downloads depot content
+  from Steam's CDN, powering the Depots page's Download action. A fork of
+  [DepotDownloader](https://github.com/SteamRE/DepotDownloader), fetched and run as a standalone tool
+- [SteamAutoCrack](https://github.com/SteamAutoCracks/Steam-auto-crack): fetched and launched from the
+  Downloads page
+- [Steamless](https://github.com/atom0s/Steamless): removes SteamStub DRM from game executables
+- [CloudRedirect](https://github.com/Selectively11/CloudRedirect): Steam Cloud redirection, used by the
+  mode install flow
 
 ## Licence
 
