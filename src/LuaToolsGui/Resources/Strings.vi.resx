@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Gỡ DRM của Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Hành động</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Gỡ DRM của Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Thao tác này chạy Steamless trên tệp thực thi của trò chơi để loại bỏ DRM SteamStub. Tệp .exe gốc được sao lưu thành .bak trước. Một số trò chơi có thể cần xác minh tệp trên Steam sau đó. Tiếp tục?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Thao tác này đưa trò chơi ra khỏi Steam theo hai bước: Steamless bóc lớp vỏ SteamStub khỏi các tệp thực thi, rồi trình giả lập Goldberg thay các DLL steam_api. Bản gốc được lưu cạnh đó dưới dạng .bak, và những gì đã có bản sao thì không đụng tới. Các tính năng Steam (overlay, lưu đám mây, trực tuyến) sẽ ngừng hoạt động với trò chơi này; khôi phục các tệp .bak, hoặc xác minh tệp trò chơi trong Steam, sẽ đưa mọi thứ trở lại. Tiếp tục?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Đang gỡ DRM của Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>Đã xử lý {0}, {1} không đổi.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Đã bóc {0} tệp thực thi, thay {1} tệp Steam API, {2} đã làm từ trước.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Không tải được trình giả lập Steam. Hãy kiểm tra kết nối rồi thử lại.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Không thấy steam_api.dll trong thư mục trò chơi — không có gì để thay.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Đã bóc {0} tệp thực thi, nhưng bước giả lập thất bại: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Không tìm thấy thư mục trò chơi — đã cài đặt chưa?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Không thể gỡ DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Nhấp để sao chép App ID</value></data>

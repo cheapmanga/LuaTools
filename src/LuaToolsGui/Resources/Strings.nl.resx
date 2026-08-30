@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam-DRM verwijderen</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acties</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam-DRM verwijderen?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dit voert Steamless uit op het uitvoerbare bestand van het spel om de SteamStub-DRM te verwijderen. De originele .exe wordt eerst als .bak geback-upt. Sommige spellen hebben daarna een bestandsverificatie in Steam nodig. Doorgaan?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dit haalt het spel in twee stappen van Steam af: Steamless haalt de SteamStub-verpakking van de uitvoerbare bestanden en daarna vervangt de Goldberg-emulator de steam_api-DLL's. De originelen komen ernaast te staan als .bak, en wat al een back-up heeft blijft ongemoeid. Steam-functies (overlay, cloudopslag, online) werken niet meer voor dit spel; de .bak-bestanden terugzetten, of de spelbestanden in Steam verifiëren, draait het terug. Doorgaan?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam-DRM verwijderen…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} aangepast, {1} ongewijzigd.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} uitvoerbare bestand(en) uitgepakt, {1} Steam API-bestand(en) vervangen, {2} al gedaan.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>De Steam-emulator kon niet worden gedownload. Controleer de verbinding en probeer het opnieuw.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Geen steam_api.dll in de spelmap gevonden — niets te vervangen.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} uitvoerbare bestand(en) uitgepakt, maar de emulatorstap is mislukt: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Spelmap niet gevonden — is het geïnstalleerd?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Kan DRM niet verwijderen. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klik om de App ID te kopiëren</value></data>

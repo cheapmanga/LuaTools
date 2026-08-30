@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Elimină DRM-ul Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acțiuni</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Elimini DRM-ul Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Aceasta rulează Steamless pe executabilul jocului pentru a elimina DRM-ul SteamStub. Fișierul .exe original este mai întâi salvat ca .bak. Unele jocuri pot necesita apoi o verificare a fișierelor în Steam. Continui?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Asta scoate jocul din Steam în doi pași: Steamless dezbracă învelișul SteamStub de pe executabile, apoi emulatorul Goldberg îi înlocuiește DLL-urile steam_api. Originalele sunt salvate alături ca .bak, iar ce are deja o copie nu este atins. Funcțiile Steam (overlay, salvări în cloud, online) nu mai merg pentru acest joc; restaurarea fișierelor .bak sau verificarea fișierelor jocului în Steam readuce totul. Continui?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Se elimină DRM-ul Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} modificate, {1} nemodificate.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} executabil(e) despachetat(e), {1} fișier(e) Steam API înlocuit(e), {2} deja făcut(e).</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulatorul Steam nu a putut fi descărcat. Verifică conexiunea și încearcă din nou.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Niciun steam_api.dll în folderul jocului — nu e nimic de înlocuit.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} executabil(e) despachetat(e), dar pasul cu emulatorul a eșuat: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Folderul jocului nu a fost găsit — este instalat?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Nu s-a putut elimina DRM-ul. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Clic pentru a copia App ID</value></data>

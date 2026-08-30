@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM eltávolítása</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Műveletek</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Eltávolítja a Steam DRM-et?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ez lefuttatja a Steamlesst a játék futtatható fájlján a SteamStub DRM eltávolításához. Az eredeti .exe előbb .bak néven biztonsági mentésre kerül. Egyes játékoknál utána fájlellenőrzés lehet szükséges a Steamben. Folytatja?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ez két lépésben veszi ki a játékot a Steamből: a Steamless lehúzza a SteamStub burkot a futtatható fájlokról, majd a Goldberg emulátor lecseréli a steam_api DLL-eket. Az eredetiek mellettük maradnak .bak néven, és amihez már van mentés, azt nem bántja. A Steam funkciói (overlay, felhőmentések, online) ehhez a játékhoz nem működnek többé; a .bak fájlok visszaállítása vagy a játékfájlok ellenőrzése a Steamben visszahozza. Folytatod?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam DRM eltávolítása…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} módosítva, {1} változatlan.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} futtatható fájl kicsomagolva, {1} Steam API-fájl lecserélve, {2} már kész.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>A Steam-emulátort nem sikerült letölteni. Ellenőrizd a kapcsolatot, és próbáld újra.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Nincs steam_api.dll a játék mappájában — nincs mit lecserélni.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} futtatható fájl kicsomagolva, de az emulátor lépés elbukott: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>A játék mappája nem található — telepítve van?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>A DRM nem távolítható el. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Kattints az App ID másolásához</value></data>

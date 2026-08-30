@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Poista Steam-DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Toiminnot</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Poistetaanko Steam-DRM?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Tämä suorittaa Steamlessin pelin suoritettavaan tiedostoon SteamStub-DRM:n poistamiseksi. Alkuperäinen .exe varmuuskopioidaan ensin .bak-tiedostoksi. Jotkin pelit voivat vaatia jälkeenpäin tiedostojen vahvistuksen Steamissa. Jatketaanko?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Tämä irrottaa pelin Steamista kahdessa vaiheessa: Steamless purkaa SteamStub-kuoren suoritettavista tiedostoista, ja sitten Goldberg-emulaattori korvaa sen steam_api-DLL:t. Alkuperäiset tallennetaan viereen .bak-tiedostoiksi, eikä jo varmuuskopioituun kosketa. Steamin ominaisuudet (overlay, pilvitallennukset, verkko) lakkaavat toimimasta tälle pelille; .bak-tiedostojen palautus tai pelin tiedostojen tarkistus Steamissa palauttaa ennalleen. Jatketaanko?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Poistetaan Steam-DRM:ää…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} käsitelty, {1} ennallaan.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} suoritettava(a) tiedosto(a) purettu, {1} Steam API -tiedosto(a) korvattu, {2} jo tehty.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulaattorin lataus epäonnistui. Tarkista yhteys ja yritä uudelleen.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Pelin kansiosta ei löytynyt steam_api.dll:ää — ei mitään korvattavaa.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} suoritettava(a) tiedosto(a) purettu, mutta emulaattorivaihe epäonnistui: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Pelikansiota ei löytynyt — onko se asennettu?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM:n poistaminen epäonnistui. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Napsauta kopioidaksesi App ID:n</value></data>

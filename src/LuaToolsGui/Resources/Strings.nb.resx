@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Fjern Steam-DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Handlinger</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Fjerne Steam-DRM?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dette kjører Steamless på spillets kjørbare fil for å fjerne SteamStub-DRM. Den originale .exe-en sikkerhetskopieres først til .bak. Enkelte spill kan trenge en filbekreftelse i Steam etterpå. Fortsette?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dette tar spillet av Steam i to trinn: Steamless fjerner SteamStub-innpakningen fra programfilene, og så erstatter Goldberg-emulatoren steam_api-DLL-ene. Originalene lagres ved siden av som .bak, og det som allerede har en sikkerhetskopi, røres ikke. Steam-funksjoner (overlegg, skylagring, online) slutter å virke for dette spillet; gjenopprett .bak-filene, eller verifiser spillfilene i Steam, for å sette det tilbake. Fortsette?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Fjerner Steam-DRM…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} endret, {1} uendret.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} programfil(er) pakket ut, {1} Steam API-fil(er) erstattet, {2} allerede gjort.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulatoren kunne ikke lastes ned. Sjekk tilkoblingen og prøv igjen.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Fant ingen steam_api.dll i spillmappen — ingenting å erstatte.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} programfil(er) pakket ut, men emulatortrinnet mislyktes: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Spillmappen ble ikke funnet — er det installert?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Kunne ikke fjerne DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klikk for å kopiere App ID</value></data>
