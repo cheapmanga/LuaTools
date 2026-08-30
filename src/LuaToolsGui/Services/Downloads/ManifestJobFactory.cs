@@ -577,11 +577,28 @@ public class ManifestJobFactory(
             // Extract into the game folder, overwriting. Best-effort per entry so one locked file
             // doesn't abandon the rest of the fix.
             using var archive = ZipFile.OpenRead(file.FilePath);
+
+            // Zip Slip guard. A fix comes from the community fix backend, so its entry names are not
+            // trusted: an entry like "..\..\..\Windows\..." would, unchecked, write outside the game
+            // folder. Everything must resolve to a path inside installDir, compared with a trailing
+            // separator so a sibling folder ("...Game-evil") can't pass the prefix test.
+            string root = Path.GetFullPath(installDir);
+            string rootWithSep = root.EndsWith(Path.DirectorySeparatorChar)
+                ? root
+                : root + Path.DirectorySeparatorChar;
+
             int failed = 0;
             foreach (var entry in archive.Entries)
             {
                 if (string.IsNullOrEmpty(entry.Name)) continue; // directory entry
-                string dest = Path.Combine(installDir, entry.FullName);
+
+                string dest = Path.GetFullPath(Path.Combine(installDir, entry.FullName));
+                if (!dest.StartsWith(rootWithSep, StringComparison.OrdinalIgnoreCase))
+                {
+                    failed++; // path escapes the game folder: refuse it, keep going
+                    continue;
+                }
+
                 try
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
