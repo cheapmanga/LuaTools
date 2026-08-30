@@ -80,6 +80,13 @@ You can find release builds on the [luatools website](https://lua.tools/app) or 
   the Steam achievement interop the Achievements page is built on. Its sources are vendored under
   `src/LuaTools.SamHost/Vendor/` under the zlib licence, unmodified; see the
   [notice](src/LuaTools.SamHost/Vendor/NOTICE.md) there
+- [DepotDownloaderMod](https://github.com/SteamAutoCracks/DepotDownloaderMod): downloads depot content
+  from Steam's CDN, powering the Depots page's Download action. A fork of
+  [DepotDownloader](https://github.com/SteamRE/DepotDownloader), fetched and run as a standalone tool
+- [SteamAutoCrack](https://github.com/SteamAutoCracks/Steam-auto-crack): fetched and launched from the
+  Downloads page
+- [Steamless](https://github.com/atom0s/Steamless): removes SteamStub from game executables
+- [CloudRedirect](https://github.com/Selectively11/CloudRedirect): Steam Cloud revival project, can be turned on via the mode page
 
 ## Licence
 
