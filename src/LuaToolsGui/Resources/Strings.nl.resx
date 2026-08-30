@@ -627,6 +627,8 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Ontgrendeld</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Vergrendeld</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Alles ontgrendelen</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Alles ontgrendelen?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam heeft maar {0} minuut/minuten speeltijd voor {2}. {1} prestaties in één keer ontgrendelen bij een nauwelijks gespeeld spel is precies wat Steams servers terugdraaien — ze verschijnen en zijn uren later weg. Verspreid over een paar sessies is veiliger. Toch alles ontgrendelen?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Alles vergrendelen</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Ongedaan maken</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Opslaan op Steam</value></data>

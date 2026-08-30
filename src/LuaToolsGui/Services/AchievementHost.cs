@@ -58,17 +58,21 @@ public sealed class AchievementSession : IDisposable
     private readonly SemaphoreSlim _gate = new(1, 1);
     private bool _disposed;
 
-    private AchievementSession(Process process, long appId, string language)
+    private AchievementSession(Process process, long appId, string language, ulong steamId)
     {
         _process = process;
         AppId = appId;
         Language = language;
+        SteamId = steamId;
     }
 
     public long AppId { get; }
 
     /// <summary>Steam's language for this game; the achievement names come back in it.</summary>
     public string Language { get; }
+
+    /// <summary>The signed-in account, as reported by Steam itself. 0 when the host didn't say.</summary>
+    public ulong SteamId { get; }
 
     /// <summary>
     /// Start a host for <paramref name="appId"/> and wait for its ready line.
@@ -110,7 +114,11 @@ public sealed class AchievementSession : IDisposable
             string language = ready.RootElement.TryGetProperty("language", out var lang)
                 ? lang.GetString() ?? "english"
                 : "english";
-            return new AchievementSession(process, appId, language);
+            // Sent as a string: a 64-bit Steam id doesn't survive a round trip through a JSON number
+            // in every reader, and this one has no reason to risk it.
+            ulong steamId = ready.RootElement.TryGetProperty("steamId", out var id)
+                && ulong.TryParse(id.GetString(), out ulong parsed) ? parsed : 0;
+            return new AchievementSession(process, appId, language, steamId);
         }
         catch
         {

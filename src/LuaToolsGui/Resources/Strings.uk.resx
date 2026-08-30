@@ -627,6 +627,8 @@
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Відкриті</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Закриті</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Відкрити всі</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Відкрити всі?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>У Steam для {2} записано лише {0} хвилин(и) гри. Відкрити {1} досягнень одразу в ледве запущеній грі — саме те, що сервери Steam скасовують: вони з'являться і за кілька годин зникнуть. Безпечніше розтягнути їх на кілька сесій. Усе одно відкрити всі?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Закрити всі</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Скасувати</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Зберегти в Steam</value></data>

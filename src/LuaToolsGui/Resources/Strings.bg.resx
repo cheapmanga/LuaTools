@@ -627,6 +627,8 @@
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Отключени</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Заключени</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Отключи всички</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Да се отключат всички?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam е записал само {0} минута(и) игра за {2}. Отключването на {1} постижения наведнъж в едва пипната игра е точно това, което сървърите на Steam връщат — появяват се и изчезват след часове. По-безопасно е да се разпределят в няколко сесии. Да се отключат ли въпреки това всички?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Заключи всички</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Отмени</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Запази в Steam</value></data>

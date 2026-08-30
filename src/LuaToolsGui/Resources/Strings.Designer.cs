@@ -608,6 +608,8 @@ public static class Strings
     public static string Ach_Filter_Unlocked => Get(nameof(Ach_Filter_Unlocked));
     public static string Ach_Filter_Locked => Get(nameof(Ach_Filter_Locked));
     public static string Ach_UnlockAll => Get(nameof(Ach_UnlockAll));
+    public static string Ach_Playtime_Warning_Title => Get(nameof(Ach_Playtime_Warning_Title));
+    public static string Ach_Playtime_Warning => Get(nameof(Ach_Playtime_Warning));
     public static string Ach_LockAll => Get(nameof(Ach_LockAll));
     public static string Ach_Revert => Get(nameof(Ach_Revert));
     public static string Ach_Save => Get(nameof(Ach_Save));
