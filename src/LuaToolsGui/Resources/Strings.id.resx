@@ -605,10 +605,6 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Hapus semua {0} entri dari riwayat unduhan? Berkas yang sudah diunduh tidak terpengaruh.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Pencapaian</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Mulai ulang Steam untuk menerapkan.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} file eksekusi dibuka, {1} file Steam API diganti, {2} sudah pernah.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulator Steam tidak bisa diunduh. Periksa koneksi lalu coba lagi.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Tidak ada steam_api.dll di folder game — tidak ada yang perlu diganti.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} file eksekusi dibuka, tapi langkah emulator gagal: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Mulai ulang Steam sekarang agar perubahan berlaku?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest {0} terpasang — Steam sedang dimulai ulang.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest {0} terpasang. Mulai ulang Steam untuk menerapkan.</value></data>

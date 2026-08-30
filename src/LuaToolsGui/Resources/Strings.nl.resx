@@ -605,10 +605,6 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} items uit de downloadgeschiedenis verwijderen? Gedownloade bestanden blijven staan.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Prestaties</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Herstart Steam om toe te passen.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} uitvoerbare bestand(en) uitgepakt, {1} Steam API-bestand(en) vervangen, {2} al gedaan.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>De Steam-emulator kon niet worden gedownload. Controleer de verbinding en probeer het opnieuw.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Geen steam_api.dll in de spelmap gevonden — niets te vervangen.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} uitvoerbare bestand(en) uitgepakt, maar de emulatorstap is mislukt: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam nu herstarten zodat de wijzigingen worden doorgevoerd?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest van {0} geïnstalleerd — Steam wordt opnieuw gestart.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest van {0} geïnstalleerd. Herstart Steam om toe te passen.</value></data>

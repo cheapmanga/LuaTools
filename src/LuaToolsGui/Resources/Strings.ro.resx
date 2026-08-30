@@ -605,10 +605,6 @@ Anulare - continuă descărcarea</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Elimini toate cele {0} intrări din istoricul descărcărilor? Fișierele descărcate nu sunt afectate.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Realizări</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Repornește Steam pentru a aplica.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} executabil(e) despachetat(e), {1} fișier(e) Steam API înlocuit(e), {2} deja făcut(e).</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulatorul Steam nu a putut fi descărcat. Verifică conexiunea și încearcă din nou.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Niciun steam_api.dll în folderul jocului — nu e nimic de înlocuit.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} executabil(e) despachetat(e), dar pasul cu emulatorul a eșuat: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Repornești Steam acum pentru ca modificările să aibă efect?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifestul {0} instalat — Steam repornește.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifestul {0} instalat. Repornește Steam pentru a aplica.</value></data>

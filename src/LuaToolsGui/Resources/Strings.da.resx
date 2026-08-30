@@ -605,10 +605,6 @@ Annuller - fortsæt download</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Fjern alle {0} poster fra downloadhistorikken? Hentede filer påvirkes ikke.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Præstationer</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Genstart Steam for at anvende.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} programfil(er) pakket ud, {1} Steam API-fil(er) erstattet, {2} allerede gjort.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulatoren kunne ikke hentes. Tjek forbindelsen, og prøv igen.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Ingen steam_api.dll i spillets mappe — der er intet at erstatte.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} programfil(er) pakket ud, men emulatortrinnet mislykkedes: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Genstart Steam nu, så ændringerne træder i kraft?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest for {0} installeret — Steam genstarter.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest for {0} installeret. Genstart Steam for at anvende.</value></data>

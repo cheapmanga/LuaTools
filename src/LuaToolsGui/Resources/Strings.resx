@@ -640,10 +640,6 @@ Cancel - keep downloading</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Remove all {0} entries from the download history? Downloaded files are not affected.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Achievements</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Restart Steam to apply.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} executable(s) unpacked, {1} Steam API file(s) replaced, {2} already done.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Couldn't download the Steam emulator. Check the connection and try again.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>No steam_api.dll found in the game folder — nothing to replace.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} executable(s) unpacked, but the emulator step failed: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Restart Steam now so the changes take effect?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} manifest installed. Steam is restarting.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} manifest installed. Restart Steam to apply.</value></data>

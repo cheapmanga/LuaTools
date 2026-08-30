@@ -605,10 +605,6 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Usunąć wszystkie {0} wpisy z historii pobierania? Pobrane pliki pozostaną nienaruszone.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Osiągnięcia</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Uruchom ponownie Steam, aby zastosować.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Rozpakowane pliki wykonywalne: {0}, podmienione pliki Steam API: {1}, już zrobione: {2}.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Nie udało się pobrać emulatora Steama. Sprawdź połączenie i spróbuj ponownie.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>W folderze gry nie ma pliku steam_api.dll — nie ma czego podmieniać.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Rozpakowane pliki wykonywalne: {0}, ale krok emulatora się nie powiódł: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Uruchomić ponownie Steam teraz, aby zmiany zaczęły obowiązywać?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest {0} zainstalowany — Steam uruchamia się ponownie.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest {0} zainstalowany. Uruchom ponownie Steam, aby zastosować.</value></data>

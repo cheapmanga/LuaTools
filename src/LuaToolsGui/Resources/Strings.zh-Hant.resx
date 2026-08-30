@@ -605,10 +605,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>要從下載紀錄中移除全部 {0} 筆記錄嗎？已下載的檔案不會受影響。</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>成就</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 重新啟動 Steam 以套用。</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>已解包 {0} 個執行檔，替換 {1} 個 Steam API 檔案，{2} 個先前已完成。</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>無法下載 Steam 模擬器。請檢查網路連線後重試。</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>遊戲資料夾裡沒有 steam_api.dll，沒有可替換的檔案。</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>已解包 {0} 個執行檔，但模擬器步驟失敗：{1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>立即重新啟動 Steam 以使變更生效？</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} 資訊清單已安裝——Steam 正在重新啟動。</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} 資訊清單已安裝。重新啟動 Steam 以套用。</value></data>

@@ -605,10 +605,6 @@ Mégse - letöltés folytatása</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Eltávolítja mind a(z) {0} bejegyzést a letöltési előzményekből? A letöltött fájlokat ez nem érinti.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Teljesítmények</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Indítsd újra a Steamet az alkalmazáshoz.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} futtatható fájl kicsomagolva, {1} Steam API-fájl lecserélve, {2} már kész.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>A Steam-emulátort nem sikerült letölteni. Ellenőrizd a kapcsolatot, és próbáld újra.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Nincs steam_api.dll a játék mappájában — nincs mit lecserélni.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} futtatható fájl kicsomagolva, de az emulátor lépés elbukott: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Újraindítod most a Steamet, hogy a változások érvénybe lépjenek?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>A(z) {0} manifest telepítve — a Steam újraindul.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>A(z) {0} manifest telepítve. Indítsd újra a Steamet az alkalmazáshoz.</value></data>

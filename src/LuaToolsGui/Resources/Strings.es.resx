@@ -605,10 +605,6 @@ Cancelar: seguir descargando</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>¿Quitar las {0} entradas del historial de descargas? Los archivos descargados no se ven afectados.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Logros</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Reinicia Steam para aplicar.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} ejecutable(s) desempaquetado(s), {1} archivo(s) de Steam API sustituido(s), {2} ya hecho(s).</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>No se ha podido descargar el emulador de Steam. Comprueba la conexión e inténtalo de nuevo.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>No se ha encontrado ningún steam_api.dll en la carpeta del juego: no hay nada que sustituir.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} ejecutable(s) desempaquetado(s), pero el paso del emulador ha fallado: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>¿Reiniciar Steam ahora para que los cambios surtan efecto?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifiesto de {0} instalado: Steam se está reiniciando.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifiesto de {0} instalado. Reinicia Steam para aplicar.</value></data>
