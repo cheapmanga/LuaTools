@@ -320,7 +320,13 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
         // Read this before the helper connects. Opening a game's achievements makes Steam count the
         // game as running, which stamps LastPlayed with the current time — the tool would erase the
         // very thing it is about to check.
-        _neverLaunched = library.GetLastPlayed(game.AppId) is { } last && last.ToUnixTimeSeconds() == 0;
+        var lastPlayed = library.GetLastPlayed(game.AppId);
+        _neverLaunched = lastPlayed is { } last && last.ToUnixTimeSeconds() == 0;
+        _launchDiagnostic = lastPlayed is null
+            ? "no appmanifest found — the game isn't installed in any Steam library"
+            : lastPlayed.Value.ToUnixTimeSeconds() == 0
+                ? "never launched"
+                : $"last launched {lastPlayed.Value.LocalDateTime:g}";
 
         _detailCts = new CancellationTokenSource();
         var ct = _detailCts.Token;
@@ -430,12 +436,23 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     /// <summary>Whether Steam had never launched this game when the panel was opened.</summary>
     private bool _neverLaunched;
 
+    /// <summary>TEMPORARY, test builds only: what the launch check found, so a missing warning can be
+    /// explained without a debugger. Remove before this reaches main.</summary>
+    private string _launchDiagnostic = "";
+
     private bool ConfirmNeverLaunched()
     {
-        if (!_neverLaunched || SelectedGame is not { } game) return true;
+        if (SelectedGame is not { } game) return true;
 
         int locked = _allAchievements.Count(a => a.CanToggle && !a.IsAchieved);
-        if (locked < QuietUnlockCount) return true;
+
+        // TEMPORARY, test builds only: say out loud why no warning is coming.
+        if (!_neverLaunched || locked < QuietUnlockCount)
+        {
+            toast.Show("Unlock all — no warning",
+                $"{_launchDiagnostic}; {locked} locked achievement(s) of {_allAchievements.Count}");
+            return true;
+        }
 
         return MessageBox.Show(
             string.Format(Resources.Strings.Ach_Playtime_Warning, locked, game.Name),
