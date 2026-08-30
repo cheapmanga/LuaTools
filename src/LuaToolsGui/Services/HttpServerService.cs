@@ -151,8 +151,30 @@ public class HttpServerService : IHostedService
         var req = ctx.Request;
         var resp = ctx.Response;
 
-        SetCors(resp);
+        // Reject a cross-origin browser request before it can act. The only legitimate caller is this
+        // app's own native code (the CDP bridge in CefInjectorService), which sends no Origin header;
+        // a request that carries one is a web page, and unless it is Steam's own store it has no
+        // business driving a server that can remove luas, restart Steam or start downloads. This is the
+        // real fix — CORS only governs reading a response, not the side effect that already happened.
+        string? origin = req.Headers["Origin"];
+        bool forbiddenOrigin = origin is not null && !IsAllowedOrigin(origin);
+
+        // Defence in depth against DNS rebinding: a rebinding page reaches us with its own hostname in
+        // Host, not 127.0.0.1. Our own caller always uses the loopback literal.
+        string? host = req.Headers["Host"];
+        bool forbiddenHost = host is not null && !IsLoopbackHost(host);
+
+        SetCors(resp, origin);
         resp.ContentType = "application/json; charset=utf-8";
+
+        if ((forbiddenOrigin || forbiddenHost) && req.HttpMethod != "OPTIONS")
+        {
+            resp.StatusCode = 403;
+            var denied = Encoding.UTF8.GetBytes(JsonErr("Forbidden"));
+            await resp.OutputStream.WriteAsync(denied);
+            resp.Close();
+            return;
+        }
 
         try
         {
@@ -498,13 +520,18 @@ public class HttpServerService : IHostedService
         }
         catch { /* fall through to validation */ }
 
-        if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-            && !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+        // Only a well-formed http(s) URL, and never a loopback/private host: this hands the string to
+        // the shell, and pointing it at another local service (a router page, a dev server) would turn
+        // "open a Discord link" into a way to reach things only this machine can see.
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var parsed)
+            || (parsed.Scheme != Uri.UriSchemeHttp && parsed.Scheme != Uri.UriSchemeHttps)
+            || parsed.IsLoopback
+            || IsPrivateHost(parsed.Host))
             return (400, JsonErr("Invalid URL"));
 
         try
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(parsed.AbsoluteUri) { UseShellExecute = true });
             return (200, Json(new { success = true }));
         }
         catch (Exception ex)
@@ -601,9 +628,43 @@ public class HttpServerService : IHostedService
 
     // ── Helpers ───────────────────────────────────────────────────────
 
-    private static void SetCors(HttpListenerResponse resp)
+    /// <summary>Steam's own store pages — the only browser context that has any reason to talk to
+    /// this server, kept in the allowlist in case a future direct (non-bridge) call is ever wanted.</summary>
+    private static readonly string[] AllowedOrigins =
+    [
+        "https://store.steampowered.com",
+        "https://steamcommunity.com",
+    ];
+
+    /// <summary>An Origin is allowed only if it exactly matches a Steam store origin. No wildcard, no
+    /// suffix match (which "steampowered.com.evil.com" would slip through).</summary>
+    private static bool IsAllowedOrigin(string origin) =>
+        AllowedOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>A private / link-local host that a public "open this link" action should never reach.</summary>
+    private static bool IsPrivateHost(string host) =>
+        host.StartsWith("10.", StringComparison.Ordinal)
+        || host.StartsWith("192.168.", StringComparison.Ordinal)
+        || host.StartsWith("169.254.", StringComparison.Ordinal)
+        || System.Text.RegularExpressions.Regex.IsMatch(host, @"^172\.(1[6-9]|2\d|3[01])\.")
+        || host.EndsWith(".local", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>True for a Host header pointing at our own loopback listener, with or without the port.</summary>
+    private static bool IsLoopbackHost(string host) =>
+        host.Equals("127.0.0.1:6767", StringComparison.OrdinalIgnoreCase)
+        || host.Equals("localhost:6767", StringComparison.OrdinalIgnoreCase)
+        || host.Equals("127.0.0.1", StringComparison.OrdinalIgnoreCase)
+        || host.Equals("localhost", StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Reflect the caller's Origin only when it is an allowlisted Steam origin — never "*". A same-origin
+    /// or native caller sends no Origin and needs no header; a disallowed one gets no CORS grant, so the
+    /// browser blocks it (and the request itself is already refused with 403 upstream).
+    /// </summary>
+    private static void SetCors(HttpListenerResponse resp, string? origin)
     {
-        resp.AddHeader("Access-Control-Allow-Origin", "*");
+        if (origin is not null && IsAllowedOrigin(origin))
+            resp.AddHeader("Access-Control-Allow-Origin", origin);
         resp.AddHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         resp.AddHeader("Access-Control-Allow-Headers", "Content-Type");
     }
