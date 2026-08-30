@@ -56,6 +56,45 @@ public partial class SteamLibraryService(SteamService steam)
     [GeneratedRegex(@"""name""\s*""([^""]*)""", RegexOptions.IgnoreCase)]
     private static partial Regex NameRegex();
 
+    // "LastPlayed" "1788083097" — unix seconds, and "0" when the game has never been launched.
+    [GeneratedRegex(@"""LastPlayed""\s*""(\d+)""", RegexOptions.IgnoreCase)]
+    private static partial Regex LastPlayedRegex();
+
+    /// <summary>
+    /// When Steam last launched this game, or null if it can't be established. Zero means never — which
+    /// is the only value this is really asked for.
+    /// </summary>
+    /// <remarks>
+    /// Steam stopped recording per-game playtime in localconfig.vdf, so the manifest's LastPlayed is
+    /// what is left to tell a game that has been played from one that has only been installed.
+    /// </remarks>
+    public DateTimeOffset? GetLastPlayed(long appId)
+    {
+        string? steamRoot = steam.EffectivePath;
+        if (steamRoot is null) return null;
+
+        foreach (string library in GetLibraryRoots(steamRoot))
+        {
+            string acf = Path.Combine(library, "steamapps", $"appmanifest_{appId}.acf");
+            try
+            {
+                if (!File.Exists(acf)) continue;
+                if (ReadLastPlayed(File.ReadAllText(acf)) is { } seconds)
+                    return DateTimeOffset.FromUnixTimeSeconds(seconds);
+            }
+            catch { /* unreadable manifest: treat as unknown */ }
+        }
+
+        return null;
+    }
+
+    /// <summary>The LastPlayed stamp out of an appmanifest, or null when the key is absent.</summary>
+    internal static long? ReadLastPlayed(string manifest)
+    {
+        var match = LastPlayedRegex().Match(manifest);
+        return match.Success && long.TryParse(match.Groups[1].Value, out long seconds) ? seconds : null;
+    }
+
     /// <summary>
     /// Enumerate the installed games across every library by reading each appmanifest_&lt;appid&gt;.acf.
     /// Best-effort per file: an unreadable or half-written manifest is skipped, never fatal. The name is

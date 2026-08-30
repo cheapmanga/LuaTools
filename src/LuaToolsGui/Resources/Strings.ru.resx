@@ -628,7 +628,7 @@
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Закрытые</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Открыть все</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Открыть все?</value></data>
-  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>В Steam для {2} записано всего {0} минут(ы) игры. Открыть {1} достижений разом в едва запущенной игре — именно то, что серверы Steam отменяют: они появятся и через несколько часов пропадут. Безопаснее растянуть их на несколько сессий. Всё равно открыть все?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>У Steam нет записи о том, что {1} когда-либо запускалась. Открыть {0} достижений в игре, в которую никогда не играли, — именно то, что серверы Steam отменяют: они появятся и через несколько часов пропадут. Обычно достаточно один раз ненадолго запустить игру. Всё равно открыть все?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Закрыть все</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Отменить</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Сохранить в Steam</value></data>

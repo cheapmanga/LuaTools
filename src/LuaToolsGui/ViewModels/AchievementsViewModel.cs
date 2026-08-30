@@ -140,14 +140,13 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     private readonly SteamAppInfoCache appInfo;
     private readonly CoverCache covers;
     private readonly AchievementIconCache icons;
-    private readonly SteamPlaytimeService playtime;
     private readonly ToastService toast;
     private readonly SettingsService settings;
 
     public AchievementsViewModel(
         AchievementHostService hosts, SteamLibraryService library, SteamAppListCache appList,
-        SteamAppInfoCache appInfo, CoverCache covers, AchievementIconCache icons,
-        SteamPlaytimeService playtime, ToastService toast, SettingsService settings)
+        SteamAppInfoCache appInfo, CoverCache covers, AchievementIconCache icons, ToastService toast,
+        SettingsService settings)
     {
         this.hosts = hosts;
         this.library = library;
@@ -155,7 +154,6 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
         this.appInfo = appInfo;
         this.covers = covers;
         this.icons = icons;
-        this.playtime = playtime;
         this.toast = toast;
         this.settings = settings;
         InitPageSize(settings.AchievementsPageSize);
@@ -319,6 +317,11 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
         UnlockedCount = TotalCount = ChangedCount = 0;
         _ = game.EnsureCoverAsync(appInfo, covers);
 
+        // Read this before the helper connects. Opening a game's achievements makes Steam count the
+        // game as running, which stamps LastPlayed with the current time — the tool would erase the
+        // very thing it is about to check.
+        _neverLaunched = library.GetLastPlayed(game.AppId) is { } last && last.ToUnixTimeSeconds() == 0;
+
         _detailCts = new CancellationTokenSource();
         var ct = _detailCts.Token;
 
@@ -407,38 +410,35 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     /// Stage every togglable row at once. Still just a staged change: Save is what commits it.
     ///
     /// <para>
-    /// Warns first when Steam has barely any playtime recorded for the game. Steam's servers roll back
-    /// achievements that don't square with the time on the clock, so a full list unlocked on a game
-    /// with a few minutes played is the one reliable way to lose them all — and the user finds out
-    /// hours later, not here. Nothing is warned about when the playtime can't be read: a warning on a
-    /// number we don't have would just teach people to click through it.
+    /// Warns first when Steam has never launched this game. Its servers roll back achievements that
+    /// don't square with the play record, so a full list unlocked on a game that was never started is
+    /// the one reliable way to lose them all — and the user finds out hours later, not here. Nothing is
+    /// warned about when the state can't be read: a warning based on a fact we don't have would just
+    /// teach people to click through it.
     /// </para>
     /// </summary>
     [RelayCommand]
     private void UnlockAll()
     {
-        if (!ConfirmAgainstPlaytime()) return;
+        if (!ConfirmNeverLaunched()) return;
         SetAllLocal(true);
     }
-
-    /// <summary>How little playtime makes a full unlock look implausible to Steam.</summary>
-    private static readonly TimeSpan ThinPlaytime = TimeSpan.FromHours(1);
 
     /// <summary>Number of unlocks below which nobody needs a warning, however new the game is.</summary>
     private const int QuietUnlockCount = 5;
 
-    private bool ConfirmAgainstPlaytime()
+    /// <summary>Whether Steam had never launched this game when the panel was opened.</summary>
+    private bool _neverLaunched;
+
+    private bool ConfirmNeverLaunched()
     {
-        if (_session is not { SteamId: > 0 } session || SelectedGame is not { } game) return true;
+        if (!_neverLaunched || SelectedGame is not { } game) return true;
 
         int locked = _allAchievements.Count(a => a.CanToggle && !a.IsAchieved);
         if (locked < QuietUnlockCount) return true;
 
-        int? minutes = playtime.GetMinutesPlayed(SteamPlaytimeService.AccountIdFrom(session.SteamId), game.AppId);
-        if (minutes is null || minutes >= ThinPlaytime.TotalMinutes) return true;
-
         return MessageBox.Show(
-            string.Format(Resources.Strings.Ach_Playtime_Warning, minutes.Value, locked, game.Name),
+            string.Format(Resources.Strings.Ach_Playtime_Warning, locked, game.Name),
             Resources.Strings.Ach_Playtime_Warning_Title,
             MessageBoxButton.OKCancel,
             MessageBoxImage.Warning) == MessageBoxResult.OK;

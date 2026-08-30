@@ -30,7 +30,6 @@ public partial class App : Application
                 services.AddSingleton<CoverCache>();
                 services.AddSingleton<AchievementIconCache>();
                 services.AddSingleton<AchievementHostService>();
-                services.AddSingleton<SteamPlaytimeService>();
                 services.AddSingleton<FixLookupService>();
                 services.AddSingleton<ToastService>();
                 services.AddSingleton<SteamDepotInfo>();

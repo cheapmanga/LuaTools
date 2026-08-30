@@ -628,7 +628,7 @@
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>ล็อกอยู่</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>ปลดล็อกทั้งหมด</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>ปลดล็อกทั้งหมดหรือไม่</value></data>
-  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam บันทึกเวลาเล่น {2} ไว้เพียง {0} นาที การปลดล็อกความสำเร็จ {1} รายการรวดเดียวในเกมที่แทบไม่ได้เล่นคือสิ่งที่เซิร์ฟเวอร์ Steam ย้อนคืน — มันจะขึ้นแล้วหายไปในไม่กี่ชั่วโมง ทยอยปลดหลายรอบปลอดภัยกว่า จะปลดล็อกทั้งหมดต่อไปหรือไม่</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam ไม่มีบันทึกว่า {1} เคยถูกเปิดเล่น การปลดล็อกความสำเร็จ {0} รายการในเกมที่ไม่เคยเล่นคือสิ่งที่เซิร์ฟเวอร์ Steam ย้อนคืน — มันจะขึ้นแล้วหายไปในไม่กี่ชั่วโมง เปิดเกมสักครั้งแม้แค่ครู่เดียวก็มักพอแล้ว จะปลดล็อกทั้งหมดต่อไปหรือไม่</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>ล็อกทั้งหมด</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>ย้อนกลับ</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>บันทึกไปยัง Steam</value></data>
