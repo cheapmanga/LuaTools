@@ -229,7 +229,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} manifest(s)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>Installed {0} to Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} file(s) failed. Close Steam and retry.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Restart Steam to apply.</value></data>
 
   <!-- ── Common ── -->
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Search by name or App ID...</value></data>
@@ -309,11 +308,11 @@
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Remove lua file</value></data>
   <data name="Manage_Delete_Body" xml:space="preserve"><value>Remove "{0}" (App ID {1})?
 
-This deletes its .lua file from Steam\config\stplug-in. Restart Steam afterwards for the change to take effect.</value></data>
+This deletes its .lua file from Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Remove lua files</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>Remove {0} lua files?
 
-This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterwards for the changes to take effect.</value></data>
+This deletes the .lua files from Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Remove failed</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Couldn't delete the file:
 {0}</value></data>
@@ -321,7 +320,6 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} files couldn't be deleted.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Restart Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Restart Steam now so the changes take effect?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Couldn't find or launch Steam. Set its location in Settings.</value></data>
 
   <!-- ── Fixes ── -->
@@ -341,8 +339,7 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Install failed</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Couldn't install. Close Steam (or Restart Steam) and try again.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Fix installed</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} manifest installed. Steam is restarting.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} manifest installed. Restart Steam to apply.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>{0} manifest installed.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Game not found</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Install {0} in Steam first, then apply the fix.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Fix partially applied</value></data>
@@ -385,13 +382,12 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Could not resolve the base game for this DLC</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Something went wrong. Check your connection and try again.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Download failed. Check your connection and try again.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generation failed. Check your connection and try again.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>Replace "{0}"?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>No depot/DLC changes. Same content.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Install cancelled. Existing files left unchanged.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>Couldn't install {0} file(s). Close Steam (or use Restart Steam) and try again.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Added {0}: lua + {1} manifest(s). Restart Steam to apply.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Added {0}. Steam will fetch manifests. Restart Steam to apply.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>Added {0}: lua + {1} manifest(s).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>Added {0}. Steam will fetch manifests.</value></data>
   <data name="Add_FastFetch" xml:space="preserve"><value>FastFetch™️</value></data>
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Auto-download from the first available source</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>No available sources found for this game</value></data>
@@ -482,9 +478,9 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Delete this preset?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>“{0}” will be removed from your saved presets. This doesn't affect the game itself.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Can't delete the preset that's currently in use.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>Now using “{0}”. Restart Steam for it to take effect.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>Now using “{0}”.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Couldn't switch presets. The lua file may be in use.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Saved. Restart Steam for it to take effect.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Saved.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Couldn't save. The lua file may be in use.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Saved as a preset.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>Save to “{0}”</value></data>
@@ -562,4 +558,84 @@ This deletes the .lua files from Steam\config\stplug-in. Restart Steam afterward
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Your Hubcap daily limit has been reached.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>No Hubcap manifest is available for this app.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap download failed ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Nothing downloading right now. Start downloading some shit!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Queue</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>History</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>Queued</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Downloading</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Waiting for you</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Installing</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Done</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Retry</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Move up</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Move down</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Clear history</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Review</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} of {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>{0} left</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Action required</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Interrupted when the app closed.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC unlock</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Install the game first to apply a fix.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Paused</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Verifying…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot files</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} of {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Couldn't get the depot downloader.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>No decryption keys found for this game.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} failed: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>Downloaded {0} depot(s) to {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Download</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Select depots to download</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>Download {0} depots ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>This depot declares no version to download.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Select all</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>No depots selected</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Choose where to save the depot files</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Not enough disk space: needs {0}, only {1} free.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Save to</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Needs {0} · {1} free on {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Sign in to download this depot.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Sign in to download depots.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>fetching manifest</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Couldn't get this depot's manifest.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Preparing · {0} of {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Getting the downloader</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Tool</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>Checking the .NET runtime</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>Getting SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack opened.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Couldn't install the .NET runtime SteamAutoCrack needs.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>The .NET runtime installed, but Windows needs a restart before SteamAutoCrack can run.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Couldn't download SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Couldn't start SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack updated.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allocating files</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>checking existing files</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Cancel download</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} has already been written to:
+{1}
+
+Yes - stop and delete those files
+No - stop but keep them
+Cancel - keep downloading</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Couldn't delete the downloaded files. They're still in {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>Copy App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Show in folder</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Couldn't copy — another app is holding the clipboard.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>Couldn't open {0} — it may have been moved or deleted.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>No decryption key in Lua for this depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>The decryption key for depot {0} is wrong.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>No decryption key in Lua for depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Shared runtime — usually already installed. Tick to download anyway.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Remove all {0} entries from the download history? Downloaded files are not affected.</value></data>
 </root>
