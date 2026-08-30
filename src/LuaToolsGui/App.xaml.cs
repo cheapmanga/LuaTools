@@ -1,4 +1,4 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Threading;
 using LuaToolsGui.Models;
 using LuaToolsGui.Services;
@@ -44,7 +44,9 @@ public partial class App : Application
                 services.AddSingleton<HardwareAppIdService>();
                 services.AddSingleton<SteamlessService>();
                 services.AddSingleton<GoldbergService>();
+                services.AddSingleton<SteamAutoCrackService>();
                 services.AddSingleton<CloudRedirectService>();
+                services.AddSingleton<DepotDownloaderService>();
                 services.AddSingleton<UnlockerService>();
                 services.AddSingleton<PluginInstallerService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
@@ -52,6 +54,12 @@ public partial class App : Application
                 services.AddSingleton<LuaToolsApiClient>();
                 services.AddSingleton<HubcapService>();
                 services.AddSingleton<UpdateService>();
+                // Central download queue. Singleton + hosted service (same pattern as HttpServerService
+                // below): the hosted lifetime runs the scheduler pump, and view models resolve the same
+                // instance to enqueue and observe.
+                services.AddSingleton<Services.Downloads.DownloadQueue>();
+                services.AddHostedService(sp => sp.GetRequiredService<Services.Downloads.DownloadQueue>());
+                services.AddSingleton<Services.Downloads.ManifestJobFactory>();
                 // Hook loader infrastructure
                 services.AddSingleton<PluginAddService>();
                 services.AddSingleton<HttpServerService>();
@@ -69,12 +77,14 @@ public partial class App : Application
                 services.AddSingleton<ModeViewModel>();
                 services.AddSingleton<FixesViewModel>();
                 services.AddSingleton<AchievementsViewModel>();
+                services.AddSingleton<DownloadsViewModel>();
                 services.AddSingleton<PluginViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
                 // Pages resolved by NavigationView via the DI service provider.
                 services.AddSingleton<HomeView>();
                 services.AddSingleton<DownloadView>();
+                services.AddSingleton<DownloadsView>();
                 services.AddSingleton<ManageView>();
                 services.AddSingleton<BuildsView>();
                 services.AddSingleton<ModeView>();
@@ -221,6 +231,8 @@ public partial class App : Application
 
         // Legacy cleanup: older builds staged downloads in ~/Downloads/LuaTools (they now stage in
         // %TEMP% and self-delete). Remove any leftovers from that user-visible folder, best-effort.
+        // Also sweep the current %TEMP% staging folder: a crash mid-download, or an overwrite confirm
+        // the user never answered, leaves a staged zip nobody will ever delete.
         _ = System.Threading.Tasks.Task.Run(() =>
         {
             try
@@ -230,6 +242,8 @@ public partial class App : Application
                 if (System.IO.Directory.Exists(legacy)) System.IO.Directory.Delete(legacy, recursive: true);
             }
             catch { /* best effort, never block startup on cleanup */ }
+
+            Services.Downloads.HttpFileDownloader.SweepStale();
         });
 
         await _host.StartAsync();
@@ -242,6 +256,12 @@ public partial class App : Application
         // overlay explaining why.
         if (ModeMigration.Apply(_host.Services.GetRequiredService<SettingsService>()))
             _host.Services.GetRequiredService<CacheService>().OnboardingComplete = false;
+
+        // Point OST/BST at config/stplug-in so lua writes hot-reload. Must run AFTER the migration
+        // above, which is what makes SelectedMode parse. The app no longer tells anyone to restart
+        // Steam for a lua change, so this registration is what makes that promise true — and it
+        // previously only ever ran during a mode install through this app.
+        _host.Services.GetRequiredService<UnlockerService>().EnsureLuaPathRegistered();
 
         var main = _host.Services.GetRequiredService<MainViewModel>();
         var settingsVm = _host.Services.GetRequiredService<SettingsViewModel>();
@@ -350,6 +370,16 @@ public partial class App : Application
             Dispatcher.Invoke(() => { window.NavigateToManage(); _ = manage.OpenDetailForAppIdAsync(appId); });
         var home = _host.Services.GetRequiredService<HomeViewModel>();
         home.NavigateToGame = openInManage;
+
+        // Deliberately NO queue-wide completion toast here. Every entry point already reports its own
+        // outcome: Fixes toasts from ManifestJobFactory, the Add page shows its InstallStatus banner, the
+        // store plugin has its popup, and a silent install pops a tray balloon. A global toast on top of
+        // those double-notified every one of them.
+
+        // The Downloads tab's "Review" button on an item waiting for an overwrite confirmation: the
+        // overlay lives on the Add page, so send the user there.
+        _host.Services.GetRequiredService<DownloadsViewModel>().RevealItem = _ => window.NavigateToAdd();
+
         download.NavigateToGame = openInManage;
 
         // Add page → the post-fetch "this game has a fix" banner opens it straight in the Fixes page.
@@ -359,6 +389,8 @@ public partial class App : Application
             _ = _host.Services.GetRequiredService<FixesViewModel>().OpenForAppIdAsync(appId);
         });
         builds.NavigateToManage = openInManage; // Builds "Manage" button: the reverse of "Manage Build"
+        // Depot download queues one item covering the whole selection; show the user where it went.
+        builds.RequestShowDownloads = () => Dispatcher.Invoke(window.NavigateToDownloads);
 
         // Dragging a SteamDB / Steam store link onto either drop box installs that appid. Routed through
         // HandleProtocolUrl rather than calling ProtocolInstall directly, so a dropped link and
@@ -527,7 +559,10 @@ public partial class App : Application
                         {
                             window.ShowInstallNotification(msg, error);
                             // Cold launch + no tray app wanted → exit once the balloon has had time to show.
-                            if (_exitAfterSilentInstall)
+                            // ProtocolInstall already awaited this item's completion, but the user (or the
+                            // store plugin) may have queued more; exiting now would cancel them mid-flight.
+                            var queue = _host.Services.GetRequiredService<Services.Downloads.DownloadQueue>();
+                            if (_exitAfterSilentInstall && queue.ActiveCount == 0)
                                 _ = Task.Delay(6000).ContinueWith(_ => Dispatcher.Invoke(Shutdown));
                         }));
                 }

@@ -65,7 +65,6 @@
   <data name="Nav_Manage" xml:space="preserve"><value>إدارة</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>الوضع</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>الإصلاحات</value></data>
-  <data name="Nav_Achievements" xml:space="preserve"><value>الإنجازات</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>إعادة تشغيل Steam</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>الإعدادات</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>تسجيل الدخول عبر Discord</value></data>
@@ -221,7 +220,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} ملف manifest</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>تم تثبيت {0} في Steam.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> فشل {0} من الملفات — أغلِق Steam وأعِد المحاولة.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> أعد تشغيل Steam للتطبيق.</value></data>
 
   <!-- ── Common ── -->
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>ابحث بالاسم أو App ID...</value></data>
@@ -254,12 +252,9 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>إزالة حماية Steam DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>الإجراءات</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>إزالة حماية Steam DRM؟</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>يخرج هذا اللعبة من Steam على خطوتين: يزيل Steamless غلاف SteamStub عن الملفات التنفيذية، ثم يستبدل محاكي Goldberg ملفات steam_api. تُحفظ النسخ الأصلية بجانبها بامتداد ‎.bak، وما له نسخة احتياطية مسبقًا لا يُمسّ. تتوقف ميزات Steam (الواجهة، الحفظ السحابي، اللعب عبر الإنترنت) لهذه اللعبة؛ استعادة ملفات ‎.bak أو التحقق من ملفات اللعبة في Steam يعيد كل شيء. متابعة؟</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>سيؤدي ذلك إلى تشغيل Steamless على ملف اللعبة التنفيذي لإزالة حماية SteamStub. يُنسخ ملف .exe الأصلي احتياطيًا إلى .bak أولًا. قد تحتاج بعض الألعاب إلى التحقق من الملفات في Steam بعد ذلك. هل تريد المتابعة؟</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>جارٍ إزالة حماية Steam DRM…</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، واستُبدل {1} ملف Steam API، و{2} تم من قبل.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>تعذّر تنزيل محاكي Steam. تحقّق من الاتصال وأعد المحاولة.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>لا يوجد steam_api.dll في مجلد اللعبة — لا شيء لاستبداله.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، لكن خطوة المحاكي فشلت: {1}</value></data>
+  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>تمت معالجة {0}، و{1} دون تغيير.</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>لم يُعثر على مجلد اللعبة — هل هي مثبَتة؟</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>تعذّرت إزالة الحماية. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>انقر لنسخ App ID</value></data>
@@ -298,13 +293,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>مستودع مشترك</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>إزالة ملف lua</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>إزالة "{0}" (App ID {1})؟
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>إزالة ‏«{0}» ‏(App ID {1})؟
 
-سيؤدي ذلك إلى حذف ملف ‎.lua الخاص بها من Steam\config\stplug-in. أعد تشغيل Steam بعد ذلك ليسري التغيير.</value></data>
+سيؤدي هذا إلى حذف ملف ‎.lua الخاص به من Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>إزالة ملفات lua</value></data>
   <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>إزالة {0} من ملفات lua؟
 
-سيؤدي ذلك إلى حذف ملفات ‎.lua من Steam\config\stplug-in. أعد تشغيل Steam بعد ذلك لتسري التغييرات.</value></data>
+سيؤدي هذا إلى حذف ملفات ‎.lua من Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>فشلت الإزالة</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>تعذّر حذف الملف:
 {0}</value></data>
@@ -312,7 +307,6 @@
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>تعذّر حذف {0} من الملفات.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>إعادة تشغيل Steam</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>إعادة تشغيل Steam الآن ليسري مفعول التغييرات؟</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>تعذّر العثور على Steam أو تشغيله. حدّد موقعه في الإعدادات.</value></data>
 
   <!-- ── Fixes ── -->
@@ -332,8 +326,7 @@
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>فشل التثبيت</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>تعذّر التثبيت — أغلِق Steam (أو أعد تشغيله) وحاول مجددًا.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>تم تثبيت الإصلاح</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0} — يُعاد تشغيل Steam.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0}. أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>تم تثبيت ملف بيان {0}.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>اللعبة غير موجودة</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>ثبّت {0} في Steam أولًا، ثم طبّق الإصلاح.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>طُبِّق الإصلاح جزئيًا</value></data>
@@ -376,13 +369,12 @@
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>تعذّر تحديد اللعبة الأساسية لمحتوى DLC هذا</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>حدث خطأ ما — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>فشل التنزيل — تحقق من اتصالك وحاول مجددًا.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>فشل الإنشاء — تحقق من اتصالك وحاول مجددًا.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>استبدال "{0}"؟</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>لا تغييرات في المستودع/DLC — المحتوى نفسه.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>أُلغي التثبيت — تُركت الملفات الحالية دون تغيير.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>تعذّر تثبيت {0} من الملفات — أغلِق Steam (أو استخدم إعادة تشغيل Steam) وحاول مجددًا.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>تمت إضافة {0} — ملف lua + {1} ملف manifest. أعد تشغيل Steam للتطبيق.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>تمت إضافة {0} — سيجلب Steam ملفات manifest. أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>تمت إضافة {0}: lua + {1} ملف بيان.</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>تمت إضافة {0}. سيجلب Steam ملفات البيان.</value></data>
 
   <!-- ── Confirm overlay (overwrite diff) ── -->
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>فتح في SteamDB</value></data>
@@ -404,9 +396,6 @@
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>التنزيل التلقائي من أول مصدر متاح</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>لم يتم العثور على مصادر متاحة لهذه اللعبة</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· عبر {0}</value></data>
-  <data name="Add_Fix_Available" xml:space="preserve"><value>تتوفر لهذه اللعبة {0} إصلاح.</value></data>
-  <data name="Add_Fix_Available_Tags" xml:space="preserve"><value>تتوفر لهذه اللعبة {0} إصلاح: {1}.</value></data>
-  <data name="Add_Fix_Open" xml:space="preserve"><value>عرض الإصلاحات</value></data>
   <data name="Plugin_Title" xml:space="preserve"><value>إضافة LuaTools</value></data>
   <data name="Plugin_Subtitle" xml:space="preserve"><value>إضافة LuaTools لمتجر Steam! — تستخدم الآن LuaLoader بدلًا من Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>الحالة</value></data>
@@ -484,9 +473,9 @@
   <data name="Builds_Delete_Title" xml:space="preserve"><value>حذف هذا الإعداد المسبق؟</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>ستتم إزالة «{0}» من إعداداتك المسبقة المحفوظة. هذا لا يؤثر على اللعبة نفسها.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>لا يمكن حذف الإعداد المسبق المستخدم حاليًا.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>يُستخدم الآن «{0}». أعد تشغيل Steam ليسري المفعول.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>يتم الآن استخدام ‏«{0}».</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>تعذّر تبديل الإعداد المسبق — قد يكون ملف lua قيد الاستخدام.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>تم الحفظ. أعد تشغيل Steam ليسري المفعول.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>تم الحفظ.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>تعذّر الحفظ — قد يكون ملف lua قيد الاستخدام.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>تم الحفظ كإعداد مسبق.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>حفظ في «{0}»</value></data>
@@ -560,6 +549,99 @@
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>لقد بلغت حدّك اليومي في Hubcap.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>لا يوجد بيان Hubcap متاح لهذا التطبيق.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>فشل التنزيل من Hubcap ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>التنزيلات</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>التنزيلات</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>لا توجد تنزيلات الآن. ابدأ بتنزيل شيء ما!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>قائمة الانتظار</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>السجل</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>في الانتظار</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>جارٍ التنزيل</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>بانتظارك</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>جارٍ التثبيت</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>تم</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>فشل</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>أُلغي</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>إلغاء</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>إعادة المحاولة</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>إزالة</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>تحريك لأعلى</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>تحريك لأسفل</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>مسح السجل</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>مراجعة</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} من {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>يتبقى {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>مطلوب إجراء</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>توقّف عند إغلاق التطبيق.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>فتح DLC</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>ثبّت اللعبة أولاً لتطبيق الإصلاح.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>متوقف مؤقتًا</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>جارٍ التحقق…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>إيقاف مؤقت</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>استئناف</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>ملفات المستودع</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>المستودعات · {0} من {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>تعذّر الحصول على أداة تنزيل المستودعات.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>لم يتم العثور على مفاتيح فك تشفير لهذه اللعبة.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>فشل المستودع {0}: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>تم تنزيل {0} مستودع إلى {1}.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>تنزيل</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>اختر المستودعات المراد تنزيلها</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>تنزيل {0} مستودع ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>هذا المستودع لا يعلن عن أي إصدار للتنزيل.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>تحديد الكل</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>لم يتم اختيار أي مستودع</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>اختر مكان حفظ ملفات المستودع</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>لا توجد مساحة كافية على القرص: يحتاج {0}، والمتاح {1} فقط.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>حفظ في</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>يحتاج {0} · متاح {1} على {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل هذا المستودع.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>سجّل الدخول لتنزيل المستودعات.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>جارٍ جلب الملف</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>تعذّر الحصول على ملف manifest لهذا المستودع.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>جارٍ التحضير · {0} من {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>جارٍ إحضار أداة التنزيل</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>أداة</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>جارٍ فحص بيئة تشغيل ‎.NET</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>جارٍ إحضار SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>تم فتح SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>تعذّر تثبيت بيئة تشغيل ‎.NET التي يحتاجها SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>تم تثبيت بيئة تشغيل ‎.NET، لكن يجب إعادة تشغيل Windows قبل أن يعمل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>تعذّر تنزيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>تعذّر تشغيل SteamAutoCrack.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>تم تحديث SteamAutoCrack.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>تخصيص الملفات</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>فحص الملفات الموجودة</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>إلغاء التنزيل</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>تمت كتابة {0} بالفعل إلى:
+{1}
+
+نعم - إيقاف وحذف تلك الملفات
+لا - إيقاف مع الاحتفاظ بها
+إلغاء - متابعة التنزيل</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>تعذّر حذف الملفات التي تم تنزيلها. لا تزال في {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>نسخ App ID</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>إظهار في المجلد</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>تعذّر النسخ — تطبيق آخر يستخدم الحافظة.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>تعذّر فتح {0} — ربما تم نقله أو حذفه.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua لهذا الـ depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>مفتاح فك التشفير الخاص بالـ depot ‏{0} غير صحيح.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>لا يوجد مفتاح فك تشفير في ملف Lua للـ depot ‏{0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>بيئة تشغيل مشتركة — مثبّتة غالبًا بالفعل. حدّدها للتنزيل على أي حال.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>هل تريد إزالة كل الإدخالات ({0}) من سجل التنزيلات؟ لن تتأثر الملفات التي تم تنزيلها.</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>الإنجازات</value></data>
+  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، واستُبدل {1} ملف Steam API، و{2} تم من قبل.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>تعذّر تنزيل محاكي Steam. تحقّق من الاتصال وأعد المحاولة.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>لا يوجد steam_api.dll في مجلد اللعبة — لا شيء لاستبداله.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، لكن خطوة المحاكي فشلت: {1}</value></data>
+  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>إعادة تشغيل Steam الآن ليسري مفعول التغييرات؟</value></data>
+  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0} — يُعاد تشغيل Steam.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0}. أعد تشغيل Steam للتطبيق.</value></data>
+  <data name="Add_Err_Generate" xml:space="preserve"><value>فشل الإنشاء — تحقق من اتصالك وحاول مجددًا.</value></data>
+  <data name="Add_Fix_Available" xml:space="preserve"><value>تتوفر لهذه اللعبة {0} إصلاح.</value></data>
+  <data name="Add_Fix_Available_Tags" xml:space="preserve"><value>تتوفر لهذه اللعبة {0} إصلاح: {1}.</value></data>
+  <data name="Add_Fix_Open" xml:space="preserve"><value>عرض الإصلاحات</value></data>
   <data name="Ach_Title" xml:space="preserve"><value>الإنجازات</value></data>
   <data name="Ach_Subtitle" xml:space="preserve"><value>افتح إنجازات أي لعبة في مكتبة Steam أو أغلقها. يجب أن يكون Steam قيد التشغيل ومسجَّل الدخول.</value></data>
   <data name="Ach_Loading" xml:space="preserve"><value>جارٍ قراءة مكتبة Steam الخاصة بك…</value></data>

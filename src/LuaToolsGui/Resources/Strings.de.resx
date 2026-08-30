@@ -65,7 +65,6 @@
   <data name="Nav_Manage" xml:space="preserve"><value>Verwalten</value></data>
   <data name="Nav_Mode" xml:space="preserve"><value>Modus</value></data>
   <data name="Nav_Fixes" xml:space="preserve"><value>Fixes</value></data>
-  <data name="Nav_Achievements" xml:space="preserve"><value>Errungenschaften</value></data>
   <data name="Nav_RestartSteam" xml:space="preserve"><value>Steam neu starten</value></data>
   <data name="Nav_Settings" xml:space="preserve"><value>Einstellungen</value></data>
   <data name="Nav_SignInDiscord" xml:space="preserve"><value>Mit Discord anmelden</value></data>
@@ -209,7 +208,6 @@
   <data name="Drop_Count_Manifests" xml:space="preserve"><value>{0} Manifest(e)</value></data>
   <data name="Drop_Result_Installed" xml:space="preserve"><value>{0} in Steam installiert.</value></data>
   <data name="Drop_Result_Failed" xml:space="preserve"><value> {0} Datei(en) fehlgeschlagen — schließe Steam und versuche es erneut.</value></data>
-  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Starte Steam neu, um die Änderungen zu übernehmen.</value></data>
   <data name="Common_SearchPlaceholder" xml:space="preserve"><value>Nach Name oder App-ID suchen...</value></data>
   <data name="Common_Loading" xml:space="preserve"><value>Wird geladen…</value></data>
   <data name="Common_AppId" xml:space="preserve"><value>App-ID: {0}</value></data>
@@ -238,12 +236,9 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam-DRM entfernen</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Aktionen</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam-DRM entfernen?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Das nimmt das Spiel in zwei Schritten von Steam: Steamless entfernt die SteamStub-Hülle von den Programmdateien, dann ersetzt der Goldberg-Emulator die steam_api-DLLs. Die Originale werden daneben als .bak gesichert; was bereits gesichert ist, bleibt unangetastet. Steam-Funktionen (Overlay, Cloud-Speicherstände, Online) funktionieren für dieses Spiel nicht mehr; die .bak-Dateien zurückspielen oder die Spieldateien in Steam überprüfen stellt alles wieder her. Fortfahren?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dadurch wird Steamless auf der Spiel-EXE ausgeführt, um den SteamStub-DRM zu entfernen. Die originale .exe wird zuerst als .bak gesichert. Manche Spiele benötigen danach eine Dateiüberprüfung in Steam. Fortfahren?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Steam-DRM wird entfernt…</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, {1} Steam-API-Datei(en) ersetzt, {2} bereits erledigt.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Der Steam-Emulator konnte nicht heruntergeladen werden. Verbindung prüfen und erneut versuchen.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Keine steam_api.dll im Spielordner gefunden — nichts zu ersetzen.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, aber der Emulator-Schritt ist fehlgeschlagen: {1}</value></data>
+  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} bearbeitet, {1} unverändert.</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Spielordner nicht gefunden – ist es installiert?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>DRM konnte nicht entfernt werden. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klicken, um die App-ID zu kopieren</value></data>
@@ -280,13 +275,13 @@
   <data name="Manage_SharedDepot" xml:space="preserve"><value>Geteiltes Depot</value></data>
   <data name="Manage_DlcName" xml:space="preserve"><value>DLC {0}</value></data>
   <data name="Manage_Delete_Title" xml:space="preserve"><value>Lua-Datei entfernen</value></data>
-  <data name="Manage_Delete_Body" xml:space="preserve"><value>"{0}" (App-ID {1}) entfernen?
+  <data name="Manage_Delete_Body" xml:space="preserve"><value>„{0}“ (App ID {1}) entfernen?
 
-Dadurch wird die .lua-Datei aus Steam\config\stplug-in gelöscht. Starte Steam anschließend neu, damit die Änderung wirksam wird.</value></data>
+Dies löscht die .lua-Datei aus Steam\config\stplug-in.</value></data>
   <data name="Manage_DeleteMany_Title" xml:space="preserve"><value>Lua-Dateien entfernen</value></data>
-  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>{0} Lua-Dateien entfernen?
+  <data name="Manage_DeleteMany_Body" xml:space="preserve"><value>{0} lua-Dateien entfernen?
 
-Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Steam anschließend neu, damit die Änderungen wirksam werden.</value></data>
+Dies löscht die .lua-Dateien aus Steam\config\stplug-in.</value></data>
   <data name="Manage_RemoveFailed_Title" xml:space="preserve"><value>Entfernen fehlgeschlagen</value></data>
   <data name="Manage_RemoveFailed_File" xml:space="preserve"><value>Die Datei konnte nicht gelöscht werden:
 {0}</value></data>
@@ -294,7 +289,6 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
 {1}</value></data>
   <data name="Manage_RemoveFailed_Count" xml:space="preserve"><value>{0} Dateien konnten nicht gelöscht werden.</value></data>
   <data name="Manage_RestartSteam_Title" xml:space="preserve"><value>Steam neu starten</value></data>
-  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam jetzt neu starten, damit die Änderungen wirksam werden?</value></data>
   <data name="Manage_RestartSteam_Failed" xml:space="preserve"><value>Steam konnte nicht gefunden oder gestartet werden. Lege den Speicherort in den Einstellungen fest.</value></data>
   <data name="Fixes_Title" xml:space="preserve"><value>Fixes</value></data>
   <data name="Fixes_Loading" xml:space="preserve"><value>Fixes werden geladen…</value></data>
@@ -311,8 +305,7 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Fixes_Toast_InstallFailed" xml:space="preserve"><value>Installation fehlgeschlagen</value></data>
   <data name="Fixes_Toast_InstallFailed_Body" xml:space="preserve"><value>Installation fehlgeschlagen — schließe Steam (oder starte Steam neu) und versuche es erneut.</value></data>
   <data name="Fixes_Toast_FixInstalled" xml:space="preserve"><value>Fix installiert</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest für {0} installiert — Steam wird neu gestartet.</value></data>
-  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest für {0} installiert. Starte Steam neu, um es zu übernehmen.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Body" xml:space="preserve"><value>Manifest für {0} installiert.</value></data>
   <data name="Fixes_Toast_GameNotFound" xml:space="preserve"><value>Spiel nicht gefunden</value></data>
   <data name="Fixes_Toast_GameNotFound_Body" xml:space="preserve"><value>Installiere {0} zuerst in Steam und wende dann den Fix an.</value></data>
   <data name="Fixes_Toast_PartiallyApplied" xml:space="preserve"><value>Fix teilweise angewendet</value></data>
@@ -352,13 +345,12 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Add_Err_BaseGame" xml:space="preserve"><value>Das Hauptspiel für diesen DLC konnte nicht ermittelt werden</value></data>
   <data name="Add_Err_Generic" xml:space="preserve"><value>Etwas ist schiefgelaufen — überprüfe deine Verbindung und versuche es erneut.</value></data>
   <data name="Add_Err_Download" xml:space="preserve"><value>Download fehlgeschlagen — überprüfe deine Verbindung und versuche es erneut.</value></data>
-  <data name="Add_Err_Generate" xml:space="preserve"><value>Generierung fehlgeschlagen — überprüfe deine Verbindung und versuche es erneut.</value></data>
   <data name="Add_Confirm_Replace" xml:space="preserve"><value>"{0}" ersetzen?</value></data>
   <data name="Add_Confirm_NoChanges" xml:space="preserve"><value>Keine Depot-/DLC-Änderungen — gleicher Inhalt.</value></data>
   <data name="Add_Status_Cancelled" xml:space="preserve"><value>Installation abgebrochen — vorhandene Dateien unverändert.</value></data>
   <data name="Add_Status_InstallFailed" xml:space="preserve"><value>{0} Datei(en) konnten nicht installiert werden — schließe Steam (oder nutze „Steam neu starten“) und versuche es erneut.</value></data>
-  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} hinzugefügt — Lua + {1} Manifest(e). Starte Steam neu, um es zu übernehmen.</value></data>
-  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} hinzugefügt — Steam ruft die Manifeste ab. Starte Steam neu, um es zu übernehmen.</value></data>
+  <data name="Add_Status_AddedManifests" xml:space="preserve"><value>{0} hinzugefügt: lua + {1} Manifest(e).</value></data>
+  <data name="Add_Status_AddedFetch" xml:space="preserve"><value>{0} hinzugefügt. Steam lädt die Manifeste.</value></data>
   <data name="Confirm_OpenSteamDb" xml:space="preserve"><value>Auf SteamDB öffnen</value></data>
   <data name="Confirm_Shared" xml:space="preserve"><value>GETEILT</value></data>
   <data name="Confirm_ReviewChanges" xml:space="preserve"><value>Dies ersetzt das installierte Lua. Überprüfe, was sich ändert:</value></data>
@@ -378,9 +370,6 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Add_FastFetch_Hint" xml:space="preserve"><value>Automatisch von der ersten verfügbaren Quelle herunterladen</value></data>
   <data name="Add_FastFetch_NoSource" xml:space="preserve"><value>Keine verfügbaren Quellen für dieses Spiel gefunden</value></data>
   <data name="Add_FastFetch_Via" xml:space="preserve"><value>· über {0}</value></data>
-  <data name="Add_Fix_Available" xml:space="preserve"><value>Für dieses Spiel gibt es {0} Fixes.</value></data>
-  <data name="Add_Fix_Available_Tags" xml:space="preserve"><value>Für dieses Spiel gibt es {0} Fixes: {1}.</value></data>
-  <data name="Add_Fix_Open" xml:space="preserve"><value>Fixes ansehen</value></data>
   <data name="Plugin_Title" xml:space="preserve"><value>LuaTools-Plugin</value></data>
   <data name="Plugin_Subtitle" xml:space="preserve"><value>Das LuaTools-Steam-Plugin! — Nutzt jetzt LuaLoader statt Shittenium</value></data>
   <data name="Plugin_CardTitle" xml:space="preserve"><value>Status</value></data>
@@ -458,9 +447,9 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Builds_Delete_Title" xml:space="preserve"><value>Diese Vorlage löschen?</value></data>
   <data name="Builds_Delete_Body" xml:space="preserve"><value>„{0}“ wird aus deinen gespeicherten Vorlagen entfernt. Das Spiel selbst bleibt davon unberührt.</value></data>
   <data name="Builds_Delete_ActiveTip" xml:space="preserve"><value>Die gerade verwendete Vorlage kann nicht gelöscht werden.</value></data>
-  <data name="Builds_Apply_Done" xml:space="preserve"><value>„{0}“ wird jetzt verwendet. Starte Steam neu, damit es wirksam wird.</value></data>
+  <data name="Builds_Apply_Done" xml:space="preserve"><value>„{0}“ wird jetzt verwendet.</value></data>
   <data name="Builds_Apply_Failed" xml:space="preserve"><value>Vorlage konnte nicht gewechselt werden — die lua-Datei ist möglicherweise in Benutzung.</value></data>
-  <data name="Builds_Save_Done" xml:space="preserve"><value>Gespeichert. Starte Steam neu, damit es wirksam wird.</value></data>
+  <data name="Builds_Save_Done" xml:space="preserve"><value>Gespeichert.</value></data>
   <data name="Builds_Save_Failed" xml:space="preserve"><value>Speichern fehlgeschlagen — die lua-Datei ist möglicherweise in Benutzung.</value></data>
   <data name="Builds_Preset_Saved" xml:space="preserve"><value>Als Vorlage gespeichert.</value></data>
   <data name="Builds_Action_SaveTo" xml:space="preserve"><value>In „{0}“ speichern</value></data>
@@ -534,6 +523,99 @@ Dadurch werden die .lua-Dateien aus Steam\config\stplug-in gelöscht. Starte Ste
   <data name="Hubcap_Err_LimitReached" xml:space="preserve"><value>Dein tägliches Hubcap-Limit ist erreicht.</value></data>
   <data name="Hubcap_Err_NoManifest" xml:space="preserve"><value>Für diese App ist kein Hubcap-Manifest verfügbar.</value></data>
   <data name="Hubcap_Err_DownloadFailed" xml:space="preserve"><value>Hubcap-Download fehlgeschlagen ({0}).</value></data>
+  <data name="Nav_Downloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Title" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_Empty" xml:space="preserve"><value>Derzeit keine Downloads. Lad dir was runter!</value></data>
+  <data name="Downloads_Section_Active" xml:space="preserve"><value>Warteschlange</value></data>
+  <data name="Downloads_Section_History" xml:space="preserve"><value>Verlauf</value></data>
+  <data name="Downloads_Status_Queued" xml:space="preserve"><value>In Warteschlange</value></data>
+  <data name="Downloads_Status_Downloading" xml:space="preserve"><value>Wird geladen</value></data>
+  <data name="Downloads_Status_AwaitingConfirm" xml:space="preserve"><value>Wartet auf dich</value></data>
+  <data name="Downloads_Status_Installing" xml:space="preserve"><value>Wird installiert</value></data>
+  <data name="Downloads_Status_Completed" xml:space="preserve"><value>Fertig</value></data>
+  <data name="Downloads_Status_Failed" xml:space="preserve"><value>Fehlgeschlagen</value></data>
+  <data name="Downloads_Status_Cancelled" xml:space="preserve"><value>Abgebrochen</value></data>
+  <data name="Downloads_Action_Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Downloads_Action_Retry" xml:space="preserve"><value>Wiederholen</value></data>
+  <data name="Downloads_Action_Remove" xml:space="preserve"><value>Entfernen</value></data>
+  <data name="Downloads_Action_MoveUp" xml:space="preserve"><value>Nach oben</value></data>
+  <data name="Downloads_Action_MoveDown" xml:space="preserve"><value>Nach unten</value></data>
+  <data name="Downloads_Action_ClearHistory" xml:space="preserve"><value>Verlauf löschen</value></data>
+  <data name="Downloads_Action_Review" xml:space="preserve"><value>Ansehen</value></data>
+  <data name="Downloads_Of" xml:space="preserve"><value>{0} von {1}</value></data>
+  <data name="Downloads_Eta" xml:space="preserve"><value>Noch {0}</value></data>
+  <data name="Downloads_ActionRequired" xml:space="preserve"><value>Aktion erforderlich</value></data>
+  <data name="Downloads_Err_Interrupted" xml:space="preserve"><value>Beim Schließen der App unterbrochen.</value></data>
+  <data name="Downloads_Kind_Dlc" xml:space="preserve"><value>DLC-Freischaltung</value></data>
+  <data name="Fixes_NotInstalled_Hint" xml:space="preserve"><value>Installiere zuerst das Spiel, um einen Fix anzuwenden.</value></data>
+  <data name="Downloads_Status_Paused" xml:space="preserve"><value>Pausiert</value></data>
+  <data name="Downloads_Status_Verifying" xml:space="preserve"><value>Wird geprüft…</value></data>
+  <data name="Downloads_Action_Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Action_Resume" xml:space="preserve"><value>Fortsetzen</value></data>
+  <data name="Downloads_Kind_Depot" xml:space="preserve"><value>Depot-Dateien</value></data>
+  <data name="Downloads_Depots_Progress" xml:space="preserve"><value>Depots · {0} von {1}</value></data>
+  <data name="Depot_Err_Tool" xml:space="preserve"><value>Der Depot-Downloader konnte nicht geladen werden.</value></data>
+  <data name="Depot_Err_NoKeys" xml:space="preserve"><value>Keine Entschlüsselungsschlüssel für dieses Spiel gefunden.</value></data>
+  <data name="Depot_Err_Failed" xml:space="preserve"><value>Depot {0} fehlgeschlagen: {1}</value></data>
+  <data name="Depot_Status_Done" xml:space="preserve"><value>{0} Depots nach {1} heruntergeladen.</value></data>
+  <data name="Builds_Action_Download" xml:space="preserve"><value>Herunterladen</value></data>
+  <data name="Builds_Select_Title" xml:space="preserve"><value>Depots zum Herunterladen auswählen</value></data>
+  <data name="Builds_Select_Confirm" xml:space="preserve"><value>{0} Depots herunterladen ({1})</value></data>
+  <data name="Builds_Select_NoManifest" xml:space="preserve"><value>Dieses Depot gibt keine herunterladbare Version an.</value></data>
+  <data name="Builds_Select_All" xml:space="preserve"><value>Alle auswählen</value></data>
+  <data name="Builds_Select_None" xml:space="preserve"><value>Keine Depots ausgewählt</value></data>
+  <data name="Builds_Select_ChooseFolder" xml:space="preserve"><value>Speicherort für die Depot-Dateien wählen</value></data>
+  <data name="Depot_Err_NoSpace" xml:space="preserve"><value>Nicht genug Speicherplatz: benötigt {0}, nur {1} frei.</value></data>
+  <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Speichern in</value></data>
+  <data name="Builds_Select_Space" xml:space="preserve"><value>Benötigt {0} · {1} frei auf {2}</value></data>
+  <data name="Builds_Select_SignIn" xml:space="preserve"><value>Melde dich an, um dieses Depot zu laden.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Zum Laden von Depots anmelden.</value></data>
+  <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>Manifest wird geholt</value></data>
+  <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Das Manifest dieses Depots konnte nicht geladen werden.</value></data>
+  <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Vorbereiten · {0} von {1}</value></data>
+  <data name="Downloads_Depots_GettingTool" xml:space="preserve"><value>Downloader wird geholt</value></data>
+  <data name="Downloads_Kind_Tool" xml:space="preserve"><value>Werkzeug</value></data>
+  <data name="Downloads_SteamAutoCrack" xml:space="preserve"><value>SteamAutoCrack</value></data>
+  <data name="Downloads_SAC_GettingRuntime" xml:space="preserve"><value>.NET-Runtime wird geprüft</value></data>
+  <data name="Downloads_SAC_GettingTool" xml:space="preserve"><value>SteamAutoCrack wird geholt</value></data>
+  <data name="Downloads_SAC_Launched" xml:space="preserve"><value>SteamAutoCrack geöffnet.</value></data>
+  <data name="Downloads_SAC_Err_Runtime" xml:space="preserve"><value>Die von SteamAutoCrack benötigte .NET-Runtime konnte nicht installiert werden.</value></data>
+  <data name="Downloads_SAC_Err_Restart" xml:space="preserve"><value>Die .NET-Runtime wurde installiert, aber Windows muss neu gestartet werden, bevor SteamAutoCrack läuft.</value></data>
+  <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack konnte nicht heruntergeladen werden.</value></data>
+  <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack konnte nicht gestartet werden.</value></data>
+  <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack aktualisiert.</value></data>
+  <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>Dateien werden reserviert</value></data>
+  <data name="Downloads_Depot_Validating" xml:space="preserve"><value>vorhandene Dateien werden geprüft</value></data>
+  <data name="Depot_Cancel_Title" xml:space="preserve"><value>Download abbrechen</value></data>
+  <data name="Depot_Cancel_Body" xml:space="preserve"><value>{0} wurden bereits geschrieben nach:
+{1}
+
+Ja - anhalten und diese Dateien löschen
+Nein - anhalten, Dateien behalten
+Abbrechen - weiter herunterladen</value></data>
+  <data name="Depot_Cancel_DeleteFailed" xml:space="preserve"><value>Die heruntergeladenen Dateien konnten nicht gelöscht werden. Sie liegen weiterhin in {0}.</value></data>
+  <data name="Common_CopyAppId" xml:space="preserve"><value>App-ID kopieren</value></data>
+  <data name="Common_ShowInFolder" xml:space="preserve"><value>Im Ordner anzeigen</value></data>
+  <data name="Err_ClipboardBusy" xml:space="preserve"><value>Kopieren fehlgeschlagen — eine andere App blockiert die Zwischenablage.</value></data>
+  <data name="Err_PathMissing" xml:space="preserve"><value>{0} konnte nicht geöffnet werden — möglicherweise verschoben oder gelöscht.</value></data>
+  <data name="Builds_Select_NoKey" xml:space="preserve"><value>Kein Entschlüsselungsschlüssel im Lua für dieses Depot.</value></data>
+  <data name="Depot_Err_BadKey" xml:space="preserve"><value>Der Entschlüsselungsschlüssel für Depot {0} ist falsch.</value></data>
+  <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Kein Entschlüsselungsschlüssel im Lua für Depot {0}.</value></data>
+  <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Gemeinsame Laufzeit — meist bereits installiert. Zum Herunterladen trotzdem ankreuzen.</value></data>
+  <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} Einträge aus dem Download-Verlauf entfernen? Heruntergeladene Dateien bleiben erhalten.</value></data>
+  <data name="Nav_Achievements" xml:space="preserve"><value>Errungenschaften</value></data>
+  <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Starte Steam neu, um die Änderungen zu übernehmen.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, {1} Steam-API-Datei(en) ersetzt, {2} bereits erledigt.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Der Steam-Emulator konnte nicht heruntergeladen werden. Verbindung prüfen und erneut versuchen.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Keine steam_api.dll im Spielordner gefunden — nichts zu ersetzen.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, aber der Emulator-Schritt ist fehlgeschlagen: {1}</value></data>
+  <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam jetzt neu starten, damit die Änderungen wirksam werden?</value></data>
+  <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest für {0} installiert — Steam wird neu gestartet.</value></data>
+  <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest für {0} installiert. Starte Steam neu, um es zu übernehmen.</value></data>
+  <data name="Add_Err_Generate" xml:space="preserve"><value>Generierung fehlgeschlagen — überprüfe deine Verbindung und versuche es erneut.</value></data>
+  <data name="Add_Fix_Available" xml:space="preserve"><value>Für dieses Spiel gibt es {0} Fixes.</value></data>
+  <data name="Add_Fix_Available_Tags" xml:space="preserve"><value>Für dieses Spiel gibt es {0} Fixes: {1}.</value></data>
+  <data name="Add_Fix_Open" xml:space="preserve"><value>Fixes ansehen</value></data>
   <data name="Ach_Title" xml:space="preserve"><value>Errungenschaften</value></data>
   <data name="Ach_Subtitle" xml:space="preserve"><value>Errungenschaften eines beliebigen Spiels aus Ihrer Steam-Bibliothek freischalten oder sperren. Steam muss laufen und angemeldet sein.</value></data>
   <data name="Ach_Loading" xml:space="preserve"><value>Ihre Steam-Bibliothek wird gelesen…</value></data>
