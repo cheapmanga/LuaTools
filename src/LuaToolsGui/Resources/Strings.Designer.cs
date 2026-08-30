@@ -227,7 +227,10 @@ public static class Strings
     public static string Manage_Steamless_Confirm_Title => Get(nameof(Manage_Steamless_Confirm_Title));
     public static string Manage_Steamless_Confirm_Body => Get(nameof(Manage_Steamless_Confirm_Body));
     public static string Manage_Steamless_Working => Get(nameof(Manage_Steamless_Working));
-    public static string Manage_Toast_Steamless_Done => Get(nameof(Manage_Toast_Steamless_Done));
+    public static string Manage_Toast_Crack_Done => Get(nameof(Manage_Toast_Crack_Done));
+    public static string Manage_Goldberg_NoEmu => Get(nameof(Manage_Goldberg_NoEmu));
+    public static string Manage_Goldberg_NoDll => Get(nameof(Manage_Goldberg_NoDll));
+    public static string Manage_Goldberg_Partial => Get(nameof(Manage_Goldberg_Partial));
     public static string Manage_Steamless_NoInstall => Get(nameof(Manage_Steamless_NoInstall));
     public static string Manage_Steamless_Failed => Get(nameof(Manage_Steamless_Failed));
     public static string Manage_CopyAppIdTip => Get(nameof(Manage_CopyAppIdTip));

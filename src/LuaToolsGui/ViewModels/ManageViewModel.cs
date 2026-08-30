@@ -184,6 +184,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private readonly ToastService _toast;
     private readonly SettingsService _settings;
     private readonly SteamlessService _steamless;
+    private readonly GoldbergService _goldberg;
 
     private List<LuaTileViewModel> _all = [];
     private CancellationTokenSource? _prefetchCts;
@@ -275,7 +276,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     public ManageViewModel(SteamService steam, SteamAppListCache appList, SteamAppInfoCache appInfo,
         CoverCache covers, ToastService toast, SettingsService settings,
-        SteamlessService steamless)
+        SteamlessService steamless, GoldbergService goldberg)
     {
         _steam = steam;
         _appList = appList;
@@ -284,6 +285,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         _toast = toast;
         _settings = settings;
         _steamless = steamless;
+        _goldberg = goldberg;
         InitPageSize(settings.ManagePageSize);
     }
 
@@ -372,7 +374,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [RelayCommand]
     private void Update(LuaTileViewModel tile) => NavigateToAdd?.Invoke(tile.AppId);
 
-    // ── Steamless: remove SteamStub DRM ──────────────────────────────
+    // ── Remove Steam DRM: strip SteamStub, then swap in the emulator ──
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(NotBusy))]
     private bool _isBusy;
@@ -381,7 +383,22 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     [ObservableProperty] private double _progress;
     [ObservableProperty] private bool _isProgressIndeterminate;
 
-    /// <summary>Download Steamless (once) and strip SteamStub DRM from this game's executable(s).</summary>
+    /// <summary>
+    /// Take the game off Steam: strip the SteamStub wrapper from its executables (Steamless), then
+    /// replace the Steam API it calls with the Goldberg emulator.
+    ///
+    /// <para>
+    /// The two halves are useless apart. Unpacking alone leaves a game that still asks a running,
+    /// owning Steam client for permission; the emulator alone can't get past a packed executable. This
+    /// is the pipeline <see href="https://github.com/SteamAutoCracks/Steam-auto-crack">SteamAutoCrack</see>
+    /// automates, and the same order it uses.
+    /// </para>
+    ///
+    /// <para>
+    /// The emulator step runs even when Steamless patched nothing: most games have no SteamStub at all,
+    /// and those are exactly the ones where swapping the API is the whole job.
+    /// </para>
+    /// </summary>
     [RelayCommand]
     private async Task RemoveDrm(LuaTileViewModel? tile)
     {
@@ -404,22 +421,35 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
         try
         {
-            var result = await _steamless.PatchGameAsync(tile.AppId, prog);
-            if (result.Failed)
-            {
-                string msg = result.Error switch
-                {
-                    "no-install" => Resources.Strings.Manage_Steamless_NoInstall,
-                    "no-exe" => Resources.Strings.Manage_Steamless_NoInstall,
-                    _ => string.Format(Resources.Strings.Manage_Steamless_Failed, ""),
-                };
-                _toast.Show(Resources.Strings.Manage_Action_RemoveDrm, msg, error: true);
-            }
-            else
+            var unpack = await _steamless.PatchGameAsync(tile.AppId, prog);
+
+            // "The game isn't installed" is the one failure that stops everything: without a folder
+            // there is nothing for either half to work on.
+            if (unpack.Error == "no-install")
             {
                 _toast.Show(Resources.Strings.Manage_Action_RemoveDrm,
-                    string.Format(Resources.Strings.Manage_Toast_Steamless_Done, result.Patched, result.Unchanged));
+                    Resources.Strings.Manage_Steamless_NoInstall, error: true);
+                return;
             }
+
+            var emu = await _goldberg.ApplyAsync(tile.AppId, prog);
+            if (emu.Failed)
+            {
+                string msg = emu.Error switch
+                {
+                    "emu" => Resources.Strings.Manage_Goldberg_NoEmu,
+                    "no-dll" => Resources.Strings.Manage_Goldberg_NoDll,
+                    _ => string.Format(Resources.Strings.Manage_Steamless_Failed, ""),
+                };
+                // Steamless may well have done its half, so say what did happen before the problem.
+                _toast.Show(Resources.Strings.Manage_Action_RemoveDrm,
+                    string.Format(Resources.Strings.Manage_Goldberg_Partial, unpack.Patched, msg), error: true);
+                return;
+            }
+
+            _toast.Show(Resources.Strings.Manage_Action_RemoveDrm,
+                string.Format(Resources.Strings.Manage_Toast_Crack_Done,
+                    unpack.Patched, emu.Applied, emu.AlreadyDone));
         }
         catch (Exception ex)
         {

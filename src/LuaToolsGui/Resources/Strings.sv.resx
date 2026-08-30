@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Ta bort Steam-DRM</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Åtgärder</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Ta bort Steam-DRM?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Detta kör Steamless på spelets körbara fil för att ta bort SteamStub-DRM. Den ursprungliga .exe-filen säkerhetskopieras först till .bak. Vissa spel kan behöva en filverifiering i Steam efteråt. Fortsätta?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Det här tar spelet ur Steam i två steg: Steamless skalar av SteamStub-omslaget från de körbara filerna och sedan ersätter Goldberg-emulatorn dess steam_api-DLL:er. Originalen sparas bredvid som .bak, och det som redan har en säkerhetskopia lämnas i fred. Steam-funktioner (overlay, molnsparningar, online) slutar fungera för spelet; återställ .bak-filerna, eller verifiera spelets filer i Steam, för att ta tillbaka det. Fortsätta?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Tar bort Steam-DRM…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} ändrade, {1} oförändrade.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} körbar(a) fil(er) uppackade, {1} Steam API-fil(er) ersatta, {2} redan gjorda.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulatorn kunde inte hämtas. Kontrollera anslutningen och försök igen.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Ingen steam_api.dll i spelets mapp — det finns inget att ersätta.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} körbar(a) fil(er) uppackade, men emulatorsteget misslyckades: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Spelmappen hittades inte — är det installerat?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Det gick inte att ta bort DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klicka för att kopiera App ID</value></data>

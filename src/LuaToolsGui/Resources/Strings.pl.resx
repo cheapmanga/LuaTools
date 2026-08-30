@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Usuń DRM Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Akcje</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Usunąć DRM Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>To uruchomi Steamless na pliku wykonywalnym gry, aby usunąć DRM SteamStub. Oryginalny .exe zostanie najpierw zapisany jako .bak. Niektóre gry mogą wymagać później weryfikacji plików w Steam. Kontynuować?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>To wyprowadza grę ze Steama w dwóch krokach: Steamless zdejmuje otoczkę SteamStub z plików wykonywalnych, a potem emulator Goldberg podmienia biblioteki steam_api. Oryginały lądują obok jako .bak, a to, co ma już kopię, zostaje nietknięte. Funkcje Steama (overlay, zapisy w chmurze, sieć) przestają działać dla tej gry; przywrócenie plików .bak albo sprawdzenie plików gry w Steamie cofa zmianę. Kontynuować?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Usuwanie DRM Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} zmienione, {1} bez zmian.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Rozpakowane pliki wykonywalne: {0}, podmienione pliki Steam API: {1}, już zrobione: {2}.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Nie udało się pobrać emulatora Steama. Sprawdź połączenie i spróbuj ponownie.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>W folderze gry nie ma pliku steam_api.dll — nie ma czego podmieniać.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Rozpakowane pliki wykonywalne: {0}, ale krok emulatora się nie powiódł: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Nie znaleziono folderu gry — czy jest zainstalowana?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Nie udało się usunąć DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Kliknij, aby skopiować App ID</value></data>

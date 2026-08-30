@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Quitar DRM de Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acciones</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>¿Quitar el DRM de Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Esto ejecuta Steamless en el ejecutable del juego para eliminar el DRM SteamStub. El .exe original se respalda como .bak primero. Algunos juegos pueden necesitar una verificación de archivos en Steam después. ¿Continuar?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Esto saca el juego de Steam en dos pasos: Steamless quita la envoltura SteamStub de sus ejecutables y luego el emulador Goldberg sustituye sus DLL steam_api. Los originales se guardan al lado como .bak, y lo que ya tenga copia no se toca. Las funciones de Steam (overlay, guardado en la nube, en línea) dejan de funcionar para este juego; restaurar los .bak, o verificar los archivos del juego en Steam, lo deja como estaba. ¿Continuar?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Quitando el DRM de Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} modificados, {1} sin cambios.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} ejecutable(s) desempaquetado(s), {1} archivo(s) de Steam API sustituido(s), {2} ya hecho(s).</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>No se ha podido descargar el emulador de Steam. Comprueba la conexión e inténtalo de nuevo.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>No se ha encontrado ningún steam_api.dll en la carpeta del juego: no hay nada que sustituir.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} ejecutable(s) desempaquetado(s), pero el paso del emulador ha fallado: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>No se encontró la carpeta del juego, ¿está instalado?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>No se pudo quitar el DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Haz clic para copiar el App ID</value></data>

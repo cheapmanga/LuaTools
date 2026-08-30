@@ -238,9 +238,12 @@
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Hapus DRM Steam</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Tindakan</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Hapus DRM Steam?</value></data>
-  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ini menjalankan Steamless pada file eksekusi game untuk menghapus DRM SteamStub. File .exe asli dicadangkan ke .bak terlebih dahulu. Beberapa game mungkin perlu verifikasi file di Steam setelahnya. Lanjutkan?</value></data>
+  <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ini mengeluarkan game dari Steam dalam dua langkah: Steamless mengupas pembungkus SteamStub dari file eksekusinya, lalu emulator Goldberg mengganti DLL steam_api-nya. File asli dicadangkan di sebelahnya sebagai .bak, dan yang sudah punya cadangan tidak disentuh. Fitur Steam (overlay, save cloud, online) berhenti bekerja untuk game ini; mengembalikan file .bak, atau memverifikasi file game di Steam, mengembalikan semuanya. Lanjutkan?</value></data>
   <data name="Manage_Steamless_Working" xml:space="preserve"><value>Menghapus DRM Steam…</value></data>
-  <data name="Manage_Toast_Steamless_Done" xml:space="preserve"><value>{0} diubah, {1} tidak berubah.</value></data>
+  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} file eksekusi dibuka, {1} file Steam API diganti, {2} sudah pernah.</value></data>
+  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulator Steam tidak bisa diunduh. Periksa koneksi lalu coba lagi.</value></data>
+  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Tidak ada steam_api.dll di folder game — tidak ada yang perlu diganti.</value></data>
+  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} file eksekusi dibuka, tapi langkah emulator gagal: {1}</value></data>
   <data name="Manage_Steamless_NoInstall" xml:space="preserve"><value>Folder game tidak ditemukan — apakah sudah terpasang?</value></data>
   <data name="Manage_Steamless_Failed" xml:space="preserve"><value>Tidak dapat menghapus DRM. {0}</value></data>
   <data name="Manage_CopyAppIdTip" xml:space="preserve"><value>Klik untuk menyalin App ID</value></data>
