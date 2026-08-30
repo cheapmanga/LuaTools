@@ -320,13 +320,9 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
         // Read this before the helper connects. Opening a game's achievements makes Steam count the
         // game as running, which stamps LastPlayed with the current time — the tool would erase the
         // very thing it is about to check.
-        var lastPlayed = library.GetLastPlayed(game.AppId);
-        _neverLaunched = lastPlayed is { } last && last.ToUnixTimeSeconds() == 0;
-        _launchDiagnostic = lastPlayed is null
-            ? "no appmanifest found — the game isn't installed in any Steam library"
-            : lastPlayed.Value.ToUnixTimeSeconds() == 0
-                ? "never launched"
-                : $"last launched {lastPlayed.Value.LocalDateTime:g}";
+        // Read before the helper connects: opening a game's achievements makes Steam count it as
+        // running, which stamps LastPlayed with the current time.
+        _neverLaunched = library.GetLastPlayed(game.AppId) is { } last && last.ToUnixTimeSeconds() == 0;
 
         _detailCts = new CancellationTokenSource();
         var ct = _detailCts.Token;
@@ -416,17 +412,15 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     /// Stage every togglable row at once. Still just a staged change: Save is what commits it.
     ///
     /// <para>
-    /// Warns first when Steam has never launched this game. Its servers roll back achievements that
-    /// don't square with the play record, so a full list unlocked on a game that was never started is
-    /// the one reliable way to lose them all — and the user finds out hours later, not here. Nothing is
-    /// warned about when the state can't be read: a warning based on a fact we don't have would just
-    /// teach people to click through it.
+    /// Confirms first, because Steam rolls back achievements that don't square with the play record.
+    /// See <see cref="ConfirmMassUnlock"/> for why the question is asked every time rather than only
+    /// for games that look unplayed.
     /// </para>
     /// </summary>
     [RelayCommand]
     private void UnlockAll()
     {
-        if (!ConfirmNeverLaunched()) return;
+        if (!ConfirmMassUnlock()) return;
         SetAllLocal(true);
     }
 
@@ -436,26 +430,37 @@ public partial class AchievementsViewModel : PagedListViewModel<AchievementGameC
     /// <summary>Whether Steam had never launched this game when the panel was opened.</summary>
     private bool _neverLaunched;
 
-    /// <summary>TEMPORARY, test builds only: what the launch check found, so a missing warning can be
-    /// explained without a debugger. Remove before this reaches main.</summary>
-    private string _launchDiagnostic = "";
-
-    private bool ConfirmNeverLaunched()
+    /// <summary>
+    /// Confirm a mass unlock, because Steam's servers roll back achievements that don't square with
+    /// the play record: they appear, then vanish hours later, and the user has no idea why.
+    ///
+    /// <para>
+    /// The question is always asked above <see cref="QuietUnlockCount"/> rather than only for games
+    /// Steam has never launched, because that state can't be measured honestly any more. Steam stopped
+    /// recording per-game playtime, leaving only the manifest's LastPlayed — and opening this very
+    /// panel makes Steam count the game as running, so the tool stamps LastPlayed itself on first use.
+    /// A check defeated by its own side effect is worse than no check: it stays silent exactly when it
+    /// was supposed to speak.
+    /// </para>
+    ///
+    /// <para>
+    /// LastPlayed is still read, for the wording only: a game Steam has never started earns the blunter
+    /// warning, the rest get the general one.
+    /// </para>
+    /// </summary>
+    private bool ConfirmMassUnlock()
     {
         if (SelectedGame is not { } game) return true;
 
         int locked = _allAchievements.Count(a => a.CanToggle && !a.IsAchieved);
+        if (locked < QuietUnlockCount) return true;
 
-        // TEMPORARY, test builds only: say out loud why no warning is coming.
-        if (!_neverLaunched || locked < QuietUnlockCount)
-        {
-            toast.Show("Unlock all — no warning",
-                $"{_launchDiagnostic}; {locked} locked achievement(s) of {_allAchievements.Count}");
-            return true;
-        }
+        string message = _neverLaunched
+            ? string.Format(Resources.Strings.Ach_Playtime_Warning, locked, game.Name)
+            : string.Format(Resources.Strings.Ach_MassUnlock_Warning, locked, game.Name);
 
         return MessageBox.Show(
-            string.Format(Resources.Strings.Ach_Playtime_Warning, locked, game.Name),
+            message,
             Resources.Strings.Ach_Playtime_Warning_Title,
             MessageBoxButton.OKCancel,
             MessageBoxImage.Warning) == MessageBoxResult.OK;

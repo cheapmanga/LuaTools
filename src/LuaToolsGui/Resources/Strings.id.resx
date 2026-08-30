@@ -629,6 +629,7 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Buka semua</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Buka semua?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam tidak punya catatan bahwa {1} pernah dijalankan. Membuka {0} pencapaian di game yang belum pernah dimainkan persis yang dibatalkan server Steam — muncul, lalu hilang beberapa jam kemudian. Biasanya cukup menjalankan game sekali, sebentar saja. Tetap buka semua?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Kamu akan membuka {0} pencapaian di {1} sekaligus. Server Steam membatalkan pencapaian yang tidak cocok dengan lama bermain — muncul, lalu hilang beberapa jam kemudian. Lebih aman disebar ke beberapa sesi. Tetap buka semua?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Kunci semua</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Batalkan</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Simpan ke Steam</value></data>

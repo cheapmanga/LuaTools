@@ -629,6 +629,7 @@ Avbryt - fortsätt hämta</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Lås upp alla</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Låsa upp alla?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam har ingen notering om att {1} någonsin startats. Att låsa upp {0} prestationer i ett spel som aldrig spelats är precis vad Steams servrar tar tillbaka — de dyker upp och försvinner timmar senare. Det räcker oftast att starta spelet en gång, kort. Låsa upp allt ändå?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Du håller på att låsa upp {0} prestationer i {1} på en gång. Steams servrar tar tillbaka prestationer som inte stämmer med speltiden — de dyker upp och försvinner timmar senare. Sprid ut dem över flera tillfällen är säkrare. Låsa upp allt ändå?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Lås alla</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Ångra</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Spara till Steam</value></data>

@@ -629,6 +629,7 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Alle freischalten</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Alle freischalten?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam hat keinen Eintrag darüber, dass {1} je gestartet wurde. {0} Errungenschaften bei einem nie gespielten Spiel freizuschalten, ist genau das, was Steams Server zurücknehmen — sie erscheinen und sind Stunden später weg. Das Spiel einmal kurz zu starten, reicht meist. Trotzdem alle freischalten?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Gleich werden {0} Errungenschaften in {1} auf einmal freigeschaltet. Steams Server nehmen Errungenschaften zurück, die nicht zur Spielzeit passen — sie erscheinen und sind Stunden später weg. Verteilt auf mehrere Sitzungen ist es sicherer. Trotzdem alle freischalten?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Alle sperren</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Verwerfen</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Auf Steam speichern</value></data>

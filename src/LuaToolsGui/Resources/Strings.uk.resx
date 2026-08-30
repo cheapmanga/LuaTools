@@ -629,6 +629,7 @@
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Відкрити всі</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Відкрити всі?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>У Steam немає запису про те, що {1} колись запускали. Відкрити {0} досягнень у грі, в яку ніколи не грали, — саме те, що сервери Steam скасовують: вони з'являться і за кілька годин зникнуть. Зазвичай досить один раз ненадовго запустити гру. Усе одно відкрити всі?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Зараз буде відкрито {0} досягнень у {1} одразу. Сервери Steam скасовують досягнення, що не узгоджуються з часом у грі: вони з'являться і за кілька годин зникнуть. Безпечніше розтягнути їх на кілька сесій. Усе одно відкрити всі?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Закрити всі</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Скасувати</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Зберегти в Steam</value></data>

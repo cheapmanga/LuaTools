@@ -629,6 +629,7 @@ Peruuta - jatka lataamista</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Avaa kaikki</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Avataanko kaikki?</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steamilla ei ole merkintää siitä, että {1} olisi koskaan käynnistetty. {0} saavutuksen avaaminen pelissä, jota ei ole koskaan pelattu, on juuri se, minkä Steamin palvelimet peruvat — ne ilmestyvät ja katoavat tuntien päästä. Yleensä riittää käynnistää peli kerran, vaikka hetkeksi. Avataanko silti kaikki?</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>Olet avaamassa {0} saavutusta pelissä {1} kerralla. Steamin palvelimet peruvat saavutukset, jotka eivät vastaa peliaikaa — ne ilmestyvät ja katoavat tuntien päästä. Turvallisempaa on jakaa ne useampaan kertaan. Avataanko silti kaikki?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Lukitse kaikki</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Kumoa</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Tallenna Steamiin</value></data>

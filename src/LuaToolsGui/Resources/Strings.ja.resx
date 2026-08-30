@@ -629,6 +629,7 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Ach_UnlockAll" xml:space="preserve"><value>すべて解除</value></data>
   <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>すべて解除しますか？</value></data>
   <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam には {1} を起動した記録がありません。一度も遊んでいないゲームで {0} 件の実績を解除するのは、Steam のサーバーが取り消す典型例です。表示されても数時間後には消えます。ゲームを一度、短くても起動すれば大抵は足ります。それでもすべて解除しますか？</value></data>
+  <data name="Ach_MassUnlock_Warning" xml:space="preserve"><value>{1} の実績 {0} 件を一度に解除しようとしています。Steam のサーバーはプレイ時間と釣り合わない実績を取り消します。表示されても数時間後には消えます。何回かに分ける方が安全です。それでもすべて解除しますか？</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>すべてロック</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>元に戻す</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Steamに保存</value></data>
