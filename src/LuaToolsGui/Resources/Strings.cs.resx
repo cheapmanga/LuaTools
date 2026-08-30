@@ -605,10 +605,6 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Odstranit všech {0} záznamů z historie stahování? Stažené soubory zůstanou zachovány.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Achievementy</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Restartujte Steam, aby se změny použily.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Rozbalené spustitelné soubory: {0}, vyměněné soubory Steam API: {1}, už hotové: {2}.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Emulátor Steamu se nepodařilo stáhnout. Zkontroluj připojení a zkus to znovu.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Ve složce hry není žádný steam_api.dll — není co vyměnit.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Rozbalené spustitelné soubory: {0}, ale krok s emulátorem selhal: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Restartovat Steam nyní, aby se změny projevily?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest {0} nainstalován — Steam se restartuje.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest {0} nainstalován. Restartujte Steam, aby se použil.</value></data>

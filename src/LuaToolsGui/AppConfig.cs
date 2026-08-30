@@ -60,8 +60,7 @@ public static class AppConfig
     //     DESKTOP runtime must be present. We install it on demand via Velopack's Runtimes API.
     //   * Its zip has a real directory TREE (Goldberg/, TEMP/ beside the exe), unlike the flat zip
     //     DepotDownloaderService expects. Their exe resolves those paths from its own base directory,
-    //     so extract without flattening. GoldbergService reads that same package for its Goldberg/
-    //     folder, which is why the emulator needs no separate download.
+    //     so extract without flattening.
     public const string SteamAutoCrackRepo = "SteamAutoCracks/Steam-auto-crack";
 
     // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.

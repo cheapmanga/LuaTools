@@ -605,10 +605,6 @@ Peruuta - jatka lataamista</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Poistetaanko kaikki {0} merkintää lataushistoriasta? Ladattuihin tiedostoihin tämä ei vaikuta.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Saavutukset</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Käynnistä Steam uudelleen ottaaksesi käyttöön.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} suoritettava(a) tiedosto(a) purettu, {1} Steam API -tiedosto(a) korvattu, {2} jo tehty.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulaattorin lataus epäonnistui. Tarkista yhteys ja yritä uudelleen.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Pelin kansiosta ei löytynyt steam_api.dll:ää — ei mitään korvattavaa.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} suoritettava(a) tiedosto(a) purettu, mutta emulaattorivaihe epäonnistui: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Käynnistetäänkö Steam nyt uudelleen, jotta muutokset tulevat voimaan?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0}-manifest asennettu — Steam käynnistyy uudelleen.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0}-manifest asennettu. Käynnistä Steam uudelleen ottaaksesi käyttöön.</value></data>

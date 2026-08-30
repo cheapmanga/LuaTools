@@ -605,10 +605,6 @@ Hayır - durdur ama dosyaları koru
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>İndirme geçmişindeki {0} kaydın tümü kaldırılsın mı? İndirilen dosyalar etkilenmez.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Başarımlar</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Uygulamak için Steam'i yeniden başlatın.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} çalıştırılabilir dosya açıldı, {1} Steam API dosyası değiştirildi, {2} zaten yapılmıştı.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam öykünücüsü indirilemedi. Bağlantıyı kontrol edip tekrar dene.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Oyun klasöründe steam_api.dll yok — değiştirilecek bir şey yok.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} çalıştırılabilir dosya açıldı, ama öykünücü adımı başarısız oldu: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Değişikliklerin uygulanması için Steam şimdi yeniden başlatılsın mı?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} manifestosu kuruldu — Steam yeniden başlatılıyor.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} manifestosu kuruldu. Uygulamak için Steam'i yeniden başlatın.</value></data>

@@ -631,10 +631,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>هل تريد إزالة كل الإدخالات ({0}) من سجل التنزيلات؟ لن تتأثر الملفات التي تم تنزيلها.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>الإنجازات</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> أعد تشغيل Steam للتطبيق.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، واستُبدل {1} ملف Steam API، و{2} تم من قبل.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>تعذّر تنزيل محاكي Steam. تحقّق من الاتصال وأعد المحاولة.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>لا يوجد steam_api.dll في مجلد اللعبة — لا شيء لاستبداله.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>تم فك {0} ملف تنفيذي، لكن خطوة المحاكي فشلت: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>إعادة تشغيل Steam الآن ليسري مفعول التغييرات؟</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0} — يُعاد تشغيل Steam.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>تم تثبيت manifest الخاص بـ {0}. أعد تشغيل Steam للتطبيق.</value></data>

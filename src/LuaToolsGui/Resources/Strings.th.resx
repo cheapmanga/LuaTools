@@ -605,10 +605,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ต้องการลบรายการทั้งหมด {0} รายการออกจากประวัติการดาวน์โหลดหรือไม่ ไฟล์ที่ดาวน์โหลดแล้วจะไม่ได้รับผลกระทบ</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>ความสำเร็จ</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> รีสตาร์ท Steam เพื่อนำไปใช้</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>แตกไฟล์โปรแกรมแล้ว {0} ไฟล์ แทนที่ไฟล์ Steam API แล้ว {1} ไฟล์ ทำไปแล้ว {2} ไฟล์</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>ดาวน์โหลดตัวจำลอง Steam ไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองใหม่</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>ไม่พบ steam_api.dll ในโฟลเดอร์เกม — ไม่มีอะไรให้แทนที่</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>แตกไฟล์โปรแกรมแล้ว {0} ไฟล์ แต่ขั้นตอนตัวจำลองล้มเหลว: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>รีสตาร์ท Steam ตอนนี้เพื่อให้การเปลี่ยนแปลงมีผลหรือไม่?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>ติดตั้ง manifest ของ {0} แล้ว — Steam กำลังรีสตาร์ท</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>ติดตั้ง manifest ของ {0} แล้ว รีสตาร์ท Steam เพื่อนำไปใช้</value></data>

@@ -605,10 +605,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Да се премахнат ли всички {0} записа от историята на изтеглянията? Изтеглените файлове не се засягат.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Постижения</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Рестартирайте Steam, за да приложите.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Разопаковани изпълними файла: {0}, подменени файла Steam API: {1}, вече направени: {2}.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Емулаторът на Steam не можа да бъде изтеглен. Проверете връзката и опитайте отново.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>В папката на играта няма steam_api.dll — няма какво да се подмени.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Разопаковани изпълними файла: {0}, но стъпката с емулатора се провали: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Рестартиране на Steam сега, за да влязат в сила промените?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Манифестът на {0} е инсталиран — Steam се рестартира.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Манифестът на {0} е инсталиран. Рестартирайте Steam, за да приложите.</value></data>

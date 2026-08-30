@@ -605,10 +605,6 @@ Hủy - tiếp tục tải</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Xóa tất cả {0} mục khỏi lịch sử tải xuống? Các tệp đã tải không bị ảnh hưởng.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Thành tựu</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Khởi động lại Steam để áp dụng.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Đã bóc {0} tệp thực thi, thay {1} tệp Steam API, {2} đã làm từ trước.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Không tải được trình giả lập Steam. Hãy kiểm tra kết nối rồi thử lại.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Không thấy steam_api.dll trong thư mục trò chơi — không có gì để thay.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Đã bóc {0} tệp thực thi, nhưng bước giả lập thất bại: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Khởi động lại Steam ngay để các thay đổi có hiệu lực?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Đã cài đặt manifest của {0} — Steam đang khởi động lại.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Đã cài đặt manifest của {0}. Khởi động lại Steam để áp dụng.</value></data>

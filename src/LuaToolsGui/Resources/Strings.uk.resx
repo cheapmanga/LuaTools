@@ -605,10 +605,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Вилучити всі записи ({0}) з історії завантажень? Завантажені файли не зачіпаються.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Досягнення</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Перезапустіть Steam, щоб застосувати.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>Розпаковано виконуваних файлів: {0}, замінено файлів Steam API: {1}, уже зроблено: {2}.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Не вдалося завантажити емулятор Steam. Перевірте з'єднання та повторіть спробу.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>У теці гри немає steam_api.dll — немає чого замінювати.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>Розпаковано виконуваних файлів: {0}, але крок з емулятором не вдався: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Перезапустити Steam зараз, щоб зміни набули чинності?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Маніфест {0} встановлено — Steam перезапускається.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Маніфест {0} встановлено. Перезапустіть Steam, щоб застосувати.</value></data>

@@ -586,10 +586,6 @@ public static class Strings
 
     public static string Nav_Achievements => Get(nameof(Nav_Achievements));
     public static string Drop_Result_RestartApply => Get(nameof(Drop_Result_RestartApply));
-    public static string Manage_Toast_Crack_Done => Get(nameof(Manage_Toast_Crack_Done));
-    public static string Manage_Goldberg_NoEmu => Get(nameof(Manage_Goldberg_NoEmu));
-    public static string Manage_Goldberg_NoDll => Get(nameof(Manage_Goldberg_NoDll));
-    public static string Manage_Goldberg_Partial => Get(nameof(Manage_Goldberg_Partial));
     public static string Manage_RestartSteam_Ask => Get(nameof(Manage_RestartSteam_Ask));
     public static string Fixes_Toast_FixInstalled_Restarting => Get(nameof(Fixes_Toast_FixInstalled_Restarting));
     public static string Fixes_Toast_FixInstalled_Restart => Get(nameof(Fixes_Toast_FixInstalled_Restart));

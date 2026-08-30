@@ -605,10 +605,6 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} Einträge aus dem Download-Verlauf entfernen? Heruntergeladene Dateien bleiben erhalten.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Errungenschaften</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Starte Steam neu, um die Änderungen zu übernehmen.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, {1} Steam-API-Datei(en) ersetzt, {2} bereits erledigt.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Der Steam-Emulator konnte nicht heruntergeladen werden. Verbindung prüfen und erneut versuchen.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Keine steam_api.dll im Spielordner gefunden — nichts zu ersetzen.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} Programmdatei(en) entpackt, aber der Emulator-Schritt ist fehlgeschlagen: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam jetzt neu starten, damit die Änderungen wirksam werden?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest für {0} installiert — Steam wird neu gestartet.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest für {0} installiert. Starte Steam neu, um es zu übernehmen.</value></data>

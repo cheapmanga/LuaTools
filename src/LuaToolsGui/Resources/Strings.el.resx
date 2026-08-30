@@ -605,10 +605,6 @@
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Να αφαιρεθούν και οι {0} καταχωρίσεις από το ιστορικό λήψεων; Τα ληφθέντα αρχεία δεν επηρεάζονται.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Επιτεύγματα</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Επανεκκινήστε το Steam για εφαρμογή.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} εκτελέσιμα αποσυμπιέστηκαν, {1} αρχεία Steam API αντικαταστάθηκαν, {2} ήδη έτοιμα.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Δεν ήταν δυνατή η λήψη του εξομοιωτή Steam. Έλεγξε τη σύνδεση και δοκίμασε ξανά.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Δεν βρέθηκε steam_api.dll στον φάκελο του παιχνιδιού — δεν υπάρχει τίποτα να αντικατασταθεί.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} εκτελέσιμα αποσυμπιέστηκαν, αλλά το βήμα του εξομοιωτή απέτυχε: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Επανεκκίνηση του Steam τώρα ώστε να τεθούν σε ισχύ οι αλλαγές;</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Το manifest του {0} εγκαταστάθηκε — το Steam επανεκκινείται.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Το manifest του {0} εγκαταστάθηκε. Επανεκκινήστε το Steam για εφαρμογή.</value></data>

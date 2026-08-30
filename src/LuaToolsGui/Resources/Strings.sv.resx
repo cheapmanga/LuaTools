@@ -605,10 +605,6 @@ Avbryt - fortsätt hämta</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Ta bort alla {0} poster från hämtningshistoriken? Hämtade filer påverkas inte.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Prestationer</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Starta om Steam för att tillämpa.</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>{0} körbar(a) fil(er) uppackade, {1} Steam API-fil(er) ersatta, {2} redan gjorda.</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam-emulatorn kunde inte hämtas. Kontrollera anslutningen och försök igen.</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>Ingen steam_api.dll i spelets mapp — det finns inget att ersätta.</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>{0} körbar(a) fil(er) uppackade, men emulatorsteget misslyckades: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Starta om Steam nu så att ändringarna träder i kraft?</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>Manifest för {0} installerat — Steam startar om.</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>Manifest för {0} installerat. Starta om Steam för att tillämpa.</value></data>

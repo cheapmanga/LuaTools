@@ -605,10 +605,6 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ダウンロード履歴から {0} 件すべてを削除しますか？ダウンロード済みのファイルには影響しません。</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>実績</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 適用するにはSteamを再起動してください。</value></data>
-  <data name="Manage_Toast_Crack_Done" xml:space="preserve"><value>実行ファイル {0} 個を展開、Steam API ファイル {1} 個を差し替え、{2} 個は対応済み。</value></data>
-  <data name="Manage_Goldberg_NoEmu" xml:space="preserve"><value>Steam エミュレーターをダウンロードできませんでした。接続を確認して、もう一度お試しください。</value></data>
-  <data name="Manage_Goldberg_NoDll" xml:space="preserve"><value>ゲームフォルダーに steam_api.dll が見つかりません。差し替えるものがありません。</value></data>
-  <data name="Manage_Goldberg_Partial" xml:space="preserve"><value>実行ファイル {0} 個を展開しましたが、エミュレーターの段階で失敗しました: {1}</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>変更を反映するために今すぐSteamを再起動しますか？</value></data>
   <data name="Fixes_Toast_FixInstalled_Restarting" xml:space="preserve"><value>{0} のマニフェストをインストールしました — Steamを再起動しています。</value></data>
   <data name="Fixes_Toast_FixInstalled_Restart" xml:space="preserve"><value>{0} のマニフェストをインストールしました。適用するにはSteamを再起動してください。</value></data>
