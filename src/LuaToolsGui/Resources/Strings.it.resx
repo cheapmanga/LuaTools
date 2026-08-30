@@ -627,6 +627,8 @@ Annulla - continua a scaricare</value></data>
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Sbloccati</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Bloccati</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Sblocca tutto</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Sbloccarli tutti?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam ha registrato solo {0} minuto/i di gioco su {2}. Sbloccare {1} obiettivi in una volta su un gioco appena avviato è proprio ciò che i server di Steam annullano: compaiono e spariscono dopo qualche ora. Distribuirli su più sessioni è più sicuro. Sbloccare comunque tutto?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Blocca tutto</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Annulla</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Salva su Steam</value></data>

@@ -627,6 +627,8 @@
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Ξεκλειδωμένα</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Κλειδωμένα</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Ξεκλείδωμα όλων</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Ξεκλείδωμα όλων;</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Το Steam έχει καταγράψει μόλις {0} λεπτό/ά παιχνιδιού για το {2}. Το ξεκλείδωμα {1} επιτευγμάτων μονομιάς σε παιχνίδι που μόλις άνοιξες είναι ακριβώς αυτό που αναιρούν οι διακομιστές του Steam — εμφανίζονται και χάνονται μετά από ώρες. Πιο ασφαλές είναι να τα μοιράσεις σε λίγες συνεδρίες. Να ξεκλειδωθούν όλα έτσι κι αλλιώς;</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Κλείδωμα όλων</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Αναίρεση</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Αποθήκευση στο Steam</value></data>

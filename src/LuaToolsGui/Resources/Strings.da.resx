@@ -627,6 +627,8 @@ Annuller - fortsæt download</value></data>
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Låst op</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Låst</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Lås alle op</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Lås dem alle op?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam har kun registreret {0} minut(ter) spilletid på {2}. At låse {1} præstationer op på én gang i et spil, der næsten ikke er spillet, er præcis det, Steams servere ruller tilbage — de dukker op og forsvinder timer senere. Fordelt over flere gange er sikrere. Lås alt op alligevel?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Lås alle</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Fortryd</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Gem på Steam</value></data>

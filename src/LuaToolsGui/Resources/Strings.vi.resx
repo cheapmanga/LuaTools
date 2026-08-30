@@ -627,6 +627,8 @@ Hủy - tiếp tục tải</value></data>
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Đã mở khóa</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Đang khóa</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Mở khóa tất cả</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Mở khóa tất cả?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam chỉ ghi nhận {0} phút chơi {2}. Mở khóa {1} thành tựu cùng lúc trên một trò chơi gần như chưa chơi chính là điều máy chủ Steam thu hồi — chúng hiện ra rồi biến mất sau vài giờ. Rải ra vài phiên thì an toàn hơn. Vẫn mở khóa tất cả?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Khóa tất cả</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Hoàn tác</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Lưu lên Steam</value></data>

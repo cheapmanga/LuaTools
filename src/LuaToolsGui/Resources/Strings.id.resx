@@ -627,6 +627,8 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Ach_Filter_Unlocked" xml:space="preserve"><value>Terbuka</value></data>
   <data name="Ach_Filter_Locked" xml:space="preserve"><value>Terkunci</value></data>
   <data name="Ach_UnlockAll" xml:space="preserve"><value>Buka semua</value></data>
+  <data name="Ach_Playtime_Warning_Title" xml:space="preserve"><value>Buka semua?</value></data>
+  <data name="Ach_Playtime_Warning" xml:space="preserve"><value>Steam hanya mencatat {0} menit bermain untuk {2}. Membuka {1} pencapaian sekaligus di game yang nyaris belum dimainkan persis yang dibatalkan server Steam — muncul, lalu hilang beberapa jam kemudian. Lebih aman disebar ke beberapa sesi. Tetap buka semua?</value></data>
   <data name="Ach_LockAll" xml:space="preserve"><value>Kunci semua</value></data>
   <data name="Ach_Revert" xml:space="preserve"><value>Batalkan</value></data>
   <data name="Ach_Save" xml:space="preserve"><value>Simpan ke Steam</value></data>
