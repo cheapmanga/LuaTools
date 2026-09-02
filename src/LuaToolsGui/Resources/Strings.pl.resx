@@ -696,7 +696,18 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Nie udało się zapisać biletów. Zamknij Steam i spróbuj ponownie.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Realizacja wysyła kod i MachineGuid tego Windows, nic więcej. Kod jest przypisany do maszyny, której bilet go otworzył.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generowanie kodu</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Do wygenerowania potrzebny jest bilet własności pobrany z twojej aktywnej sesji Steam, a to potrafi tylko własna aplikacja Tesla697. Ten przycisk ją otwiera.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Otwórz Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Realizacja kodów i walidacja Devuvo zostały odtworzone na podstawie TokeerDRM-App i LuaToolsValidator autorstwa Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Wybierz grę, którą masz, i udostępnij do niej kod. Tickety zapisane przez Steam przy ostatnim uruchomieniu trafiają do magazynu kodów, który sprawdza podpis Valve, zanim cokolwiek wygeneruje.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Aktywacja, generowanie i walidacja Devuvo są odtworzone na podstawie TokeerDRM-App i LuaToolsValidator autorstwa Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generuj</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Gra</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Twój kod</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Jednorazowy: gdy ktoś go użyje, przepada.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Na tym PC nie ma jeszcze ticketu do tej gry. Uruchom ją raz ze Steama na koncie, które ją posiada, i wróć tutaj.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Konto zalogowane w Steamie nie posiada tej gry: jej ticket pochodzi z wykorzystanego kodu, więc nie da się z niego zrobić nowych.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Serwer nie zwrócił kodu.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopiuj</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Żaden tryb unlockera nie jest aktywny</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kodu można użyć tylko raz, a sklep zużywa go w chwili, gdy go realizujesz. Bez aktywnego trybu zapisane bilety mogą nic nie dać, a kod przepadnie na zawsze.
+
+Zrealizować mimo to?</value></data>
 </root>

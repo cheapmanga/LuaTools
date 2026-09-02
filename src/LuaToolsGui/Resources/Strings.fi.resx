@@ -696,7 +696,18 @@ Peruuta - jatka lataamista</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Lippuja ei voitu kirjoittaa. Sulje Steam ja yritä uudelleen.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Lunastus lähettää vain koodin ja tämän koneen Windows-MachineGuidin, ei mitään muuta. Koodi on sidottu siihen koneeseen, jonka lipulla se luotiin.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Koodin luominen</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Koodin luominen vaatii omistajuuslipun aktiivisesta Steam-istunnostasi, mihin pystyy vain Tesla697:n oma sovellus. Tämä avaa sen.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Avaa Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Lunastus ja Devuvo-tarkistus on rakennettu uudelleen Tesla697:n TokeerDRM-App- ja LuaToolsValidator-sovellusten pohjalta.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Valitse omistamasi peli ja jaa siitä koodi. Tiketit, jotka Steam tallensi viime käynnistyksellä, lähetetään koodipankkiin, joka tarkistaa Valven allekirjoituksen ennen kuin mitään luodaan.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Lunastus, koodien luonti ja Devuvo-tarkistus on rakennettu uudelleen Tesla697:n TokeerDRM-Appista ja LuaToolsValidatorista.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Luo</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Peli</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Koodisi</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Kertakäyttöinen: heti kun joku lunastaa sen, se on käytetty.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Tälle pelille ei ole vielä tikettiä tällä PC:llä. Käynnistä se kerran Steamista sillä tilillä, joka omistaa sen, ja palaa sitten tänne.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Steamiin kirjautunut tili ei omista tätä peliä: sen tiketti on peräisin lunastetusta koodista, joten sillä ei voi luoda uusia.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Palvelin ei palauttanut koodia.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopioi</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Mikään unlocker-tila ei ole käytössä</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Koodin voi käyttää vain kerran, ja kauppa kuluttaa sen heti kun lunastat sen. Ilman käytössä olevaa tilaa sen kirjoittamat tiketit eivät ehkä tee mitään ja koodi menetetään lopullisesti.
+
+Lunastetaanko silti?</value></data>
 </root>

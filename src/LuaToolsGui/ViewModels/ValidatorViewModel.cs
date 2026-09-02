@@ -7,8 +7,8 @@ using LuaToolsGui.Services;
 
 namespace LuaToolsGui.ViewModels;
 
-/// <summary>One installed game, for the picker.</summary>
-public record ValidatorGame(long AppId, string Name)
+/// <summary>One installed game, for a page's game picker.</summary>
+public record InstalledGame(long AppId, string Name)
 {
     public string Display => $"{Name} ({AppId})";
 }
@@ -42,12 +42,12 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
     /// <summary>Keeps a long run from growing the log without bound; the tail is what matters.</summary>
     private const int MaxLogLines = 3000;
 
-    public ObservableCollection<ValidatorGame> Games { get; } = [];
+    public ObservableCollection<InstalledGame> Games { get; } = [];
     public ObservableCollection<string> Log { get; } = [];
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(RunCommand))]
-    private ValidatorGame? _selectedGame;
+    private InstalledGame? _selectedGame;
 
     /// <summary>Pins the game to its installed build, so a Steam update can't wipe the activation.</summary>
     [ObservableProperty] private bool _lockVersion;
@@ -94,7 +94,7 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
             .ToList());
 
         foreach (var (appId, name) in installed)
-            Games.Add(new ValidatorGame(appId, name));
+            Games.Add(new InstalledGame(appId, name));
     }
 
     private bool CanRun() => !IsRunning && ConsentGiven && SelectedGame is not null;
@@ -124,6 +124,12 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
                 _ => Resources.Strings.Val_Status_Failed,
             };
         }
+        catch (Exception)
+        {
+            // Nothing may escape an async command: there is no handler above it, so an exception here
+            // would close the app instead of failing the run.
+            Status = Resources.Strings.Val_Status_Failed;
+        }
         finally
         {
             IsRunning = false;
@@ -133,9 +139,14 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
     /// <summary>
     /// One transcript line, from the thread following the file. Everything here has to hop to the UI.
     /// </summary>
+    /// <remarks>
+    /// Posted rather than sent: a blocking Invoke per line makes the reader thread wait on a busy UI
+    /// thread for every line of a chatty run. Posts keep their order, so the log still reads in
+    /// sequence.
+    /// </remarks>
     private void OnLine(string line)
     {
-        Application.Current?.Dispatcher.Invoke(() =>
+        Application.Current?.Dispatcher.BeginInvoke(() =>
         {
             Log.Add(line);
             while (Log.Count > MaxLogLines) Log.RemoveAt(0);

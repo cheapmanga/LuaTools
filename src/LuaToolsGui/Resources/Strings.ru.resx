@@ -696,7 +696,18 @@
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Не удалось записать тикеты. Закрой Steam и попробуй снова.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>При активации отправляются только код и MachineGuid этой машины из Windows, больше ничего. Код привязывается к машине, чей тикет его открыл.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Создание кода</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Для создания нужен тикет владения из твоей активной сессии Steam, а это умеет только приложение самого Tesla697. Эта кнопка его откроет.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Открыть Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Активация кодов и проверка Devuvo воссозданы на основе TokeerDRM-App и LuaToolsValidator от Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Выбери игру, которая у тебя есть, и поделись кодом на неё. Тикеты, сохранённые Steam при последнем запуске, уходят в хранилище кодов, а оно проверяет подпись Valve, прежде чем что-то сгенерировать.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Активация, генерация и проверка Devuvo воссозданы по TokeerDRM-App и LuaToolsValidator от Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Сгенерировать</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Игра</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Твой код</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Одноразовый: как только его кто-то активирует, он сгорает.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Для этой игры на этом PC пока нет тикета. Запусти её один раз из Steam под аккаунтом, которому она принадлежит, и возвращайся.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Аккаунт, под которым ты вошёл в Steam, не владеет этой игрой: её тикет получен из уже активированного кода, поэтому новые из него не сделать.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Сервер не вернул код.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Копировать</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Ни один режим разблокировки не активен</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Код можно использовать только один раз, и магазин расходует его в момент активации. Без активного режима записанные тикеты могут ничего не дать, а код пропадёт навсегда.
+
+Всё равно активировать?</value></data>
 </root>

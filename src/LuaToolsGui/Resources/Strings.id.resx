@@ -696,7 +696,18 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tiket gagal ditulis. Tutup Steam lalu coba lagi.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Saat menukarkan, yang dikirim hanya kodenya dan MachineGuid Windows mesin ini, tidak ada yang lain. Sebuah kode terikat ke mesin yang tiketnya membuka kode itu.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Membuat kode</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Membuat kode butuh tiket kepemilikan dari sesi Steam yang sedang aktif, dan hanya aplikasi milik Tesla697 sendiri yang bisa melakukannya. Tombol ini membukanya.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Buka Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Penukaran kode dan validasi Devuvo dibangun ulang dari TokeerDRM-App dan LuaToolsValidator karya Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Pilih game yang kamu miliki dan bagikan kodenya. Ticket yang disimpan Steam saat kamu terakhir menjalankannya dikirim ke penyimpanan kode, yang memeriksa tanda tangan Valve sebelum membuat apa pun.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Penukaran, pembuatan kode, dan validasi Devuvo dibangun ulang dari TokeerDRM-App dan LuaToolsValidator milik Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Buat</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Kode kamu</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Sekali pakai: begitu ada yang menukarkannya, kode ini habis.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Belum ada ticket untuk game ini di PC ini. Jalankan sekali lewat Steam pakai akun yang memilikinya, lalu kembali ke sini.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Akun yang masuk di Steam tidak memiliki game ini: ticket-nya berasal dari kode yang sudah ditukarkan, jadi tidak bisa membuat kode baru.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Server tidak mengembalikan kode.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Salin</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Tidak ada mode unlocker yang aktif</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kode hanya bisa dipakai sekali, dan toko langsung menghabiskannya begitu kamu menukarkannya. Tanpa mode yang aktif, tiket yang ditulisnya mungkin tidak berpengaruh apa-apa dan kodenya hilang selamanya.
+
+Tetap tukarkan?</value></data>
 </root>

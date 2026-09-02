@@ -696,7 +696,18 @@
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>無法寫入票證。請關閉 Steam 後再試一次。</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>兌換時只會傳送啟用碼與這台電腦的 Windows MachineGuid，不會傳送其他資料。啟用碼會綁定到產生它的那台電腦。</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>產生啟用碼</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>產生啟用碼需要從你正在執行的 Steam 工作階段取得所有權票證，這只有 Tesla697 自己的程式才做得到。點這裡開啟。</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>開啟 Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>兌換功能與 Devuvo 驗證是根據 Tesla697 的 TokeerDRM-App 與 LuaToolsValidator 重新實作而成。</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>選一款你擁有的遊戲，分享它的代碼。你上次啟動時 Steam 快取的票證會送往代碼庫，代碼庫會先驗證 Valve 的簽章，才會產生任何東西。</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>兌換、產生與 Devuvo 驗證都是依據 Tesla697 的 TokeerDRM-App 和 LuaToolsValidator 重新製作。</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>產生</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>遊戲</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>你的代碼</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>一次性使用：只要有人兌換，就會失效。</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>這台 PC 上還沒有這款遊戲的票證。用擁有它的帳號從 Steam 啟動一次，再回來這裡。</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>目前登入 Steam 的帳號並未擁有這款遊戲：它的票證來自已兌換的代碼，因此無法產生新代碼。</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>伺服器沒有回傳代碼。</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>複製</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>沒有啟用任何解鎖模式</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>一組兌換碼只能用一次，你一兌換，商店就會立刻把它消耗掉。沒有啟用任何模式時，它寫入的票證可能毫無作用，兌換碼也就永久作廢了。
+
+仍要兌換嗎？</value></data>
 </root>

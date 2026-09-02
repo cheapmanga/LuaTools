@@ -14,8 +14,9 @@ namespace LuaToolsGui.Services;
 /// <remarks>
 /// <para>The shape is <see cref="SteamAutoCrackService"/>'s, minus the parts that only its ZIP needs:
 /// the release is looked up through <see cref="GithubProxy"/> (direct, then mirrors), the asset digest
-/// is verified before it replaces a working copy, the installed tag is recorded, and the check is
-/// throttled so a click on an offline machine backs off instead of re-walking the mirror chain.</para>
+/// is verified before it replaces a working copy, and the installed tag is recorded. The check is
+/// throttled once a copy exists, so repeated clicks on an offline machine back off; the first install
+/// deliberately is not, since there is nothing to fall back to and retrying is the only way through.</para>
 ///
 /// <para>Every failure path falls back to an existing exe while still recording the attempt: a tool
 /// that is already on disk stays launchable when GitHub is unreachable.</para>
@@ -129,10 +130,13 @@ public abstract class GithubExeTool(GithubProxy gh, CacheService cache, ILogger 
             cache.SaveToolCheck(Id, release!.TagName, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
             return ExePath;
         }
-        catch (OperationCanceledException) { throw; }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
         catch (Exception ex)
         {
+            // Includes HttpClient's timeout, which surfaces as a TaskCanceledException and would
+            // otherwise be reported to the user as their own cancellation.
             log.LogDebug(ex, "Obtaining {Tool} failed", DisplayName);
+            try { if (File.Exists(ExePath + ".new")) File.Delete(ExePath + ".new"); } catch { }
             if (have) RecordAttempt();
             return have ? ExePath : null;
         }
@@ -166,7 +170,7 @@ public abstract class GithubExeTool(GithubProxy gh, CacheService cache, ILogger 
             return !string.IsNullOrEmpty(release?.TagName)
                 && !string.Equals(release!.TagName, cache.GetToolVersion(Id), StringComparison.Ordinal);
         }
-        catch (OperationCanceledException) { throw; }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
         catch (Exception ex)
         {
             log.LogDebug(ex, "Checking for a {Tool} update failed", DisplayName);
@@ -196,7 +200,7 @@ public abstract class GithubExeTool(GithubProxy gh, CacheService cache, ILogger 
 
             try
             {
-                Process.Start(psi);
+                Process.Start(psi)?.Dispose(); // the handle, not the process: it keeps running
             }
             catch (System.ComponentModel.Win32Exception ex) when (ex.NativeErrorCode == 740 && !psi.UseShellExecute)
             {
@@ -204,7 +208,7 @@ public abstract class GithubExeTool(GithubProxy gh, CacheService cache, ILogger 
                 // asking for admin cannot be given the private runtime. Start it the old way and let it
                 // find a runtime itself - a Windows dialog beats a launch that just fails.
                 log.LogDebug("{Tool} wants elevation; launching without the private runtime", DisplayName);
-                Process.Start(new ProcessStartInfo(ExePath) { UseShellExecute = true, WorkingDirectory = Dir });
+                Process.Start(new ProcessStartInfo(ExePath) { UseShellExecute = true, WorkingDirectory = Dir })?.Dispose();
             }
 
             return true;

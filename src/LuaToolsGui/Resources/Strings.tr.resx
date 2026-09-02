@@ -696,7 +696,18 @@ Hayır - durdur ama dosyaları koru
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Biletler yazılamadı. Steam'i kapatıp tekrar dene.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Kod kullanırken sadece kod ve bu makinenin Windows MachineGuid'i gönderilir, başka bir şey değil. Bir kod, onu açan biletin ait olduğu makineye bağlanır.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Kod oluşturma</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Oluşturmak için canlı Steam oturumundan alınan bir sahiplik bileti gerekir; bunu yalnızca Tesla697'nin kendi uygulaması yapabilir. Bu, onu açar.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer'ı aç</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Kod kullanımı ve Devuvo doğrulaması, Tesla697'nin TokeerDRM-App ve LuaToolsValidator projelerinden yeniden yazıldı.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Sahip olduğun bir oyunu seç ve onun için kod paylaş. Steam'in oyunu son açtığında sakladığı ticket'lar kod deposuna gönderilir; depo da bir şey üretmeden önce Valve'ın imzasını kontrol eder.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Kod kullanma, kod üretme ve Devuvo doğrulaması, Tesla697'nin TokeerDRM-App ve LuaToolsValidator projelerinden yeniden yazıldı.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Oluştur</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Oyun</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Kodun</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Tek kullanımlık: biri kullandığı anda tükenir.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Bu PC'de bu oyun için henüz ticket yok. Oyunu, sahibi olan hesapla Steam'den bir kez başlat, sonra buraya dön.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Steam'de açık olan hesap bu oyuna sahip değil: ticket'ı kullanılmış bir koddan geldiği için yeni kod üretemez.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Sunucu kod döndürmedi.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopyala</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Etkin bir unlocker modu yok</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Bir kod yalnızca bir kez kullanılabilir ve mağaza kodu kullandığın anda harcar. Etkin bir mod yokken yazdığı biletler hiçbir işe yaramayabilir ve kod tamamen kaybolur.
+
+Yine de kullanmak ister misin?</value></data>
 </root>

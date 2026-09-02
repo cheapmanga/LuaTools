@@ -696,7 +696,18 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>チケットを書き込めませんでした。Steam を終了してから再試行してください。</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>引き換え時に送信されるのはコードとこの PC の Windows MachineGuid だけです。コードは、それを発行したチケットの PC に紐付けられます。</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>コードの生成</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>生成には、実行中の Steam セッションから取得した所有権チケットが必要で、これは Tesla697 のアプリでしか行えません。ここから開きます。</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer を開く</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>引き換え機能と Devuvo 検証は、Tesla697 の TokeerDRM-App および LuaToolsValidator をもとに再実装したものです。</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>持っているゲームを選んで、そのコードを共有しましょう。前回起動時に Steam がキャッシュしたチケットがコードストアに送られ、Valve の署名を確認してから生成されます。</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>コードの使用・生成と Devuvo の検証は、Tesla697 の TokeerDRM-App と LuaToolsValidator をもとに作り直したものです。</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>生成</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>ゲーム</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>あなたのコード</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>1回限り。誰かが使った時点で消費されます。</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>この PC にはまだこのゲームのチケットがありません。所有しているアカウントで Steam から一度起動してから、戻ってきてください。</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Steam にサインイン中のアカウントはこのゲームを所有していません。チケットが使用済みコード由来のため、新しいコードは作れません。</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>サーバーからコードが返ってきませんでした。</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>コピー</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>アンロッカーモードが有効になっていません</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>コードは一度しか使えず、引き換えた瞬間にストア側で消費されます。モードが有効でないと、書き込まれるチケットは何もしないまま、コードだけが永久に失われる可能性があります。
+
+それでも引き換えますか？</value></data>
 </root>

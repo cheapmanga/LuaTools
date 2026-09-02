@@ -696,7 +696,18 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Les tickets n'ont pas pu être écrits. Fermez Steam et réessayez.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Utiliser un code envoie le code et le MachineGuid Windows de cette machine, rien d'autre. Un code est lié à la machine dont le ticket l'a créé.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Générer un code</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Générer exige un ticket de propriété tiré de votre session Steam active, ce que seule l'application de Tesla697 sait faire. Ce bouton l'ouvre.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Ouvrir Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>L'utilisation des codes et la validation Devuvo sont reconstruites à partir de TokeerDRM-App et LuaToolsValidator de Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Choisis un jeu que tu possèdes et partage un code pour celui-ci. Les tickets que Steam a mis en cache à ton dernier lancement sont envoyés à la banque de codes, qui vérifie la signature de Valve avant de générer quoi que ce soit.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>L'activation, la génération et la validation Devuvo sont réimplémentées à partir de TokeerDRM-App et LuaToolsValidator de Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Générer</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Jeu</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Ton code</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Usage unique : dès que quelqu'un l'active, il est consommé.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Aucun ticket pour ce jeu sur ce PC pour l'instant. Lance-le une fois depuis Steam, connecté avec le compte qui le possède, puis reviens.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Le compte connecté à Steam ne possède pas ce jeu : son ticket vient d'un code activé, il ne peut donc pas en générer de nouveaux.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Le serveur n'a renvoyé aucun code.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copier</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Aucun mode unlocker actif</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un code ne peut servir qu'une seule fois, et la boutique le consomme dès que tu le valides. Sans mode actif, les tickets qu'il écrit risquent de ne rien faire et le code sera perdu pour de bon.
+
+Valider quand même ?</value></data>
 </root>

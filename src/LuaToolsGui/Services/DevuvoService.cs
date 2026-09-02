@@ -38,7 +38,11 @@ public class DevuvoService(ILogger<DevuvoService> log)
     private static readonly string RunDir = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LuaToolsGui", "devuvo");
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(30) };
+    private readonly HttpClient _http = new()
+    {
+        Timeout = TimeSpan.FromSeconds(30),
+        DefaultRequestHeaders = { { "User-Agent", "LuaTools" } },
+    };
 
     /// <summary>
     /// Fetch the current script. Null when neither source answered.
@@ -67,9 +71,11 @@ public class DevuvoService(ILogger<DevuvoService> log)
 
                 log.LogDebug("{Url} did not return the validation script", url);
             }
-            catch (OperationCanceledException) { throw; }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
             catch (Exception ex)
             {
+                // Includes HttpClient's own timeout, which arrives as a TaskCanceledException. Try
+                // the next source rather than letting it escape.
                 log.LogDebug(ex, "Fetching the validation script from {Url} failed", url);
             }
         }
@@ -90,13 +96,15 @@ public class DevuvoService(ILogger<DevuvoService> log)
         try
         {
             Directory.CreateDirectory(RunDir);
+            PruneOldRuns();
             string stamp = $"{DateTime.Now:yyyyMMddHHmmss}-{Guid.NewGuid():N}";
             string scriptPath = Path.Combine(RunDir, $"Devuvo-{stamp}.ps1");
             string wrapperPath = Path.Combine(RunDir, $"Run-{stamp}.ps1");
             string logPath = Path.Combine(RunDir, $"Run-{stamp}.log");
 
-            // The script prompts for an AppID when it isn't given one, which would hang forever behind
-            // -NonInteractive. Fail loudly instead - the wrapper always sets it.
+            // The script prompts for an AppID when it isn't given one. Under -NonInteractive that
+            // throws rather than hangs, but the message is PowerShell's and says nothing useful, so
+            // it is replaced by one that names the cause. The wrapper always sets the id anyway.
             script = script.Replace(
                 "$AppID = Read-Host \"Enter Steam AppID\"",
                 "throw 'No Steam AppID was passed by LuaTools.'",
@@ -119,27 +127,30 @@ public class DevuvoService(ILogger<DevuvoService> log)
                 "Stop-Transcript | Out-Null",
             ]), new UTF8Encoding(true), ct);
 
-            var psi = new ProcessStartInfo(PowerShellPath())
+            return await Task.Run(async () =>
             {
-                Arguments = $"-NoProfile -ExecutionPolicy Bypass -NonInteractive -File \"{wrapperPath}\"",
-                // Elevation and redirection are mutually exclusive; this is why the transcript exists.
-                UseShellExecute = true,
-                Verb = "runas",
-                WorkingDirectory = RunDir,
-            };
+                var psi = new ProcessStartInfo(PowerShellPath())
+                {
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -NonInteractive -File \"{wrapperPath}\"",
+                    // Elevation and redirection are mutually exclusive; this is why the transcript exists.
+                    UseShellExecute = true,
+                    Verb = "runas",
+                    WorkingDirectory = RunDir,
+                };
 
-            using var process = Process.Start(psi);
-            if (process is null) return DevuvoRunResult.Failed;
+                using var process = Process.Start(psi);
+                if (process is null) return DevuvoRunResult.Failed;
 
-            await TailAsync(logPath, process, onLine, ct);
-            return DevuvoRunResult.Finished;
+                await TailAsync(logPath, process, onLine, ct);
+                return DevuvoRunResult.Finished;
+            }, ct);
         }
         catch (System.ComponentModel.Win32Exception ex) when (ex.NativeErrorCode == 1223)
         {
             // ERROR_CANCELLED: the UAC prompt was dismissed. The user's choice, not a failure.
             return DevuvoRunResult.ElevationDeclined;
         }
-        catch (OperationCanceledException) { throw; }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
         catch (Exception ex)
         {
             log.LogDebug(ex, "Running the validation script failed");
@@ -188,7 +199,7 @@ public class DevuvoService(ILogger<DevuvoService> log)
             if (fs.Length <= offset) return offset;
 
             fs.Seek(offset, SeekOrigin.Begin);
-            using var reader = new StreamReader(fs, Encoding.UTF8);
+            using var reader = new StreamReader(fs, Encoding.UTF8, detectEncodingFromByteOrderMarks: false);
             string chunk = reader.ReadToEnd();
             offset = fs.Position;
 
@@ -211,6 +222,30 @@ public class DevuvoService(ILogger<DevuvoService> log)
     }
 
     private static string Escape(string path) => path.Replace("'", "''");
+
+    /// <summary>
+    /// Keep the last few runs' script, wrapper and transcript; drop the rest.
+    /// </summary>
+    /// <remarks>
+    /// Three files per run, and a transcript is not small. Best effort: a file still held open by a
+    /// run in progress simply survives to the next sweep.
+    /// </remarks>
+    private static void PruneOldRuns(int keep = 15)
+    {
+        try
+        {
+            var stale = new DirectoryInfo(RunDir).GetFiles()
+                .OrderByDescending(f => f.LastWriteTimeUtc)
+                .Skip(keep * 3);
+
+            foreach (var file in stale)
+                try { file.Delete(); } catch { /* in use, or gone already */ }
+        }
+        catch
+        {
+            // Housekeeping only. Never worth failing a run over.
+        }
+    }
 
     /// <summary>
     /// Windows PowerShell, by full path first. Some machines don't have it on PATH, and a bare

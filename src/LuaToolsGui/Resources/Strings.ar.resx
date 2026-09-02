@@ -722,7 +722,18 @@
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>تعذّرت كتابة التذاكر. أغلق Steam وحاول مرة أخرى.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>عند الاستخدام يُرسَل الرمز و MachineGuid الخاص بنظام Windows على هذا الجهاز فقط، لا شيء غير ذلك. يرتبط الرمز بالجهاز الذي فتحته تذكرته.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>توليد رمز</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>يحتاج التوليد إلى تذكرة ملكية تُؤخذ من جلسة Steam النشطة، وهذا لا يستطيعه سوى تطبيق Tesla697 نفسه. هذا الزر يفتحه.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>فتح Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>استخدام الرموز والتحقق عبر Devuvo أُعيد بناؤهما اعتمادًا على TokeerDRM-App و LuaToolsValidator من Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>اختر لعبة تملكها وشارك رمزًا لها. الـ tickets التي حفظها Steam عند آخر تشغيل تُرسَل إلى مخزن الرموز، وهو يتحقق من توقيع Valve قبل إنشاء أي شيء.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>الاستخدام والإنشاء والتحقق من Devuvo أُعيد بناؤها من TokeerDRM-App و LuaToolsValidator من Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>إنشاء</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>اللعبة</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>رمزك</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>لمرة واحدة: بمجرد أن يستخدمه أحد، ينتهي.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>لا يوجد بعد ticket لهذه اللعبة على هذا PC. شغّلها مرة واحدة من Steam بالحساب المالك لها، ثم عد إلى هنا.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>الحساب المسجَّل في Steam لا يملك هذه اللعبة: الـ ticket الخاص بها جاء من رمز مستخدَم، لذا لا يمكنه إنشاء رموز جديدة.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>الخادم لم يُرجع أي رمز.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>نسخ</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>لا يوجد وضع فتح مُفعَّل</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>لا يمكن استخدام الكود إلا مرة واحدة، والمتجر يستهلكه في اللحظة التي تفعّله فيها. وبدون وضع مُفعَّل، قد لا تفعل التذاكر التي يكتبها أي شيء ويضيع الكود إلى الأبد.
+
+هل تريد تفعيله رغم ذلك؟</value></data>
 </root>

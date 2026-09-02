@@ -696,7 +696,18 @@ Cancelar - continuar baixando</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Não foi possível gravar os tickets. Feche a Steam e tente de novo.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Resgatar envia o código e o MachineGuid do Windows desta máquina, nada além disso. Um código fica vinculado à máquina cujo ticket o criou.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Gerar um código</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Gerar exige um ticket de propriedade tirado da sua sessão ativa da Steam, o que só o app do Tesla697 consegue fazer. Este botão o abre.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Abrir Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>O resgate e a validação Devuvo foram reconstruídos a partir do TokeerDRM-App e do LuaToolsValidator do Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Escolha um jogo que você tem e compartilhe um código dele. Os tickets que a Steam guardou no último início são enviados ao banco de códigos, que confere a assinatura da Valve antes de gerar qualquer coisa.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>O resgate, a geração e a validação do Devuvo foram refeitos a partir do TokeerDRM-App e do LuaToolsValidator do Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Gerar</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Jogo</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Seu código</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Uso único: assim que alguém resgatar, ele deixa de valer.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Ainda não há ticket deste jogo neste PC. Abra o jogo uma vez pela Steam, logado na conta que o possui, e volte aqui.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>A conta logada na Steam não possui este jogo: o ticket dela veio de um código resgatado, então não dá para gerar novos.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>O servidor não retornou nenhum código.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copiar</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Nenhum modo de unlocker está ativo</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Um código só pode ser usado uma vez, e a loja o consome no instante em que você resgata. Sem nenhum modo ativo, os tickets que ele grava podem não fazer nada e o código se perde de vez.
+
+Resgatar mesmo assim?</value></data>
 </root>

@@ -696,7 +696,18 @@ Anulare - continuă descărcarea</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tichetele nu au putut fi scrise. Închide Steam și încearcă din nou.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Folosirea codului trimite codul și MachineGuid-ul Windows al acestui calculator, nimic altceva. Un cod rămâne legat de calculatorul al cărui tichet l-a deschis.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generarea unui cod</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generarea are nevoie de un tichet de proprietate luat din sesiunea ta Steam activă, lucru pe care doar aplicația lui Tesla697 îl poate face. De aici o deschizi.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Deschide Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Folosirea codurilor și validarea Devuvo sunt refăcute după TokeerDRM-App și LuaToolsValidator ale lui Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Alege un joc pe care îl deții și distribuie un cod pentru el. Ticketele salvate de Steam la ultima pornire sunt trimise la depozitul de coduri, care verifică semnătura Valve înainte să genereze ceva.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Folosirea codurilor, generarea și validarea Devuvo sunt refăcute după TokeerDRM-App și LuaToolsValidator de la Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generează</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Joc</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Codul tău</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>De unică folosință: după ce cineva îl folosește, s-a consumat.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Încă nu există niciun ticket pentru acest joc pe acest PC. Pornește-l o dată din Steam, cu contul care îl deține, apoi revino.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Contul conectat pe Steam nu deține acest joc: ticketul lui vine dintr-un cod deja folosit, așa că nu poate genera altele noi.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Serverul nu a returnat niciun cod.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copiază</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Niciun mod de deblocare nu este activ</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un cod poate fi folosit o singură dată, iar magazinul îl consumă în clipa în care îl revendici. Fără un mod activ, tichetele pe care le scrie s-ar putea să nu facă nimic, iar codul se pierde definitiv.
+
+Îl revendici oricum?</value></data>
 </root>

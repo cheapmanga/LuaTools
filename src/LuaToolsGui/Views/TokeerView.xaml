@@ -49,7 +49,7 @@
                             Grid.Column="0"
                             CharacterCasing="Upper"
                             IsEnabled="{Binding NotBusy}"
-                            MaxLength="16"
+                            MaxLength="6"
                             PlaceholderText="{x:Static res:Strings.Tokeer_Code_Placeholder}"
                             Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
                         <ui:Button
@@ -90,7 +90,7 @@
                 Text="{x:Static res:Strings.Tokeer_Sends}"
                 TextWrapping="Wrap" />
 
-            <!--  Generate: honestly out of reach here, so it points at the tool that can.  -->
+            <!--  Generate: the tickets Steam already cached for a game you own, handed to the store.  -->
             <Border
                 Margin="0,18,0,0"
                 Padding="16"
@@ -106,12 +106,75 @@
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         Text="{x:Static res:Strings.Tokeer_Generate_Body}"
                         TextWrapping="Wrap" />
-                    <ui:Button
+
+                    <TextBlock
+                        Margin="0,12,0,6"
+                        FontWeight="SemiBold"
+                        Text="{x:Static res:Strings.Tokeer_Generate_Game}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox
+                            Grid.Column="0"
+                            DisplayMemberPath="Display"
+                            IsEnabled="{Binding NotBusy}"
+                            ItemsSource="{Binding Games}"
+                            SelectedItem="{Binding SelectedGame}" />
+                        <ui:Button
+                            Grid.Column="1"
+                            Margin="8,0,0,0"
+                            Command="{Binding GenerateCommand}"
+                            Content="{x:Static res:Strings.Tokeer_Generate}"
+                            Icon="{ui:SymbolIcon Add24}" />
+                    </Grid>
+
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        Foreground="#f87171"
+                        Text="{Binding GenerateStatus}"
+                        TextWrapping="Wrap"
+                        Visibility="{Binding HasGenerateStatus, Converter={StaticResource BoolToVis}}" />
+
+                    <Border
                         Margin="0,12,0,0"
-                        HorizontalAlignment="Left"
-                        Command="{Binding OpenGeneratorCommand}"
-                        Content="{x:Static res:Strings.Tokeer_Generate_Open}"
-                        Icon="{ui:SymbolIcon Open24}" />
+                        Padding="14,12"
+                        Background="#1422c55e"
+                        BorderBrush="#4022c55e"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Visibility="{Binding HasGeneratedCode, Converter={StaticResource BoolToVis}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock
+                                    FontWeight="SemiBold"
+                                    Foreground="#22c55e"
+                                    Text="{x:Static res:Strings.Tokeer_Generated_Header}" />
+                                <TextBlock
+                                    Margin="0,4,0,0"
+                                    FontFamily="Consolas"
+                                    FontSize="18"
+                                    Text="{Binding GeneratedCode}" />
+                                <TextBlock
+                                    Margin="0,4,0,0"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                    Text="{x:Static res:Strings.Tokeer_Generated_Hint}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                            <ui:Button
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Command="{Binding CopyGeneratedCodeCommand}"
+                                Content="{x:Static res:Strings.Common_Copy}"
+                                Icon="{ui:SymbolIcon Copy24}" />
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </Border>
 

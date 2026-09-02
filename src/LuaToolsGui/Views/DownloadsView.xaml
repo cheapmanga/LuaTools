@@ -298,9 +298,11 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock
+                VerticalAlignment="Center"
                 FontSize="22"
                 FontWeight="Bold"
-                Text="{x:Static res:Strings.Downloads_Title}" />
+                Text="{x:Static res:Strings.Downloads_Title}"
+                TextTrimming="CharacterEllipsis" />
             <!--  Third-party tools: each is fetched on first use and then just opened. None of them takes
                   arguments, so nothing is passed to them — the user drives them from their own window.
                   Their names are products, so they are written here rather than translated.  -->

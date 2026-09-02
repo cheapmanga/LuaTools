@@ -32,8 +32,10 @@ namespace LuaToolsGui.Services;
 /// </remarks>
 public class PrivateDotnetRuntime(GithubProxy gh, ILogger<PrivateDotnetRuntime> log)
 {
+    // Local, not roaming: this is ~180 MB of extracted runtime, and a roaming profile would try to
+    // synchronise it at every sign-in.
     private static readonly string Root = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LuaToolsGui", "dotnet");
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LuaToolsGui", "dotnet");
 
     private static string DesktopDir => Path.Combine(Root, "shared", "Microsoft.WindowsDesktop.App");
     private static string CoreDir => Path.Combine(Root, "shared", "Microsoft.NETCore.App");
@@ -81,12 +83,22 @@ public class PrivateDotnetRuntime(GithubProxy gh, ILogger<PrivateDotnetRuntime> 
     /// start against it and fail deeper, past the point where we could still fall back.
     /// </remarks>
     public bool IsReady =>
-        HasVersionFolder(DesktopDir) && HasVersionFolder(CoreDir) && HasVersionFolder(HostFxrDir);
+        Has(HostFxrDir, "hostfxr.dll")
+        && Has(CoreDir, "System.Private.CoreLib.dll")
+        && Has(DesktopDir, "PresentationFramework.dll");
 
-    private static bool HasVersionFolder(string dir)
+    /// <summary>Does some version folder under <paramref name="dir"/> actually contain that file?</summary>
+    private static bool Has(string dir, string file)
     {
-        try { return Directory.Exists(dir) && Directory.EnumerateDirectories(dir).Any(); }
-        catch { return false; }
+        try
+        {
+            return Directory.Exists(dir)
+                && Directory.EnumerateDirectories(dir).Any(v => File.Exists(Path.Combine(v, file)));
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -106,12 +118,18 @@ public class PrivateDotnetRuntime(GithubProxy gh, ILogger<PrivateDotnetRuntime> 
             if (IsReady) return true; // won the race elsewhere
 
             Directory.CreateDirectory(Root);
-            foreach (var url in new[] { AppConfig.DotnetRuntimeZipUrl, AppConfig.DotnetDesktopRuntimeZipUrl })
+            var urls = new[] { AppConfig.DotnetRuntimeZipUrl, AppConfig.DotnetDesktopRuntimeZipUrl };
+            for (int i = 0; i < urls.Length; i++)
             {
                 ct.ThrowIfCancellationRequested();
+                string url = urls[i];
                 string zip = Path.Combine(Root, "runtime.zip");
+
+                // Each archive owns half the bar, so it fills once across the pair rather than
+                // filling, resetting and filling again.
+                int half = i;
                 var sink = progress is null ? null : new ProgressRelay<double?>(f =>
-                    progress.Report(new DownloadProgress((long)((f ?? 0) * 1000), 1000)));
+                    progress.Report(new DownloadProgress((long)((half + (f ?? 0)) * 500), 1000)));
 
                 await gh.DownloadAsync(url, zip, sink, ct);
 
@@ -126,9 +144,11 @@ public class PrivateDotnetRuntime(GithubProxy gh, ILogger<PrivateDotnetRuntime> 
             log.LogDebug("The private runtime extracted but looks incomplete");
             return false;
         }
-        catch (OperationCanceledException) { throw; }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
         catch (Exception ex)
         {
+            // Includes HttpClient's timeout on a 72 MB download, which arrives as a
+            // TaskCanceledException and must not be reported as the user cancelling.
             log.LogDebug(ex, "Preparing the private .NET runtime failed");
             return false;
         }

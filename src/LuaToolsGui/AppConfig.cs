@@ -72,6 +72,11 @@ public static class AppConfig
     // MachineGuid, because a code is bound to the machine whose ticket opened it.
     public const string TokeerRedeemUrl = "https://luastools.xyz/drm/redeem";
 
+    // Minting a code, same route. The request carries the two tickets Steam cached for the game plus
+    // the owner and live account ids; the store verifies Valve's signature on the ownership ticket
+    // before it mints anything, so a forged one buys nothing.
+    public const string TokeerGenerateUrl = "https://luastools.xyz/drm/generate";
+
     // Devuvo.ps1: the Denuvo activation check and repair the Validator page runs. Fetched at run time
     // rather than bundled - it is LuaTools' own script, updated as games and checks change, and a copy
     // frozen into this build would repair last month's problems. Vercel is authoritative; the raw

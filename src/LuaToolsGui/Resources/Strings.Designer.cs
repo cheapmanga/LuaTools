@@ -678,6 +678,15 @@ public static class Strings
     public static string Tokeer_Sends => Get(nameof(Tokeer_Sends));
     public static string Tokeer_Generate_Header => Get(nameof(Tokeer_Generate_Header));
     public static string Tokeer_Generate_Body => Get(nameof(Tokeer_Generate_Body));
-    public static string Tokeer_Generate_Open => Get(nameof(Tokeer_Generate_Open));
     public static string Tokeer_Credit => Get(nameof(Tokeer_Credit));
+    public static string Tokeer_Generate_Game => Get(nameof(Tokeer_Generate_Game));
+    public static string Tokeer_Generated_Header => Get(nameof(Tokeer_Generated_Header));
+    public static string Tokeer_Generated_Hint => Get(nameof(Tokeer_Generated_Hint));
+    public static string Tokeer_Err_NoTicket => Get(nameof(Tokeer_Err_NoTicket));
+    public static string Tokeer_Err_NotOwner => Get(nameof(Tokeer_Err_NotOwner));
+    public static string Tokeer_Err_NoCode => Get(nameof(Tokeer_Err_NoCode));
+    public static string Tokeer_Generate => Get(nameof(Tokeer_Generate));
+    public static string Common_Copy => Get(nameof(Common_Copy));
+    public static string Tokeer_Warn_NoMode_Title => Get(nameof(Tokeer_Warn_NoMode_Title));
+    public static string Tokeer_Warn_NoMode_Body => Get(nameof(Tokeer_Warn_NoMode_Body));
 }

@@ -69,9 +69,16 @@ written into Steam's credential store, including the owner SteamID that a stale 
 outrank. Then launch the game from Steam as usual. The only things that leave the machine are the code
 and this machine's Windows MachineGuid, which is what binds a code to one PC.
 
-Generating a code is not done here. It needs an ownership ticket pulled from the live Steam session,
-which Tesla697's own app does with a helper published without source — so the page says so and opens
-their app for that half instead of pretending.
+Generating one works the other way round: pick a game you own, and the tickets Steam cached the last
+time you launched it are sent to the code store, which verifies Valve's signature on the ownership
+ticket before minting anything. Codes are single use.
+
+Two things follow from reading the tickets out of Steam's own store rather than asking the live
+session for fresh ones, as their app does with a helper published without source. A game that has
+never been launched on this PC has nothing cached yet, and the page says so instead of failing
+vaguely. And the account signed into Steam is checked against the ticket's owner: after redeeming
+someone else's code that owner's ticket sits in your registry, and without that check anyone could
+launder one shared code into many.
 
 ## Statistics
 <div>
@@ -112,9 +119,8 @@ You can find release builds on the [luatools website](https://lua.tools/app) or 
 - [SteamAutoCrack](https://github.com/SteamAutoCracks/Steam-auto-crack): fetched and launched from the
   Downloads page
 - [TokeerDRM](https://github.com/Tesla697/TokeerDRM-App) by Tesla697: the activation-code scheme the
-  Tokeer page redeems against. The page talks to the same public code store their app does and writes
-  the same Steam registry values; it carries none of their code, and generating a code still needs
-  their app, which the Downloads page fetches
+  Tokeer page redeems and generates against. The page talks to the same public code store their app
+  does and reads and writes the same Steam registry values; it carries none of their code
 - [LuaToolsValidator](https://github.com/Tesla697/LuaToolsValidator) by Tesla697: the front end whose
   job the Validator page does. Both run the same `Devuvo.ps1`, published by this project and fetched
   at run time, so neither one owns the repair logic

@@ -696,7 +696,18 @@
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Τα tickets δεν γράφτηκαν. Κλείσε το Steam και δοκίμασε ξανά.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Η εξαργύρωση στέλνει τον κωδικό και το MachineGuid των Windows αυτού του υπολογιστή, τίποτα άλλο. Ο κωδικός δένεται με το μηχάνημα του οποίου το ticket τον άνοιξε.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Δημιουργία κωδικού</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Η δημιουργία χρειάζεται ένα ticket ιδιοκτησίας από τη ζωντανή σου συνεδρία Steam, κάτι που μπορεί μόνο η εφαρμογή του ίδιου του Tesla697. Από εδώ ανοίγει.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Άνοιγμα Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Η εξαργύρωση και η επικύρωση Devuvo έχουν ξαναφτιαχτεί με βάση τα TokeerDRM-App και LuaToolsValidator του Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Διάλεξε ένα παιχνίδι που έχεις και μοιράσου έναν κωδικό γι' αυτό. Τα tickets που αποθήκευσε το Steam στο τελευταίο άνοιγμα στέλνονται στην αποθήκη κωδικών, η οποία ελέγχει την υπογραφή της Valve πριν δημιουργήσει οτιδήποτε.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Η εξαργύρωση, η δημιουργία κωδικών και ο έλεγχος Devuvo έχουν ξαναφτιαχτεί από τα TokeerDRM-App και LuaToolsValidator του Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Δημιουργία</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Παιχνίδι</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Ο κωδικός σου</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Μίας χρήσης: μόλις τον εξαργυρώσει κάποιος, χάνεται.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Δεν υπάρχει ακόμα ticket για αυτό το παιχνίδι σε αυτό το PC. Άνοιξέ το μία φορά από το Steam, με τον λογαριασμό στον οποίο ανήκει, και ξαναγύρνα.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Ο λογαριασμός που είναι συνδεδεμένος στο Steam δεν κατέχει αυτό το παιχνίδι: το ticket του προήλθε από εξαργυρωμένο κωδικό, οπότε δεν μπορεί να φτιάξει καινούριους.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Ο διακομιστής δεν επέστρεψε κωδικό.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Αντιγραφή</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Δεν είναι ενεργή καμία λειτουργία unlocker</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Ένας κωδικός μπορεί να χρησιμοποιηθεί μόνο μία φορά και το κατάστημα τον καταναλώνει τη στιγμή που τον εξαργυρώνεις. Χωρίς ενεργή λειτουργία, τα tickets που γράφει μπορεί να μην κάνουν τίποτα και ο κωδικός θα χαθεί οριστικά.
+
+Να γίνει εξαργύρωση ούτως ή άλλως;</value></data>
 </root>

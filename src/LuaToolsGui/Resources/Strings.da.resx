@@ -696,7 +696,18 @@ Annuller - fortsæt download</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Ticketsene kunne ikke skrives. Luk Steam og prøv igen.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Ved indløsning sendes kun koden og denne maskines Windows-MachineGuid, intet andet. En kode er bundet til den maskine, hvis ticket åbnede den.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Sådan genererer du en kode</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generering kræver et ejerskabsticket fra din aktive Steam-session, og det kan kun Tesla697s egen app. Her åbner du den.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Åbn Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Indløsningen og Devuvo-valideringen er bygget op efter Tesla697s TokeerDRM-App og LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Vælg et spil, du ejer, og del en kode til det. De tickets, Steam gemte, sidst du startede det, sendes til kodebanken, der tjekker Valves signatur, før den laver noget.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Indløsning, generering og Devuvo-valideringen er bygget om ud fra Tesla697s TokeerDRM-App og LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generer</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Spil</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Din kode</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Engangskode: så snart nogen indløser den, er den brugt.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Der er endnu ingen ticket til dette spil på denne PC. Start det én gang fra Steam med den konto, der ejer det, og kom så tilbage.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Kontoen, der er logget ind på Steam, ejer ikke dette spil: dens ticket kommer fra en indløst kode, så den kan ikke lave nye.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Serveren returnerede ingen kode.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopiér</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Ingen unlocker-tilstand er aktiv</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>En kode kan kun bruges én gang, og butikken bruger den i det øjeblik, du indløser den. Uden en aktiv tilstand gør de tickets, den skriver, måske ingenting, og koden er tabt for altid.
+
+Vil du indløse den alligevel?</value></data>
 </root>
