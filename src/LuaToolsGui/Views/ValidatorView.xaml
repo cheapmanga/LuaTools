@@ -138,6 +138,7 @@
                         x:Name="LogList"
                         Padding="12,10"
                         Background="Transparent"
+                        PreviewMouseWheel="Log_PreviewMouseWheel"
                         BorderThickness="0"
                         ItemsSource="{Binding Log}"
                         ScrollViewer.CanContentScroll="True"

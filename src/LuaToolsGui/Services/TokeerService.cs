@@ -102,23 +102,26 @@ public class TokeerService(ILogger<TokeerService> log)
             return new TokeerGenerateResult(false, Error: Resources.Strings.Tokeer_Err_NoTicket);
 
         string owner = OwnerSteamId(appTicket);
-        if (owner.Length == 0)
-            return new TokeerGenerateResult(false, Error: Resources.Strings.Tokeer_Err_NoTicket);
-
         string current = CurrentSteamId();
-        if (current.Length > 0 && !string.Equals(owner, current, StringComparison.Ordinal))
+        if (owner.Length > 0 && current.Length > 0 && !string.Equals(owner, current, StringComparison.Ordinal))
             return new TokeerGenerateResult(false, Error: Resources.Strings.Tokeer_Err_NotOwner);
+
+        // Whichever of the two we have. Only with neither is there nothing to identify the account by,
+        // and that is the case the "launch it once" message is actually about.
+        string steamId = owner.Length > 0 ? owner : current;
+        if (steamId.Length == 0)
+            return new TokeerGenerateResult(false, Error: Resources.Strings.Tokeer_Err_NoTicket);
 
         var (payload, error) = await PostAsync(AppConfig.TokeerGenerateUrl, new
         {
             appticket = appTicket,
             eticket = eTicket,
-            steam_id = owner,
+            steam_id = steamId,
             app_id = appId.ToString(),
             // Codes are single-use; the store enforces it, and offering a dial here would only
             // promise something the server refuses.
             max_uses = 1,
-            created_by_user = owner,
+            created_by_user = steamId,
             current_steam_id = current,
         }, ct);
         if (payload is null) return new TokeerGenerateResult(false, Error: error);
@@ -181,11 +184,25 @@ public class TokeerService(ILogger<TokeerService> log)
         }
     }
 
-    private static bool Succeeded(JsonElement body) =>
-        body.ValueKind == JsonValueKind.Object
-        && body.TryGetProperty("success", out var s)
-        && (s.ValueKind == JsonValueKind.True
-            || (s.ValueKind == JsonValueKind.String && bool.TryParse(s.GetString(), out bool b) && b));
+    /// <summary>
+    /// Did the store say yes? Read the way their client reads it - Python truthiness - because a
+    /// stricter test would call a success a refusal after the code has already been spent.
+    /// </summary>
+    private static bool Succeeded(JsonElement body)
+    {
+        if (body.ValueKind != JsonValueKind.Object || !body.TryGetProperty("success", out var s))
+            return false;
+
+        return s.ValueKind switch
+        {
+            JsonValueKind.True => true,
+            JsonValueKind.Number => s.TryGetDouble(out double d) && d != 0,
+            JsonValueKind.String => s.GetString() is { Length: > 0 } text
+                                    && !text.Equals("false", StringComparison.OrdinalIgnoreCase)
+                                    && !text.Equals("0", StringComparison.Ordinal),
+            _ => false,
+        };
+    }
 
     private static string? Text(JsonElement body, string name) =>
         body.ValueKind == JsonValueKind.Object && body.TryGetProperty(name, out var v)

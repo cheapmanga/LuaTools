@@ -9,6 +9,13 @@ public partial class TokeerView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
-        Loaded += async (_, _) => await viewModel.LoadAsync();
+
+        // Nothing may escape an async handler: with no global exception handler, a throw here would
+        // close the app rather than leave an empty picker.
+        Loaded += async (_, _) =>
+        {
+            try { await viewModel.LoadAsync(); }
+            catch { /* the picker stays empty; redeeming still works */ }
+        };
     }
 }

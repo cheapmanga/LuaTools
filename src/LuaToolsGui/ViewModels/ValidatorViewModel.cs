@@ -85,10 +85,13 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
     /// Off the UI thread: this walks every library folder's appmanifests, which is quick on a handful
     /// of games and visibly not on a few hundred.
     /// </remarks>
-    public async Task LoadAsync()
-    {
-        if (Games.Count > 0) return;
+    public Task LoadAsync() => _loading ??= LoadCoreAsync();
 
+    /// <summary>Cached so a second navigation joins the first enumeration instead of repeating it.</summary>
+    private Task? _loading;
+
+    private async Task LoadCoreAsync()
+    {
         var installed = await Task.Run(() => library.EnumerateInstalled()
             .OrderBy(g => g.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList());

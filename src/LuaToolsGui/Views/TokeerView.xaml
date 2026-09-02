@@ -49,7 +49,7 @@
                             Grid.Column="0"
                             CharacterCasing="Upper"
                             IsEnabled="{Binding NotBusy}"
-                            MaxLength="6"
+                            MaxLength="32"
                             PlaceholderText="{x:Static res:Strings.Tokeer_Code_Placeholder}"
                             Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
                         <ui:Button
