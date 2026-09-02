@@ -25,6 +25,11 @@ Desktop Runtime on a clean machine; the app then self-updates through Velopack.
 
 To produce a local build for testing, `dotnet publish -c Release` is enough.
 
+This fork ships a plain zip rather than a setup, so it has no installer to put that runtime in
+place. `scripts/publish-standalone.sh` publishes self-contained instead: the resulting
+`LuaTools.exe` carries the runtime and needs nothing but Windows itself, at the cost of size
+(~72 MiB, against ~5 MiB framework-dependent).
+
 ### Layout
 
 | Path | Contents |
@@ -34,6 +39,7 @@ To produce a local build for testing, `dotnet publish -c Release` is enough.
 | `src/LuaTools.SamHost/` | Headless x86 / net48 helper for the Achievements page (Steam achievement interop, vendored from gibbed's SAM). Built and copied next to `LuaTools.exe` by the app's csproj |
 | `tests/LuaToolsGui.Tests/` | xUnit tests |
 | `scripts/check-i18n.py` | Translation validator, run by CI on every RESX change |
+| `scripts/publish-standalone.sh` | Builds the fork's standalone Windows asset (self-contained, single file) |
 
 ## Contribution Guidelines
 
