@@ -696,7 +696,18 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tikety se nepodařilo zapsat. Zavři Steam a zkus to znovu.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Uplatnění odešle kód a MachineGuid tohoto Windows, nic víc. Kód je vázaný na počítač, jehož tiket ho otevřel.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generování kódu</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generování vyžaduje tiket vlastnictví z tvé živé relace Steamu, což umí jen vlastní aplikace od Tesla697. Tímto ji otevřeš.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Otevřít Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Uplatňování kódů a validace Devuvo jsou znovu postavené podle TokeerDRM-App a LuaToolsValidator od Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Vyber hru, kterou vlastníš, a sdílej k ní kód. Tickety, které si Steam uložil při posledním spuštění, se pošlou do úložiště kódů, které před vygenerováním ověří podpis od Valve.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Uplatnění, generování a ověření Devuvo jsou znovu vytvořené podle TokeerDRM-App a LuaToolsValidator od Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Vygenerovat</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Hra</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Tvůj kód</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Na jedno použití: jakmile ho někdo uplatní, je pryč.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Pro tuhle hru zatím na tomhle PC není žádný ticket. Spusť ji jednou ze Steamu pod účtem, který ji vlastní, a vrať se sem.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Účet přihlášený ve Steamu tuhle hru nevlastní: její ticket pochází z uplatněného kódu, takže z něj nejde vytvořit nové.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Server nevrátil žádný kód.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopírovat</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Není aktivní žádný režim odemykání</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kód jde použít jen jednou a obchod ho spotřebuje ve chvíli, kdy ho uplatníš. Bez aktivního režimu nemusí lístky, které zapíše, udělat vůbec nic a kód bude nenávratně pryč.
+
+Uplatnit ho i tak?</value></data>
 </root>

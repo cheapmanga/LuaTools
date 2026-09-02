@@ -696,7 +696,18 @@
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>เขียนตั๋วไม่สำเร็จ กรุณาปิด Steam แล้วลองใหม่</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>การแลกรหัสจะส่งเฉพาะตัวรหัสและ Windows MachineGuid ของเครื่องนี้เท่านั้น ไม่มีอย่างอื่น รหัสจะผูกกับเครื่องที่ตั๋วของมันสร้างรหัสนั้นขึ้นมา</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>การสร้างรหัส</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>การสร้างรหัสต้องใช้ตั๋วแสดงความเป็นเจ้าของที่ดึงจากเซสชัน Steam ที่กำลังทำงานอยู่ ซึ่งมีเพียงแอปของ Tesla697 เท่านั้นที่ทำได้ กดที่นี่เพื่อเปิดแอปดังกล่าว</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>เปิด Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>ระบบแลกรหัสและการตรวจสอบ Devuvo สร้างขึ้นใหม่จาก TokeerDRM-App และ LuaToolsValidator ของ Tesla697</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>เลือกเกมที่คุณเป็นเจ้าของแล้วแชร์โค้ดของเกมนั้น ticket ที่ Steam เก็บไว้ตอนคุณเปิดเกมครั้งล่าสุดจะถูกส่งไปยังคลังโค้ด ซึ่งจะตรวจลายเซ็นของ Valve ก่อนสร้างโค้ดใดๆ</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>การแลกโค้ด การสร้างโค้ด และการตรวจสอบ Devuvo สร้างขึ้นใหม่จาก TokeerDRM-App และ LuaToolsValidator ของ Tesla697</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>สร้างโค้ด</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>เกม</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>โค้ดของคุณ</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>ใช้ได้ครั้งเดียว พอมีคนแลกไปแล้วก็หมดสิทธิ์</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>ยังไม่มี ticket ของเกมนี้บน PC เครื่องนี้ ลองเปิดเกมจาก Steam สักครั้งด้วยบัญชีที่เป็นเจ้าของ แล้วค่อยกลับมา</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>บัญชีที่ล็อกอิน Steam อยู่ไม่ได้เป็นเจ้าของเกมนี้ ticket ของมันมาจากโค้ดที่ถูกแลกไปแล้ว จึงสร้างโค้ดใหม่ไม่ได้</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>เซิร์ฟเวอร์ไม่ได้ส่งโค้ดกลับมา</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>คัดลอก</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>ยังไม่มีโหมด unlocker ที่เปิดใช้งานอยู่</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>โค้ดใช้ได้แค่ครั้งเดียว และร้านค้าจะตัดใช้งานทันทีที่คุณแลก ถ้าไม่มีโหมดไหนเปิดอยู่ ตั๋วที่มันเขียนลงไปอาจไม่มีผลอะไรเลย แล้วโค้ดก็หายไปอย่างถาวร
+
+จะแลกต่อเลยไหม?</value></data>
 </root>

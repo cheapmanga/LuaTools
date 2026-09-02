@@ -696,7 +696,18 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>De tickets konden niet worden geschreven. Sluit Steam en probeer het opnieuw.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Bij het inwisselen worden alleen de code en de Windows-MachineGuid van deze machine verstuurd, verder niets. Een code is gebonden aan de machine waarvan het ticket hem heeft aangemaakt.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Een code genereren</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Genereren vereist een eigendomsticket uit je actieve Steam-sessie, en dat kan alleen de eigen app van Tesla697. Hiermee open je die.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer openen</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Het inwisselen en de Devuvo-validatie zijn nagebouwd op basis van Tesla697's TokeerDRM-App en LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Kies een spel dat je bezit en deel er een code voor. De tickets die Steam bij je laatste start heeft bewaard gaan naar de codebank, die eerst de handtekening van Valve controleert voordat er iets wordt aangemaakt.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Inwisselen, genereren en de Devuvo-controle zijn nagebouwd op basis van Tesla697's TokeerDRM-App en LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Genereren</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Spel</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Jouw code</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Eenmalig: zodra iemand hem inwisselt, is hij op.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Nog geen ticket voor dit spel op deze PC. Start het één keer via Steam met het account dat het bezit en kom dan terug.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Het account dat op Steam is ingelogd, bezit dit spel niet: het ticket komt van een ingewisselde code en kan er dus geen nieuwe aanmaken.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>De server heeft geen code teruggegeven.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopiëren</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Geen unlocker-modus actief</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Een code kun je maar één keer gebruiken en de store verbruikt hem zodra je hem inwisselt. Zonder actieve modus doen de tickets die hij schrijft misschien niets en ben je de code voorgoed kwijt.
+
+Toch inwisselen?</value></data>
 </root>

@@ -731,7 +731,18 @@ Cancel - keep downloading</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>The tickets could not be written. Close Steam and try again.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Redeeming sends the code and this machine's Windows MachineGuid, nothing else. A code is bound to the machine whose ticket opened it.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generating a code</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generating needs an ownership ticket taken from your live Steam session, which only Tesla697's own app can do. This opens it.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Open Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Redeeming and the Devuvo validation are rebuilt from Tesla697's TokeerDRM-App and LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Pick a game you own and share a code for it. The tickets Steam cached when you last launched it are sent to the code store, which checks Valve's signature before minting anything.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Redeeming, generating and the Devuvo validation are rebuilt from Tesla697's TokeerDRM-App and LuaToolsValidator.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generate</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Your code</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Single use: once someone redeems it, it is spent.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>No ticket for this game on this PC yet. Launch it once from Steam, signed in with the account that owns it, then come back.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>The account signed into Steam does not own this game: its ticket came from a redeemed code, so it cannot mint new ones.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>The server did not return a code.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>No unlocker mode is active</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>A code can only be used once, and the store spends it the moment you redeem. With no mode active, the tickets it writes may do nothing and the code is gone for good.
+
+Redeem anyway?</value></data>
 </root>

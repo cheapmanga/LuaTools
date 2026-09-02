@@ -696,7 +696,18 @@ Cancelar: seguir descargando</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>No se pudieron escribir los tickets. Cierra Steam e inténtalo de nuevo.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Canjear envía el código y el MachineGuid de Windows de este equipo, nada más. Un código queda ligado al equipo cuyo ticket lo creó.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generar un código</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generar requiere un ticket de propiedad tomado de tu sesión activa de Steam, algo que solo puede hacer la app de Tesla697. Este botón la abre.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Abrir Tokeer</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>El canje y la validación Devuvo están reconstruidos a partir de TokeerDRM-App y LuaToolsValidator de Tesla697.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Elige un juego que tengas y comparte un código. Los tickets que Steam guardó la última vez que lo abriste se envían al banco de códigos, que comprueba la firma de Valve antes de generar nada.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>El canje, la generación y la validación de Devuvo están rehechos a partir de TokeerDRM-App y LuaToolsValidator de Tesla697.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generar</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Juego</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Tu código</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Un solo uso: en cuanto alguien lo canjea, se gasta.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Todavía no hay ningún ticket de este juego en este PC. Ábrelo una vez desde Steam con la cuenta que lo tiene y vuelve aquí.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>La cuenta con la que has iniciado sesión en Steam no tiene este juego: su ticket viene de un código canjeado, así que no puede generar otros.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>El servidor no ha devuelto ningún código.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copiar</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>No hay ningún modo de desbloqueo activo</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un código solo se puede usar una vez, y la tienda lo gasta en cuanto lo canjeas. Sin ningún modo activo, puede que los tickets que escribe no hagan nada y el código se pierda para siempre.
+
+¿Canjearlo de todos modos?</value></data>
 </root>

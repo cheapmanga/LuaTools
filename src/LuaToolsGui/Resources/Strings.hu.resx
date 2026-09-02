@@ -696,7 +696,18 @@ Mégse - letöltés folytatása</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>A jegyeket nem sikerült beírni. Zárd be a Steamet, és próbáld újra.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>A beváltás a kódot és ennek a gépnek a Windows MachineGuid azonosítóját küldi el, mást nem. A kód ahhoz a géphez kötődik, amelynek a jegye megnyitotta.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Kód generálása</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>A generáláshoz tulajdonjegy kell az élő Steam-munkamenetedből, amit csak Tesla697 saját alkalmazása tud megszerezni. Ez megnyitja azt.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer megnyitása</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>A beváltás és a Devuvo-ellenőrzés Tesla697 TokeerDRM-App és LuaToolsValidator programjai alapján készült újra.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Válassz egy játékot, ami a tiéd, és oszd meg hozzá a kódot. A Steam által a legutóbbi indításkor eltárolt ticketek a kódtárba kerülnek, ami a Valve aláírását ellenőrzi, mielőtt bármit is generálna.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>A beváltás, a generálás és a Devuvo-ellenőrzés Tesla697 TokeerDRM-App és LuaToolsValidator projektjei alapján készült újra.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generálás</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Játék</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>A kódod</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Egyszer használható: ha valaki beváltja, elhasználódik.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Ehhez a játékhoz még nincs ticket ezen a PC-n. Indítsd el egyszer a Steamből azzal a fiókkal, amelyik birtokolja, aztán gyere vissza.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>A Steamre bejelentkezett fiók nem birtokolja ezt a játékot: a ticketje egy beváltott kódból származik, így nem lehet vele újakat készíteni.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>A szerver nem küldött vissza kódot.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Másolás</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Nincs aktív unlocker mód</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Egy kódot csak egyszer lehet felhasználni, és a bolt abban a pillanatban elhasználja, amint beváltod. Aktív mód nélkül a beírt jegyek lehet, hogy semmit sem csinálnak, a kód pedig végleg elvész.
+
+Mégis beváltod?</value></data>
 </root>

@@ -338,14 +338,14 @@ public class SteamAutoCrackService(
 
             try
             {
-                Process.Start(psi);
+                Process.Start(psi)?.Dispose();
             }
             catch (System.ComponentModel.Win32Exception ex) when (ex.NativeErrorCode == 740 && !psi.UseShellExecute)
             {
                 // ERROR_ELEVATION_REQUIRED: only the shell can raise a UAC prompt. Start it the old way
                 // and let it resolve a runtime itself rather than failing outright.
                 log.LogDebug(ex, "SteamAutoCrack wants elevation; launching without the private runtime");
-                Process.Start(new ProcessStartInfo(ExePath) { UseShellExecute = true, WorkingDirectory = ToolDir });
+                Process.Start(new ProcessStartInfo(ExePath) { UseShellExecute = true, WorkingDirectory = ToolDir })?.Dispose();
             }
 
             return true;

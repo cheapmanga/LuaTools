@@ -696,7 +696,18 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Tokeer_Err_Write" xml:space="preserve"><value>Die Tickets konnten nicht geschrieben werden. Schließe Steam und versuch es erneut.</value></data>
   <data name="Tokeer_Sends" xml:space="preserve"><value>Beim Einlösen werden nur der Code und die Windows-MachineGuid dieses Rechners gesendet, sonst nichts. Ein Code ist an den Rechner gebunden, dessen Ticket ihn erzeugt hat.</value></data>
   <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Einen Code erzeugen</value></data>
-  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Zum Erzeugen wird ein Besitz-Ticket aus deiner laufenden Steam-Sitzung gebraucht, was nur Tesla697s eigene App kann. Hier wird sie geöffnet.</value></data>
-  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer öffnen</value></data>
-  <data name="Tokeer_Credit" xml:space="preserve"><value>Das Einlösen und die Devuvo-Prüfung sind aus Tesla697s TokeerDRM-App und LuaToolsValidator nachgebaut.</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Wähl ein Spiel aus, das dir gehört, und teile einen Code dafür. Die Tickets, die Steam beim letzten Start zwischengespeichert hat, gehen an den Code-Speicher, der erst Valves Signatur prüft, bevor er etwas erzeugt.</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Einlösen, Generieren und die Devuvo-Prüfung sind aus Tesla697s TokeerDRM-App und LuaToolsValidator nachgebaut.</value></data>
+  <data name="Tokeer_Generate" xml:space="preserve"><value>Generieren</value></data>
+  <data name="Tokeer_Generate_Game" xml:space="preserve"><value>Spiel</value></data>
+  <data name="Tokeer_Generated_Header" xml:space="preserve"><value>Dein Code</value></data>
+  <data name="Tokeer_Generated_Hint" xml:space="preserve"><value>Nur einmal nutzbar: sobald ihn jemand einlöst, ist er verbraucht.</value></data>
+  <data name="Tokeer_Err_NoTicket" xml:space="preserve"><value>Für dieses Spiel gibt es auf diesem PC noch kein Ticket. Starte es einmal über Steam mit dem Konto, dem es gehört, und komm dann zurück.</value></data>
+  <data name="Tokeer_Err_NotOwner" xml:space="preserve"><value>Das bei Steam angemeldete Konto besitzt dieses Spiel nicht: Sein Ticket stammt aus einem eingelösten Code und kann deshalb keine neuen erzeugen.</value></data>
+  <data name="Tokeer_Err_NoCode" xml:space="preserve"><value>Der Server hat keinen Code zurückgegeben.</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Kopieren</value></data>
+  <data name="Tokeer_Warn_NoMode_Title" xml:space="preserve"><value>Kein Unlocker-Modus aktiv</value></data>
+  <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Ein Code lässt sich nur einmal verwenden, und der Store verbraucht ihn in dem Moment, in dem du ihn einlöst. Ohne aktiven Modus bewirken die geschriebenen Tickets womöglich gar nichts und der Code ist endgültig weg.
+
+Trotzdem einlösen?</value></data>
 </root>
