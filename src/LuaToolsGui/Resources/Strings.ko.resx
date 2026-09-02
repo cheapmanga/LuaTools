@@ -585,6 +585,12 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack을 다운로드하지 못했습니다.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack을 시작하지 못했습니다.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack이 업데이트되었습니다.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} 가져오는 중</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0}을 열었습니다.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0}이 업데이트되었습니다.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0}을 다운로드하지 못했습니다.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0}을 시작하지 못했습니다.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>{0}에 필요한 .NET 런타임을 설치하지 못했습니다.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>파일 할당 중</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>기존 파일 확인 중</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>다운로드 취소</value></data>

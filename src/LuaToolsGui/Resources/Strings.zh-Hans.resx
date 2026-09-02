@@ -605,6 +605,12 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>无法下载 SteamAutoCrack。</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>无法启动 SteamAutoCrack。</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack 已更新。</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>正在获取 {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>已打开 {0}。</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} 已更新。</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>无法下载 {0}。</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>无法启动 {0}。</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>无法安装 {0} 所需的 .NET 运行时。</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>正在分配文件</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>正在校验已有文件</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>取消下载</value></data>

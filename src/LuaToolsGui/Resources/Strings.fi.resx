@@ -585,6 +585,12 @@ Tämä poistaa .lua-tiedostot kansiosta Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrackia ei voitu ladata.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrackia ei voitu käynnistää.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack päivitettiin.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Haetaan {0}ia</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} avattiin.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} päivitettiin.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0}ia ei voitu ladata.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0}ia ei voitu käynnistää.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>{0}in tarvitsemaa .NET-ajonaikaa ei voitu asentaa.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>varataan tiedostoja</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>tarkistetaan olemassa olevia tiedostoja</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Peruuta lataus</value></data>

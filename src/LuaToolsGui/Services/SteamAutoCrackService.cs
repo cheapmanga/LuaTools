@@ -42,6 +42,7 @@ public enum SacPrepareResult
 public class SteamAutoCrackService(
     GithubProxy gh,
     CacheService cache,
+    PrivateDotnetRuntime privateRuntime,
     ILogger<SteamAutoCrackService> log)
 {
     private static readonly string ToolDir = Path.Combine(
@@ -99,19 +100,8 @@ public class SteamAutoCrackService(
     /// Presence of the major version is all their exe needs; patch-level servicing is Windows Update's
     /// job, so this deliberately does not chase 10.0.x updates.
     /// </remarks>
-    public async Task<bool> RuntimeInstalledAsync()
-    {
-        try
-        {
-            var runtime = Runtimes.GetRuntimeByName(RuntimeId);
-            return runtime is not null && await runtime.CheckIsInstalled();
-        }
-        catch (Exception ex)
-        {
-            log.LogDebug(ex, "Checking for the .NET runtime failed");
-            return false;
-        }
-    }
+    public async Task<bool> RuntimeInstalledAsync() =>
+        privateRuntime.IsReady || await privateRuntime.MachineHasRuntimeAsync();
 
     /// <summary>
     /// Make sure the .NET 10 Desktop runtime is present, installing it if not. Returns Ready when their
@@ -130,6 +120,13 @@ public class SteamAutoCrackService(
             }
 
             if (await runtime.CheckIsInstalled()) return SacPrepareResult.Ready;
+
+            // Before asking the user to install anything: a runtime in our own folder starts their exe
+            // just as well, needs no elevation and changes nothing on the machine. The installer below
+            // stays as the fallback for when that download fails.
+            var privateSink = progress is null ? null
+                : new ProgressRelay<DownloadProgress>(p => progress.Report(p.Fraction));
+            if (await privateRuntime.EnsureAsync(privateSink, ct)) return SacPrepareResult.Ready;
 
             if (!await runtime.CheckIsSupported())
             {
@@ -329,11 +326,28 @@ public class SteamAutoCrackService(
         try
         {
             // WorkingDirectory matters: their exe looks for Goldberg/ and TEMP/ next to itself.
-            Process.Start(new ProcessStartInfo(ExePath)
+            var psi = new ProcessStartInfo(ExePath)
             {
                 UseShellExecute = true,
                 WorkingDirectory = ToolDir,
-            });
+            };
+
+            // No-op unless a private runtime was extracted, in which case this points their exe at it
+            // (and turns the shell off, which environment variables require).
+            privateRuntime.Apply(psi);
+
+            try
+            {
+                Process.Start(psi);
+            }
+            catch (System.ComponentModel.Win32Exception ex) when (ex.NativeErrorCode == 740 && !psi.UseShellExecute)
+            {
+                // ERROR_ELEVATION_REQUIRED: only the shell can raise a UAC prompt. Start it the old way
+                // and let it resolve a runtime itself rather than failing outright.
+                log.LogDebug(ex, "SteamAutoCrack wants elevation; launching without the private runtime");
+                Process.Start(new ProcessStartInfo(ExePath) { UseShellExecute = true, WorkingDirectory = ToolDir });
+            }
+
             return true;
         }
         catch (Exception ex)

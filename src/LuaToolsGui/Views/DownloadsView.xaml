@@ -301,14 +301,28 @@
                 FontSize="22"
                 FontWeight="Bold"
                 Text="{x:Static res:Strings.Downloads_Title}" />
-            <!--  Fetches SteamAutoCrack (and the .NET runtime it needs) and opens its window. Their GUI
-                  takes no arguments, so nothing is passed to it — the user drives it from there.  -->
-            <ui:Button
+            <!--  Third-party tools: each is fetched on first use and then just opened. None of them takes
+                  arguments, so nothing is passed to them — the user drives them from their own window.
+                  Their names are products, so they are written here rather than translated.  -->
+            <StackPanel
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Command="{Binding LaunchSteamAutoCrackCommand}"
-                Content="{x:Static res:Strings.Downloads_SteamAutoCrack}"
-                Icon="{ui:SymbolIcon Wrench24}" />
+                Orientation="Horizontal">
+                <ui:Button
+                    Command="{Binding LaunchSteamAutoCrackCommand}"
+                    Content="{x:Static res:Strings.Downloads_SteamAutoCrack}"
+                    Icon="{ui:SymbolIcon Wrench24}" />
+                <ui:Button
+                    Margin="8,0,0,0"
+                    Command="{Binding LaunchTokeerCommand}"
+                    Content="Tokeer"
+                    Icon="{ui:SymbolIcon KeyMultiple24}" />
+                <ui:Button
+                    Margin="8,0,0,0"
+                    Command="{Binding LaunchValidatorCommand}"
+                    Content="LuaTools Validator"
+                    Icon="{ui:SymbolIcon CheckmarkCircle24}" />
+            </StackPanel>
         </Grid>
 
         <ScrollViewer

@@ -585,6 +585,12 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>ดาวน์โหลด SteamAutoCrack ไม่สำเร็จ</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>เริ่ม SteamAutoCrack ไม่สำเร็จ</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>อัปเดต SteamAutoCrack แล้ว</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>กำลังรับ {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>เปิด {0} แล้ว</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>อัปเดต {0} แล้ว</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>ดาวน์โหลด {0} ไม่สำเร็จ</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>เริ่ม {0} ไม่สำเร็จ</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>ติดตั้ง .NET runtime ที่ {0} ต้องใช้ไม่สำเร็จ</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>กำลังจองพื้นที่ไฟล์</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>กำลังตรวจสอบไฟล์ที่มีอยู่</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>ยกเลิกการดาวน์โหลด</value></data>
