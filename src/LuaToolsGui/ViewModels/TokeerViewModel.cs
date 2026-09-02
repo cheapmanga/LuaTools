@@ -67,11 +67,18 @@ public partial class TokeerViewModel(
 
     public bool HasGenerateStatus => GenerateStatus.Length > 0;
 
-    /// <summary>Fill the picker from the games Steam has installed. Off the UI thread, like Validator.</summary>
-    public async Task LoadAsync()
-    {
-        if (Games.Count > 0) return;
+    /// <summary>Cached so a second navigation joins the first enumeration instead of repeating it.</summary>
+    private Task? _loading;
 
+    /// <summary>Fill the picker from the games Steam has installed. Off the UI thread, like Validator.</summary>
+    /// <remarks>
+    /// The guard is the task, not the list. Testing Games.Count before the await let a page switch
+    /// during a slow enumeration re-enter with an empty list and append every game a second time.
+    /// </remarks>
+    public Task LoadAsync() => _loading ??= LoadCoreAsync();
+
+    private async Task LoadCoreAsync()
+    {
         var installed = await Task.Run(() => library.EnumerateInstalled()
             .OrderBy(g => g.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList());
@@ -90,7 +97,7 @@ public partial class TokeerViewModel(
 
         try
         {
-            if (!await ConfirmWithoutModeAsync()) return;
+            if (!ConfirmWithoutMode()) return;
 
             var result = await tokeer.RedeemAsync(Code);
             StatusIsError = !result.Ok;
@@ -124,24 +131,24 @@ public partial class TokeerViewModel(
     }
 
     /// <summary>
-    /// Ask before spending a code on a machine with no unlocker mode active. True = go ahead.
+    /// Ask before spending a code on a machine with no unlocker mode selected. True = go ahead.
     /// </summary>
     /// <remarks>
-    /// A code is single use and the store spends it the moment it answers. With no mode active the
-    /// tickets are written to a Steam that will not use them, and the code is gone for nothing - the
-    /// one failure a user cannot undo. Deliberately a question and not a block: if the detection is
-    /// wrong, refusing to redeem would be worse than asking.
+    /// <para>A code is single use and the store spends it the moment it answers. With no mode in
+    /// place the tickets are written to a Steam that will not use them, and the code is gone for
+    /// nothing - the one failure a user cannot undo. Deliberately a question and not a block: if this
+    /// reads the situation wrong, refusing to redeem would be worse than asking.</para>
+    ///
+    /// <para>It reads the selected mode from settings rather than calling
+    /// <c>DetectActiveModeAsync</c>, which looked like the better check and is not: that one hits
+    /// api.github.com on a five-minute-timeout client (so the button could appear to hang before the
+    /// redeem is even attempted), never resolves a custom mode - warning exactly the people running
+    /// their own unlocker - and writes back the mode it detects, so pressing Redeem here could
+    /// silently overwrite the user's choice.</para>
     /// </remarks>
-    private async Task<bool> ConfirmWithoutModeAsync()
+    private bool ConfirmWithoutMode()
     {
-        try
-        {
-            if (await unlocker.DetectActiveModeAsync() is not null) return true;
-        }
-        catch
-        {
-            return true; // couldn't tell. Not a reason to stand in the way
-        }
+        if (unlocker.SelectedMode is not null) return true;
 
         return MessageBox.Show(
             Resources.Strings.Tokeer_Warn_NoMode_Body,
