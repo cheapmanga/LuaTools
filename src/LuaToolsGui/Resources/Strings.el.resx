@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Εμφάνιση .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Αντιγραφή App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Κατάργηση DRM του Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Διορθώσεις ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Ενέργειες</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Κατάργηση του DRM του Steam;</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Αυτό εκτελεί το Steamless στο εκτελέσιμο του παιχνιδιού για να αφαιρέσει το DRM SteamStub. Το αρχικό .exe δημιουργείται πρώτα ως αντίγραφο .bak. Ορισμένα παιχνίδια ίσως χρειαστούν έπειτα επαλήθευση αρχείων στο Steam. Συνέχεια;</value></data>

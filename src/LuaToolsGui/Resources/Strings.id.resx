@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Tampilkan .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Salin App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Hapus DRM Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Perbaikan ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Tindakan</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Hapus DRM Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ini menjalankan Steamless pada file eksekusi game untuk menghapus DRM SteamStub. File .exe asli dicadangkan ke .bak terlebih dahulu. Beberapa game mungkin perlu verifikasi file di Steam setelahnya. Lanjutkan?</value></data>

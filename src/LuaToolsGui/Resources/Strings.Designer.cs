@@ -217,6 +217,7 @@ public static class Strings
     public static string Manage_Action_Reveal => Get(nameof(Manage_Action_Reveal));
     public static string Manage_Action_CopyAppId => Get(nameof(Manage_Action_CopyAppId));
     public static string Manage_Action_RemoveDrm => Get(nameof(Manage_Action_RemoveDrm));
+    public static string Manage_Action_Fixes => Get(nameof(Manage_Action_Fixes));
     public static string Manage_Action_ManageBuild => Get(nameof(Manage_Action_ManageBuild));
     public static string Manage_AboutHeader => Get(nameof(Manage_AboutHeader));
     public static string Manage_Info_Developer => Get(nameof(Manage_Info_Developer));

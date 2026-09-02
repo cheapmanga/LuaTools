@@ -248,6 +248,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>显示 .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>复制 App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>移除 Steam DRM</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修复 ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>操作</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>移除 Steam DRM？</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>这将对游戏的可执行文件运行 Steamless 以移除 SteamStub DRM。原始 .exe 会先备份为 .bak。某些游戏之后可能需要在 Steam 中验证文件。是否继续？</value></data>

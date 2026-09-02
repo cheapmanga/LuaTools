@@ -250,6 +250,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>إظهار ملف .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>نسخ App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>إزالة حماية Steam DRM</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>الإصلاحات ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>الإجراءات</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>إزالة حماية Steam DRM؟</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>سيؤدي ذلك إلى تشغيل Steamless على ملف اللعبة التنفيذي لإزالة حماية SteamStub. يُنسخ ملف .exe الأصلي احتياطيًا إلى .bak أولًا. قد تحتاج بعض الألعاب إلى التحقق من الملفات في Steam بعد ذلك. هل تريد المتابعة؟</value></data>

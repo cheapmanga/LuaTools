@@ -747,6 +747,18 @@
                             Content="{x:Static res:Strings.Manage_Action_RemoveDrm}"
                             Icon="{ui:SymbolIcon WrenchScrewdriver24}"
                             IsEnabled="{Binding DataContext.NotBusy, ElementName=Root}" />
+
+                        <!-- Only when the listing has fixes for this game. Purple like the Add page's
+                             banner, so the same offer reads the same way on both pages. -->
+                        <ui:Button
+                            Margin="0,8,0,0"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding DataContext.OpenFixesCommand, ElementName=Root}"
+                            CommandParameter="{Binding}"
+                            Content="{Binding DataContext.FixesActionText, ElementName=Root}"
+                            Foreground="#a78bfa"
+                            Icon="{ui:SymbolIcon ShieldTask24}"
+                            Visibility="{Binding DataContext.HasFix, ElementName=Root, Converter={StaticResource BoolToVis}}" />
                         <UniformGrid Margin="0,8,0,0" Columns="2" Rows="2">
                             <ui:Button
                                 Margin="0,0,4,4"

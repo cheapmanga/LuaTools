@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Zobrazit .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Kopírovat App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Odebrat Steam DRM</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Opravy ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Akce</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Odebrat Steam DRM?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Tímto se na spustitelném souboru hry spustí Steamless, aby odstranil DRM SteamStub. Původní .exe se nejprve zazálohuje jako .bak. Některé hry mohou poté vyžadovat ověření souborů ve Steamu. Pokračovat?</value></data>
