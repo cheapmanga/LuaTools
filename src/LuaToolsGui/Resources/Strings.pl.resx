@@ -585,6 +585,12 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nie udało się pobrać SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nie udało się uruchomić SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>Zaktualizowano SteamAutoCrack.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Pobieranie {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>Otwarto {0}.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>Zaktualizowano {0}.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nie udało się pobrać {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nie udało się uruchomić {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nie udało się zainstalować środowiska .NET wymaganego przez {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>przydzielanie plików</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>sprawdzanie istniejących plików</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Anuluj pobieranie</value></data>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LuaToolsGui.Services;
@@ -17,14 +18,21 @@ public partial class DownloadsViewModel : ObservableObject
 
     private readonly ManifestJobFactory _jobs;
     private readonly SteamAutoCrackService _sac;
+    private readonly TokeerService _tokeer;
+    private readonly LuaToolsValidatorService _validator;
+    private readonly PrivateDotnetRuntime _runtime;
     private readonly ToastService _toast;
 
     public DownloadsViewModel(DownloadQueue queue, ManifestJobFactory jobs, SteamAutoCrackService sac,
+        TokeerService tokeer, LuaToolsValidatorService validator, PrivateDotnetRuntime runtime,
         ToastService toast)
     {
         _queue = queue;
         _jobs = jobs;
         _sac = sac;
+        _tokeer = tokeer;
+        _validator = validator;
+        _runtime = runtime;
         _toast = toast;
 
         _queue.Items.CollectionChanged += (_, _) => RaiseCounts();
@@ -73,6 +81,58 @@ public partial class DownloadsViewModel : ObservableObject
 
         // First run, or the runtime is missing: real work, so it earns a queue row.
         _queue.Enqueue(_jobs.CreateSteamAutoCrackJob());
+    }
+
+    /// <summary>Fetch Tokeer and open it.</summary>
+    [RelayCommand]
+    private Task LaunchTokeer() => LaunchToolAsync(_tokeer);
+
+    /// <summary>Fetch LuaToolsValidator (and the .NET runtime it needs) and open it.</summary>
+    [RelayCommand]
+    private Task LaunchValidator() => LaunchToolAsync(_validator);
+
+    /// <summary>
+    /// Open a single-exe tool, downloading it first if that is actually needed.
+    /// </summary>
+    /// <remarks>
+    /// Same two paths as SteamAutoCrack: a tool already on disk (with a runtime, if it needs one) opens
+    /// immediately, because a queue row for a launch that transfers nothing would flash a progress bar
+    /// AND leave a permanent history entry beside the user's real game downloads. Anything else is real
+    /// work and earns a row. The job's DedupeKey means repeated clicks join the running item.
+    /// </remarks>
+    private async Task LaunchToolAsync(GithubExeTool tool)
+    {
+        if (File.Exists(tool.ExePath) && await RuntimeSatisfiedAsync(tool))
+        {
+            if (tool.Launch())
+            {
+                _ = CheckToolUpdateAsync(tool);
+                return;
+            }
+        }
+
+        _queue.Enqueue(_jobs.CreateExeToolJob(tool));
+    }
+
+    /// <summary>
+    /// Can this tool actually start? A framework-dependent one needs a runtime somewhere - ours or the
+    /// machine's - and a missing one would hand the user Windows' own "install .NET" dialog instead of
+    /// our download.
+    /// </summary>
+    private async Task<bool> RuntimeSatisfiedAsync(GithubExeTool tool) =>
+        !tool.NeedsDotnetDesktop || _runtime.IsReady || await _runtime.MachineHasRuntimeAsync();
+
+    /// <summary>Throttled background update probe for a single-exe tool.</summary>
+    private async Task CheckToolUpdateAsync(GithubExeTool tool)
+    {
+        // Fire-and-forget off a UI command: an unobserved fault here must never reach the user.
+        try
+        {
+            if (_queue.FindActive(tool.JobKey) is not null) return; // one already in flight
+            if (await tool.IsUpdateAvailableAsync())
+                _queue.Enqueue(_jobs.CreateExeToolJob(tool, launchWhenDone: false));
+        }
+        catch { /* background nicety; never surfaces */ }
     }
 
     /// <summary>Throttled background update probe. Only queues anything if a newer build actually exists.</summary>

@@ -585,6 +585,12 @@ Questo elimina i file .lua da Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Impossibile scaricare SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Impossibile avviare SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack aggiornato.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Recupero di {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} aperto.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} aggiornato.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Impossibile scaricare {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Impossibile avviare {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Impossibile installare il runtime .NET richiesto da {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allocazione file</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>verifica dei file esistenti</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Annulla download</value></data>

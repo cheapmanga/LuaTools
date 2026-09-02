@@ -585,6 +585,12 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Tidak dapat mengunduh SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack diperbarui.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Mengambil {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} dibuka.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} diperbarui.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Tidak dapat mengunduh {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Tidak dapat memasang runtime .NET yang dibutuhkan {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>mengalokasikan berkas</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>memeriksa berkas yang ada</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Batalkan unduhan</value></data>

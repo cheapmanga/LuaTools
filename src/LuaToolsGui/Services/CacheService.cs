@@ -50,6 +50,17 @@ public class CacheData
     public long SteamlessCheckedAtMs { get; set; }
     public string? SteamAutoCrackVersion { get; set; }
     public long SteamAutoCrackCheckedAtMs { get; set; }
+
+    // Single-exe GitHub tools (Tokeer, LuaToolsValidator). Keyed by tool id rather than a field pair
+    // each, so adding a tool touches no storage schema.
+    public Dictionary<string, ToolFingerprint> ExeTools { get; set; } = [];
+}
+
+/// <summary>The release tag last installed for one tool, and when we last asked GitHub about it.</summary>
+public class ToolFingerprint
+{
+    public string? Version { get; set; }
+    public long CheckedAtMs { get; set; }
 }
 
 /// <summary>
@@ -199,6 +210,28 @@ public class CacheService
     {
         get => _cache.SteamAutoCrackCheckedAtMs;
         set { _cache.SteamAutoCrackCheckedAtMs = value; Save(); }
+    }
+
+    /// <summary>The release tag a single-exe tool was last updated to, or null if never.</summary>
+    public string? GetToolVersion(string id) =>
+        _cache.ExeTools.TryGetValue(id, out var f) ? f.Version : null;
+
+    /// <summary>Unix-ms of the last release check for a single-exe tool; 0 = never.</summary>
+    public long GetToolCheckedAt(string id) =>
+        _cache.ExeTools.TryGetValue(id, out var f) ? f.CheckedAtMs : 0;
+
+    /// <summary>Record what a tool is at and that we just looked. Both move together, always.</summary>
+    public void SaveToolCheck(string id, string? version, long checkedAtMs)
+    {
+        lock (_gate)
+        {
+            _cache.ExeTools[id] = new ToolFingerprint
+            {
+                Version = string.IsNullOrWhiteSpace(version) ? null : version,
+                CheckedAtMs = checkedAtMs,
+            };
+        }
+        Save();
     }
 
     /// <summary>Clear the loaded-apps notification list (ReadLoadedApps → DismissLoadedApps).</summary>
