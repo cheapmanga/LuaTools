@@ -585,6 +585,12 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Не удалось загрузить SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Не удалось запустить SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack обновлён.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Загрузка {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} открыт.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} обновлён.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Не удалось загрузить {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Не удалось запустить {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Не удалось установить среду .NET, необходимую {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>выделение файлов</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>проверка имеющихся файлов</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Отменить загрузку</value></data>

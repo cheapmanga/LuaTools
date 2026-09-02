@@ -570,6 +570,12 @@ public static class Strings
     public static string Downloads_SAC_Err_Tool => Get(nameof(Downloads_SAC_Err_Tool));
     public static string Downloads_SAC_Err_Launch => Get(nameof(Downloads_SAC_Err_Launch));
     public static string Downloads_SAC_Updated => Get(nameof(Downloads_SAC_Updated));
+    public static string Downloads_Tool_Getting => Get(nameof(Downloads_Tool_Getting));
+    public static string Downloads_Tool_Launched => Get(nameof(Downloads_Tool_Launched));
+    public static string Downloads_Tool_Updated => Get(nameof(Downloads_Tool_Updated));
+    public static string Downloads_Tool_Err_Get => Get(nameof(Downloads_Tool_Err_Get));
+    public static string Downloads_Tool_Err_Launch => Get(nameof(Downloads_Tool_Err_Launch));
+    public static string Downloads_Tool_Err_Runtime => Get(nameof(Downloads_Tool_Err_Runtime));
     public static string Downloads_Depot_PreAllocating => Get(nameof(Downloads_Depot_PreAllocating));
     public static string Downloads_Depot_Validating => Get(nameof(Downloads_Depot_Validating));
     public static string Depot_Cancel_Title => Get(nameof(Depot_Cancel_Title));

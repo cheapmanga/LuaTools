@@ -585,6 +585,12 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack indirilemedi.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack başlatılamadı.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack güncellendi.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} alınıyor</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} açıldı.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} güncellendi.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0} indirilemedi.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0} başlatılamadı.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>{0} için gereken .NET çalışma zamanı kurulamadı.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>dosyalar ayrılıyor</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>mevcut dosyalar denetleniyor</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>İndirmeyi iptal et</value></data>

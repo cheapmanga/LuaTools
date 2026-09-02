@@ -31,6 +31,9 @@ public partial class App : Application
                 services.AddSingleton<AchievementIconCache>();
                 services.AddSingleton<AchievementHostService>();
                 services.AddSingleton<FixLookupService>();
+                services.AddSingleton<PrivateDotnetRuntime>();
+                services.AddSingleton<TokeerService>();
+                services.AddSingleton<LuaToolsValidatorService>();
                 services.AddSingleton<ToastService>();
                 services.AddSingleton<SteamDepotInfo>();
                 services.AddSingleton<LuaVault>();

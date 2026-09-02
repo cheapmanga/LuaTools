@@ -1,4 +1,4 @@
-namespace LuaToolsGui;
+﻿namespace LuaToolsGui;
 
 /// <summary>
 /// Compiled-in client configuration. The Supabase URL and anon key are public
@@ -62,6 +62,26 @@ public static class AppConfig
     //     DepotDownloaderService expects. Their exe resolves those paths from its own base directory,
     //     so extract without flattening.
     public const string SteamAutoCrackRepo = "SteamAutoCracks/Steam-auto-crack";
+
+    // Tokeer (Tesla697): shares and redeems Denuvo activation codes. Its release ships one exe, a Nuitka
+    // onefile build of a Python app - self-contained, so the Downloads button only downloads and opens it.
+    public const string TokeerRepo = "Tesla697/TokeerDRM-App";
+
+    // LuaToolsValidator (Tesla697): a WPF front end for the Denuvo activation validator. One exe again,
+    // but a FRAMEWORK-DEPENDENT net10.0-windows one - hence PrivateDotnetRuntime below.
+    public const string LuaToolsValidatorRepo = "Tesla697/LuaToolsValidator";
+
+    // The .NET 10 Desktop runtime, as plain ZIP binaries, for PrivateDotnetRuntime.
+    //
+    // These aka.ms links are the channel's current patch (they resolve to builds.dotnet.microsoft.com
+    // /dotnet/.../10.0.11/... today), so a tool gets a serviced runtime without us pinning a version that
+    // would rot. TWO archives are needed: the windowsdesktop one carries only Microsoft.WindowsDesktop.App,
+    // with no host and no Microsoft.NETCore.App, so the base runtime is extracted first and it goes on top.
+    //
+    // x64 in both cases even on an arm64 machine: the tools are x64 executables and an x64 apphost needs an
+    // x64 runtime.
+    public const string DotnetRuntimeZipUrl = "https://aka.ms/dotnet/10.0/dotnet-runtime-win-x64.zip";
+    public const string DotnetDesktopRuntimeZipUrl = "https://aka.ms/dotnet/10.0/windowsdesktop-runtime-win-x64.zip";
 
     // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.
     // Powers the Depots page "Download" action.

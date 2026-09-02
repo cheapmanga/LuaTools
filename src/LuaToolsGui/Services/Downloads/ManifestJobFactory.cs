@@ -24,7 +24,8 @@ public class ManifestJobFactory(
     ToastService toast,
     DepotDownloaderService depotTool,
     SteamDepotInfo depotInfo,
-    SteamAutoCrackService sac)
+    SteamAutoCrackService sac,
+    PrivateDotnetRuntime privateRuntime)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -199,6 +200,61 @@ public class ManifestJobFactory(
                 !launchWhenDone ? new JobResult(true, Resources.Strings.Downloads_SAC_Updated)
                 : sac.Launch() ? new JobResult(true, Resources.Strings.Downloads_SAC_Launched)
                 : new JobResult(false, Resources.Strings.Downloads_SAC_Err_Launch)),
+            ConfirmAsync: null,
+            OnFinished: onFinished);
+    }
+
+    /// <summary>
+    /// Fetch a single-exe tool (and, if it needs one, a .NET runtime) and open it.
+    /// </summary>
+    /// <remarks>
+    /// The generic sibling of <see cref="CreateSteamAutoCrackJob"/>, for tools published as one exe in a
+    /// GitHub release. A queue job rather than an inline call so a first run - up to ~95 MB for a tool
+    /// that also needs the runtime - shows real progress and can be cancelled.
+    /// </remarks>
+    /// <param name="launchWhenDone">False for the background-update path, which must not open a second
+    /// window while the user already has one.</param>
+    public DownloadJob CreateExeToolJob(
+        GithubExeTool tool, bool launchWhenDone = true, Action<DownloadItem, JobResult?>? onFinished = null)
+    {
+        return new DownloadJob(
+            DownloadKind.Tool,
+            tool.JobKey,
+            0,
+            tool.DisplayName, // a product name; deliberately not localized
+            Resources.Strings.Downloads_Kind_Tool,
+            null,
+            async (item, progress, ct) =>
+            {
+                // Only for a framework-dependent tool, and only when nothing usable is already there:
+                // a machine with .NET 10 Desktop installed never pays for the private copy.
+                if (tool.NeedsDotnetDesktop && !privateRuntime.IsReady && !await privateRuntime.MachineHasRuntimeAsync())
+                {
+                    OnUi(() => item.Detail = Resources.Strings.Downloads_SAC_GettingRuntime);
+                    if (!await privateRuntime.EnsureAsync(progress, ct))
+                        throw new DownloadAbortedException(
+                            string.Format(Resources.Strings.Downloads_Tool_Err_Runtime, tool.DisplayName));
+                }
+
+                OnUi(() => item.Detail = string.Format(Resources.Strings.Downloads_Tool_Getting, tool.DisplayName));
+                progress.Report(new DownloadProgress(0, null)); // hand the bar back before the real download
+
+                // force when this job was queued by the background update probe: that probe already
+                // recorded the check timestamp, so the throttle would otherwise skip this download.
+                string? exe = await tool.EnsureToolAsync(progress, force: !launchWhenDone, ct)
+                    ?? throw new DownloadAbortedException(
+                        string.Format(Resources.Strings.Downloads_Tool_Err_Get, tool.DisplayName));
+
+                OnUi(() => item.Detail = null);
+                // Directory sentinel, same as CreateDepotJob: the queue's staged-file cleanup no-ops on it.
+                return new DownloadedFile(Path.GetDirectoryName(exe)!, tool.DisplayName);
+            },
+            (_, _, _) => Task.FromResult(
+                !launchWhenDone
+                    ? new JobResult(true, string.Format(Resources.Strings.Downloads_Tool_Updated, tool.DisplayName))
+                : tool.Launch()
+                    ? new JobResult(true, string.Format(Resources.Strings.Downloads_Tool_Launched, tool.DisplayName))
+                    : new JobResult(false, string.Format(Resources.Strings.Downloads_Tool_Err_Launch, tool.DisplayName))),
             ConfirmAsync: null,
             OnFinished: onFinished);
     }
