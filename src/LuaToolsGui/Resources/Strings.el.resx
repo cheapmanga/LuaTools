@@ -662,4 +662,41 @@
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Ο βοηθός επιτευγμάτων λείπει από αυτήν την εγκατάσταση του LuaTools. Εγκατέστησέ την ξανά για να επανέλθει.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Αυτό το επίτευγμα απονέμεται από τους διακομιστές του παιχνιδιού και δεν μπορεί να αλλάξει.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Κάτι πήγε στραβά στην επικοινωνία με το Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Επικύρωση</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Ενεργοποίηση Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Ελέγχει την ενεργοποίηση Denuvo ενός εγκατεστημένου παιχνιδιού και διορθώνει ό,τι μπορεί. Τη δουλειά την κάνει το script Devuvo του LuaTools, που κατεβαίνει ξανά σε κάθε εκτέλεση.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Παιχνίδι</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Κλείδωμα έκδοσης</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Καρφιτσώνει το παιχνίδι στο εγκατεστημένο build, ώστε μια ενημέρωση του Steam να μη σβήσει την ενεργοποίηση.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Αυτή η εκτέλεση ανεβάζει αναφορά</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Το script συλλέγει το MachineGuid σου, τον σειριακό του δίσκου, τις διευθύνσεις MAC, τη δημόσια IP, το υλικό σου και τα περιεχόμενα του φακέλου του παιχνιδιού, και τα ανεβάζει στο paste.rtech.support. Ο κωδικός D-Report που παίρνεις είναι η δημόσια διεύθυνση αυτής της σελίδας: όποιος τον έχει μπορεί να τα δει όλα.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Καταλαβαίνω τι στέλνεται</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Εκτέλεση</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Εκτελείται. Ενέκρινε το αίτημα δικαιωμάτων και παρακολούθησε το παράθυρο που ανοίγει.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Ολοκληρώθηκε.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Ολοκληρώθηκε, αλλά δεν εμφανίστηκε κωδικός αναφοράς.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Ακυρώθηκε: το script δεν τρέχει χωρίς δικαιώματα διαχειριστή.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Το script δεν κατέβηκε. Έλεγξε τη σύνδεσή σου.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Η εκτέλεση απέτυχε.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Κωδικός D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Επικόλλησέ τον στο bot υποστήριξης. Οδηγεί στην αναφορά που ανέβηκε.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Αντιγραφή</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Ο κωδικός αναφοράς αντιγράφηκε</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Κωδικοί ενεργοποίησης για παιχνίδια με Denuvo, που μοιράζονται μεταξύ τους όσοι τα έχουν.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Εξαργύρωση κωδικού</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Επικόλλησε έναν κωδικό που σου έδωσαν. Τα tickets που αντιστοιχούν γράφονται στο Steam και μετά ξεκινάς το παιχνίδι από το Steam ως συνήθως.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Κωδικός 6 χαρακτήρων</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Εξαργύρωση</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Ο κωδικός εξαργυρώθηκε</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Γράφτηκαν tickets για την εφαρμογή {0}. Ξεκίνησέ την από το Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Ο κωδικός απορρίφθηκε.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Δεν ήταν δυνατή η σύνδεση με την αποθήκη κωδικών.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Ο διακομιστής επέστρεψε ελλιπές ticket.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Τα tickets δεν γράφτηκαν. Κλείσε το Steam και δοκίμασε ξανά.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Η εξαργύρωση στέλνει τον κωδικό και το MachineGuid των Windows αυτού του υπολογιστή, τίποτα άλλο. Ο κωδικός δένεται με το μηχάνημα του οποίου το ticket τον άνοιξε.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Δημιουργία κωδικού</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Η δημιουργία χρειάζεται ένα ticket ιδιοκτησίας από τη ζωντανή σου συνεδρία Steam, κάτι που μπορεί μόνο η εφαρμογή του ίδιου του Tesla697. Από εδώ ανοίγει.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Άνοιγμα Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Η εξαργύρωση και η επικύρωση Devuvo έχουν ξαναφτιαχτεί με βάση τα TokeerDRM-App και LuaToolsValidator του Tesla697.</value></data>
 </root>

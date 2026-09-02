@@ -1,0 +1,187 @@
+﻿<UserControl
+    x:Class="LuaToolsGui.Views.ValidatorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="clr-namespace:LuaToolsGui.Resources"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:LuaToolsGui.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vm:ValidatorViewModel}"
+    TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <StackPanel Grid.Row="0">
+            <TextBlock
+                FontSize="22"
+                FontWeight="Bold"
+                Text="{x:Static res:Strings.Val_Title}" />
+            <TextBlock
+                Margin="0,4,0,0"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="{x:Static res:Strings.Val_Subtitle}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+
+        <!--  Game + options  -->
+        <Grid Grid.Row="1" Margin="0,18,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock
+                    Margin="0,0,0,6"
+                    FontWeight="SemiBold"
+                    Text="{x:Static res:Strings.Val_Game}" />
+                <!--  The installed games Steam knows about, so nobody has to look up an appid.  -->
+                <ComboBox
+                    DisplayMemberPath="Display"
+                    IsEnabled="{Binding NotRunning}"
+                    ItemsSource="{Binding Games}"
+                    SelectedItem="{Binding SelectedGame}" />
+            </StackPanel>
+
+            <CheckBox
+                Grid.Column="1"
+                Margin="16,26,0,0"
+                VerticalAlignment="Top"
+                Content="{x:Static res:Strings.Val_LockVersion}"
+                IsChecked="{Binding LockVersion}"
+                IsEnabled="{Binding NotRunning}"
+                ToolTip="{x:Static res:Strings.Val_LockVersion_Hint}" />
+        </Grid>
+
+        <!--  What the run sends. Amber, because it is a caution rather than an offer or a result: the
+              script uploads a machine report and hands back the paste's public address as the code.  -->
+        <Border
+            Grid.Row="2"
+            Margin="0,16,0,0"
+            Padding="14,12"
+            Background="#14f59e0b"
+            BorderBrush="#40f59e0b"
+            BorderThickness="1"
+            CornerRadius="8">
+            <StackPanel>
+                <TextBlock
+                    FontWeight="SemiBold"
+                    Foreground="#f59e0b"
+                    Text="{x:Static res:Strings.Val_Consent_Header}" />
+                <TextBlock
+                    Margin="0,6,0,0"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    Text="{x:Static res:Strings.Val_Consent_Body}"
+                    TextWrapping="Wrap" />
+                <CheckBox
+                    Margin="0,10,0,0"
+                    Content="{x:Static res:Strings.Val_Consent_Check}"
+                    IsChecked="{Binding ConsentGiven}"
+                    IsEnabled="{Binding NotRunning}" />
+            </StackPanel>
+        </Border>
+
+        <!--  Run, progress, log, report code  -->
+        <Grid Grid.Row="3" Margin="0,16,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <ui:Button
+                    Appearance="Primary"
+                    Command="{Binding RunCommand}"
+                    Content="{x:Static res:Strings.Val_Run}"
+                    Icon="{ui:SymbolIcon Play24}" />
+                <TextBlock
+                    Margin="12,0,0,0"
+                    VerticalAlignment="Center"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    Text="{Binding Status}" />
+            </StackPanel>
+
+            <ProgressBar
+                Grid.Row="1"
+                Height="3"
+                Margin="0,12,0,0"
+                Maximum="100"
+                Value="{Binding Progress}"
+                Visibility="{Binding HasProgress, Converter={StaticResource BoolToVis}}" />
+
+            <!--  The script's own output, unedited: it is the thing actually doing the work, and a
+                  summary would hide the step that failed.  -->
+            <Border
+                Grid.Row="2"
+                Margin="0,12,0,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                CornerRadius="8">
+                <ScrollViewer x:Name="LogScroller" Padding="12,10" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Log}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    FontFamily="Consolas"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding}"
+                                    TextWrapping="Wrap" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+
+            <Border
+                Grid.Row="3"
+                Margin="0,12,0,0"
+                Padding="14,12"
+                Background="#1422c55e"
+                BorderBrush="#4022c55e"
+                BorderThickness="1"
+                CornerRadius="8"
+                Visibility="{Binding HasReportCode, Converter={StaticResource BoolToVis}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontWeight="SemiBold"
+                            Foreground="#22c55e"
+                            Text="{x:Static res:Strings.Val_Report_Header}" />
+                        <TextBlock
+                            Margin="0,4,0,0"
+                            FontFamily="Consolas"
+                            FontSize="15"
+                            Text="{Binding ReportCode}" />
+                        <TextBlock
+                            Margin="0,4,0,0"
+                            FontSize="11"
+                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Text="{x:Static res:Strings.Val_Report_Hint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <ui:Button
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Command="{Binding CopyReportCodeCommand}"
+                        Content="{x:Static res:Strings.Val_Report_Copy}"
+                        Icon="{ui:SymbolIcon Copy24}" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

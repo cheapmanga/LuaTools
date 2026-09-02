@@ -688,4 +688,41 @@
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>مساعد الإنجازات مفقود من تثبيت LuaTools هذا. أعد التثبيت لاستعادته.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>هذا الإنجاز تمنحه خوادم اللعبة ولا يمكن تغييره.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>حدث خطأ ما أثناء الاتصال بـ Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>المُدقّق</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>تفعيل Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>يفحص تفعيل Denuvo للعبة مثبّتة ويصلح ما يستطيع. يقوم بالعمل سكربت Devuvo الخاص بـ LuaTools، ويُنزَّل من جديد في كل تشغيل.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>اللعبة</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>تثبيت الإصدار</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>يثبّت اللعبة على النسخة المثبتة حاليًا، حتى لا يمحو تحديث Steam التفعيل.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>هذا التشغيل يرفع تقريرًا</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>يجمع السكربت MachineGuid الخاص بك، والرقم التسلسلي للقرص، وعناوين MAC، وعنوان IP العام، ومواصفات العتاد، ومحتويات مجلد اللعبة، ثم يرفعها إلى paste.rtech.support. رمز D-Report الذي تحصل عليه هو العنوان العلني لتلك الصفحة: أي شخص تعطيه إياه يستطيع قراءة كل ذلك.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>أفهم ما الذي يُرسَل</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>تشغيل</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>قيد التشغيل. وافق على طلب صلاحيات المسؤول، ثم تابع النافذة التي ستفتح.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>انتهى.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>انتهى، لكن لم يُطبع أي رمز تقرير.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>أُلغي: لا يمكن تشغيل السكربت بدون صلاحيات المسؤول.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>تعذّر تنزيل السكربت. تحقّق من اتصالك.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>فشل التشغيل.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>رمز D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>الصقه في بوت الدعم. إنه يشير إلى التقرير المرفوع.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>نسخ</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>تم نسخ رمز التقرير</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>رموز تفعيل لألعاب Denuvo، يتشاركها من يملكون هذه الألعاب.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>استخدام رمز</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>الصق رمزًا شاركه أحدهم معك. ستُكتب التذاكر المقابلة له في Steam، ثم شغّل اللعبة من Steam كالمعتاد.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>رمز من 6 خانات</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>استخدام</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>تم استخدام الرمز</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>كُتبت التذاكر للتطبيق {0}. شغّله من Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>تم رفض الرمز.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>تعذّر الوصول إلى مخزن الرموز.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>أعاد الخادم تذكرة ناقصة.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>تعذّرت كتابة التذاكر. أغلق Steam وحاول مرة أخرى.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>عند الاستخدام يُرسَل الرمز و MachineGuid الخاص بنظام Windows على هذا الجهاز فقط، لا شيء غير ذلك. يرتبط الرمز بالجهاز الذي فتحته تذكرته.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>توليد رمز</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>يحتاج التوليد إلى تذكرة ملكية تُؤخذ من جلسة Steam النشطة، وهذا لا يستطيعه سوى تطبيق Tesla697 نفسه. هذا الزر يفتحه.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>فتح Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>استخدام الرموز والتحقق عبر Devuvo أُعيد بناؤهما اعتمادًا على TokeerDRM-App و LuaToolsValidator من Tesla697.</value></data>
 </root>

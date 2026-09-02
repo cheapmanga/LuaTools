@@ -32,8 +32,10 @@ public partial class App : Application
                 services.AddSingleton<AchievementHostService>();
                 services.AddSingleton<FixLookupService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
-                services.AddSingleton<TokeerService>();
+                services.AddSingleton<TokeerAppService>();
                 services.AddSingleton<LuaToolsValidatorService>();
+                services.AddSingleton<DevuvoService>();
+                services.AddSingleton<TokeerService>();
                 services.AddSingleton<ToastService>();
                 services.AddSingleton<SteamDepotInfo>();
                 services.AddSingleton<LuaVault>();
@@ -81,6 +83,8 @@ public partial class App : Application
                 services.AddSingleton<AchievementsViewModel>();
                 services.AddSingleton<DownloadsViewModel>();
                 services.AddSingleton<PluginViewModel>();
+                services.AddSingleton<ValidatorViewModel>();
+                services.AddSingleton<TokeerViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
                 // Pages resolved by NavigationView via the DI service provider.
@@ -92,6 +96,8 @@ public partial class App : Application
                 services.AddSingleton<ModeView>();
                 services.AddSingleton<FixesView>();
                 services.AddSingleton<AchievementsView>();
+                services.AddSingleton<ValidatorView>();
+                services.AddSingleton<TokeerView>();
                 services.AddSingleton<PluginView>();
                 services.AddSingleton<SettingsView>();
                 services.AddSingleton<MainWindow>();
@@ -393,6 +399,14 @@ public partial class App : Application
         });
         download.OpenFixesForGame = openFixes;
         manage.OpenFixesForGame = openFixes;
+
+        // Tokeer's Generate half can't be done in-app (it needs an ownership ticket out of the live
+        // Steam session), so the page hands it to the Downloads page, which owns their tool.
+        _host.Services.GetRequiredService<TokeerViewModel>().OpenTokeerApp = () => Dispatcher.Invoke(() =>
+        {
+            window.NavigateToDownloads();
+            _host.Services.GetRequiredService<DownloadsViewModel>().LaunchTokeerCommand.Execute(null);
+        });
         builds.NavigateToManage = openInManage; // Builds "Manage" button: the reverse of "Manage Build"
         // Depot download queues one item covering the whole selection; show the user where it went.
         builds.RequestShowDownloads = () => Dispatcher.Invoke(window.NavigateToDownloads);

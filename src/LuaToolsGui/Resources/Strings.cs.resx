@@ -662,4 +662,41 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>V této instalaci LuaTools chybí pomocník pro achievementy. Přeinstaluj ji, aby se obnovil.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Tento achievement uděluje server hry a nelze ho změnit.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Při komunikaci se Steamem se něco pokazilo.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validátor</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Aktivace Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Zkontroluje aktivaci Denuvo u nainstalované hry a co půjde, opraví. Práci odvede vlastní skript Devuvo z LuaTools, který se stahuje znovu při každém spuštění.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Hra</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Zamknout verzi</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Připne hru k nainstalovanému buildu, aby aktualizace Steamu nesmazala aktivaci.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Toto spuštění nahraje report</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Skript sesbírá tvůj MachineGuid, sériové číslo disku, MAC adresy, veřejnou IP, údaje o hardwaru a obsah složky hry a nahraje je na paste.rtech.support. Kód D-Report, který dostaneš, je veřejná adresa té stránky: kdokoli, komu ho dáš, si všechno přečte.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Rozumím, co se odesílá</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Spustit</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Běží. Potvrď výzvu ke zvýšení oprávnění a sleduj okno, které se otevře.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Hotovo.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Hotovo, ale žádný kód reportu se nevypsal.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Zrušeno: skript nemůže běžet bez práv správce.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Skript se nepodařilo stáhnout. Zkontroluj připojení.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Spuštění selhalo.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Kód D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Vlož ho do support bota. Odkazuje na nahraný report.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Kopírovat</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Kód reportu zkopírován</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Aktivační kódy pro hry s Denuvo, sdílené mezi lidmi, kteří je vlastní.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Uplatnit kód</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Vlož kód, který ti někdo poslal. Tikety, které zastupuje, se zapíšou do Steamu; pak hru spusť ze Steamu jako obvykle.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6znakový kód</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Uplatnit</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Kód uplatněn</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tikety zapsány pro aplikaci {0}. Spusť ji ze Steamu.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Kód byl odmítnut.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Úložiště kódů je nedostupné.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Server vrátil neúplný tiket.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tikety se nepodařilo zapsat. Zavři Steam a zkus to znovu.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Uplatnění odešle kód a MachineGuid tohoto Windows, nic víc. Kód je vázaný na počítač, jehož tiket ho otevřel.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generování kódu</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generování vyžaduje tiket vlastnictví z tvé živé relace Steamu, což umí jen vlastní aplikace od Tesla697. Tímto ji otevřeš.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Otevřít Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Uplatňování kódů a validace Devuvo jsou znovu postavené podle TokeerDRM-App a LuaToolsValidator od Tesla697.</value></data>
 </root>

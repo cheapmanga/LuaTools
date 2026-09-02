@@ -1,0 +1,126 @@
+﻿<UserControl
+    x:Class="LuaToolsGui.Views.TokeerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="clr-namespace:LuaToolsGui.Resources"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:LuaToolsGui.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vm:TokeerViewModel}"
+    TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock
+                FontSize="22"
+                FontWeight="Bold"
+                Text="{x:Static res:Strings.Tokeer_Title}" />
+            <TextBlock
+                Margin="0,4,0,0"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="{x:Static res:Strings.Tokeer_Subtitle}"
+                TextWrapping="Wrap" />
+
+            <!--  Redeem  -->
+            <Border
+                Margin="0,18,0,0"
+                Padding="16"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                CornerRadius="8">
+                <StackPanel>
+                    <TextBlock
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Text="{x:Static res:Strings.Tokeer_Redeem_Header}" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{x:Static res:Strings.Tokeer_Redeem_Body}"
+                        TextWrapping="Wrap" />
+
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ui:TextBox
+                            Grid.Column="0"
+                            CharacterCasing="Upper"
+                            IsEnabled="{Binding NotBusy}"
+                            MaxLength="16"
+                            PlaceholderText="{x:Static res:Strings.Tokeer_Code_Placeholder}"
+                            Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
+                        <ui:Button
+                            Grid.Column="1"
+                            Margin="8,0,0,0"
+                            Appearance="Primary"
+                            Command="{Binding RedeemCommand}"
+                            Content="{x:Static res:Strings.Tokeer_Redeem}"
+                            Icon="{ui:SymbolIcon KeyMultiple24}" />
+                    </Grid>
+
+                    <!--  The store's own wording on failure: it knows why (already used, wrong machine,
+                          expired) better than anything this page could guess.  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        Text="{Binding Status}"
+                        TextWrapping="Wrap"
+                        Visibility="{Binding HasStatus, Converter={StaticResource BoolToVis}}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#22c55e" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StatusIsError}" Value="True">
+                                        <Setter Property="Foreground" Value="#f87171" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <!--  What leaves the machine, said plainly rather than buried in a privacy note nobody reads.  -->
+            <TextBlock
+                Margin="2,10,0,0"
+                FontSize="11"
+                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                Text="{x:Static res:Strings.Tokeer_Sends}"
+                TextWrapping="Wrap" />
+
+            <!--  Generate: honestly out of reach here, so it points at the tool that can.  -->
+            <Border
+                Margin="0,18,0,0"
+                Padding="16"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                CornerRadius="8">
+                <StackPanel>
+                    <TextBlock
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Text="{x:Static res:Strings.Tokeer_Generate_Header}" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{x:Static res:Strings.Tokeer_Generate_Body}"
+                        TextWrapping="Wrap" />
+                    <ui:Button
+                        Margin="0,12,0,0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding OpenGeneratorCommand}"
+                        Content="{x:Static res:Strings.Tokeer_Generate_Open}"
+                        Icon="{ui:SymbolIcon Open24}" />
+                </StackPanel>
+            </Border>
+
+            <TextBlock
+                Margin="2,14,0,0"
+                FontSize="11"
+                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                Text="{x:Static res:Strings.Tokeer_Credit}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

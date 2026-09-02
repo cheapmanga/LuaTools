@@ -697,4 +697,41 @@ Cancel - keep downloading</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>The achievement helper is missing from this LuaTools install. Reinstall to restore it.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>That achievement is awarded by the game's servers and can't be changed.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Something went wrong while talking to Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo activation</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Checks an installed game's Denuvo activation and repairs what it can. The work is done by LuaTools' own Devuvo script, downloaded fresh on every run.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Lock the version</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Pins the game to its installed build, so a Steam update can't wipe the activation.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>This run uploads a report</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>The script collects your MachineGuid, disk serial, MAC addresses, public IP, hardware and the game folder's contents, and uploads them to paste.rtech.support. The D-Report code you get back is that page's public address: anyone you give it to can read all of it.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>I understand what is sent</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Run</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Running. Approve the elevation prompt, then watch the window it opens.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Finished.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Finished, but no report code was printed.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Cancelled: the script cannot run without administrator rights.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>The script could not be downloaded. Check your connection.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>The run failed.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report code</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Paste it into the support bot. It points to the uploaded report.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Report code copied</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Activation codes for Denuvo games, shared between people who own them.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Redeem a code</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Paste a code someone shared with you. The tickets it stands for are written to Steam; then launch the game from Steam as usual.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6-character code</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Redeem</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Code redeemed</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tickets written for app {0}. Launch it from Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>The code was refused.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>The code store could not be reached.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>The server returned an incomplete ticket.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>The tickets could not be written. Close Steam and try again.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Redeeming sends the code and this machine's Windows MachineGuid, nothing else. A code is bound to the machine whose ticket opened it.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generating a code</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generating needs an ownership ticket taken from your live Steam session, which only Tesla697's own app can do. This opens it.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Open Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Redeeming and the Devuvo validation are rebuilt from Tesla697's TokeerDRM-App and LuaToolsValidator.</value></data>
 </root>

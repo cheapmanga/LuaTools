@@ -662,4 +662,41 @@ Annulla - continua a scaricare</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>L'helper degli obiettivi non è presente in questa installazione di LuaTools. Reinstallala per ripristinarlo.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Questo obiettivo viene assegnato dai server del gioco e non può essere modificato.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Si è verificato un problema durante la comunicazione con Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validatore</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Attivazione Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Controlla l'attivazione Denuvo di un gioco installato e ripara ciò che può. Il lavoro è svolto dallo script Devuvo di LuaTools, scaricato a ogni esecuzione.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Gioco</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Blocca la versione</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fissa il gioco alla versione installata, così un aggiornamento di Steam non cancella l'attivazione.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Questa esecuzione carica un rapporto</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Lo script raccoglie il tuo MachineGuid, il numero di serie del disco, i tuoi indirizzi MAC, il tuo IP pubblico, l'hardware e il contenuto della cartella del gioco, e li carica su paste.rtech.support. Il codice D-Report che ricevi è l'indirizzo pubblico di quella pagina: chiunque lo riceva può leggere tutto.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ho capito cosa viene inviato</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Esegui</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>In corso. Accetta la richiesta di elevazione, poi segui la finestra che si apre.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Completato.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Completato, ma non è stato mostrato alcun codice del rapporto.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Annullato: lo script non può essere eseguito senza diritti di amministratore.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Non è stato possibile scaricare lo script. Controlla la connessione.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>L'esecuzione non è riuscita.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Codice D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Incollalo nel bot di supporto. Rimanda al rapporto caricato.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Copia</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Codice del rapporto copiato</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Codici di attivazione per giochi con Denuvo, condivisi tra chi li possiede.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Riscatta un codice</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Incolla un codice che ti è stato condiviso. I ticket corrispondenti vengono scritti in Steam; poi avvia il gioco da Steam come al solito.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Codice di 6 caratteri</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Riscatta</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Codice riscattato</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Ticket scritti per l'app {0}. Avviala da Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Il codice è stato rifiutato.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Non è stato possibile contattare l'archivio dei codici.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Il server ha restituito un ticket incompleto.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Non è stato possibile scrivere i ticket. Chiudi Steam e riprova.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Il riscatto invia il codice e il MachineGuid di Windows di questa macchina, nient'altro. Un codice è legato alla macchina il cui ticket lo ha creato.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generare un codice</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generare richiede un ticket di proprietà preso dalla tua sessione Steam attiva, cosa che solo l'app di Tesla697 sa fare. Questo pulsante la apre.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Apri Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Il riscatto e la validazione Devuvo sono ricostruiti da TokeerDRM-App e LuaToolsValidator di Tesla697.</value></data>
 </root>

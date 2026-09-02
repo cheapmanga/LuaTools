@@ -67,6 +67,21 @@ public static class AppConfig
     // onefile build of a Python app - self-contained, so the Downloads button only downloads and opens it.
     public const string TokeerRepo = "Tesla697/TokeerDRM-App";
 
+    // The code store the Tokeer page redeems against, through the public Cloudflare route their own
+    // client uses (it forwards to codestore.luastools.xyz). A redeem sends the code and this machine's
+    // MachineGuid, because a code is bound to the machine whose ticket opened it.
+    public const string TokeerRedeemUrl = "https://luastools.xyz/drm/redeem";
+
+    // Devuvo.ps1: the Denuvo activation check and repair the Validator page runs. Fetched at run time
+    // rather than bundled - it is LuaTools' own script, updated as games and checks change, and a copy
+    // frozen into this build would repair last month's problems. Vercel is authoritative; the raw
+    // GitHub copy is the fallback and goes through the mirror chain.
+    public static readonly string[] DevuvoScriptUrls =
+    [
+        "https://luatools.vercel.app/Devuvo.ps1",
+        "https://raw.githubusercontent.com/madoiscool/lt_api_links/main/Devuvo.ps1",
+    ];
+
     // LuaToolsValidator (Tesla697): a WPF front end for the Denuvo activation validator. One exe again,
     // but a FRAMEWORK-DEPENDENT net10.0-windows one - hence PrivateDotnetRuntime below.
     public const string LuaToolsValidatorRepo = "Tesla697/LuaToolsValidator";

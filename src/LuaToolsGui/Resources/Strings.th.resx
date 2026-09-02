@@ -662,4 +662,41 @@
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>ตัวช่วยความสำเร็จหายไปจากการติดตั้ง LuaTools นี้ ติดตั้งใหม่เพื่อกู้คืน</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>ความสำเร็จนี้มอบโดยเซิร์ฟเวอร์ของเกมและแก้ไขไม่ได้</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>เกิดข้อผิดพลาดขณะติดต่อกับ Steam</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>ตรวจสอบ</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>การเปิดใช้งาน Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>ตรวจสอบการเปิดใช้งาน Denuvo ของเกมที่ติดตั้งไว้ และซ่อมแซมเท่าที่ทำได้ งานทั้งหมดทำโดยสคริปต์ Devuvo ของ LuaTools เอง ซึ่งจะดาวน์โหลดใหม่ทุกครั้งที่รัน</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>เกม</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>ล็อกเวอร์ชัน</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>ตรึงเกมไว้ที่บิลด์ที่ติดตั้งอยู่ เพื่อไม่ให้การอัปเดตของ Steam ลบการเปิดใช้งานทิ้ง</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>การรันครั้งนี้จะอัปโหลดรายงาน</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>สคริปต์จะเก็บ MachineGuid, หมายเลขซีเรียลของดิสก์, ที่อยู่ MAC, IP สาธารณะ, ข้อมูลฮาร์ดแวร์ และเนื้อหาในโฟลเดอร์เกมของคุณ แล้วอัปโหลดไปยัง paste.rtech.support รหัส D-Report ที่ได้กลับมาคือที่อยู่สาธารณะของหน้านั้น ใครก็ตามที่คุณให้รหัสไปจะอ่านข้อมูลทั้งหมดได้</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>ฉันเข้าใจว่าจะมีการส่งอะไรบ้าง</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>รัน</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>กำลังรัน อนุมัติคำขอสิทธิ์ผู้ดูแลระบบ แล้วดูหน้าต่างที่เปิดขึ้น</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>เสร็จสิ้น</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>เสร็จสิ้น แต่ไม่มีรหัสรายงานแสดงออกมา</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>ยกเลิกแล้ว: สคริปต์รันไม่ได้หากไม่มีสิทธิ์ผู้ดูแลระบบ</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>ดาวน์โหลดสคริปต์ไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อ</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>การรันล้มเหลว</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>รหัส D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>วางลงในบอทช่วยเหลือ รหัสนี้ชี้ไปยังรายงานที่อัปโหลดไว้</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>คัดลอก</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>คัดลอกรหัสรายงานแล้ว</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>รหัสเปิดใช้งานสำหรับเกม Denuvo แบ่งปันกันระหว่างผู้ที่เป็นเจ้าของเกม</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>แลกรหัส</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>วางรหัสที่มีคนแบ่งปันให้คุณ ตั๋วที่รหัสนั้นแทนอยู่จะถูกเขียนลงใน Steam จากนั้นเปิดเกมจาก Steam ตามปกติ</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>รหัส 6 ตัวอักษร</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>แลก</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>แลกรหัสแล้ว</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>เขียนตั๋วสำหรับแอป {0} แล้ว เปิดเกมจาก Steam ได้เลย</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>รหัสถูกปฏิเสธ</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>เชื่อมต่อกับที่เก็บรหัสไม่ได้</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>เซิร์ฟเวอร์ส่งตั๋วกลับมาไม่ครบ</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>เขียนตั๋วไม่สำเร็จ กรุณาปิด Steam แล้วลองใหม่</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>การแลกรหัสจะส่งเฉพาะตัวรหัสและ Windows MachineGuid ของเครื่องนี้เท่านั้น ไม่มีอย่างอื่น รหัสจะผูกกับเครื่องที่ตั๋วของมันสร้างรหัสนั้นขึ้นมา</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>การสร้างรหัส</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>การสร้างรหัสต้องใช้ตั๋วแสดงความเป็นเจ้าของที่ดึงจากเซสชัน Steam ที่กำลังทำงานอยู่ ซึ่งมีเพียงแอปของ Tesla697 เท่านั้นที่ทำได้ กดที่นี่เพื่อเปิดแอปดังกล่าว</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>เปิด Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>ระบบแลกรหัสและการตรวจสอบ Devuvo สร้างขึ้นใหม่จาก TokeerDRM-App และ LuaToolsValidator ของ Tesla697</value></data>
 </root>

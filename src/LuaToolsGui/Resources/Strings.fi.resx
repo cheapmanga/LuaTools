@@ -662,4 +662,41 @@ Peruuta - jatka lataamista</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Saavutusapuri puuttuu tästä LuaTools-asennuksesta. Asenna uudelleen palauttaaksesi sen.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Tämän saavutuksen myöntävät pelin palvelimet, eikä sitä voi muuttaa.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Jokin meni pieleen Steamin kanssa viestittäessä.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo-aktivointi</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Tarkistaa asennetun pelin Denuvo-aktivoinnin ja korjaa sen minkä pystyy. Työn tekee LuaToolsin oma Devuvo-skripti, joka ladataan uudelleen joka ajolla.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Peli</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Lukitse versio</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Kiinnittää pelin asennettuun versioon, jottei Steam-päivitys pyyhi aktivointia.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Tämä ajo lähettää raportin</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Skripti kerää MachineGuidin, levyn sarjanumeron, MAC-osoitteet, julkisen IP-osoitteen, laitetiedot ja pelikansion sisällön ja lähettää ne osoitteeseen paste.rtech.support. Saamasi D-Report-koodi on kyseisen sivun julkinen osoite: kuka tahansa jolle sen annat voi lukea kaiken.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ymmärrän mitä lähetetään</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Suorita</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Käynnissä. Hyväksy käyttöoikeuskysely ja seuraa sitten avautuvaa ikkunaa.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Valmis.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Valmis, mutta raporttikoodia ei tulostunut.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Peruttu: skripti ei voi toimia ilman järjestelmänvalvojan oikeuksia.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Skriptiä ei voitu ladata. Tarkista yhteytesi.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Ajo epäonnistui.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report-koodi</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Liitä se tukibottiin. Se osoittaa lähetettyyn raporttiin.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Kopioi</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Raporttikoodi kopioitu</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Denuvo-pelien aktivointikoodeja, joita pelien omistajat jakavat keskenään.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Lunasta koodi</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Liitä koodi, jonka joku on jakanut sinulle. Sen sisältämät liput kirjoitetaan Steamiin; käynnistä peli sen jälkeen Steamista tavalliseen tapaan.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6-merkkinen koodi</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Lunasta</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Koodi lunastettu</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Liput kirjoitettu sovellukselle {0}. Käynnistä se Steamista.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Koodia ei hyväksytty.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Koodivarastoon ei saatu yhteyttä.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Palvelin palautti puutteellisen lipun.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Lippuja ei voitu kirjoittaa. Sulje Steam ja yritä uudelleen.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Lunastus lähettää vain koodin ja tämän koneen Windows-MachineGuidin, ei mitään muuta. Koodi on sidottu siihen koneeseen, jonka lipulla se luotiin.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Koodin luominen</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Koodin luominen vaatii omistajuuslipun aktiivisesta Steam-istunnostasi, mihin pystyy vain Tesla697:n oma sovellus. Tämä avaa sen.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Avaa Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Lunastus ja Devuvo-tarkistus on rakennettu uudelleen Tesla697:n TokeerDRM-App- ja LuaToolsValidator-sovellusten pohjalta.</value></data>
 </root>

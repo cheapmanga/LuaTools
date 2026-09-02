@@ -662,4 +662,41 @@ Annuller - fortsæt download</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Præstationshjælperen mangler i denne LuaTools-installation. Installer igen for at få den tilbage.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Denne præstation tildeles af spillets servere og kan ikke ændres.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Noget gik galt i kommunikationen med Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo-aktivering</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Tjekker Denuvo-aktiveringen i et installeret spil og reparerer det, den kan. Arbejdet klares af LuaTools' eget Devuvo-script, der hentes forfra ved hver kørsel.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Spil</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Lås versionen</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fastholder spillet på den installerede build, så en Steam-opdatering ikke sletter aktiveringen.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Denne kørsel uploader en rapport</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Scriptet indsamler din MachineGuid, disk-serienummer, MAC-adresser, offentlige IP, hardware og indholdet af spilmappen og uploader det til paste.rtech.support. Den D-Report-kode, du får tilbage, er sidens offentlige adresse: alle, du giver den til, kan læse det hele.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Jeg forstår, hvad der sendes</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Kør</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Kører. Godkend anmodningen om administratorrettigheder, og hold øje med vinduet, den åbner.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Færdig.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Færdig, men der blev ikke vist nogen rapportkode.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Annulleret: scriptet kan ikke køre uden administratorrettigheder.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Scriptet kunne ikke hentes. Tjek din forbindelse.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Kørslen mislykkedes.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report-kode</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Indsæt den i supportbotten. Den peger på den uploadede rapport.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Kopiér</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Rapportkode kopieret</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Aktiveringskoder til Denuvo-spil, delt mellem folk der ejer dem.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Indløs en kode</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Indsæt en kode, som nogen har delt med dig. De tilhørende tickets skrives til Steam; start derefter spillet fra Steam som sædvanligt.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Kode på 6 tegn</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Indløs</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Kode indløst</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tickets skrevet til app {0}. Start den fra Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Koden blev afvist.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Kodelageret kunne ikke nås.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Serveren returnerede et ufuldstændigt ticket.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Ticketsene kunne ikke skrives. Luk Steam og prøv igen.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Ved indløsning sendes kun koden og denne maskines Windows-MachineGuid, intet andet. En kode er bundet til den maskine, hvis ticket åbnede den.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Sådan genererer du en kode</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generering kræver et ejerskabsticket fra din aktive Steam-session, og det kan kun Tesla697s egen app. Her åbner du den.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Åbn Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Indløsningen og Devuvo-valideringen er bygget op efter Tesla697s TokeerDRM-App og LuaToolsValidator.</value></data>
 </root>
