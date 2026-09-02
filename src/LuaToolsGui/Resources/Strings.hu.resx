@@ -662,4 +662,41 @@ Mégse - letöltés folytatása</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>A teljesítménysegéd hiányzik ebből a LuaTools-telepítésből. Telepítsd újra a visszaállításához.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Ezt a teljesítményt a játék szerverei ítélik oda, nem módosítható.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Hiba történt a Steammel való kommunikáció során.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Ellenőrző</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo-aktiválás</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Ellenőrzi egy telepített játék Denuvo-aktiválását, és megjavítja, amit tud. A munkát a LuaTools saját Devuvo szkriptje végzi, amely minden futtatáskor frissen töltődik le.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Játék</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Verzió rögzítése</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>A játékot a telepített buildhez rögzíti, így egy Steam-frissítés nem törli az aktiválást.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Ez a futtatás jelentést tölt fel</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>A szkript összegyűjti a MachineGuid azonosítódat, a lemez sorozatszámát, a MAC-címeket, a nyilvános IP-t, a hardveradatokat és a játékmappa tartalmát, majd feltölti a paste.rtech.support oldalra. A kapott D-Report kód ennek az oldalnak a nyilvános címe: aki megkapja tőled, az mindent elolvashat.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Értem, mi kerül elküldésre</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Futtatás</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Fut. Hagyd jóvá a rendszergazdai kérést, majd figyeld a megnyíló ablakot.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Kész.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Kész, de nem jelent meg jelentéskód.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Megszakítva: a szkript nem futtatható rendszergazdai jog nélkül.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>A szkriptet nem sikerült letölteni. Ellenőrizd a kapcsolatot.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>A futtatás nem sikerült.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report kód</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Illeszd be a támogatási botba. A feltöltött jelentésre mutat.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Másolás</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Jelentéskód másolva</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Aktiválókódok Denuvo-játékokhoz, megosztva azok között, akiknek megvan a játék.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Kód beváltása</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Illeszd be a kódot, amit valaki megosztott veled. A hozzá tartozó jegyek bekerülnek a Steambe; utána indítsd a játékot a Steamből a szokásos módon.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6 karakteres kód</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Beváltás</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Kód beváltva</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>A jegyek beírva a(z) {0} alkalmazáshoz. Indítsd a Steamből.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>A kódot elutasították.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>A kódtár nem érhető el.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>A szerver hiányos jegyet küldött.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>A jegyeket nem sikerült beírni. Zárd be a Steamet, és próbáld újra.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>A beváltás a kódot és ennek a gépnek a Windows MachineGuid azonosítóját küldi el, mást nem. A kód ahhoz a géphez kötődik, amelynek a jegye megnyitotta.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Kód generálása</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>A generáláshoz tulajdonjegy kell az élő Steam-munkamenetedből, amit csak Tesla697 saját alkalmazása tud megszerezni. Ez megnyitja azt.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer megnyitása</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>A beváltás és a Devuvo-ellenőrzés Tesla697 TokeerDRM-App és LuaToolsValidator programjai alapján készült újra.</value></data>
 </root>

@@ -662,4 +662,41 @@
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>此 LuaTools 安裝中缺少成就小幫手。重新安裝即可還原。</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>此成就由遊戲伺服器授予，無法變更。</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>與 Steam 通訊時發生問題。</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>驗證</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo 啟用</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>檢查已安裝遊戲的 Denuvo 啟用狀態，並盡可能修復。實際作業由 LuaTools 自帶的 Devuvo 指令碼完成，每次執行都會重新下載最新版本。</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>遊戲</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>鎖定版本</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>把遊戲固定在目前安裝的版本，避免 Steam 更新清除啟用狀態。</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>這次執行會上傳一份報告</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>指令碼會收集你的 MachineGuid、硬碟序號、MAC 位址、公用 IP、硬體資訊以及遊戲資料夾的內容，並上傳至 paste.rtech.support。你取得的 D-Report 代碼就是該頁面的公開網址：拿到代碼的人都能看到全部內容。</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>我了解將要傳送的內容</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>執行</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>執行中。請允許權限提升提示，然後查看開啟的視窗。</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>已完成。</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>已完成，但沒有輸出報告代碼。</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>已取消：沒有系統管理員權限，指令碼無法執行。</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>無法下載指令碼。請檢查網路連線。</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>執行失敗。</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report 代碼</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>貼到支援機器人中。它指向已上傳的報告。</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>複製</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>已複製報告代碼</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Denuvo 遊戲的啟用碼，由持有遊戲的玩家彼此分享。</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>兌換啟用碼</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>貼上別人分享給你的啟用碼。對應的票證會寫入 Steam，接著照常從 Steam 啟動遊戲即可。</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6 個字元的代碼</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>兌換</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>兌換成功</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>已寫入應用程式 {0} 的票證。請從 Steam 啟動。</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>啟用碼遭到拒絕。</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>無法連線到啟用碼伺服器。</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>伺服器回傳的票證不完整。</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>無法寫入票證。請關閉 Steam 後再試一次。</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>兌換時只會傳送啟用碼與這台電腦的 Windows MachineGuid，不會傳送其他資料。啟用碼會綁定到產生它的那台電腦。</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>產生啟用碼</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>產生啟用碼需要從你正在執行的 Steam 工作階段取得所有權票證，這只有 Tesla697 自己的程式才做得到。點這裡開啟。</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>開啟 Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>兌換功能與 Devuvo 驗證是根據 Tesla697 的 TokeerDRM-App 與 LuaToolsValidator 重新實作而成。</value></data>
 </root>

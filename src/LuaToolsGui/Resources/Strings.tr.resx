@@ -662,4 +662,41 @@ Hayır - durdur ama dosyaları koru
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Bu LuaTools kurulumunda başarım yardımcısı eksik. Geri getirmek için yeniden kur.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Bu başarımı oyunun sunucuları veriyor, değiştirilemez.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Steam ile iletişimde bir sorun çıktı.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Doğrulayıcı</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo etkinleştirme</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Kurulu bir oyunun Denuvo etkinleştirmesini kontrol eder ve yapabildiğini onarır. İşi, her çalıştırmada yeniden indirilen LuaTools'un kendi Devuvo betiği yapar.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Oyun</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Sürümü kilitle</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Oyunu kurulu sürümüne sabitler, böylece bir Steam güncellemesi etkinleştirmeyi silemez.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Bu çalıştırma bir rapor yükler</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Betik; MachineGuid'ini, disk seri numaranı, MAC adreslerini, genel IP'ni, donanımını ve oyun klasörünün içeriğini toplayıp paste.rtech.support adresine yükler. Aldığın D-Report kodu o sayfanın herkese açık adresidir: kodu verdiğin herkes bunların hepsini okuyabilir.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Neyin gönderildiğini anlıyorum</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Çalıştır</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Çalışıyor. Yönetici izni istemini onayla, sonra açılan pencereyi izle.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Bitti.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Bitti, ama rapor kodu yazdırılmadı.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>İptal edildi: betik yönetici hakları olmadan çalışamaz.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Betik indirilemedi. Bağlantını kontrol et.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Çalıştırma başarısız oldu.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report kodu</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Destek botuna yapıştır. Yüklenen rapora işaret eder.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Kopyala</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Rapor kodu kopyalandı</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Denuvo'lu oyunlar için etkinleştirme kodları; oyuna sahip olanlar arasında paylaşılır.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Kod kullan</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Biri seninle paylaştıysa kodu buraya yapıştır. Karşılığı olan biletler Steam'e yazılır; sonra oyunu her zamanki gibi Steam'den başlat.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6 karakterlik kod</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Kullan</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Kod kullanıldı</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>{0} uygulaması için biletler yazıldı. Steam'den başlat.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Kod reddedildi.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Kod deposuna ulaşılamadı.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Sunucu eksik bir bilet döndürdü.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Biletler yazılamadı. Steam'i kapatıp tekrar dene.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Kod kullanırken sadece kod ve bu makinenin Windows MachineGuid'i gönderilir, başka bir şey değil. Bir kod, onu açan biletin ait olduğu makineye bağlanır.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Kod oluşturma</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Oluşturmak için canlı Steam oturumundan alınan bir sahiplik bileti gerekir; bunu yalnızca Tesla697'nin kendi uygulaması yapabilir. Bu, onu açar.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer'ı aç</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Kod kullanımı ve Devuvo doğrulaması, Tesla697'nin TokeerDRM-App ve LuaToolsValidator projelerinden yeniden yazıldı.</value></data>
 </root>

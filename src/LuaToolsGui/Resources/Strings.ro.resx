@@ -662,4 +662,41 @@ Anulare - continuă descărcarea</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Asistentul de realizări lipsește din această instalare LuaTools. Reinstaleaz-o ca să îl recuperezi.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Această realizare este acordată de serverele jocului și nu poate fi schimbată.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Ceva n-a mers bine în comunicarea cu Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Activare Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Verifică activarea Denuvo a unui joc instalat și repară ce poate. Treaba o face scriptul Devuvo propriu al LuaTools, descărcat din nou la fiecare rulare.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Joc</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Blochează versiunea</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fixează jocul pe build-ul instalat, ca o actualizare Steam să nu șteargă activarea.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Această rulare încarcă un raport</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Scriptul îți adună MachineGuid, seria discului, adresele MAC, IP-ul public, datele despre hardware și conținutul folderului jocului și le încarcă pe paste.rtech.support. Codul D-Report pe care îl primești este adresa publică a acelei pagini: oricine îl primește de la tine poate citi tot.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Înțeleg ce se trimite</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Rulează</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>În curs. Acceptă cererea de drepturi de administrator, apoi urmărește fereastra care se deschide.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Gata.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Gata, dar nu a fost afișat niciun cod de raport.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Anulat: scriptul nu poate rula fără drepturi de administrator.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Scriptul nu a putut fi descărcat. Verifică-ți conexiunea.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Rularea a eșuat.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Cod D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Lipește-l în botul de suport. Duce către raportul încărcat.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Copiază</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Cod de raport copiat</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Coduri de activare pentru jocuri cu Denuvo, împărțite între cei care le dețin.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Folosește un cod</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Lipește un cod primit de la cineva. Tichetele pe care le reprezintă sunt scrise în Steam; apoi pornește jocul din Steam ca de obicei.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Cod de 6 caractere</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Folosește</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Cod folosit</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tichete scrise pentru aplicația {0}. Pornește-o din Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Codul a fost respins.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Depozitul de coduri nu a putut fi contactat.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Serverul a returnat un tichet incomplet.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tichetele nu au putut fi scrise. Închide Steam și încearcă din nou.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Folosirea codului trimite codul și MachineGuid-ul Windows al acestui calculator, nimic altceva. Un cod rămâne legat de calculatorul al cărui tichet l-a deschis.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Generarea unui cod</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Generarea are nevoie de un tichet de proprietate luat din sesiunea ta Steam activă, lucru pe care doar aplicația lui Tesla697 îl poate face. De aici o deschizi.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Deschide Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Folosirea codurilor și validarea Devuvo sunt refăcute după TokeerDRM-App și LuaToolsValidator ale lui Tesla697.</value></data>
 </root>

@@ -662,4 +662,41 @@
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>В этой установке LuaTools отсутствует помощник достижений. Переустановите её, чтобы восстановить его.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Это достижение выдаётся серверами игры, изменить его нельзя.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>При обращении к Steam что-то пошло не так.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Валидатор</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Активация Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Проверяет активацию Denuvo у установленной игры и чинит то, что может. Всю работу делает собственный скрипт Devuvo от LuaTools, он скачивается заново при каждом запуске.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Игра</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Заблокировать версию</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Закрепляет игру на установленной сборке, чтобы обновление Steam не снесло активацию.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Этот запуск выгружает отчёт</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Скрипт собирает твой MachineGuid, серийный номер диска, MAC-адреса, публичный IP, данные о железе и содержимое папки с игрой, а затем выгружает всё на paste.rtech.support. Полученный код D-Report — это публичный адрес той страницы: любой, кому ты его дашь, увидит всё содержимое.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Я понимаю, что отправляется</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Запустить</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Выполняется. Подтверди запрос прав администратора и следи за открывшимся окном.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Готово.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Готово, но код отчёта не был выведен.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Отменено: без прав администратора скрипт работать не может.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Не удалось скачать скрипт. Проверь подключение.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Запуск не удался.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Код D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Вставь его в бота поддержки. Он ведёт на выгруженный отчёт.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Копировать</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Код отчёта скопирован</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Коды активации для игр с Denuvo, которыми делятся друг с другом их владельцы.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Активировать код</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Вставь код, которым с тобой поделились. Соответствующие тикеты запишутся в Steam, после чего запускай игру из Steam как обычно.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Код из 6 символов</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Активировать</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Код активирован</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Тикеты записаны для приложения {0}. Запускай его из Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Код отклонён.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Не удалось связаться с хранилищем кодов.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Сервер вернул неполный тикет.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Не удалось записать тикеты. Закрой Steam и попробуй снова.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>При активации отправляются только код и MachineGuid этой машины из Windows, больше ничего. Код привязывается к машине, чей тикет его открыл.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Создание кода</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Для создания нужен тикет владения из твоей активной сессии Steam, а это умеет только приложение самого Tesla697. Эта кнопка его откроет.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Открыть Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Активация кодов и проверка Devuvo воссозданы на основе TokeerDRM-App и LuaToolsValidator от Tesla697.</value></data>
 </root>

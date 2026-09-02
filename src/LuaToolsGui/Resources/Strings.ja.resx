@@ -662,4 +662,41 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>このLuaToolsインストールに実績ヘルパーがありません。再インストールして復元してください。</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>この実績はゲームのサーバーが付与するもので、変更できません。</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Steamとの通信中に問題が発生しました。</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>検証</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo アクティベーション</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>インストール済みゲームの Denuvo アクティベーションを確認し、可能な範囲で修復します。処理は LuaTools 独自の Devuvo スクリプトが行い、実行のたびに最新版がダウンロードされます。</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>ゲーム</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>バージョンを固定</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>インストール済みのビルドにゲームを固定し、Steam の更新でアクティベーションが消えないようにします。</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>この実行はレポートをアップロードします</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>スクリプトは MachineGuid、ディスクシリアル、MAC アドレス、グローバル IP、ハードウェア情報、ゲームフォルダーの内容を収集し、paste.rtech.support にアップロードします。返される D-Report コードはそのページの公開アドレスです。コードを渡した相手は、その内容をすべて閲覧できます。</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>送信される内容を理解しました</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>実行</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>実行中です。昇格の確認画面を承認し、開いたウィンドウの表示を確認してください。</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>完了しました。</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>完了しましたが、レポートコードは出力されませんでした。</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>中止しました: 管理者権限がないとスクリプトを実行できません。</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>スクリプトをダウンロードできませんでした。接続を確認してください。</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>実行に失敗しました。</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report コード</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>サポートボットに貼り付けてください。アップロードされたレポートを指し示します。</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>コピー</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>レポートコードをコピーしました</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Denuvo ゲームのアクティベーションコードを、所有者どうしで共有します。</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>コードを引き換える</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>共有されたコードを貼り付けてください。対応するチケットが Steam に書き込まれます。あとは通常どおり Steam からゲームを起動してください。</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>6 文字のコード</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>引き換え</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>コードを引き換えました</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>アプリ {0} のチケットを書き込みました。Steam から起動してください。</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>コードが拒否されました。</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>コードストアに接続できませんでした。</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>サーバーが不完全なチケットを返しました。</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>チケットを書き込めませんでした。Steam を終了してから再試行してください。</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>引き換え時に送信されるのはコードとこの PC の Windows MachineGuid だけです。コードは、それを発行したチケットの PC に紐付けられます。</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>コードの生成</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>生成には、実行中の Steam セッションから取得した所有権チケットが必要で、これは Tesla697 のアプリでしか行えません。ここから開きます。</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer を開く</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>引き換え機能と Devuvo 検証は、Tesla697 の TokeerDRM-App および LuaToolsValidator をもとに再実装したものです。</value></data>
 </root>

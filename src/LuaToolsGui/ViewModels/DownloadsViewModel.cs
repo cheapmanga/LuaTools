@@ -18,13 +18,13 @@ public partial class DownloadsViewModel : ObservableObject
 
     private readonly ManifestJobFactory _jobs;
     private readonly SteamAutoCrackService _sac;
-    private readonly TokeerService _tokeer;
+    private readonly TokeerAppService _tokeer;
     private readonly LuaToolsValidatorService _validator;
     private readonly PrivateDotnetRuntime _runtime;
     private readonly ToastService _toast;
 
     public DownloadsViewModel(DownloadQueue queue, ManifestJobFactory jobs, SteamAutoCrackService sac,
-        TokeerService tokeer, LuaToolsValidatorService validator, PrivateDotnetRuntime runtime,
+        TokeerAppService tokeer, LuaToolsValidatorService validator, PrivateDotnetRuntime runtime,
         ToastService toast)
     {
         _queue = queue;

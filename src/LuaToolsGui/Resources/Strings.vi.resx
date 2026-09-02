@@ -662,4 +662,41 @@ Hủy - tiếp tục tải</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Bản cài LuaTools này thiếu trình trợ giúp thành tựu. Hãy cài lại để khôi phục.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Thành tựu này do máy chủ trò chơi trao và không thể thay đổi.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Đã xảy ra lỗi khi liên lạc với Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Trình kiểm tra</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Kích hoạt Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Kiểm tra kích hoạt Denuvo của game đã cài và sửa những gì có thể. Việc này do chính script Devuvo của LuaTools thực hiện, tải mới mỗi lần chạy.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Khóa phiên bản</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Ghim game ở bản build đang cài, để bản cập nhật Steam không xóa mất kích hoạt.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Lần chạy này sẽ tải lên một báo cáo</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Script thu thập MachineGuid, số sê-ri ổ đĩa, địa chỉ MAC, IP công khai, thông tin phần cứng và nội dung thư mục game của bạn, rồi tải hết lên paste.rtech.support. Mã D-Report bạn nhận được chính là địa chỉ công khai của trang đó: ai được bạn đưa mã cũng đọc được toàn bộ.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Tôi hiểu những gì được gửi đi</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Chạy</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Đang chạy. Hãy chấp nhận yêu cầu quyền quản trị, rồi theo dõi cửa sổ vừa mở.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Đã xong.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Đã xong, nhưng không có mã báo cáo nào được in ra.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Đã hủy: script không chạy được nếu thiếu quyền quản trị.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Không tải được script. Hãy kiểm tra kết nối.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Lần chạy đã thất bại.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Mã D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Dán vào bot hỗ trợ. Mã này trỏ tới báo cáo đã tải lên.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Sao chép</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Đã sao chép mã báo cáo</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Mã kích hoạt cho game dùng Denuvo, được chia sẻ giữa những người sở hữu game.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Đổi mã</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Dán mã mà ai đó đã chia sẻ cho bạn. Các ticket tương ứng sẽ được ghi vào Steam; sau đó cứ mở game từ Steam như bình thường.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Mã 6 ký tự</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Đổi mã</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Đã đổi mã</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Đã ghi ticket cho ứng dụng {0}. Hãy mở nó từ Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Mã đã bị từ chối.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Không kết nối được tới kho mã.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Máy chủ trả về một ticket không đầy đủ.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Không ghi được ticket. Hãy đóng Steam rồi thử lại.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Khi đổi mã chỉ gửi đi mã đó và MachineGuid của Windows trên máy này, không gì khác. Mỗi mã bị ràng buộc với máy có ticket đã mở ra nó.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Tạo mã</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Việc tạo mã cần một ticket sở hữu lấy từ phiên Steam đang chạy, mà chỉ ứng dụng của chính Tesla697 mới làm được. Nút này sẽ mở nó.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Mở Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Phần đổi mã và kiểm tra Devuvo được dựng lại từ TokeerDRM-App và LuaToolsValidator của Tesla697.</value></data>
 </root>

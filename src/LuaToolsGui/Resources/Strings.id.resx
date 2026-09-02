@@ -662,4 +662,41 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>Pembantu pencapaian hilang dari instalasi LuaTools ini. Pasang ulang untuk memulihkannya.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Pencapaian ini diberikan oleh server game dan tidak bisa diubah.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Terjadi kesalahan saat berkomunikasi dengan Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Aktivasi Denuvo</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Memeriksa aktivasi Denuvo pada game yang terpasang dan memperbaiki yang bisa diperbaiki. Semuanya dikerjakan oleh skrip Devuvo milik LuaTools, yang diunduh ulang setiap kali dijalankan.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Kunci versi</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Mengunci game pada build yang terpasang, supaya pembaruan Steam tidak menghapus aktivasinya.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Proses ini mengunggah laporan</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Skrip mengumpulkan MachineGuid, nomor seri disk, alamat MAC, IP publik, data perangkat keras, dan isi folder game kamu, lalu mengunggahnya ke paste.rtech.support. Kode D-Report yang kamu terima adalah alamat publik halaman itu: siapa pun yang kamu beri kode itu bisa membaca semuanya.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Saya paham apa yang dikirim</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Jalankan</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Sedang berjalan. Setujui permintaan hak administrator, lalu perhatikan jendela yang terbuka.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Selesai.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Selesai, tapi tidak ada kode laporan yang ditampilkan.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Dibatalkan: skrip tidak bisa jalan tanpa hak administrator.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Skrip gagal diunduh. Periksa koneksimu.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>Proses gagal.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>Kode D-Report</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Tempel ke bot dukungan. Kode ini mengarah ke laporan yang diunggah.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Salin</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Kode laporan disalin</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Kode aktivasi untuk game Denuvo, dibagikan antar orang yang memilikinya.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Tukarkan kode</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Tempel kode yang dibagikan seseorang ke kamu. Tiket yang diwakilinya ditulis ke Steam; setelah itu jalankan game dari Steam seperti biasa.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Kode 6 karakter</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Tukarkan</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Kode ditukarkan</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tiket ditulis untuk aplikasi {0}. Jalankan dari Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>Kode ditolak.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>Penyimpanan kode tidak bisa dihubungi.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>Server mengembalikan tiket yang tidak lengkap.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>Tiket gagal ditulis. Tutup Steam lalu coba lagi.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Saat menukarkan, yang dikirim hanya kodenya dan MachineGuid Windows mesin ini, tidak ada yang lain. Sebuah kode terikat ke mesin yang tiketnya membuka kode itu.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Membuat kode</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Membuat kode butuh tiket kepemilikan dari sesi Steam yang sedang aktif, dan hanya aplikasi milik Tesla697 sendiri yang bisa melakukannya. Tombol ini membukanya.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Buka Tokeer</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Penukaran kode dan validasi Devuvo dibangun ulang dari TokeerDRM-App dan LuaToolsValidator karya Tesla697.</value></data>
 </root>

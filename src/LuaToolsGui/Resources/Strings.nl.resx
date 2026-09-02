@@ -662,4 +662,41 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Ach_Err_HostMissing" xml:space="preserve"><value>De prestatiehelper ontbreekt in deze LuaTools-installatie. Installeer opnieuw om hem terug te zetten.</value></data>
   <data name="Ach_Err_Protected" xml:space="preserve"><value>Deze prestatie wordt toegekend door de servers van het spel en kan niet worden gewijzigd.</value></data>
   <data name="Ach_Err_Unknown" xml:space="preserve"><value>Er ging iets mis bij de communicatie met Steam.</value></data>
+  <data name="Nav_Validator" xml:space="preserve"><value>Validator</value></data>
+  <data name="Val_Title" xml:space="preserve"><value>Denuvo-activatie</value></data>
+  <data name="Val_Subtitle" xml:space="preserve"><value>Controleert de Denuvo-activatie van een geïnstalleerd spel en repareert wat mogelijk is. Het werk doet LuaTools' eigen Devuvo-script, dat bij elke run opnieuw wordt opgehaald.</value></data>
+  <data name="Val_Game" xml:space="preserve"><value>Spel</value></data>
+  <data name="Val_LockVersion" xml:space="preserve"><value>Versie vastzetten</value></data>
+  <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Zet het spel vast op de geïnstalleerde build, zodat een Steam-update de activatie niet wist.</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Deze run uploadt een rapport</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Het script verzamelt je MachineGuid, schijfserienummer, MAC-adressen, publieke IP, hardware en de inhoud van de spelmap, en uploadt dat naar paste.rtech.support. De D-Report-code die je terugkrijgt is het publieke adres van die pagina: iedereen aan wie je hem geeft, kan alles lezen.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ik weet wat er verstuurd wordt</value></data>
+  <data name="Val_Run" xml:space="preserve"><value>Uitvoeren</value></data>
+  <data name="Val_Status_Running" xml:space="preserve"><value>Bezig. Ga akkoord met de beheerdersmelding en volg daarna het venster dat opent.</value></data>
+  <data name="Val_Status_Done" xml:space="preserve"><value>Klaar.</value></data>
+  <data name="Val_Status_DoneNoCode" xml:space="preserve"><value>Klaar, maar er is geen rapportcode getoond.</value></data>
+  <data name="Val_Status_NoElevation" xml:space="preserve"><value>Geannuleerd: zonder beheerdersrechten kan het script niet draaien.</value></data>
+  <data name="Val_Status_NoScript" xml:space="preserve"><value>Het script kon niet worden gedownload. Controleer je verbinding.</value></data>
+  <data name="Val_Status_Failed" xml:space="preserve"><value>De run is mislukt.</value></data>
+  <data name="Val_Report_Header" xml:space="preserve"><value>D-Report-code</value></data>
+  <data name="Val_Report_Hint" xml:space="preserve"><value>Plak hem in de supportbot. Hij verwijst naar het geüploade rapport.</value></data>
+  <data name="Val_Report_Copy" xml:space="preserve"><value>Kopiëren</value></data>
+  <data name="Val_Toast_Copied" xml:space="preserve"><value>Rapportcode gekopieerd</value></data>
+  <data name="Tokeer_Title" xml:space="preserve"><value>Tokeer</value></data>
+  <data name="Tokeer_Subtitle" xml:space="preserve"><value>Activatiecodes voor Denuvo-spellen, gedeeld tussen mensen die ze bezitten.</value></data>
+  <data name="Tokeer_Redeem_Header" xml:space="preserve"><value>Code inwisselen</value></data>
+  <data name="Tokeer_Redeem_Body" xml:space="preserve"><value>Plak een code die iemand met je heeft gedeeld. De bijbehorende tickets worden naar Steam geschreven; start het spel daarna gewoon via Steam.</value></data>
+  <data name="Tokeer_Code_Placeholder" xml:space="preserve"><value>Code van 6 tekens</value></data>
+  <data name="Tokeer_Redeem" xml:space="preserve"><value>Inwisselen</value></data>
+  <data name="Tokeer_Redeemed_Title" xml:space="preserve"><value>Code ingewisseld</value></data>
+  <data name="Tokeer_Redeemed_Body" xml:space="preserve"><value>Tickets geschreven voor app {0}. Start hem via Steam.</value></data>
+  <data name="Tokeer_Err_Refused" xml:space="preserve"><value>De code is geweigerd.</value></data>
+  <data name="Tokeer_Err_Unreachable" xml:space="preserve"><value>De codeopslag was niet bereikbaar.</value></data>
+  <data name="Tokeer_Err_Incomplete" xml:space="preserve"><value>De server gaf een onvolledig ticket terug.</value></data>
+  <data name="Tokeer_Err_Write" xml:space="preserve"><value>De tickets konden niet worden geschreven. Sluit Steam en probeer het opnieuw.</value></data>
+  <data name="Tokeer_Sends" xml:space="preserve"><value>Bij het inwisselen worden alleen de code en de Windows-MachineGuid van deze machine verstuurd, verder niets. Een code is gebonden aan de machine waarvan het ticket hem heeft aangemaakt.</value></data>
+  <data name="Tokeer_Generate_Header" xml:space="preserve"><value>Een code genereren</value></data>
+  <data name="Tokeer_Generate_Body" xml:space="preserve"><value>Genereren vereist een eigendomsticket uit je actieve Steam-sessie, en dat kan alleen de eigen app van Tesla697. Hiermee open je die.</value></data>
+  <data name="Tokeer_Generate_Open" xml:space="preserve"><value>Tokeer openen</value></data>
+  <data name="Tokeer_Credit" xml:space="preserve"><value>Het inwisselen en de Devuvo-validatie zijn nagebouwd op basis van Tesla697's TokeerDRM-App en LuaToolsValidator.</value></data>
 </root>

@@ -222,7 +222,7 @@ public abstract class GithubExeTool(GithubProxy gh, CacheService cache, ILogger 
 /// </summary>
 /// <remarks>Their exe is a Nuitka onefile build of a Python app - self-contained, nothing to install
 /// alongside it.</remarks>
-public sealed class TokeerService(GithubProxy gh, CacheService cache, ILogger<TokeerService> log)
+public sealed class TokeerAppService(GithubProxy gh, CacheService cache, ILogger<TokeerAppService> log)
     : GithubExeTool(gh, cache, log)
 {
     protected override string Repo => AppConfig.TokeerRepo;
