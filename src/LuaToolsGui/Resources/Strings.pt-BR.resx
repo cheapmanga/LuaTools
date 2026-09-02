@@ -585,6 +585,12 @@ Isso exclui os arquivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Não foi possível baixar o SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Não foi possível iniciar o SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack atualizado.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Obtendo o {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} aberto.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} atualizado.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Não foi possível baixar o {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Não foi possível iniciar o {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Não foi possível instalar o runtime do .NET exigido pelo {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>alocando arquivos</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>verificando arquivos existentes</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Cancelar download</value></data>

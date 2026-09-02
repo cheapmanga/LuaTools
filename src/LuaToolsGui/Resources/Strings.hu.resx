@@ -585,6 +585,12 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nem sikerült letölteni a SteamAutoCracket.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a SteamAutoCracket.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>A SteamAutoCrack frissült.</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} beszerzése</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>A {0} megnyílt.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>A {0} frissült.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nem sikerült letölteni a {0}et.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a {0}et.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nem sikerült telepíteni a {0}hez szükséges .NET futtatókörnyezetet.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>fájlok lefoglalása</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>meglévő fájlok ellenőrzése</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Letöltés megszakítása</value></data>
