@@ -381,12 +381,15 @@ public partial class App : Application
 
         download.NavigateToGame = openInManage;
 
-        // Add page → the post-fetch "this game has a fix" banner opens it straight in the Fixes page.
-        download.OpenFixesForGame = appId => Dispatcher.Invoke(() =>
+        // Both ends of the sequence open the Fixes page on one game: the Add page's post-fetch banner
+        // (a manifest goes on before the install) and Manage's detail flyout (a fix goes on after it).
+        Action<long> openFixes = appId => Dispatcher.Invoke(() =>
         {
             window.NavigateToFixes();
             _ = _host.Services.GetRequiredService<FixesViewModel>().OpenForAppIdAsync(appId);
         });
+        download.OpenFixesForGame = openFixes;
+        manage.OpenFixesForGame = openFixes;
         builds.NavigateToManage = openInManage; // Builds "Manage" button: the reverse of "Manage Build"
         // Depot download queues one item covering the whole selection; show the user where it went.
         builds.RequestShowDownloads = () => Dispatcher.Invoke(window.NavigateToDownloads);

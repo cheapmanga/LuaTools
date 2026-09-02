@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>แสดง .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>คัดลอก App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>ลบ DRM ของ Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>การแก้ไข ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>การดำเนินการ</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>ลบ DRM ของ Steam หรือไม่?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>การดำเนินการนี้จะเรียกใช้ Steamless กับไฟล์เรียกทำงานของเกมเพื่อลบ DRM SteamStub ไฟล์ .exe ต้นฉบับจะถูกสำรองเป็น .bak ก่อน บางเกมอาจต้องตรวจสอบไฟล์ใน Steam ภายหลัง ดำเนินการต่อหรือไม่?</value></data>

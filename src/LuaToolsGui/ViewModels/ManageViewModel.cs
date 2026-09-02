@@ -184,6 +184,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     private readonly ToastService _toast;
     private readonly SettingsService _settings;
     private readonly SteamlessService _steamless;
+    private readonly FixLookupService _fixes;
 
     private List<LuaTileViewModel> _all = [];
     private CancellationTokenSource? _prefetchCts;
@@ -264,6 +265,20 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     public bool IsDetailOpen => SelectedTile is not null;
 
+    /// <summary>
+    /// How many published fixes the open game has, filled in by <see cref="CheckFixesAsync"/> when the
+    /// flyout opens. 0 hides the Fixes action, which is also what a failed lookup leaves behind.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasFix))]
+    [NotifyPropertyChangedFor(nameof(FixesActionText))]
+    private int _fixCount;
+
+    public bool HasFix => FixCount > 0;
+
+    /// <summary>The Fixes action's label, carrying the count so the button says what is waiting.</summary>
+    public string FixesActionText => string.Format(Resources.Strings.Manage_Action_Fixes, FixCount);
+
     // ── Multi-select ────────────────────────────────────────────────
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSelecting))]
@@ -275,7 +290,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
 
     public ManageViewModel(SteamService steam, SteamAppListCache appList, SteamAppInfoCache appInfo,
         CoverCache covers, ToastService toast, SettingsService settings,
-        SteamlessService steamless)
+        SteamlessService steamless, FixLookupService fixes)
     {
         _steam = steam;
         _appList = appList;
@@ -284,6 +299,7 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         _toast = toast;
         _settings = settings;
         _steamless = steamless;
+        _fixes = fixes;
         InitPageSize(settings.ManagePageSize);
     }
 
@@ -323,6 +339,11 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
         SelectedTile = tile;
         Overview = _appInfo.GetOverview(tile.AppId); // instant when the blob is already on disk
 
+        // Not awaited: whether this game has a fix has no bearing on the flyout opening, and the
+        // action appearing a moment later is better than a flyout that waits on the network.
+        FixCount = 0;
+        _ = CheckFixesAsync(tile);
+
         // The flyout binds its cover to SelectedTile.Cover. When opened from outside Manage
         // (Home → game detail) the tile was never rendered/scrolled into view, so its cover
         // was never resolved and the pullout image is blank. Ensure it here (idempotent).
@@ -340,7 +361,43 @@ public partial class ManageViewModel : PagedListViewModel<LuaTileViewModel>
     {
         SelectedTile = null;
         Overview = null;
+        FixCount = 0;
     }
+
+    /// <summary>
+    /// Look up how many fixes the open game has, so the flyout can offer them.
+    ///
+    /// <para>
+    /// A fix is applied to an installed game, after its manifest: Manage is where the user already is
+    /// at that point, so the offer belongs here as well as on the Add page.
+    /// </para>
+    ///
+    /// <para>
+    /// The result is dropped if the user has closed the flyout or switched games in the meantime,
+    /// which would otherwise advertise the previous game's fixes.
+    /// </para>
+    /// </summary>
+    private async Task CheckFixesAsync(LuaTileViewModel tile)
+    {
+        try
+        {
+            var summary = await _fixes.GetFixSummaryAsync(tile.AppId);
+            if (SelectedTile != tile) return; // user moved on. Drop it
+
+            FixCount = summary?.Count ?? 0;
+        }
+        catch
+        {
+            // Offline / API down. The action just doesn't appear.
+        }
+    }
+
+    /// <summary>Set by App. Opens the Fixes page with this game already selected.</summary>
+    public Action<long>? OpenFixesForGame { get; set; }
+
+    /// <summary>Flyout action: jump to the Fixes page for the open game.</summary>
+    [RelayCommand]
+    private void OpenFixes(LuaTileViewModel tile) => OpenFixesForGame?.Invoke(tile.AppId);
 
     /// <summary>Open this game on the Builds page (switch build, inspect depots/manifests, edit).</summary>
     [RelayCommand]

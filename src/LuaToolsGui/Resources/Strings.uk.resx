@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Показати .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Скопіювати App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Видалити DRM Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Фікси ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Дії</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Видалити DRM Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Буде запущено Steamless для виконуваного файлу гри, щоб видалити DRM SteamStub. Оригінальний .exe спершу зберігається як .bak. Деяким іграм потім може знадобитися перевірка файлів у Steam. Продовжити?</value></data>

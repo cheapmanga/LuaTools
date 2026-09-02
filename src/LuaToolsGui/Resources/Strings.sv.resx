@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Visa .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Kopiera App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Ta bort Steam-DRM</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fixar ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Åtgärder</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Ta bort Steam-DRM?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Detta kör Steamless på spelets körbara fil för att ta bort SteamStub-DRM. Den ursprungliga .exe-filen säkerhetskopieras först till .bak. Vissa spel kan behöva en filverifiering i Steam efteråt. Fortsätta?</value></data>

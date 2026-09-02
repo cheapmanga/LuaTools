@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Pokaż .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Kopiuj App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Usuń DRM Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Poprawki ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Akcje</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Usunąć DRM Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>To uruchomi Steamless na pliku wykonywalnym gry, aby usunąć DRM SteamStub. Oryginalny .exe zostanie najpierw zapisany jako .bak. Niektóre gry mogą wymagać później weryfikacji plików w Steam. Kontynuować?</value></data>

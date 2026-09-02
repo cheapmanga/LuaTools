@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Покажи .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Копиране на App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Премахни DRM на Steam</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Корекции ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Действия</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Да се премахне ли DRM на Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Това стартира Steamless върху изпълнимия файл на играта, за да премахне DRM SteamStub. Оригиналният .exe първо се архивира като .bak. Някои игри може да изискват след това проверка на файловете в Steam. Да се продължи ли?</value></data>

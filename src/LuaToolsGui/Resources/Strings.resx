@@ -259,6 +259,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Reveal .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Copy App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Remove Steam DRM</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fixes ({0})</value></data>
   <data name="Manage_Action_ManageBuild" xml:space="preserve"><value>Manage Depots</value></data>
   <data name="Manage_AboutHeader" xml:space="preserve"><value>About</value></data>
   <data name="Manage_Info_Developer" xml:space="preserve"><value>Developer</value></data>

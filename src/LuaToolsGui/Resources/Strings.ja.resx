@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>.lua を表示</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>App IDをコピー</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM を削除</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修正 ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>アクション</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam DRM を削除しますか？</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>ゲームの実行ファイルに Steamless を実行して SteamStub DRM を除去します。元の .exe は先に .bak としてバックアップされます。一部のゲームでは後で Steam のファイル整合性確認が必要になる場合があります。続行しますか？</value></data>

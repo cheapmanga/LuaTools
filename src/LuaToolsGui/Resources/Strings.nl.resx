@@ -234,6 +234,7 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>.lua tonen</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>App ID kopiëren</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam-DRM verwijderen</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fixes ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acties</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam-DRM verwijderen?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dit voert Steamless uit op het uitvoerbare bestand van het spel om de SteamStub-DRM te verwijderen. De originele .exe wordt eerst als .bak geback-upt. Sommige spellen hebben daarna een bestandsverificatie in Steam nodig. Doorgaan?</value></data>
