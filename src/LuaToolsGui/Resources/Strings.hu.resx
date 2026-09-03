@@ -710,4 +710,9 @@ Mégse - letöltés folytatása</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Egy kódot csak egyszer lehet felhasználni, és a bolt abban a pillanatban elhasználja, amint beváltod. Aktív mód nélkül a beírt jegyek lehet, hogy semmit sem csinálnak, a kód pedig végleg elvész.
 
 Mégis beváltod?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Nincs korlát</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Az ingyenes forrás most nem érhető el. Próbálj egy lua.tools forrást lentebb.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Az ingyenes forrásban nincsenek kulcsok ehhez a játékhoz.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Ez a játék nincs benne az ingyenes forrásban.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Letöltés lua.tools-szal</value></data>
 </root>

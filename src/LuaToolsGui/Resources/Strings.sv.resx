@@ -710,4 +710,9 @@ Avbryt - fortsätt hämta</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>En kod kan bara användas en gång, och butiken förbrukar den i samma stund som du löser in den. Utan ett aktivt läge gör biljetterna den skriver kanske ingenting alls och koden är borta för gott.
 
 Vill du lösa in den ändå?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Ingen gräns</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Den gratis källan går inte att nå just nu. Testa en lua.tools-källa nedan.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Den gratis källan har inga nycklar för det här spelet.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Det här spelet finns inte i den gratis källan.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hämta med lua.tools</value></data>
 </root>

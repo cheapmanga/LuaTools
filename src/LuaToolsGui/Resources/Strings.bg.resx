@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Кодът може да се използва само веднъж и магазинът го изразходва в момента, в който го активираш. Без активен режим билетите, които той записва, може да не свършат нищо, а кодът ще е изгубен завинаги.
 
 Да го активираме ли въпреки това?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Без лимит</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Безплатният източник не е достъпен в момента. Пробвай lua.tools източник по-долу.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Безплатният източник няма ключове за тази игра.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Тази игра я няма в безплатния източник.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Вземи през lua.tools</value></data>
 </root>

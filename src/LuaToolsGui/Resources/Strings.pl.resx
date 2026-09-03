@@ -710,4 +710,9 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kodu można użyć tylko raz, a sklep zużywa go w chwili, gdy go realizujesz. Bez aktywnego trybu zapisane bilety mogą nic nie dać, a kod przepadnie na zawsze.
 
 Zrealizować mimo to?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Bez limitu</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Darmowe źródło jest teraz niedostępne. Wypróbuj źródło lua.tools poniżej.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Darmowe źródło nie ma kluczy do tej gry.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tej gry nie ma w darmowym źródle.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Pobierz przez lua.tools</value></data>
 </root>

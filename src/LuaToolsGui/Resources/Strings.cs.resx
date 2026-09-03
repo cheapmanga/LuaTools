@@ -710,4 +710,9 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kód jde použít jen jednou a obchod ho spotřebuje ve chvíli, kdy ho uplatníš. Bez aktivního režimu nemusí lístky, které zapíše, udělat vůbec nic a kód bude nenávratně pryč.
 
 Uplatnit ho i tak?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Bez limitu</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Bezplatný zdroj teď není dostupný. Zkus zdroj lua.tools níže.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Bezplatný zdroj nemá klíče pro tuhle hru.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tahle hra v bezplatném zdroji není.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Stáhnout přes lua.tools</value></data>
 </root>

@@ -710,4 +710,9 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Kode hanya bisa dipakai sekali, dan toko langsung menghabiskannya begitu kamu menukarkannya. Tanpa mode yang aktif, tiket yang ditulisnya mungkin tidak berpengaruh apa-apa dan kodenya hilang selamanya.
 
 Tetap tukarkan?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Tanpa batas</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Sumber gratis tidak bisa diakses sekarang. Coba sumber lua.tools di bawah.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Sumber gratis tidak punya kunci untuk game ini.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Game ini tidak ada di sumber gratis.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Ambil lewat lua.tools</value></data>
 </root>

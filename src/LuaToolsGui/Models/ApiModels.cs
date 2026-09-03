@@ -179,6 +179,7 @@ public static class SourceMeta
         ["Sushi"] = new(DiscordUrl: "https://discord.gg/hMdv5dQhcN"),
         ["Skyflare"] = new(DiscordUrl: "https://discord.gg/luatools"),
         ["Sadie (Morrenus)"] = new(DisplayName: "Sadie (Hubcap)", DiscordUrl: "https://discord.gg/hubcapsmanifest", RequiresUserKey: true),
+        ["manifesthub"] = new(DisplayName: "ManifestHub"),
     };
 
     public static Meta Get(string name) => All.TryGetValue(name, out var m) ? m : new Meta();

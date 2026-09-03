@@ -710,4 +710,9 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Ein Code lässt sich nur einmal verwenden, und der Store verbraucht ihn in dem Moment, in dem du ihn einlöst. Ohne aktiven Modus bewirken die geschriebenen Tickets womöglich gar nichts und der Code ist endgültig weg.
 
 Trotzdem einlösen?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Kein Limit</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Die kostenlose Quelle ist gerade nicht erreichbar. Probier unten eine lua.tools-Quelle.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Die kostenlose Quelle hat keine Schlüssel für dieses Spiel.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dieses Spiel ist nicht in der kostenlosen Quelle.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Mit lua.tools holen</value></data>
 </root>

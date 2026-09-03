@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>一組兌換碼只能用一次，你一兌換，商店就會立刻把它消耗掉。沒有啟用任何模式時，它寫入的票證可能毫無作用，兌換碼也就永久作廢了。
 
 仍要兌換嗎？</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>無限制</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>現在連不上免費來源。試試下面的 lua.tools 來源。</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>免費來源裡沒有這個遊戲的金鑰。</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>免費來源裡沒有這個遊戲。</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>用 lua.tools 取得</value></data>
 </root>

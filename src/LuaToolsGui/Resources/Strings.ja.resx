@@ -710,4 +710,9 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>コードは一度しか使えず、引き換えた瞬間にストア側で消費されます。モードが有効でないと、書き込まれるチケットは何もしないまま、コードだけが永久に失われる可能性があります。
 
 それでも引き換えますか？</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>無制限</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>無料ソースに今アクセスできません。下の lua.tools ソースを試してみて。</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>無料ソースにこのゲームのキーがありません。</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>このゲームは無料ソースにありません。</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>lua.tools で取得</value></data>
 </root>

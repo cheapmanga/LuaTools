@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Код можна використати лише один раз, і крамниця витрачає його в мить активації. Без активного режиму записані квитки можуть нічого не дати, а код зникне назавжди.
 
 Все одно активувати?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Без ліміту</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Безкоштовне джерело зараз недоступне. Спробуй джерело lua.tools нижче.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>У безкоштовному джерелі немає ключів для цієї гри.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Цієї гри немає в безкоштовному джерелі.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Отримати через lua.tools</value></data>
 </root>

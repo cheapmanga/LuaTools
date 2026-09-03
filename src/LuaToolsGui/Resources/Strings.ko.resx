@@ -710,4 +710,9 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>코드는 한 번만 쓸 수 있고, 사용하는 순간 상점에서 바로 소모돼요. 활성화된 모드가 없으면 코드가 기록하는 티켓이 아무 역할도 못 하고, 코드는 영영 사라져요.
 
 그래도 사용할까요?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>제한 없음</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>지금은 무료 소스에 연결할 수 없어. 아래 lua.tools 소스를 써봐.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>무료 소스에 이 게임의 키가 없어.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>이 게임은 무료 소스에 없어.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>lua.tools로 가져오기</value></data>
 </root>

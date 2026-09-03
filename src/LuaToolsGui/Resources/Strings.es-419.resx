@@ -710,4 +710,9 @@ Cancelar: seguir descargando</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un código solo se puede usar una vez y la tienda lo consume apenas lo canjeas. Si no hay ningún modo activo, es posible que los tickets que escribe no sirvan de nada y el código se pierda para siempre.
 
 ¿Canjear de todas formas?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Sin límite</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>No se puede acceder a la fuente gratuita en este momento. Prueba una fuente de lua.tools abajo.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>La fuente gratuita no tiene claves para este juego.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Este juego no está en la fuente gratuita.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Obtener con lua.tools</value></data>
 </root>

@@ -736,4 +736,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>لا يمكن استخدام الكود إلا مرة واحدة، والمتجر يستهلكه في اللحظة التي تفعّله فيها. وبدون وضع مُفعَّل، قد لا تفعل التذاكر التي يكتبها أي شيء ويضيع الكود إلى الأبد.
 
 هل تريد تفعيله رغم ذلك؟</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>بلا حدود</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>تعذّر الوصول إلى المصدر المجاني الآن. جرّب مصدر lua.tools بالأسفل.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>المصدر المجاني لا يملك مفاتيح لهذه اللعبة.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>هذه اللعبة غير متوفرة في المصدر المجاني.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>جلب عبر lua.tools</value></data>
 </root>

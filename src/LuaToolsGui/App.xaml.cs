@@ -31,6 +31,7 @@ public partial class App : Application
                 services.AddSingleton<AchievementIconCache>();
                 services.AddSingleton<AchievementHostService>();
                 services.AddSingleton<FixLookupService>();
+                services.AddSingleton<ManifestHubService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<TokeerAppService>();
                 services.AddSingleton<LuaToolsValidatorService>();

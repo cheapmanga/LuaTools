@@ -21,6 +21,10 @@ public partial class SourceRowViewModel : ObservableObject
     public string? DiscordUrl { get; }
     public bool NeedsKey { get; }
 
+    /// <summary>The free ManifestHub source: built from public keys locally, no account, no daily cap.
+    /// Its label shows "no limit" rather than a usage count, and its download never prompts sign-in.</summary>
+    public bool IsFree { get; init; }
+
     public bool IsAvailable => Status == "available";
     public string StatusLabel => Status.ToUpperInvariant();
 
@@ -88,6 +92,7 @@ public partial class DownloadViewModel : ObservableObject
     private readonly SteamDepotInfo _depotInfo;
     private readonly HardwareAppIdService _hardware;
     private readonly FixLookupService _fixes;
+    private readonly ManifestHubService _manifestHub;
     private readonly DownloadQueue _queue;
     private readonly ManifestJobFactory _jobs;
     private CancellationTokenSource? _searchCts;
@@ -171,9 +176,21 @@ public partial class DownloadViewModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasSources))]
     [NotifyPropertyChangedFor(nameof(ShowFeatured))]
+    [NotifyPropertyChangedFor(nameof(ShowFreeUnavailable))]
     private bool _sourcesLoaded;
 
     public bool HasSources => SourcesLoaded && Sources.Count > 0;
+
+    /// <summary>
+    /// The free source (default) doesn't have this game, so the page offers to switch to lua.tools.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowFreeUnavailable))]
+    [NotifyCanExecuteChangedFor(nameof(FetchWithLuaToolsCommand))]
+    private bool _freeSourceUnavailable;
+
+    /// <summary>Only worth showing the "switch to lua.tools" notice once the sources are in.</summary>
+    public bool ShowFreeUnavailable => SourcesLoaded && FreeSourceUnavailable;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasDlcInfo))]
@@ -352,8 +369,8 @@ public partial class DownloadViewModel : ObservableObject
     public DownloadViewModel(LuaToolsApiClient api, HubcapService hubcap, SettingsService settings,
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
-        HardwareAppIdService hardware, FixLookupService fixes, DropInstallViewModel drop,
-        DownloadQueue queue, ManifestJobFactory jobs)
+        HardwareAppIdService hardware, FixLookupService fixes, ManifestHubService manifestHub,
+        DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs)
     {
         _api = api;
         _hubcap = hubcap;
@@ -366,6 +383,7 @@ public partial class DownloadViewModel : ObservableObject
         _depotInfo = depotInfo;
         _hardware = hardware;
         _fixes = fixes;
+        _manifestHub = manifestHub;
         _queue = queue;
         _jobs = jobs;
         Drop = drop;
@@ -580,6 +598,10 @@ public partial class DownloadViewModel : ObservableObject
 
                 await ApplyHubcapStateAsync();
 
+                // The free source is the default: added last but inserted on top, off its own check
+                // against the public key database. Separate from the lua.tools source list above.
+                await AddFreeSourceAsync(Details.AppId);
+
                 if (FastFetch)
                 {
                     var best = Sources.FirstOrDefault(s => s.CanDownload);
@@ -667,6 +689,53 @@ public partial class DownloadViewModel : ObservableObject
         statuses[HubcapSourceName] = status?.ManifestFileExists == true ? "available" : "unavailable";
     }
 
+    /// <summary>
+    /// Add the free ManifestHub source, as the default (top) row, when it covers this game.
+    /// </summary>
+    /// <remarks>
+    /// When it doesn't, no row is added and <see cref="FreeSourceUnavailable"/> flips so the page can
+    /// offer to switch to lua.tools - the game exists there or nowhere. Best-effort: if the key database
+    /// can't be reached, the free source is simply treated as not covering this game, and the lua.tools
+    /// rows carry on as before.
+    /// </remarks>
+    private async Task AddFreeSourceAsync(long appId)
+    {
+        bool available;
+        try
+        {
+            available = await _manifestHub.HasGameAsync(appId);
+        }
+        catch
+        {
+            available = false; // offline / lookup failed → fall back to the paid rows silently
+        }
+
+        if (available)
+        {
+            var row = new SourceRowViewModel(this, ManifestHubService.SourceName, "available") { IsFree = true };
+            row.StatsText = Resources.Strings.Free_NoLimit;
+            Sources.Insert(0, row); // default: the free source sits on top
+            FreeSourceUnavailable = false;
+        }
+        else
+        {
+            // The notice AND its button share one condition: only surface the offer when there is a
+            // lua.tools row actually downloadable, so the banner never appears with a dead button.
+            FreeSourceUnavailable = Sources.Any(s => !s.IsFree && s.CanDownload);
+        }
+    }
+
+    /// <summary>Can we offer a lua.tools fallback - i.e. is a non-free source actually downloadable?</summary>
+    private bool CanFetchWithLuaTools() => Sources.Any(s => !s.IsFree && s.CanDownload);
+
+    /// <summary>Switch to lua.tools for a game the free source doesn't have: fetch from its best row.</summary>
+    [RelayCommand(CanExecute = nameof(CanFetchWithLuaTools))]
+    private async Task FetchWithLuaTools()
+    {
+        var best = Sources.FirstOrDefault(s => !s.IsFree && s.CanDownload);
+        if (best is not null) await DownloadFromSourceAsync(best);
+    }
+
     private async Task ApplyHubcapStateAsync()
     {
         var keyRows = Sources.Where(s => s.NeedsKey).ToList();
@@ -695,22 +764,19 @@ public partial class DownloadViewModel : ObservableObject
     /// </summary>
     public async Task RefreshStandardUsageAsync()
     {
-        var standardRows = Sources.Where(s => !s.NeedsKey).ToList();
+        // The free row is excluded: it carries no lua.tools quota, and its own "No limit" label was set
+        // when it was added. Only the metered lua.tools rows get a usage count.
+        var standardRows = Sources.Where(s => !s.NeedsKey && !s.IsFree).ToList();
         if (standardRows.Count == 0) return;
         if (_auth.IsGuest) return;
 
         var usage = await _api.GetStandardUsageAsync();
+        if (usage is null) return;
 
-        // Fork choice: the usage label always reads "Unlimited". Cosmetic only - IsSupporter never
-        // gated anything (it fed this string and nothing else), so the /api/me/supporter-status call
-        // is dropped rather than ignored. The real daily cap is counted and enforced server-side and
-        // is unaffected; this changes what the row shows, not what the server allows.
+        // The real daily figure. The label reads "Unlimited" only on the free source (set above), never
+        // here - a lua.tools row shows the count it is actually held to.
         foreach (var row in standardRows)
-        {
-            row.IsSupporter = true;
-            if (usage is null) continue;
-            row.StatsText = $"{usage.Used} / {Resources.Strings.Add_Unlimited}";
-        }
+            row.StatsText = $"{usage.Used}/{usage.Limit}";
     }
 
     // ── Downloads ───────────────────────────────────────────────────
@@ -729,10 +795,11 @@ public partial class DownloadViewModel : ObservableObject
     {
         if (Details is null) return null;
 
-        // Hubcap downloads use the user's OWN key and never touch lua.tools, so a guest with a key
-        // configured can download without signing in. Every other source still needs a lua.tools account.
+        // The free source builds its lua from public keys and never touches lua.tools; like Hubcap with
+        // a key, it needs no account. Every lua.tools source still requires signing in.
         bool hubcapWithKey = source.NeedsKey && !string.IsNullOrEmpty(_settings.HubcapApiKey);
-        if (!hubcapWithKey && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return null;
+        if (!source.IsFree && !hubcapWithKey
+            && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return null;
 
         Error = null;
         LastDownload = null;
@@ -744,12 +811,20 @@ public partial class DownloadViewModel : ObservableObject
         string gameName = Details.Name;
         bool needsKey = source.NeedsKey;
 
-        var job = _jobs.CreateManifestJob(
-            appId, gameName, source.Name, needsKey,
-            // Silent/headless installs have no surfaced window to confirm on, so they skip the gate.
-            confirm: _silentInstall ? null : (file, _, ct) => ConfirmOverwriteAsync(file, appId, gameName, ct),
-            onFinished: (item, result) => OnManifestFinished(item, result, needsKey),
-            onReveal: () => NavigateToGame?.Invoke(appId));
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm =
+            _silentInstall ? null : (file, _, ct) => ConfirmOverwriteAsync(file, appId, gameName, ct);
+
+        var job = source.IsFree
+            ? _jobs.CreateManifestHubJob(
+                appId, gameName,
+                confirm: confirm,
+                onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                onReveal: () => NavigateToGame?.Invoke(appId))
+            : _jobs.CreateManifestJob(
+                appId, gameName, source.Name, needsKey,
+                confirm: confirm,
+                onFinished: (item, result) => OnManifestFinished(item, result, needsKey),
+                onReveal: () => NavigateToGame?.Invoke(appId));
 
         var queued = _queue.Enqueue(job);
         source.QueueItem = queued;
@@ -1008,6 +1083,7 @@ public partial class DownloadViewModel : ObservableObject
     {
         Sources.Clear();
         SourcesLoaded = false;
+        FreeSourceUnavailable = false; // explicit: the banner is already hidden via SourcesLoaded, but keep the flag honest
         DlcInfo = null;
         DlcDepots.Clear();
         Error = null;
