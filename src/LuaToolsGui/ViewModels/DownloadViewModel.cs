@@ -699,20 +699,17 @@ public partial class DownloadViewModel : ObservableObject
         if (standardRows.Count == 0) return;
         if (_auth.IsGuest) return;
 
-        var usageTask = _api.GetStandardUsageAsync();
-        var supporterTask = _api.GetSupporterStatusAsync();
-        await Task.WhenAll(usageTask, supporterTask);
+        var usage = await _api.GetStandardUsageAsync();
 
-        var usage = usageTask.Result;
-        bool isSupporter = supporterTask.Result?.IsSupporter == true;
-
+        // Fork choice: the usage label always reads "Unlimited". Cosmetic only - IsSupporter never
+        // gated anything (it fed this string and nothing else), so the /api/me/supporter-status call
+        // is dropped rather than ignored. The real daily cap is counted and enforced server-side and
+        // is unaffected; this changes what the row shows, not what the server allows.
         foreach (var row in standardRows)
         {
-            row.IsSupporter = isSupporter;
+            row.IsSupporter = true;
             if (usage is null) continue;
-            row.StatsText = isSupporter
-                ? $"{usage.Used} / {Resources.Strings.Add_Unlimited}"
-                : $"{usage.Used}/{usage.Limit}";
+            row.StatsText = $"{usage.Used} / {Resources.Strings.Add_Unlimited}";
         }
     }
 
