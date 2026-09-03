@@ -713,4 +713,8 @@ Anulare - continuă descărcarea</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Sursa gratuită nu are chei pentru jocul ăsta.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Jocul ăsta nu e în sursa gratuită.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Descarcă cu lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Aplică codul de la bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Ai trimis D-Report-ul la bot? Lipește aici codul cu care ți-a răspuns ca să scriem tichetele în Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Cod de la bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Aplică</value></data>
 </root>

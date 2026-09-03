@@ -713,4 +713,8 @@ Trotzdem einlösen?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Die kostenlose Quelle hat keine Schlüssel für dieses Spiel.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dieses Spiel ist nicht in der kostenlosen Quelle.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Mit lua.tools holen</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Code vom bot anwenden</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>D-Report an den bot geschickt? Füg hier den Code ein, den er zurückgeschickt hat, um die Tickets in Steam zu schreiben.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code vom bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Anwenden</value></data>
 </root>

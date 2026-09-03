@@ -748,4 +748,8 @@ Redeem anyway?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>The free source has no keys for this game.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>This game isn't in the free source.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Fetch with lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Apply the bot's code</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Sent your D-Report to the bot? Paste the code it replied with here to write the tickets into Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code from the bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Apply</value></data>
 </root>

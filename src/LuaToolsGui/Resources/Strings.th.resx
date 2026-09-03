@@ -713,4 +713,8 @@
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>แหล่งฟรีไม่มีคีย์สำหรับเกมนี้</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>เกมนี้ไม่มีในแหล่งฟรี</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>ดึงด้วย lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>ใช้โค้ดจาก bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>ส่ง D-Report ให้ bot แล้วใช่ไหม? วางโค้ดที่มันตอบกลับมาตรงนี้เพื่อเขียนตั๋วลงใน Steam</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>โค้ดจาก bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>ใช้งาน</value></data>
 </root>

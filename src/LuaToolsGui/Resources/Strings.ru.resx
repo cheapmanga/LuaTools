@@ -713,4 +713,8 @@
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>В бесплатном источнике нет ключей для этой игры.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Этой игры нет в бесплатном источнике.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Получить через lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Примени код от bot'а</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Отправил свой D-Report bot'у? Вставь сюда код из ответа, чтобы записать тикеты в Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Код от bot'а</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Применить</value></data>
 </root>

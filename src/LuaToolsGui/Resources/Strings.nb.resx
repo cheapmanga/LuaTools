@@ -713,4 +713,8 @@ Vil du løse den inn likevel?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Den gratis kilden har ingen nøkler for dette spillet.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dette spillet finnes ikke i den gratis kilden.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hent med lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Bruk koden fra bot-en</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Sendte du D-Reporten til bot-en? Lim inn koden den svarte med her for å skrive billettene inn i Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kode fra bot-en</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Bruk</value></data>
 </root>

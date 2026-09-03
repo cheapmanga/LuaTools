@@ -713,4 +713,8 @@ Valider quand même ?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>La source gratuite n'a pas de clés pour ce jeu.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Ce jeu n'est pas dans la source gratuite.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Récupérer via lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Applique le code du bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Tu as envoyé ton D-Report au bot ? Colle ici le code qu'il t'a renvoyé pour écrire les tickets dans Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code du bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Appliquer</value></data>
 </root>

@@ -98,6 +98,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -212,6 +213,63 @@
                             Content="{x:Static res:Strings.Val_Report_Copy}"
                             Icon="{ui:SymbolIcon Copy24}" />
                     </Grid>
+                </Border>
+
+                <!--  Apply the code the bot sends back: the last step of the Denuvo round-trip, on the
+                      same page. It's a Tokeer redeem, so it writes the tickets straight into Steam.  -->
+                <Border
+                    Grid.Row="4"
+                    Margin="0,12,0,0"
+                    Padding="16"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8">
+                    <StackPanel>
+                        <TextBlock
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Text="{x:Static res:Strings.Val_Apply_Header}" />
+                        <TextBlock
+                            Margin="0,4,0,0"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="{x:Static res:Strings.Val_Apply_Body}"
+                            TextWrapping="Wrap" />
+
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox
+                                Grid.Column="0"
+                                IsEnabled="{Binding NotApplying}"
+                                PlaceholderText="{x:Static res:Strings.Val_Apply_Placeholder}"
+                                Text="{Binding BotCode, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:Button
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                Appearance="Primary"
+                                Command="{Binding ApplyBotCodeCommand}"
+                                Content="{x:Static res:Strings.Val_Apply_Action}"
+                                Icon="{ui:SymbolIcon Checkmark24}" />
+                        </Grid>
+
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            Text="{Binding ApplyStatus}"
+                            TextWrapping="Wrap"
+                            Visibility="{Binding HasApplyStatus, Converter={StaticResource BoolToVis}}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#22c55e" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ApplyIsError}" Value="True">
+                                            <Setter Property="Foreground" Value="#f87171" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
                 </Border>
             </Grid>
         </Grid>

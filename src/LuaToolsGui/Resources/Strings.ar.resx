@@ -739,4 +739,8 @@
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>المصدر المجاني لا يملك مفاتيح لهذه اللعبة.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>هذه اللعبة غير متوفرة في المصدر المجاني.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>جلب عبر lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>طبّق رمز الـ bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>أرسلت الـ D-Report إلى الـ bot؟ الصق الرمز الذي ردّ به هنا لكتابة التذاكر في Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>الرمز من الـ bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>تطبيق</value></data>
 </root>

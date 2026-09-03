@@ -692,4 +692,8 @@ public static class Strings
     public static string Free_Err_NoKeys => Get(nameof(Free_Err_NoKeys));
     public static string Free_Unavailable_Notice => Get(nameof(Free_Unavailable_Notice));
     public static string Free_Unavailable_Action => Get(nameof(Free_Unavailable_Action));
+    public static string Val_Apply_Header => Get(nameof(Val_Apply_Header));
+    public static string Val_Apply_Body => Get(nameof(Val_Apply_Body));
+    public static string Val_Apply_Placeholder => Get(nameof(Val_Apply_Placeholder));
+    public static string Val_Apply_Action => Get(nameof(Val_Apply_Action));
 }

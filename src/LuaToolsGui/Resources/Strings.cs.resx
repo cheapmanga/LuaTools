@@ -713,4 +713,8 @@ Uplatnit ho i tak?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Bezplatný zdroj nemá klíče pro tuhle hru.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tahle hra v bezplatném zdroji není.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Stáhnout přes lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Použij kód od bota</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Poslal jsi bota svůj D-Report? Vlož sem kód, který ti odpověděl, a zapíšeme tickety do Steamu.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kód od bota</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Použít</value></data>
 </root>

@@ -713,4 +713,8 @@
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Безплатният източник няма ключове за тази игра.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Тази игра я няма в безплатния източник.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Вземи през lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Приложи кода от bot-а</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Изпрати ли D-Report на bot-а? Постави тук кода, който ти върна, за да запишеш билетите в Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Код от bot-а</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Приложи</value></data>
 </root>

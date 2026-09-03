@@ -713,4 +713,8 @@
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Η δωρεάν πηγή δεν έχει κλειδιά για αυτό το παιχνίδι.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Αυτό το παιχνίδι δεν υπάρχει στη δωρεάν πηγή.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Λήψη μέσω lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Εφάρμοσε τον κωδικό του bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Έστειλες το D-Report στο bot; Επικόλλησε εδώ τον κωδικό που σου απάντησε για να γραφτούν τα tickets στο Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Κωδικός από το bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Εφαρμογή</value></data>
 </root>
