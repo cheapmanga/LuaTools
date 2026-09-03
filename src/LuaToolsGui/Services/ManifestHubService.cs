@@ -114,9 +114,14 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, ILogge
     /// to pick up exactly as it would a downloaded one.
     /// </summary>
     /// <remarks>
-    /// One <c>addappid</c> line per depot that has a key, with the depot's current public manifest id as
-    /// a <c>setManifestid</c> pin. The installer comments those pins out when Auto Update is on, so
-    /// including them costs nothing and lets a user who turns auto-update off get a coherent pinned lua.
+    /// <para>The base game plus, like lua.tools, its DLCs and soundtracks. Each declared DLC gets an
+    /// <c>addappid(&lt;dlcid&gt;)</c> entitlement line - many DLCs and most soundtracks are store-only with
+    /// no depot, so the appid alone is what unlocks them. DLCs that DO carry content are covered the same
+    /// way base content is: their depot appears in the depot list and gets its key.</para>
+    ///
+    /// <para>Every content depot with a key gets an <c>addappid(&lt;depot&gt;,1,"&lt;key&gt;")</c> line and, when
+    /// known, a <c>setManifestid</c> pin. The installer comments those pins out under Auto Update, so
+    /// including them costs nothing and gives a coherent pinned lua to anyone who turns it off.</para>
     /// </remarks>
     public async Task<DownloadedFile> BuildLuaAsync(long appId, CancellationToken ct = default)
     {
@@ -131,7 +136,24 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, ILogge
             throw new DownloadAbortedException(Resources.Strings.Free_Err_NoKeys);
 
         var lua = new StringBuilder();
-        lua.Append("addappid(").Append(appId).Append(")\n");
+        var addedApps = new HashSet<long>();
+
+        // An addappid line, emitted once per appid. Steam ignores a duplicate but the diff shouldn't show one.
+        void AddApp(long id)
+        {
+            if (addedApps.Add(id))
+                lua.Append("addappid(").Append(id).Append(")\n");
+        }
+
+        AddApp(appId);
+
+        // DLCs and soundtracks: unlock every declared DLC entitlement, with or without a depot. This is
+        // what lua.tools does, and it's the only thing store-only DLCs and soundtracks need. The id > 0
+        // guard just shrugs off a malformed listofdlc entry rather than emitting addappid(0).
+        foreach (var dlc in info.DlcIds.Where(id => id > 0))
+            AddApp(dlc);
+
+        // Content depots with a key - the base game's and any DLC's alike (DLC depots are in this list too).
         foreach (var d in keyed)
         {
             lua.Append("addappid(").Append(d.Id).Append(",1,\"").Append(keys[d.Id]).Append("\")\n");
