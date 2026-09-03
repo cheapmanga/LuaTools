@@ -668,9 +668,9 @@ Anulare - continuă descărcarea</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Joc</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Blochează versiunea</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fixează jocul pe build-ul instalat, ca o actualizare Steam să nu șteargă activarea.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Această rulare încarcă un raport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Scriptul îți adună MachineGuid, seria discului, adresele MAC, IP-ul public, datele despre hardware și conținutul folderului jocului și le încarcă pe paste.rtech.support. Codul D-Report pe care îl primești este adresa publică a acelei pagini: oricine îl primește de la tine poate citi tot.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Înțeleg ce se trimite</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Rularea aceasta încarcă un raport și dezactivează Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Rularea face două lucruri. Scriptul încarcă un raport — MachineGuid-ul tău, seria discului, adresele MAC, IP-ul tău public, hardware-ul și conținutul folderului jocului — pe un serviciu de tip paste, iar codul D-Report pe care îl primești este adresa publică a acelei pagini, așa că oricine îl primește de la tine poate citi tot. Dezactivează și Smart App Control, lucru de care scriptul are nevoie: e o schimbare la nivelul întregii mașini, are efect după o repornire, iar Windows nu mai poate reactiva Smart App Control fără o reinstalare curată.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Am înțeles, inclusiv că Smart App Control va rămâne dezactivat definitiv</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Rulează</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>În curs. Acceptă cererea de drepturi de administrator, apoi urmărește fereastra care se deschide.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Gata.</value></data>

@@ -668,9 +668,9 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Gra</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Zablokuj wersję</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Przypina grę do zainstalowanej kompilacji, żeby aktualizacja Steam nie skasowała aktywacji.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>To uruchomienie wysyła raport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skrypt zbiera twój MachineGuid, numer seryjny dysku, adresy MAC, publiczny adres IP, dane sprzętu i zawartość folderu gry, po czym wysyła to na paste.rtech.support. Otrzymany kod D-Report to publiczny adres tej strony: każdy, komu go dasz, przeczyta całość.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Rozumiem, co jest wysyłane</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>To uruchomienie wysyła raport i wyłącza Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Uruchomienie robi dwie rzeczy. Skrypt wysyła raport — twój MachineGuid, numer seryjny dysku, adresy MAC, twój publiczny IP, sprzęt i zawartość folderu gry — do serwisu typu paste, a kod D-Report, który dostajesz, to publiczny adres tej strony, więc każdy, komu go podasz, może przeczytać wszystko. Wyłącza też Smart App Control, czego wymaga skrypt: to zmiana obejmująca cały komputer, działa po ponownym uruchomieniu, a Windows nie potrafi ponownie włączyć Smart App Control bez czystej reinstalacji.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Rozumiem, także to, że Smart App Control zostanie wyłączony na dobre</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Uruchom</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Trwa. Zatwierdź prośbę o uprawnienia i obserwuj okno, które się otworzy.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Zakończono.</value></data>

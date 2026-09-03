@@ -688,9 +688,9 @@
   <data name="Val_Game" xml:space="preserve"><value>游戏</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>锁定版本</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>把游戏固定在当前已安装的版本上，避免 Steam 更新清除激活。</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>本次运行会上传一份报告</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>脚本会收集你的 MachineGuid、硬盘序列号、MAC 地址、公网 IP、硬件信息以及游戏目录的内容，并上传到 paste.rtech.support。你拿到的 D-Report 代码就是该页面的公开地址：拿到代码的人都能看到全部内容。</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>我已了解将要发送的内容</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>本次运行会上传一份报告，并关闭 Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>运行会做两件事。脚本会把一份报告——你的 MachineGuid、硬盘序列号、MAC 地址、公网 IP、硬件信息以及游戏文件夹的内容——上传到一个 paste 服务，而你拿到的 D-Report 代码就是那个页面的公开地址，所以你把它给谁，谁就能看到全部内容。脚本还需要关闭 Smart App Control：这是对整台机器生效的更改，重启后生效，而且不重装 Windows 就无法再把 Smart App Control 打开。</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>我已了解，也清楚 Smart App Control 将被永久关闭</value></data>
   <data name="Val_Run" xml:space="preserve"><value>运行</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>正在运行。请允许提权提示，然后查看弹出的窗口。</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>已完成。</value></data>

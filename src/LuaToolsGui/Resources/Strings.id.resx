@@ -668,9 +668,9 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Kunci versi</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Mengunci game pada build yang terpasang, supaya pembaruan Steam tidak menghapus aktivasinya.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Proses ini mengunggah laporan</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skrip mengumpulkan MachineGuid, nomor seri disk, alamat MAC, IP publik, data perangkat keras, dan isi folder game kamu, lalu mengunggahnya ke paste.rtech.support. Kode D-Report yang kamu terima adalah alamat publik halaman itu: siapa pun yang kamu beri kode itu bisa membaca semuanya.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Saya paham apa yang dikirim</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Menjalankan ini akan mengunggah laporan dan mematikan Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Menjalankannya melakukan dua hal. Skrip mengunggah laporan — MachineGuid kamu, nomor seri disk, alamat MAC, IP publik, informasi perangkat keras, dan isi folder game — ke layanan paste, dan kode D-Report yang kamu terima adalah alamat publik halaman itu, jadi siapa pun yang kamu beri kode itu bisa membaca semuanya. Skrip juga mematikan Smart App Control karena memang membutuhkannya: itu perubahan untuk seluruh mesin, berlaku setelah restart, dan Windows tidak bisa menyalakan Smart App Control lagi tanpa instal ulang bersih.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Saya paham, termasuk bahwa Smart App Control akan dimatikan selamanya</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Jalankan</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Sedang berjalan. Setujui permintaan hak administrator, lalu perhatikan jendela yang terbuka.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Selesai.</value></data>

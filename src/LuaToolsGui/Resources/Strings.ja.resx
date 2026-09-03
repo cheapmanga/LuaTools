@@ -668,9 +668,9 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Val_Game" xml:space="preserve"><value>ゲーム</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>バージョンを固定</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>インストール済みのビルドにゲームを固定し、Steam の更新でアクティベーションが消えないようにします。</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>この実行はレポートをアップロードします</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>スクリプトは MachineGuid、ディスクシリアル、MAC アドレス、グローバル IP、ハードウェア情報、ゲームフォルダーの内容を収集し、paste.rtech.support にアップロードします。返される D-Report コードはそのページの公開アドレスです。コードを渡した相手は、その内容をすべて閲覧できます。</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>送信される内容を理解しました</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>この実行はレポートをアップロードし、Smart App Control をオフにする</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>実行すると 2 つのことが起きる。スクリプトはレポート（MachineGuid、ディスクのシリアル番号、MAC アドレス、グローバル IP、ハードウェア情報、ゲームフォルダーの中身）をペーストサービスにアップロードし、返ってくる D-Report コードはそのページの公開アドレスだ。つまり、コードを渡した相手は誰でもその内容をすべて読める。さらに、スクリプトの動作に必要なため Smart App Control をオフにする。これはマシン全体に及ぶ変更で、再起動後に反映され、Windows をクリーンインストールしない限り Smart App Control を元に戻すことはできない。</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>内容を理解しました。Smart App Control が永久にオフになることも承知しています</value></data>
   <data name="Val_Run" xml:space="preserve"><value>実行</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>実行中です。昇格の確認画面を承認し、開いたウィンドウの表示を確認してください。</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>完了しました。</value></data>

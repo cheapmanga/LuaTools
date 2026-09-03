@@ -668,9 +668,9 @@ Cancelar: seguir descargando</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Juego</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Bloquear la versión</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fija el juego en la versión instalada, para que una actualización de Steam no borre la activación.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Esta ejecución sube un informe</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>El script recopila tu MachineGuid, el número de serie del disco, tus direcciones MAC, tu IP pública, tu hardware y el contenido de la carpeta del juego, y los sube a paste.rtech.support. El código D-Report que recibes es la dirección pública de esa página: cualquiera a quien se lo des puede leerlo todo.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Entiendo lo que se envía</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Esta ejecución sube un reporte y desactiva Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Ejecutarlo hace dos cosas. El script sube un reporte — tu MachineGuid, el número de serie del disco, las direcciones MAC, tu IP pública, tu hardware y el contenido de la carpeta del juego — a un servicio de paste, y el código D-Report que recibes es la dirección pública de esa página, así que cualquier persona a la que se lo des puede leer todo eso. También desactiva Smart App Control, que es lo que el script necesita: es un cambio que afecta a toda la computadora, se aplica después de reiniciar, y Windows no puede volver a activar Smart App Control sin una reinstalación limpia.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Entiendo, incluso que Smart App Control quedará desactivado para siempre</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Ejecutar</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>En curso. Acepta el aviso de elevación y luego sigue la ventana que se abre.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Listo.</value></data>

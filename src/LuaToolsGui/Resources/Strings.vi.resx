@@ -668,9 +668,9 @@ Hủy - tiếp tục tải</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Khóa phiên bản</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Ghim game ở bản build đang cài, để bản cập nhật Steam không xóa mất kích hoạt.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Lần chạy này sẽ tải lên một báo cáo</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Script thu thập MachineGuid, số sê-ri ổ đĩa, địa chỉ MAC, IP công khai, thông tin phần cứng và nội dung thư mục game của bạn, rồi tải hết lên paste.rtech.support. Mã D-Report bạn nhận được chính là địa chỉ công khai của trang đó: ai được bạn đưa mã cũng đọc được toàn bộ.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Tôi hiểu những gì được gửi đi</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Lần chạy này sẽ tải lên một báo cáo và tắt Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Chạy script sẽ làm hai việc. Script tải lên một báo cáo — MachineGuid của bạn, số sê-ri ổ đĩa, các địa chỉ MAC, IP công cộng, thông tin phần cứng và nội dung thư mục game — lên một dịch vụ paste, và mã D-Report bạn nhận lại chính là địa chỉ công khai của trang đó, nên ai được bạn đưa mã cũng đọc được toàn bộ. Nó cũng tắt Smart App Control vì script cần như vậy: đây là thay đổi áp dụng cho cả máy, có hiệu lực sau khi khởi động lại, và Windows không thể bật Smart App Control trở lại nếu không cài đặt lại sạch.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Tôi hiểu, kể cả việc Smart App Control sẽ bị tắt vĩnh viễn</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Chạy</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Đang chạy. Hãy chấp nhận yêu cầu quyền quản trị, rồi theo dõi cửa sổ vừa mở.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Đã xong.</value></data>

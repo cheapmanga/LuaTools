@@ -668,9 +668,9 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Val_Game" xml:space="preserve"><value>게임</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>버전 고정</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>게임을 현재 설치된 빌드에 고정해 Steam 업데이트로 인증이 지워지지 않도록 합니다.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>이 실행은 보고서를 업로드합니다</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>스크립트는 MachineGuid, 디스크 일련번호, MAC 주소, 공인 IP, 하드웨어 정보와 게임 폴더의 내용을 수집해 paste.rtech.support에 업로드합니다. 결과로 받는 D-Report 코드는 그 페이지의 공개 주소이므로, 코드를 받은 사람은 내용을 모두 볼 수 있습니다.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>전송되는 내용을 이해했습니다</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>이 실행은 보고서를 업로드하고 Smart App Control을 끕니다</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>실행하면 두 가지 일이 일어납니다. 스크립트는 MachineGuid, 디스크 일련번호, MAC 주소, 공인 IP, 하드웨어 정보, 게임 폴더의 내용이 담긴 보고서를 붙여넣기 서비스에 업로드하고, 돌려받는 D-Report 코드는 그 페이지의 공개 주소입니다. 즉, 코드를 받은 사람은 누구나 그 내용을 전부 볼 수 있습니다. 또한 스크립트에 필요하기 때문에 Smart App Control을 끕니다. 이는 컴퓨터 전체에 적용되는 변경이며, 재부팅 후에 적용되고, Windows를 새로 설치하지 않는 한 Smart App Control을 다시 켤 수 없습니다.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>이해했습니다. Smart App Control이 영구적으로 꺼진다는 점도 알고 있습니다</value></data>
   <data name="Val_Run" xml:space="preserve"><value>실행</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>실행 중입니다. 권한 상승 창을 허용한 뒤, 열리는 창을 확인하세요.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>완료되었습니다.</value></data>

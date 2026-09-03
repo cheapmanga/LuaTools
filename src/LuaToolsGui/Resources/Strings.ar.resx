@@ -694,9 +694,9 @@
   <data name="Val_Game" xml:space="preserve"><value>اللعبة</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>تثبيت الإصدار</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>يثبّت اللعبة على النسخة المثبتة حاليًا، حتى لا يمحو تحديث Steam التفعيل.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>هذا التشغيل يرفع تقريرًا</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>يجمع السكربت MachineGuid الخاص بك، والرقم التسلسلي للقرص، وعناوين MAC، وعنوان IP العام، ومواصفات العتاد، ومحتويات مجلد اللعبة، ثم يرفعها إلى paste.rtech.support. رمز D-Report الذي تحصل عليه هو العنوان العلني لتلك الصفحة: أي شخص تعطيه إياه يستطيع قراءة كل ذلك.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>أفهم ما الذي يُرسَل</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>هذا التشغيل يرفع تقريرًا ويعطّل Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>التشغيل يقوم بأمرين. يرفع السكربت تقريرًا — يحتوي على MachineGuid الخاص بك ورقم سيريال القرص وعناوين MAC وعنوان IP العام ومعلومات العتاد ومحتويات مجلد اللعبة — إلى خدمة paste، ورمز D-Report الذي تحصل عليه هو العنوان العام لتلك الصفحة، فأي شخص تعطيه الرمز يستطيع قراءة كل ذلك. كما يعطّل Smart App Control لأن السكربت يحتاج إلى ذلك: هذا تغيير يشمل الجهاز بأكمله، ويسري بعد إعادة التشغيل، ولا يستطيع Windows إعادة تفعيل Smart App Control دون إعادة تثبيت نظيفة.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>أفهم ذلك، بما في ذلك أن Smart App Control سيبقى معطّلًا نهائيًا</value></data>
   <data name="Val_Run" xml:space="preserve"><value>تشغيل</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>قيد التشغيل. وافق على طلب صلاحيات المسؤول، ثم تابع النافذة التي ستفتح.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>انتهى.</value></data>

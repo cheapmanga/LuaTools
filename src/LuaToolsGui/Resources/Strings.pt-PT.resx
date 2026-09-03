@@ -668,9 +668,9 @@ Cancelar - continuar a transferir</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Jogo</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Bloquear a versão</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fixa o jogo na versão instalada, para que uma atualização da Steam não apague a ativação.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Esta execução envia um relatório</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>O script recolhe o seu MachineGuid, o número de série do disco, os seus endereços MAC, o seu IP público, o seu hardware e o conteúdo da pasta do jogo, e envia tudo para paste.rtech.support. O código D-Report que recebe é o endereço público dessa página: qualquer pessoa a quem o der pode ler tudo.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Compreendi o que é enviado</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Esta execução envia um relatório e desativa o Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Executar faz duas coisas. O script envia um relatório — o teu MachineGuid, o número de série do disco, os endereços MAC, o teu IP público, o teu hardware e o conteúdo da pasta do jogo — para um serviço de paste, e o código D-Report que recebes é o endereço público dessa página, por isso qualquer pessoa a quem o dês consegue ler tudo. Também desativa o Smart App Control, de que o script precisa: é uma alteração que abrange toda a máquina, só produz efeito depois de reiniciar, e o Windows não consegue voltar a ativar o Smart App Control sem uma reinstalação limpa.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Compreendo, incluindo que o Smart App Control ficará desativado para sempre</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Executar</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Em curso. Aceite o pedido de elevação e acompanhe a janela que abrir.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Concluído.</value></data>

@@ -668,9 +668,9 @@ Annuller - fortsæt download</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Spil</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Lås versionen</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fastholder spillet på den installerede build, så en Steam-opdatering ikke sletter aktiveringen.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Denne kørsel uploader en rapport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Scriptet indsamler din MachineGuid, disk-serienummer, MAC-adresser, offentlige IP, hardware og indholdet af spilmappen og uploader det til paste.rtech.support. Den D-Report-kode, du får tilbage, er sidens offentlige adresse: alle, du giver den til, kan læse det hele.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Jeg forstår, hvad der sendes</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Denne kørsel uploader en rapport og slår Smart App Control fra</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Kørslen gør to ting. Scriptet uploader en rapport — din MachineGuid, diskens serienummer, MAC-adresser, din offentlige IP, din hardware og indholdet af spilmappen — til en paste-tjeneste, og den D-Report-kode du får tilbage, er den sides offentlige adresse, så alle du giver den til, kan læse det hele. Det slår også Smart App Control fra, hvilket scriptet har brug for: det er en ændring for hele maskinen, den træder i kraft efter en genstart, og Windows kan ikke slå Smart App Control til igen uden en ren geninstallation.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Jeg forstår det, også at Smart App Control bliver slået fra for altid</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Kør</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Kører. Godkend anmodningen om administratorrettigheder, og hold øje med vinduet, den åbner.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Færdig.</value></data>

@@ -668,9 +668,9 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Spiel</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Version sperren</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Hält das Spiel auf dem installierten Build fest, damit ein Steam-Update die Aktivierung nicht löscht.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Dieser Durchlauf lädt einen Bericht hoch</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Das Skript sammelt deine MachineGuid, Datenträger-Seriennummer, MAC-Adressen, öffentliche IP, Hardware und den Inhalt des Spielordners und lädt alles auf paste.rtech.support hoch. Der D-Report-Code, den du zurückbekommst, ist die öffentliche Adresse dieser Seite: Wem du ihn gibst, der kann alles lesen.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Ich weiß, was gesendet wird</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Dieser Durchlauf lädt einen Bericht hoch und schaltet Smart App Control ab</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Das Ausführen macht zwei Dinge. Das Skript lädt einen Bericht hoch — deine MachineGuid, die Seriennummer der Festplatte, MAC-Adressen, deine öffentliche IP, deine Hardware und den Inhalt des Spielordners — zu einem Paste-Dienst, und der D-Report-Code, den du zurückbekommst, ist die öffentliche Adresse dieser Seite: Wer ihn von dir bekommt, kann das alles lesen. Außerdem schaltet es Smart App Control ab, was das Skript braucht: Das ist eine Änderung für den ganzen Rechner, sie greift nach einem Neustart, und Windows kann Smart App Control ohne saubere Neuinstallation nicht wieder einschalten.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ich habe verstanden, auch dass Smart App Control endgültig abgeschaltet wird</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Starten</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Läuft. Bestätige die Rechteabfrage und beobachte dann das geöffnete Fenster.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Fertig.</value></data>

@@ -30,13 +30,38 @@ public enum DevuvoRunResult
 ///
 /// <para>It runs ELEVATED, because it touches the Steam folder and the registry. Elevation means
 /// ShellExecute, and ShellExecute cannot redirect stdout - so the script writes a PowerShell transcript
-/// and this tails that file instead. The console window is deliberately left visible: it is the user's
-/// only way to stop a process this one is not allowed to kill.</para>
+/// and this tails that file into the page. The console window is hidden: the transcript already carries
+/// everything it would have shown. The cost is that an elevated child cannot be killed by this
+/// non-elevated process, so a started run is left to finish; the UAC prompt is the point to back out.</para>
 /// </remarks>
 public class DevuvoService(ILogger<DevuvoService> log)
 {
     private static readonly string RunDir = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LuaToolsGui", "devuvo");
+
+    /// <summary>
+    /// Elevated PowerShell that turns Smart App Control off - written into the run wrapper, never run
+    /// on its own.
+    /// </summary>
+    /// <remarks>
+    /// Only when it is actually on (state 1) or evaluating (state 2): a machine where SAC was never a
+    /// thing keeps an untouched registry, and a value already 0 is left alone. Setting it needs the
+    /// admin rights the run already has, and it applies on the next reboot - which is why the consent
+    /// text says a reboot is needed. There is no matching enable: Windows only turns SAC back on
+    /// through a clean install, so this is deliberately one-way.
+    /// </remarks>
+    private const string DisableSmartAppControlStep = """
+        try {
+          $ci = 'HKLM:\SYSTEM\CurrentControlSet\Control\CI\Policy'
+          $sac = (Get-ItemProperty -Path $ci -Name VerifiedAndReputablePolicyState -ErrorAction SilentlyContinue).VerifiedAndReputablePolicyState
+          if ($sac -eq 1 -or $sac -eq 2) {
+            Set-ItemProperty -Path $ci -Name VerifiedAndReputablePolicyState -Value 0 -Type DWord
+            Write-Host '[*] Smart App Control turned off. Reboot for it to take effect.'
+          } else {
+            Write-Host '[*] Smart App Control is already off or not present; nothing changed.'
+          }
+        } catch { Write-Host "[!] Could not change Smart App Control: $_" }
+        """;
 
     private readonly HttpClient _http = new()
     {
@@ -87,8 +112,14 @@ public class DevuvoService(ILogger<DevuvoService> log)
     /// Run the script for one game and report every line it prints.
     /// </summary>
     /// <param name="onLine">Called on a background thread for each new transcript line.</param>
+    /// <param name="disableSmartAppControl">
+    /// Turn Smart App Control off as the first elevated step, because the script needs it off to run
+    /// unimpeded. This is gated by the page's consent, since it is a machine-wide change that takes a
+    /// reboot to apply and that Windows will not let anything turn back on without a clean reinstall.
+    /// </param>
     public async Task<DevuvoRunResult> RunAsync(
-        long appId, bool lockVersion, Action<string> onLine, CancellationToken ct = default)
+        long appId, bool lockVersion, bool disableSmartAppControl, Action<string> onLine,
+        CancellationToken ct = default)
     {
         string? script = await FetchScriptAsync(ct);
         if (script is null) return DevuvoRunResult.ScriptUnavailable;
@@ -111,30 +142,42 @@ public class DevuvoService(ILogger<DevuvoService> log)
                 StringComparison.Ordinal);
 
             await File.WriteAllTextAsync(scriptPath, script, new UTF8Encoding(true), ct);
-            await File.WriteAllTextAsync(wrapperPath, string.Join("\r\n",
-            [
+
+            var wrapper = new List<string>
+            {
                 "$ErrorActionPreference = 'Continue'",
                 // Tells the script it is driven by a UI: it then prints progress markers instead of
                 // waiting on keypresses.
                 "$env:LUATOOLS_APP_MODE = '1'",
                 "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12",
                 $"Start-Transcript -Path '{Escape(logPath)}' -Force | Out-Null",
-                $"$AppID = '{appId}'",
-                // Section 6 of the script: pins the game to its installed build so a Steam update
-                // cannot wipe the activation.
-                $"$LockVersion = ${(lockVersion ? "true" : "false")}",
-                $"try {{ . '{Escape(scriptPath)}' }} catch {{ Write-Host \"[!] $_\" }}",
-                "Stop-Transcript | Out-Null",
-            ]), new UTF8Encoding(true), ct);
+            };
+
+            if (disableSmartAppControl) wrapper.Add(DisableSmartAppControlStep);
+
+            wrapper.Add($"$AppID = '{appId}'");
+            // Section 6 of the script: pins the game to its installed build so a Steam update
+            // cannot wipe the activation.
+            wrapper.Add($"$LockVersion = ${(lockVersion ? "true" : "false")}");
+            wrapper.Add($"try {{ . '{Escape(scriptPath)}' }} catch {{ Write-Host \"[!] $_\" }}");
+            wrapper.Add("Stop-Transcript | Out-Null");
+
+            await File.WriteAllTextAsync(wrapperPath, string.Join("\r\n", wrapper), new UTF8Encoding(true), ct);
 
             return await Task.Run(async () =>
             {
                 var psi = new ProcessStartInfo(PowerShellPath())
                 {
-                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -NonInteractive -File \"{wrapperPath}\"",
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -NonInteractive -WindowStyle Hidden -File \"{wrapperPath}\"",
                     // Elevation and redirection are mutually exclusive; this is why the transcript exists.
                     UseShellExecute = true,
                     Verb = "runas",
+                    // No console. The script's output already reaches the app through the transcript
+                    // this tails, so the window showed nothing the page doesn't. Hidden on both the
+                    // ShellExecute side (WindowStyle) and PowerShell's own -WindowStyle, since one
+                    // without the other still flashes a console.
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
                     WorkingDirectory = RunDir,
                 };
 

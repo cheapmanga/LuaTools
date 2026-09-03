@@ -668,9 +668,9 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Hra</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Zamknout verzi</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Připne hru k nainstalovanému buildu, aby aktualizace Steamu nesmazala aktivaci.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Toto spuštění nahraje report</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skript sesbírá tvůj MachineGuid, sériové číslo disku, MAC adresy, veřejnou IP, údaje o hardwaru a obsah složky hry a nahraje je na paste.rtech.support. Kód D-Report, který dostaneš, je veřejná adresa té stránky: kdokoli, komu ho dáš, si všechno přečte.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Rozumím, co se odesílá</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Toto spuštění nahraje report a vypne Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Spuštění udělá dvě věci. Skript nahraje report — tvůj MachineGuid, sériové číslo disku, MAC adresy, tvou veřejnou IP, hardware a obsah složky s hrou — na paste službu a kód D-Report, který dostaneš zpátky, je veřejná adresa té stránky, takže kdokoli, komu ho dáš, si to celé přečte. Zároveň vypne Smart App Control, který skript potřebuje vypnout: je to změna pro celý počítač, projeví se po restartu a Windows už Smart App Control nedokáže zapnout zpátky bez čisté přeinstalace.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Rozumím, včetně toho, že Smart App Control zůstane vypnutý natrvalo</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Spustit</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Běží. Potvrď výzvu ke zvýšení oprávnění a sleduj okno, které se otevře.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Hotovo.</value></data>
