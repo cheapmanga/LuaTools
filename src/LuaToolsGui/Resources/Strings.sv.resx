@@ -713,4 +713,8 @@ Vill du lösa in den ändå?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Den gratis källan har inga nycklar för det här spelet.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Det här spelet finns inte i den gratis källan.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hämta med lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Använd botens kod</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Skickade du din D-Report till boten? Klistra in koden den svarade med här för att skriva biljetterna till Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kod från boten</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Använd</value></data>
 </root>

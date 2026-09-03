@@ -713,4 +713,8 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>무료 소스에 이 게임의 키가 없어.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>이 게임은 무료 소스에 없어.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>lua.tools로 가져오기</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>bot 코드 적용</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>D-Report를 bot에 보냈어? 답장으로 받은 코드를 여기에 붙여넣어서 티켓을 Steam에 기록해.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>bot이 보낸 코드</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>적용</value></data>
 </root>

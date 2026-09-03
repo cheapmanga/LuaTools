@@ -29,7 +29,8 @@ public record InstalledGame(long AppId, string Name)
 /// which the script needs and which Windows will not turn back on without a clean reinstall. The
 /// checkbox names both; consent is what carries the second into <see cref="DevuvoService"/>.</para>
 /// </remarks>
-public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryService library, ToastService toast)
+public partial class ValidatorViewModel(
+    DevuvoService devuvo, SteamLibraryService library, TokeerService tokeer, ToastService toast)
     : ObservableObject
 {
     // What the script prints for a UI to read. All of them are optional: a script version that stops
@@ -188,6 +189,68 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
         catch
         {
             // The clipboard can be held by another process. The code is on screen either way.
+        }
+    }
+
+    // ── Apply the code the bot sends back ────────────────────────────
+    // The Denuvo round-trip is: run above → send the D-Report code to the bot → the bot replies with a
+    // code → apply it here. That last step is a Tokeer redeem (writes the tickets into Steam), brought
+    // onto this page so the whole flow lives in one place instead of in a separate app.
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ApplyBotCodeCommand))]
+    [NotifyPropertyChangedFor(nameof(NotApplying))]
+    private bool _isApplying;
+
+    public bool NotApplying => !IsApplying;
+
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ApplyBotCodeCommand))]
+    private string _botCode = "";
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasApplyStatus))]
+    private string _applyStatus = "";
+
+    [ObservableProperty] private bool _applyIsError;
+
+    public bool HasApplyStatus => ApplyStatus.Length > 0;
+
+    private bool CanApplyBotCode() => !IsApplying && BotCode.Trim().Length > 0;
+
+    [RelayCommand(CanExecute = nameof(CanApplyBotCode))]
+    private async Task ApplyBotCode()
+    {
+        IsApplying = true;
+        ApplyStatus = "";
+
+        try
+        {
+            var result = await tokeer.RedeemAsync(BotCode);
+            ApplyIsError = !result.Ok;
+            if (result.Ok)
+            {
+                ApplyStatus = string.Format(Resources.Strings.Tokeer_Redeemed_Body, result.AppId);
+                toast.Show(Resources.Strings.Tokeer_Redeemed_Title, ApplyStatus);
+                BotCode = "";
+            }
+            else
+            {
+                // The store's own reason when it gave one (already used, wrong machine, expired…).
+                ApplyStatus = string.IsNullOrWhiteSpace(result.Error)
+                    ? Resources.Strings.Tokeer_Err_Refused
+                    : result.Error!;
+            }
+        }
+        catch (Exception)
+        {
+            // Nothing may escape an async command: there is no handler above it.
+            ApplyIsError = true;
+            ApplyStatus = Resources.Strings.Tokeer_Err_Unreachable;
+        }
+        finally
+        {
+            IsApplying = false;
         }
     }
 }

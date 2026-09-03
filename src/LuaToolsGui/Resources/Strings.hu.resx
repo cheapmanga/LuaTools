@@ -713,4 +713,8 @@ Mégis beváltod?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Az ingyenes forrásban nincsenek kulcsok ehhez a játékhoz.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Ez a játék nincs benne az ingyenes forrásban.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Letöltés lua.tools-szal</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Alkalmazd a bot kódját</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Elküldted a D-Reportot a botnak? Illeszd be ide a kódot, amit válaszolt, hogy beírjuk a jegyeket a Steambe.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kód a bottól</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Alkalmaz</value></data>
 </root>

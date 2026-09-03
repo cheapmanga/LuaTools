@@ -713,4 +713,8 @@ Vẫn đổi chứ?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Nguồn miễn phí không có key cho game này.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Game này không có trong nguồn miễn phí.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Lấy bằng lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Áp dụng mã của bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Đã gửi D-Report cho bot chưa? Dán mã nó trả lời vào đây để ghi vé vào Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Mã từ bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Áp dụng</value></data>
 </root>

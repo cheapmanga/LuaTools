@@ -713,4 +713,8 @@ Vil du indløse den alligevel?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Den gratis kilde har ingen nøgler til dette spil.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dette spil findes ikke i den gratis kilde.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hent med lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Brug bottens kode</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Har du sendt din D-Report til bot'en? Indsæt koden, den svarede med, her for at skrive billetterne ind i Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kode fra bot'en</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Brug</value></data>
 </root>

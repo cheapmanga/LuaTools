@@ -713,4 +713,8 @@ Lunastetaanko silti?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Ilmaisessa lähteessä ei ole avaimia tälle pelille.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tätä peliä ei ole ilmaisessa lähteessä.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hae lua.toolsilla</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Käytä botin koodia</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Lähetitkö D-Reportin botille? Liitä tähän koodi, jonka se vastasi, niin kirjoitetaan liput Steamiin.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Koodi botilta</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Käytä</value></data>
 </root>

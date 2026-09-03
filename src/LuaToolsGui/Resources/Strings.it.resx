@@ -713,4 +713,8 @@ Riscattarlo lo stesso?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>La fonte gratuita non ha chiavi per questo gioco.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Questo gioco non è nella fonte gratuita.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Scarica con lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Applica il codice del bot</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Hai mandato il tuo D-Report al bot? Incolla qui il codice che ti ha risposto per scrivere i ticket in Steam.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Codice dal bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Applica</value></data>
 </root>

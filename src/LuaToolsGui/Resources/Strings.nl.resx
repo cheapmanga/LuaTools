@@ -713,4 +713,8 @@ Toch inwisselen?</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>De gratis bron heeft geen keys voor dit spel.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dit spel zit niet in de gratis bron.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Ophalen via lua.tools</value></data>
+  <data name="Val_Apply_Header" xml:space="preserve"><value>Pas de code van de bot toe</value></data>
+  <data name="Val_Apply_Body" xml:space="preserve"><value>Je D-Report naar de bot gestuurd? Plak hier de code die je terugkreeg om de tickets in Steam te schrijven.</value></data>
+  <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code van de bot</value></data>
+  <data name="Val_Apply_Action" xml:space="preserve"><value>Toepassen</value></data>
 </root>
