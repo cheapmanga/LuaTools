@@ -38,6 +38,21 @@ It has to be a separate process: `steamclient.dll` is 32-bit and cannot be loade
 and Steam binds one app id per connection. The helper targets .NET Framework 4.8, which is part of
 Windows, so there is nothing extra to install.
 
+## Free sources
+
+Fetching a game on the **Add** page lists its manifest sources, and the top rows are the free ones —
+badged **No limit**, needing no account and no daily cap:
+
+- **ManifestHub** builds the lua locally from the public [depot-key database](https://github.com/SteamAutoCracks/ManifestHub)
+  plus Steam's own depot list, unlocking the base game, its DLCs and its soundtracks.
+- **Sushi** pulls a full manifest zip (lua + `.manifest`) from its public
+  [game repo](https://github.com/sushi-dev55-alt/sushitools-games-repo-alt), so it can also cover
+  pinned builds a keys-only source can't.
+
+Both install exactly as a lua.tools manifest does. When neither free source has a game, a banner
+offers to fetch it with lua.tools instead (which uses your account and its 25/day cap). The lua.tools
+rows stay in the list, showing their real used/limit count.
+
 ## Fixes after a Fetch
 
 Fetching a game on the **Add** page also checks whether it has published fixes. When it does, a banner
