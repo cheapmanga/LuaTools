@@ -246,14 +246,13 @@ public class PluginAddService(
     {
         try
         {
-            var usageTask = api.GetStandardUsageAsync();
-            var supporterTask = api.GetSupporterStatusAsync();
-            await Task.WhenAll(usageTask, supporterTask);
-            var usage = usageTask.Result;
-            bool isSupporter = supporterTask.Result?.IsSupporter == true;
+            var usage = await api.GetStandardUsageAsync();
+            // Fork choice: the usage label always reads "Unlimited". Cosmetic only - the flag never
+            // gated anything, so the /api/me/supporter-status call is dropped rather than ignored. The
+            // real cap is counted server-side and is unaffected; this only changes what the row shows.
             foreach (var r in rows.Where(r => !r.NeedsKey))
                 if (usage is not null)
-                    r.Stats = isSupporter ? $"{usage.Used} / Unlimited" : $"{usage.Used}/{usage.Limit}";
+                    r.Stats = $"{usage.Used} / {Resources.Strings.Add_Unlimited}";
         }
         catch { }
     }
