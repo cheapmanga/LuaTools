@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Ένας κωδικός μπορεί να χρησιμοποιηθεί μόνο μία φορά και το κατάστημα τον καταναλώνει τη στιγμή που τον εξαργυρώνεις. Χωρίς ενεργή λειτουργία, τα tickets που γράφει μπορεί να μην κάνουν τίποτα και ο κωδικός θα χαθεί οριστικά.
 
 Να γίνει εξαργύρωση ούτως ή άλλως;</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Χωρίς όριο</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Η δωρεάν πηγή δεν είναι διαθέσιμη τώρα. Δοκίμασε μια πηγή lua.tools παρακάτω.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Η δωρεάν πηγή δεν έχει κλειδιά για αυτό το παιχνίδι.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Αυτό το παιχνίδι δεν υπάρχει στη δωρεάν πηγή.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Λήψη μέσω lua.tools</value></data>
 </root>

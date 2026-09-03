@@ -25,7 +25,8 @@ public class ManifestJobFactory(
     DepotDownloaderService depotTool,
     SteamDepotInfo depotInfo,
     SteamAutoCrackService sac,
-    PrivateDotnetRuntime privateRuntime)
+    PrivateDotnetRuntime privateRuntime,
+    ManifestHubService manifestHub)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -47,6 +48,32 @@ public class ManifestJobFactory(
             (_, progress, ct) => needsKey
                 ? hubcap.DownloadManifestAsync(appId.ToString(), settings.HubcapApiKey ?? "", progress, ct)
                 : api.DownloadManifestAsync(appId.ToString(), sourceName, gameName, progress, ct),
+            (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
+            confirm,
+            onFinished,
+            onReveal);
+    }
+
+    /// <summary>
+    /// A manifest from the free ManifestHub source: the lua is built locally from public depot keys, so
+    /// the fetch step touches no account and no daily cap. Everything after it - the overwrite diff, the
+    /// install, the banner - is the exact same path a lua.tools manifest takes.
+    /// </summary>
+    public DownloadJob CreateManifestHubJob(
+        long appId, string? gameName,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        string title = gameName ?? appId.ToString();
+        return new DownloadJob(
+            DownloadKind.Manifest,
+            $"manifest:{appId}",
+            appId,
+            title,
+            "ManifestHub",
+            covers.GetLocalPath(appId),
+            (_, _, ct) => manifestHub.BuildLuaAsync(appId, ct),
             (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
             confirm,
             onFinished,

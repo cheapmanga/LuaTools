@@ -710,4 +710,9 @@ Peruuta - jatka lataamista</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Koodin voi käyttää vain kerran, ja kauppa kuluttaa sen heti kun lunastat sen. Ilman käytössä olevaa tilaa sen kirjoittamat tiketit eivät ehkä tee mitään ja koodi menetetään lopullisesti.
 
 Lunastetaanko silti?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Ei rajaa</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Ilmaiseen lähteeseen ei saada yhteyttä juuri nyt. Kokeile lua.tools-lähdettä alta.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Ilmaisessa lähteessä ei ole avaimia tälle pelille.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tätä peliä ei ole ilmaisessa lähteessä.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hae lua.toolsilla</value></data>
 </root>

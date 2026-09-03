@@ -710,4 +710,9 @@ Anulare - continuă descărcarea</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un cod poate fi folosit o singură dată, iar magazinul îl consumă în clipa în care îl revendici. Fără un mod activ, tichetele pe care le scrie s-ar putea să nu facă nimic, iar codul se pierde definitiv.
 
 Îl revendici oricum?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Fără limită</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Sursa gratuită nu e accesibilă acum. Încearcă o sursă lua.tools mai jos.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Sursa gratuită nu are chei pentru jocul ăsta.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Jocul ăsta nu e în sursa gratuită.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Descarcă cu lua.tools</value></data>
 </root>

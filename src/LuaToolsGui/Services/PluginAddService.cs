@@ -247,12 +247,11 @@ public class PluginAddService(
         try
         {
             var usage = await api.GetStandardUsageAsync();
-            // Fork choice: the usage label always reads "Unlimited". Cosmetic only - the flag never
-            // gated anything, so the /api/me/supporter-status call is dropped rather than ignored. The
-            // real cap is counted server-side and is unaffected; this only changes what the row shows.
+            // The real lua.tools daily figure. The "Unlimited" label belongs to the free source on the
+            // Add page, not here: this plugin row is the lua.tools count, shown honestly.
             foreach (var r in rows.Where(r => !r.NeedsKey))
                 if (usage is not null)
-                    r.Stats = $"{usage.Used} / {Resources.Strings.Add_Unlimited}";
+                    r.Stats = $"{usage.Used}/{usage.Limit}";
         }
         catch { }
     }

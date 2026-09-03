@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>โค้ดใช้ได้แค่ครั้งเดียว และร้านค้าจะตัดใช้งานทันทีที่คุณแลก ถ้าไม่มีโหมดไหนเปิดอยู่ ตั๋วที่มันเขียนลงไปอาจไม่มีผลอะไรเลย แล้วโค้ดก็หายไปอย่างถาวร
 
 จะแลกต่อเลยไหม?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>ไม่จำกัด</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>ตอนนี้เข้าถึงแหล่งฟรีไม่ได้ ลองแหล่ง lua.tools ด้านล่างดู</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>แหล่งฟรีไม่มีคีย์สำหรับเกมนี้</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>เกมนี้ไม่มีในแหล่งฟรี</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>ดึงด้วย lua.tools</value></data>
 </root>

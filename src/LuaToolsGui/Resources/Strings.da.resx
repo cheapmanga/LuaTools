@@ -710,4 +710,9 @@ Annuller - fortsæt download</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>En kode kan kun bruges én gang, og butikken bruger den i det øjeblik, du indløser den. Uden en aktiv tilstand gør de tickets, den skriver, måske ingenting, og koden er tabt for altid.
 
 Vil du indløse den alligevel?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Ingen grænse</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Den gratis kilde kan ikke nås lige nu. Prøv en lua.tools-kilde nedenfor.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Den gratis kilde har ingen nøgler til dette spil.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dette spil findes ikke i den gratis kilde.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hent med lua.tools</value></data>
 </root>

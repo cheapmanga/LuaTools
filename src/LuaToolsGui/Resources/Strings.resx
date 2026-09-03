@@ -745,4 +745,9 @@ Cancel - keep downloading</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>A code can only be used once, and the store spends it the moment you redeem. With no mode active, the tickets it writes may do nothing and the code is gone for good.
 
 Redeem anyway?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>No limit</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>The free source can't be reached right now. Try a lua.tools source below.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>The free source has no keys for this game.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>This game isn't in the free source.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Fetch with lua.tools</value></data>
 </root>

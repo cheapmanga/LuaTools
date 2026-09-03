@@ -710,4 +710,9 @@ Hayır - durdur ama dosyaları koru
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Bir kod yalnızca bir kez kullanılabilir ve mağaza kodu kullandığın anda harcar. Etkin bir mod yokken yazdığı biletler hiçbir işe yaramayabilir ve kod tamamen kaybolur.
 
 Yine de kullanmak ister misin?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Sınır yok</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Ücretsiz kaynağa şu an ulaşılamıyor. Aşağıdan bir lua.tools kaynağı dene.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Ücretsiz kaynakta bu oyun için anahtar yok.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Bu oyun ücretsiz kaynakta yok.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>lua.tools ile getir</value></data>
 </root>

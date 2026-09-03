@@ -466,6 +466,36 @@
                 </Grid>
             </Border>
 
+            <!-- Free source (default) doesn't have this game: offer to switch to lua.tools. Amber, as a
+                 heads-up rather than an error - the paid rows below can still get it. -->
+            <Border
+                Margin="0,12,0,0"
+                Padding="12,10"
+                Background="#14f59e0b"
+                BorderBrush="#40f59e0b"
+                BorderThickness="1"
+                CornerRadius="8"
+                Visibility="{Binding ShowFreeUnavailable, Converter={StaticResource BoolToVis}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{x:Static res:Strings.Free_Unavailable_Notice}"
+                        TextWrapping="Wrap" />
+                    <ui:Button
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Command="{Binding FetchWithLuaToolsCommand}"
+                        Content="{x:Static res:Strings.Free_Unavailable_Action}"
+                        Icon="{ui:SymbolIcon ArrowDownload24}" />
+                </Grid>
+            </Border>
+
             <!-- Manifest sources -->
             <ItemsControl
                 Margin="0,12,0,0"

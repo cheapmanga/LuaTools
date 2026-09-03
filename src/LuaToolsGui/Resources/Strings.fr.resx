@@ -710,4 +710,9 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un code ne peut servir qu'une seule fois, et la boutique le consomme dès que tu le valides. Sans mode actif, les tickets qu'il écrit risquent de ne rien faire et le code sera perdu pour de bon.
 
 Valider quand même ?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Sans limite</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>La source gratuite est injoignable pour le moment. Essaie une source lua.tools ci-dessous.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>La source gratuite n'a pas de clés pour ce jeu.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Ce jeu n'est pas dans la source gratuite.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Récupérer via lua.tools</value></data>
 </root>

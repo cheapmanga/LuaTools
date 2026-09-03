@@ -710,4 +710,9 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Een code kun je maar één keer gebruiken en de store verbruikt hem zodra je hem inwisselt. Zonder actieve modus doen de tickets die hij schrijft misschien niets en ben je de code voorgoed kwijt.
 
 Toch inwisselen?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Geen limiet</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>De gratis bron is nu niet bereikbaar. Probeer hieronder een lua.tools-bron.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>De gratis bron heeft geen keys voor dit spel.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Dit spel zit niet in de gratis bron.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Ophalen via lua.tools</value></data>
 </root>

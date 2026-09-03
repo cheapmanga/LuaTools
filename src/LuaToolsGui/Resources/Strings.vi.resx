@@ -710,4 +710,9 @@ Hủy - tiếp tục tải</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Mỗi mã chỉ dùng được một lần, và cửa hàng sẽ tiêu mã ngay khi bạn đổi. Nếu không có chế độ nào đang bật, các ticket mà nó ghi ra có thể chẳng làm gì cả và mã thì mất vĩnh viễn.
 
 Vẫn đổi chứ?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Không giới hạn</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Không truy cập được nguồn miễn phí lúc này. Thử nguồn lua.tools bên dưới.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>Nguồn miễn phí không có key cho game này.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Game này không có trong nguồn miễn phí.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Lấy bằng lua.tools</value></data>
 </root>

@@ -710,4 +710,9 @@
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Код можно использовать только один раз, и магазин расходует его в момент активации. Без активного режима записанные тикеты могут ничего не дать, а код пропадёт навсегда.
 
 Всё равно активировать?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Без лимита</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>Бесплатный источник сейчас недоступен. Попробуй источник lua.tools ниже.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>В бесплатном источнике нет ключей для этой игры.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Этой игры нет в бесплатном источнике.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Получить через lua.tools</value></data>
 </root>

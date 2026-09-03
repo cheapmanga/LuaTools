@@ -710,4 +710,9 @@ Annulla - continua a scaricare</value></data>
   <data name="Tokeer_Warn_NoMode_Body" xml:space="preserve"><value>Un codice si può usare una sola volta e il negozio lo consuma nel momento in cui lo riscatti. Senza una modalità attiva, i ticket che scrive potrebbero non fare nulla e il codice andrà perso per sempre.
 
 Riscattarlo lo stesso?</value></data>
+  <data name="Free_NoLimit" xml:space="preserve"><value>Nessun limite</value></data>
+  <data name="Free_Err_Unavailable" xml:space="preserve"><value>La fonte gratuita non è raggiungibile adesso. Prova una fonte lua.tools qui sotto.</value></data>
+  <data name="Free_Err_NoKeys" xml:space="preserve"><value>La fonte gratuita non ha chiavi per questo gioco.</value></data>
+  <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Questo gioco non è nella fonte gratuita.</value></data>
+  <data name="Free_Unavailable_Action" xml:space="preserve"><value>Scarica con lua.tools</value></data>
 </root>
