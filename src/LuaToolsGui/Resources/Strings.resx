@@ -703,9 +703,9 @@ Cancel - keep downloading</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Game</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Lock the version</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Pins the game to its installed build, so a Steam update can't wipe the activation.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>This run uploads a report</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>The script collects your MachineGuid, disk serial, MAC addresses, public IP, hardware and the game folder's contents, and uploads them to paste.rtech.support. The D-Report code you get back is that page's public address: anyone you give it to can read all of it.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>I understand what is sent</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>This run uploads a report and turns off Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Running does two things. The script uploads a report — your MachineGuid, disk serial, MAC addresses, public IP, hardware and the game folder's contents — to a paste service, and the D-Report code you get back is that page's public address, so anyone you give it to can read all of it. It also turns Smart App Control off, which the script needs: that is a machine-wide change, it takes effect after a reboot, and Windows cannot turn Smart App Control back on without a clean reinstall.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>I understand, including that Smart App Control will be turned off for good</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Run</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Running. Approve the elevation prompt, then watch the window it opens.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Finished.</value></data>

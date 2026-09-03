@@ -668,9 +668,9 @@ Peruuta - jatka lataamista</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Peli</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Lukitse versio</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Kiinnittää pelin asennettuun versioon, jottei Steam-päivitys pyyhi aktivointia.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Tämä ajo lähettää raportin</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skripti kerää MachineGuidin, levyn sarjanumeron, MAC-osoitteet, julkisen IP-osoitteen, laitetiedot ja pelikansion sisällön ja lähettää ne osoitteeseen paste.rtech.support. Saamasi D-Report-koodi on kyseisen sivun julkinen osoite: kuka tahansa jolle sen annat voi lukea kaiken.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Ymmärrän mitä lähetetään</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Tämä ajo lähettää raportin ja kytkee Smart App Controlin pois päältä</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Ajo tekee kaksi asiaa. Skripti lähettää raportin — MachineGuid-tunnuksesi, levyn sarjanumeron, MAC-osoitteet, julkisen IP-osoitteesi, laitteistotiedot ja pelikansion sisällön — paste-palveluun, ja saamasi D-Report-koodi on sen sivun julkinen osoite, joten kuka tahansa, jolle annat koodin, näkee kaiken tuon. Lisäksi se kytkee Smart App Controlin pois päältä, mitä skripti vaatii: se on koko konetta koskeva muutos, se tulee voimaan uudelleenkäynnistyksen jälkeen, eikä Windows saa Smart App Controlia enää päälle ilman puhdasta uudelleenasennusta.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ymmärrän, myös sen että Smart App Control jää pysyvästi pois päältä</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Suorita</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Käynnissä. Hyväksy käyttöoikeuskysely ja seuraa sitten avautuvaa ikkunaa.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Valmis.</value></data>

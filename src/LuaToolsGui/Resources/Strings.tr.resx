@@ -668,9 +668,9 @@ Hayır - durdur ama dosyaları koru
   <data name="Val_Game" xml:space="preserve"><value>Oyun</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Sürümü kilitle</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Oyunu kurulu sürümüne sabitler, böylece bir Steam güncellemesi etkinleştirmeyi silemez.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Bu çalıştırma bir rapor yükler</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Betik; MachineGuid'ini, disk seri numaranı, MAC adreslerini, genel IP'ni, donanımını ve oyun klasörünün içeriğini toplayıp paste.rtech.support adresine yükler. Aldığın D-Report kodu o sayfanın herkese açık adresidir: kodu verdiğin herkes bunların hepsini okuyabilir.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Neyin gönderildiğini anlıyorum</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Bu çalıştırma bir rapor yükler ve Smart App Control'ü kapatır</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Çalıştırmak iki şey yapar. Betik bir raporu — MachineGuid değerini, disk seri numaranı, MAC adreslerini, genel IP adresini, donanımını ve oyun klasörünün içeriğini — bir paste servisine yükler ve geri aldığın D-Report kodu o sayfanın herkese açık adresidir, yani kodu verdiğin herkes bunların hepsini okuyabilir. Ayrıca betiğin ihtiyaç duyduğu için Smart App Control'ü kapatır: bu, makinenin tamamını etkileyen bir değişikliktir, yeniden başlattıktan sonra geçerli olur ve Windows temiz bir kurulum yapılmadan Smart App Control'ü geri açamaz.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Anlıyorum, Smart App Control'ün kalıcı olarak kapatılacağını da anlıyorum</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Çalıştır</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Çalışıyor. Yönetici izni istemini onayla, sonra açılan pencereyi izle.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Bitti.</value></data>

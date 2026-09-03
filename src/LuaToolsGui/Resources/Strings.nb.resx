@@ -668,9 +668,9 @@ Avbryt - fortsett nedlastingen</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Spill</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Lås versjonen</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Låser spillet til den installerte builden, så en Steam-oppdatering ikke sletter aktiveringen.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Denne kjøringen laster opp en rapport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skriptet samler inn MachineGuid, disk-serienummer, MAC-adresser, offentlig IP, maskinvare og innholdet i spillmappen, og laster alt opp til paste.rtech.support. D-Report-koden du får tilbake er den offentlige adressen til siden: alle du gir den til kan lese alt sammen.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Jeg forstår hva som sendes</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Denne kjøringen laster opp en rapport og slår av Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Kjøringen gjør to ting. Skriptet laster opp en rapport — MachineGuid-en din, serienummeret på disken, MAC-adresser, den offentlige IP-en din, maskinvaren og innholdet i spillmappa — til en paste-tjeneste, og D-Report-koden du får tilbake, er den offentlige adressen til den siden, så alle du gir den til, kan lese alt sammen. Det slår også av Smart App Control, som skriptet krever: det er en endring for hele maskinen, den trer i kraft etter en omstart, og Windows kan ikke slå Smart App Control på igjen uten en ren reinstallasjon.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Jeg forstår, også at Smart App Control blir slått av for godt</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Kjør</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Kjører. Godkjenn forespørselen om administratorrettigheter, og følg med på vinduet som åpnes.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Ferdig.</value></data>

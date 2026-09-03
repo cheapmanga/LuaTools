@@ -668,9 +668,9 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Jeu</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Verrouiller la version</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Fige le jeu sur sa version installée, pour qu'une mise à jour Steam n'efface pas l'activation.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Cette exécution téléverse un rapport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Le script collecte votre MachineGuid, le numéro de série du disque, vos adresses MAC, votre IP publique, votre matériel et le contenu du dossier du jeu, puis les téléverse sur paste.rtech.support. Le code D-Report que vous recevez est l'adresse publique de cette page : toute personne à qui vous le donnez peut tout lire.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>J'ai compris ce qui est envoyé</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Cette exécution envoie un rapport et désactive Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Lancer le script fait deux choses. Il envoie un rapport — ton MachineGuid, le numéro de série du disque, les adresses MAC, ton IP publique, ton matériel et le contenu du dossier du jeu — vers un service de paste, et le code D-Report que tu récupères est l'adresse publique de cette page : n'importe qui à qui tu le donnes peut tout lire. Il désactive aussi Smart App Control, dont le script a besoin : c'est un changement qui touche toute la machine, il prend effet après un redémarrage, et Windows ne peut pas réactiver Smart App Control sans une réinstallation propre.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>J'ai compris, y compris que Smart App Control sera désactivé définitivement</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Lancer</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>En cours. Acceptez la demande d'élévation, puis suivez la fenêtre qui s'ouvre.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Terminé.</value></data>

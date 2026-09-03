@@ -57,10 +57,12 @@ progress bar. The D-Report code it ends on is one click from your clipboard.
 The repair itself is `Devuvo.ps1`, this project's script, downloaded on every run — so fixes to the
 checks arrive without an app update, and nothing here is frozen at build time.
 
-It asks before it runs, and says why: the script uploads a machine report — MachineGuid, disk serial,
+It asks before it runs, and says why. The script uploads a machine report — MachineGuid, disk serial,
 MAC addresses, public IP, hardware, the game folder's contents — to a paste service, and the D-Report
-code **is that page's public address**. Anyone given the code can read the report. That was true of
-the standalone tool too; here it is on screen before you start.
+code **is that page's public address**, so anyone given the code can read the report. Running also
+turns **Smart App Control** off, which the script needs: a machine-wide change that takes effect after
+a reboot and that Windows cannot turn back on without a clean reinstall. The one consent checkbox names
+both, because neither can be undone.
 
 ## Tokeer
 

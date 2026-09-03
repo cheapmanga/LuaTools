@@ -668,9 +668,9 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Spel</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Versie vastzetten</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Zet het spel vast op de geïnstalleerde build, zodat een Steam-update de activatie niet wist.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Deze run uploadt een rapport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Het script verzamelt je MachineGuid, schijfserienummer, MAC-adressen, publieke IP, hardware en de inhoud van de spelmap, en uploadt dat naar paste.rtech.support. De D-Report-code die je terugkrijgt is het publieke adres van die pagina: iedereen aan wie je hem geeft, kan alles lezen.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Ik weet wat er verstuurd wordt</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Deze run uploadt een rapport en schakelt Smart App Control uit</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Uitvoeren doet twee dingen. Het script uploadt een rapport — je MachineGuid, het serienummer van je schijf, MAC-adressen, je publieke IP, je hardware en de inhoud van de spelmap — naar een paste-dienst, en de D-Report-code die je terugkrijgt is het openbare adres van die pagina, dus iedereen aan wie je hem geeft kan alles lezen. Het schakelt ook Smart App Control uit, wat het script nodig heeft: dat is een wijziging voor de hele machine, hij gaat in na een herstart, en Windows kan Smart App Control niet meer aanzetten zonder een schone herinstallatie.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Ik begrijp het, ook dat Smart App Control voorgoed uit blijft</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Uitvoeren</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Bezig. Ga akkoord met de beheerdersmelding en volg daarna het venster dat opent.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Klaar.</value></data>

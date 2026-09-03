@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>遊戲</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>鎖定版本</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>把遊戲固定在目前安裝的版本，避免 Steam 更新清除啟用狀態。</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>這次執行會上傳一份報告</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>指令碼會收集你的 MachineGuid、硬碟序號、MAC 位址、公用 IP、硬體資訊以及遊戲資料夾的內容，並上傳至 paste.rtech.support。你取得的 D-Report 代碼就是該頁面的公開網址：拿到代碼的人都能看到全部內容。</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>我了解將要傳送的內容</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>這次執行會上傳一份報告，並關閉 Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>執行會做兩件事。指令碼會把一份報告——你的 MachineGuid、硬碟序號、MAC 位址、公網 IP、硬體資訊以及遊戲資料夾的內容——上傳到 paste 服務，而你拿到的 D-Report 代碼就是那個頁面的公開網址，所以你把它給誰，對方就能看到全部內容。它還會關閉指令碼必須關掉的 Smart App Control：這是整台機器都會生效的變更，重新開機後生效，而且不重灌 Windows 就無法再把 Smart App Control 開回來。</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>我了解，也清楚 Smart App Control 將被永久關閉</value></data>
   <data name="Val_Run" xml:space="preserve"><value>執行</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>執行中。請允許權限提升提示，然後查看開啟的視窗。</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>已完成。</value></data>

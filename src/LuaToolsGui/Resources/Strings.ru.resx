@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>Игра</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Заблокировать версию</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Закрепляет игру на установленной сборке, чтобы обновление Steam не снесло активацию.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Этот запуск выгружает отчёт</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Скрипт собирает твой MachineGuid, серийный номер диска, MAC-адреса, публичный IP, данные о железе и содержимое папки с игрой, а затем выгружает всё на paste.rtech.support. Полученный код D-Report — это публичный адрес той страницы: любой, кому ты его дашь, увидит всё содержимое.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Я понимаю, что отправляется</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Этот запуск отправляет отчёт и отключает Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Запуск делает две вещи. Скрипт отправляет отчёт — твой MachineGuid, серийный номер диска, MAC-адреса, публичный IP, данные о железе и содержимое папки с игрой — на сервис для вставок, а код D-Report, который ты получаешь, — это публичный адрес той страницы, так что любой, кому ты его дашь, прочитает всё это. Ещё он отключает Smart App Control, без чего скрипт не работает: это изменение для всей машины, оно вступает в силу после перезагрузки, и Windows не сможет снова включить Smart App Control без чистой переустановки.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Я понимаю, в том числе что Smart App Control будет отключён навсегда</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Запустить</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Выполняется. Подтверди запрос прав администратора и следи за открывшимся окном.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Готово.</value></data>

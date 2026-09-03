@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>Гра</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Зафіксувати версію</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Закріплює гру на встановленому білді, щоб оновлення Steam не стерло активацію.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Цей запуск надсилає звіт</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Скрипт збирає твій MachineGuid, серійний номер диска, MAC-адреси, публічну IP, дані про залізо та вміст теки гри й вивантажує це на paste.rtech.support. Код D-Report, який ти отримаєш, — це публічна адреса тієї сторінки: будь-хто, кому ти його даси, прочитає все.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Розумію, що надсилається</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Цей запуск надсилає звіт і вимикає Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Запуск робить дві речі. Скрипт надсилає звіт — твій MachineGuid, серійний номер диска, MAC-адреси, публічний IP, дані про залізо та вміст теки з грою — на сервіс для вставок, а код D-Report, який ти отримуєш, — це публічна адреса тієї сторінки, тож будь-хто, кому ти його даси, прочитає все це. Ще він вимикає Smart App Control, чого скрипт і потребує: це зміна для всієї машини, вона діє після перезавантаження, і Windows не зможе увімкнути Smart App Control назад без чистого перевстановлення.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Я розумію, зокрема те, що Smart App Control буде вимкнено назавжди</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Запустити</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Виконується. Підтверди запит на права адміністратора й стеж за вікном, що відкриється.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Завершено.</value></data>

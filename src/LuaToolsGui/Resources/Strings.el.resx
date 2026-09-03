@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>Παιχνίδι</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Κλείδωμα έκδοσης</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Καρφιτσώνει το παιχνίδι στο εγκατεστημένο build, ώστε μια ενημέρωση του Steam να μη σβήσει την ενεργοποίηση.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Αυτή η εκτέλεση ανεβάζει αναφορά</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Το script συλλέγει το MachineGuid σου, τον σειριακό του δίσκου, τις διευθύνσεις MAC, τη δημόσια IP, το υλικό σου και τα περιεχόμενα του φακέλου του παιχνιδιού, και τα ανεβάζει στο paste.rtech.support. Ο κωδικός D-Report που παίρνεις είναι η δημόσια διεύθυνση αυτής της σελίδας: όποιος τον έχει μπορεί να τα δει όλα.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Καταλαβαίνω τι στέλνεται</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Αυτή η εκτέλεση ανεβάζει μια αναφορά και απενεργοποιεί το Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Η εκτέλεση κάνει δύο πράγματα. Το script ανεβάζει μια αναφορά — το MachineGuid σου, τον σειριακό αριθμό του δίσκου, τις διευθύνσεις MAC, τη δημόσια IP σου, το υλικό σου και τα περιεχόμενα του φακέλου του παιχνιδιού — σε μια υπηρεσία paste, και ο κωδικός D-Report που παίρνεις πίσω είναι η δημόσια διεύθυνση εκείνης της σελίδας, οπότε όποιος τον πάρει από σένα μπορεί να τα διαβάσει όλα. Επίσης απενεργοποιεί το Smart App Control, που το χρειάζεται το script: πρόκειται για αλλαγή σε όλο το μηχάνημα, ισχύει μετά από επανεκκίνηση και τα Windows δεν μπορούν να ξαναενεργοποιήσουν το Smart App Control χωρίς καθαρή επανεγκατάσταση.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Το καταλαβαίνω, καθώς και ότι το Smart App Control θα απενεργοποιηθεί οριστικά</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Εκτέλεση</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Εκτελείται. Ενέκρινε το αίτημα δικαιωμάτων και παρακολούθησε το παράθυρο που ανοίγει.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Ολοκληρώθηκε.</value></data>

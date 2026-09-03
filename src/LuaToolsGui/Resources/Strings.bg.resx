@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>Игра</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Заключи версията</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Закрепва играта към инсталирания билд, за да не изтрие обновление на Steam активацията.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Това пускане качва отчет</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Скриптът събира твоя MachineGuid, серийния номер на диска, MAC адресите, публичния IP, данните за хардуера и съдържанието на папката с играта и ги качва на paste.rtech.support. Кодът D-Report, който получаваш, е публичният адрес на тази страница: всеки, на когото го дадеш, може да прочете всичко.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Разбирам какво се изпраща</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Това изпълнение качва отчет и изключва Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Изпълнението прави две неща. Скриптът качва отчет — твоя MachineGuid, серийния номер на диска, MAC адресите, публичния ти IP, хардуера и съдържанието на папката с играта — в услуга за поставяне на текст, а кодът D-Report, който получаваш, е публичният адрес на тази страница, така че всеки, на когото го дадеш, може да прочете всичко. Освен това изключва Smart App Control, което скриптът изисква: това е промяна за цялата машина, влиза в сила след рестарт, а Windows не може да включи Smart App Control обратно без чиста преинсталация.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Разбирам, включително че Smart App Control ще остане изключен завинаги</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Пусни</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Изпълнява се. Потвърди заявката за администраторски права и следи прозореца, който се отваря.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Готово.</value></data>

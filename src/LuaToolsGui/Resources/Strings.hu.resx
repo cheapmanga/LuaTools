@@ -668,9 +668,9 @@ Mégse - letöltés folytatása</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Játék</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Verzió rögzítése</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>A játékot a telepített buildhez rögzíti, így egy Steam-frissítés nem törli az aktiválást.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Ez a futtatás jelentést tölt fel</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>A szkript összegyűjti a MachineGuid azonosítódat, a lemez sorozatszámát, a MAC-címeket, a nyilvános IP-t, a hardveradatokat és a játékmappa tartalmát, majd feltölti a paste.rtech.support oldalra. A kapott D-Report kód ennek az oldalnak a nyilvános címe: aki megkapja tőled, az mindent elolvashat.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Értem, mi kerül elküldésre</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Ez a futtatás feltölt egy jelentést és kikapcsolja a Smart App Control funkciót</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>A futtatás két dolgot csinál. A szkript feltölt egy jelentést — a MachineGuid azonosítódat, a lemez sorozatszámát, a MAC címeket, a publikus IP címedet, a hardvered adatait és a játékmappa tartalmát — egy paste szolgáltatásra, és a visszakapott D-Report kód annak az oldalnak a nyilvános címe, vagyis bárki, akinek odaadod, az egészet elolvashatja. Emellett kikapcsolja a Smart App Control funkciót, amire a szkriptnek szüksége van: ez az egész gépre kiterjedő változtatás, újraindítás után lép életbe, és a Windows tiszta újratelepítés nélkül nem tudja többé bekapcsolni a Smart App Control funkciót.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Értem, azt is, hogy a Smart App Control véglegesen ki lesz kapcsolva</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Futtatás</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Fut. Hagyd jóvá a rendszergazdai kérést, majd figyeld a megnyíló ablakot.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Kész.</value></data>

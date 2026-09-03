@@ -23,10 +23,11 @@ public record InstalledGame(long AppId, string Name)
 /// game is picked from the user's actual Steam library rather than typed as a number, and the run is
 /// gated behind a consent step that says what the report contains.</para>
 ///
-/// <para>That gate is not decoration. The script uploads a machine report - MachineGuid, disk serial,
-/// MAC addresses, public IP, the game's folder contents - to a paste service, and the "D-Report code"
-/// handed back is that paste's public address. Anyone given the code can read all of it. Nothing here
-/// can change what the script does, so the only honest thing to do is say so before it runs.</para>
+/// <para>That gate is not decoration. The run does two things the user cannot take back: it uploads a
+/// machine report - MachineGuid, disk serial, MAC addresses, public IP, the game's folder contents -
+/// to a paste service whose public address IS the D-Report code, and it turns Smart App Control off,
+/// which the script needs and which Windows will not turn back on without a clean reinstall. The
+/// checkbox names both; consent is what carries the second into <see cref="DevuvoService"/>.</para>
 /// </remarks>
 public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryService library, ToastService toast)
     : ObservableObject
@@ -52,7 +53,7 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
     /// <summary>Pins the game to its installed build, so a Steam update can't wipe the activation.</summary>
     [ObservableProperty] private bool _lockVersion;
 
-    /// <summary>Ticked by the user once they have read what the report sends.</summary>
+    /// <summary>Ticked once the user has read what the run uploads and that it turns Smart App Control off.</summary>
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(RunCommand))]
     private bool _consentGiven;
@@ -116,7 +117,9 @@ public partial class ValidatorViewModel(DevuvoService devuvo, SteamLibraryServic
 
         try
         {
-            var result = await devuvo.RunAsync(game.AppId, LockVersion, OnLine);
+            // Consent covers turning Smart App Control off as well as the report upload - the checkbox
+            // says so - and consent is required to reach here, so it is always the gate that is passed.
+            var result = await devuvo.RunAsync(game.AppId, LockVersion, ConsentGiven, OnLine);
             Status = result switch
             {
                 DevuvoRunResult.Finished => HasReportCode

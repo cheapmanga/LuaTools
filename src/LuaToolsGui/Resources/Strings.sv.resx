@@ -668,9 +668,9 @@ Avbryt - fortsätt hämta</value></data>
   <data name="Val_Game" xml:space="preserve"><value>Spel</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>Lås versionen</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>Låser spelet till den installerade bygget, så att en Steam-uppdatering inte raderar aktiveringen.</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>Den här körningen laddar upp en rapport</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>Skriptet samlar in din MachineGuid, diskserienummer, MAC-adresser, publika IP, hårdvara och innehållet i spelmappen och laddar upp allt till paste.rtech.support. D-Report-koden du får tillbaka är sidans publika adress: alla du ger den till kan läsa allt.</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>Jag förstår vad som skickas</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>Den här körningen laddar upp en rapport och stänger av Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>Körningen gör två saker. Skriptet laddar upp en rapport — din MachineGuid, diskens serienummer, MAC-adresser, din publika IP, din hårdvara och innehållet i spelmappen — till en paste-tjänst, och D-Report-koden du får tillbaka är den sidans offentliga adress, så alla du ger koden till kan läsa alltihop. Det stänger också av Smart App Control, vilket skriptet kräver: det är en ändring för hela datorn, den börjar gälla efter en omstart, och Windows kan inte slå på Smart App Control igen utan en ren ominstallation.</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>Jag förstår, även att Smart App Control stängs av för gott</value></data>
   <data name="Val_Run" xml:space="preserve"><value>Kör</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>Kör. Godkänn behörighetsdialogen och håll sedan koll på fönstret som öppnas.</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>Klart.</value></data>

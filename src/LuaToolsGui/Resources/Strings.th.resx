@@ -668,9 +668,9 @@
   <data name="Val_Game" xml:space="preserve"><value>เกม</value></data>
   <data name="Val_LockVersion" xml:space="preserve"><value>ล็อกเวอร์ชัน</value></data>
   <data name="Val_LockVersion_Hint" xml:space="preserve"><value>ตรึงเกมไว้ที่บิลด์ที่ติดตั้งอยู่ เพื่อไม่ให้การอัปเดตของ Steam ลบการเปิดใช้งานทิ้ง</value></data>
-  <data name="Val_Consent_Header" xml:space="preserve"><value>การรันครั้งนี้จะอัปโหลดรายงาน</value></data>
-  <data name="Val_Consent_Body" xml:space="preserve"><value>สคริปต์จะเก็บ MachineGuid, หมายเลขซีเรียลของดิสก์, ที่อยู่ MAC, IP สาธารณะ, ข้อมูลฮาร์ดแวร์ และเนื้อหาในโฟลเดอร์เกมของคุณ แล้วอัปโหลดไปยัง paste.rtech.support รหัส D-Report ที่ได้กลับมาคือที่อยู่สาธารณะของหน้านั้น ใครก็ตามที่คุณให้รหัสไปจะอ่านข้อมูลทั้งหมดได้</value></data>
-  <data name="Val_Consent_Check" xml:space="preserve"><value>ฉันเข้าใจว่าจะมีการส่งอะไรบ้าง</value></data>
+  <data name="Val_Consent_Header" xml:space="preserve"><value>การรันครั้งนี้จะอัปโหลดรายงานและปิด Smart App Control</value></data>
+  <data name="Val_Consent_Body" xml:space="preserve"><value>การรันจะทำสองอย่าง สคริปต์จะอัปโหลดรายงาน — MachineGuid ของคุณ หมายเลขซีเรียลของดิสก์ ที่อยู่ MAC, IP สาธารณะ ข้อมูลฮาร์ดแวร์ และเนื้อหาในโฟลเดอร์เกม — ไปยังบริการ paste และรหัส D-Report ที่ได้กลับมาก็คือที่อยู่สาธารณะของหน้านั้น ดังนั้นใครก็ตามที่คุณให้รหัสไป จะอ่านข้อมูลทั้งหมดได้ นอกจากนี้ยังปิด Smart App Control ซึ่งสคริปต์จำเป็นต้องให้ปิด นี่เป็นการเปลี่ยนแปลงที่มีผลกับทั้งเครื่อง จะมีผลหลังจากรีสตาร์ท และ Windows ไม่สามารถเปิด Smart App Control กลับมาได้อีกหากไม่ติดตั้งใหม่ทั้งหมด</value></data>
+  <data name="Val_Consent_Check" xml:space="preserve"><value>ฉันเข้าใจแล้ว รวมถึงว่า Smart App Control จะถูกปิดอย่างถาวร</value></data>
   <data name="Val_Run" xml:space="preserve"><value>รัน</value></data>
   <data name="Val_Status_Running" xml:space="preserve"><value>กำลังรัน อนุมัติคำขอสิทธิ์ผู้ดูแลระบบ แล้วดูหน้าต่างที่เปิดขึ้น</value></data>
   <data name="Val_Status_Done" xml:space="preserve"><value>เสร็จสิ้น</value></data>
