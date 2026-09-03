@@ -325,8 +325,6 @@ Isso exclui os arquivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>Buscar</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>Verificando…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>Mostrar</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>Ilimitado</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>Requer sua própria chave de API</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>Entre no Discord desta fonte</value></data>

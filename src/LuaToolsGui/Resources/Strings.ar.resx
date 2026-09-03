@@ -348,8 +348,6 @@
   <data name="Add_Fetch" xml:space="preserve"><value>جلب</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>جارٍ التحقق…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>إظهار</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>غير محدود</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>يتطلب مفتاح API خاصًا بك</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>انضم إلى Discord الخاص بهذا المصدر</value></data>

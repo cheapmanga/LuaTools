@@ -325,8 +325,6 @@ Spowoduje to usunięcie plików .lua z Steam\config\stplug-in.</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>Pobierz</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>Sprawdzanie…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>Pokaż</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>Nieograniczony</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>Wymaga własnego klucza API</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>Dołącz do Discorda tego źródła</value></data>

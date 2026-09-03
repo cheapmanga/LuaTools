@@ -38,7 +38,6 @@ public partial class SourceRowViewModel : ObservableObject
     private bool _isLocked;
 
     [ObservableProperty] private string? _statsText;
-    [ObservableProperty] private bool _isSupporter;
 
     /// <summary>The queue item for this row's in-flight download, if any. The row's progress bar binds
     /// straight through to it, so the queue stays the only owner of download state.</summary>

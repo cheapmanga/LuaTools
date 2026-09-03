@@ -343,8 +343,6 @@
   <data name="Add_Fetch" xml:space="preserve"><value>获取</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>正在检查…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>显示</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>无限制</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>需要你自己的 API 密钥</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>加入此来源的 Discord</value></data>

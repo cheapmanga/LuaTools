@@ -114,11 +114,6 @@ public class ApiError
 /// <summary>The lua.tools standard daily download usage (counted from user_downloads, limit 25/day).</summary>
 public record StandardUsage(int Used, int Limit);
 
-public class SupporterStatus
-{
-    [JsonPropertyName("isSupporter")] public bool IsSupporter { get; set; }
-}
-
 /// <summary>Response from /api/auth/code/redeem. A Discord bot login code exchanged for a magic-link token.</summary>
 public class CodeRedeemResponse
 {

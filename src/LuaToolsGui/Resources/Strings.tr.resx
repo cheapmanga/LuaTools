@@ -325,8 +325,6 @@ Bu, .lua dosyalarını Steam\config\stplug-in konumundan siler.</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>Getir</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>Denetleniyor…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>Göster</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>Sınırsız</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>Kendi API anahtarınızı gerektirir</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>Bu kaynağın Discord'una katılın</value></data>
