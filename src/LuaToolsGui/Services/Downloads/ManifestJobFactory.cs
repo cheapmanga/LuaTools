@@ -26,7 +26,8 @@ public class ManifestJobFactory(
     SteamDepotInfo depotInfo,
     SteamAutoCrackService sac,
     PrivateDotnetRuntime privateRuntime,
-    ManifestHubService manifestHub)
+    ManifestHubService manifestHub,
+    SushiService sushi)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -74,6 +75,31 @@ public class ManifestJobFactory(
             "ManifestHub",
             covers.GetLocalPath(appId),
             (_, _, ct) => manifestHub.BuildLuaAsync(appId, ct),
+            (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
+            confirm,
+            onFinished,
+            onReveal);
+    }
+
+    /// <summary>
+    /// A manifest from the free Sushi source: downloads the game's public <c>&lt;appid&gt;.zip</c> and installs
+    /// it through the same pipeline as any manifest zip. No account, no daily cap.
+    /// </summary>
+    public DownloadJob CreateSushiJob(
+        long appId, string? gameName,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        string title = gameName ?? appId.ToString();
+        return new DownloadJob(
+            DownloadKind.Manifest,
+            $"manifest:{appId}",
+            appId,
+            title,
+            SourceMeta.Get(SushiService.SourceName).DisplayName ?? "Sushi",
+            covers.GetLocalPath(appId),
+            (_, progress, ct) => sushi.DownloadZipAsync(appId, progress, ct),
             (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
             confirm,
             onFinished,

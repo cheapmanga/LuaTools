@@ -103,6 +103,11 @@ public static class AppConfig
     public const string DotnetRuntimeZipUrl = "https://aka.ms/dotnet/10.0/dotnet-runtime-win-x64.zip";
     public const string DotnetDesktopRuntimeZipUrl = "https://aka.ms/dotnet/10.0/windowsdesktop-runtime-win-x64.zip";
 
+    // Sushi: SteamTools' public game repo, one <appid>.zip per game. A free, account-free source that
+    // ships full manifest zips (lua + .manifest), unlike ManifestHub's keys-only database. Listed in
+    // lua.tools' own load_free_manifest_apis, so it is a source they consume too.
+    public const string SushiRawBase = "https://raw.githubusercontent.com/sushi-dev55-alt/sushitools-games-repo-alt/main";
+
     // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.
     // Powers the Depots page "Download" action.
     //
