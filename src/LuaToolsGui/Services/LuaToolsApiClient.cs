@@ -133,16 +133,6 @@ public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, Cove
         }
     }
 
-    public async Task<SupporterStatus?> GetSupporterStatusAsync(CancellationToken ct = default)
-    {
-        try
-        {
-            var res = await SendAsync(HttpMethod.Get, "/api/me/supporter-status", ct);
-            return await ReadJsonAsync<SupporterStatus>(res, ct);
-        }
-        catch { return null; }
-    }
-
     public async Task<DlcInfo?> GetDlcInfoAsync(string appid, string baseAppId, CancellationToken ct = default)
     {
         var res = await SendAsync(HttpMethod.Get, $"/api/dlc/info?appid={appid}&base={baseAppId}", ct);

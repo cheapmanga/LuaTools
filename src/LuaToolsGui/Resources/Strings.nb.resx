@@ -325,8 +325,6 @@ Dette sletter .lua-filene fra Steam\config\stplug-in.</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>Hent</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>Sjekker…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>Vis</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>Ubegrenset</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>Krever din egen API-nøkkel</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>Bli med i denne kildens Discord</value></data>

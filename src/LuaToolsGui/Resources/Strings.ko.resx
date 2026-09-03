@@ -325,8 +325,6 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Add_Fetch" xml:space="preserve"><value>가져오기</value></data>
   <data name="Add_Checking" xml:space="preserve"><value>확인 중…</value></data>
   <data name="Add_Reveal" xml:space="preserve"><value>표시</value></data>
-  <data name="Add_Supporter" xml:space="preserve"><value>Supporter</value></data>
-  <data name="Add_Unlimited" xml:space="preserve"><value>무제한</value></data>
   <data name="Add_RequiresOwnKey" xml:space="preserve"><value>본인의 API 키가 필요합니다</value></data>
   <data name="Add_Discord" xml:space="preserve"><value>Discord</value></data>
   <data name="Add_JoinDiscord" xml:space="preserve"><value>이 출처의 Discord에 참여</value></data>

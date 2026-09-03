@@ -310,8 +310,6 @@ public static class Strings
     public static string Add_Fetch => Get(nameof(Add_Fetch));
     public static string Add_Checking => Get(nameof(Add_Checking));
     public static string Add_Reveal => Get(nameof(Add_Reveal));
-    public static string Add_Supporter => Get(nameof(Add_Supporter));
-    public static string Add_Unlimited => Get(nameof(Add_Unlimited));
     public static string Add_RequiresOwnKey => Get(nameof(Add_RequiresOwnKey));
     public static string Add_Discord => Get(nameof(Add_Discord));
     public static string Add_JoinDiscord => Get(nameof(Add_JoinDiscord));

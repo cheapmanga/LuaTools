@@ -553,25 +553,6 @@
                                                 Foreground="#22c55e"
                                                 Text="{Binding StatsText}" />
                                         </Border>
-                                        <Border
-                                            Margin="4,0,0,0"
-                                            Padding="5,1"
-                                            Background="#20f59e0b"
-                                            CornerRadius="4"
-                                            Visibility="{Binding IsSupporter, Converter={StaticResource BoolToVis}}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <ui:SymbolIcon
-                                                    FontSize="10"
-                                                    Foreground="#f59e0b"
-                                                    Symbol="Star24" />
-                                                <TextBlock
-                                                    Margin="3,0,0,0"
-                                                    FontSize="10"
-                                                    FontWeight="SemiBold"
-                                                    Foreground="#f59e0b"
-                                                    Text="{x:Static res:Strings.Add_Supporter}" />
-                                            </StackPanel>
-                                        </Border>
                                     </StackPanel>
 
                                     <!-- Status badge -->
