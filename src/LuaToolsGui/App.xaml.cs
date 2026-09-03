@@ -32,6 +32,7 @@ public partial class App : Application
                 services.AddSingleton<AchievementHostService>();
                 services.AddSingleton<FixLookupService>();
                 services.AddSingleton<ManifestHubService>();
+                services.AddSingleton<SushiService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<TokeerAppService>();
                 services.AddSingleton<LuaToolsValidatorService>();

@@ -92,6 +92,7 @@ public partial class DownloadViewModel : ObservableObject
     private readonly HardwareAppIdService _hardware;
     private readonly FixLookupService _fixes;
     private readonly ManifestHubService _manifestHub;
+    private readonly SushiService _sushi;
     private readonly DownloadQueue _queue;
     private readonly ManifestJobFactory _jobs;
     private CancellationTokenSource? _searchCts;
@@ -369,7 +370,7 @@ public partial class DownloadViewModel : ObservableObject
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
         HardwareAppIdService hardware, FixLookupService fixes, ManifestHubService manifestHub,
-        DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs)
+        SushiService sushi, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs)
     {
         _api = api;
         _hubcap = hubcap;
@@ -383,6 +384,7 @@ public partial class DownloadViewModel : ObservableObject
         _hardware = hardware;
         _fixes = fixes;
         _manifestHub = manifestHub;
+        _sushi = sushi;
         _queue = queue;
         _jobs = jobs;
         Drop = drop;
@@ -699,29 +701,32 @@ public partial class DownloadViewModel : ObservableObject
     /// </remarks>
     private async Task AddFreeSourceAsync(long appId)
     {
-        bool available;
-        try
-        {
-            available = await _manifestHub.HasGameAsync(appId);
-        }
-        catch
-        {
-            available = false; // offline / lookup failed → fall back to the paid rows silently
-        }
+        // Two free sources, checked in parallel. Each covered one becomes a row on top of the paid
+        // list, labelled "No limit". ManifestHub is inserted last so it ends up first (the default).
+        bool sushiHas = await SafeHasAsync(_sushi.HasGameAsync(appId));
+        bool hubHas = await SafeHasAsync(_manifestHub.HasGameAsync(appId));
 
-        if (available)
-        {
-            var row = new SourceRowViewModel(this, ManifestHubService.SourceName, "available") { IsFree = true };
-            row.StatsText = Resources.Strings.Free_NoLimit;
-            Sources.Insert(0, row); // default: the free source sits on top
-            FreeSourceUnavailable = false;
-        }
-        else
-        {
-            // The notice AND its button share one condition: only surface the offer when there is a
-            // lua.tools row actually downloadable, so the banner never appears with a dead button.
-            FreeSourceUnavailable = Sources.Any(s => !s.IsFree && s.CanDownload);
-        }
+        if (sushiHas) InsertFreeRow(SushiService.SourceName);
+        if (hubHas) InsertFreeRow(ManifestHubService.SourceName);
+
+        // The notice AND its button share one condition: only offer to switch when no free source has
+        // the game AND a lua.tools row is actually downloadable, so the banner never shows a dead button.
+        FreeSourceUnavailable = !sushiHas && !hubHas && Sources.Any(s => !s.IsFree && s.CanDownload);
+    }
+
+    /// <summary>A HasGameAsync that never throws: a failed/offline lookup just means "not covered".</summary>
+    private static async Task<bool> SafeHasAsync(Task<bool> probe)
+    {
+        try { return await probe; }
+        catch { return false; }
+    }
+
+    /// <summary>Put a free source's row on top of the list, badged "No limit".</summary>
+    private void InsertFreeRow(string sourceName)
+    {
+        var row = new SourceRowViewModel(this, sourceName, "available") { IsFree = true };
+        row.StatsText = Resources.Strings.Free_NoLimit;
+        Sources.Insert(0, row);
     }
 
     /// <summary>Can we offer a lua.tools fallback - i.e. is a non-free source actually downloadable?</summary>
@@ -813,17 +818,28 @@ public partial class DownloadViewModel : ObservableObject
         Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm =
             _silentInstall ? null : (file, _, ct) => ConfirmOverwriteAsync(file, appId, gameName, ct);
 
-        var job = source.IsFree
-            ? _jobs.CreateManifestHubJob(
-                appId, gameName,
-                confirm: confirm,
-                onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
-                onReveal: () => NavigateToGame?.Invoke(appId))
-            : _jobs.CreateManifestJob(
+        DownloadJob job;
+        if (source.IsFree)
+        {
+            // Route to the matching free builder; both install through the same pipeline afterward.
+            job = source.Name == SushiService.SourceName
+                ? _jobs.CreateSushiJob(appId, gameName,
+                    confirm: confirm,
+                    onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                    onReveal: () => NavigateToGame?.Invoke(appId))
+                : _jobs.CreateManifestHubJob(appId, gameName,
+                    confirm: confirm,
+                    onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                    onReveal: () => NavigateToGame?.Invoke(appId));
+        }
+        else
+        {
+            job = _jobs.CreateManifestJob(
                 appId, gameName, source.Name, needsKey,
                 confirm: confirm,
                 onFinished: (item, result) => OnManifestFinished(item, result, needsKey),
                 onReveal: () => NavigateToGame?.Invoke(appId));
+        }
 
         var queued = _queue.Enqueue(job);
         source.QueueItem = queued;
