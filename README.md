@@ -1,5 +1,6 @@
 <p align="center">
-  <img height="336" alt="luatools" src="https://github.com/user-attachments/assets/54702ada-93a8-439b-ab3e-5cd73747ed46" />
+  <img width="1920" alt="lt" src="https://github.com/user-attachments/assets/658f539a-f4a9-4ad5-a3a2-6bb7aa6809bd" />
+
 </p>
 
 # LuaTools
