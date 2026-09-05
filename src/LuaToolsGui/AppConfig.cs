@@ -95,6 +95,19 @@ public static class AppConfig
     public const string DotnetRuntimeZipUrl = "https://aka.ms/dotnet/10.0/dotnet-runtime-win-x64.zip";
     public const string DotnetDesktopRuntimeZipUrl = "https://aka.ms/dotnet/10.0/windowsdesktop-runtime-win-x64.zip";
 
+    // ── ManifestHub depot-key database (the free ManifestHub source) ──────────────
+    // The flat depot-id → key map the free source builds its lua from. The FIRST url is the primary
+    // (upstream); any after it are FALLBACK mirrors, tried in order only when the one before is
+    // unreachable. Each url is still individually GithubProxy-mirrored for blocked regions (that handles
+    // "can't reach GitHub here"). The fallback slot is for the different failure the region mirrors can't
+    // fix: upstream being DMCA'd / removed ENTIRELY, where every region mirror would still point at a dead
+    // repo. Populate it with a raw depotkeys.json URL from a mirror we control; left empty = no fallback.
+    public static readonly string[] ManifestHubKeysUrls =
+    [
+        "https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/main/depotkeys.json", // primary (upstream)
+        // "https://raw.githubusercontent.com/<our-mirror>/ManifestHub/main/depotkeys.json", // fallback (ours)
+    ];
+
     // Sushi: SteamTools' public game repo, one <appid>.zip per game. A free, account-free source that
     // ships full manifest zips (lua + .manifest), unlike ManifestHub's keys-only database. Listed in
     // lua.tools' own load_free_manifest_apis, so it is a source they consume too.
