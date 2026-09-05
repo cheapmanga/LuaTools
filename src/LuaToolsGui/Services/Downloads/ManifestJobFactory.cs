@@ -24,6 +24,7 @@ public class ManifestJobFactory(
     ToastService toast,
     DepotDownloaderService depotTool,
     SteamDepotInfo depotInfo,
+    SteamAppInfoCache appInfo,
     SteamAutoCrackService sac,
     PrivateDotnetRuntime privateRuntime,
     ManifestHubService manifestHub,
@@ -92,9 +93,13 @@ public class ManifestJobFactory(
         {
             try
             {
+                // Union appinfo's listofdlc with the store's dlc list. The store list is what carries a
+                // dedicated Steam Soundtrack (music) app, which listofdlc omits - so the OST is added too.
                 var info = await depotInfo.GetAsync(appId, ct);
-                if (info is not null)
-                    installer.AddDlcEntitlements(appId, info.DlcIds);
+                var storeDlc = await appInfo.GetStoreDlcIdsAsync(appId, ct);
+                var dlcIds = (info?.DlcIds ?? []).Concat(storeDlc).Where(id => id > 0).Distinct().ToList();
+                if (dlcIds.Count > 0)
+                    installer.AddDlcEntitlements(appId, dlcIds);
             }
             catch { /* DLC augmentation is best-effort; the game itself is already installed */ }
         }

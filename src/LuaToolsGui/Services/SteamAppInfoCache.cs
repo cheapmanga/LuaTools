@@ -197,6 +197,33 @@ public class SteamAppInfoCache
         catch { return null; }
     }
 
+    /// <summary>
+    /// The app's store-listed DLC and soundtrack appids (the appdetails "dlc" array). This is the piece
+    /// the appinfo <c>listofdlc</c> misses: dedicated Steam Soundtrack (music) apps are NOT declared as
+    /// DLC of the base game, but the store DOES list them here — so the free sources add the OST too.
+    /// Fetches + caches the full blob on demand (throttled); empty on any failure.
+    /// </summary>
+    public async Task<IReadOnlyList<long>> GetStoreDlcIdsAsync(long appid, CancellationToken ct = default)
+    {
+        try
+        {
+            await EnsureFullDetailsAsync(appid, ct);
+            string? raw = GetFullDetails(appid);
+            if (raw is null) return [];
+
+            using var doc = JsonDocument.Parse(raw);
+            if (!doc.RootElement.TryGetProperty("dlc", out var dlc) || dlc.ValueKind != JsonValueKind.Array)
+                return [];
+
+            var ids = new List<long>();
+            foreach (var e in dlc.EnumerateArray())
+                if (e.TryGetInt64(out long id) && id > 0) ids.Add(id);
+            return ids;
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+        catch { return []; }
+    }
+
     /// <summary>Parse the cached full blob into the fields the Manage filters use. Null if not cached
     /// yet (the caller treats that as "details loading"). Memoized so repeated filters don't re-parse.</summary>
     public AppFilterData? GetFilterData(long appid)
