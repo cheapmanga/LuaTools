@@ -67,6 +67,12 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnFastFetchChanged(bool value) => _settings.FastFetch = value;
 
+    /// <summary>Block the normal fetch when a game's fix ships its own manifests, and offer the fix
+    /// instead (Add page). Persisted via SettingsService (default ON).</summary>
+    [ObservableProperty] private bool _blockFetchWhenFixManifests;
+
+    partial void OnBlockFetchWhenFixManifestsChanged(bool value) => _settings.BlockFetchWhenFixManifests = value;
+
     /// <summary>Donate spare Steam decryption keys to the community pool. Persisted via SettingsService.</summary>
     [ObservableProperty] private bool _donateKeys;
 
@@ -233,6 +239,7 @@ public partial class SettingsViewModel : ObservableObject
         RefreshSteam();
         _autoUpdateApps = settings.AutoUpdateApps; // init from saved value (default ON) without triggering Save
         _fastFetch = settings.FastFetch;
+        _blockFetchWhenFixManifests = settings.BlockFetchWhenFixManifests;
         _donateKeys = settings.DonateKeys;
         _startWithWindows = settings.StartWithWindows; // default OFF. Init without triggering the registry write
         _minimizeToTray = settings.MinimizeToTray;

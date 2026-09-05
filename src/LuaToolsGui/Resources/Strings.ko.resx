@@ -717,4 +717,9 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>D-Report를 bot에 보냈어? 답장으로 받은 코드를 여기에 붙여넣어서 티켓을 Steam에 기록해.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>bot이 보낸 코드</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>적용</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>이 게임의 fix에 manifest가 들어 있어 — 일반 소스 말고 fix로 추가해.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>fix로 추가</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>이 게임의 fix manifest를 찾지 못했어.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>fix manifest 우선</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>게임의 fix가 자체 manifest를 포함할 때(voices38, DenuvOwO, SteamTools Achievements) 일반 가져오기를 막고 fix로 추가해</value></data>
 </root>

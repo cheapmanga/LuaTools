@@ -142,8 +142,17 @@ public partial class DownloadViewModel : ObservableObject
     private GameDetails? _details;
 
     /// <summary>
-    /// Number of published fixes for the fetched game, filled in by <see cref="CheckFixesAsync"/> after
-    /// a Fetch. 0 hides the banner, which is also what a failed lookup leaves behind.
+    /// Fix categories whose fix SHIPS the game's manifests - you add the game THROUGH the fix, not via a
+    /// normal manifest source. Exact names from the listing's tag catalogue.
+    /// </summary>
+    private static readonly HashSet<string> ManifestFixCategories = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "voices38 (crack)", "DenuvOwO", "SteamTools Achievements Fix",
+    };
+
+    /// <summary>
+    /// Number of published fixes for the loaded game, filled in by <see cref="CheckFixesAsync"/> when the
+    /// game is loaded (before Fetch). 0 hides the banner, which is also what a failed lookup leaves behind.
     /// </summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasFix))]
@@ -155,7 +164,27 @@ public partial class DownloadViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(FixBannerText))]
     private string _fixTags = "";
 
+    /// <summary>
+    /// True when at least one of this game's fixes is a manifest-fix category (add-through-the-fix).
+    /// Drives whether the fetch is blocked and the "add via the fix" offer shows.
+    /// </summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BlockFetch))]
+    [NotifyPropertyChangedFor(nameof(ShowManifestFixOffer))]
+    [NotifyCanExecuteChangedFor(nameof(FetchCommand))]
+    [NotifyCanExecuteChangedFor(nameof(AddViaFixManifestsCommand))]
+    private bool _hasManifestFix;
+
     public bool HasFix => FixCount > 0;
+
+    /// <summary>
+    /// Block the normal manifest fetch: the setting is on AND this game has a manifest-fix. The fetch
+    /// button greys out and the banner offers to add the game through the fix instead.
+    /// </summary>
+    public bool BlockFetch => _settings.BlockFetchWhenFixManifests && HasManifestFix;
+
+    /// <summary>Show the "add via the fix" button on the banner (same condition as the block).</summary>
+    public bool ShowManifestFixOffer => BlockFetch;
 
     /// <summary>
     /// The banner sentence. The kinds are named when the listing gives them, because "a fix" says very
@@ -555,7 +584,7 @@ public partial class DownloadViewModel : ObservableObject
 
     // ── Fetch (sources or DLC info, depending on app type) ─────────
 
-    private bool CanFetch() => HasDetails && !IsChecking;
+    private bool CanFetch() => HasDetails && !IsChecking && !BlockFetch;
 
     [RelayCommand(CanExecute = nameof(CanFetch))]
     private async Task FetchAsync()
@@ -582,10 +611,12 @@ public partial class DownloadViewModel : ObservableObject
             }
             else
             {
-                // Independent of the source check, and deliberately not awaited: whether the game has a
-                // Denuvo fix has no bearing on fetching its manifest sources, and the banner showing a
-                // moment later is better than holding up the fetch.
-                _ = CheckFixesAsync(Details.AppId);
+                // Enforce the manifest-fix block HERE, not just via the button's CanExecute: the protocol
+                // and plugin paths call this command directly (bypassing CanExecute), and a manual click
+                // could land before the async fix check returns. Wait for that check, then bail if the
+                // game is a manifest-fix - the banner already offers "Add via the fix".
+                if (_fixCheck is { } fc) { try { await fc; } catch { /* offline: no block */ } }
+                if (BlockFetch) return;
 
                 var statuses = await _api.CheckSourcesAsync(Details.AppId.ToString());
 
@@ -651,8 +682,10 @@ public partial class DownloadViewModel : ObservableObject
             var summary = await _fixes.GetFixSummaryAsync(appId);
             if (Details?.AppId != appId) return; // user moved on. Drop it
 
+            var tags = summary?.Tags ?? [];
             FixCount = summary?.Count ?? 0;
-            FixTags = summary is null ? "" : string.Join(", ", summary.Tags);
+            FixTags = string.Join(", ", tags);
+            HasManifestFix = tags.Any(ManifestFixCategories.Contains);
         }
         catch
         {
@@ -660,11 +693,78 @@ public partial class DownloadViewModel : ObservableObject
         }
     }
 
+    /// <summary>Clear the fix banner state (a new game with no fixes, or none loaded).</summary>
+    private void ClearFixes()
+    {
+        FixCount = 0;
+        FixTags = "";
+        HasManifestFix = false;
+    }
+
+    /// <summary>
+    /// Check fixes as soon as a game loads, so the banner is up BEFORE the user reaches for Fetch. DLCs
+    /// have no fixes of their own, so they just clear it.
+    /// </summary>
+    /// <summary>The in-flight fix check for the current game, so Fetch can wait for it before deciding.</summary>
+    private Task? _fixCheck;
+
+    partial void OnDetailsChanged(GameDetails? value)
+    {
+        ClearFixes();
+        _fixCheck = value is { IsDlc: false } ? CheckFixesAsync(value.AppId) : null;
+    }
+
     /// <summary>Banner action: jump to the Fixes page with this game already open.</summary>
     [RelayCommand]
     private void OpenFixes()
     {
         if (Details is { } details) OpenFixesForGame?.Invoke(details.AppId);
+    }
+
+    /// <summary>Can we add this game through its fix? Only when a manifest-fix is what's blocking fetch.</summary>
+    private bool CanAddViaFixManifests() => BlockFetch && Details is not null;
+
+    /// <summary>
+    /// Add the game through its manifest-fix instead of a normal source: find the fix in a manifest
+    /// category, and queue its manifest slot (a force-locked lua install), same as the Fixes page does.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanAddViaFixManifests))]
+    private async Task AddViaFixManifests()
+    {
+        if (Details is not { } details) return;
+        if (await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return;
+
+        long appId = details.AppId;
+        string gameName = details.Name;
+        Error = null;
+
+        try
+        {
+            var fixes = await _api.GetDenuvoFixesAsync(appId.ToString());
+            // Prefer a manifest-bearing fix in a manifest-fix category; fall back to ANY manifest-bearing
+            // fix, so a game that's blocked on the tag but whose matching fix lacks a manifest isn't left
+            // stuck with no way in.
+            var fix = fixes?.Fixes.FirstOrDefault(f =>
+                          f.HasManifest && f.Tags.Any(t => ManifestFixCategories.Contains(t.Name)))
+                      ?? fixes?.Fixes.FirstOrDefault(f => f.HasManifest);
+
+            if (fix is null)
+            {
+                Error = Resources.Strings.Add_Fix_None;
+                return;
+            }
+
+            // 3rd arg is the fallback save name (used only if the URL carries none) - the manifest's own
+            // filename, not the human title.
+            var job = _jobs.CreateDenuvoJob(
+                fix.Id, "manifest", fix.ManifestFilename ?? $"{appId}.zip", appId, gameName, fix.Title,
+                onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false));
+            _lastEnqueued = _queue.Enqueue(job);
+        }
+        catch
+        {
+            Error = Resources.Strings.Add_Fix_None;
+        }
     }
 
     /// <summary>The Hubcap source name as the website/source-meta keys it.</summary>
@@ -1104,8 +1204,8 @@ public partial class DownloadViewModel : ObservableObject
         Error = null;
         LastDownload = null;
         _fastFetchSource = null;
-        FixCount = 0;
-        FixTags = "";
+        // Fix state is NOT reset here: it belongs to the loaded game (set in OnDetailsChanged), so the
+        // banner must survive a Fetch. It is cleared only when the game changes.
     }
 
     /// <summary>

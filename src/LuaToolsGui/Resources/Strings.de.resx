@@ -717,4 +717,9 @@ Trotzdem einlösen?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>D-Report an den bot geschickt? Füg hier den Code ein, den er zurückgeschickt hat, um die Tickets in Steam zu schreiben.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code vom bot</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Anwenden</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Der Fix des Spiels bringt dessen Manifeste mit — füg es über den Fix hinzu, nicht über eine normale Quelle.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Über den Fix hinzufügen</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Die Manifeste des Fixes für dieses Spiel wurden nicht gefunden.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Fix-Manifeste bevorzugen</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Wenn der Fix eines Spiels eigene Manifeste mitbringt (voices38, DenuvOwO, SteamTools Achievements), den normalen Abruf blockieren und das Spiel stattdessen über den Fix hinzufügen</value></data>
 </root>
