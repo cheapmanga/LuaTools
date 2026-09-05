@@ -314,16 +314,6 @@
                     Command="{Binding LaunchSteamAutoCrackCommand}"
                     Content="{x:Static res:Strings.Downloads_SteamAutoCrack}"
                     Icon="{ui:SymbolIcon Wrench24}" />
-                <ui:Button
-                    Margin="8,0,0,0"
-                    Command="{Binding LaunchTokeerCommand}"
-                    Content="Tokeer"
-                    Icon="{ui:SymbolIcon KeyMultiple24}" />
-                <ui:Button
-                    Margin="8,0,0,0"
-                    Command="{Binding LaunchValidatorCommand}"
-                    Content="LuaTools Validator"
-                    Icon="{ui:SymbolIcon CheckmarkCircle24}" />
             </StackPanel>
         </Grid>
 

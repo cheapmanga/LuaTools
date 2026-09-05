@@ -63,10 +63,6 @@ public static class AppConfig
     //     so extract without flattening.
     public const string SteamAutoCrackRepo = "SteamAutoCracks/Steam-auto-crack";
 
-    // Tokeer (Tesla697): shares and redeems Denuvo activation codes. Its release ships one exe, a Nuitka
-    // onefile build of a Python app - self-contained, so the Downloads button only downloads and opens it.
-    public const string TokeerRepo = "Tesla697/TokeerDRM-App";
-
     // The code store the Tokeer page redeems against, through the public Cloudflare route their own
     // client uses (it forwards to codestore.luastools.xyz). A redeem sends the code and this machine's
     // MachineGuid, because a code is bound to the machine whose ticket opened it.
@@ -86,10 +82,6 @@ public static class AppConfig
         "https://luatools.vercel.app/Devuvo.ps1",
         "https://raw.githubusercontent.com/madoiscool/lt_api_links/main/Devuvo.ps1",
     ];
-
-    // LuaToolsValidator (Tesla697): a WPF front end for the Denuvo activation validator. One exe again,
-    // but a FRAMEWORK-DEPENDENT net10.0-windows one - hence PrivateDotnetRuntime below.
-    public const string LuaToolsValidatorRepo = "Tesla697/LuaToolsValidator";
 
     // The .NET 10 Desktop runtime, as plain ZIP binaries, for PrivateDotnetRuntime.
     //
