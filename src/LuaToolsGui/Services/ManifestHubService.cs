@@ -22,7 +22,7 @@ namespace LuaToolsGui.Services;
 /// out, and a game with none is "not available here" - the caller then falls back to lua.tools. It is an
 /// excellent primary source, not a guaranteed superset.</para>
 /// </remarks>
-public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, ILogger<ManifestHubService> log)
+public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamAppInfoCache appInfo, ILogger<ManifestHubService> log)
 {
     /// <summary>Public raw URL of the key database. GithubProxy gives it the same mirror fallback as the rest.</summary>
     private const string DepotKeysUrl = "https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/main/depotkeys.json";
@@ -147,10 +147,13 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, ILogge
 
         AddApp(appId);
 
-        // DLCs and soundtracks: unlock every declared DLC entitlement, with or without a depot. This is
-        // what lua.tools does, and it's the only thing store-only DLCs and soundtracks need. The id > 0
-        // guard just shrugs off a malformed listofdlc entry rather than emitting addappid(0).
-        foreach (var dlc in info.DlcIds.Where(id => id > 0))
+        // DLCs and soundtracks: unlock every declared entitlement, with or without a depot. This is what
+        // lua.tools does, and it's the only thing store-only DLCs and soundtracks need. Two sources unioned
+        // (AddApp de-dups): appinfo's listofdlc, plus the store's dlc list — the latter is what carries a
+        // dedicated Steam Soundtrack (music) app, which listofdlc omits. The id > 0 guard shrugs off a
+        // malformed entry rather than emitting addappid(0).
+        var storeDlc = await appInfo.GetStoreDlcIdsAsync(appId, ct);
+        foreach (var dlc in info.DlcIds.Concat(storeDlc).Where(id => id > 0))
             AddApp(dlc);
 
         // Content depots with a key - the base game's and any DLC's alike (DLC depots are in this list too).
