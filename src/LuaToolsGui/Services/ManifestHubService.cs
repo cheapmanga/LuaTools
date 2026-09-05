@@ -24,8 +24,6 @@ namespace LuaToolsGui.Services;
 /// </remarks>
 public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamAppInfoCache appInfo, ILogger<ManifestHubService> log)
 {
-    /// <summary>Public raw URL of the key database. GithubProxy gives it the same mirror fallback as the rest.</summary>
-    private const string DepotKeysUrl = "https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/main/depotkeys.json";
 
     /// <summary>The source name this appears under in the Add page's row list.</summary>
     public const string SourceName = "manifesthub";
@@ -48,43 +46,54 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         {
             if (_keys is not null) return _keys; // won the race
 
-            using var res = await gh.SendAsync(DepotKeysUrl, ct);
-            if (res is null || !res.IsSuccessStatusCode)
+            // Primary first, then any fallback mirror - the next url is tried only when the one before is
+            // unreachable or returns garbage, so a DMCA'd upstream falls through to a copy we control.
+            foreach (var url in AppConfig.ManifestHubKeysUrls)
             {
-                log.LogDebug("depotkeys.json fetch failed: {Status}", res?.StatusCode);
-                return null;
+                try
+                {
+                    using var res = await gh.SendAsync(url, ct);
+                    if (res is null || !res.IsSuccessStatusCode)
+                    {
+                        log.LogDebug("depotkeys.json fetch failed at {Url}: {Status}", url, res?.StatusCode);
+                        continue; // try the next mirror
+                    }
+
+                    byte[] bytes = await res.Content.ReadAsByteArrayAsync(ct);
+
+                    // Parse off the UI thread. This runs from a UI-thread command (Fetch → HasGameAsync),
+                    // and deserializing 15 MB into a ~200k-entry map is enough to hitch the window for a
+                    // moment on the first game of a session. The caller's own await still resumes on the UI
+                    // thread, so its ObservableCollection writes stay safe.
+                    var keys = await Task.Run(() =>
+                    {
+                        // Flat {"<depotid>": "<key>"} object. Drop any entry whose id isn't a number
+                        // rather than failing the whole load.
+                        var raw = JsonSerializer.Deserialize<Dictionary<string, string>>(bytes);
+                        if (raw is null) return null;
+
+                        var map = new Dictionary<long, string>(raw.Count);
+                        foreach (var (id, key) in raw)
+                            if (long.TryParse(id, out long depot) && !string.IsNullOrWhiteSpace(key))
+                                map[depot] = key.Trim();
+                        return map;
+                    }, ct);
+
+                    if (keys is { Count: > 0 }) return _keys = keys; // good copy → cache and stop
+                    log.LogDebug("depotkeys.json from {Url} parsed to nothing; trying the next mirror", url);
+                }
+                catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+                catch (Exception ex)
+                {
+                    // Includes an HttpClient timeout (surfaced as TaskCanceledException). Try the next
+                    // mirror; nothing is cached, so a later lookup retries from the top.
+                    log.LogDebug(ex, "Loading the depot-key database from {Url} failed", url);
+                }
             }
 
-            byte[] bytes = await res.Content.ReadAsByteArrayAsync(ct);
-
-            // Parse off the UI thread. This runs from a UI-thread command (Fetch → HasGameAsync), and
-            // deserializing 15 MB into a ~200k-entry map is enough to hitch the window for a moment on
-            // the first game of a session. The caller's own await still resumes on the UI thread, so its
-            // ObservableCollection writes stay safe.
-            var keys = await Task.Run(() =>
-            {
-                // The file is a flat {"<depotid>": "<key>"} object. Drop any entry whose id isn't a
-                // number rather than failing the whole load.
-                var raw = JsonSerializer.Deserialize<Dictionary<string, string>>(bytes);
-                if (raw is null) return null;
-
-                var map = new Dictionary<long, string>(raw.Count);
-                foreach (var (id, key) in raw)
-                    if (long.TryParse(id, out long depot) && !string.IsNullOrWhiteSpace(key))
-                        map[depot] = key.Trim();
-                return map;
-            }, ct);
-
-            return keys is null ? null : _keys = keys;
+            return null; // every mirror failed → "free source unavailable right now"
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
-        catch (Exception ex)
-        {
-            // Includes an HttpClient timeout (surfaced as TaskCanceledException). Not cached, so the
-            // next lookup tries again.
-            log.LogDebug(ex, "Loading the depot-key database failed");
-            return null;
-        }
         finally
         {
             _gate.Release();
