@@ -153,6 +153,16 @@ public static class AppConfig
     /// <summary>The primary releases repo (first in <see cref="GithubReleasesRepos"/>).</summary>
     public static string GithubReleasesRepo => GithubReleasesRepos[0];
 
+    // ── Fork standalone self-update (StandaloneUpdateService) ──────────────
+    // The fork ships as ONE moving release: this repo, this tag, this asset. Unlike the Velopack path
+    // above (which only fires for a Velopack install), this drives the plain-zip standalone build. The tag
+    // is re-pointed at each build's commit and the asset replaced in place, so the tag NAME never changes;
+    // StandaloneUpdateService instead compares the running build's stamped commit (SourceRevisionId, see
+    // the csproj) to the commit this tag currently points at - they differ exactly when a newer build is up.
+    public const string ForkRepo = "cheapmanga/LuaTools";
+    public const string ForkReleaseTag = "v1.1.3-fork";
+    public const string ForkAssetName = "LuaTools-win-x64.zip";
+
     // ── Plugin releases (the store-page plugin manager fetches these) ──────────────
     // Separate from the app's own Velopack self-update repo above. Each release of this repo carries
     // `plugin.zip` (the frontend) + `winmm.dll` (the loader); the tag is the version (e.g. "v1.2").
