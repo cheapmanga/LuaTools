@@ -123,6 +123,41 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
         StampNow(dest);
     }
 
+    /// <summary>
+    /// Append <c>addappid(&lt;dlcId&gt;)</c> for any declared DLC not already in the installed
+    /// <c>&lt;appid&gt;.lua</c>, so DLCs are unlocked alongside the game.
+    /// </summary>
+    /// <remarks>
+    /// The ManifestHub source builds its lua with these lines already; a Sushi zip ships a full manifest
+    /// set but its lua may not carry the DLC entitlements, so this brings it in line. Best-effort: no-op
+    /// when there's no installed lua, no DLCs, or nothing missing. Existing addappid lines (base game or
+    /// keyed depots) are left untouched.
+    /// </remarks>
+    public void AddDlcEntitlements(long appId, IReadOnlyCollection<long> dlcIds)
+    {
+        if (dlcIds.Count == 0) return;
+        string? dir = steam.StPlugInDir;
+        if (dir is null) return;
+
+        string path = Path.Combine(dir, $"{appId}.lua");
+        if (!File.Exists(path)) return;
+
+        try
+        {
+            string lua = File.ReadAllText(path);
+            var toAdd = dlcIds
+                .Where(id => id > 0 && !Regex.IsMatch(lua, $@"addappid\(\s*{id}\b"))
+                .Select(id => $"addappid({id})")
+                .ToList();
+            if (toAdd.Count == 0) return;
+
+            string sep = lua.Length > 0 && !lua.EndsWith("\n") ? "\n" : "";
+            File.AppendAllText(path, sep + string.Join("\n", toAdd) + "\n");
+            StampNow(path);
+        }
+        catch { /* best effort: DLC augmentation never fails the install */ }
+    }
+
     /// <summary>Path of the already-installed &lt;appid&gt;.lua in stplug-in, or null.</summary>
     public string? ReadInstalledLua(long appId)
     {
