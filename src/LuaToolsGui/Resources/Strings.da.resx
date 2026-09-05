@@ -717,4 +717,9 @@ Vil du indløse den alligevel?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Har du sendt din D-Report til bot'en? Indsæt koden, den svarede med, her for at skrive billetterne ind i Steam.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kode fra bot'en</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Brug</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Spillets fix indeholder dets manifester — tilføj det via fixet, ikke en normal kilde.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Tilføj via fixet</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Kunne ikke finde fixets manifester til dette spil.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Foretræk fix-manifester</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Når et spils fix har sine egne manifester (voices38, DenuvOwO, SteamTools Achievements), så blokér den normale hentning og tilføj det via fixet i stedet</value></data>
 </root>

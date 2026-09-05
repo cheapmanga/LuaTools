@@ -717,4 +717,9 @@
   <data name="Val_Apply_Body" xml:space="preserve"><value>ส่ง D-Report ให้ bot แล้วใช่ไหม? วางโค้ดที่มันตอบกลับมาตรงนี้เพื่อเขียนตั๋วลงใน Steam</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>โค้ดจาก bot</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>ใช้งาน</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>fix ของเกมนี้มี manifest มาให้แล้ว — เพิ่มผ่าน fix ไม่ใช่ผ่านแหล่งปกติ</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>เพิ่มผ่าน fix</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>หา manifest จาก fix ของเกมนี้ไม่เจอ</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>เลือกใช้ manifest ของ fix</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>เมื่อ fix ของเกมมี manifest ของตัวเอง (voices38, DenuvOwO, SteamTools Achievements) ให้บล็อกการดึงแบบปกติแล้วเพิ่มเกมผ่าน fix แทน</value></data>
 </root>

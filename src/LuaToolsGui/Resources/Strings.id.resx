@@ -717,4 +717,9 @@ Tetap tukarkan?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Sudah kirim D-Report kamu ke bot? Tempel di sini kode balasannya buat menulis tiket ke Steam.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kode dari bot</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Terapkan</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Fix game ini sudah membawa manifest-nya — tambahkan lewat fix, bukan sumber biasa.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Tambah lewat fix</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Manifest dari fix untuk game ini tidak ditemukan.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Utamakan manifest fix</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Kalau fix sebuah game membawa manifest-nya sendiri (voices38, DenuvOwO, SteamTools Achievements), blokir pengambilan biasa dan tambahkan lewat fix</value></data>
 </root>

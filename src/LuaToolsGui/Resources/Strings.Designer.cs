@@ -696,4 +696,9 @@ public static class Strings
     public static string Val_Apply_Body => Get(nameof(Val_Apply_Body));
     public static string Val_Apply_Placeholder => Get(nameof(Val_Apply_Placeholder));
     public static string Val_Apply_Action => Get(nameof(Val_Apply_Action));
+    public static string Add_Fix_Blocked => Get(nameof(Add_Fix_Blocked));
+    public static string Add_Fix_AddViaFix => Get(nameof(Add_Fix_AddViaFix));
+    public static string Add_Fix_None => Get(nameof(Add_Fix_None));
+    public static string Settings_BlockFetchFix => Get(nameof(Settings_BlockFetchFix));
+    public static string Settings_BlockFetchFix_Hint => Get(nameof(Settings_BlockFetchFix_Hint));
 }

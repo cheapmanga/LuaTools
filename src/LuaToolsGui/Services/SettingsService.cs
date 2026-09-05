@@ -56,6 +56,11 @@ public class AppSettings
     // When true, FastFetch auto-picks the first available source and downloads immediately.
     // Nullable so "never set" (→ default OFF) is distinguishable from an explicit choice.
     public bool? FastFetch { get; set; }
+
+    // When true, the Add page blocks the normal manifest fetch for a game whose fix ships its own
+    // manifests (voices38/DenuvOwO/SteamTools Achievements) and offers to add it through the fix.
+    // Nullable so "never set" (→ default ON) is distinguishable from an explicit choice.
+    public bool? BlockFetchWhenFixManifests { get; set; }
 }
 
 public class SettingsService
@@ -164,6 +169,13 @@ public class SettingsService
         set { _settings.FastFetch = value; Save(); }
     }
 
+    /// <summary>Block the normal fetch when a game's fix ships its own manifests, and offer the fix instead (default ON).</summary>
+    public bool BlockFetchWhenFixManifests
+    {
+        get => _settings.BlockFetchWhenFixManifests ?? true; // default ON
+        set { _settings.BlockFetchWhenFixManifests = value; Save(); }
+    }
+
     private static readonly string TmpPath = FilePath + ".tmp";
     private static readonly string BakPath = FilePath + ".bak";
 
@@ -223,7 +235,8 @@ public class SettingsService
             && _settings.HubcapApiKey is null
             && _settings.StartWithWindows is null
             && _settings.MinimizeToTray is null
-            && _settings.FastFetch is null;
+            && _settings.FastFetch is null
+            && _settings.BlockFetchWhenFixManifests is null;
         if (empty)
         {
             foreach (var p in new[] { FilePath, BakPath, TmpPath })

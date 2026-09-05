@@ -393,19 +393,34 @@
                         VerticalAlignment="Center"
                         Foreground="#a78bfa"
                         Symbol="ShieldTask24" />
-                    <TextBlock
-                        Grid.Column="1"
-                        Margin="10,0"
-                        VerticalAlignment="Center"
-                        FontSize="13"
-                        Text="{Binding FixBannerText}"
-                        TextWrapping="Wrap" />
-                    <ui:Button
-                        Grid.Column="2"
-                        Appearance="Primary"
-                        Command="{Binding OpenFixesCommand}"
-                        Content="{x:Static res:Strings.Add_Fix_Open}"
-                        Icon="{ui:SymbolIcon ShieldTask24}" />
+                    <StackPanel Grid.Column="1" Margin="10,0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="13"
+                            Text="{Binding FixBannerText}"
+                            TextWrapping="Wrap" />
+                        <!-- Only when the fetch is blocked: say the fix ships the manifests, so add it that way. -->
+                        <TextBlock
+                            Margin="0,3,0,0"
+                            FontSize="12"
+                            Foreground="#a78bfa"
+                            Text="{x:Static res:Strings.Add_Fix_Blocked}"
+                            TextWrapping="Wrap"
+                            Visibility="{Binding ShowManifestFixOffer, Converter={StaticResource BoolToVis}}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <!-- Add via the fix's own manifests: only when the fetch is blocked for a manifest-fix. -->
+                        <ui:Button
+                            Margin="0,0,8,0"
+                            Appearance="Primary"
+                            Command="{Binding AddViaFixManifestsCommand}"
+                            Content="{x:Static res:Strings.Add_Fix_AddViaFix}"
+                            Icon="{ui:SymbolIcon ArrowDownload24}"
+                            Visibility="{Binding ShowManifestFixOffer, Converter={StaticResource BoolToVis}}" />
+                        <ui:Button
+                            Command="{Binding OpenFixesCommand}"
+                            Content="{x:Static res:Strings.Add_Fix_Open}"
+                            Icon="{ui:SymbolIcon ShieldTask24}" />
+                    </StackPanel>
                 </Grid>
             </Border>
 

@@ -717,4 +717,9 @@ Toch inwisselen?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Je D-Report naar de bot gestuurd? Plak hier de code die je terugkreeg om de tickets in Steam te schrijven.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Code van de bot</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Toepassen</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>De fix van dit spel bevat de manifests — voeg het via de fix toe, niet via een gewone bron.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Via de fix toevoegen</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>De manifests van de fix voor dit spel zijn niet gevonden.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Fix-manifests verkiezen</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Als de fix van een spel eigen manifests bevat (voices38, DenuvOwO, SteamTools Achievements), blokkeer het gewone ophalen en voeg het via de fix toe</value></data>
 </root>

@@ -390,6 +390,31 @@
                             VerticalAlignment="Center"
                             IsChecked="{Binding FastFetch, Mode=TwoWay}" />
                     </Grid>
+
+                    <!-- Block the normal fetch when a game's fix ships its own manifests. -->
+                    <Grid Margin="14,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Medium"
+                                Text="{x:Static res:Strings.Settings_BlockFetchFix}" />
+                            <TextBlock
+                                Margin="0,4,0,0"
+                                FontSize="12"
+                                Foreground="#6b7280"
+                                Text="{x:Static res:Strings.Settings_BlockFetchFix_Hint}"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                        <ui:ToggleSwitch
+                            Grid.Column="1"
+                            Margin="12,0,0,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding BlockFetchWhenFixManifests, Mode=TwoWay}" />
+                    </Grid>
                 </StackPanel>
             </Border>
 

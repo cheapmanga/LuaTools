@@ -717,4 +717,9 @@ Anulare - continuă descărcarea</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Ai trimis D-Report-ul la bot? Lipește aici codul cu care ți-a răspuns ca să scriem tichetele în Steam.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Cod de la bot</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Aplică</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Fix-ul jocului include manifestele lui — adaugă-l prin fix, nu dintr-o sursă normală.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Adaugă prin fix</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Nu am găsit manifestele fix-ului pentru acest joc.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Preferă manifestele fix-ului</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Când fix-ul unui joc vine cu propriile manifeste (voices38, DenuvOwO, SteamTools Achievements), blochează preluarea normală și adaugă-l prin fix</value></data>
 </root>

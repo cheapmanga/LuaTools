@@ -717,4 +717,9 @@
   <data name="Val_Apply_Body" xml:space="preserve"><value>Надіслав свій D-Report bot'у? Встав сюди код із відповіді, щоб записати тікети в Steam.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Код від bot'а</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Застосувати</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Фікс гри містить її маніфести — додай її через фікс, а не зі звичайного джерела.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Додати через фікс</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Не вдалося знайти маніфести фікса для цієї гри.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Надавати перевагу маніфестам фікса</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Коли фікс гри містить власні маніфести (voices38, DenuvOwO, SteamTools Achievements), блокуй звичайне завантаження й додавай гру через фікс</value></data>
 </root>

@@ -717,4 +717,9 @@ Mégis beváltod?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Elküldted a D-Reportot a botnak? Illeszd be ide a kódot, amit válaszolt, hogy beírjuk a jegyeket a Steambe.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kód a bottól</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Alkalmaz</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>A játék fixje tartalmazza a manifesztjeit — a fixen keresztül add hozzá, ne normál forrásból.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Hozzáadás a fixen át</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Nem találhatók a fix manifesztjei ehhez a játékhoz.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Fix-manifesztek előnyben</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Ha egy játék fixje saját manifeszteket hoz (voices38, DenuvOwO, SteamTools Achievements), tiltsd le a normál letöltést, és a fixen keresztül add hozzá</value></data>
 </root>

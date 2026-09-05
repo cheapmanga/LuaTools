@@ -717,4 +717,9 @@ Uplatnit ho i tak?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Poslal jsi bota svůj D-Report? Vlož sem kód, který ti odpověděl, a zapíšeme tickety do Steamu.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kód od bota</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Použít</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Fix téhle hry obsahuje její manifesty — přidej ji přes fix, ne přes běžný zdroj.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Přidat přes fix</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Manifesty z fixu se pro tuhle hru nepodařilo najít.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Upřednostnit manifesty z fixu</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Když fix hry obsahuje vlastní manifesty (voices38, DenuvOwO, SteamTools Achievements), zablokuj běžné stahování a přidej hru rovnou přes fix</value></data>
 </root>

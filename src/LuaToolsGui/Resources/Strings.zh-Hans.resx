@@ -737,4 +737,9 @@
   <data name="Val_Apply_Body" xml:space="preserve"><value>把 D-Report 发给 bot 了吗？把它回复的代码粘贴到这里，就能把票据写入 Steam。</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>bot 给的代码</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>应用</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>这游戏的 fix 自带 manifest — 通过 fix 添加，别用普通来源。</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>通过 fix 添加</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>找不到这游戏 fix 里的 manifest。</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>优先用 fix 的 manifest</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>当游戏的 fix 自带 manifest 时（voices38、DenuvOwO、SteamTools Achievements），拦截普通获取，改为通过 fix 添加</value></data>
 </root>

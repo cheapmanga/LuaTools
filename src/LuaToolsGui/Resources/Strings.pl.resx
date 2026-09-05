@@ -717,4 +717,9 @@ Zrealizować mimo to?</value></data>
   <data name="Val_Apply_Body" xml:space="preserve"><value>Wysłałeś swój D-Report do bota? Wklej tutaj kod, który odesłał, żeby zapisać tickety w Steam.</value></data>
   <data name="Val_Apply_Placeholder" xml:space="preserve"><value>Kod od bota</value></data>
   <data name="Val_Apply_Action" xml:space="preserve"><value>Zastosuj</value></data>
+  <data name="Add_Fix_Blocked" xml:space="preserve"><value>Fix tej gry zawiera jej manifesty — dodaj ją przez fix, a nie ze zwykłego źródła.</value></data>
+  <data name="Add_Fix_AddViaFix" xml:space="preserve"><value>Dodaj przez fix</value></data>
+  <data name="Add_Fix_None" xml:space="preserve"><value>Nie znaleziono manifestów z fixa dla tej gry.</value></data>
+  <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Preferuj manifesty z fixa</value></data>
+  <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Gdy fix gry zawiera własne manifesty (voices38, DenuvOwO, SteamTools Achievements), zablokuj zwykłe pobieranie i dodaj grę przez fix</value></data>
 </root>
