@@ -82,6 +82,26 @@ public class ManifestJobFactory(
     }
 
     /// <summary>
+    /// Install a manifest, then unlock the game's DLCs. For the Sushi zip, whose lua may not carry the
+    /// DLC entitlements the way ManifestHub's built lua does.
+    /// </summary>
+    private async Task<JobResult> InstallManifestWithDlcAsync(DownloadedFile file, long appId, string title, CancellationToken ct)
+    {
+        var result = InstallManifest(file, appId, title);
+        if (result.Ok)
+        {
+            try
+            {
+                var info = await depotInfo.GetAsync(appId, ct);
+                if (info is not null)
+                    installer.AddDlcEntitlements(appId, info.DlcIds);
+            }
+            catch { /* DLC augmentation is best-effort; the game itself is already installed */ }
+        }
+        return result;
+    }
+
+    /// <summary>
     /// A manifest from the free Sushi source: downloads the game's public <c>&lt;appid&gt;.zip</c> and installs
     /// it through the same pipeline as any manifest zip. No account, no daily cap.
     /// </summary>
@@ -100,7 +120,7 @@ public class ManifestJobFactory(
             SourceMeta.Get(SushiService.SourceName).DisplayName ?? "Sushi",
             covers.GetLocalPath(appId),
             (_, progress, ct) => sushi.DownloadZipAsync(appId, progress, ct),
-            (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
+            (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
             confirm,
             onFinished,
             onReveal);
