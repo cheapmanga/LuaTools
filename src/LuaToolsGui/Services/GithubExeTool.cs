@@ -236,20 +236,6 @@ public sealed class TokeerAppService(GithubProxy gh, CacheService cache, ILogger
 }
 
 /// <summary>
-/// UbiTokeer (Tesla697/UbiTokeer-DenuvoTicket): generates Denuvo activation tokens for Ubisoft/Uplay
-/// titles - the Ubisoft counterpart to <see cref="TokeerAppService"/>.
-/// </summary>
-/// <remarks>Ships one self-contained exe, so there is nothing to install alongside it.</remarks>
-public sealed class UbiTokeerService(GithubProxy gh, CacheService cache, ILogger<UbiTokeerService> log)
-    : GithubExeTool(gh, cache, log)
-{
-    protected override string Repo => AppConfig.UbiTokeerRepo;
-    protected override string AssetName => "DenuvoTicketGUI.exe";
-    public override string Id => "ubitokeer";
-    public override string DisplayName => "UbiTokeer";
-}
-
-/// <summary>
 /// LuaToolsValidator (Tesla697/LuaToolsValidator): a front end for the Denuvo activation validator.
 /// </summary>
 /// <remarks>
