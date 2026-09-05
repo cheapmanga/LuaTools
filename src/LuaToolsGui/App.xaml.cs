@@ -98,8 +98,9 @@ public partial class App : Application
                 services.AddSingleton<ModeView>();
                 services.AddSingleton<FixesView>();
                 services.AddSingleton<AchievementsView>();
-                services.AddSingleton<ValidatorView>();
-                services.AddSingleton<TokeerView>();
+                services.AddSingleton<ValidatorView>(); // hosted inside DenuvoView
+                services.AddSingleton<TokeerView>();     // hosted inside DenuvoView
+                services.AddSingleton<DenuvoView>();
                 services.AddSingleton<PluginView>();
                 services.AddSingleton<SettingsView>();
                 services.AddSingleton<MainWindow>();
