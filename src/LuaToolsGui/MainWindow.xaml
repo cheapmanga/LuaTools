@@ -92,12 +92,7 @@
                             <ui:SymbolIcon Symbol="Trophy24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Validator}" TargetPageType="{x:Type views:ValidatorView}">
-                        <ui:NavigationViewItem.Icon>
-                            <ui:SymbolIcon Symbol="CheckmarkCircle24" />
-                        </ui:NavigationViewItem.Icon>
-                    </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Content="Tokeer" TargetPageType="{x:Type views:TokeerView}">
+                    <ui:NavigationViewItem Content="Denuvo" TargetPageType="{x:Type views:DenuvoView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="KeyMultiple24" />
                         </ui:NavigationViewItem.Icon>
