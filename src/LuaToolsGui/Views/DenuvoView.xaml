@@ -22,21 +22,21 @@
             Margin="24,20,24,4"
             Orientation="Horizontal">
             <ui:Button
-                x:Name="TabTokeer"
-                Appearance="Primary"
-                Click="TabTokeer_Click"
-                Content="Tokeer" />
-            <ui:Button
                 x:Name="TabValidator"
-                Margin="8,0,0,0"
-                Appearance="Secondary"
+                Appearance="Primary"
                 Click="TabValidator_Click"
                 Content="{x:Static res:Strings.Nav_Validator}" />
+            <ui:Button
+                x:Name="TabTokeer"
+                Margin="8,0,0,0"
+                Appearance="Secondary"
+                Click="TabTokeer_Click"
+                Content="Tokeer" />
         </StackPanel>
 
         <Grid Grid.Row="1">
-            <ContentControl x:Name="TokeerHost" />
-            <ContentControl x:Name="ValidatorHost" Visibility="Collapsed" />
+            <ContentControl x:Name="ValidatorHost" />
+            <ContentControl x:Name="TokeerHost" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </UserControl>
