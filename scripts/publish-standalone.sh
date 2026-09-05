@@ -23,6 +23,15 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 out="${1:-$root/publish/standalone}"
 
 rm -rf "$out"
+
+# Stamp the build's git commit so StandaloneUpdateService can tell this build from the one the release tag
+# points at. MUST be the commit the moving tag will be re-pointed to at publish (i.e. current HEAD).
+#
+# PUBLISH INVARIANT (or the self-updater re-installs forever): the zip built here must come from the SAME
+# commit the moving tag is re-pointed to, and to avoid a window where the tag is ahead of the asset, upload
+# THIS zip first, THEN move the v1.1.3-fork tag ref to this commit.
+commit="$(git -C "$root" rev-parse --short HEAD 2>/dev/null || true)"
+
 dotnet publish "$root/src/LuaToolsGui/LuaToolsGui.csproj" \
     -c Release -r win-x64 --self-contained true \
     -p:PublishSingleFile=true \
@@ -30,6 +39,7 @@ dotnet publish "$root/src/LuaToolsGui/LuaToolsGui.csproj" \
     -p:IncludeNativeLibrariesForSelfExtract=true \
     -p:EnableWindowsTargeting=true \
     -p:DebugType=none \
+    -p:BuildCommit="$commit" \
     -o "$out"
 
 # LuaTools.SamHost.exe stays a separate file: it is x86/net48 and cannot live inside an x64/net8.0

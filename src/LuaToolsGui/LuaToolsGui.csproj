@@ -11,6 +11,10 @@
     <AssemblyTitle>LuaTools</AssemblyTitle>
     <Product>LuaTools</Product>
     <Version>1.1.3</Version>
+    <!-- Stamped by publish-standalone.sh (-p:BuildCommit=<short sha>). The compiler appends "+<sha>" to
+         AssemblyInformationalVersion, which StandaloneUpdateService reads to tell this build's commit from
+         the one the release tag points at. Empty on a plain `dotnet build`/`run`, which disables the check. -->
+    <SourceRevisionId Condition="'$(BuildCommit)' != ''">$(BuildCommit)</SourceRevisionId>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <!-- Velopack needs a custom Main (Program.Main) that runs before WPF -->
     <StartupObject>LuaToolsGui.Program</StartupObject>

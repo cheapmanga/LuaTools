@@ -51,6 +51,15 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         _trayIcon.ContextMenuStrip = menu;
     }
 
+    /// <summary>Drop the tray icon so a hard process exit (e.g. the self-update swap) leaves no ghost icon.</summary>
+    public void DisposeTrayIcon()
+    {
+        if (_trayIcon is null) return;
+        _trayIcon.Visible = false;
+        _trayIcon.Dispose();
+        _trayIcon = null;
+    }
+
     /// <summary>Clicking the window's close (X) button hides to the tray instead of quitting, when the
     /// MinimizeToTray setting is on OR the app was launched with --tray-locked (the loader passes this to
     /// keep the backend alive. Session-only, doesn't touch the saved setting). Either way, only the tray

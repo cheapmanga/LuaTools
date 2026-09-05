@@ -60,6 +60,7 @@ public partial class App : Application
                 services.AddSingleton<LuaToolsApiClient>();
                 services.AddSingleton<HubcapService>();
                 services.AddSingleton<UpdateService>();
+                services.AddSingleton<StandaloneUpdateService>();
                 // Central download queue. Singleton + hosted service (same pattern as HttpServerService
                 // below): the hosted lifetime runs the scheduler pump, and view models resolve the same
                 // instance to enqueue and observe.
@@ -234,6 +235,52 @@ public partial class App : Application
             catch { /* offline / install error. Retry next Steam-open */ }
         }
         finally { _updateFlowGate.Release(); }
+    }
+
+    /// <summary>Check for a newer standalone build and, if there is one, offer to apply it via a toast.</summary>
+    private async Task CheckStandaloneUpdateAsync()
+    {
+        try
+        {
+            var svc = _host.Services.GetRequiredService<StandaloneUpdateService>();
+            var upd = await svc.CheckAsync();
+            if (upd is null) return; // up to date, offline, or not a standalone build
+
+            var toast = _host.Services.GetRequiredService<ToastService>();
+            Dispatcher.Invoke(() => toast.ShowAction(
+                "LuaTools",
+                "A new version is available.",
+                "Update & restart",
+                () => _ = ApplyStandaloneUpdateAsync(svc, upd)));
+        }
+        catch { /* background nicety; never surfaces */ }
+    }
+
+    private async Task ApplyStandaloneUpdateAsync(StandaloneUpdateService svc, StandaloneUpdateService.Available upd)
+    {
+        try
+        {
+            var toast = _host.Services.GetRequiredService<ToastService>();
+            Dispatcher.Invoke(() => toast.Show("LuaTools", "Downloading update…"));
+
+            if (!await svc.DownloadAndApplyAsync(upd, progress: null, requestExit: () => Dispatcher.Invoke(HardExit)))
+                Dispatcher.Invoke(() => toast.Show("LuaTools", "Update failed. Staying on the current version.", error: true));
+        }
+        catch { /* stays on the current version */ }
+    }
+
+    /// <summary>Exit the process outright so the update swap helper can replace the files. A normal close
+    /// would only hide the window to the tray, which would leave the exe locked and the swap waiting.</summary>
+    private void HardExit()
+    {
+        try { _trayIcon_Dispose(); } catch { /* best effort */ }
+        Environment.Exit(0);
+    }
+
+    // The tray icon lives on MainWindow; ask it to drop the icon before we hard-exit so no ghost is left.
+    private void _trayIcon_Dispose()
+    {
+        if (MainWindow is LuaToolsGui.MainWindow mw) mw.DisposeTrayIcon();
     }
 
     protected override async void OnStartup(StartupEventArgs e)
@@ -491,6 +538,12 @@ public partial class App : Application
 
         if (url is not null)
             HandleProtocolUrl(url);
+
+        // Standalone (plain-zip) self-update: check GitHub once on a normal launch and, if a newer build
+        // is out, offer to apply it. Skipped on a silent/protocol cold launch (which exits on its own) and
+        // a no-op for Velopack/dev builds. Fire-and-forget; never blocks startup.
+        if (!silentStartup)
+            _ = CheckStandaloneUpdateAsync();
 
         // Background, non-blocking Steam-open update flow (app + plugin), but ONLY in the loader context
         // (--tray-locked). A manual / protocol / silent-install launch skips it, so the app never
