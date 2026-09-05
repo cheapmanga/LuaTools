@@ -105,7 +105,7 @@ public static class AppConfig
     public static readonly string[] ManifestHubKeysUrls =
     [
         "https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/main/depotkeys.json", // primary (upstream)
-        // "https://raw.githubusercontent.com/<our-mirror>/ManifestHub/main/depotkeys.json", // fallback (ours)
+        "https://raw.githubusercontent.com/jetob/ManifestHub/main/depotkeys.json",           // fallback (our mirror: daily union of upstream + fresher forks)
     ];
 
     // Sushi: SteamTools' public game repo, one <appid>.zip per game. A free, account-free source that
