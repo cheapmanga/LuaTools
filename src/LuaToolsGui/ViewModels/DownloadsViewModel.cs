@@ -19,18 +19,20 @@ public partial class DownloadsViewModel : ObservableObject
     private readonly ManifestJobFactory _jobs;
     private readonly SteamAutoCrackService _sac;
     private readonly TokeerAppService _tokeer;
+    private readonly UbiTokeerService _ubiTokeer;
     private readonly LuaToolsValidatorService _validator;
     private readonly PrivateDotnetRuntime _runtime;
     private readonly ToastService _toast;
 
     public DownloadsViewModel(DownloadQueue queue, ManifestJobFactory jobs, SteamAutoCrackService sac,
-        TokeerAppService tokeer, LuaToolsValidatorService validator, PrivateDotnetRuntime runtime,
-        ToastService toast)
+        TokeerAppService tokeer, UbiTokeerService ubiTokeer, LuaToolsValidatorService validator,
+        PrivateDotnetRuntime runtime, ToastService toast)
     {
         _queue = queue;
         _jobs = jobs;
         _sac = sac;
         _tokeer = tokeer;
+        _ubiTokeer = ubiTokeer;
         _validator = validator;
         _runtime = runtime;
         _toast = toast;
@@ -86,6 +88,10 @@ public partial class DownloadsViewModel : ObservableObject
     /// <summary>Fetch Tokeer and open it.</summary>
     [RelayCommand]
     private Task LaunchTokeer() => LaunchToolAsync(_tokeer);
+
+    /// <summary>Fetch UbiTokeer (the Ubisoft token generator) and open it.</summary>
+    [RelayCommand]
+    private Task LaunchUbiTokeer() => LaunchToolAsync(_ubiTokeer);
 
     /// <summary>Fetch LuaToolsValidator (and the .NET runtime it needs) and open it.</summary>
     [RelayCommand]

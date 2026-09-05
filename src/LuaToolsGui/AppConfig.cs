@@ -67,6 +67,11 @@ public static class AppConfig
     // onefile build of a Python app - self-contained, so the Downloads button only downloads and opens it.
     public const string TokeerRepo = "Tesla697/TokeerDRM-App";
 
+    // UbiTokeer (Tesla697): the Ubisoft/Uplay counterpart to Tokeer - generates Denuvo tokens for Ubi
+    // titles. Its release ships one self-contained exe (DenuvoTicketGUI.exe), so the Downloads button
+    // only downloads and opens it.
+    public const string UbiTokeerRepo = "Tesla697/UbiTokeer-DenuvoTicket";
+
     // The code store the Tokeer page redeems against, through the public Cloudflare route their own
     // client uses (it forwards to codestore.luastools.xyz). A redeem sends the code and this machine's
     // MachineGuid, because a code is bound to the machine whose ticket opened it.

@@ -321,6 +321,11 @@
                     Icon="{ui:SymbolIcon KeyMultiple24}" />
                 <ui:Button
                     Margin="8,0,0,0"
+                    Command="{Binding LaunchUbiTokeerCommand}"
+                    Content="UbiTokeer"
+                    Icon="{ui:SymbolIcon Key24}" />
+                <ui:Button
+                    Margin="8,0,0,0"
                     Command="{Binding LaunchValidatorCommand}"
                     Content="LuaTools Validator"
                     Icon="{ui:SymbolIcon CheckmarkCircle24}" />
