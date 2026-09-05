@@ -35,7 +35,6 @@ public partial class App : Application
                 services.AddSingleton<SushiService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<TokeerAppService>();
-                services.AddSingleton<UbiTokeerService>();
                 services.AddSingleton<LuaToolsValidatorService>();
                 services.AddSingleton<DevuvoService>();
                 services.AddSingleton<TokeerService>();
