@@ -744,17 +744,13 @@
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>当游戏的 fix 自带 manifest 时（voices38、DenuvOwO、SteamTools Achievements），拦截普通获取，改为通过 fix 添加</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>扩展</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>扩展</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>社区扩展可以为 LuaTools 添加清单源和页面。扩展就是一个文件夹：放进去然后重启。</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>需要重启</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>重启 LuaTools 后此更改才会生效。</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>社区扩展可以为 LuaTools 添加清单源。扩展就是一个装着 JSON 的文件夹：放进去即可，不会执行任何内容。</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>未安装任何扩展</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>扩展是一个包含 addon.json 的文件夹。最小又有用的形式只是几行 JSON，用来添加一个清单源 —— 不编译任何东西，也不执行任何东西。</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>打开扩展文件夹</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>加载器消息</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>已加载</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>已加载（仅数据，未执行任何内容）</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>已禁用</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>加载失败</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>刷新</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>请重启 LuaTools 以加载此扩展（它包含代码）</value></data>
 </root>

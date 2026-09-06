@@ -724,17 +724,13 @@ Resgatar mesmo assim?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Quando o fix de um jogo traz os próprios manifests (voices38, DenuvOwO, SteamTools Achievements), bloqueie a busca normal e adicione pelo fix</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Complementos</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Complementos</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Complementos da comunidade adicionam fontes de manifesto e páginas ao LuaTools. Um complemento é uma pasta: coloque-a aqui e reinicie.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Reinício necessário</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Reinicie o LuaTools para aplicar esta alteração.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Complementos da comunidade adicionam fontes de manifesto ao LuaTools. Um complemento é uma pasta com JSON: coloque-a aqui, nada nela é executado.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Nenhum complemento instalado</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Um complemento é uma pasta com um addon.json. O menor que serve são algumas linhas de JSON que adicionam uma fonte de manifesto — nada compilado, nada executado.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Abrir a pasta de complementos</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Mensagens do carregador</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Carregado</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Carregado (somente dados, nada executado)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Desativado</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Falha ao carregar</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Atualizar</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Reinicie o LuaTools para carregar este complemento (ele contém código)</value></data>
 </root>

@@ -724,17 +724,13 @@ Vẫn đổi chứ?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Khi bản fix của game kèm manifest riêng (voices38, DenuvOwO, SteamTools Achievements), chặn việc lấy thông thường và thêm game qua fix</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Tiện ích</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Tiện ích</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Tiện ích cộng đồng bổ sung nguồn manifest và trang cho LuaTools. Một tiện ích là một thư mục: thả vào rồi khởi động lại.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Cần khởi động lại</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Khởi động lại LuaTools để thay đổi có hiệu lực.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Tiện ích cộng đồng bổ sung nguồn manifest cho LuaTools. Một tiện ích là thư mục chứa JSON: thả vào là xong, không có gì được thực thi.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Chưa cài tiện ích nào</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Một tiện ích là thư mục chứa addon.json. Loại nhỏ nhất mà hữu ích chỉ là vài dòng JSON thêm một nguồn manifest — không biên dịch, không thực thi gì cả.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Mở thư mục tiện ích</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Thông báo của bộ nạp</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Đã nạp</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Đã nạp (chỉ dữ liệu, không chạy gì)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Đã tắt</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Nạp thất bại</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Làm mới</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Khởi động lại LuaTools để nạp tiện ích này (nó có chứa mã)</value></data>
 </root>

@@ -724,17 +724,13 @@
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>當遊戲的 fix 自帶 manifest 時（voices38、DenuvOwO、SteamTools Achievements），攔截一般擷取，改為透過 fix 新增</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>擴充功能</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>擴充功能</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>社群擴充功能可為 LuaTools 新增資訊清單來源與頁面。擴充功能就是一個資料夾：放進去然後重新啟動。</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>需要重新啟動</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>重新啟動 LuaTools 後此變更才會生效。</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>社群擴充功能可為 LuaTools 新增資訊清單來源。擴充功能就是一個裝著 JSON 的資料夾：放進去即可，不會執行任何內容。</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>尚未安裝任何擴充功能</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>擴充功能是一個含有 addon.json 的資料夾。最小又實用的形式只是幾行 JSON，用來新增一個資訊清單來源 —— 不編譯任何東西，也不執行任何東西。</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>開啟擴充功能資料夾</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>載入器訊息</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>已載入</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>已載入（僅資料，未執行任何內容）</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>已停用</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>載入失敗</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>重新整理</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>請重新啟動 LuaTools 以載入此擴充功能（它包含程式碼）</value></data>
 </root>

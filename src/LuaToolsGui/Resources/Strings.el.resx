@@ -724,17 +724,13 @@
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Όταν το fix ενός παιχνιδιού έχει τα δικά του manifest (voices38, DenuvOwO, SteamTools Achievements), μπλόκαρε την κανονική λήψη και πρόσθεσέ το μέσω του fix</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Πρόσθετα</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Πρόσθετα</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Τα πρόσθετα της κοινότητας προσθέτουν πηγές manifest και σελίδες στο LuaTools. Ένα πρόσθετο είναι ένας φάκελος: βάλ' τον εδώ και κάνε επανεκκίνηση.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Απαιτείται επανεκκίνηση</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Κάνε επανεκκίνηση του LuaTools για να ισχύσει η αλλαγή.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Τα πρόσθετα της κοινότητας προσθέτουν πηγές manifest στο LuaTools. Ένα πρόσθετο είναι ένας φάκελος με JSON: βάλ' τον εδώ, τίποτα δεν εκτελείται.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Δεν έχουν εγκατασταθεί πρόσθετα</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Ένα πρόσθετο είναι ένας φάκελος με ένα addon.json. Το μικρότερο χρήσιμο είναι λίγες γραμμές JSON που προσθέτουν μια πηγή manifest — τίποτα δεν μεταγλωττίζεται, τίποτα δεν εκτελείται.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Άνοιγμα του φακέλου προσθέτων</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Μηνύματα του φορτωτή</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Φορτώθηκε</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Φορτώθηκε (μόνο δεδομένα, δεν εκτελέστηκε τίποτα)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Απενεργοποιημένο</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Η φόρτωση απέτυχε</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Ανανέωση</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Κάνε επανεκκίνηση του LuaTools για να φορτωθεί αυτό το πρόσθετο (περιέχει κώδικα)</value></data>
 </root>

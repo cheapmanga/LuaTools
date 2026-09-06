@@ -750,17 +750,13 @@
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>عندما يتضمن إصلاح اللعبة ملفات manifest الخاصة به (voices38، DenuvOwO، SteamTools Achievements)، أوقف الجلب العادي وأضِف اللعبة عبر الإصلاح بدلاً من ذلك</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>الإضافات</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>الإضافات</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>تضيف إضافات المجتمع مصادر مانيفست وصفحات إلى LuaTools. الإضافة هي مجلد: ضعه هنا وأعد التشغيل.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>يلزم إعادة التشغيل</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>أعد تشغيل LuaTools لتطبيق هذا التغيير.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>تضيف إضافات المجتمع مصادر مانيفست إلى LuaTools. الإضافة هي مجلد من JSON: ضعه هنا، ولا يُنفَّذ منه أي شيء.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>لا توجد إضافات مثبتة</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>الإضافة هي مجلد يحتوي على addon.json. أصغر إضافة مفيدة هي بضعة أسطر JSON تضيف مصدر مانيفست — بلا ترجمة برمجية وبلا تنفيذ.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>فتح مجلد الإضافات</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>رسائل المُحمِّل</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>مُحمَّلة</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>مُحمَّلة (بيانات فقط، بلا تنفيذ)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>معطّلة</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>فشل التحميل</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>تحديث</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>أعد تشغيل LuaTools لتحميل هذه الإضافة (تحتوي على شيفرة)</value></data>
 </root>

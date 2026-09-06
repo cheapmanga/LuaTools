@@ -724,17 +724,13 @@ Lunastetaanko silti?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Kun pelin fixillä on omat manifestit (voices38, DenuvOwO, SteamTools Achievements), estä tavallinen haku ja lisää peli fixin kautta</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Lisäosat</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Lisäosat</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Yhteisön lisäosat tuovat LuaToolsiin manifestilähteitä ja sivuja. Lisäosa on kansio: pudota se tänne ja käynnistä uudelleen.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Uudelleenkäynnistys vaaditaan</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Käynnistä LuaTools uudelleen, jotta muutos tulee voimaan.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Yhteisön lisäosat tuovat LuaToolsiin manifestilähteitä. Lisäosa on JSON-kansio: pudota se tänne, mitään ei suoriteta.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Ei asennettuja lisäosia</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Lisäosa on kansio, jossa on addon.json. Pienin hyödyllinen on muutama rivi JSONia, joka lisää manifestilähteen — mitään ei käännetä eikä suoriteta.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Avaa lisäosakansio</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Lataajan viestit</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Ladattu</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Ladattu (vain data, mitään ei suoritettu)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Poistettu käytöstä</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Lataus epäonnistui</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Päivitä</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Käynnistä LuaTools uudelleen ladataksesi tämän lisäosan (se sisältää koodia)</value></data>
 </root>

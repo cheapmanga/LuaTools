@@ -1,7 +1,6 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using LuaTools.Addons;
 using LuaToolsGui.Services.Downloads;
 using Microsoft.Extensions.Logging;
 

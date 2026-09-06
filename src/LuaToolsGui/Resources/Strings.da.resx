@@ -724,17 +724,13 @@ Vil du indløse den alligevel?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Når et spils fix har sine egne manifester (voices38, DenuvOwO, SteamTools Achievements), så blokér den normale hentning og tilføj det via fixet i stedet</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Tilføjelser</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Tilføjelser</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Tilføjelser fra fællesskabet føjer manifestkilder og sider til LuaTools. En tilføjelse er en mappe: læg den ind og genstart.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Genstart påkrævet</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Genstart LuaTools, for at ændringen træder i kraft.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Tilføjelser fra fællesskabet føjer manifestkilder til LuaTools. En tilføjelse er en mappe med JSON: læg den ind, intet køres.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Ingen tilføjelser installeret</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>En tilføjelse er en mappe med en addon.json. Den mindste brugbare er nogle få linjer JSON, der tilføjer en manifestkilde — intet kompileres, intet køres.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Åbn mappen med tilføjelser</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Meddelelser fra indlæseren</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Indlæst</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Indlæst (kun data, intet kørt)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktiveret</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Kunne ikke indlæses</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Opdater</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Genstart LuaTools for at indlæse denne tilføjelse (den indeholder kode)</value></data>
 </root>

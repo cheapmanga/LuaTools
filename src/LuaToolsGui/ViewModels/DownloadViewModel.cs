@@ -838,6 +838,10 @@ public partial class DownloadViewModel : ObservableObject
     /// </remarks>
     private async Task<int> AddAddonSourcesAsync(long appId, int freeRowCount)
     {
+        // Read from disk here rather than once at startup: an addon is only ever data, so a fetch may
+        // as well see what is in the folder right now. Cheap - a handful of small json files.
+        _addons.Reload(_settings.DisabledAddons);
+
         var sources = _addons.Sources;
         if (sources.Count == 0) return 0;
 

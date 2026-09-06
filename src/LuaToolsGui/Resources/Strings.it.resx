@@ -724,17 +724,13 @@ Riscattarlo lo stesso?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Quando il fix di un gioco include i propri manifest (voices38, DenuvOwO, SteamTools Achievements), blocca il recupero normale e aggiungilo tramite il fix</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Componenti aggiuntivi</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Componenti aggiuntivi</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>I componenti aggiuntivi della community aggiungono fonti di manifest e pagine a LuaTools. Un componente è una cartella: mettila qui e riavvia.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Riavvio necessario</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Riavvia LuaTools per applicare questa modifica.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>I componenti aggiuntivi della community aggiungono fonti di manifest a LuaTools. Un componente è una cartella di JSON: mettila qui, non viene mai eseguito nulla.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Nessun componente aggiuntivo installato</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Un componente aggiuntivo è una cartella con un addon.json. Il più piccolo utile sono poche righe di JSON che aggiungono una fonte di manifest: niente di compilato, niente di eseguito.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Apri la cartella dei componenti</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Messaggi del caricatore</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Caricato</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Caricato (solo dati, niente eseguito)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Disattivato</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Caricamento non riuscito</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Aggiorna</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Riavvia LuaTools per caricare questo componente (contiene codice)</value></data>
 </root>

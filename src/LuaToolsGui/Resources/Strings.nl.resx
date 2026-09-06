@@ -724,17 +724,13 @@ Toch inwisselen?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Als de fix van een spel eigen manifests bevat (voices38, DenuvOwO, SteamTools Achievements), blokkeer het gewone ophalen en voeg het via de fix toe</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Add-ons</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Add-ons</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Add-ons van de community voegen manifestbronnen en pagina's toe aan LuaTools. Een add-on is een map: zet hem erin en herstart.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Herstart vereist</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Herstart LuaTools om deze wijziging toe te passen.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Add-ons van de community voegen manifestbronnen toe aan LuaTools. Een add-on is een map met JSON: zet hem erin, er wordt nooit iets uitgevoerd.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Geen add-ons geïnstalleerd</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Een add-on is een map met een addon.json. De kleinste bruikbare bestaat uit een paar regels JSON die een manifestbron toevoegen — niets gecompileerd, niets uitgevoerd.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Add-onmap openen</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Berichten van de lader</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Geladen</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Geladen (alleen gegevens, niets uitgevoerd)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Uitgeschakeld</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Laden mislukt</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Vernieuwen</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Herstart LuaTools om deze add-on te laden (hij bevat code)</value></data>
 </root>

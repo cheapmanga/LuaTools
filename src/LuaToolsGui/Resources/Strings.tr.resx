@@ -724,17 +724,13 @@ Yine de kullanmak ister misin?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Bir oyunun fix'i kendi manifest'lerini getirdiğinde (voices38, DenuvOwO, SteamTools Achievements) normal çekmeyi engelle ve oyunu fix üzerinden ekle</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Eklentiler</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Eklentiler</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Topluluk eklentileri LuaTools'a manifest kaynakları ve sayfalar ekler. Eklenti bir klasördür: içine bırakın ve yeniden başlatın.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Yeniden başlatma gerekli</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Bu değişikliğin geçerli olması için LuaTools'u yeniden başlatın.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Topluluk eklentileri LuaTools'a manifest kaynakları ekler. Eklenti, JSON içeren bir klasördür: içine bırakın, hiçbir şey çalıştırılmaz.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Yüklü eklenti yok</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Eklenti, addon.json içeren bir klasördür. İşe yarayan en küçüğü, bir manifest kaynağı ekleyen birkaç satır JSON'dur — hiçbir şey derlenmez, hiçbir şey çalıştırılmaz.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Eklenti klasörünü aç</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Yükleyici iletileri</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Yüklendi</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Yüklendi (yalnızca veri, hiçbir şey çalıştırılmadı)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Devre dışı</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Yüklenemedi</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Yenile</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Bu eklentiyi yüklemek için LuaTools'u yeniden başlatın (kod içeriyor)</value></data>
 </root>
