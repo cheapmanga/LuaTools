@@ -26,15 +26,6 @@
                     Text="{x:Static res:Strings.Addons_Subtitle}"
                     TextWrapping="Wrap" />
 
-                <!-- Restart notice -->
-                <ui:InfoBar
-                    Margin="0,16,0,0"
-                    IsClosable="False"
-                    IsOpen="{Binding RestartNeeded}"
-                    Message="{x:Static res:Strings.Addons_RestartBody}"
-                    Severity="Informational"
-                    Title="{x:Static res:Strings.Addons_RestartTitle}" />
-
                 <!-- Empty state -->
                 <Border
                     Margin="0,16,0,0"

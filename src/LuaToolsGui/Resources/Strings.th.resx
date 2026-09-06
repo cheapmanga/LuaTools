@@ -724,17 +724,13 @@
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>เมื่อ fix ของเกมมี manifest ของตัวเอง (voices38, DenuvOwO, SteamTools Achievements) ให้บล็อกการดึงแบบปกติแล้วเพิ่มเกมผ่าน fix แทน</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>ส่วนเสริม</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>ส่วนเสริม</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>ส่วนเสริมจากชุมชนช่วยเพิ่มแหล่งแมนิเฟสต์และหน้าต่าง ๆ ให้ LuaTools ส่วนเสริมคือโฟลเดอร์ วางไว้แล้วรีสตาร์ท</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>ต้องรีสตาร์ท</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>รีสตาร์ท LuaTools เพื่อให้การเปลี่ยนแปลงมีผล</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>ส่วนเสริมจากชุมชนช่วยเพิ่มแหล่งแมนิเฟสต์ให้ LuaTools ส่วนเสริมคือโฟลเดอร์ที่มี JSON วางไว้ได้เลย ไม่มีอะไรถูกรัน</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>ยังไม่ได้ติดตั้งส่วนเสริม</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>ส่วนเสริมคือโฟลเดอร์ที่มีไฟล์ addon.json ตัวที่เล็กที่สุดที่ใช้งานได้คือ JSON ไม่กี่บรรทัดที่เพิ่มแหล่งแมนิเฟสต์ — ไม่มีการคอมไพล์ ไม่มีการรันอะไรทั้งสิ้น</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>เปิดโฟลเดอร์ส่วนเสริม</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>ข้อความจากตัวโหลด</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>โหลดแล้ว</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>โหลดแล้ว (เฉพาะข้อมูล ไม่มีการรัน)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>ปิดใช้งาน</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>โหลดไม่สำเร็จ</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>รีเฟรช</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>รีสตาร์ท LuaTools เพื่อโหลดส่วนเสริมนี้ (มีโค้ดอยู่ภายใน)</value></data>
 </root>

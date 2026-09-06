@@ -21,23 +21,19 @@ public partial class AddonRow : ObservableObject
     /// <summary>"Loaded" / "Data only" / "Disabled" / the failure reason. One line, for the user.</summary>
     public required string Status { get; init; }
 
-    /// <summary>What this addon actually contributes, e.g. "2 sources, 1 page". Empty when nothing.</summary>
+    /// <summary>What this addon actually contributes, e.g. "2 sources". Empty when nothing.</summary>
     public required string Contributes { get; init; }
 
     public bool Failed { get; init; }
 
-    /// <summary>
-    /// Bound to the row's switch. Setting it writes to settings immediately but changes nothing this
-    /// session: assemblies cannot be safely unloaded once their types are in the visual tree and the DI
-    /// container, so <see cref="RestartNeeded"/> goes up and the page says so.
-    /// </summary>
+    /// <summary>Bound to the row's switch. Takes effect from the next fetch; nothing needs restarting.</summary>
     [ObservableProperty] private bool _enabled;
 }
 
 /// <summary>
 /// The Addons page: what is installed, what it contributes, and what went wrong. Deliberately not a
-/// store — installing is dropping a folder in, which is the whole point of a format whose smallest
-/// useful form is a few lines of JSON.
+/// store — installing is dropping a folder in, which is the whole point of a format that is only ever
+/// a few lines of JSON and can never carry code.
 /// </summary>
 public partial class AddonsViewModel : ObservableObject
 {
@@ -53,14 +49,13 @@ public partial class AddonsViewModel : ObservableObject
 
     /// <summary>
     /// Re-read the addon folder and show what is there now. Called when the page is opened and by the
-    /// Refresh button, so dropping a data addon in and coming back to this page is enough to see it -
-    /// no restart, because a data addon touches nothing that is fixed at startup.
+    /// Refresh button, so dropping an addon in and coming back to this page is enough to see it. An
+    /// addon is only ever data, so there is nothing a restart could do that this does not.
     /// </summary>
     [RelayCommand]
     private void Refresh()
     {
-        // Sticky: a restart already owed for a code addon is not cleared by a later data-only refresh.
-        RestartNeeded |= _registry.RefreshDataAddons(_settings.DisabledAddons);
+        _registry.Reload(_settings.DisabledAddons);
         Reload();
     }
 
@@ -68,8 +63,6 @@ public partial class AddonsViewModel : ObservableObject
 
     /// <summary>Loader messages, newest last. Shown collapsed unless something failed.</summary>
     public ObservableCollection<string> Diagnostics { get; } = [];
-
-    [ObservableProperty] private bool _restartNeeded;
 
     /// <summary>True when there is nothing to list, so the page can explain how to add one.</summary>
     public bool IsEmpty => Addons.Count == 0;
@@ -98,16 +91,11 @@ public partial class AddonsViewModel : ObservableObject
                 Failed = a.State == AddonState.Failed,
                 Enabled = !disabled.Contains(a.Manifest.Id, StringComparer.OrdinalIgnoreCase),
             };
-            bool hasCode = a.HasAssembly;
             row.PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName != nameof(AddonRow.Enabled)) return;
                 _settings.SetAddonEnabled(row.Id, row.Enabled);
-
-                // Only a code addon needs the app restarted to come or go. Toggling a data addon takes
-                // effect on the next fetch, so claiming otherwise would be a lie the user has to obey.
-                if (hasCode) RestartNeeded = true;
-                else Refresh();
+                Refresh();
             };
             Addons.Add(row);
         }
@@ -121,7 +109,6 @@ public partial class AddonsViewModel : ObservableObject
     private static string Describe(LoadedAddon a) => a.State switch
     {
         AddonState.Loaded => Resources.Strings.Addons_State_Loaded,
-        AddonState.DataOnly => Resources.Strings.Addons_State_DataOnly,
         AddonState.Disabled => Resources.Strings.Addons_State_Disabled,
         // The loader's reason, when there is one, beats a generic label: it names the actual problem.
         _ => a.Error ?? Resources.Strings.Addons_State_Failed,
@@ -131,7 +118,6 @@ public partial class AddonsViewModel : ObservableObject
     {
         List<string> parts = [];
         if (a.Sources.Count > 0) parts.Add($"{a.Sources.Count} source{(a.Sources.Count == 1 ? "" : "s")}");
-        if (a.Pages.Count > 0) parts.Add($"{a.Pages.Count} page{(a.Pages.Count == 1 ? "" : "s")}");
         return string.Join(", ", parts);
     }
 

@@ -724,17 +724,13 @@ Zrealizować mimo to?</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Gdy fix gry zawiera własne manifesty (voices38, DenuvOwO, SteamTools Achievements), zablokuj zwykłe pobieranie i dodaj grę przez fix</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>Dodatki</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>Dodatki</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>Dodatki społeczności dodają do LuaTools źródła manifestów i strony. Dodatek to folder: wrzuć go i uruchom ponownie.</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>Wymagany restart</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>Uruchom LuaTools ponownie, aby zastosować tę zmianę.</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Dodatki społeczności dodają do LuaTools źródła manifestów. Dodatek to folder z JSON-em: wrzuć go, nic z niego nie jest uruchamiane.</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>Brak zainstalowanych dodatków</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>Dodatek to folder z plikiem addon.json. Najmniejszy użyteczny to kilka linii JSON dodających źródło manifestów — nic kompilowanego, nic uruchamianego.</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>Otwórz folder dodatków</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>Komunikaty modułu ładującego</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>Załadowany</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Załadowany (tylko dane, nic nie uruchomiono)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Wyłączony</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Nie udało się załadować</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Odśwież</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Uruchom LuaTools ponownie, aby wczytać ten dodatek (zawiera kod)</value></data>
 </root>

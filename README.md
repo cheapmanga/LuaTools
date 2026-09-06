@@ -56,9 +56,7 @@ rows stay in the list, showing their real used/limit count.
 ## Addons
 
 The **Addons** page loads community addons from `%AppData%\LuaToolsGui\addons\`. An addon is a
-folder holding an `addon.json`; drop one in and restart.
-
-The smallest useful addon has **no code at all** — a few lines of JSON adding a manifest source:
+folder holding an `addon.json` — a few lines of JSON adding a manifest source:
 
 ```json
 {
@@ -85,15 +83,9 @@ That case is the reason this exists. Free sources rot: the ManifestHub repo upst
 since January 2026, and pointing at fresher community forks took a whole new build. An addon turns
 that into editing one line.
 
-Naming an assembly opts into the code path — the addon implements `ILuaToolsAddon` against the
-`LuaTools.Addons` contract, registers its own services and can add a page of its own to the nav rail.
-A code addon must declare its dll's sha256; that is not a trust decision (a hash beside the file it
-describes proves nothing on its own) but it lets a published addon, its listing and the bytes on disk
-be shown to be the same thing. Read what you install.
-
-A data addon needs no restart: drop it in, open the Addons page, and its sources are live from the
-next fetch. Only an addon carrying an assembly needs one — it registers services into a container built
-once at startup, and its types can never be unloaded afterwards.
+An addon is data, and only data: it can say *where* manifests come from, never supply code or a binary,
+so installing one from a stranger cannot execute anything. Nothing needs restarting — drop a folder in,
+open the Addons page, and its sources are live from the next fetch.
 
 A broken addon never stops the app from starting: the Addons page lists every folder found and, for
 each, either what it contributed or why it was refused.

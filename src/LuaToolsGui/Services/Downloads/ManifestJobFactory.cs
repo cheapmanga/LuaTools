@@ -138,7 +138,7 @@ public class ManifestJobFactory(
     /// depending on which source happened to have the game.
     /// </summary>
     public DownloadJob CreateAddonSourceJob(
-        LuaTools.Addons.ManifestSourceDescriptor source,
+        Addons.ManifestSourceDescriptor source,
         long appId, string? gameName,
         Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
         Action<DownloadItem, JobResult?>? onFinished = null,
@@ -155,7 +155,7 @@ public class ManifestJobFactory(
             (_, progress, ct) => addonSources.FetchAsync(source, appId, progress, ct),
             // A key database yields a lua we built, which already carries the DLC and soundtrack
             // entitlements; only a ready-made zip or lua from someone else needs them added after.
-            source.Kind is LuaTools.Addons.ManifestSourceKind.DepotKeyDatabase
+            source.Kind is Addons.ManifestSourceKind.DepotKeyDatabase
                 ? (file, _, _) => Task.FromResult(InstallManifest(file, appId, title))
                 : (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
             confirm,

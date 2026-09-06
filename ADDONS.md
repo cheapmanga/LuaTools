@@ -4,14 +4,16 @@ An addon is a folder in `%AppData%\LuaToolsGui\addons\`, holding an `addon.json`
 the addon id — a manifest whose `id` disagrees with its folder is refused, so one addon cannot pose as
 another by editing a file.
 
-**A data addon needs no restart.** Drop it in and open the Addons page (or hit **Refresh**) — its
-sources are live from the next fetch, and enabling or disabling one takes effect the same way. Only an
-addon that carries an **assembly** needs LuaTools restarted: it registers services into a container that
-is built once at startup, and its types can never be unloaded afterwards.
+**Nothing needs restarting.** Drop a folder in and open the Addons page (or hit **Refresh**) — its
+sources are live from the next fetch, and enabling or disabling one takes effect the same way.
 
-## The smallest useful addon
+**An addon is data, and only data.** It can say *where* manifests are fetched from; it cannot supply
+code, a binary, or a fetch routine of its own. It names one of the shapes below and the app does the
+fetching, so installing an addon from a stranger cannot execute anything.
 
-No code, nothing compiled, nothing executed — a source the Add page can fetch from:
+## An addon
+
+A source the Add page can fetch from:
 
 `%AppData%\LuaToolsGui\addons\example.freesource\addon.json`:
 
@@ -42,9 +44,9 @@ No code, nothing compiled, nothing executed — a source the Add page can fetch 
 }
 ```
 
-This is the case the format exists for. Free manifest sources rot: the upstream ManifestHub repo has
-been frozen since January 2026, and the app had to ship a whole new build just to point at fresher
-community forks. A data addon turns that into editing one line.
+This is what the format exists for. Free manifest sources rot: the upstream ManifestHub repo has been
+frozen since January 2026, and the app had to ship a whole new build just to point at fresher community
+forks. An addon turns that into editing one line.
 
 ### Source kinds
 
@@ -56,46 +58,6 @@ community forks. A data addon turns that into editing one line.
 
 Every url must be `https`. Source names that belong to the app (`manifesthub`, `sushi`, `luatools`,
 `hubcap`, `sadie`) are refused rather than silently shadowed.
-
-## An addon with code
-
-Reference `LuaTools.Addons` (**`Private=false`** — do not ship your own copy of it, or the host cannot
-cast your addon to its own interface), implement `ILuaToolsAddon`, and name the built dll in the
-manifest with its sha256:
-
-```json
-{
-  "schema": 1,
-  "id": "you.mypage",
-  "name": "My page",
-  "version": "1.0.0",
-  "assembly": "MyAddon.dll",
-  "assemblySha256": "…",
-  "minHostVersion": "1.1.3"
-}
-```
-
-```csharp
-public sealed class MyAddon : ILuaToolsAddon
-{
-    public void Configure(IAddonContext ctx)
-    {
-        ctx.Services.AddSingleton<MyPageView>();
-        ctx.AddPage(new AddonPage { Title = "My page", ViewType = typeof(MyPageView), Icon = "Star24" });
-    }
-}
-```
-
-`Configure` runs on the UI thread during startup, before the window exists, and every addon's runs
-before the app is usable. Register and return — anything that can block belongs in the service your
-page resolves, on first use.
-
-### The sha256 is not a trust decision
-
-A hash sitting next to the file it describes proves nothing against someone who can rewrite both. It is
-there so a published addon, its catalog entry and the bytes on your disk can be shown to be the same
-thing — which is what makes "it's open source" checkable rather than merely true. Read the source of
-anything you install; that is the actual protection, and it is the same one LuaTools itself relies on.
 
 ## When something doesn't load
 

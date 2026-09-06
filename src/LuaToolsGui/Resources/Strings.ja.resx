@@ -724,17 +724,13 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>ゲームのfixが独自のmanifestを含む場合（voices38、DenuvOwO、SteamTools Achievements）、通常の取得をブロックしてfix経由で追加する</value></data>
   <data name="Nav_Addons" xml:space="preserve"><value>アドオン</value></data>
   <data name="Addons_Title" xml:space="preserve"><value>アドオン</value></data>
-  <data name="Addons_Subtitle" xml:space="preserve"><value>コミュニティのアドオンは、LuaTools にマニフェストのソースやページを追加します。アドオンはフォルダーです。入れて再起動してください。</value></data>
-  <data name="Addons_RestartTitle" xml:space="preserve"><value>再起動が必要です</value></data>
-  <data name="Addons_RestartBody" xml:space="preserve"><value>この変更を適用するには LuaTools を再起動してください。</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>コミュニティのアドオンは LuaTools にマニフェストのソースを追加します。アドオンは JSON が入ったフォルダーです。置くだけで、実行されるものは何もありません。</value></data>
   <data name="Addons_EmptyTitle" xml:space="preserve"><value>アドオンがインストールされていません</value></data>
   <data name="Addons_EmptyBody" xml:space="preserve"><value>アドオンとは addon.json を含むフォルダーです。最小限で役に立つものは、マニフェストのソースを追加する数行の JSON だけ — コンパイルも実行も行われません。</value></data>
   <data name="Addons_OpenFolder" xml:space="preserve"><value>アドオンフォルダーを開く</value></data>
   <data name="Addons_Diagnostics" xml:space="preserve"><value>ローダーのメッセージ</value></data>
   <data name="Addons_State_Loaded" xml:space="preserve"><value>読み込み済み</value></data>
-  <data name="Addons_State_DataOnly" xml:space="preserve"><value>読み込み済み（データのみ、実行なし）</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>無効</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>読み込みに失敗しました</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>更新</value></data>
-  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>このアドオンを読み込むには LuaTools を再起動してください（コードを含みます）</value></data>
 </root>

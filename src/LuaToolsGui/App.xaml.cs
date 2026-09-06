@@ -19,19 +19,10 @@ public partial class App : Application
 
     public App()
     {
-        // Addons register into the service collection, so they have to run while one still exists: by
-        // the time the provider is built, nothing can be added to it. Reading the disabled list needs a
-        // SettingsService before DI can hand one out, so this makes its own - it only reads the same
-        // file the singleton will, and is thrown away here.
-        var addons = new Services.Addons.AddonRegistry();
-
         _host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
-                try { addons.LoadAll(services, new SettingsService().DisabledAddons); }
-                catch (Exception ex) { addons.Note($"addons: loading was abandoned ({ex.Message})"); }
-                services.AddSingleton(addons);
-
+                services.AddSingleton<Services.Addons.AddonRegistry>();
                 services.AddSingleton<SettingsService>();
                 services.AddSingleton<CacheService>();
                 services.AddSingleton<SteamService>();
