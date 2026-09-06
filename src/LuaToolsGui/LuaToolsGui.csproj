@@ -28,6 +28,13 @@
     <Using Remove="System.Drawing" />
   </ItemGroup>
 
+  <!-- The addon contract. Addons compile against this same assembly and must NOT ship their own copy;
+       AddonLoadContext sends any assembly the host already has back to the default context so the
+       ILuaToolsAddon an addon implements is the very type this host casts to. -->
+  <ItemGroup>
+    <ProjectReference Include="..\LuaTools.Addons\LuaTools.Addons.csproj" />
+  </ItemGroup>
+
   <!-- Let the test project reach internal members (e.g. Program.MatchOsLanguage). -->
   <ItemGroup>
     <InternalsVisibleTo Include="LuaToolsGui.Tests" />

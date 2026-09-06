@@ -2,6 +2,7 @@
 using LuaToolsGui.Services;
 using LuaToolsGui.ViewModels;
 using LuaToolsGui.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LuaToolsGui;
 
@@ -20,6 +21,8 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
         // NavigationView resolves page instances (DownloadView/SettingsView) from DI.
         RootNavigation.SetServiceProvider(services);
 
+        AppendAddonPages(services.GetRequiredService<Services.Addons.AddonRegistry>());
+
         InitializeTrayIcon();
         Closing += OnWindowClosing;
 
@@ -30,6 +33,43 @@ public partial class MainWindow : Wpf.Ui.Controls.FluentWindow
             catch { /* auth restore failed (e.g. offline). UI still loads as guest */ }
         };
     }
+
+    /// <summary>
+    /// Puts each addon's page in the nav rail, after the built-in ones.
+    /// </summary>
+    /// <remarks>
+    /// Appending to <c>MenuItems</c> rather than moving the whole rail to a bound <c>MenuItemsSource</c>
+    /// is deliberate: the two cannot both be used, so binding the source would mean pulling all twelve
+    /// built-in pages out of XAML and into a collection, for no gain to anything but addons. This leaves
+    /// the existing rail untouched and costs one loop.
+    /// </remarks>
+    private void AppendAddonPages(Services.Addons.AddonRegistry addons)
+    {
+        foreach (var page in addons.Pages)
+        {
+            try
+            {
+                var item = new Wpf.Ui.Controls.NavigationViewItem
+                {
+                    Content = page.Title,
+                    TargetPageType = page.ViewType,
+                    Icon = new Wpf.Ui.Controls.SymbolIcon(ParseSymbol(page.Icon)),
+                };
+                RootNavigation.MenuItems.Add(item);
+            }
+            catch (Exception ex)
+            {
+                // One bad page must not cost the user the others, nor the window.
+                addons.Note($"nav: could not add page \"{page.Title}\" ({ex.Message})");
+            }
+        }
+    }
+
+    /// <summary>An icon name we don't know becomes the generic one, never an exception.</summary>
+    private static Wpf.Ui.Controls.SymbolRegular ParseSymbol(string? name) =>
+        Enum.TryParse<Wpf.Ui.Controls.SymbolRegular>(name, ignoreCase: true, out var s)
+            ? s
+            : Wpf.Ui.Controls.SymbolRegular.PuzzlePiece24;
 
     // ── System tray ─────────────────────────────────────────────────
     private void InitializeTrayIcon()

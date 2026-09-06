@@ -61,6 +61,10 @@ public class AppSettings
     // manifests (voices38/DenuvOwO/SteamTools Achievements) and offers to add it through the fix.
     // Nullable so "never set" (→ default ON) is distinguishable from an explicit choice.
     public bool? BlockFetchWhenFixManifests { get; set; }
+
+    // Addon ids the user switched off, by id. Only the OFF list is stored: an addon the user has never
+    // touched is on, so a newly installed one works without an entry having to appear here first.
+    public List<string>? DisabledAddons { get; set; }
 }
 
 public class SettingsService
@@ -103,6 +107,22 @@ public class SettingsService
     {
         get => _settings.DonateKeys ?? true; // default ON
         set { _settings.DonateKeys = value; Save(); }
+    }
+
+    /// <summary>
+    /// Addons the user switched off, by id. Reading returns a copy: the registry holds this while it
+    /// walks the addon folders, and a caller mutating the live list mid-walk would change the outcome
+    /// halfway through.
+    /// </summary>
+    public IReadOnlyList<string> DisabledAddons => _settings.DisabledAddons?.ToArray() ?? [];
+
+    /// <summary>Switches one addon on or off. Takes effect on restart - see AddonLoadContext.</summary>
+    public void SetAddonEnabled(string id, bool enabled)
+    {
+        var list = _settings.DisabledAddons ??= [];
+        if (enabled) list.RemoveAll(x => string.Equals(x, id, StringComparison.OrdinalIgnoreCase));
+        else if (!list.Any(x => string.Equals(x, id, StringComparison.OrdinalIgnoreCase))) list.Add(id);
+        Save();
     }
 
     /// <summary>Manage-page results-per-page (default 24). 0 = "All" (single infinite scroll).</summary>
@@ -236,7 +256,8 @@ public class SettingsService
             && _settings.StartWithWindows is null
             && _settings.MinimizeToTray is null
             && _settings.FastFetch is null
-            && _settings.BlockFetchWhenFixManifests is null;
+            && _settings.BlockFetchWhenFixManifests is null
+            && (_settings.DisabledAddons is null || _settings.DisabledAddons.Count == 0);
         if (empty)
         {
             foreach (var p in new[] { FilePath, BakPath, TmpPath })
