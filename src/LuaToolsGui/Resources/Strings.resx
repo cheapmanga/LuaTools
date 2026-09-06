@@ -757,4 +757,17 @@ Redeem anyway?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Couldn't find the fix's manifests for this game.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Prefer fix manifests</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>When a game's fix ships its own manifests (voices38, DenuvOwO, SteamTools Achievements), block the normal fetch and add it through the fix instead</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Addons</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Addons</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Community addons add manifest sources and pages to LuaTools. An addon is a folder: drop it in and restart.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Restart needed</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Restart LuaTools for this change to take effect.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>No addons installed</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>An addon is a folder holding an addon.json. The smallest useful one is a few lines of JSON that add a manifest source — nothing compiled, nothing executed.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Open the addons folder</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Loader messages</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Loaded</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Loaded (data only, nothing executed)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Failed to load</value></data>
 </root>

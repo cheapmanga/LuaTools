@@ -49,13 +49,17 @@ public partial class SourceRowViewModel : ObservableObject
     // would collapse it anyway; this just keeps the button from looking clickable.
     public bool CanDownload => IsAvailable && !IsLocked && QueueItem?.IsActive != true;
 
-    public SourceRowViewModel(DownloadViewModel parent, string name, string status)
+    /// <param name="displayName">
+    /// Overrides the built-in source-meta table. Addon sources are not in it and never will be - their
+    /// label travels with the descriptor that declared them, already localised by its author.
+    /// </param>
+    public SourceRowViewModel(DownloadViewModel parent, string name, string status, string? displayName = null)
     {
         _parent = parent;
         Name = name;
         Status = status;
         var meta = SourceMeta.Get(name);
-        DisplayName = meta.DisplayName ?? name;
+        DisplayName = displayName ?? meta.DisplayName ?? name;
         DiscordUrl = meta.DiscordUrl;
         NeedsKey = meta.RequiresUserKey;
     }
@@ -93,6 +97,8 @@ public partial class DownloadViewModel : ObservableObject
     private readonly FixLookupService _fixes;
     private readonly ManifestHubService _manifestHub;
     private readonly SushiService _sushi;
+    private readonly Services.Addons.AddonRegistry _addons;
+    private readonly Services.Addons.AddonSourceService _addonSources;
     private readonly DownloadQueue _queue;
     private readonly ManifestJobFactory _jobs;
     private CancellationTokenSource? _searchCts;
@@ -399,7 +405,8 @@ public partial class DownloadViewModel : ObservableObject
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
         HardwareAppIdService hardware, FixLookupService fixes, ManifestHubService manifestHub,
-        SushiService sushi, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs)
+        SushiService sushi, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs,
+        Services.Addons.AddonRegistry addons, Services.Addons.AddonSourceService addonSources)
     {
         _api = api;
         _hubcap = hubcap;
@@ -414,6 +421,8 @@ public partial class DownloadViewModel : ObservableObject
         _fixes = fixes;
         _manifestHub = manifestHub;
         _sushi = sushi;
+        _addons = addons;
+        _addonSources = addonSources;
         _queue = queue;
         _jobs = jobs;
         Drop = drop;
@@ -809,9 +818,44 @@ public partial class DownloadViewModel : ObservableObject
         if (sushiHas) InsertFreeRow(SushiService.SourceName);
         if (hubHas) InsertFreeRow(ManifestHubService.SourceName);
 
+        int addonRows = await AddAddonSourcesAsync(appId, freeRowCount: (sushiHas ? 1 : 0) + (hubHas ? 1 : 0));
+
         // The notice AND its button share one condition: only offer to switch when no free source has
         // the game AND a lua.tools row is actually downloadable, so the banner never shows a dead button.
-        FreeSourceUnavailable = !sushiHas && !hubHas && Sources.Any(s => !s.IsFree && s.CanDownload);
+        FreeSourceUnavailable = !sushiHas && !hubHas && addonRows == 0
+            && Sources.Any(s => !s.IsFree && s.CanDownload);
+    }
+
+    /// <summary>
+    /// Add a row for every addon-contributed source that covers this game, below the built-in free ones
+    /// and above the metered lua.tools rows. Returns how many were added.
+    /// </summary>
+    /// <remarks>
+    /// Probed in parallel, because the count is whatever the user installed and doing them in sequence
+    /// would put an addon's latency on the critical path of every Fetch. Built-ins stay on top: they are
+    /// the ones this app is tested with, and an addon should not be able to displace them by declaring a
+    /// lower order.
+    /// </remarks>
+    private async Task<int> AddAddonSourcesAsync(long appId, int freeRowCount)
+    {
+        var sources = _addons.Sources;
+        if (sources.Count == 0) return 0;
+
+        var probes = sources
+            .Select(src => (Source: src, Has: SafeHasAsync(_addonSources.HasGameAsync(src, appId))))
+            .ToList();
+        await Task.WhenAll(probes.Select(p => p.Has));
+
+        int added = 0;
+        foreach (var (src, has) in probes)
+        {
+            if (!has.Result) continue;
+            var row = new SourceRowViewModel(this, src.Name, "available", src.DisplayName) { IsFree = src.IsFree };
+            row.StatsText = src.Badge ?? (src.IsFree ? Resources.Strings.Free_NoLimit : null);
+            Sources.Insert(freeRowCount + added, row);
+            added++;
+        }
+        return added;
     }
 
     /// <summary>A HasGameAsync that never throws: a failed/offline lookup just means "not covered".</summary>
@@ -901,8 +945,14 @@ public partial class DownloadViewModel : ObservableObject
 
         // The free source builds its lua from public keys and never touches lua.tools; like Hubcap with
         // a key, it needs no account. Every lua.tools source still requires signing in.
+        // Resolved up here because it exempts the row from the sign-in gate below: an addon source is
+        // fetched straight from the url its descriptor names and never touches lua.tools, so a
+        // lua.tools account has no bearing on it whatever the descriptor says about being free.
+        var addonSource = _addons.Sources.FirstOrDefault(x =>
+            string.Equals(x.Name, source.Name, StringComparison.OrdinalIgnoreCase));
+
         bool hubcapWithKey = source.NeedsKey && !string.IsNullOrEmpty(_settings.HubcapApiKey);
-        if (!source.IsFree && !hubcapWithKey
+        if (!source.IsFree && !hubcapWithKey && addonSource is null
             && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return null;
 
         Error = null;
@@ -919,7 +969,16 @@ public partial class DownloadViewModel : ObservableObject
             _silentInstall ? null : (file, _, ct) => ConfirmOverwriteAsync(file, appId, gameName, ct);
 
         DownloadJob job;
-        if (source.IsFree)
+        if (addonSource is not null)
+        {
+            // Checked before the built-in branch, but it can never shadow one: the registry refuses an
+            // addon that claims a reserved source name, so a match here is always genuinely an addon's.
+            job = _jobs.CreateAddonSourceJob(addonSource, appId, gameName,
+                confirm: confirm,
+                onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                onReveal: () => NavigateToGame?.Invoke(appId));
+        }
+        else if (source.IsFree)
         {
             // Route to the matching free builder; both install through the same pipeline afterward.
             job = source.Name == SushiService.SourceName

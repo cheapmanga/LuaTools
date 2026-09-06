@@ -722,4 +722,17 @@ Uplatnit ho i tak?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Manifesty z fixu se pro tuhle hru nepodařilo najít.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Upřednostnit manifesty z fixu</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Když fix hry obsahuje vlastní manifesty (voices38, DenuvOwO, SteamTools Achievements), zablokuj běžné stahování a přidej hru rovnou přes fix</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Doplňky</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Doplňky</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Komunitní doplňky přidávají do LuaTools zdroje manifestů a stránky. Doplněk je složka: vložte ji a restartujte.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Vyžaduje restart</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Restartujte LuaTools, aby se změna projevila.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Žádné nainstalované doplňky</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Doplněk je složka se souborem addon.json. Nejmenší užitečný je pár řádků JSON, které přidají zdroj manifestů — nic se nekompiluje ani nespouští.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Otevřít složku doplňků</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Zprávy zavaděče</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Načteno</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Načteno (jen data, nic se nespustilo)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Zakázáno</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Načtení selhalo</value></data>
 </root>

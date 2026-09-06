@@ -71,6 +71,14 @@ public sealed class AddonRegistry
 
     private readonly List<LoadedAddon> _addons = [];
 
+    /// <summary>
+    /// Source names already taken this session, across every addon. Two addons contributing the same
+    /// name would each get a row, and a download would resolve to whichever the lookup hit first - so
+    /// the second one is refused and said so, rather than producing a source whose behaviour depends on
+    /// folder ordering.
+    /// </summary>
+    private readonly HashSet<string> _claimedSourceNames = new(StringComparer.OrdinalIgnoreCase);
+
     /// <summary>Every addon folder found, whatever became of it. Ordered by display name.</summary>
     public IReadOnlyList<LoadedAddon> Addons => _addons;
 
@@ -183,6 +191,9 @@ public sealed class AddonRegistry
 
             if (ReservedSourceNames.Contains(e.Name))
             { Note($"{addon.Manifest.Id}: source \"{e.Name}\" is a built-in name, skipped"); continue; }
+
+            if (!_claimedSourceNames.Add(e.Name))
+            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" is already provided by another addon, skipped"); continue; }
 
             if (!Enum.TryParse<ManifestSourceKind>(e.Kind, ignoreCase: true, out var kind))
             { Note($"{addon.Manifest.Id}: source \"{e.Name}\" has unknown kind \"{e.Kind}\", skipped"); continue; }
@@ -337,6 +348,8 @@ public sealed class AddonRegistry
             Live(source);
             if (ReservedSourceNames.Contains(source.Name))
                 throw new InvalidOperationException($"source name \"{source.Name}\" is reserved");
+            if (!registry._claimedSourceNames.Add(source.Name))
+                throw new InvalidOperationException($"source name \"{source.Name}\" is already taken by another addon");
             addon.Sources.Add(source);
         }
 

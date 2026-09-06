@@ -722,4 +722,17 @@
   <data name="Add_Fix_None" xml:space="preserve"><value>Не вдалося знайти маніфести фікса для цієї гри.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Надавати перевагу маніфестам фікса</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Коли фікс гри містить власні маніфести (voices38, DenuvOwO, SteamTools Achievements), блокуй звичайне завантаження й додавай гру через фікс</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Доповнення</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Доповнення</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Доповнення спільноти додають до LuaTools джерела маніфестів і сторінки. Доповнення — це тека: покладіть її сюди й перезапустіть.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Потрібен перезапуск</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Перезапустіть LuaTools, щоб зміна набула чинності.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Доповнення не встановлено</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Доповнення — це тека з файлом addon.json. Найменше корисне — кілька рядків JSON, що додають джерело маніфестів: нічого не компілюється й не виконується.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Відкрити теку доповнень</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Повідомлення завантажувача</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Завантажено</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Завантажено (лише дані, нічого не виконано)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Вимкнено</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Не вдалося завантажити</value></data>
 </root>

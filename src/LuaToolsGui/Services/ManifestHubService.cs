@@ -46,58 +46,73 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         {
             if (_keys is not null) return _keys; // won the race
 
-            // Primary first, then any fallback mirror - the next url is tried only when the one before is
-            // unreachable or returns garbage, so a DMCA'd upstream falls through to a copy we control.
-            foreach (var url in AppConfig.ManifestHubKeysUrls)
-            {
-                try
-                {
-                    using var res = await gh.SendAsync(url, ct);
-                    if (res is null || !res.IsSuccessStatusCode)
-                    {
-                        log.LogDebug("depotkeys.json fetch failed at {Url}: {Status}", url, res?.StatusCode);
-                        continue; // try the next mirror
-                    }
-
-                    byte[] bytes = await res.Content.ReadAsByteArrayAsync(ct);
-
-                    // Parse off the UI thread. This runs from a UI-thread command (Fetch → HasGameAsync),
-                    // and deserializing 15 MB into a ~200k-entry map is enough to hitch the window for a
-                    // moment on the first game of a session. The caller's own await still resumes on the UI
-                    // thread, so its ObservableCollection writes stay safe.
-                    var keys = await Task.Run(() =>
-                    {
-                        // Flat {"<depotid>": "<key>"} object. Drop any entry whose id isn't a number
-                        // rather than failing the whole load.
-                        var raw = JsonSerializer.Deserialize<Dictionary<string, string>>(bytes);
-                        if (raw is null) return null;
-
-                        var map = new Dictionary<long, string>(raw.Count);
-                        foreach (var (id, key) in raw)
-                            if (long.TryParse(id, out long depot) && !string.IsNullOrWhiteSpace(key))
-                                map[depot] = key.Trim();
-                        return map;
-                    }, ct);
-
-                    if (keys is { Count: > 0 }) return _keys = keys; // good copy → cache and stop
-                    log.LogDebug("depotkeys.json from {Url} parsed to nothing; trying the next mirror", url);
-                }
-                catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
-                catch (Exception ex)
-                {
-                    // Includes an HttpClient timeout (surfaced as TaskCanceledException). Try the next
-                    // mirror; nothing is cached, so a later lookup retries from the top.
-                    log.LogDebug(ex, "Loading the depot-key database from {Url} failed", url);
-                }
-            }
-
-            return null; // every mirror failed → "free source unavailable right now"
+            var keys = await FetchKeyDatabaseAsync(AppConfig.ManifestHubKeysUrls, ct);
+            return keys is null ? null : _keys = keys;
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
         finally
         {
             _gate.Release();
         }
+    }
+
+    /// <summary>
+    /// Load a flat <c>{"&lt;depotid&gt;": "&lt;key&gt;"}</c> database from the first of <paramref name="urls"/>
+    /// that yields a usable one. Public because addon-contributed key databases are the same shape and
+    /// deserve the same mirror fallback; the caching, which differs per source, stays with the caller.
+    /// </summary>
+    /// <remarks>
+    /// The next url is tried only when the one before is unreachable or parses to nothing, so a frozen or
+    /// DMCA'd upstream falls through to a fresher copy. Null means every url failed, which callers read as
+    /// "this source is unavailable right now", never as an error.
+    /// </remarks>
+    public async Task<IReadOnlyDictionary<long, string>?> FetchKeyDatabaseAsync(
+        IEnumerable<string> urls, CancellationToken ct = default)
+    {
+        foreach (var url in urls)
+        {
+            try
+            {
+                using var res = await gh.SendAsync(url, ct);
+                if (res is null || !res.IsSuccessStatusCode)
+                {
+                    log.LogDebug("depotkeys.json fetch failed at {Url}: {Status}", url, res?.StatusCode);
+                    continue; // try the next mirror
+                }
+
+                byte[] bytes = await res.Content.ReadAsByteArrayAsync(ct);
+
+                // Parse off the UI thread. This runs from a UI-thread command (Fetch → HasGameAsync),
+                // and deserializing 15 MB into a ~200k-entry map is enough to hitch the window for a
+                // moment on the first game of a session. The caller's own await still resumes on the UI
+                // thread, so its ObservableCollection writes stay safe.
+                var keys = await Task.Run(() =>
+                {
+                    // Flat {"<depotid>": "<key>"} object. Drop any entry whose id isn't a number
+                    // rather than failing the whole load.
+                    var raw = JsonSerializer.Deserialize<Dictionary<string, string>>(bytes);
+                    if (raw is null) return null;
+
+                    var map = new Dictionary<long, string>(raw.Count);
+                    foreach (var (id, key) in raw)
+                        if (long.TryParse(id, out long depot) && !string.IsNullOrWhiteSpace(key))
+                            map[depot] = key.Trim();
+                    return map;
+                }, ct);
+
+                if (keys is { Count: > 0 }) return keys; // good copy → stop here
+                log.LogDebug("depotkeys.json from {Url} parsed to nothing; trying the next mirror", url);
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+            catch (Exception ex)
+            {
+                // Includes an HttpClient timeout (surfaced as TaskCanceledException). Try the next
+                // mirror; nothing is cached, so a later lookup retries from the top.
+                log.LogDebug(ex, "Loading the depot-key database from {Url} failed", url);
+            }
+        }
+
+        return null; // every mirror failed → "free source unavailable right now"
     }
 
     /// <summary>
@@ -137,6 +152,19 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         var keys = await EnsureKeysAsync(ct)
             ?? throw new DownloadAbortedException(Resources.Strings.Free_Err_Unavailable);
 
+        return await BuildLuaFromKeysAsync(appId, keys, ct);
+    }
+
+    /// <summary>
+    /// Build a game's lua from an already-loaded depot-key map. Public so an addon-contributed key
+    /// database produces byte-for-byte the same lua as the built-in source: the DLC and soundtrack
+    /// unlocks, the manifest pins and the de-duplication are subtle enough that a second implementation
+    /// would drift, and every drift would be a game that installs differently depending on which source
+    /// the user happened to pick.
+    /// </summary>
+    public async Task<DownloadedFile> BuildLuaFromKeysAsync(
+        long appId, IReadOnlyDictionary<long, string> keys, CancellationToken ct = default)
+    {
         var info = await depotInfo.GetAsync(appId, ct)
             ?? throw new DownloadAbortedException(Resources.Strings.Free_Err_Unavailable);
 

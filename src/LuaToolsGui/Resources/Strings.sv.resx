@@ -722,4 +722,17 @@ Vill du lösa in den ändå?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Kunde inte hitta fixens manifest för det här spelet.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Föredra fix-manifest</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>När ett spels fix har egna manifest (voices38, DenuvOwO, SteamTools Achievements), blockera den vanliga hämtningen och lägg till det via fixen istället</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Tillägg</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Tillägg</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Tillägg från communityn lägger till manifestkällor och sidor i LuaTools. Ett tillägg är en mapp: lägg dit den och starta om.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Omstart krävs</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Starta om LuaTools för att ändringen ska gälla.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Inga tillägg installerade</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Ett tillägg är en mapp med en addon.json. Det minsta användbara är några rader JSON som lägger till en manifestkälla — inget kompileras, inget körs.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Öppna tilläggsmappen</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Meddelanden från laddaren</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Laddat</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Laddat (endast data, inget kördes)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Inaktiverat</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Kunde inte laddas</value></data>
 </root>

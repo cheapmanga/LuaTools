@@ -722,4 +722,17 @@ Trotzdem einlösen?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Die Manifeste des Fixes für dieses Spiel wurden nicht gefunden.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Fix-Manifeste bevorzugen</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Wenn der Fix eines Spiels eigene Manifeste mitbringt (voices38, DenuvOwO, SteamTools Achievements), den normalen Abruf blockieren und das Spiel stattdessen über den Fix hinzufügen</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Add-ons</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Add-ons</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Community-Add-ons fügen LuaTools Manifest-Quellen und Seiten hinzu. Ein Add-on ist ein Ordner: hineinlegen und neu starten.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Neustart erforderlich</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Starte LuaTools neu, damit diese Änderung wirksam wird.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Keine Add-ons installiert</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Ein Add-on ist ein Ordner mit einer addon.json. Das kleinste sinnvolle besteht aus ein paar Zeilen JSON, die eine Manifest-Quelle hinzufügen — nichts kompiliert, nichts ausgeführt.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Add-on-Ordner öffnen</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Meldungen des Laders</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Geladen</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Geladen (nur Daten, nichts ausgeführt)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktiviert</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Laden fehlgeschlagen</value></data>
 </root>

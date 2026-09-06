@@ -722,4 +722,17 @@ Mégis beváltod?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Nem találhatók a fix manifesztjei ehhez a játékhoz.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Fix-manifesztek előnyben</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Ha egy játék fixje saját manifeszteket hoz (voices38, DenuvOwO, SteamTools Achievements), tiltsd le a normál letöltést, és a fixen keresztül add hozzá</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Kiegészítők</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Kiegészítők</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>A közösségi kiegészítők manifest-forrásokat és oldalakat adnak a LuaToolshoz. A kiegészítő egy mappa: tedd ide, és indítsd újra.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Újraindítás szükséges</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Indítsd újra a LuaToolst, hogy a változás életbe lépjen.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Nincs telepített kiegészítő</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>A kiegészítő egy mappa, benne egy addon.json fájllal. A legkisebb hasznos néhány sor JSON, amely manifest-forrást ad hozzá — semmit nem fordít le és nem futtat.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Kiegészítők mappájának megnyitása</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Betöltő üzenetei</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Betöltve</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Betöltve (csak adat, semmi nem futott)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Letiltva</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>A betöltés sikertelen</value></data>
 </root>

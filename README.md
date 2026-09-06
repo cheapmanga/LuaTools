@@ -53,6 +53,49 @@ Both install exactly as a lua.tools manifest does. When neither free source has 
 offers to fetch it with lua.tools instead (which uses your account and its 25/day cap). The lua.tools
 rows stay in the list, showing their real used/limit count.
 
+## Addons
+
+The **Addons** page loads community addons from `%AppData%\LuaToolsGui\addons\`. An addon is a
+folder holding an `addon.json`; drop one in and restart.
+
+The smallest useful addon has **no code at all** — a few lines of JSON adding a manifest source:
+
+```json
+{
+  "schema": 1,
+  "id": "example.freesource",
+  "name": "Example free source",
+  "version": "1.0.0",
+  "sources": [{
+    "name": "example-zip",
+    "displayName": "Example (free)",
+    "kind": "manifestZip",
+    "url": "https://raw.githubusercontent.com/someone/some-repo/main/{appid}.zip",
+    "badge": "Free"
+  }]
+}
+```
+
+Its source then appears on the **Add** page alongside the built-in free ones and installs through the
+same pipeline, DLCs and soundtracks included. Three shapes are understood: `manifestZip`
+(`<appid>.zip` with lua + manifests), `luaFile` (`<appid>.lua`), and `depotKeyDatabase` (one flat
+`depot → key` map for every game, from which the lua is built locally).
+
+That case is the reason this exists. Free sources rot: the ManifestHub repo upstream has been frozen
+since January 2026, and pointing at fresher community forks took a whole new build. An addon turns
+that into editing one line.
+
+Naming an assembly opts into the code path — the addon implements `ILuaToolsAddon` against the
+`LuaTools.Addons` contract, registers its own services and can add a page of its own to the nav rail.
+A code addon must declare its dll's sha256; that is not a trust decision (a hash beside the file it
+describes proves nothing on its own) but it lets a published addon, its listing and the bytes on disk
+be shown to be the same thing. Read what you install.
+
+A broken addon never stops the app from starting: the Addons page lists every folder found and, for
+each, either what it contributed or why it was refused. Enabling and disabling take effect on restart.
+
+Full format and an example: [`docs/addons/`](docs/addons/).
+
 ## Fixes after a Fetch
 
 Fetching a game on the **Add** page also checks whether it has published fixes. When it does, a banner
