@@ -39,6 +39,15 @@ public sealed class LoadedAddon
 
     /// <summary>True when the addon names an assembly - the one thing that makes a restart unavoidable.</summary>
     public bool HasAssembly => !string.IsNullOrWhiteSpace(Manifest.Assembly);
+
+    /// <summary>
+    /// The folder name, which is the addon's identity of record everywhere it matters: diagnostics, the
+    /// enabled/disabled list, the Addons row. The manifest's own id is only ever CHECKED against this,
+    /// never trusted over it - a message about a manifest that lies about its id must not be filed under
+    /// the id it lied about, or it names an addon that exists nowhere on disk and the user cannot find
+    /// the folder to fix.
+    /// </summary>
+    public string FolderName => Path.GetFileName(Directory.TrimEnd(Path.DirectorySeparatorChar));
 }
 
 /// <summary>
@@ -123,7 +132,7 @@ public sealed class AddonRegistry
             if (addon is null) continue;
             _addons.Add(addon);
 
-            if (disabledIds.Contains(addon.Manifest.Id, StringComparer.OrdinalIgnoreCase))
+            if (disabledIds.Contains(addon.FolderName, StringComparer.OrdinalIgnoreCase))
             {
                 addon.State = AddonState.Disabled;
                 continue;
@@ -202,7 +211,7 @@ public sealed class AddonRegistry
                 string.Equals(a.Directory, dir, StringComparison.OrdinalIgnoreCase));
             if (existing is not null)
             {
-                bool nowDisabled = disabledIds.Contains(existing.Manifest.Id, StringComparer.OrdinalIgnoreCase);
+                bool nowDisabled = disabledIds.Contains(existing.FolderName, StringComparer.OrdinalIgnoreCase);
                 if (nowDisabled != (existing.State == AddonState.Disabled)) needsRestart = true;
                 continue;
             }
@@ -211,7 +220,7 @@ public sealed class AddonRegistry
             if (addon is null) continue;
             _addons.Add(addon);
 
-            if (disabledIds.Contains(addon.Manifest.Id, StringComparer.OrdinalIgnoreCase))
+            if (disabledIds.Contains(addon.FolderName, StringComparer.OrdinalIgnoreCase))
             {
                 addon.State = AddonState.Disabled;
                 continue;
@@ -272,7 +281,7 @@ public sealed class AddonRegistry
         string folder = Path.GetFileName(dir);
         if (string.IsNullOrWhiteSpace(m.Id) || !string.Equals(m.Id, folder, StringComparison.OrdinalIgnoreCase))
         {
-            Fail(addon, $"id \"{m.Id}\" does not match its folder \"{folder}\"");
+            Fail(addon, $"its addon.json claims the id \"{m.Id}\", which is not this folder's name");
             _addons.Add(addon);
             return null;
         }
@@ -292,24 +301,24 @@ public sealed class AddonRegistry
         foreach (var e in addon.Manifest.Sources)
         {
             if (string.IsNullOrWhiteSpace(e.Name) || string.IsNullOrWhiteSpace(e.Url))
-            { Note($"{addon.Manifest.Id}: a source is missing its name or url, skipped"); continue; }
+            { Note($"{addon.FolderName}: a source is missing its name or url, skipped"); continue; }
 
             if (ReservedSourceNames.Contains(e.Name))
-            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" is a built-in name, skipped"); continue; }
+            { Note($"{addon.FolderName}: source \"{e.Name}\" is a built-in name, skipped"); continue; }
 
             if (!_claimedSourceNames.Add(e.Name))
-            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" is already provided by another addon, skipped"); continue; }
+            { Note($"{addon.FolderName}: source \"{e.Name}\" is already provided by another addon, skipped"); continue; }
 
             if (!Enum.TryParse<ManifestSourceKind>(e.Kind, ignoreCase: true, out var kind))
-            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" has unknown kind \"{e.Kind}\", skipped"); continue; }
+            { Note($"{addon.FolderName}: source \"{e.Name}\" has unknown kind \"{e.Kind}\", skipped"); continue; }
 
             // Everything a community addon fetches goes over TLS. The app already has enough cleartext
             // in it; a source anyone can add is not the place to add more.
             if (!IsHttps(e.Url) || e.Mirrors.Any(u => !IsHttps(u)))
-            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" must use https, skipped"); continue; }
+            { Note($"{addon.FolderName}: source \"{e.Name}\" must use https, skipped"); continue; }
 
             if (kind is not ManifestSourceKind.DepotKeyDatabase && !e.Url.Contains("{appid}", StringComparison.OrdinalIgnoreCase))
-            { Note($"{addon.Manifest.Id}: source \"{e.Name}\" url has no {{appid}} placeholder, skipped"); continue; }
+            { Note($"{addon.FolderName}: source \"{e.Name}\" url has no {{appid}} placeholder, skipped"); continue; }
 
             addon.Sources.Add(new ManifestSourceDescriptor
             {
@@ -396,7 +405,7 @@ public sealed class AddonRegistry
     {
         addon.State = AddonState.Failed;
         addon.Error = why;
-        Note($"{addon.Manifest.Id}: {why}");
+        Note($"{addon.FolderName}: {why}");
     }
 
     internal void Note(string line) => _diagnostics.Add(line);
@@ -424,7 +433,7 @@ public sealed class AddonRegistry
         {
             get
             {
-                string p = Path.Combine(Root, addon.Manifest.Id, "data");
+                string p = Path.Combine(Root, addon.FolderName, "data");
                 System.IO.Directory.CreateDirectory(p);
                 return p;
             }
@@ -458,10 +467,10 @@ public sealed class AddonRegistry
             addon.Sources.Add(source);
         }
 
-        void IAddonLog.Info(string message) => registry.Note($"{addon.Manifest.Id}: {message}");
-        void IAddonLog.Warn(string message) => registry.Note($"{addon.Manifest.Id}: {message}");
+        void IAddonLog.Info(string message) => registry.Note($"{addon.FolderName}: {message}");
+        void IAddonLog.Warn(string message) => registry.Note($"{addon.FolderName}: {message}");
         void IAddonLog.Error(string message, Exception? ex) =>
-            registry.Note($"{addon.Manifest.Id}: {message}{(ex is null ? "" : $" ({ex.Message})")}");
+            registry.Note($"{addon.FolderName}: {message}{(ex is null ? "" : $" ({ex.Message})")}");
 
         internal void Seal() => _sealed = true;
 

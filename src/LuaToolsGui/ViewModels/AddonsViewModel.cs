@@ -85,7 +85,9 @@ public partial class AddonsViewModel : ObservableObject
         {
             var row = new AddonRow
             {
-                Id = a.Manifest.Id,
+                // The folder, not the manifest's claim - see LoadedAddon.FolderName. It keys the
+                // disabled list, so a refused addon can still be switched off by the folder it is in.
+                Id = a.FolderName,
                 Name = string.IsNullOrWhiteSpace(a.Manifest.Name) ? a.Manifest.Id : a.Manifest.Name,
                 Version = a.Manifest.Version,
                 Author = a.Manifest.Author,
