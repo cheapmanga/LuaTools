@@ -5,12 +5,13 @@
     piece of LuaTools whose public surface is a promise: renaming or resigning anything here breaks
     every addon in the wild. Keep it small, keep it stable, and add rather than change.
 
-    It targets net8.0-windows with WPF because an addon that contributes a page has to hand us a
-    real WPF control; there is no way to express "a page" without the framework that draws it.
+    It targets plain net8.0 and does NOT reference WPF. A page is named by Type, so nothing here needs
+    the framework that draws it; the host, which does know about WPF, is where a page type is checked for
+    actually being a Control. That keeps the contract buildable anywhere and keeps an addon author's
+    project file down to a single reference.
   -->
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>LuaTools.Addons</AssemblyName>

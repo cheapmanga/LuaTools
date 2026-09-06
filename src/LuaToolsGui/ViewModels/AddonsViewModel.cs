@@ -100,10 +100,11 @@ public partial class AddonsViewModel : ObservableObject
 
     private static string Describe(LoadedAddon a) => a.State switch
     {
-        AddonState.Loaded => "Loaded",
-        AddonState.DataOnly => "Loaded (data only, nothing executed)",
-        AddonState.Disabled => "Disabled",
-        _ => a.Error ?? "Failed to load",
+        AddonState.Loaded => Resources.Strings.Addons_State_Loaded,
+        AddonState.DataOnly => Resources.Strings.Addons_State_DataOnly,
+        AddonState.Disabled => Resources.Strings.Addons_State_Disabled,
+        // The loader's reason, when there is one, beats a generic label: it names the actual problem.
+        _ => a.Error ?? Resources.Strings.Addons_State_Failed,
     };
 
     private static string Contributions(LoadedAddon a)

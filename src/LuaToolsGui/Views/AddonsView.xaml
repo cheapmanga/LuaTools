@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:res="clr-namespace:LuaToolsGui.Resources"
     xmlns:vm="clr-namespace:LuaToolsGui.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:AddonsViewModel}"
     TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -17,12 +18,12 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel MaxWidth="820" Margin="8,16,16,24">
 
-                <TextBlock FontSize="22" FontWeight="Bold" Text="Addons" />
+                <TextBlock FontSize="22" FontWeight="Bold" Text="{x:Static res:Strings.Addons_Title}" />
                 <TextBlock
                     Margin="0,2,0,0"
                     FontSize="13"
                     Foreground="#9ca3af"
-                    Text="Community addons add manifest sources and pages to LuaTools. An addon is a folder: drop it in and restart."
+                    Text="{x:Static res:Strings.Addons_Subtitle}"
                     TextWrapping="Wrap" />
 
                 <!-- Restart notice -->
@@ -30,9 +31,9 @@
                     Margin="0,16,0,0"
                     IsClosable="False"
                     IsOpen="{Binding RestartNeeded}"
-                    Message="Restart LuaTools for this change to take effect."
+                    Message="{x:Static res:Strings.Addons_RestartBody}"
                     Severity="Informational"
-                    Title="Restart needed" />
+                    Title="{x:Static res:Strings.Addons_RestartTitle}" />
 
                 <!-- Empty state -->
                 <Border
@@ -42,17 +43,17 @@
                     CornerRadius="8"
                     Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
-                        <TextBlock FontWeight="SemiBold" Text="No addons installed" />
+                        <TextBlock FontWeight="SemiBold" Text="{x:Static res:Strings.Addons_EmptyTitle}" />
                         <TextBlock
                             Margin="0,6,0,0"
                             Foreground="#9ca3af"
-                            Text="An addon is a folder holding an addon.json. The smallest useful one is a few lines of JSON that add a manifest source — nothing compiled, nothing executed."
+                            Text="{x:Static res:Strings.Addons_EmptyBody}"
                             TextWrapping="Wrap" />
                         <ui:Button
                             Margin="0,14,0,0"
                             HorizontalAlignment="Left"
                             Command="{Binding OpenFolderCommand}"
-                            Content="Open the addons folder"
+                            Content="{x:Static res:Strings.Addons_OpenFolder}"
                             Icon="{ui:SymbolIcon FolderOpen24}" />
                     </StackPanel>
                 </Border>
@@ -116,7 +117,7 @@
                     Margin="0,4,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding OpenFolderCommand}"
-                    Content="Open the addons folder"
+                    Content="{x:Static res:Strings.Addons_OpenFolder}"
                     Icon="{ui:SymbolIcon FolderOpen24}"
                     Visibility="{Binding IsEmpty, Converter={StaticResource InverseBoolToVis}}" />
 
@@ -124,7 +125,7 @@
                 <TextBlock
                     Margin="0,20,0,0"
                     FontWeight="SemiBold"
-                    Text="Loader messages"
+                    Text="{x:Static res:Strings.Addons_Diagnostics}"
                     Visibility="{Binding Diagnostics.Count, Converter={StaticResource CountToVis}}" />
                 <ItemsControl Margin="0,6,0,0" ItemsSource="{Binding Diagnostics}">
                     <ItemsControl.ItemTemplate>

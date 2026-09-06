@@ -722,4 +722,17 @@
   <data name="Add_Fix_None" xml:space="preserve"><value>Не удалось найти манифесты фикса для этой игры.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Предпочитать манифесты фикса</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Когда фикс игры содержит собственные манифесты (voices38, DenuvOwO, SteamTools Achievements), блокируй обычную загрузку и добавляй игру через фикс</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Дополнения</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Дополнения</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Дополнения сообщества добавляют в LuaTools источники манифестов и страницы. Дополнение — это папка: положите её сюда и перезапустите.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Требуется перезапуск</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Перезапустите LuaTools, чтобы изменение вступило в силу.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Дополнения не установлены</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Дополнение — это папка с файлом addon.json. Самое маленькое полезное — несколько строк JSON, добавляющих источник манифестов: ничего не компилируется и не выполняется.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Открыть папку дополнений</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Сообщения загрузчика</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Загружено</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Загружено (только данные, ничего не выполнялось)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Отключено</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Не удалось загрузить</value></data>
 </root>

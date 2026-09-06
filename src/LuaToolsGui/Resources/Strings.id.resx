@@ -722,4 +722,17 @@ Tetap tukarkan?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Manifest dari fix untuk game ini tidak ditemukan.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Utamakan manifest fix</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Kalau fix sebuah game membawa manifest-nya sendiri (voices38, DenuvOwO, SteamTools Achievements), blokir pengambilan biasa dan tambahkan lewat fix</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Add-on</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Add-on</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Add-on komunitas menambahkan sumber manifest dan halaman ke LuaTools. Sebuah add-on adalah folder: taruh di sini lalu mulai ulang.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Perlu dimulai ulang</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Mulai ulang LuaTools agar perubahan ini berlaku.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Belum ada add-on terpasang</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Add-on adalah folder berisi addon.json. Yang paling kecil dan berguna hanya beberapa baris JSON yang menambahkan sumber manifest — tidak ada yang dikompilasi, tidak ada yang dijalankan.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Buka folder add-on</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Pesan pemuat</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Dimuat</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Dimuat (hanya data, tidak ada yang dijalankan)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Dinonaktifkan</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Gagal dimuat</value></data>
 </root>

@@ -102,7 +102,7 @@
                             <ui:SymbolIcon Symbol="PuzzlePiece24" />
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Content="Addons" TargetPageType="{x:Type views:AddonsView}">
+                    <ui:NavigationViewItem Content="{x:Static res:Strings.Nav_Addons}" TargetPageType="{x:Type views:AddonsView}">
                         <ui:NavigationViewItem.Icon>
                             <ui:SymbolIcon Symbol="Apps24" />
                         </ui:NavigationViewItem.Icon>

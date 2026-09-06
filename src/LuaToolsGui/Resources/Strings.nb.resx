@@ -722,4 +722,17 @@ Vil du løse den inn likevel?</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Fant ikke fixens manifester for dette spillet.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Foretrekk fix-manifester</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Når et spills fix har sine egne manifester (voices38, DenuvOwO, SteamTools Achievements), blokker den vanlige hentingen og legg det til via fixen i stedet</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Tillegg</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Tillegg</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Tillegg fra fellesskapet legger til manifestkilder og sider i LuaTools. Et tillegg er en mappe: legg den inn og start på nytt.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Omstart kreves</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Start LuaTools på nytt for at endringen skal tre i kraft.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Ingen tillegg installert</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Et tillegg er en mappe med en addon.json. Det minste nyttige er noen få linjer JSON som legger til en manifestkilde — ingenting kompileres, ingenting kjøres.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Åpne tilleggsmappen</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Meldinger fra lasteren</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Lastet</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Lastet (bare data, ingenting kjørt)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktivert</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Kunne ikke lastes</value></data>
 </root>

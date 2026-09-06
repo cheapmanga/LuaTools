@@ -701,4 +701,17 @@ public static class Strings
     public static string Add_Fix_None => Get(nameof(Add_Fix_None));
     public static string Settings_BlockFetchFix => Get(nameof(Settings_BlockFetchFix));
     public static string Settings_BlockFetchFix_Hint => Get(nameof(Settings_BlockFetchFix_Hint));
+    public static string Nav_Addons => Get(nameof(Nav_Addons));
+    public static string Addons_Title => Get(nameof(Addons_Title));
+    public static string Addons_Subtitle => Get(nameof(Addons_Subtitle));
+    public static string Addons_RestartTitle => Get(nameof(Addons_RestartTitle));
+    public static string Addons_RestartBody => Get(nameof(Addons_RestartBody));
+    public static string Addons_EmptyTitle => Get(nameof(Addons_EmptyTitle));
+    public static string Addons_EmptyBody => Get(nameof(Addons_EmptyBody));
+    public static string Addons_OpenFolder => Get(nameof(Addons_OpenFolder));
+    public static string Addons_Diagnostics => Get(nameof(Addons_Diagnostics));
+    public static string Addons_State_Loaded => Get(nameof(Addons_State_Loaded));
+    public static string Addons_State_DataOnly => Get(nameof(Addons_State_DataOnly));
+    public static string Addons_State_Disabled => Get(nameof(Addons_State_Disabled));
+    public static string Addons_State_Failed => Get(nameof(Addons_State_Failed));
 }

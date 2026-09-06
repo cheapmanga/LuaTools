@@ -722,4 +722,17 @@ Cancelar: seguir descargando</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>No se encontraron los manifiestos del fix de este juego.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Preferir manifiestos del fix</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Cuando el fix de un juego trae sus propios manifiestos (voices38, DenuvOwO, SteamTools Achievements), bloquea la descarga normal y añádelo a través del fix</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Complementos</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Complementos</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Los complementos de la comunidad añaden fuentes de manifiestos y páginas a LuaTools. Un complemento es una carpeta: colócala y reinicia.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Se requiere reiniciar</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Reinicia LuaTools para aplicar este cambio.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>No hay complementos instalados</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Un complemento es una carpeta con un addon.json. El más pequeño que sirve son unas pocas líneas de JSON que añaden una fuente de manifiestos: nada compilado, nada ejecutado.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Abrir la carpeta de complementos</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Mensajes del cargador</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Cargado</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Cargado (solo datos, nada ejecutado)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Desactivado</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Error al cargar</value></data>
 </root>

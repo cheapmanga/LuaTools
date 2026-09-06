@@ -722,4 +722,17 @@
   <data name="Add_Fix_None" xml:space="preserve"><value>Манифестите от фикса за тази игра не бяха намерени.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Предпочитай манифести от фикса</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Когато фиксът на играта съдържа собствени манифести (voices38, DenuvOwO, SteamTools Achievements), спри обичайното извличане и я добави през фикса</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Добавки</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Добавки</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Добавките на общността добавят към LuaTools източници на манифести и страници. Добавката е папка: сложете я тук и рестартирайте.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Нужен е рестарт</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Рестартирайте LuaTools, за да влезе промяната в сила.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Няма инсталирани добавки</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Добавката е папка с файл addon.json. Най-малката полезна е няколко реда JSON, които добавят източник на манифести — нищо не се компилира и не се изпълнява.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Отваряне на папката с добавки</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Съобщения на зареждащия модул</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Заредена</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Заредена (само данни, нищо не е изпълнено)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Изключена</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Зареждането е неуспешно</value></data>
 </root>

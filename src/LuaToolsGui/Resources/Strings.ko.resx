@@ -722,4 +722,17 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>이 게임의 fix manifest를 찾지 못했어.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>fix manifest 우선</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>게임의 fix가 자체 manifest를 포함할 때(voices38, DenuvOwO, SteamTools Achievements) 일반 가져오기를 막고 fix로 추가해</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>애드온</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>애드온</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>커뮤니티 애드온은 LuaTools에 매니페스트 소스와 페이지를 추가합니다. 애드온은 폴더입니다. 넣고 다시 시작하세요.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>다시 시작 필요</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>이 변경을 적용하려면 LuaTools를 다시 시작하세요.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>설치된 애드온 없음</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>애드온은 addon.json이 든 폴더입니다. 가장 작고 쓸모 있는 것은 매니페스트 소스를 추가하는 몇 줄의 JSON입니다 — 컴파일도, 실행도 없습니다.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>애드온 폴더 열기</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>로더 메시지</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>불러옴</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>불러옴 (데이터만, 실행 없음)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>사용 안 함</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>불러오지 못함</value></data>
 </root>

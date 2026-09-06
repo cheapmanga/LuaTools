@@ -722,4 +722,17 @@ Anulare - continuă descărcarea</value></data>
   <data name="Add_Fix_None" xml:space="preserve"><value>Nu am găsit manifestele fix-ului pentru acest joc.</value></data>
   <data name="Settings_BlockFetchFix" xml:space="preserve"><value>Preferă manifestele fix-ului</value></data>
   <data name="Settings_BlockFetchFix_Hint" xml:space="preserve"><value>Când fix-ul unui joc vine cu propriile manifeste (voices38, DenuvOwO, SteamTools Achievements), blochează preluarea normală și adaugă-l prin fix</value></data>
+  <data name="Nav_Addons" xml:space="preserve"><value>Suplimente</value></data>
+  <data name="Addons_Title" xml:space="preserve"><value>Suplimente</value></data>
+  <data name="Addons_Subtitle" xml:space="preserve"><value>Suplimentele comunității adaugă surse de manifest și pagini în LuaTools. Un supliment este un folder: pune-l aici și repornește.</value></data>
+  <data name="Addons_RestartTitle" xml:space="preserve"><value>Este necesară repornirea</value></data>
+  <data name="Addons_RestartBody" xml:space="preserve"><value>Repornește LuaTools pentru ca modificarea să aibă efect.</value></data>
+  <data name="Addons_EmptyTitle" xml:space="preserve"><value>Niciun supliment instalat</value></data>
+  <data name="Addons_EmptyBody" xml:space="preserve"><value>Un supliment este un folder cu un addon.json. Cel mai mic util înseamnă câteva linii de JSON care adaugă o sursă de manifest — nimic compilat, nimic executat.</value></data>
+  <data name="Addons_OpenFolder" xml:space="preserve"><value>Deschide folderul de suplimente</value></data>
+  <data name="Addons_Diagnostics" xml:space="preserve"><value>Mesajele încărcătorului</value></data>
+  <data name="Addons_State_Loaded" xml:space="preserve"><value>Încărcat</value></data>
+  <data name="Addons_State_DataOnly" xml:space="preserve"><value>Încărcat (doar date, nimic executat)</value></data>
+  <data name="Addons_State_Disabled" xml:space="preserve"><value>Dezactivat</value></data>
+  <data name="Addons_State_Failed" xml:space="preserve"><value>Încărcarea a eșuat</value></data>
 </root>

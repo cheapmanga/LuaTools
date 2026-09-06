@@ -27,7 +27,8 @@ public class ManifestJobFactory(
     SteamAppInfoCache appInfo,
     SteamAutoCrackService sac,
     ManifestHubService manifestHub,
-    SushiService sushi)
+    SushiService sushi,
+    Addons.AddonSourceService addonSources)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -125,6 +126,38 @@ public class ManifestJobFactory(
             covers.GetLocalPath(appId),
             (_, progress, ct) => sushi.DownloadZipAsync(appId, progress, ct),
             (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
+            confirm,
+            onFinished,
+            onReveal);
+    }
+
+    /// <summary>
+    /// A manifest from an addon-contributed source. A ready-made zip or lua installs through
+    /// <see cref="InstallManifestWithDlcAsync"/> like the Sushi zip does - someone else's lua may not
+    /// carry the DLC entitlements a built one does, and the user should not get a different set of DLCs
+    /// depending on which source happened to have the game.
+    /// </summary>
+    public DownloadJob CreateAddonSourceJob(
+        LuaTools.Addons.ManifestSourceDescriptor source,
+        long appId, string? gameName,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        string title = gameName ?? appId.ToString();
+        return new DownloadJob(
+            DownloadKind.Manifest,
+            $"manifest:{appId}",
+            appId,
+            title,
+            source.DisplayName,
+            covers.GetLocalPath(appId),
+            (_, progress, ct) => addonSources.FetchAsync(source, appId, progress, ct),
+            // A key database yields a lua we built, which already carries the DLC and soundtrack
+            // entitlements; only a ready-made zip or lua from someone else needs them added after.
+            source.Kind is LuaTools.Addons.ManifestSourceKind.DepotKeyDatabase
+                ? (file, _, _) => Task.FromResult(InstallManifest(file, appId, title))
+                : (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
             confirm,
             onFinished,
             onReveal);
