@@ -735,4 +735,6 @@ Vill du lösa in den ändå?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Laddat (endast data, inget kördes)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Inaktiverat</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Kunde inte laddas</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Uppdatera</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Starta om LuaTools för att läsa in detta tillägg (det innehåller kod)</value></data>
 </root>

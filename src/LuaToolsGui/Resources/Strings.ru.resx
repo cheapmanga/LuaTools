@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Загружено (только данные, ничего не выполнялось)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Отключено</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Не удалось загрузить</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Обновить</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Перезапустите LuaTools, чтобы загрузить это дополнение (оно содержит код)</value></data>
 </root>

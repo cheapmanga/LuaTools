@@ -770,4 +770,6 @@ Redeem anyway?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Loaded (data only, nothing executed)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Disabled</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Failed to load</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Restart LuaTools to load this addon (it contains code)</value></data>
 </root>

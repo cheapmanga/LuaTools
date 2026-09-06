@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Заредена (само данни, нищо не е изпълнено)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Изключена</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Зареждането е неуспешно</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Опресняване</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Рестартирайте LuaTools, за да заредите тази добавка (съдържа код)</value></data>
 </root>

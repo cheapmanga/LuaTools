@@ -36,6 +36,9 @@ public sealed class LoadedAddon
 
     public List<ManifestSourceDescriptor> Sources { get; } = [];
     public List<AddonPage> Pages { get; } = [];
+
+    /// <summary>True when the addon names an assembly - the one thing that makes a restart unavoidable.</summary>
+    public bool HasAssembly => !string.IsNullOrWhiteSpace(Manifest.Assembly);
 }
 
 /// <summary>
@@ -91,7 +94,15 @@ public sealed class AddonRegistry
         _addons.SelectMany(a => a.Sources).OrderBy(s => s.Order).ThenBy(s => s.DisplayName).ToList();
 
     /// <summary>Lines worth showing the user, addon id first. Not a debug log; this is the Addons page's feed.</summary>
-    public IReadOnlyList<string> Diagnostics => _diagnostics;
+    public IReadOnlyList<string> Diagnostics => [.._startupDiagnostics, .._diagnostics];
+
+    /// <summary>
+    /// What startup had to say. Kept apart from <see cref="_diagnostics"/> and never cleared, because a
+    /// refresh rebuilds only the data addons: clearing everything would erase the reason a CODE addon
+    /// failed to load, and the page auto-refreshes when opened - so the user would never get to read it.
+    /// </summary>
+    private readonly List<string> _startupDiagnostics = [];
+
     private readonly List<string> _diagnostics = [];
 
     /// <summary>
@@ -137,8 +148,102 @@ public sealed class AddonRegistry
             }
         }
 
-        _addons.Sort((a, b) => string.Compare(a.Manifest.Name, b.Manifest.Name, StringComparison.CurrentCultureIgnoreCase));
+        Sort();
+
+        // From here on these lines belong to startup and survive every later refresh.
+        _startupDiagnostics.AddRange(_diagnostics);
+        _diagnostics.Clear();
     }
+
+    /// <summary>
+    /// Re-read the addon folder, applying everything that does not need the app restarted. Returns true
+    /// when something changed that this cannot apply, so the caller can ask for a restart only when a
+    /// restart is genuinely the answer.
+    /// </summary>
+    /// <remarks>
+    /// <para>The restart requirement is not a property of addons, it is a property of CODE addons. One
+    /// that names an assembly registers services into a collection that stops existing the moment the
+    /// provider is built, and its page has to be resolvable by the nav that was populated at startup —
+    /// neither can be redone live, and its types can never be unloaded (see
+    /// <see cref="AddonLoadContext"/>). A data addon does none of that: its sources are a list this
+    /// registry holds and the Add page re-reads on every fetch, so adding, removing, enabling and
+    /// disabling one can all take effect immediately.</para>
+    ///
+    /// <para>Already-running code addons are left strictly alone here — not re-read, not re-configured,
+    /// not dropped. Their <c>Configure</c> ran once against a service collection that is gone; running
+    /// it again would register into nothing, and dropping them would leave their page in the nav rail
+    /// pointing at a service that no longer exists.</para>
+    /// </remarks>
+    public bool RefreshDataAddons(IReadOnlyCollection<string> disabledIds)
+    {
+        var code = _addons.Where(a => a.HasAssembly).ToList();
+
+        // Names are re-claimed from scratch each pass, seeded with the code addons that keep theirs, so
+        // a source whose addon was deleted stops holding its name hostage for the rest of the session.
+        _claimedSourceNames.Clear();
+        foreach (var a in code)
+            foreach (var src in a.Sources) _claimedSourceNames.Add(src.Name);
+
+        _addons.RemoveAll(a => !a.HasAssembly);
+        _diagnostics.Clear();
+
+        bool needsRestart = false;
+
+        try
+        {
+            if (!System.IO.Directory.Exists(Root)) { Sort(); return false; }
+        }
+        catch (Exception ex) { Note($"addons: cannot reach {Root}: {ex.Message}"); Sort(); return false; }
+
+        foreach (string dir in SafeEnumerate(Root))
+        {
+            // A code addon already running is reported as it was, and skipped entirely.
+            var existing = code.FirstOrDefault(a =>
+                string.Equals(a.Directory, dir, StringComparison.OrdinalIgnoreCase));
+            if (existing is not null)
+            {
+                bool nowDisabled = disabledIds.Contains(existing.Manifest.Id, StringComparer.OrdinalIgnoreCase);
+                if (nowDisabled != (existing.State == AddonState.Disabled)) needsRestart = true;
+                continue;
+            }
+
+            LoadedAddon? addon = ReadManifest(dir);
+            if (addon is null) continue;
+            _addons.Add(addon);
+
+            if (disabledIds.Contains(addon.Manifest.Id, StringComparer.OrdinalIgnoreCase))
+            {
+                addon.State = AddonState.Disabled;
+                continue;
+            }
+
+            try
+            {
+                if (!addon.HasAssembly)
+                {
+                    CollectSources(addon);
+                    addon.State = AddonState.DataOnly;
+                }
+                else
+                {
+                    // New on disk since startup, and it carries code: nothing here can load it safely.
+                    addon.State = AddonState.Failed;
+                    addon.Error = Resources.Strings.Addons_State_NeedsRestart;
+                    needsRestart = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Fail(addon, ex.Message);
+            }
+        }
+
+        Sort();
+        return needsRestart;
+    }
+
+    private void Sort() =>
+        _addons.Sort((a, b) => string.Compare(a.Manifest.Name, b.Manifest.Name, StringComparison.CurrentCultureIgnoreCase));
 
     // ── stages ──────────────────────────────────────────────────────────────────────────────────
 

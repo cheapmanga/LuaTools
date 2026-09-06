@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>已載入（僅資料，未執行任何內容）</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>已停用</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>載入失敗</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>重新整理</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>請重新啟動 LuaTools 以載入此擴充功能（它包含程式碼）</value></data>
 </root>

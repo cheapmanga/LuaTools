@@ -735,4 +735,6 @@ Cancelar: seguir descargando</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Cargado (solo datos, nada ejecutado)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Desactivado</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Error al cargar</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Actualizar</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Reinicia LuaTools para cargar este complemento (contiene código)</value></data>
 </root>

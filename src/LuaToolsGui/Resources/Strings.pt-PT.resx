@@ -735,4 +735,6 @@ Resgatar mesmo assim?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Carregada (apenas dados, nada executado)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Desativada</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Falha ao carregar</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Atualizar</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Reinicie o LuaTools para carregar esta extensão (contém código)</value></data>
 </root>

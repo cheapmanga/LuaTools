@@ -735,4 +735,6 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>読み込み済み（データのみ、実行なし）</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>無効</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>読み込みに失敗しました</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>更新</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>このアドオンを読み込むには LuaTools を再起動してください（コードを含みます）</value></data>
 </root>

@@ -735,4 +735,6 @@ Riscattarlo lo stesso?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Caricato (solo dati, niente eseguito)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Disattivato</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Caricamento non riuscito</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Aggiorna</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Riavvia LuaTools per caricare questo componente (contiene codice)</value></data>
 </root>

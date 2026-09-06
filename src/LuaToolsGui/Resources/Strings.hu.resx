@@ -735,4 +735,6 @@ Mégis beváltod?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Betöltve (csak adat, semmi nem futott)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Letiltva</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>A betöltés sikertelen</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Frissítés</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Indítsd újra a LuaToolst a kiegészítő betöltéséhez (kódot tartalmaz)</value></data>
 </root>

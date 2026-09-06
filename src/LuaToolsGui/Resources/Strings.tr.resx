@@ -735,4 +735,6 @@ Yine de kullanmak ister misin?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Yüklendi (yalnızca veri, hiçbir şey çalıştırılmadı)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Devre dışı</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Yüklenemedi</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Yenile</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Bu eklentiyi yüklemek için LuaTools'u yeniden başlatın (kod içeriyor)</value></data>
 </root>

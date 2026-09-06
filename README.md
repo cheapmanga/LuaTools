@@ -91,8 +91,12 @@ A code addon must declare its dll's sha256; that is not a trust decision (a hash
 describes proves nothing on its own) but it lets a published addon, its listing and the bytes on disk
 be shown to be the same thing. Read what you install.
 
+A data addon needs no restart: drop it in, open the Addons page, and its sources are live from the
+next fetch. Only an addon carrying an assembly needs one — it registers services into a container built
+once at startup, and its types can never be unloaded afterwards.
+
 A broken addon never stops the app from starting: the Addons page lists every folder found and, for
-each, either what it contributed or why it was refused. Enabling and disabling take effect on restart.
+each, either what it contributed or why it was refused.
 
 Full format and an example: [`docs/addons/`](docs/addons/).
 

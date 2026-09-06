@@ -735,4 +735,6 @@ Lunastetaanko silti?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Ladattu (vain data, mitään ei suoritettu)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Poistettu käytöstä</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Lataus epäonnistui</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Päivitä</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Käynnistä LuaTools uudelleen ladataksesi tämän lisäosan (se sisältää koodia)</value></data>
 </root>

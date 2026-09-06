@@ -735,4 +735,6 @@ Vil du løse den inn likevel?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Lastet (bare data, ingenting kjørt)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktivert</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Kunne ikke lastes</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Oppdater</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Start LuaTools på nytt for å laste dette tillegget (det inneholder kode)</value></data>
 </root>

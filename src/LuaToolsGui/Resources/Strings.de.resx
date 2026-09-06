@@ -735,4 +735,6 @@ Trotzdem einlösen?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Geladen (nur Daten, nichts ausgeführt)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktiviert</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Laden fehlgeschlagen</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Aktualisieren</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Starte LuaTools neu, um dieses Add-on zu laden (es enthält Code)</value></data>
 </root>
