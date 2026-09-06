@@ -98,7 +98,7 @@ once at startup, and its types can never be unloaded afterwards.
 A broken addon never stops the app from starting: the Addons page lists every folder found and, for
 each, either what it contributed or why it was refused.
 
-Full format and an example: [`docs/addons/`](docs/addons/).
+Full format and an example: [`ADDONS.md`](ADDONS.md).
 
 ## Fixes after a Fetch
 
