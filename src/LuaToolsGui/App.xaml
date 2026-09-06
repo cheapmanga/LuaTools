@@ -14,6 +14,7 @@
 
             <local:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
             <local:NullToCollapsedConverter x:Key="NullToCollapsed" />
+            <local:CountToVisibilityConverter x:Key="CountToVis" />
             <local:StatusToBrushConverter x:Key="StatusToBrush" />
             <local:ImagePathToSourceConverter x:Key="ImagePathToSource" />
             <local:EqualityMultiConverter x:Key="EqualityMulti" />
