@@ -735,4 +735,6 @@ Zrealizować mimo to?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Załadowany (tylko dane, nic nie uruchomiono)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Wyłączony</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Nie udało się załadować</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Odśwież</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Uruchom LuaTools ponownie, aby wczytać ten dodatek (zawiera kod)</value></data>
 </root>

@@ -735,4 +735,6 @@ Uplatnit ho i tak?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Načteno (jen data, nic se nespustilo)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Zakázáno</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Načtení selhalo</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Obnovit</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Restartujte LuaTools, aby se tento doplněk načetl (obsahuje kód)</value></data>
 </root>

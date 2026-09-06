@@ -51,6 +51,19 @@ public partial class AddonsViewModel : ObservableObject
         Reload();
     }
 
+    /// <summary>
+    /// Re-read the addon folder and show what is there now. Called when the page is opened and by the
+    /// Refresh button, so dropping a data addon in and coming back to this page is enough to see it -
+    /// no restart, because a data addon touches nothing that is fixed at startup.
+    /// </summary>
+    [RelayCommand]
+    private void Refresh()
+    {
+        // Sticky: a restart already owed for a code addon is not cleared by a later data-only refresh.
+        RestartNeeded |= _registry.RefreshDataAddons(_settings.DisabledAddons);
+        Reload();
+    }
+
     public ObservableCollection<AddonRow> Addons { get; } = [];
 
     /// <summary>Loader messages, newest last. Shown collapsed unless something failed.</summary>
@@ -83,11 +96,16 @@ public partial class AddonsViewModel : ObservableObject
                 Failed = a.State == AddonState.Failed,
                 Enabled = !disabled.Contains(a.Manifest.Id, StringComparer.OrdinalIgnoreCase),
             };
+            bool hasCode = a.HasAssembly;
             row.PropertyChanged += (_, e) =>
             {
                 if (e.PropertyName != nameof(AddonRow.Enabled)) return;
                 _settings.SetAddonEnabled(row.Id, row.Enabled);
-                RestartNeeded = true;
+
+                // Only a code addon needs the app restarted to come or go. Toggling a data addon takes
+                // effect on the next fetch, so claiming otherwise would be a lie the user has to obey.
+                if (hasCode) RestartNeeded = true;
+                else Refresh();
             };
             Addons.Add(row);
         }

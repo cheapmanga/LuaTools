@@ -735,4 +735,6 @@ Vẫn đổi chứ?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Đã nạp (chỉ dữ liệu, không chạy gì)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Đã tắt</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Nạp thất bại</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Làm mới</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Khởi động lại LuaTools để nạp tiện ích này (nó có chứa mã)</value></data>
 </root>

@@ -735,4 +735,6 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>불러옴 (데이터만, 실행 없음)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>사용 안 함</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>불러오지 못함</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>새로 고침</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>이 애드온을 불러오려면 LuaTools를 다시 시작하세요 (코드가 포함되어 있습니다)</value></data>
 </root>

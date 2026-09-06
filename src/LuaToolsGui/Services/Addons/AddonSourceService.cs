@@ -151,19 +151,24 @@ public class AddonSourceService(
     private async Task<IReadOnlyDictionary<long, string>?> EnsureKeysAsync(
         ManifestSourceDescriptor source, CancellationToken ct)
     {
+        // Keyed on the url as well as the name: an addon can be edited and refreshed without restarting
+        // the app now, and a cache keyed on the name alone would keep serving the old database after its
+        // url was changed - the most confusing possible outcome of an edit that looks like it worked.
+        string cacheKey = $"{source.Name}\u0000{source.UrlTemplate}";
+
         lock (_keyDbs)
-            if (_keyDbs.TryGetValue(source.Name, out var cached)) return cached;
+            if (_keyDbs.TryGetValue(cacheKey, out var cached)) return cached;
 
         await _keyGate.WaitAsync(ct);
         try
         {
             lock (_keyDbs)
-                if (_keyDbs.TryGetValue(source.Name, out var cached)) return cached; // won the race
+                if (_keyDbs.TryGetValue(cacheKey, out var cached)) return cached; // won the race
 
             var keys = await hub.FetchKeyDatabaseAsync(Urls(source, 0), ct);
             if (keys is null) return null;
 
-            lock (_keyDbs) _keyDbs[source.Name] = keys;
+            lock (_keyDbs) _keyDbs[cacheKey] = keys;
             return keys;
         }
         finally { _keyGate.Release(); }

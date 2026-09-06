@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Завантажено (лише дані, нічого не виконано)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Вимкнено</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Не вдалося завантажити</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Оновити</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Перезапустіть LuaTools, щоб завантажити це доповнення (воно містить код)</value></data>
 </root>

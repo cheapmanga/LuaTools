@@ -735,4 +735,6 @@ Tetap tukarkan?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Dimuat (hanya data, tidak ada yang dijalankan)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Dinonaktifkan</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Gagal dimuat</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Segarkan</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Mulai ulang LuaTools untuk memuat add-on ini (berisi kode)</value></data>
 </root>

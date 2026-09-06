@@ -49,12 +49,17 @@
                             Foreground="#9ca3af"
                             Text="{x:Static res:Strings.Addons_EmptyBody}"
                             TextWrapping="Wrap" />
-                        <ui:Button
-                            Margin="0,14,0,0"
-                            HorizontalAlignment="Left"
-                            Command="{Binding OpenFolderCommand}"
-                            Content="{x:Static res:Strings.Addons_OpenFolder}"
-                            Icon="{ui:SymbolIcon FolderOpen24}" />
+                        <StackPanel Margin="0,14,0,0" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <ui:Button
+                                Command="{Binding OpenFolderCommand}"
+                                Content="{x:Static res:Strings.Addons_OpenFolder}"
+                                Icon="{ui:SymbolIcon FolderOpen24}" />
+                            <ui:Button
+                                Margin="8,0,0,0"
+                                Command="{Binding RefreshCommand}"
+                                Content="{x:Static res:Strings.Addons_Refresh}"
+                                Icon="{ui:SymbolIcon ArrowClockwise24}" />
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
@@ -113,13 +118,21 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <ui:Button
+                <StackPanel
                     Margin="0,4,0,0"
                     HorizontalAlignment="Left"
-                    Command="{Binding OpenFolderCommand}"
-                    Content="{x:Static res:Strings.Addons_OpenFolder}"
-                    Icon="{ui:SymbolIcon FolderOpen24}"
-                    Visibility="{Binding IsEmpty, Converter={StaticResource InverseBoolToVis}}" />
+                    Orientation="Horizontal"
+                    Visibility="{Binding IsEmpty, Converter={StaticResource InverseBoolToVis}}">
+                    <ui:Button
+                        Command="{Binding OpenFolderCommand}"
+                        Content="{x:Static res:Strings.Addons_OpenFolder}"
+                        Icon="{ui:SymbolIcon FolderOpen24}" />
+                    <ui:Button
+                        Margin="8,0,0,0"
+                        Command="{Binding RefreshCommand}"
+                        Content="{x:Static res:Strings.Addons_Refresh}"
+                        Icon="{ui:SymbolIcon ArrowClockwise24}" />
+                </StackPanel>
 
                 <!-- Loader messages. Only worth the room when something had something to say. -->
                 <TextBlock

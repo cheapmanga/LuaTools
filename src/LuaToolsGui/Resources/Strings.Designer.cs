@@ -714,4 +714,6 @@ public static class Strings
     public static string Addons_State_DataOnly => Get(nameof(Addons_State_DataOnly));
     public static string Addons_State_Disabled => Get(nameof(Addons_State_Disabled));
     public static string Addons_State_Failed => Get(nameof(Addons_State_Failed));
+    public static string Addons_Refresh => Get(nameof(Addons_Refresh));
+    public static string Addons_State_NeedsRestart => Get(nameof(Addons_State_NeedsRestart));
 }

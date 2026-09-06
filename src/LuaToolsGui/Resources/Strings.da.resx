@@ -735,4 +735,6 @@ Vil du indløse den alligevel?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Indlæst (kun data, intet kørt)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktiveret</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Kunne ikke indlæses</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Opdater</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Genstart LuaTools for at indlæse denne tilføjelse (den indeholder kode)</value></data>
 </root>

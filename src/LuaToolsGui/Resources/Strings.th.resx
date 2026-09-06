@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>โหลดแล้ว (เฉพาะข้อมูล ไม่มีการรัน)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>ปิดใช้งาน</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>โหลดไม่สำเร็จ</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>รีเฟรช</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>รีสตาร์ท LuaTools เพื่อโหลดส่วนเสริมนี้ (มีโค้ดอยู่ภายใน)</value></data>
 </root>

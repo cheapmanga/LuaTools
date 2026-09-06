@@ -735,4 +735,6 @@ Anulare - continuă descărcarea</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Încărcat (doar date, nimic executat)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Dezactivat</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Încărcarea a eșuat</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Reîmprospătează</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Repornește LuaTools pentru a încărca acest supliment (conține cod)</value></data>
 </root>

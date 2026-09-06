@@ -735,4 +735,6 @@ Toch inwisselen?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Geladen (alleen gegevens, niets uitgevoerd)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Uitgeschakeld</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Laden mislukt</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Vernieuwen</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Herstart LuaTools om deze add-on te laden (hij bevat code)</value></data>
 </root>

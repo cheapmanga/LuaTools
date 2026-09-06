@@ -735,4 +735,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Φορτώθηκε (μόνο δεδομένα, δεν εκτελέστηκε τίποτα)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Απενεργοποιημένο</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Η φόρτωση απέτυχε</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Ανανέωση</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Κάνε επανεκκίνηση του LuaTools για να φορτωθεί αυτό το πρόσθετο (περιέχει κώδικα)</value></data>
 </root>

@@ -735,4 +735,6 @@ Valider quand même ?</value></data>
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>Chargée (données seules, rien d'exécuté)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Désactivée</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Échec du chargement</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>Actualiser</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>Redémarrez LuaTools pour charger cette extension (elle contient du code)</value></data>
 </root>

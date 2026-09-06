@@ -761,4 +761,6 @@
   <data name="Addons_State_DataOnly" xml:space="preserve"><value>مُحمَّلة (بيانات فقط، بلا تنفيذ)</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>معطّلة</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>فشل التحميل</value></data>
+  <data name="Addons_Refresh" xml:space="preserve"><value>تحديث</value></data>
+  <data name="Addons_State_NeedsRestart" xml:space="preserve"><value>أعد تشغيل LuaTools لتحميل هذه الإضافة (تحتوي على شيفرة)</value></data>
 </root>
