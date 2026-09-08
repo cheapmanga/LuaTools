@@ -593,15 +593,25 @@ public class ManifestJobFactory(
             foreach (var entry in archive.Entries)
             {
                 if (string.IsNullOrEmpty(entry.Name)) continue;
-                string dest = Path.Combine(installDir, entry.FullName);
                 string relPath = entry.FullName.Replace('\\', '/');
+
+                // A zip entry naming its way out of the game folder is never legitimate; skip it and
+                // count it, rather than writing wherever it points.
+                if (ResolveInside(installDir, entry.FullName) is not { } dest) { failed++; continue; }
 
                 try
                 {
                     if (File.Exists(dest))
                     {
-                        // Back up the original — never clobber a known-good .bak
-                        string bakRel = $"{fixKey}/{Path.GetFileName(dest)}.bak";
+                        // Back up the original — never clobber a known-good .bak.
+                        //
+                        // Keyed by the FULL relative path, not just the file name: fix archives routinely
+                        // ship the same name in several folders (steam_api64.dll, config.ini), and keying
+                        // by name alone collapsed them onto one .bak. The !File.Exists guard below then
+                        // skipped backing the second one up while still recording it as "modified"
+                        // pointing at the first one's backup — so a revert restored one file with the
+                        // other's contents, or silently restored nothing once the .bak was consumed.
+                        string bakRel = $"{fixKey}/{relPath}.bak";
                         string bakAbs = Path.Combine(installDir, FixManifestDir, bakRel);
                         if (!File.Exists(bakAbs))
                         {
@@ -679,6 +689,30 @@ public class ManifestJobFactory(
     internal static string GetFixManifestPath(string installDir, string fixId) =>
         Path.Combine(installDir, FixManifestDir, $"{SafeFixKey(fixId)}.json");
 
+    /// <summary>
+    /// Resolve a relative path against the game folder, or null when it would escape it.
+    /// </summary>
+    /// <remarks>
+    /// Both callers take the relative part from data we do not control: zip entry names on apply, and the
+    /// revert manifest on revert. `Path.Combine(installDir, "../../../Windows/System32/x.dll")` happily
+    /// resolves outside the game — the classic zip-slip shape — and the revert path DELETES what it
+    /// resolves. The manifest also lives in a user-writable folder, and a fix archive can plant one for a
+    /// different fix key that we would not overwrite. So neither side is trusted; both go through here.
+    /// Same containment check as <c>DepotDownloaderService.TryDeleteCreatedFiles</c>.
+    /// </remarks>
+    private static string? ResolveInside(string root, string relative)
+    {
+        try
+        {
+            string rootFull = Path.TrimEndingDirectorySeparator(Path.GetFullPath(root));
+            string full = Path.GetFullPath(Path.Combine(rootFull, relative));
+            return full.StartsWith(rootFull + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)
+                ? full
+                : null;
+        }
+        catch { return null; } // malformed path (illegal chars, too long): treat as out of bounds
+    }
+
     /// <summary>Read a fix manifest from disk, or null if it doesn't exist.</summary>
     internal static DenuvoFixManifest? ReadFixManifest(string manifestPath)
     {
@@ -712,12 +746,16 @@ public class ManifestJobFactory(
 
             foreach (var entry in manifest.Files)
             {
-                string dest = Path.Combine(installDir, entry.RelativePath);
+                // The manifest sits in a user-writable folder and a fix archive can plant one, so its
+                // paths get the same containment check the extract does. This branch DELETES.
+                if (ResolveInside(installDir, entry.RelativePath) is not { } dest) { errors++; continue; }
+
                 try
                 {
                     if (entry.Action == "modified" && entry.BackupPath is { } bakRel)
                     {
-                        string bakAbs = Path.Combine(installDir, FixManifestDir, bakRel);
+                        if (ResolveInside(Path.Combine(installDir, FixManifestDir), bakRel)
+                            is not { } bakAbs) { errors++; continue; }
                         if (File.Exists(bakAbs))
                         {
                             File.Copy(bakAbs, dest, overwrite: true);
@@ -737,17 +775,23 @@ public class ManifestJobFactory(
                 catch { errors++; }
             }
 
-            // Clean up backup dir for this fix
-            string backupDir = Path.Combine(installDir, FixManifestDir, SafeFixKey(fixId));
-            try { if (Directory.Exists(backupDir)) Directory.Delete(backupDir, recursive: true); } catch { }
-            try { if (File.Exists(manifestPath)) File.Delete(manifestPath); } catch { }
-
             if (errors > 0)
             {
+                // Backups and manifest stay put ON PURPOSE. The usual reason a revert fails is a locked
+                // file because the game is running, and deleting the .bak files here would leave the user
+                // half-reverted with no way to ever finish. Keeping them means the revert is simply
+                // retryable once the game is closed. Same principle the apply path already follows: it
+                // writes the manifest even on partial failure so the backups stay recoverable.
                 string err = string.Format(Resources.Strings.Fixes_Revert_Partial_Body, errors);
                 toast.Show(Resources.Strings.Fixes_Revert_Partial, err, error: true);
                 return new JobResult(false, err);
             }
+
+            // Fully reverted, so the backups have served their purpose and the manifest is what makes the
+            // Revert button appear — both go, and the fix reads as un-applied again.
+            string backupDir = Path.Combine(installDir, FixManifestDir, SafeFixKey(fixId));
+            try { if (Directory.Exists(backupDir)) Directory.Delete(backupDir, recursive: true); } catch { }
+            try { if (File.Exists(manifestPath)) File.Delete(manifestPath); } catch { }
 
             string message = string.Format(Resources.Strings.Fixes_Revert_Done_Body, restored, deleted);
             toast.Show(Resources.Strings.Fixes_Revert_Done, message);

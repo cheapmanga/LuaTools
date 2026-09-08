@@ -603,4 +603,18 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>ไม่มีคีย์ถอดรหัสใน Lua สำหรับ depot {0}</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>รันไทม์ที่ใช้ร่วมกัน — ปกติติดตั้งไว้แล้ว ติ๊กเพื่อดาวน์โหลดอยู่ดี</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ต้องการลบรายการทั้งหมด {0} รายการออกจากประวัติการดาวน์โหลดหรือไม่ ไฟล์ที่ดาวน์โหลดแล้วจะไม่ได้รับผลกระทบ</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>แก้ไขนี้ถูกใช้งานอยู่แล้ว ย้อนกลับก่อนหากต้องการติดตั้งอันอื่น</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>เกมของฉัน</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>เกมของคุณ {0} เกมมีตัวแก้ไข เลื่อนรายการเพื่อดูเกมที่เหลือ</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>ยังไม่ได้เพิ่ม lua เพิ่ม (หรือติดตั้ง) เกมเพื่อให้แสดงที่นี่</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>ย้อนกลับ</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>ยกเลิก</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>ย้อนกลับ "{0}" หรือไม่ ไฟล์ที่ถูกแก้ไขจะถูกกู้คืนจากข้อมูลสำรอง และไฟล์ที่ตัวแก้ไขเพิ่มไว้จะถูกลบ</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขของ {0} หรือไม่</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขแล้ว</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>กู้คืน {0} รายการ ลบไฟล์ที่เพิ่ม {1} รายการ</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขไม่สำเร็จ</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>ไม่พบบันทึกว่าเคยใช้ตัวแก้ไขนี้ อาจถูกย้อนกลับไปแล้ว</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขได้บางส่วน</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>กู้คืนไฟล์ {0} รายการไม่สำเร็จ กรุณาปิดเกมแล้วลองใหม่</value></data>
 </root>

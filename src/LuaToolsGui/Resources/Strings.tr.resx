@@ -603,4 +603,18 @@ Hayır - durdur ama dosyaları koru
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua'da {0} depot'u için şifre çözme anahtarı yok.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Paylaşılan çalışma zamanı — genelde zaten kurulu. Yine de indirmek için işaretleyin.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>İndirme geçmişindeki {0} kaydın tümü kaldırılsın mı? İndirilen dosyalar etkilenmez.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Bu düzeltme zaten uygulanmış. Başka birini kurmak için geri alın.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Oyunlarım</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>Oyunlarınızdan {0} tanesinde düzeltme var. Kalanları görmek için listeyi kaydırın.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Henüz lua eklenmedi. Burada görmek için bir oyun ekleyin (veya kurun).</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Geri al</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>İptal</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>"{0}" geri alınsın mı? Değiştirilen dosyalar yedekten geri yüklenecek, düzeltmenin eklediği dosyalar silinecek.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>{0} için düzeltme geri alınsın mı?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Düzeltme geri alındı</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} geri yüklendi, eklenen {1} dosya kaldırıldı.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Düzeltme geri alınamadı</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Bu düzeltmenin uygulandığına dair kayıt yok. Zaten geri alınmış olabilir.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Düzeltme kısmen geri alındı</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} dosya geri yüklenemedi. Oyunu kapatıp tekrar deneyin.</value></data>
 </root>

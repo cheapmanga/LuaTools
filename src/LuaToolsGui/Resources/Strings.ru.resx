@@ -603,4 +603,18 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>В Lua нет ключа расшифровки для depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Общая среда выполнения — обычно уже установлена. Отметьте, чтобы всё равно скачать.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Удалить все записи ({0}) из истории загрузок? Загруженные файлы не затрагиваются.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Это исправление уже применено. Откатите его, чтобы установить другое.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Мои игры</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>Исправления есть для {0} ваших игр. Прокрутите список, чтобы увидеть остальные.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Файлы lua ещё не добавлены. Добавьте (или установите) игру, чтобы увидеть её здесь.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Откатить</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Откатить «{0}»? Изменённые файлы будут восстановлены из резервной копии, а добавленные исправлением файлы удалены.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Откатить исправление для {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Исправление откачено</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Восстановлено {0}, удалено добавленных файлов: {1}.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Не удалось откатить исправление</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Нет записи о применении этого исправления. Возможно, его уже откатили.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Исправление откачено частично</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Не удалось восстановить файлов: {0}. Закройте игру и повторите попытку.</value></data>
 </root>

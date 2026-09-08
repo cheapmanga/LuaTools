@@ -603,4 +603,18 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua 中沒有 depot {0} 的解密金鑰。</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共用執行階段 — 通常已安裝。如仍需下載請勾選。</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>要從下載紀錄中移除全部 {0} 筆記錄嗎？已下載的檔案不會受影響。</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>此修復已套用。若要安裝其他修復，請先還原。</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>我的遊戲</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>你的 {0} 款遊戲有可用修復。捲動清單可瀏覽其餘內容。</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>尚未新增 lua，新增或安裝一款遊戲後會顯示在這裡。</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>還原</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>要還原「{0}」嗎？修改過的檔案將從備份復原，修復新增的檔案將被刪除。</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>還原 {0} 的修復？</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>修復已還原</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>已復原 {0} 個，已刪除 {1} 個新增檔案。</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>無法還原修復</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>沒有套用此修復的紀錄，可能已經還原過了。</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>修復部分還原</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>有 {0} 個檔案無法復原。請關閉遊戲後重試。</value></data>
 </root>

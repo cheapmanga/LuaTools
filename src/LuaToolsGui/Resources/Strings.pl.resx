@@ -603,4 +603,18 @@ Anuluj - kontynuuj pobieranie</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Brak klucza deszyfrującego w Lua dla depotu {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Współdzielone środowisko — zwykle już zainstalowane. Zaznacz, aby i tak pobrać.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Usunąć wszystkie {0} wpisy z historii pobierania? Pobrane pliki pozostaną nienaruszone.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Ta poprawka jest już zastosowana. Cofnij ją, aby zainstalować inną.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Moje gry</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} z twoich gier ma poprawki. Przewiń listę, aby zobaczyć resztę.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Nie dodano jeszcze żadnych plików lua. Dodaj (lub zainstaluj) grę, aby ją tu zobaczyć.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Cofnij</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Anuluj</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Cofnąć „{0}”? Zmodyfikowane pliki zostaną przywrócone z kopii zapasowej, a pliki dodane przez poprawkę usunięte.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Cofnąć poprawkę dla {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Poprawka cofnięta</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Przywrócono {0}, usunięto {1} dodanych plików.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Nie udało się cofnąć poprawki</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Brak zapisu o zastosowaniu tej poprawki. Mogła już zostać cofnięta.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Poprawka cofnięta częściowo</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Nie udało się przywrócić {0} plików. Zamknij grę i spróbuj ponownie.</value></data>
 </root>

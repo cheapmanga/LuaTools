@@ -603,4 +603,18 @@ Cancelar - continuar a transferir</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Sem chave de desencriptação no Lua para o depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partilhado — normalmente já instalado. Marque para transferir na mesma.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Remover todas as {0} entradas do histórico de transferências? Os ficheiros transferidos não são afetados.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Esta correção já está aplicada. Reverta se quiser instalar outra.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Os meus jogos</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} dos seus jogos têm correções. Desloque a grelha para ver os restantes.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Ainda não adicionou nenhum lua. Adicione (ou instale) um jogo para o ver aqui.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Reverter</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Reverter "{0}"? Os ficheiros modificados serão restaurados a partir da cópia de segurança e os ficheiros adicionados pela correção serão eliminados.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Reverter a correção de {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Correção revertida</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} restaurado(s), {1} ficheiro(s) adicionado(s) removido(s).</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Não foi possível reverter a correção</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Não há registo de esta correção ter sido aplicada. Pode já ter sido revertida.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Correção revertida parcialmente</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Não foi possível restaurar {0} ficheiro(s). Feche o jogo e tente novamente.</value></data>
 </root>

@@ -603,4 +603,18 @@ Avbryt - fortsett nedlastingen</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Ingen dekrypteringsnøkkel i Lua for depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Delt kjøretid — vanligvis allerede installert. Huk av for å laste ned likevel.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Fjerne alle {0} oppføringer fra nedlastingsloggen? Nedlastede filer påvirkes ikke.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Denne rettelsen er allerede brukt. Angre den hvis du vil installere en annen.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Mine spill</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} av spillene dine har rettelser. Bla i listen for å se resten.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Ingen lua-filer lagt til ennå. Legg til (eller installer) et spill for å se det her.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Angre</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Avbryt</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Angre «{0}»? Endrede filer gjenopprettes fra sikkerhetskopien, og filer lagt til av rettelsen slettes.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Angre rettelsen for {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Rettelse angret</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} gjenopprettet, {1} tillagte filer fjernet.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Kunne ikke angre rettelsen</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Ingen registrering av at denne rettelsen er brukt. Den kan allerede være angret.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Rettelse delvis angret</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fil(er) kunne ikke gjenopprettes. Lukk spillet og prøv igjen.</value></data>
 </root>

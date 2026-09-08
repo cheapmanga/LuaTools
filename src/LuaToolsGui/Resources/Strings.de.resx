@@ -603,4 +603,18 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Kein Entschlüsselungsschlüssel im Lua für Depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Gemeinsame Laufzeit — meist bereits installiert. Zum Herunterladen trotzdem ankreuzen.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} Einträge aus dem Download-Verlauf entfernen? Heruntergeladene Dateien bleiben erhalten.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Dieser Fix ist bereits angewendet. Mache ihn rückgängig, um einen anderen zu installieren.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Meine Spiele</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} deiner Spiele haben Fixes. Scrolle die Übersicht für den Rest.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Noch keine Luas hinzugefügt. Füge ein Spiel hinzu (oder installiere eines), um es hier zu sehen.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Rückgängig</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>„{0}“ rückgängig machen? Geänderte Dateien werden aus dem Backup wiederhergestellt und vom Fix hinzugefügte Dateien gelöscht.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Fix für {0} rückgängig machen?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Fix rückgängig gemacht</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} wiederhergestellt, {1} hinzugefügte Datei(en) entfernt.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Fix konnte nicht rückgängig gemacht werden</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Kein Nachweis, dass dieser Fix angewendet wurde. Möglicherweise wurde er bereits rückgängig gemacht.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Fix teilweise rückgängig gemacht</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} Datei(en) konnten nicht wiederhergestellt werden. Schließe das Spiel und versuche es erneut.</value></data>
 </root>

@@ -603,4 +603,18 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>У Lua немає ключа розшифрування для depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Спільне середовище виконання — зазвичай уже встановлене. Позначте, щоб усе одно завантажити.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Вилучити всі записи ({0}) з історії завантажень? Завантажені файли не зачіпаються.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Це виправлення вже застосовано. Відкотіть його, щоб встановити інше.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Мої ігри</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>Виправлення є для {0} ваших ігор. Прогорніть список, щоб побачити решту.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Файли lua ще не додано. Додайте (або встановіть) гру, щоб побачити її тут.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Відкотити</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Відкотити «{0}»? Змінені файли буде відновлено з резервної копії, а додані виправленням файли видалено.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Відкотити виправлення для {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Виправлення відкочено</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Відновлено {0}, вилучено доданих файлів: {1}.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Не вдалося відкотити виправлення</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Немає запису про застосування цього виправлення. Можливо, його вже відкотили.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Виправлення відкочено частково</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Не вдалося відновити файлів: {0}. Закрийте гру та спробуйте ще раз.</value></data>
 </root>

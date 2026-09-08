@@ -603,4 +603,18 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Aucune clé de déchiffrement dans le Lua pour le depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partagé — généralement déjà installé. Cochez pour le télécharger quand même.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Supprimer les {0} entrées de l'historique des téléchargements ? Les fichiers téléchargés ne sont pas affectés.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Ce correctif est déjà appliqué. Annulez-le pour en installer un autre.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Mes jeux</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} de vos jeux ont des correctifs. Faites défiler la grille pour voir les autres.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Aucun lua ajouté pour l'instant. Ajoutez (ou installez) un jeu pour le voir ici.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Annuler le correctif</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Annuler « {0} » ? Les fichiers modifiés seront restaurés depuis la sauvegarde et les fichiers ajoutés par le correctif seront supprimés.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Annuler le correctif de {0} ?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Correctif annulé</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} restauré(s), {1} fichier(s) ajouté(s) supprimé(s).</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Impossible d'annuler le correctif</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Aucune trace de l'application de ce correctif. Il a peut-être déjà été annulé.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Correctif partiellement annulé</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Impossible de restaurer {0} fichier(s). Fermez le jeu et réessayez.</value></data>
 </root>

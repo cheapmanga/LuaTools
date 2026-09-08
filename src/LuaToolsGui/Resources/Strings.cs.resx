@@ -603,4 +603,18 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>V Lua není dešifrovací klíč pro depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Sdílený runtime — obvykle již nainstalován. Zaškrtnutím jej přesto stáhnete.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Odstranit všech {0} záznamů z historie stahování? Stažené soubory zůstanou zachovány.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Tato oprava je již použita. Vraťte ji zpět, pokud chcete nainstalovat jinou.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Moje hry</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} z vašich her má opravy. Zbytek zobrazíte posunutím seznamu.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Zatím nebyly přidány žádné soubory lua. Přidejte (nebo nainstalujte) hru, aby se zde zobrazila.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Vrátit zpět</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Zrušit</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Vrátit zpět „{0}“? Změněné soubory budou obnoveny ze zálohy a soubory přidané opravou budou smazány.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Vrátit zpět opravu pro {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Oprava vrácena zpět</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Obnoveno {0}, odstraněno {1} přidaných souborů.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Opravu se nepodařilo vrátit zpět</value></data>
+  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>O použití této opravy neexistuje záznam. Možná už byla vrácena zpět.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Oprava vrácena zpět částečně</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} soubor(ů) se nepodařilo obnovit. Zavřete hru a zkuste to znovu.</value></data>
 </root>
