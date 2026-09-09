@@ -113,7 +113,23 @@ public static class AppConfig
     // Sushi: SteamTools' public game repo, one <appid>.zip per game. A free, account-free source that
     // ships full manifest zips (lua + .manifest), unlike ManifestHub's keys-only database. Listed in
     // lua.tools' own load_free_manifest_apis, so it is a source they consume too.
+    // NOTE: as of 2026-09-09 this repo has not been pushed since 2025-11-19; coverage is ~10 months old.
     public const string SushiRawBase = "https://raw.githubusercontent.com/sushi-dev55-alt/sushitools-games-repo-alt/main";
+
+    // Ryuu: one zip per appid, carrying the lua AND its .manifest files, refreshed daily. Listed in
+    // lua.tools' own load_free_manifest_apis with "enabled": true, alongside Sushi — a source they
+    // publish as free, not a private endpoint.
+    //
+    // Since Steam closed the route that served manifests for apps you don't own (2026-09-09), a source
+    // that brings its own manifests is the only kind that still installs, and Ryuu is the only fresh
+    // one: Sushi's repo stopped in November 2025 and every ManifestHub fork is a mid-2025 snapshot.
+    //
+    // It is plain HTTP, which is theirs to fix, not ours to work around: there is no TLS endpoint. The
+    // exposure is bounded — InstallZip only ever writes .lua and .manifest, manifests are
+    // content-addressed so a tampered one is inert, and the lua is forced to <appid>.lua. A MITM could
+    // still hand over a bad lua for the game being added, which is why this is a deliberate built-in
+    // rather than something the addon format allows: addon sources are required to be https.
+    public const string RyuuBase = "http://167.235.229.108";
 
     // DepotDownloaderMod: downloads raw depot content from Steam's CDN using depot keys + a local manifest.
     // Powers the Depots page "Download" action.

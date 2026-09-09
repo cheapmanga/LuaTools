@@ -97,6 +97,7 @@ public partial class DownloadViewModel : ObservableObject
     private readonly FixLookupService _fixes;
     private readonly ManifestHubService _manifestHub;
     private readonly SushiService _sushi;
+    private readonly RyuuService _ryuu;
     private readonly Services.Addons.AddonRegistry _addons;
     private readonly Services.Addons.AddonSourceService _addonSources;
     private readonly DownloadQueue _queue;
@@ -405,7 +406,7 @@ public partial class DownloadViewModel : ObservableObject
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
         HardwareAppIdService hardware, FixLookupService fixes, ManifestHubService manifestHub,
-        SushiService sushi, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs,
+        SushiService sushi, RyuuService ryuu, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs,
         Services.Addons.AddonRegistry addons, Services.Addons.AddonSourceService addonSources)
     {
         _api = api;
@@ -421,6 +422,7 @@ public partial class DownloadViewModel : ObservableObject
         _fixes = fixes;
         _manifestHub = manifestHub;
         _sushi = sushi;
+        _ryuu = ryuu;
         _addons = addons;
         _addonSources = addonSources;
         _queue = queue;
@@ -820,17 +822,23 @@ public partial class DownloadViewModel : ObservableObject
         // which is now the difference between a source that installs and one that cannot. Its coverage
         // is stale (its repo has not been pushed since November 2025), so ManifestHub keeps its row -
         // it is a worse default, not a useless source, and the day the route reopens this reverts.
+        var ryuuProbe = SafeHasAsync(_ryuu.HasGameAsync(appId));
         bool sushiHas = await SafeHasAsync(_sushi.HasGameAsync(appId));
         bool hubHas = await SafeHasAsync(_manifestHub.HasGameAsync(appId));
+        bool ryuuHas = await ryuuProbe;
 
+        // Worst default first, best last: each Insert goes to index 0, so the order below is reversed
+        // on screen. Ryuu ends up on top because it is the only free source still refreshed daily.
         if (hubHas) InsertFreeRow(ManifestHubService.SourceName);
         if (sushiHas) InsertFreeRow(SushiService.SourceName);
+        if (ryuuHas) InsertFreeRow(RyuuService.SourceName);
 
-        int addonRows = await AddAddonSourcesAsync(appId, freeRowCount: (sushiHas ? 1 : 0) + (hubHas ? 1 : 0));
+        int addonRows = await AddAddonSourcesAsync(
+            appId, freeRowCount: (sushiHas ? 1 : 0) + (hubHas ? 1 : 0) + (ryuuHas ? 1 : 0));
 
         // The notice AND its button share one condition: only offer to switch when no free source has
         // the game AND a lua.tools row is actually downloadable, so the banner never shows a dead button.
-        FreeSourceUnavailable = !sushiHas && !hubHas && addonRows == 0
+        FreeSourceUnavailable = !sushiHas && !hubHas && !ryuuHas && addonRows == 0
             && Sources.Any(s => !s.IsFree && s.CanDownload);
     }
 
@@ -993,7 +1001,12 @@ public partial class DownloadViewModel : ObservableObject
         else if (source.IsFree)
         {
             // Route to the matching free builder; both install through the same pipeline afterward.
-            job = source.Name == SushiService.SourceName
+            job = source.Name == RyuuService.SourceName
+                ? _jobs.CreateRyuuJob(appId, gameName,
+                    confirm: confirm,
+                    onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                    onReveal: () => NavigateToGame?.Invoke(appId))
+                : source.Name == SushiService.SourceName
                 ? _jobs.CreateSushiJob(appId, gameName,
                     confirm: confirm,
                     onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),

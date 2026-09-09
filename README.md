@@ -43,11 +43,16 @@ Windows, so there is nothing extra to install.
 Fetching a game on the **Add** page lists its manifest sources, and the top rows are the free ones —
 badged **No limit**, needing no account and no daily cap:
 
-- **ManifestHub** builds the lua locally from the public [depot-key database](https://github.com/SteamAutoCracks/ManifestHub)
-  plus Steam's own depot list, unlocking the base game, its DLCs and its soundtracks.
+- **Ryuu** pulls a zip carrying the lua and its `.manifest` files, refreshed daily. Listed in
+  lua.tools' own `load_free_manifest_apis` as a free source. **The default**, and since 2026-09-09 the
+  only free source still current.
 - **Sushi** pulls a full manifest zip (lua + `.manifest`) from its public
-  [game repo](https://github.com/sushi-dev55-alt/sushitools-games-repo-alt), so it can also cover
-  pinned builds a keys-only source can't.
+  [game repo](https://github.com/sushi-dev55-alt/sushitools-games-repo-alt). Still works, but that repo
+  has not been updated since November 2025, so its coverage is roughly a year behind.
+- **ManifestHub** builds the lua locally from the public [depot-key database](https://github.com/SteamAutoCracks/ManifestHub)
+  plus Steam's own depot list. **Degraded since 2026-09-09**: Steam closed the route that served
+  manifests for apps you don't own, and a keys-only source has none of its own to fall back on. Kept
+  because it becomes useful again the day that route reopens.
 
 Both install exactly as a lua.tools manifest does. When neither free source has a game, a banner
 offers to fetch it with lua.tools instead (which uses your account and its 25/day cap). The lua.tools
