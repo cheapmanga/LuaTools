@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Показати .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Скопіювати App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Видалити DRM Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Фікси ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Дії</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Видалити DRM Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Буде запущено Steamless для виконуваного файлу гри, щоб видалити DRM SteamStub. Оригінальний .exe спершу зберігається як .bak. Деяким іграм потім може знадобитися перевірка файлів у Steam. Продовжити?</value></data>
@@ -583,12 +582,6 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Не вдалося завантажити SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Не вдалося запустити SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack оновлено.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Завантаження {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} відкрито.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} оновлено.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Не вдалося завантажити {0}.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Не вдалося запустити {0}.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Не вдалося встановити середовище .NET, потрібне для {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>виділення файлів</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>перевірка наявних файлів</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Скасувати завантаження</value></data>
@@ -608,6 +601,29 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>У Lua немає ключа розшифрування для depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Спільне середовище виконання — зазвичай уже встановлене. Позначте, щоб усе одно завантажити.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Вилучити всі записи ({0}) з історії завантажень? Завантажені файли не зачіпаються.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Це виправлення вже застосовано. Відкотіть його, щоб встановити інше.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Мої ігри</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>Виправлення є для {0} ваших ігор. Прогорніть список, щоб побачити решту.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Файли lua ще не додано. Додайте (або встановіть) гру, щоб побачити її тут.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Відкотити</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Відкотити «{0}»? Змінені файли буде відновлено з резервної копії, а додані виправленням файли видалено.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Відкотити виправлення для {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Виправлення відкочено</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Відновлено {0}, вилучено доданих файлів: {1}.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Не вдалося відкотити виправлення</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Немає запису про застосування цього виправлення. Можливо, його вже відкотили.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Не вдається безпечно скасувати фікс</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>Файл {0} змінився після застосування цього фікса, тож відновлення перезапише ці зміни. Якщо згори застосовано інший фікс, спершу скасуйте його. Порушено файлів: {1}.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Виправлення відкочено частково</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Не вдалося відновити файлів: {0}. Закрийте гру та спробуйте ще раз.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Фікси ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Завантаження {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} відкрито.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} оновлено.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Не вдалося завантажити {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Не вдалося запустити {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Не вдалося встановити середовище .NET, потрібне для {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Досягнення</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Перезапустіть Steam, щоб застосувати.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Перезапустити Steam зараз, щоб зміни набули чинності?</value></data>

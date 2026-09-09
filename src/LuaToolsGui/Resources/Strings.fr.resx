@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Afficher le .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Copier l'App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Supprimer le DRM Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Correctifs ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Actions</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Supprimer le DRM Steam ?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ceci exécute Steamless sur l'exécutable du jeu pour retirer le DRM SteamStub. Le .exe d'origine est d'abord sauvegardé en .bak. Certains jeux peuvent nécessiter une vérification des fichiers dans Steam ensuite. Continuer ?</value></data>
@@ -583,12 +582,6 @@ Cela supprime les fichiers .lua de Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Impossible de télécharger SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Impossible de lancer SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack mis à jour.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Récupération de {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} ouvert.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} mis à jour.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Impossible de télécharger {0}.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Impossible de lancer {0}.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Impossible d'installer le runtime .NET requis par {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allocation des fichiers</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>vérification des fichiers existants</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Annuler le téléchargement</value></data>
@@ -608,6 +601,29 @@ Annuler - continuer le téléchargement</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Aucune clé de déchiffrement dans le Lua pour le depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partagé — généralement déjà installé. Cochez pour le télécharger quand même.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Supprimer les {0} entrées de l'historique des téléchargements ? Les fichiers téléchargés ne sont pas affectés.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Ce correctif est déjà appliqué. Annulez-le pour en installer un autre.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Mes jeux</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} de vos jeux ont des correctifs. Faites défiler la grille pour voir les autres.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Aucun lua ajouté pour l'instant. Ajoutez (ou installez) un jeu pour le voir ici.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Annuler le correctif</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Annuler</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Annuler « {0} » ? Les fichiers modifiés seront restaurés depuis la sauvegarde et les fichiers ajoutés par le correctif seront supprimés.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Annuler le correctif de {0} ?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Correctif annulé</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} restauré(s), {1} fichier(s) ajouté(s) supprimé(s).</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Impossible d'annuler le correctif</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Aucune trace de l'application de ce correctif. Il a peut-être déjà été annulé.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Impossible d'annuler ce correctif en toute sécurité</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} a changé depuis l'application de ce correctif ; le restaurer écraserait ces modifications. Si vous avez appliqué un autre correctif par-dessus, annulez-le d'abord. {1} fichier(s) concerné(s).</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Correctif partiellement annulé</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Impossible de restaurer {0} fichier(s). Fermez le jeu et réessayez.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Correctifs ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Récupération de {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} ouvert.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} mis à jour.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Impossible de télécharger {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Impossible de lancer {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Impossible d'installer le runtime .NET requis par {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Succès</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Redémarrez Steam pour appliquer.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Redémarrer Steam maintenant pour que les changements prennent effet ?</value></data>

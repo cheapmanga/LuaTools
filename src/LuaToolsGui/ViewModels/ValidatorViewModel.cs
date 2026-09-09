@@ -98,7 +98,7 @@ public partial class ValidatorViewModel(
             .OrderBy(g => g.Name, StringComparer.CurrentCultureIgnoreCase)
             .ToList());
 
-        foreach (var (appId, name) in installed)
+        foreach (var (appId, name, _) in installed)
             Games.Add(new InstalledGame(appId, name));
     }
 

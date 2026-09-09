@@ -248,7 +248,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>显示 .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>复制 App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>移除 Steam DRM</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修复 ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>操作</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>移除 Steam DRM？</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>这将对游戏的可执行文件运行 Steamless 以移除 SteamStub DRM。原始 .exe 会先备份为 .bak。某些游戏之后可能需要在 Steam 中验证文件。是否继续？</value></data>
@@ -603,12 +602,6 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>无法下载 SteamAutoCrack。</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>无法启动 SteamAutoCrack。</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack 已更新。</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>正在获取 {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>已打开 {0}。</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} 已更新。</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>无法下载 {0}。</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>无法启动 {0}。</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>无法安装 {0} 所需的 .NET 运行时。</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>正在分配文件</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>正在校验已有文件</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>取消下载</value></data>
@@ -628,6 +621,29 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua 中没有 depot {0} 的解密密钥。</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共享运行库 — 通常已安装。如仍需下载请勾选。</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>要从下载历史中移除全部 {0} 条记录吗？已下载的文件不会受影响。</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>此修复已应用。若要安装其他修复，请先还原。</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>我的游戏</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>你的 {0} 款游戏有可用修复。滚动列表可浏览其余内容。</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>尚未添加 lua，添加或安装一款游戏后会显示在这里。</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>还原</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>要还原“{0}”吗？修改过的文件将从备份恢复，修复添加的文件将被删除。</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>还原 {0} 的修复？</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>修复已还原</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>已恢复 {0} 个，已删除 {1} 个新增文件。</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>无法还原修复</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>没有应用此修复的记录，可能已经还原过了。</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>无法安全还原此修复</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>自应用此修复以来，{0} 已被更改，还原会覆盖这些更改。如果你在其上应用了另一个修复，请先还原那一个。共影响 {1} 个文件。</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>修复部分还原</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>有 {0} 个文件无法恢复。请关闭游戏后重试。</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修复 ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>正在获取 {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>已打开 {0}。</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} 已更新。</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>无法下载 {0}。</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>无法启动 {0}。</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>无法安装 {0} 所需的 .NET 运行时。</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>成就</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 重启 Steam 以生效。</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>立即重启 Steam 以使更改生效？</value></data>

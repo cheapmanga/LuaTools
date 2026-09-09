@@ -20,6 +20,15 @@ public partial class SteamLibraryService(SteamService steam)
     [GeneratedRegex(@"""installdir""\s*""([^""]+)""", RegexOptions.IgnoreCase)]
     private static partial Regex InstallDirRegex();
 
+    [GeneratedRegex(@"""appid""\s*""(\d+)""", RegexOptions.IgnoreCase)]
+    private static partial Regex AppIdRegex();
+
+    [GeneratedRegex(@"""name""\s*""([^""]*)""", RegexOptions.IgnoreCase)]
+    private static partial Regex NameRegex();
+
+    /// <summary>An installed game, as its appmanifest describes it.</summary>
+    public record InstalledGame(long AppId, string Name, string InstallDir);
+
     /// <summary>
     /// Full path to the game's install folder (…\steamapps\common\&lt;installdir&gt;) if it exists on
     /// disk, else null (game not installed / Steam not found / unreadable).
@@ -48,26 +57,22 @@ public partial class SteamLibraryService(SteamService steam)
         return null;
     }
 
-    // "appid" "480" / "name" "Spacewar" — the two keys we need out of an appmanifest, same quoted
-    // one-per-line KeyValues shape as the rest of this file.
-    [GeneratedRegex(@"""appid""\s*""(\d+)""", RegexOptions.IgnoreCase)]
-    private static partial Regex AppIdRegex();
-
-    [GeneratedRegex(@"""name""\s*""([^""]*)""", RegexOptions.IgnoreCase)]
-    private static partial Regex NameRegex();
-
     // "LastPlayed" "1788083097" — unix seconds, and "0" when the game has never been launched.
     [GeneratedRegex(@"""LastPlayed""\s*""(\d+)""", RegexOptions.IgnoreCase)]
     private static partial Regex LastPlayedRegex();
 
+    /// <summary>The LastPlayed stamp out of an appmanifest, or null when the key is absent.</summary>
+    internal static long? ReadLastPlayed(string manifest)
+    {
+        var match = LastPlayedRegex().Match(manifest);
+        return match.Success && long.TryParse(match.Groups[1].Value, out long seconds) ? seconds : null;
+    }
+
     /// <summary>
-    /// When Steam last launched this game, or null if it can't be established. Zero means never — which
-    /// is the only value this is really asked for.
+    /// When Steam last recorded this game as played, or null if it never has been (or the manifest
+    /// can't be read). Read straight from the appmanifest, so it is right even for apps the public app
+    /// list doesn't know.
     /// </summary>
-    /// <remarks>
-    /// Steam stopped recording per-game playtime in localconfig.vdf, so the manifest's LastPlayed is
-    /// what is left to tell a game that has been played from one that has only been installed.
-    /// </remarks>
     public DateTimeOffset? GetLastPlayed(long appId)
     {
         string? steamRoot = steam.EffectivePath;
@@ -88,41 +93,52 @@ public partial class SteamLibraryService(SteamService steam)
         return null;
     }
 
-    /// <summary>The LastPlayed stamp out of an appmanifest, or null when the key is absent.</summary>
-    internal static long? ReadLastPlayed(string manifest)
-    {
-        var match = LastPlayedRegex().Match(manifest);
-        return match.Success && long.TryParse(match.Groups[1].Value, out long seconds) ? seconds : null;
-    }
-
     /// <summary>
-    /// Enumerate the installed games across every library by reading each appmanifest_&lt;appid&gt;.acf.
-    /// Best-effort per file: an unreadable or half-written manifest is skipped, never fatal. The name is
-    /// the one Steam itself stores, so it's correct even for apps missing from the public app list.
+    /// Every installed game across every library, from the appmanifests. Lazy, and skips anything whose
+    /// folder isn't actually on disk.
     /// </summary>
-    public IEnumerable<(long AppId, string Name)> EnumerateInstalled()
+    /// <remarks>
+    /// Enumerating the .acf files is the cheap part (~39 ms across three drives here); what costs is
+    /// whatever the caller then does per game. Yields rather than returning a list so a caller looking
+    /// for one thing can stop early.
+    /// </remarks>
+    public IEnumerable<InstalledGame> EnumerateInstalled()
     {
         string? steamRoot = steam.EffectivePath;
         if (steamRoot is null) yield break;
 
-        var seen = new HashSet<long>();
         foreach (string library in GetLibraryRoots(steamRoot))
         {
-            string[] manifests;
-            try { manifests = Directory.GetFiles(Path.Combine(library, "steamapps"), "appmanifest_*.acf"); }
-            catch { continue; } // library on a disconnected drive
-
-            foreach (string manifest in manifests)
+            string steamapps = Path.Combine(library, "steamapps");
+            string[] acfs;
+            try
             {
-                string text;
-                try { text = File.ReadAllText(manifest); } catch { continue; }
+                if (!Directory.Exists(steamapps)) continue;
+                acfs = Directory.GetFiles(steamapps, "appmanifest_*.acf");
+            }
+            catch { continue; }
 
-                var idMatch = AppIdRegex().Match(text);
-                if (!idMatch.Success || !long.TryParse(idMatch.Groups[1].Value, out long appId)) continue;
-                if (!seen.Add(appId)) continue; // same game listed in two libraries
+            foreach (string acf in acfs)
+            {
+                InstalledGame? game = null;
+                try
+                {
+                    string text = File.ReadAllText(acf);
 
-                var nameMatch = NameRegex().Match(text);
-                yield return (appId, nameMatch.Success ? nameMatch.Groups[1].Value : appId.ToString());
+                    var idm = AppIdRegex().Match(text);
+                    var dirm = InstallDirRegex().Match(text);
+                    if (!idm.Success || !dirm.Success) continue;
+                    if (!long.TryParse(idm.Groups[1].Value, out long appId)) continue;
+
+                    string full = Path.Combine(steamapps, "common", Unescape(dirm.Groups[1].Value));
+                    if (!Directory.Exists(full)) continue;
+
+                    var nm = NameRegex().Match(text);
+                    game = new InstalledGame(appId, nm.Success ? nm.Groups[1].Value : appId.ToString(), full);
+                }
+                catch { /* unreadable or malformed acf: skip this one, not the whole library */ }
+
+                if (game is not null) yield return game;
             }
         }
     }
