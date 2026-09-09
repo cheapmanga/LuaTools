@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Afișează .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Copiază App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Elimină DRM-ul Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Remedieri ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acțiuni</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Elimini DRM-ul Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Aceasta rulează Steamless pe executabilul jocului pentru a elimina DRM-ul SteamStub. Fișierul .exe original este mai întâi salvat ca .bak. Unele jocuri pot necesita apoi o verificare a fișierelor în Steam. Continui?</value></data>
@@ -583,12 +582,6 @@ Aceasta șterge fișierele .lua din Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nu s-a putut descărca SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nu s-a putut porni SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack a fost actualizat.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Se obține {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} a fost deschis.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} a fost actualizat.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nu s-a putut descărca {0}.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nu s-a putut porni {0}.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nu s-a putut instala runtime-ul .NET necesar pentru {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>se alocă fișierele</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>se verifică fișierele existente</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Anulează descărcarea</value></data>
@@ -608,6 +601,29 @@ Anulare - continuă descărcarea</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Nu există cheie de decriptare în Lua pentru depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime partajat — de obicei deja instalat. Bifează pentru a-l descărca oricum.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Elimini toate cele {0} intrări din istoricul descărcărilor? Fișierele descărcate nu sunt afectate.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Această reparație este deja aplicată. Anuleaz-o dacă vrei să instalezi alta.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Jocurile mele</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} dintre jocurile tale au reparații. Derulează lista pentru restul.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Încă nu ai adăugat niciun lua. Adaugă (sau instalează) un joc ca să apară aici.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Anulează reparația</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Renunță</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Anulezi „{0}”? Fișierele modificate vor fi restaurate din copia de rezervă, iar fișierele adăugate de reparație vor fi șterse.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Anulezi reparația pentru {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Reparație anulată</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} restaurate, {1} fișiere adăugate eliminate.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Reparația nu a putut fi anulată</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Nu există nicio înregistrare că această reparație a fost aplicată. Poate a fost deja anulată.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix-ul nu poate fi anulat în siguranță</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} s-a modificat de la aplicarea acestui fix, așa că restaurarea ar suprascrie acele modificări. Dacă ai aplicat alt fix peste, anulează-l mai întâi pe acela. {1} fișier(e) afectate.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Reparație anulată parțial</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fișier(e) nu au putut fi restaurate. Închide jocul și încearcă din nou.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Remedieri ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Se obține {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} a fost deschis.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} a fost actualizat.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nu s-a putut descărca {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nu s-a putut porni {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nu s-a putut instala runtime-ul .NET necesar pentru {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Realizări</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Repornește Steam pentru a aplica.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Repornești Steam acum pentru ca modificările să aibă efect?</value></data>

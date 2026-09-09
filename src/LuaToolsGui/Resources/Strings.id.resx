@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Tampilkan .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Salin App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Hapus DRM Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Perbaikan ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Tindakan</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Hapus DRM Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ini menjalankan Steamless pada file eksekusi game untuk menghapus DRM SteamStub. File .exe asli dicadangkan ke .bak terlebih dahulu. Beberapa game mungkin perlu verifikasi file di Steam setelahnya. Lanjutkan?</value></data>
@@ -583,12 +582,6 @@ Ini menghapus berkas .lua dari Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Tidak dapat mengunduh SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack diperbarui.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Mengambil {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} dibuka.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} diperbarui.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Tidak dapat mengunduh {0}.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan {0}.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Tidak dapat memasang runtime .NET yang dibutuhkan {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>mengalokasikan berkas</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>memeriksa berkas yang ada</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Batalkan unduhan</value></data>
@@ -608,6 +601,29 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Tidak ada kunci dekripsi di Lua untuk depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime bersama — biasanya sudah terpasang. Centang untuk tetap mengunduh.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Hapus semua {0} entri dari riwayat unduhan? Berkas yang sudah diunduh tidak terpengaruh.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Perbaikan ini sudah diterapkan. Kembalikan dulu jika ingin memasang yang lain.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Game saya</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} game Anda memiliki perbaikan. Gulir daftar untuk melihat sisanya.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Belum ada lua yang ditambahkan. Tambahkan (atau pasang) sebuah game agar muncul di sini.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Kembalikan</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Batal</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Kembalikan "{0}"? Berkas yang diubah akan dipulihkan dari cadangan dan berkas yang ditambahkan perbaikan akan dihapus.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Kembalikan perbaikan untuk {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Perbaikan dikembalikan</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} dipulihkan, {1} berkas tambahan dihapus.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Tidak dapat mengembalikan perbaikan</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Tidak ada catatan perbaikan ini pernah diterapkan. Mungkin sudah dikembalikan.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix tidak dapat dikembalikan dengan aman</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} telah berubah sejak fix ini diterapkan, jadi memulihkannya akan menimpa perubahan tersebut. Jika Anda menerapkan fix lain di atasnya, kembalikan yang itu dulu. {1} berkas terpengaruh.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Perbaikan dikembalikan sebagian</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} berkas tidak dapat dipulihkan. Tutup game lalu coba lagi.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Perbaikan ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Mengambil {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} dibuka.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} diperbarui.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Tidak dapat mengunduh {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Tidak dapat menjalankan {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Tidak dapat memasang runtime .NET yang dibutuhkan {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Pencapaian</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Mulai ulang Steam untuk menerapkan.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Mulai ulang Steam sekarang agar perubahan berlaku?</value></data>

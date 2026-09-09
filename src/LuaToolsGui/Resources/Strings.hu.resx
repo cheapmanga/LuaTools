@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>.lua megjelenítése</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>App ID másolása</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM eltávolítása</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Javítások ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Műveletek</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Eltávolítja a Steam DRM-et?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Ez lefuttatja a Steamlesst a játék futtatható fájlján a SteamStub DRM eltávolításához. Az eredeti .exe előbb .bak néven biztonsági mentésre kerül. Egyes játékoknál utána fájlellenőrzés lehet szükséges a Steamben. Folytatja?</value></data>
@@ -583,12 +582,6 @@ Ez törli a .lua fájlokat a Steam\config\stplug-in mappából.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Nem sikerült letölteni a SteamAutoCracket.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a SteamAutoCracket.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>A SteamAutoCrack frissült.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} beszerzése</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>A {0} megnyílt.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>A {0} frissült.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nem sikerült letölteni a {0}et.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a {0}et.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nem sikerült telepíteni a {0}hez szükséges .NET futtatókörnyezetet.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>fájlok lefoglalása</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>meglévő fájlok ellenőrzése</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Letöltés megszakítása</value></data>
@@ -608,6 +601,29 @@ Mégse - letöltés folytatása</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>A Lua nem tartalmaz visszafejtő kulcsot a(z) {0} depot-hoz.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Megosztott futtatókörnyezet — általában már telepítve van. Jelölje be, ha mégis letöltené.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Eltávolítja mind a(z) {0} bejegyzést a letöltési előzményekből? A letöltött fájlokat ez nem érinti.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Ez a javítás már alkalmazva van. Vond vissza, ha másikat szeretnél telepíteni.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Saját játékok</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} játékodhoz van javítás. A többiért görgesd a listát.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Még nincs hozzáadott lua. Adj hozzá (vagy telepíts) egy játékot, hogy itt megjelenjen.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Visszavonás</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Mégse</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Visszavonod a(z) „{0}” javítást? A módosított fájlok visszaállnak a biztonsági másolatból, a javítás által hozzáadott fájlok pedig törlődnek.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Visszavonod a(z) {0} javítását?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Javítás visszavonva</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} visszaállítva, {1} hozzáadott fájl eltávolítva.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>A javítást nem sikerült visszavonni</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Nincs nyoma annak, hogy ezt a javítást alkalmazták volna. Lehet, hogy már visszavonták.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>A javítás nem vonható vissza biztonságosan</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>A(z) {0} megváltozott a javítás alkalmazása óta, ezért a visszaállítás felülírná ezeket a módosításokat. Ha másik javítást is alkalmaztál rá, előbb azt vond vissza. {1} fájl érintett.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>A javítás részben lett visszavonva</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fájlt nem sikerült visszaállítani. Zárd be a játékot, és próbáld újra.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Javítások ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} beszerzése</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>A {0} megnyílt.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>A {0} frissült.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Nem sikerült letölteni a {0}et.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Nem sikerült elindítani a {0}et.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Nem sikerült telepíteni a {0}hez szükséges .NET futtatókörnyezetet.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Teljesítmények</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Indítsd újra a Steamet az alkalmazáshoz.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Újraindítod most a Steamet, hogy a változások érvénybe lépjenek?</value></data>

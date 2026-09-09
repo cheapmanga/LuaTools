@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Покажи .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Копиране на App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Премахни DRM на Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Корекции ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Действия</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Да се премахне ли DRM на Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Това стартира Steamless върху изпълнимия файл на играта, за да премахне DRM SteamStub. Оригиналният .exe първо се архивира като .bak. Някои игри може да изискват след това проверка на файловете в Steam. Да се продължи ли?</value></data>
@@ -583,12 +582,6 @@
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack не можа да се изтегли.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack не можа да се стартира.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack е обновен.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Изтегляне на {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} е отворен.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} е обновен.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0} не можа да се изтегли.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0} не можа да се стартира.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Не можа да се инсталира .NET средата, необходима на {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>заделяне на файлове</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>проверка на съществуващите файлове</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Отказ на изтеглянето</value></data>
@@ -608,6 +601,29 @@
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>В Lua няма ключ за дешифриране за depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Споделена среда за изпълнение — обикновено вече е инсталирана. Отметнете, за да я изтеглите.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Да се премахнат ли всички {0} записа от историята на изтеглянията? Изтеглените файлове не се засягат.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Тази корекция вече е приложена. Върнете я, ако искате да инсталирате друга.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Моите игри</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} от вашите игри имат корекции. Превъртете списъка за останалите.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Все още няма добавени lua файлове. Добавете (или инсталирайте) игра, за да се появи тук.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Връщане</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Отказ</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Да се върне ли „{0}“? Променените файлове ще бъдат възстановени от резервното копие, а добавените от корекцията файлове ще бъдат изтрити.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Да се върне ли корекцията за {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Корекцията е върната</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Възстановени {0}, премахнати {1} добавени файла.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Корекцията не можа да бъде върната</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Няма запис тази корекция да е била прилагана. Може вече да е върната.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Поправката не може да се върне безопасно</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} е променен, откакто беше приложена тази поправка, така че възстановяването ще презапише тези промени. Ако сте приложили друга поправка отгоре, първо върнете нея. Засегнати са {1} файла.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Корекцията е върната частично</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} файл(а) не можаха да бъдат възстановени. Затворете играта и опитайте отново.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Корекции ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Изтегляне на {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} е отворен.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} е обновен.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0} не можа да се изтегли.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0} не можа да се стартира.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Не можа да се инсталира .NET средата, необходима на {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Постижения</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Рестартирайте Steam, за да приложите.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Рестартиране на Steam сега, за да влязат в сила промените?</value></data>

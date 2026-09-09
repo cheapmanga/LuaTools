@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>Mostra .lua</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>Copia App ID</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Rimuovi DRM di Steam</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fix ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Azioni</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Rimuovere il DRM di Steam?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Questo esegue Steamless sull'eseguibile del gioco per rimuovere il DRM SteamStub. Il .exe originale viene prima salvato come .bak. Alcuni giochi potrebbero richiedere una verifica dei file in Steam dopo. Continuare?</value></data>
@@ -583,12 +582,6 @@ Questo elimina i file .lua da Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Impossibile scaricare SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Impossibile avviare SteamAutoCrack.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack aggiornato.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Recupero di {0}</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} aperto.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} aggiornato.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Impossibile scaricare {0}.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Impossibile avviare {0}.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Impossibile installare il runtime .NET richiesto da {0}.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>allocazione file</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>verifica dei file esistenti</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Annulla download</value></data>
@@ -608,6 +601,29 @@ Annulla - continua a scaricare</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Nessuna chiave di decrittazione nel Lua per il depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Runtime condiviso — di solito già installato. Spunta per scaricarlo comunque.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Rimuovere tutte le {0} voci dalla cronologia dei download? I file scaricati non vengono toccati.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Questa fix è già applicata. Annullala se vuoi installarne un'altra.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>I miei giochi</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} dei tuoi giochi hanno fix. Scorri la griglia per vedere gli altri.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Nessun lua aggiunto finora. Aggiungi (o installa) un gioco per vederlo qui.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Annulla fix</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Annulla</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>Annullare "{0}"? I file modificati verranno ripristinati dal backup e i file aggiunti dalla fix verranno eliminati.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Annullare la fix di {0}?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Fix annullata</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} ripristinati, {1} file aggiunti rimossi.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Impossibile annullare la fix</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Nessuna traccia dell'applicazione di questa fix. Potrebbe essere già stata annullata.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Impossibile ripristinare il fix in sicurezza</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} è cambiato da quando questo fix è stato applicato, quindi ripristinarlo sovrascriverebbe quelle modifiche. Se hai applicato un altro fix sopra, ripristina prima quello. {1} file interessati.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Fix annullata parzialmente</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Impossibile ripristinare {0} file. Chiudi il gioco e riprova.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fix ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>Recupero di {0}</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} aperto.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} aggiornato.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Impossibile scaricare {0}.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Impossibile avviare {0}.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Impossibile installare il runtime .NET richiesto da {0}.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Obiettivi</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Riavvia Steam per applicare.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Riavviare Steam ora affinché le modifiche abbiano effetto?</value></data>

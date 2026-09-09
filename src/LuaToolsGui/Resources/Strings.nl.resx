@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>.lua tonen</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>App ID kopiëren</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam-DRM verwijderen</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fixes ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>Acties</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam-DRM verwijderen?</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>Dit voert Steamless uit op het uitvoerbare bestand van het spel om de SteamStub-DRM te verwijderen. De originele .exe wordt eerst als .bak geback-upt. Sommige spellen hebben daarna een bestandsverificatie in Steam nodig. Doorgaan?</value></data>
@@ -583,12 +582,6 @@ Dit verwijdert de .lua-bestanden uit Steam\config\stplug-in.</value></data>
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>Kan SteamAutoCrack niet downloaden.</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>Kan SteamAutoCrack niet starten.</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack bijgewerkt.</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} ophalen</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} geopend.</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} bijgewerkt.</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Kan {0} niet downloaden.</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Kan {0} niet starten.</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Kan de .NET-runtime die {0} nodig heeft niet installeren.</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>bestanden reserveren</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>bestaande bestanden controleren</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>Download annuleren</value></data>
@@ -608,6 +601,29 @@ Annuleren - doorgaan met downloaden</value></data>
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Geen ontsleutelingssleutel in de Lua voor depot {0}.</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>Gedeelde runtime — meestal al geïnstalleerd. Vink aan om toch te downloaden.</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>Alle {0} items uit de downloadgeschiedenis verwijderen? Gedownloade bestanden blijven staan.</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Deze fix is al toegepast. Draai hem terug als je een andere wilt installeren.</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>Mijn games</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} van je games hebben fixes. Scroll door het overzicht voor de rest.</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>Nog geen lua's toegevoegd. Voeg een game toe (of installeer er een) om hem hier te zien.</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>Terugdraaien</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>Annuleren</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>"{0}" terugdraaien? Gewijzigde bestanden worden hersteld vanaf de back-up en bestanden die de fix heeft toegevoegd worden verwijderd.</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>Fix voor {0} terugdraaien?</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>Fix teruggedraaid</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} hersteld, {1} toegevoegde bestand(en) verwijderd.</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Kan fix niet terugdraaien</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Geen registratie dat deze fix is toegepast. Mogelijk is hij al teruggedraaid.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix kan niet veilig worden teruggedraaid</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} is gewijzigd sinds deze fix is toegepast, dus herstellen zou die wijzigingen overschrijven. Als je er een andere fix overheen hebt toegepast, draai die dan eerst terug. {1} bestand(en) getroffen.</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Fix gedeeltelijk teruggedraaid</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} bestand(en) konden niet worden hersteld. Sluit de game en probeer opnieuw.</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>Fixes ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} ophalen</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} geopend.</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} bijgewerkt.</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>Kan {0} niet downloaden.</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>Kan {0} niet starten.</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>Kan de .NET-runtime die {0} nodig heeft niet installeren.</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>Prestaties</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> Herstart Steam om toe te passen.</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>Steam nu herstarten zodat de wijzigingen worden doorgevoerd?</value></data>

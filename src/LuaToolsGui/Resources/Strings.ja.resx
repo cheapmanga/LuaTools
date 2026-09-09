@@ -234,7 +234,6 @@
   <data name="Manage_Action_Reveal" xml:space="preserve"><value>.lua を表示</value></data>
   <data name="Manage_Action_CopyAppId" xml:space="preserve"><value>App IDをコピー</value></data>
   <data name="Manage_Action_RemoveDrm" xml:space="preserve"><value>Steam DRM を削除</value></data>
-  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修正 ({0})</value></data>
   <data name="Manage_ActionsHeader" xml:space="preserve"><value>アクション</value></data>
   <data name="Manage_Steamless_Confirm_Title" xml:space="preserve"><value>Steam DRM を削除しますか？</value></data>
   <data name="Manage_Steamless_Confirm_Body" xml:space="preserve"><value>ゲームの実行ファイルに Steamless を実行して SteamStub DRM を除去します。元の .exe は先に .bak としてバックアップされます。一部のゲームでは後で Steam のファイル整合性確認が必要になる場合があります。続行しますか？</value></data>
@@ -583,12 +582,6 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Downloads_SAC_Err_Tool" xml:space="preserve"><value>SteamAutoCrack をダウンロードできませんでした。</value></data>
   <data name="Downloads_SAC_Err_Launch" xml:space="preserve"><value>SteamAutoCrack を起動できませんでした。</value></data>
   <data name="Downloads_SAC_Updated" xml:space="preserve"><value>SteamAutoCrack を更新しました。</value></data>
-  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} を取得中</value></data>
-  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} を開きました。</value></data>
-  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} を更新しました。</value></data>
-  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0} をダウンロードできませんでした。</value></data>
-  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0} を起動できませんでした。</value></data>
-  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>{0} に必要な .NET ランタイムをインストールできませんでした。</value></data>
   <data name="Downloads_Depot_PreAllocating" xml:space="preserve"><value>ファイルを確保中</value></data>
   <data name="Downloads_Depot_Validating" xml:space="preserve"><value>既存ファイルを検証中</value></data>
   <data name="Depot_Cancel_Title" xml:space="preserve"><value>ダウンロードを取消</value></data>
@@ -608,6 +601,29 @@ Steam\config\stplug-in から .lua ファイルを削除します。</value></da
   <data name="Depot_Err_NoKeyFor" xml:space="preserve"><value>Lua に depot {0} の復号キーがありません。</value></data>
   <data name="Builds_Select_SharedHint" xml:space="preserve"><value>共有ランタイム — 通常はインストール済みです。必要ならチェックしてください。</value></data>
   <data name="Downloads_ClearHistory_Confirm" xml:space="preserve"><value>ダウンロード履歴から {0} 件すべてを削除しますか？ダウンロード済みのファイルには影響しません。</value></data>
+  <data name="Fixes_Applied_Hint" xml:space="preserve"><value>この修正は適用済みです。別のものを入れるには元に戻してください。</value></data>
+  <data name="Fixes_MyGames" xml:space="preserve"><value>マイゲーム</value></data>
+  <data name="Fixes_MyGames_Count" xml:space="preserve"><value>あなたのゲームのうち {0} 本に修正があります。ほかはグリッドをスクロールしてご覧ください。</value></data>
+  <data name="Fixes_MyGames_NotInstalled" xml:space="preserve"><value>lua がまだありません。ゲームを追加（またはインストール）すると表示されます。</value></data>
+  <data name="Fixes_Revert" xml:space="preserve"><value>元に戻す</value></data>
+  <data name="Fixes_Revert_Cancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="Fixes_Revert_Confirm_Body" xml:space="preserve"><value>「{0}」を元に戻しますか？変更されたファイルはバックアップから復元され、修正が追加したファイルは削除されます。</value></data>
+  <data name="Fixes_Revert_Confirm_Title" xml:space="preserve"><value>{0} の修正を元に戻しますか？</value></data>
+  <data name="Fixes_Revert_Done" xml:space="preserve"><value>修正を元に戻しました</value></data>
+  <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} 件を復元し、追加された {1} 件を削除しました。</value></data>
+  <data name="Fixes_Revert_Failed" xml:space="preserve"><value>修正を元に戻せませんでした</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>この修正を適用した記録がありません。すでに元に戻されている可能性があります。</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>修正を安全に元に戻せません</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>この修正の適用後に {0} が変更されているため、復元するとその変更が上書きされます。別の修正を上に適用した場合は、先にそちらを元に戻してください。対象は {1} 個のファイルです。</value></data>
+  <data name="Fixes_Revert_Partial" xml:space="preserve"><value>修正は一部だけ元に戻りました</value></data>
+  <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} 個のファイルを復元できませんでした。ゲームを閉じてやり直してください。</value></data>
+  <data name="Manage_Action_Fixes" xml:space="preserve"><value>修正 ({0})</value></data>
+  <data name="Downloads_Tool_Getting" xml:space="preserve"><value>{0} を取得中</value></data>
+  <data name="Downloads_Tool_Launched" xml:space="preserve"><value>{0} を開きました。</value></data>
+  <data name="Downloads_Tool_Updated" xml:space="preserve"><value>{0} を更新しました。</value></data>
+  <data name="Downloads_Tool_Err_Get" xml:space="preserve"><value>{0} をダウンロードできませんでした。</value></data>
+  <data name="Downloads_Tool_Err_Launch" xml:space="preserve"><value>{0} を起動できませんでした。</value></data>
+  <data name="Downloads_Tool_Err_Runtime" xml:space="preserve"><value>{0} に必要な .NET ランタイムをインストールできませんでした。</value></data>
   <data name="Nav_Achievements" xml:space="preserve"><value>実績</value></data>
   <data name="Drop_Result_RestartApply" xml:space="preserve"><value> 適用するにはSteamを再起動してください。</value></data>
   <data name="Manage_RestartSteam_Ask" xml:space="preserve"><value>変更を反映するために今すぐSteamを再起動しますか？</value></data>
