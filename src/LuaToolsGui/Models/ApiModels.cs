@@ -176,6 +176,7 @@ public static class SourceMeta
         ["Sadie (Morrenus)"] = new(DisplayName: "Sadie (Hubcap)", DiscordUrl: "https://discord.gg/hubcapsmanifest", RequiresUserKey: true),
         ["manifesthub"] = new(DisplayName: "ManifestHub"),
         ["sushi"] = new(DisplayName: "Sushi (free)"),
+        ["ryuu"] = new(DisplayName: "Ryuu (free)"),
     };
 
     public static Meta Get(string name) => All.TryGetValue(name, out var m) ? m : new Meta();

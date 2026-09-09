@@ -34,6 +34,7 @@ public partial class App : Application
                 services.AddSingleton<FixLookupService>();
                 services.AddSingleton<ManifestHubService>();
                 services.AddSingleton<SushiService>();
+                services.AddSingleton<RyuuService>();
                 services.AddSingleton<Services.Addons.AddonSourceService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<DevuvoService>();

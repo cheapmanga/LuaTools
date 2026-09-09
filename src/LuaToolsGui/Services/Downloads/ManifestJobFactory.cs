@@ -29,6 +29,7 @@ public class ManifestJobFactory(
     AppliedFixIndexService fixIndex,
     ManifestHubService manifestHub,
     SushiService sushi,
+    RyuuService ryuu,
     Addons.AddonSourceService addonSources)
 {
     // ── Job builders ─────────────────────────────────────────────────
@@ -159,6 +160,31 @@ public class ManifestJobFactory(
             source.Kind is Addons.ManifestSourceKind.DepotKeyDatabase
                 ? (file, _, _) => Task.FromResult(InstallManifest(file, appId, title))
                 : (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
+            confirm,
+            onFinished,
+            onReveal);
+    }
+
+    /// <summary>
+    /// A manifest zip from Ryuu. Installs through <see cref="InstallManifestWithDlcAsync"/> like the
+    /// Sushi zip: a ready-made lua may not carry the DLC entitlements a built one does.
+    /// </summary>
+    public DownloadJob CreateRyuuJob(
+        long appId, string? gameName,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        string title = gameName ?? appId.ToString();
+        return new DownloadJob(
+            DownloadKind.Manifest,
+            $"manifest:{appId}",
+            appId,
+            title,
+            SourceMeta.Get(RyuuService.SourceName).DisplayName ?? "Ryuu",
+            covers.GetLocalPath(appId),
+            (_, progress, ct) => ryuu.DownloadZipAsync(appId, progress, ct),
+            (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
             confirm,
             onFinished,
             onReveal);
