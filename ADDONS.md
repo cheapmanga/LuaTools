@@ -56,6 +56,11 @@ forks. An addon turns that into editing one line.
 | `luaFile` | one `<appid>.lua` per game, entitlements and depot keys only | required |
 | `depotKeyDatabase` | a single flat JSON map of `depot id → key` for every game at once | not used |
 
+> **Since 2026-09-09**, Steam no longer serves manifests for apps you don't own. A source has to bring
+> its own: only `manifestZip` does. `luaFile` and `depotKeyDatabase` declare depot keys but no
+> `.manifest`, so Steam has to go asking for one and is refused — those two kinds install a lua that
+> cannot download. They are kept because the route may reopen; prefer `manifestZip` today.
+
 Every url must be `https`. Source names that belong to the app (`manifesthub`, `sushi`, `luatools`,
 `hubcap`, `sadie`) are refused rather than silently shadowed.
 

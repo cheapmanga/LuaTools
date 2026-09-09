@@ -18,7 +18,7 @@ public record InstallResult(bool LuaInstalled, int ManifestCount, IReadOnlyList<
 /// Note the asymmetry, it is not a typo: stplug-in is under config (it is SteamTools'), depotcache is
 /// NOT (it is Steam's own, a sibling of steamapps). See <c>SteamService.DepotCacheDir</c>.
 ///
-/// When the "Auto Update Apps" setting is on (default), setManifestid() lines in the lua are
+/// When the "Auto Update Apps" setting is on, setManifestid() lines in the lua are
 /// commented out so the app isn't pinned to a version and Steam keeps it updated. When off, the
 /// lua is installed as-is (manifest pins intact). Manifest files are copied either way.
 /// </summary>
@@ -89,8 +89,9 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
         catch { /* a subscriber blowing up must never fail an install */ }
     }
 
-    // setManifestid(depot, "manifestid", ...). Pins a depot to a fixed version. Commenting it out
-    // (and skipping the .manifest) lets Steam fetch the latest, so the app auto-updates.
+    // setManifestid(depot, "manifestid", ...). Pins a depot to a fixed version. Commenting it out lets
+    // Steam fetch the latest, so the app auto-updates. The .manifest files are copied either way; only
+    // this pin decides whether Steam reads the local one or goes asking for a newer one.
     [GeneratedRegex(@"^(\s*)(setManifestid\s*\()", RegexOptions.IgnoreCase)]
     private static partial Regex SetManifestLineRegex();
 

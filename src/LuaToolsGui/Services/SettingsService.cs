@@ -13,9 +13,9 @@ public class AppSettings
     public string? SelectedMode { get; set; }
 
     // ── Install behavior ─────────────────────────────────────────────
-    // When true (default), installs comment out setManifestid() lines and skip copying .manifest
-    // files, so games aren't pinned to a version and Steam keeps them updated. Nullable so we can
-    // tell "never set" (→ default ON) from an explicit user choice.
+    // When true, installs comment out setManifestid() lines so games aren't pinned and Steam keeps
+    // them updated. (.manifest files are copied either way - only the pin is touched.) Nullable so we
+    // can tell "never set" (→ default OFF since 2026-09-09) from an explicit user choice.
     public bool? AutoUpdateApps { get; set; }
 
     // When true (default), donate spare Steam decryption keys to the community pool. Nullable so
@@ -95,10 +95,20 @@ public class SettingsService
         set { _settings.SelectedMode = string.IsNullOrWhiteSpace(value) ? null : value; Save(); }
     }
 
-    /// <summary>When true (default), installs don't lock manifests so apps keep auto-updating.</summary>
+    /// <summary>
+    /// When true, installs comment out the manifest pins so Steam keeps apps updated.
+    /// </summary>
+    /// <remarks>
+    /// <b>Defaults to OFF since 2026-09-09.</b> It used to default ON. Steam closed the route that
+    /// served manifests for apps you don't own, and an unpinned lua is precisely a request down that
+    /// route: Steam ignores the .manifest on disk and asks the server for the latest, which now comes
+    /// back as "no internet" or "unknown error". Pinned, it uses the local file and works. The cost is
+    /// real - a pinned app stops following updates - but it is the difference between installing and
+    /// not. Nullable, so anyone who chose ON explicitly keeps it; only "never set" moves.
+    /// </remarks>
     public bool AutoUpdateApps
     {
-        get => _settings.AutoUpdateApps ?? true; // default ON
+        get => _settings.AutoUpdateApps ?? false; // default OFF, see remarks
         set { _settings.AutoUpdateApps = value; Save(); }
     }
 
