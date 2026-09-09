@@ -614,7 +614,9 @@ Hayır - durdur ama dosyaları koru
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Düzeltme geri alındı</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} geri yüklendi, eklenen {1} dosya kaldırıldı.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Düzeltme geri alınamadı</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Bu düzeltmenin uygulandığına dair kayıt yok. Zaten geri alınmış olabilir.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Bu düzeltmenin uygulandığına dair kayıt yok. Zaten geri alınmış olabilir.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Düzeltme güvenle geri alınamıyor</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>Bu düzeltme uygulandıktan sonra {0} değişti; geri yüklemek bu değişikliklerin üzerine yazar. Üstüne başka bir düzeltme uyguladıysanız önce onu geri alın. {1} dosya etkilendi.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Düzeltme kısmen geri alındı</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} dosya geri yüklenemedi. Oyunu kapatıp tekrar deneyin.</value></data>
 </root>

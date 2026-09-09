@@ -43,6 +43,8 @@ public partial class App : Application
                 services.AddSingleton<SteamAutoCrackService>();
                 services.AddSingleton<CloudRedirectService>();
                 services.AddSingleton<DepotDownloaderService>();
+                services.AddSingleton<DepotCacheMigrationService>();
+                services.AddSingleton<AppliedFixIndexService>();
                 services.AddSingleton<UnlockerService>();
                 services.AddSingleton<PluginInstallerService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
@@ -480,6 +482,10 @@ public partial class App : Application
 
         // Warm the hardware-appid blacklist (refreshes from GitHub if the cache is stale). Fire-and-forget.
         _ = _host.Services.GetRequiredService<HardwareAppIdService>().EnsureFreshAsync();
+
+        // Rescue manifests this app used to write into config\depotcache, which Steam never reads. Silent,
+        // idempotent, and costs nothing once the folder is gone. See DepotCacheMigrationService.
+        _ = _host.Services.GetRequiredService<DepotCacheMigrationService>().RunAsync();
     }
 
     protected override async void OnExit(ExitEventArgs e)

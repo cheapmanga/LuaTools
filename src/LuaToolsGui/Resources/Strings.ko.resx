@@ -614,7 +614,9 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>수정을 되돌렸습니다</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0}개 복원, 추가된 {1}개 삭제됨.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>수정을 되돌리지 못했습니다</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>이 수정이 적용된 기록이 없습니다. 이미 되돌렸을 수 있습니다.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>이 수정이 적용된 기록이 없습니다. 이미 되돌렸을 수 있습니다.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>픽스를 안전하게 되돌릴 수 없음</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>이 픽스를 적용한 뒤 {0} 이(가) 변경되어, 복원하면 해당 변경 사항을 덮어씁니다. 다른 픽스를 위에 적용했다면 그것부터 되돌리세요. {1}개 파일이 영향을 받습니다.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>수정이 일부만 되돌려졌습니다</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0}개 파일을 복원하지 못했습니다. 게임을 닫고 다시 시도하세요.</value></data>
 </root>

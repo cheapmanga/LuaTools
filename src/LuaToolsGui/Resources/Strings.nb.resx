@@ -614,7 +614,9 @@ Avbryt - fortsett nedlastingen</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Rettelse angret</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} gjenopprettet, {1} tillagte filer fjernet.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Kunne ikke angre rettelsen</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Ingen registrering av at denne rettelsen er brukt. Den kan allerede være angret.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Ingen registrering av at denne rettelsen er brukt. Den kan allerede være angret.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fiksen kan ikke tilbakestilles trygt</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} er endret siden denne fiksen ble brukt, så gjenoppretting ville overskrive de endringene. Hvis du har brukt en annen fiks oppå, tilbakestill den først. {1} fil(er) berørt.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Rettelse delvis angret</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fil(er) kunne ikke gjenopprettes. Lukk spillet og prøv igjen.</value></data>
 </root>

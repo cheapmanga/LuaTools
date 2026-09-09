@@ -614,7 +614,9 @@
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขแล้ว</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>กู้คืน {0} รายการ ลบไฟล์ที่เพิ่ม {1} รายการ</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขไม่สำเร็จ</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>ไม่พบบันทึกว่าเคยใช้ตัวแก้ไขนี้ อาจถูกย้อนกลับไปแล้ว</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>ไม่พบบันทึกว่าเคยใช้ตัวแก้ไขนี้ อาจถูกย้อนกลับไปแล้ว</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>ไม่สามารถย้อนกลับแพตช์ได้อย่างปลอดภัย</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} มีการเปลี่ยนแปลงหลังจากใช้แพตช์นี้ การกู้คืนจะเขียนทับการเปลี่ยนแปลงนั้น หากคุณใช้แพตช์อื่นทับไว้ ให้ย้อนกลับแพตช์นั้นก่อน มีไฟล์ที่ได้รับผลกระทบ {1} ไฟล์</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>ย้อนกลับตัวแก้ไขได้บางส่วน</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>กู้คืนไฟล์ {0} รายการไม่สำเร็จ กรุณาปิดเกมแล้วลองใหม่</value></data>
 </root>

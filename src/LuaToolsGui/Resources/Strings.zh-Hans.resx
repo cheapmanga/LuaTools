@@ -634,7 +634,9 @@
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>修复已还原</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>已恢复 {0} 个，已删除 {1} 个新增文件。</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>无法还原修复</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>没有应用此修复的记录，可能已经还原过了。</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>没有应用此修复的记录，可能已经还原过了。</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>无法安全还原此修复</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>自应用此修复以来，{0} 已被更改，还原会覆盖这些更改。如果你在其上应用了另一个修复，请先还原那一个。共影响 {1} 个文件。</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>修复部分还原</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>有 {0} 个文件无法恢复。请关闭游戏后重试。</value></data>
 </root>

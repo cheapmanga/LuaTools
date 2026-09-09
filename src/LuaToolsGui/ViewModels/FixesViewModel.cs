@@ -82,7 +82,7 @@ public partial class FixItemVm(DenuvoFix f) : ObservableObject
 
     private bool _gameInstalled;
 
-    /// <summary>True when the fix has been applied (its revert manifest exists on disk). Drives the Revert button.</summary>
+    /// <summary>True when the fix has been applied (its revert record exists on disk). Drives the Revert button.</summary>
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasApplied), nameof(CanDownloadFix), nameof(FixHint))]
     private bool _isApplied;
@@ -177,9 +177,26 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
     [NotifyPropertyChangedFor(nameof(MyGamesHint))]
     private bool _myGamesOnly;
 
-    public string MyGamesHint => _installedAppIds.Count == 0
-        ? Resources.Strings.Fixes_MyGames_NotInstalled
-        : string.Format(Resources.Strings.Fixes_MyGames_Count, _installedAppIds.Count);
+    /// <summary>
+    /// How many of the user's added games actually appear in the fix listing.
+    /// </summary>
+    /// <remarks>
+    /// The count must be the INTERSECTION, not <c>_installedAppIds.Count</c>. The string reads "{0} of
+    /// your games have fixes", but the raw count is every game with a lua added — so a library with 243
+    /// added games advertised 243 fixes while the filtered grid showed a dozen. This mirrors exactly what
+    /// <c>ApplyFilter</c> puts on screen when My games is on.
+    /// </remarks>
+    public string MyGamesHint
+    {
+        get
+        {
+            if (_installedAppIds.Count == 0) return Resources.Strings.Fixes_MyGames_NotInstalled;
+
+            int withFixes = _allGames.Count(g =>
+                long.TryParse(g.AppId, out long id) && _installedAppIds.Contains(id));
+            return string.Format(Resources.Strings.Fixes_MyGames_Count, withFixes);
+        }
+    }
 
     partial void OnMyGamesOnlyChanged(bool value)
     {
@@ -359,9 +376,9 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
                 foreach (var f in _allFixes)
                 {
                     f.GameInstalled = installDir is not null;
-                    // Whether this specific fix has been applied (revert manifest on disk).
+                    // Whether this specific fix has been applied (its revert record on disk).
                     f.IsApplied = installDir is not null
-                        && File.Exists(ManifestJobFactory.GetFixManifestPath(installDir, f.Id));
+                        && File.Exists(ManifestJobFactory.GetFixRecordPath(installDir, f.Id));
                 }
 
                 // Build the per-game filter pills from the distinct tags across this game's fixes.
@@ -435,13 +452,10 @@ public partial class FixesViewModel : PagedListViewModel<FixGameCardVm>
         if (!long.TryParse(game.AppId, out long appId)) return;
 
         var result = await Task.Run(() => jobs.RevertDenuvoFix(appId, fix.Id, game.Name));
-        if (!result.Ok)
-        {
-            toast.Show(Resources.Strings.Fixes_Revert_Failed, result.Message ?? "", error: true);
-            return;
-        }
 
-        fix.IsApplied = false;
+        // RevertDenuvoFix owns every revert toast (done / partial / conflict / not-found / no-record).
+        // Showing another one here meant a failed revert fired two toasts for one action.
+        if (result.Ok) fix.IsApplied = false;
     }
 
     private (FixItemVm Fix, FixGameCardVm Game)? _pendingRevert;

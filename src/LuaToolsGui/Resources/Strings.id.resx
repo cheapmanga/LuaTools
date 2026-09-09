@@ -614,7 +614,9 @@ Batal - lanjutkan mengunduh</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Perbaikan dikembalikan</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} dipulihkan, {1} berkas tambahan dihapus.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Tidak dapat mengembalikan perbaikan</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Tidak ada catatan perbaikan ini pernah diterapkan. Mungkin sudah dikembalikan.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Tidak ada catatan perbaikan ini pernah diterapkan. Mungkin sudah dikembalikan.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix tidak dapat dikembalikan dengan aman</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} telah berubah sejak fix ini diterapkan, jadi memulihkannya akan menimpa perubahan tersebut. Jika Anda menerapkan fix lain di atasnya, kembalikan yang itu dulu. {1} berkas terpengaruh.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Perbaikan dikembalikan sebagian</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} berkas tidak dapat dipulihkan. Tutup game lalu coba lagi.</value></data>
 </root>

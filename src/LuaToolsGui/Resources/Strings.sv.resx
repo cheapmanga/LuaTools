@@ -614,7 +614,9 @@ Avbryt - fortsätt hämta</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Korrigering ångrad</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} återställda, {1} tillagda filer borttagna.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Kunde inte ångra korrigeringen</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Ingen notering om att den här korrigeringen tillämpats. Den kan redan vara ångrad.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Ingen notering om att den här korrigeringen tillämpats. Den kan redan vara ångrad.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fixen kan inte återställas säkert</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} har ändrats sedan den här fixen tillämpades, så en återställning skulle skriva över de ändringarna. Om du tillämpat en annan fix ovanpå, återställ den först. {1} fil(er) påverkas.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Korrigering delvis ångrad</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fil(er) kunde inte återställas. Stäng spelet och försök igen.</value></data>
 </root>

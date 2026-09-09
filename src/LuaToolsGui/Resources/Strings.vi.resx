@@ -614,7 +614,9 @@ Hủy - tiếp tục tải</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Đã hoàn tác bản sửa lỗi</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Đã khôi phục {0}, đã xóa {1} tệp được thêm.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Không thể hoàn tác bản sửa lỗi</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Không có ghi nhận nào về việc áp dụng bản sửa lỗi này. Có thể nó đã được hoàn tác.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Không có ghi nhận nào về việc áp dụng bản sửa lỗi này. Có thể nó đã được hoàn tác.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Không thể hoàn tác bản vá một cách an toàn</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} đã thay đổi kể từ khi bản vá này được áp dụng, nên khôi phục sẽ ghi đè các thay đổi đó. Nếu bạn đã áp dụng bản vá khác lên trên, hãy hoàn tác bản đó trước. {1} tệp bị ảnh hưởng.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Bản sửa lỗi được hoàn tác một phần</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Không thể khôi phục {0} tệp. Hãy đóng trò chơi và thử lại.</value></data>
 </root>

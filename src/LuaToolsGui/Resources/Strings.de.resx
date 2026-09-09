@@ -614,7 +614,9 @@ Abbrechen - weiter herunterladen</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Fix rückgängig gemacht</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} wiederhergestellt, {1} hinzugefügte Datei(en) entfernt.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Fix konnte nicht rückgängig gemacht werden</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Kein Nachweis, dass dieser Fix angewendet wurde. Möglicherweise wurde er bereits rückgängig gemacht.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Kein Nachweis, dass dieser Fix angewendet wurde. Möglicherweise wurde er bereits rückgängig gemacht.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix kann nicht sicher zurückgesetzt werden</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} wurde seit dem Anwenden dieses Fixes geändert; eine Wiederherstellung würde diese Änderungen überschreiben. Falls du einen weiteren Fix darüber angewendet hast, setze zuerst diesen zurück. {1} Datei(en) betroffen.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Fix teilweise rückgängig gemacht</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} Datei(en) konnten nicht wiederhergestellt werden. Schließe das Spiel und versuche es erneut.</value></data>
 </root>

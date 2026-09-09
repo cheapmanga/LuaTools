@@ -640,7 +640,9 @@
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>تم التراجع عن الإصلاح</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>تمت استعادة {0} وإزالة {1} من الملفات المضافة.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>تعذّر التراجع عن الإصلاح</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>لا يوجد سجل لتطبيق هذا الإصلاح. ربما تم التراجع عنه بالفعل.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>لا يوجد سجل لتطبيق هذا الإصلاح. ربما تم التراجع عنه بالفعل.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>لا يمكن التراجع عن الإصلاح بأمان</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>تغيّر {0} منذ تطبيق هذا الإصلاح، لذا فإن استعادته ستستبدل تلك التغييرات. إذا طبّقت إصلاحًا آخر فوقه، فتراجع عنه أولاً. الملفات المتأثرة: {1}.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>تم التراجع عن الإصلاح جزئيًا</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>تعذّرت استعادة {0} من الملفات. أغلق اللعبة وحاول مرة أخرى.</value></data>
 </root>

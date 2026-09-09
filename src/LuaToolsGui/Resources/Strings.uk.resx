@@ -614,7 +614,9 @@
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Виправлення відкочено</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Відновлено {0}, вилучено доданих файлів: {1}.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Не вдалося відкотити виправлення</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Немає запису про застосування цього виправлення. Можливо, його вже відкотили.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Немає запису про застосування цього виправлення. Можливо, його вже відкотили.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Не вдається безпечно скасувати фікс</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>Файл {0} змінився після застосування цього фікса, тож відновлення перезапише ці зміни. Якщо згори застосовано інший фікс, спершу скасуйте його. Порушено файлів: {1}.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Виправлення відкочено частково</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>Не вдалося відновити файлів: {0}. Закрийте гру та спробуйте ще раз.</value></data>
 </root>

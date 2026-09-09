@@ -614,7 +614,9 @@ Anulare - continuă descărcarea</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Reparație anulată</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} restaurate, {1} fișiere adăugate eliminate.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Reparația nu a putut fi anulată</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Nu există nicio înregistrare că această reparație a fost aplicată. Poate a fost deja anulată.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Nu există nicio înregistrare că această reparație a fost aplicată. Poate a fost deja anulată.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Fix-ul nu poate fi anulat în siguranță</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} s-a modificat de la aplicarea acestui fix, așa că restaurarea ar suprascrie acele modificări. Dacă ai aplicat alt fix peste, anulează-l mai întâi pe acela. {1} fișier(e) afectate.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Reparație anulată parțial</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fișier(e) nu au putut fi restaurate. Închide jocul și încearcă din nou.</value></data>
 </root>

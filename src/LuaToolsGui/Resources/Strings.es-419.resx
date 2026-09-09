@@ -614,7 +614,9 @@ Cancelar: seguir descargando</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Parche revertido</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Se restauraron {0} y se eliminaron {1} archivo(s) agregado(s).</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>No se pudo revertir el parche</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>No hay registro de que este parche se haya aplicado. Puede que ya se haya revertido.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>No hay registro de que este parche se haya aplicado. Puede que ya se haya revertido.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>No se puede revertir el fix de forma segura</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} cambió desde que se aplicó este fix, así que restaurarlo sobrescribiría esos cambios. Si aplicaste otro fix encima, revierte ese primero. {1} archivo(s) afectado(s).</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Parche revertido parcialmente</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>No se pudieron restaurar {0} archivo(s). Cerrá el juego y probá de nuevo.</value></data>
 </root>

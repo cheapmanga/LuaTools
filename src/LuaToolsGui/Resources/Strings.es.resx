@@ -324,7 +324,9 @@ Esto elimina los archivos .lua de Steam\config\stplug-in.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Parche revertido parcialmente</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>No se pudieron restaurar {0} archivo(s). Cierra el juego e inténtalo de nuevo.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>No se pudo revertir el parche</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>No hay registro de que este parche se haya aplicado. Puede que ya se haya revertido.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>No hay registro de que este parche se haya aplicado. Puede que ya se haya revertido.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>No se puede revertir el fix de forma segura</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} ha cambiado desde que se aplicó este fix, así que restaurarlo sobrescribiría esos cambios. Si aplicaste otro fix encima, revierte ese primero. {1} archivo(s) afectado(s).</value></data>
   <data name="Fixes_Applied_Hint" xml:space="preserve"><value>Este parche ya está aplicado. Revierte para instalar otro.</value></data>
   <data name="Fixes_MyGames" xml:space="preserve"><value>Mis juegos</value></data>
   <data name="Fixes_MyGames_Count" xml:space="preserve"><value>{0} de tus juegos tienen parches. Desplázate para ver el resto.</value></data>

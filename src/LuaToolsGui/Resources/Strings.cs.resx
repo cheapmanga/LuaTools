@@ -614,7 +614,9 @@ Zrušit - pokračovat ve stahování</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Oprava vrácena zpět</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>Obnoveno {0}, odstraněno {1} přidaných souborů.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Opravu se nepodařilo vrátit zpět</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>O použití této opravy neexistuje záznam. Možná už byla vrácena zpět.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>O použití této opravy neexistuje záznam. Možná už byla vrácena zpět.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Opravu nelze bezpečně vrátit</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>Soubor {0} se od použití této opravy změnil, takže obnovení by tyto změny přepsalo. Pokud jste navrch použili jinou opravu, vraťte nejprve ji. Dotčeno {1} souborů.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Oprava vrácena zpět částečně</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} soubor(ů) se nepodařilo obnovit. Zavřete hru a zkuste to znovu.</value></data>
 </root>

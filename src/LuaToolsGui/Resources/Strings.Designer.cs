@@ -307,7 +307,9 @@ public static class Strings
     public static string Fixes_Revert_Partial => Get(nameof(Fixes_Revert_Partial));
     public static string Fixes_Revert_Partial_Body => Get(nameof(Fixes_Revert_Partial_Body));
     public static string Fixes_Revert_Failed => Get(nameof(Fixes_Revert_Failed));
-    public static string Fixes_Revert_NoManifest => Get(nameof(Fixes_Revert_NoManifest));
+    public static string Fixes_Revert_NoRecord => Get(nameof(Fixes_Revert_NoRecord));
+    public static string Fixes_Revert_Conflict => Get(nameof(Fixes_Revert_Conflict));
+    public static string Fixes_Revert_Conflict_Body => Get(nameof(Fixes_Revert_Conflict_Body));
     public static string Fixes_Applied_Hint => Get(nameof(Fixes_Applied_Hint));
     public static string Fixes_MyGames => Get(nameof(Fixes_MyGames));
     public static string Fixes_MyGames_Count => Get(nameof(Fixes_MyGames_Count));

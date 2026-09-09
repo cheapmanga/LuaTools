@@ -614,7 +614,9 @@ Annuller - fortsæt download</value></data>
   <data name="Fixes_Revert_Done" xml:space="preserve"><value>Rettelse fortrudt</value></data>
   <data name="Fixes_Revert_Done_Body" xml:space="preserve"><value>{0} gendannet, {1} tilføjede filer fjernet.</value></data>
   <data name="Fixes_Revert_Failed" xml:space="preserve"><value>Kunne ikke fortryde rettelsen</value></data>
-  <data name="Fixes_Revert_NoManifest" xml:space="preserve"><value>Ingen registrering af at denne rettelse er anvendt. Den er måske allerede fortrudt.</value></data>
+  <data name="Fixes_Revert_NoRecord" xml:space="preserve"><value>Ingen registrering af at denne rettelse er anvendt. Den er måske allerede fortrudt.</value></data>
+  <data name="Fixes_Revert_Conflict" xml:space="preserve"><value>Rettelsen kan ikke fortrydes sikkert</value></data>
+  <data name="Fixes_Revert_Conflict_Body" xml:space="preserve"><value>{0} er ændret, siden denne rettelse blev anvendt, så en gendannelse ville overskrive de ændringer. Hvis du har anvendt en anden rettelse ovenpå, så fortryd den først. {1} fil(er) berørt.</value></data>
   <data name="Fixes_Revert_Partial" xml:space="preserve"><value>Rettelse delvist fortrudt</value></data>
   <data name="Fixes_Revert_Partial_Body" xml:space="preserve"><value>{0} fil(er) kunne ikke gendannes. Luk spillet og prøv igen.</value></data>
 </root>
