@@ -810,13 +810,21 @@ public partial class DownloadViewModel : ObservableObject
     /// </remarks>
     private async Task AddFreeSourceAsync(long appId)
     {
-        // Two free sources, checked in parallel. Each covered one becomes a row on top of the paid
-        // list, labelled "No limit". ManifestHub is inserted last so it ends up first (the default).
+        // Two free sources, checked in parallel. Each covered one becomes a row on top of the paid list,
+        // labelled "No limit".
+        //
+        // Sushi is inserted last, so it ends up first and is the default. It used to be ManifestHub. On
+        // 2026-09-09 Steam closed the route that served manifests for apps you don't own, and a
+        // keys-only source has no answer to that: ManifestHub ships depot keys and never a .manifest,
+        // so Steam has to go asking for one and is refused. Sushi carries its manifests inside the zip,
+        // which is now the difference between a source that installs and one that cannot. Its coverage
+        // is stale (its repo has not been pushed since November 2025), so ManifestHub keeps its row -
+        // it is a worse default, not a useless source, and the day the route reopens this reverts.
         bool sushiHas = await SafeHasAsync(_sushi.HasGameAsync(appId));
         bool hubHas = await SafeHasAsync(_manifestHub.HasGameAsync(appId));
 
-        if (sushiHas) InsertFreeRow(SushiService.SourceName);
         if (hubHas) InsertFreeRow(ManifestHubService.SourceName);
+        if (sushiHas) InsertFreeRow(SushiService.SourceName);
 
         int addonRows = await AddAddonSourcesAsync(appId, freeRowCount: (sushiHas ? 1 : 0) + (hubHas ? 1 : 0));
 
