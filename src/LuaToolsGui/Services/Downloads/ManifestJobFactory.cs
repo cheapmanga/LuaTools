@@ -672,7 +672,16 @@ public class ManifestJobFactory(
     {
         try
         {
-            var result = IsZip(file.FilePath)
+            bool isZip = IsZip(file.FilePath);
+
+            // Anything that is neither a zip nor a lua stops here. A source served over plain HTTP can be
+            // answered by a captive portal or a proxy with a 200 and a page of HTML; that page used to be
+            // copied verbatim into stplug-in as <appid>.lua, where it sat looking installed and doing
+            // nothing. One entitlement call has to appear in the file for it to be a lua at all.
+            if (!isZip && !LooksLikeLua(file.FilePath))
+                return new JobResult(false, string.Format(Resources.Strings.Err_DownloadMissingFiles, "lua"));
+
+            var result = isZip
                 ? installer.InstallZip(file.FilePath, appId)
                 : installer.InstallLua(file.FilePath, appId);
 
@@ -680,6 +689,12 @@ public class ManifestJobFactory(
             if (result.AnyFailed)
                 return new JobResult(false,
                     string.Format(Resources.Strings.Add_Status_InstallFailed, result.Failed.Count));
+
+            // Manifests without a lua entitle nothing: Steam never learns the game exists. This used to
+            // report success - green banner, empty stplug-in, library never refreshing - because nobody
+            // read LuaInstalled.
+            if (!result.LuaInstalled)
+                return new JobResult(false, string.Format(Resources.Strings.Err_DownloadMissingFiles, "lua"));
 
             string message = result.ManifestCount > 0
                 ? string.Format(Resources.Strings.Add_Status_AddedManifests, gameName, result.ManifestCount)
@@ -1104,6 +1119,27 @@ public class ManifestJobFactory(
     /// True if the file begins with the ZIP local-file-header magic (PK\x03\x04). A bare .lua (or any
     /// non-zip a source returned under a .zip name) returns false, so it installs as a loose lua.
     /// </summary>
+    /// <summary>
+    /// Does this file contain a lua entitlement call in its first few kilobytes?
+    /// </summary>
+    /// <remarks>
+    /// Deliberately loose - it is a sanity check, not a parser. Every lua any source ships, generated or
+    /// hand-written, calls addappid; an error page, a login redirect or a truncated download does not.
+    /// Read as latin-1 so no byte sequence can throw, and capped so a large file costs nothing.
+    /// </remarks>
+    public static bool LooksLikeLua(string path)
+    {
+        try
+        {
+            using var fs = File.OpenRead(path);
+            var buffer = new byte[8192];
+            int read = fs.Read(buffer, 0, buffer.Length);
+            string head = System.Text.Encoding.Latin1.GetString(buffer, 0, read);
+            return head.Contains("addappid", StringComparison.OrdinalIgnoreCase);
+        }
+        catch { return false; }
+    }
+
     public static bool IsZip(string path)
     {
         try
