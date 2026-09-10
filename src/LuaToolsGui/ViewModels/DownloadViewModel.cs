@@ -98,6 +98,7 @@ public partial class DownloadViewModel : ObservableObject
     private readonly ManifestHubService _manifestHub;
     private readonly SushiService _sushi;
     private readonly RyuuService _ryuu;
+    private readonly ManifestCacheService _manifestCache;
     private readonly Services.Addons.AddonRegistry _addons;
     private readonly Services.Addons.AddonSourceService _addonSources;
     private readonly DownloadQueue _queue;
@@ -406,7 +407,7 @@ public partial class DownloadViewModel : ObservableObject
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
         HardwareAppIdService hardware, FixLookupService fixes, ManifestHubService manifestHub,
-        SushiService sushi, RyuuService ryuu, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs,
+        SushiService sushi, RyuuService ryuu, ManifestCacheService manifestCache, DropInstallViewModel drop, DownloadQueue queue, ManifestJobFactory jobs,
         Services.Addons.AddonRegistry addons, Services.Addons.AddonSourceService addonSources)
     {
         _api = api;
@@ -423,6 +424,7 @@ public partial class DownloadViewModel : ObservableObject
         _manifestHub = manifestHub;
         _sushi = sushi;
         _ryuu = ryuu;
+        _manifestCache = manifestCache;
         _addons = addons;
         _addonSources = addonSources;
         _queue = queue;
@@ -812,33 +814,38 @@ public partial class DownloadViewModel : ObservableObject
     /// </remarks>
     private async Task AddFreeSourceAsync(long appId)
     {
-        // Two free sources, checked in parallel. Each covered one becomes a row on top of the paid list,
-        // labelled "No limit".
+        // Every free source is probed at once, then each covered one becomes a row on top of the paid
+        // list, labelled "No limit".
         //
-        // Sushi is inserted last, so it ends up first and is the default. It used to be ManifestHub. On
-        // 2026-09-09 Steam closed the route that served manifests for apps you don't own, and a
-        // keys-only source has no answer to that: ManifestHub ships depot keys and never a .manifest,
-        // so Steam has to go asking for one and is refused. Sushi carries its manifests inside the zip,
-        // which is now the difference between a source that installs and one that cannot. Its coverage
-        // is stale (its repo has not been pushed since November 2025), so ManifestHub keeps its row -
-        // it is a worse default, not a useless source, and the day the route reopens this reverts.
+        // The order is a freshness ranking, and it exists because of 2026-09-09: Steam closed the route
+        // that served manifests for apps you don't own, so a source is only worth offering if it ships
+        // its own .manifest files, and among those the only real difference left is how old the build is.
+        //   Ryuu           - refreshed daily. Best answer whenever it has the game.
+        //   ManifestCache  - manifests from a corpus fed this week, keys from ManifestHub's database.
+        //   Sushi          - a full zip corpus, last pushed 2025-11-19.
+        //   ManifestHub    - the same corpus everyone forked, frozen 2025-07-26. Worst build, still real.
         var ryuuProbe = SafeHasAsync(_ryuu.HasGameAsync(appId));
-        bool sushiHas = await SafeHasAsync(_sushi.HasGameAsync(appId));
-        bool hubHas = await SafeHasAsync(_manifestHub.HasGameAsync(appId));
-        bool ryuuHas = await ryuuProbe;
+        var cacheProbe = SafeHasAsync(_manifestCache.HasGameAsync(appId));
+        var sushiProbe = SafeHasAsync(_sushi.HasGameAsync(appId));
+        var hubProbe = SafeHasAsync(_manifestHub.HasGameAsync(appId));
 
-        // Worst default first, best last: each Insert goes to index 0, so the order below is reversed
-        // on screen. Ryuu ends up on top because it is the only free source still refreshed daily.
+        bool ryuuHas = await ryuuProbe;
+        bool cacheHas = await cacheProbe;
+        bool sushiHas = await sushiProbe;
+        bool hubHas = await hubProbe;
+
+        // Worst first, best last: each Insert goes to index 0, so this order is reversed on screen.
         if (hubHas) InsertFreeRow(ManifestHubService.SourceName);
         if (sushiHas) InsertFreeRow(SushiService.SourceName);
+        if (cacheHas) InsertFreeRow(ManifestCacheService.SourceName);
         if (ryuuHas) InsertFreeRow(RyuuService.SourceName);
 
-        int addonRows = await AddAddonSourcesAsync(
-            appId, freeRowCount: (sushiHas ? 1 : 0) + (hubHas ? 1 : 0) + (ryuuHas ? 1 : 0));
+        int freeRows = (sushiHas ? 1 : 0) + (hubHas ? 1 : 0) + (ryuuHas ? 1 : 0) + (cacheHas ? 1 : 0);
+        int addonRows = await AddAddonSourcesAsync(appId, freeRowCount: freeRows);
 
         // The notice AND its button share one condition: only offer to switch when no free source has
         // the game AND a lua.tools row is actually downloadable, so the banner never shows a dead button.
-        FreeSourceUnavailable = !sushiHas && !hubHas && !ryuuHas && addonRows == 0
+        FreeSourceUnavailable = freeRows == 0 && addonRows == 0
             && Sources.Any(s => !s.IsFree && s.CanDownload);
     }
 
@@ -1001,7 +1008,12 @@ public partial class DownloadViewModel : ObservableObject
         else if (source.IsFree)
         {
             // Route to the matching free builder; both install through the same pipeline afterward.
-            job = source.Name == RyuuService.SourceName
+            job = source.Name == ManifestCacheService.SourceName
+                ? _jobs.CreateManifestCacheJob(appId, gameName,
+                    confirm: confirm,
+                    onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),
+                    onReveal: () => NavigateToGame?.Invoke(appId))
+                : source.Name == RyuuService.SourceName
                 ? _jobs.CreateRyuuJob(appId, gameName,
                     confirm: confirm,
                     onFinished: (item, result) => OnManifestFinished(item, result, needsKey: false),

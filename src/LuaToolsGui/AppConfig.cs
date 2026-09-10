@@ -110,6 +110,30 @@ public static class AppConfig
         "https://raw.githubusercontent.com/SteamAutoCracks/ManifestHub/main/depotkeys.json", // upstream (stable but frozen since 2026-01)
     ];
 
+    // ManifestHub as a CORPUS rather than a key database. The upstream repo purged its per-appid
+    // branches: main now carries only depotkeys.json, and a key database alone stopped installing on
+    // 2026-09-09, when Steam closed the route that served manifests for apps you don't own.
+    //
+    // Six community mirrors kept the full snapshot, and they are byte-identical to each other (same
+    // commit shas, 2025-07-26). Each branch is named after the appid and holds <appid>.lua, key.vdf and
+    // the <depot>_<manifest>.manifest files, so a branch archive installs on its own. The corpus is
+    // frozen, which is precisely why it still works: the pins name builds whose manifests ship with
+    // them. {0} is the appid.
+    public static readonly string[] ManifestHubZipUrls =
+    [
+        "https://github.com/steamtools-games/ManifestHub3/archive/refs/heads/{0}.zip",
+        "https://github.com/SSMGAlt/ManifestHub2/archive/refs/heads/{0}.zip",
+        "https://github.com/steamtoolsapp/ManifestHub/archive/refs/heads/{0}.zip",
+    ];
+
+    // SteamManifestCache: the only manifest corpus still being fed (about 113,900 appid branches, with
+    // commits from this week). It ships the .manifest files and deliberately no decryption keys, which
+    // its own README states. On its own it installs nothing; paired with ManifestHubKeysUrls it rebuilds
+    // a CURRENT lua, because a manifest's file name carries both the depot id and the manifest id, and
+    // the key comes from the map. {0} is the appid.
+    public const string ManifestCacheZipUrl =
+        "https://github.com/P-ToyStore/SteamManifestCache_Pro/archive/refs/heads/{0}.zip";
+
     // Sushi: SteamTools' public game repo, one <appid>.zip per game. A free, account-free source that
     // ships full manifest zips (lua + .manifest), unlike ManifestHub's keys-only database. Listed in
     // lua.tools' own load_free_manifest_apis, so it is a source they consume too.

@@ -1,4 +1,6 @@
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using LuaToolsGui.Services.Downloads;
@@ -7,8 +9,9 @@ using Microsoft.Extensions.Logging;
 namespace LuaToolsGui.Services;
 
 /// <summary>
-/// The free, account-free manifest source: builds a game's lua from the public depot-key database
-/// (SteamAutoCracks/ManifestHub) plus Steam's own depot list.
+/// The free, account-free ManifestHub source: a branch archive per appid, carrying the lua and the
+/// <c>.manifest</c> files that go with it, plus the public depot-key database the other free paths
+/// build on.
 /// </summary>
 /// <remarks>
 /// <para>Where lua.tools meters downloads at 25/day behind a Discord/Supabase account, this touches
@@ -17,6 +20,15 @@ namespace LuaToolsGui.Services;
 /// session, cached), asks <see cref="SteamDepotInfo"/> which depots a game has, and emits the
 /// <c>addappid</c>/<c>setManifestid</c> lua the local installer already understands. No server of theirs,
 /// no quota, no login.</para>
+///
+/// <para><b>Changed on 2026-09-09.</b> This used to serve the row by synthesising a lua from the key
+/// database alone and letting Steam fetch the manifests. Steam then closed the route that served
+/// manifests for apps you don't own, which left a keys-only source unable to install anything, and the
+/// upstream repo has since purged its per-appid branches. The row now downloads a branch archive from a
+/// community mirror of that same corpus - lua and manifests together, nothing to ask Steam for. The
+/// snapshot is frozen at 2025-07-26, so it installs an old build of a game; that is the trade, and it
+/// is the difference between an old build and none. The key database stays, because
+/// <see cref="ManifestCacheService"/> and addon-contributed sources are built on it.</para>
 ///
 /// <para>Coverage is whatever keys have been dumped: a depot with no key in the database is simply left
 /// out, and a game with none is "not available here" - the caller then falls back to lua.tools. It is an
@@ -27,6 +39,14 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
 
     /// <summary>The source name this appears under in the Add page's row list.</summary>
     public const string SourceName = "manifesthub";
+
+    /// <summary>Every mirror's url for this game's branch archive, in preference order.</summary>
+    private static IEnumerable<string> ZipUrls(long appId) =>
+        AppConfig.ManifestHubZipUrls.Select(t => string.Format(t, appId));
+
+    // A bare existence probe, with its own short timeout so it never inherits a download's. The real
+    // fetch goes through GithubProxy for the usual mirror fallback.
+    private readonly HttpClient _probe = new() { Timeout = TimeSpan.FromSeconds(15) };
 
     private readonly SemaphoreSlim _gate = new(1, 1);
 
@@ -115,14 +135,51 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         return null; // every mirror failed → "free source unavailable right now"
     }
 
+    /// <summary>The cached key database, or null when it can't be fetched right now.</summary>
+    /// <remarks>Public so <see cref="ManifestCacheService"/> pairs its manifests with these keys without
+    /// re-downloading 15 MB of json per game: the cache lives here, one copy per session.</remarks>
+    public Task<IReadOnlyDictionary<long, string>?> GetKeysAsync(CancellationToken ct = default) =>
+        EnsureKeysAsync(ct);
+
     /// <summary>
-    /// Does the free source cover this game - i.e. is at least one of its depots in the key database?
+    /// Does the corpus have a branch for this game? A HEAD that answers 200 on any mirror; 404
+    /// everywhere (or a total failure) means no.
     /// </summary>
     /// <remarks>
-    /// Cheap after the first call: the keys are cached, and the depot list comes from SteamDepotInfo's
-    /// own cache. A false here is why the Add page hides the ManifestHub row and points at lua.tools.
+    /// This asks the mirrors, not the key database. Since 2026-09-09 the row installs a branch archive,
+    /// so what matters is whether the archive exists - a depot key with no manifest beside it no longer
+    /// produces anything installable. An uncovered appid answers a clean 404, which is why this can be
+    /// a plain existence check.
     /// </remarks>
     public async Task<bool> HasGameAsync(long appId, CancellationToken ct = default)
+    {
+        foreach (var url in ZipUrls(appId))
+        {
+            try
+            {
+                using var req = new HttpRequestMessage(HttpMethod.Head, url);
+                req.Headers.TryAddWithoutValidation("User-Agent", "LuaTools");
+                using var res = await _probe.SendAsync(req, ct);
+                if (res.StatusCode == HttpStatusCode.OK) return true;
+                if (res.StatusCode == HttpStatusCode.NotFound) return false; // the mirrors are identical
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+            catch (Exception ex)
+            {
+                log.LogDebug(ex, "ManifestHub HEAD for {AppId} at {Url} failed", appId, url);
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>Is at least one of this game's depots in the key database?</summary>
+    /// <remarks>
+    /// What <see cref="HasGameAsync"/> used to ask. It is no longer enough on its own to offer this row,
+    /// but it is exactly the question <see cref="ManifestCacheService"/> has to answer before offering
+    /// manifests it cannot decrypt.
+    /// </remarks>
+    public async Task<bool> HasKeysAsync(long appId, CancellationToken ct = default)
     {
         var keys = await EnsureKeysAsync(ct);
         if (keys is null) return false;
@@ -131,6 +188,42 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         if (info is null) return false;
 
         return info.Depots.Any(d => keys.ContainsKey(d.Id));
+    }
+
+    /// <summary>
+    /// Download the game's branch archive to a temp file, for the install pipeline to unpack.
+    /// </summary>
+    /// <remarks>
+    /// Mirrors are tried in order and every one holds the same bytes, so the first that answers wins.
+    /// The archive has a root folder whose name varies per mirror (<c>ManifestHub3-&lt;appid&gt;/</c>,
+    /// <c>ManifestHub2-&lt;appid&gt;/</c>); nothing here needs to care, because the installer keys off each
+    /// entry's leaf name and ignores anything that isn't a .lua or a .manifest - key.vdf and the json
+    /// included.
+    /// </remarks>
+    public async Task<DownloadedFile> DownloadZipAsync(
+        long appId, IProgress<DownloadProgress>? progress, CancellationToken ct = default)
+    {
+        string path = Path.Combine(Path.GetTempPath(), $"manifesthub-{appId}.zip");
+
+        var sink = progress is null ? null
+            : new ProgressRelay<double?>(f => progress.Report(new DownloadProgress((long)((f ?? 0) * 1000), 1000)));
+
+        foreach (var url in ZipUrls(appId))
+        {
+            try
+            {
+                await gh.DownloadAsync(url, path, sink, ct);
+                if (File.Exists(path) && new FileInfo(path).Length > 0)
+                    return new DownloadedFile(path, $"{appId}.zip");
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+            catch (Exception ex)
+            {
+                log.LogDebug(ex, "ManifestHub zip for {AppId} at {Url} failed", appId, url);
+            }
+        }
+
+        throw new DownloadAbortedException(Resources.Strings.Free_Err_Unavailable);
     }
 
     /// <summary>
@@ -162,13 +255,39 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
     /// would drift, and every drift would be a game that installs differently depending on which source
     /// the user happened to pick.
     /// </summary>
-    public async Task<DownloadedFile> BuildLuaFromKeysAsync(
-        long appId, IReadOnlyDictionary<long, string> keys, CancellationToken ct = default)
+    public Task<DownloadedFile> BuildLuaFromKeysAsync(
+        long appId, IReadOnlyDictionary<long, string> keys, CancellationToken ct = default) =>
+        BuildLuaAsync(appId, keys, pins: null, ct);
+
+    /// <summary>
+    /// Build a lua pinned to manifests we already hold, rather than to whatever build Steam serves today.
+    /// </summary>
+    /// <remarks>
+    /// <para>This is what makes a manifests-only corpus usable. <paramref name="pins"/> maps a depot id to
+    /// the manifest id of a file that is about to be written into depotcache, read off the file's own
+    /// name. Pinning to those means Steam never has to ask for a manifest, which is the whole point since
+    /// 2026-09-09.</para>
+    ///
+    /// <para>A depot is emitted only when it has BOTH a key and a manifest here. Emitting a keyed depot
+    /// with no local manifest would send Steam back down the closed route and stall the download; leaving
+    /// it out means Steam never asks for it. The cost is an install that can be missing a depot, which is
+    /// visible and recoverable, rather than one that hangs at zero bytes.</para>
+    /// </remarks>
+    public Task<DownloadedFile> BuildLuaForManifestsAsync(
+        long appId, IReadOnlyDictionary<long, string> keys,
+        IReadOnlyDictionary<long, string> pins, CancellationToken ct = default) =>
+        BuildLuaAsync(appId, keys, pins, ct);
+
+    private async Task<DownloadedFile> BuildLuaAsync(
+        long appId, IReadOnlyDictionary<long, string> keys,
+        IReadOnlyDictionary<long, string>? pins, CancellationToken ct)
     {
         var info = await depotInfo.GetAsync(appId, ct)
             ?? throw new DownloadAbortedException(Resources.Strings.Free_Err_Unavailable);
 
-        var keyed = info.Depots.Where(d => keys.ContainsKey(d.Id)).ToList();
+        var keyed = info.Depots
+            .Where(d => keys.ContainsKey(d.Id) && (pins is null || pins.ContainsKey(d.Id)))
+            .ToList();
         if (keyed.Count is 0)
             throw new DownloadAbortedException(Resources.Strings.Free_Err_NoKeys);
 
@@ -197,8 +316,12 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         foreach (var d in keyed)
         {
             lua.Append("addappid(").Append(d.Id).Append(",1,\"").Append(keys[d.Id]).Append("\")\n");
-            if (!string.IsNullOrWhiteSpace(d.PublicManifestId))
-                lua.Append("setManifestid(").Append(d.Id).Append(",\"").Append(d.PublicManifestId).Append("\",0)\n");
+
+            // The manifest we hold wins over the one Steam is serving today: it is the one that will be
+            // on disk. Without pins, this falls back to appinfo's current public gid as before.
+            string? gid = pins is not null ? pins[d.Id] : d.PublicManifestId;
+            if (!string.IsNullOrWhiteSpace(gid))
+                lua.Append("setManifestid(").Append(d.Id).Append(",\"").Append(gid).Append("\",0)\n");
         }
 
         string path = Path.Combine(Path.GetTempPath(), $"{appId}.lua");

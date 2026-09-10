@@ -30,6 +30,7 @@ public class ManifestJobFactory(
     ManifestHubService manifestHub,
     SushiService sushi,
     RyuuService ryuu,
+    ManifestCacheService manifestCache,
     Addons.AddonSourceService addonSources)
 {
     // ── Job builders ─────────────────────────────────────────────────
@@ -59,10 +60,15 @@ public class ManifestJobFactory(
     }
 
     /// <summary>
-    /// A manifest from the free ManifestHub source: the lua is built locally from public depot keys, so
-    /// the fetch step touches no account and no daily cap. Everything after it - the overwrite diff, the
-    /// install, the banner - is the exact same path a lua.tools manifest takes.
+    /// A branch archive from the free ManifestHub corpus: lua and manifests together, no account and no
+    /// daily cap. Everything after the fetch - the overwrite diff, the install, the banner - is the exact
+    /// same path a lua.tools manifest takes.
     /// </summary>
+    /// <remarks>
+    /// Installs through <see cref="InstallManifestWithDlcAsync"/> rather than the plain install: the
+    /// corpus's ready-made lua carries the depots, but not necessarily the DLC entitlement lines that a
+    /// locally built one does.
+    /// </remarks>
     public DownloadJob CreateManifestHubJob(
         long appId, string? gameName,
         Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
@@ -77,8 +83,33 @@ public class ManifestJobFactory(
             title,
             "ManifestHub",
             covers.GetLocalPath(appId),
-            (_, _, ct) => manifestHub.BuildLuaAsync(appId, ct),
-            (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
+            (_, progress, ct) => manifestHub.DownloadZipAsync(appId, progress, ct),
+            (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
+            confirm,
+            onFinished,
+            onReveal);
+    }
+
+    /// <summary>
+    /// The hybrid free source: current manifests from SteamManifestCache, keys from ManifestHub, joined
+    /// into one zip by <see cref="ManifestCacheService"/> before it ever reaches the queue.
+    /// </summary>
+    public DownloadJob CreateManifestCacheJob(
+        long appId, string? gameName,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        string title = gameName ?? appId.ToString();
+        return new DownloadJob(
+            DownloadKind.Manifest,
+            $"manifest:{appId}",
+            appId,
+            title,
+            SourceMeta.Get(ManifestCacheService.SourceName).DisplayName ?? "SteamManifestCache",
+            covers.GetLocalPath(appId),
+            (_, progress, ct) => manifestCache.DownloadAsync(appId, progress, ct),
+            (file, _, ct) => InstallManifestWithDlcAsync(file, appId, title, ct),
             confirm,
             onFinished,
             onReveal);

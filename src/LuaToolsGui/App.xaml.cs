@@ -35,6 +35,7 @@ public partial class App : Application
                 services.AddSingleton<ManifestHubService>();
                 services.AddSingleton<SushiService>();
                 services.AddSingleton<RyuuService>();
+                services.AddSingleton<ManifestCacheService>();
                 services.AddSingleton<Services.Addons.AddonSourceService>();
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<DevuvoService>();
