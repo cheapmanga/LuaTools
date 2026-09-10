@@ -177,6 +177,7 @@ public static class SourceMeta
         ["manifesthub"] = new(DisplayName: "ManifestHub"),
         ["sushi"] = new(DisplayName: "Sushi (free)"),
         ["ryuu"] = new(DisplayName: "Ryuu (free)"),
+        ["manifestcache"] = new(DisplayName: "ManifestCache (free)"),
     };
 
     public static Meta Get(string name) => All.TryGetValue(name, out var m) ? m : new Meta();
