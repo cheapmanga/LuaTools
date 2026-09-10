@@ -58,7 +58,8 @@ public sealed class AddonRegistry
 
     /// <summary>Source names the host owns. An addon claiming one is refused, never silently ignored.</summary>
     private static readonly HashSet<string> ReservedSourceNames =
-        new(StringComparer.OrdinalIgnoreCase) { "manifesthub", "sushi", "luatools", "hubcap", "sadie" };
+        new(StringComparer.OrdinalIgnoreCase)
+        { "manifesthub", "sushi", "luatools", "hubcap", "sadie", "ryuu", "manifestcache" };
 
     private static readonly JsonSerializerOptions JsonOpts = new()
     {

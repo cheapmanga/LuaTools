@@ -89,6 +89,30 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
         catch { /* a subscriber blowing up must never fail an install */ }
     }
 
+    // "2467881_3351107248013324498.manifest" → depot 2467881, gid 3351107248013324498.
+    [GeneratedRegex(@"^(\d+)_(\d+)\.manifest$", RegexOptions.IgnoreCase)]
+    private static partial Regex ManifestNameRegex();
+
+    /// <summary>
+    /// Is the manifest already at <paramref name="dest"/> the real thing, or does it only wear the name?
+    /// </summary>
+    /// <remarks>
+    /// A manifest's name is content-addressed, so an existing file with the right name is normally
+    /// byte-identical and skipping it is free - it also avoids failing on a file Steam holds open. But a
+    /// truncated one (a killed download, a full disk) keeps that name too, and skipping THAT meant
+    /// counting a broken file as installed: Steam kept failing, and re-adding the game from any other
+    /// source changed nothing, because every attempt skipped the same corpse. Parsing it and checking it
+    /// declares the depot and gid its name claims turns that into a plain overwrite.
+    /// </remarks>
+    private static bool ExistingManifestIsGood(string dest)
+    {
+        var m = ManifestNameRegex().Match(Path.GetFileName(dest));
+        if (!m.Success || !long.TryParse(m.Groups[1].Value, out long depot))
+            return true; // not a name we can check: leave it alone, as before
+
+        return ManifestFile.Matches(dest, depot, m.Groups[2].Value);
+    }
+
     // setManifestid(depot, "manifestid", ...). Pins a depot to a fixed version. Commenting it out lets
     // Steam fetch the latest, so the app auto-updates. The .manifest files are copied either way; only
     // this pin decides whether Steam reads the local one or goes asking for a newer one.
@@ -282,10 +306,11 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
             Directory.CreateDirectory(dir);
             string dest = Path.Combine(dir, Path.GetFileName(manifestPath));
             // Content-addressed name → identical bytes if it already exists. Skip (counts as installed)
-            // rather than overwrite, which would needlessly fail when Steam has the file open.
-            if (!File.Exists(dest))
+            // rather than overwrite, which would needlessly fail when Steam has the file open. A file
+            // that does NOT parse as what its name claims is replaced instead of trusted.
+            if (!File.Exists(dest) || !ExistingManifestIsGood(dest))
             {
-                File.Copy(manifestPath, dest, overwrite: false);
+                File.Copy(manifestPath, dest, overwrite: true);
                 StampNow(dest);
             }
             return new InstallResult(LuaInstalled: false, ManifestCount: 1, Failed: [], Error: null);
@@ -335,13 +360,19 @@ public partial class LuaInstaller(SteamService steam, SettingsService settings, 
                     ? Path.Combine(plugDir, $"{appId}.lua")
                     : Path.Combine(depotDir, name);
 
-                // Manifest filenames are content-addressed (the id is a hash of the content), so an
-                // existing one is byte-identical. Skip it. Avoids needless work and, importantly, the
-                // "file in use" failure when Steam is running and already has that manifest open.
+                // Manifest filenames are content-addressed, so an existing one is normally byte-identical
+                // and skipping it avoids the "file in use" failure when Steam has it open. Only when it
+                // actually parses as the manifest its name claims, though - see ExistingManifestIsGood.
                 if (isManifest && File.Exists(dest))
                 {
-                    manifestCount++;
-                    continue;
+                    if (ExistingManifestIsGood(dest))
+                    {
+                        manifestCount++;
+                        continue;
+                    }
+
+                    try { File.Delete(dest); }
+                    catch { /* locked: the extract below fails and is reported per-file */ }
                 }
 
                 try

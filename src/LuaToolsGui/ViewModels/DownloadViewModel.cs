@@ -344,9 +344,15 @@ public partial class DownloadViewModel : ObservableObject
     public Task DownloadSourceByNameAsync(string name)
     {
         _silentInstall = true;
-        var row = Sources.FirstOrDefault(s =>
-            string.Equals(s.Name, name, StringComparison.OrdinalIgnoreCase)
-            || string.Equals(s.DisplayName, name, StringComparison.OrdinalIgnoreCase));
+
+        // Exact name first, and case-sensitively, because two different sources can differ ONLY by case:
+        // "Ryuu" is lua.tools' paid one, "ryuu" is the free built-in. Matching loosely handed whoever
+        // asked for one the other - and since free rows are inserted at index 0, always the free one.
+        // Only when nothing matches exactly does this fall back to the human-facing label.
+        var row = Sources.FirstOrDefault(s => string.Equals(s.Name, name, StringComparison.Ordinal))
+            ?? Sources.FirstOrDefault(s => string.Equals(s.DisplayName, name, StringComparison.Ordinal))
+            ?? Sources.FirstOrDefault(s => string.Equals(s.DisplayName, name, StringComparison.OrdinalIgnoreCase));
+
         return row is null ? Task.CompletedTask : DownloadFromSourceAsync(row);
     }
 
@@ -631,21 +637,40 @@ public partial class DownloadViewModel : ObservableObject
                 if (_fixCheck is { } fc) { try { await fc; } catch { /* offline: no block */ } }
                 if (BlockFetch) return;
 
-                var statuses = await _api.CheckSourcesAsync(Details.AppId.ToString());
+                // lua.tools' own source list. Allowed to fail on its own: it needs their backend and an
+                // account, the free sources need neither, and an outage there used to take every free
+                // row down with it - the page said "no source available" while Ryuu was answering fine.
+                Exception? backendFailed = null;
+                try
+                {
+                    var statuses = await _api.CheckSourcesAsync(Details.AppId.ToString());
 
-                // The manifest backend no longer reports the Hubcap/Morrenus source. Synthesize it
-                // ourselves from a direct Hubcap status check (or show it locked if no key is set).
-                await AddHubcapSourceAsync(statuses, Details.AppId.ToString());
+                    // The manifest backend no longer reports the Hubcap/Morrenus source. Synthesize it
+                    // ourselves from a direct Hubcap status check (or show it locked if no key is set).
+                    await AddHubcapSourceAsync(statuses, Details.AppId.ToString());
 
-                // Premium (key-gated) sources first, like the website
-                foreach (var (name, status) in statuses.OrderByDescending(kv => SourceMeta.Get(kv.Key).RequiresUserKey ? 1 : 0))
-                    Sources.Add(new SourceRowViewModel(this, name, status));
+                    // Premium (key-gated) sources first, like the website
+                    foreach (var (name, status) in statuses.OrderByDescending(kv => SourceMeta.Get(kv.Key).RequiresUserKey ? 1 : 0))
+                        Sources.Add(new SourceRowViewModel(this, name, status));
 
-                await ApplyHubcapStateAsync();
+                    await ApplyHubcapStateAsync();
+                }
+                catch (OperationCanceledException) { throw; }
+                catch (Exception ex)
+                {
+                    backendFailed = ex;
+                }
 
-                // The free source is the default: added last but inserted on top, off its own check
-                // against the public key database. Separate from the lua.tools source list above.
+                // The free sources are the default: added last but inserted on top, off their own checks.
+                // Separate from the lua.tools list above, and reached even when that list threw.
                 await AddFreeSourceAsync(Details.AppId);
+
+                // Only now is a backend failure fatal, and only if nothing else answered.
+                if (backendFailed is not null && Sources.Count is 0)
+                {
+                    Error = backendFailed is ApiException api ? api.Message : Resources.Strings.Add_Err_Generic;
+                    return;
+                }
 
                 if (FastFetch)
                 {
