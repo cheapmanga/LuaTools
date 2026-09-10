@@ -726,6 +726,7 @@ Peruuta - jatka lataamista</value></data>
 Lunastetaanko silti?</value></data>
   <data name="Free_NoLimit" xml:space="preserve"><value>Ei rajaa</value></data>
   <data name="Free_Err_Unavailable" xml:space="preserve"><value>Ilmaiseen lähteeseen ei saada yhteyttä juuri nyt. Kokeile lua.tools-lähdettä alta.</value></data>
+  <data name="Free_Err_RateLimited" xml:space="preserve"><value>Ryuu is limiting how often this device can ask it. Wait a few minutes, then try again.</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>Ilmaisessa lähteessä ei ole avaimia tälle pelille.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Tätä peliä ei ole ilmaisessa lähteessä.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Hae lua.toolsilla</value></data>
