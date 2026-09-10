@@ -705,6 +705,7 @@ public static class Strings
     public static string Tokeer_Warn_NoMode_Body => Get(nameof(Tokeer_Warn_NoMode_Body));
     public static string Free_NoLimit => Get(nameof(Free_NoLimit));
     public static string Free_Err_Unavailable => Get(nameof(Free_Err_Unavailable));
+    public static string Free_Err_RateLimited => Get(nameof(Free_Err_RateLimited));
     public static string Free_Err_NoKeys => Get(nameof(Free_Err_NoKeys));
     public static string Free_Unavailable_Notice => Get(nameof(Free_Unavailable_Notice));
     public static string Free_Unavailable_Action => Get(nameof(Free_Unavailable_Action));

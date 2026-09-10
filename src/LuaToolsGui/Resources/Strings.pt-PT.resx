@@ -726,6 +726,7 @@ Cancelar - continuar a transferir</value></data>
 Resgatar mesmo assim?</value></data>
   <data name="Free_NoLimit" xml:space="preserve"><value>Sem limite</value></data>
   <data name="Free_Err_Unavailable" xml:space="preserve"><value>A fonte gratuita não está acessível agora. Experimenta uma fonte lua.tools abaixo.</value></data>
+  <data name="Free_Err_RateLimited" xml:space="preserve"><value>Ryuu is limiting how often this device can ask it. Wait a few minutes, then try again.</value></data>
   <data name="Free_Err_NoKeys" xml:space="preserve"><value>A fonte gratuita não tem chaves para este jogo.</value></data>
   <data name="Free_Unavailable_Notice" xml:space="preserve"><value>Este jogo não está na fonte gratuita.</value></data>
   <data name="Free_Unavailable_Action" xml:space="preserve"><value>Obter com lua.tools</value></data>

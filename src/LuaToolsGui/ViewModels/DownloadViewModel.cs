@@ -849,7 +849,7 @@ public partial class DownloadViewModel : ObservableObject
         //   ManifestCache  - manifests from a corpus fed this week, keys from ManifestHub's database.
         //   Sushi          - a full zip corpus, last pushed 2025-11-19.
         //   ManifestHub    - the same corpus everyone forked, frozen 2025-07-26. Worst build, still real.
-        var ryuuProbe = SafeHasAsync(_ryuu.HasGameAsync(appId));
+        var ryuuProbe = SafeHasAsync(_ryuu.HasGameAsync(appId), keepOnRateLimit: true);
         var cacheProbe = SafeHasAsync(_manifestCache.HasGameAsync(appId));
         var sushiProbe = SafeHasAsync(_sushi.HasGameAsync(appId));
         var hubProbe = SafeHasAsync(_manifestHub.HasGameAsync(appId));
@@ -911,9 +911,12 @@ public partial class DownloadViewModel : ObservableObject
     }
 
     /// <summary>A HasGameAsync that never throws: a failed/offline lookup just means "not covered".</summary>
-    private static async Task<bool> SafeHasAsync(Task<bool> probe)
+    private static async Task<bool> SafeHasAsync(Task<bool> probe, bool keepOnRateLimit = false)
     {
         try { return await probe; }
+        // A rate-limited source has the game as far as we know; the probe just couldn't confirm it right
+        // now. Keep the row (the download surfaces a clear "wait a few minutes") rather than dropping it.
+        catch (RateLimitedException) { return keepOnRateLimit; }
         catch { return false; }
     }
 
