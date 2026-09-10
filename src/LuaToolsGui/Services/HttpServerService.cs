@@ -374,7 +374,9 @@ public class HttpServerService : IHostedService
             return (409, JsonErr("Download already in progress for this app"));
 
         var jobs = _services.GetRequiredService<Services.Downloads.ManifestJobFactory>();
-        _downloads[appId] = queue.Enqueue(jobs.CreateManifestJob(appId, null, source, needsKey: false));
+        // Dispatched by name: this endpoint takes whatever source the caller picked, and a free one is
+        // served by its own host rather than by the lua.tools proxy.
+        _downloads[appId] = queue.Enqueue(jobs.CreateForSource(appId, null, source, needsKey: false));
 
         return (200, Json(new { success = true }));
     }
