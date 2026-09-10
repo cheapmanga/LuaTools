@@ -18,7 +18,10 @@ public class PluginAddService(
     SettingsService settings,
     AuthService auth,
     DownloadQueue queue,
-    ManifestJobFactory jobs)
+    ManifestJobFactory jobs,
+    RyuuService ryuu,
+    SushiService sushi,
+    ManifestHubService manifestHub)
 {
     private const string HubcapSourceName = "Sadie (Morrenus)";
 
@@ -163,6 +166,11 @@ public class PluginAddService(
                     };
                 }).ToList();
 
+            // The built-in free sources, which the backend's source list knows nothing about. Without
+            // them this pipeline could only ever offer metered lua.tools rows, so an external client had
+            // no way to reach the one source that is still refreshed daily (see AddFreeRowsAsync).
+            await AddFreeRowsAsync(appId, rows);
+
             // No-key premium rows lock immediately (they show the "needs a key" hint). Keyed rows get their
             // real lock state from the Hubcap stats call in FillBadgesAsync.
             var keyRows = rows.Where(r => r.NeedsKey).ToList();
@@ -198,6 +206,54 @@ public class PluginAddService(
             state.Checking = false;
             PluginLog.Log($"PluginAdd.Check appid={appId} EXCEPTION: {ex}");
         }
+    }
+
+    /// <summary>
+    /// Put a row on top for each built-in free source that covers this game, newest-refreshed last.
+    /// </summary>
+    /// <remarks>
+    /// <para>The same three sources, probed the same way, as <c>DownloadViewModel.AddFreeSourceAsync</c>.
+    /// They are not in <c>CheckSourcesAsync</c>'s answer: that is the lua.tools backend's own list, and
+    /// these are served straight from their own hosts, with no account and no daily cap.</para>
+    ///
+    /// <para>Each Insert goes to index 0, so the order below is reversed on screen and Ryuu ends up
+    /// first - it is the only free source still refreshed daily, which since Steam closed the
+    /// unowned-manifest route on 2026-09-09 is also the difference between a source that can install and
+    /// one that cannot. With FastFetch on, first is what gets picked.</para>
+    ///
+    /// <para>Best-effort, exactly as in the view model: a source that cannot be reached is treated as
+    /// not covering the game, and the metered rows carry on as before.</para>
+    /// </remarks>
+    private async Task AddFreeRowsAsync(long appId, List<SourceRow> rows)
+    {
+        var ryuuProbe = SafeHasAsync(ryuu.HasGameAsync(appId));
+        var sushiProbe = SafeHasAsync(sushi.HasGameAsync(appId));
+        var hubProbe = SafeHasAsync(manifestHub.HasGameAsync(appId));
+
+        bool hubHas = await hubProbe;
+        bool sushiHas = await sushiProbe;
+        bool ryuuHas = await ryuuProbe;
+
+        if (hubHas) rows.Insert(0, FreeRow(ManifestHubService.SourceName));
+        if (sushiHas) rows.Insert(0, FreeRow(SushiService.SourceName));
+        if (ryuuHas) rows.Insert(0, FreeRow(RyuuService.SourceName));
+
+        PluginLog.Log($"PluginAdd.Free appid={appId} ryuu={ryuuHas} sushi={sushiHas} manifesthub={hubHas}");
+    }
+
+    private static SourceRow FreeRow(string sourceName) => new()
+    {
+        Name = sourceName,
+        DisplayName = SourceMeta.Get(sourceName).DisplayName ?? sourceName,
+        Status = "available",
+        NeedsKey = false,
+        Stats = Resources.Strings.Free_NoLimit,
+    };
+
+    private static async Task<bool> SafeHasAsync(Task<bool> probe)
+    {
+        try { return await probe; }
+        catch { return false; }
     }
 
     private void PublishSources(AddState state, List<SourceRow> rows, long appId)
@@ -281,7 +337,9 @@ public class PluginAddService(
 
         try
         {
-            var job = jobs.CreateManifestJob(appId, state.GameName, row.Name, row.NeedsKey);
+            // By NAME, through the factory's own dispatch: a free source has its own builder and its
+            // own host, and sending it to the lua.tools proxy is what made every free pick fail here.
+            var job = jobs.CreateForSource(appId, state.GameName, row.Name, row.NeedsKey);
             var item = queue.Enqueue(job);
 
             void OnChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
