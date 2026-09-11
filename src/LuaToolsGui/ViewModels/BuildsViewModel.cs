@@ -963,10 +963,14 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
                 // *manifest* is resolved from the owning app at download time, but nothing ever resolves
                 // a *key* there — ResolveKeys reads this game's lua and config.vdf and that is all the
                 // downloader will ever get. Exempting them here would only move the failure later.
+                // No SignIn wall on a missing manifest: the download resolves it at run time from the
+                // free sources (no account, no quota) before ever touching the lua.tools API, so a guest
+                // can grab any depot those sources cover. A depot only blocks here when it has no version
+                // to fetch at all, or no key to decrypt it with. If a guest ticks one that ONLY lua.tools
+                // has, the run surfaces the sign-in message then, naming that depot.
                 string? blocked =
                     mid is null && r.FromAppId is null ? Resources.Strings.Builds_Select_NoManifest
                     : !keys.ContainsKey(r.Id) ? Resources.Strings.Builds_Select_NoKey
-                    : path is null && !_depotTool.CanFetchManifests ? Resources.Strings.Builds_Select_SignIn
                     : null;
 
                 var pick = new DepotPickRow

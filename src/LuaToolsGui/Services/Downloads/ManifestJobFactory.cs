@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 ﻿using System.IO;
 using System.IO.Compression;
 using LuaToolsGui.Models;
@@ -31,7 +32,8 @@ public class ManifestJobFactory(
     SushiService sushi,
     RyuuService ryuu,
     ManifestCacheService manifestCache,
-    Addons.AddonSourceService addonSources)
+    Addons.AddonSourceService addonSources,
+    Microsoft.Extensions.Logging.ILogger<ManifestJobFactory> log)
 {
     // ── Job builders ─────────────────────────────────────────────────
 
@@ -593,10 +595,21 @@ public class ManifestJobFactory(
         // before the fetch, or InstallManifestFile will skip the copy and hand the bad file straight back.
         depotTool.DiscardCachedManifest(sel.DepotId, sel.ManifestId!);
 
+        OnUi(() => item.Detail = $"{step} · {Resources.Strings.Downloads_Depot_FetchingManifest}");
+
+        // Before anything that needs an account: the free sources ship the very .manifest we need, no
+        // login and no quota. This is what makes a depot download work in guest mode - a guest is only
+        // ever walled when NO free source has the game and only lua.tools does. Signed-in users benefit
+        // too: it spends a community zip instead of their daily lua.tools allowance.
+        if (await TryFreeManifestAsync(item.AppId, sel, ct) is { } freePath)
+        {
+            OnUi(() => item.Detail = step);
+            return freePath;
+        }
+
         if (!depotTool.CanFetchManifests)
             throw new DownloadAbortedException(Resources.Strings.Depot_Err_SignIn);
 
-        OnUi(() => item.Detail = $"{step} · {Resources.Strings.Downloads_Depot_FetchingManifest}");
 
         DownloadedFile staged;
         try
@@ -652,6 +665,78 @@ public class ManifestJobFactory(
 
         return depotTool.ResolveManifestPath(sel.DepotId, sel.ManifestId!)
                ?? throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoManifest);
+    }
+
+    /// <summary>
+    /// Try to get a single depot's <c>.manifest</c> from the free sources and drop it into depotcache,
+    /// so a guest can download the depot without signing in to lua.tools.
+    /// </summary>
+    /// <remarks>
+    /// The free sources publish one zip per appid holding that game's manifests. This pulls the game's
+    /// zip from each, in freshness order, and extracts only the <c>&lt;depot&gt;_&lt;gid&gt;.manifest</c>
+    /// this download needs - the lua and the other depots are left alone, since a depot download only
+    /// wants the file it is about to feed the downloader. Returns the installed path, or null when no
+    /// free source carries this exact manifest (then the caller falls back to the account-gated fetch).
+    /// </remarks>
+    private async Task<string?> TryFreeManifestAsync(long appId, DepotSelection sel, CancellationToken ct)
+    {
+        if (appId <= 0) return null;
+        string wanted = $"{sel.DepotId}_{sel.ManifestId}.manifest";
+
+        // Freshest first, same order as the Add page's free rows. Each is a best effort: a source that
+        // doesn't have the game, rate-limits, or ships a zip without this depot simply yields to the next.
+        var sources = new (string Name, Func<Task<DownloadedFile>> Fetch)[]
+        {
+            ("ryuu",          () => ryuu.DownloadZipAsync(appId, null, ct)),
+            ("manifestcache", () => manifestCache.DownloadAsync(appId, null, ct)),
+            ("sushi",         () => sushi.DownloadZipAsync(appId, null, ct)),
+            ("manifesthub",   () => manifestHub.DownloadZipAsync(appId, null, ct)),
+        };
+
+        foreach (var (name, fetch) in sources)
+        {
+            DownloadedFile? staged = null;
+            string extractDir = Path.Combine(Path.GetTempPath(), "freemf_" + Guid.NewGuid().ToString("N"));
+            try
+            {
+                staged = await fetch();
+                if (!IsZip(staged.FilePath)) continue;
+
+                using (var archive = ZipFile.OpenRead(staged.FilePath))
+                {
+                    // Match on the leaf name: branch archives nest everything under a repo/appid folder.
+                    var entry = archive.Entries.FirstOrDefault(
+                        e => string.Equals(e.Name, wanted, StringComparison.OrdinalIgnoreCase));
+                    if (entry is null) continue;
+
+                    Directory.CreateDirectory(extractDir);
+                    string manifestFile = Path.Combine(extractDir, wanted);
+                    entry.ExtractToFile(manifestFile, overwrite: true);
+
+                    // Same guard as the account path: never let a file that isn't a real manifest reach
+                    // depotcache, where it would be sticky and fail every later run identically.
+                    if (!IsSteamManifest(manifestFile)) continue;
+
+                    var result = installer.InstallManifestFile(manifestFile);
+                    if (result.AnyFailed) continue;
+                }
+
+                if (depotTool.ResolveManifestPath(sel.DepotId, sel.ManifestId!) is { } path)
+                    return path;
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+            catch (Exception ex)
+            {
+                log.LogDebug(ex, "Free manifest for depot {Depot} from {Source} failed", sel.DepotId, name);
+            }
+            finally
+            {
+                if (staged is not null) DeleteStaged(staged.FilePath);
+                try { if (Directory.Exists(extractDir)) Directory.Delete(extractDir, recursive: true); } catch { }
+            }
+        }
+
+        return null;
     }
 
     /// <summary>Marshal an observable-property write onto the dispatcher (this runs on a worker).</summary>
