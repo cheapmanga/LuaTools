@@ -115,7 +115,7 @@ public partial class HomeViewModel : ObservableObject
         PluginStatusColor = "#9ca3af";
         try
         {
-            var (ok, error) = await _plugin.InstallAsync(progress: null);
+            var (ok, error) = await _plugin.InstallAsync(progress: null, restartSteamOnFrontendUpdate: true);
             _toast.Show(Resources.Strings.Plugin_Toast_Title, ok
                 ? Resources.Strings.Plugin_Toast_Installed
                 : string.Format(Resources.Strings.Plugin_Toast_InstallFailed, error), error: !ok);
