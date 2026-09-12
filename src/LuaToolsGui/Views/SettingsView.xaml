@@ -41,6 +41,27 @@
                 FontWeight="Bold"
                 Text="{x:Static res:Strings.Settings_Title}" />
 
+            <!-- How bans actually work: honest note so a VPN/proxy isn't mistaken for protection. -->
+            <Border
+                Margin="0,14,0,0"
+                Padding="12"
+                Background="#1Aeab308"
+                BorderBrush="#33eab308"
+                BorderThickness="1"
+                CornerRadius="8">
+                <StackPanel>
+                    <TextBlock
+                        FontWeight="SemiBold"
+                        Text="{x:Static res:Strings.Settings_BanNote_Title}" />
+                    <TextBlock
+                        Margin="0,2,0,0"
+                        FontSize="12"
+                        Foreground="#9ca3af"
+                        Text="{x:Static res:Strings.Settings_BanNote_Body}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
             <!-- Account -->
             <TextBlock
                 Margin="0,20,0,8"

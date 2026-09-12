@@ -36,6 +36,8 @@ public static class Strings
 
     // ── Settings ──
     public static string Settings_Title => Get(nameof(Settings_Title));
+    public static string Settings_BanNote_Title => Get(nameof(Settings_BanNote_Title));
+    public static string Settings_BanNote_Body => Get(nameof(Settings_BanNote_Body));
     public static string Settings_Section_Account => Get(nameof(Settings_Section_Account));
     public static string Settings_Section_General => Get(nameof(Settings_Section_General));
     public static string Settings_Section_Steam => Get(nameof(Settings_Section_Steam));
