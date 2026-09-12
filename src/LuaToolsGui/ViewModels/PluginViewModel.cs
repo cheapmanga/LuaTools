@@ -136,18 +136,16 @@ public partial class PluginViewModel : ObservableObject
     private async Task Install()
     {
         if (IsBusy) return;
-        // Only a DLL change (a fresh install that places the loader, or an out-of-date loader) restarts
-        // Steam. A frontend-only update - the common case on our plugin channel - applies live and reloads
-        // the open store tabs, so don't warn about (and don't imply) a Steam restart that won't happen.
-        bool willRestartSteam = DllNotInstalled || DllOutOfDate;
-        if (willRestartSteam && !ConfirmSteamRestart()) return;
+        // The user asked for a Steam restart on every plugin install/update/source-switch, so always warn
+        // and, below, pass restartSteamOnFrontendUpdate so a frontend-only update restarts Steam too.
+        if (!ConfirmSteamRestart()) return;
 
         IsBusy = true;
         IsProgressIndeterminate = true;
         Progress = 0;
         try
         {
-            var (ok, error) = await _installer.InstallAsync(MakeProgress());
+            var (ok, error) = await _installer.InstallAsync(MakeProgress(), restartSteamOnFrontendUpdate: true);
             _toast.Show(Resources.Strings.Plugin_Toast_Title, ok
                 ? Resources.Strings.Plugin_Toast_Installed
                 : string.Format(Resources.Strings.Plugin_Toast_InstallFailed, error), error: !ok);

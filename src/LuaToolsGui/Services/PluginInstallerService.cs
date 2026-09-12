@@ -346,7 +346,11 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     }
 
     // ── Install / update ──
-    public async Task<(bool ok, string? error)> InstallAsync(IProgress<double?>? progress, CancellationToken ct = default)
+    /// <param name="restartSteamOnFrontendUpdate">When true, a frontend-only update restarts Steam (so the
+    /// new plugin loads into a fresh client) instead of live-reloading the open store tabs. The manual
+    /// Install/Update buttons pass true - the user asked for a Steam restart on every plugin change; the
+    /// silent auto-update path leaves it false so it never yanks Steam out from under the user.</param>
+    public async Task<(bool ok, string? error)> InstallAsync(IProgress<double?>? progress, CancellationToken ct = default, bool restartSteamOnFrontendUpdate = false)
     {
         if (SteamDir is not { } steamDir) return (false, Resources.Strings.Plugin_Err_SteamNotFound);
 
@@ -471,11 +475,23 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
                 if (wasRunning) steam.StartSteam();
             }
+            else if (restartSteamOnFrontendUpdate)
+            {
+                // Frontend-only update, but the caller (a manual Install/Update) wants Steam restarted so
+                // the new plugin loads into a fresh client. The frontend files aren't locked, so there was
+                // no need to stop Steam to write them - restart it now only if it was up.
+                if (Process.GetProcessesByName("steam").Length > 0)
+                {
+                    steam.StopSteam();
+                    await Task.Delay(1200, ct);
+                    steam.StartSteam();
+                }
+            }
             else
             {
-                // Frontend-only update: Steam was NOT restarted, so its open store tabs still run the
-                // previous luatools.js. Reload them so the new UI shows right away (the injection loop
-                // won't re-inject over a tab whose __LuaToolsReady is still set).
+                // Frontend-only update from the silent auto-update path: don't disrupt a running Steam.
+                // Its open store tabs still run the previous luatools.js, so reload them to apply the new
+                // UI (the injection loop won't re-inject over a tab whose __LuaToolsReady is still set).
                 await injector.ReloadStoreTabsAsync();
             }
 
