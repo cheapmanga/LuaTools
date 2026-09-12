@@ -73,6 +73,8 @@
   <data name="Nav_Footer_LoggedIn" xml:space="preserve"><value>Đã đăng nhập</value></data>
   <data name="Main_RestartSteam_Ask" xml:space="preserve"><value>Khởi động lại Steam ngay bây giờ? Thao tác này sẽ đóng Steam và mọi trò chơi đang chạy, sau đó khởi chạy lại.</value></data>
   <data name="Settings_Title" xml:space="preserve"><value>Cài đặt</value></data>
+  <data name="Settings_BanNote_Title" xml:space="preserve"><value>How bans actually work</value></data>
+  <data name="Settings_BanNote_Body" xml:space="preserve"><value>Steam identifies you by your account and your machine's hardware, not your IP. A ban for a lua or unlocker comes from detecting those on the account — a VPN or proxy changes your IP and hides none of it. The only real protection is a throwaway account you don't mind losing, ideally on a separate machine or VM, since Steam can link accounts that share the same hardware.</value></data>
   <data name="Settings_Section_Account" xml:space="preserve"><value>TÀI KHOẢN</value></data>
   <data name="Settings_Section_General" xml:space="preserve"><value>CHUNG</value></data>
   <data name="Settings_Section_Steam" xml:space="preserve"><value>STEAM</value></data>
