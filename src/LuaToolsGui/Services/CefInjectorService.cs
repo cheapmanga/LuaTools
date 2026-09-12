@@ -184,8 +184,11 @@ public class CefInjectorService : IHostedService
     {
         try
         {
+            // Snapshot each pending request WITH its id. Correlating responses back by id (not by the
+            // position in a second Object.keys read) is what keeps a request that resolves or times out
+            // on the page between these two reads from shifting every later response onto the wrong id.
             var pendingJson = await EvaluateReturnAsync(tabId, wsUrl,
-                "JSON.stringify(Object.values(window.Millennium._pending||{}).map(function(r){return{m:r.method,a:JSON.stringify(r.args)}}))", ct);
+                "JSON.stringify(Object.entries(window.Millennium._pending||{}).map(function(e){return{id:e[0],m:e[1].method,a:JSON.stringify(e[1].args)}}))", ct);
 
             if (string.IsNullOrWhiteSpace(pendingJson) || pendingJson == "[]" || pendingJson == "null")
                 return;
@@ -199,17 +202,19 @@ public class CefInjectorService : IHostedService
                 try
                 {
                     var result = await CallBackendMethod(req.m ?? "", req.a ?? "{}");
-                    responses.Add(new { v = JsonSerializer.Deserialize<object>(result) ?? result });
+                    responses.Add(new { id = req.id, v = JsonSerializer.Deserialize<object>(result) ?? result });
                 }
                 catch (Exception ex)
                 {
-                    responses.Add(new { e = ex.Message });
+                    responses.Add(new { id = req.id, e = ex.Message });
                 }
             }
 
+            // Write each response back to ITS request by id, and only if that request is still pending
+            // (a request the page already resolved/timed out is skipped, so its slot isn't resurrected).
             var respArray = JsonSerializer.Serialize(responses);
             await EvaluateReturnAsync(tabId, wsUrl,
-                "(function(r){var ks=Object.keys(window.Millennium._pending);for(var i=0;i<ks.length&&i<r.length;i++){var id=ks[i];window.Millennium._readyResponses[id]=r[i];delete window.Millennium._pending[id];}})(" + respArray + ");", ct);
+                "(function(r){var p=window.Millennium._pending,k=window.Millennium._readyResponses;for(var i=0;i<r.length;i++){var x=r[i];if(x&&x.id&&p[x.id]!==undefined){k[x.id]=x;delete p[x.id];}}})(" + respArray + ");", ct);
         }
         catch { }
     }
@@ -453,6 +458,7 @@ internal class CefTabInfo
 
 internal class PendingRequest
 {
+    public string? id { get; set; }
     public string? m { get; set; }
     public string? a { get; set; }
 }

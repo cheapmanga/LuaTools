@@ -51,6 +51,12 @@
     <EmbeddedResource Include="Assets\plugin.zip">
       <LogicalName>bundled-plugin.zip</LogicalName>
     </EmbeddedResource>
+    <!-- Our crescent logo. In LuaLoader mode the store-page plugin's icon comes from the app's
+         /icon route (HttpServerService.HandleIcon), not from plugin.zip, so the icon has to live in
+         the app. Embedded because the single-file publish has no loose files next to the exe. -->
+    <EmbeddedResource Include="Assets\luatools-icon.png">
+      <LogicalName>luatools-icon.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <!-- Nothing in public/ is bundled anymore. The frontend (luatools.js) is fetched from GitHub releases

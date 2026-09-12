@@ -606,19 +606,36 @@ public class HttpServerService : IHostedService
     {
         try
         {
-            var iconPath = Path.Combine(AppContext.BaseDirectory, "luatools-icon.png");
-            if (!File.Exists(iconPath))
+            // Our crescent logo is embedded in the app (LogicalName "luatools-icon.png"). Serve it first:
+            // in LuaLoader mode the store-page plugin pulls its icon from here, and the single-file publish
+            // has no loose PNG next to the exe. A sibling file (dev builds, user override) wins if present;
+            // icon.ico is the last-resort fallback.
+            var diskPath = Path.Combine(AppContext.BaseDirectory, "luatools-icon.png");
+            if (File.Exists(diskPath))
             {
-                var alt = Path.Combine(AppContext.BaseDirectory, "icon.ico");
-                if (File.Exists(alt))
-                    iconPath = alt;
-                else
-                    return (200, Json(new { success = false, dataUrl = "" }));
+                var b = File.ReadAllBytes(diskPath);
+                return (200, Json(new { success = true, dataUrl = $"data:image/png;base64,{Convert.ToBase64String(b)}" }));
             }
-            var bytes = File.ReadAllBytes(iconPath);
-            var b64 = Convert.ToBase64String(bytes);
-            var mime = iconPath.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ? "image/png" : "image/x-icon";
-            return (200, Json(new { success = true, dataUrl = $"data:{mime};base64,{b64}" }));
+
+            var asm = System.Reflection.Assembly.GetExecutingAssembly();
+            using (var res = asm.GetManifestResourceStream("luatools-icon.png"))
+            {
+                if (res != null)
+                {
+                    using var ms = new MemoryStream();
+                    res.CopyTo(ms);
+                    return (200, Json(new { success = true, dataUrl = $"data:image/png;base64,{Convert.ToBase64String(ms.ToArray())}" }));
+                }
+            }
+
+            var ico = Path.Combine(AppContext.BaseDirectory, "icon.ico");
+            if (File.Exists(ico))
+            {
+                var b = File.ReadAllBytes(ico);
+                return (200, Json(new { success = true, dataUrl = $"data:image/x-icon;base64,{Convert.ToBase64String(b)}" }));
+            }
+
+            return (200, Json(new { success = false, dataUrl = "" }));
         }
         catch
         {
