@@ -183,6 +183,14 @@ public class PluginAddService(
             if (keyRows.Count > 0 && string.IsNullOrEmpty(key))
                 foreach (var r in keyRows) r.Locked = true;
 
+            // A guest can't use the metered lua.tools rows (they need an account), and a guest never runs
+            // FillStandardBadgeAsync, so those rows would otherwise stay "available" and fail opaquely on
+            // pick. Lock them up front - honestly gated, like the no-key premium rows above. The free
+            // rows (no account, no cap) are untouched, so guest mode still adds whatever a free source has.
+            if (auth.IsGuest)
+                foreach (var r in rows.Where(r => !r.NeedsKey && !IsBuiltInFreeSource(r.Name)))
+                    r.Locked = true;
+
             if (nameTask is not null) state.GameName = await nameTask; // ready before any Pick builds its status
 
             if (state.FastFetch)
@@ -252,6 +260,11 @@ public class PluginAddService(
         NeedsKey = false,
         Stats = Resources.Strings.Free_NoLimit,
     };
+
+    /// <summary>The built-in free sources (no account, no daily cap) - the rows a guest may always use.</summary>
+    private static bool IsBuiltInFreeSource(string name) =>
+        name == RyuuService.SourceName || name == ManifestCacheService.SourceName
+        || name == SushiService.SourceName || name == ManifestHubService.SourceName;
 
     private static async Task<bool> SafeHasAsync(Task<bool> probe, bool keepOnRateLimit = false)
     {

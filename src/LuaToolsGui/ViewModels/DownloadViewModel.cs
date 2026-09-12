@@ -603,7 +603,11 @@ public partial class DownloadViewModel : ObservableObject
 
     // ── Fetch (sources or DLC info, depending on app type) ─────────
 
-    private bool CanFetch() => HasDetails && !IsChecking && !BlockFetch;
+    // BlockFetch no longer greys the button: a manifest-fix (Denuvo) game may still be covered by a
+    // free source that ships its own manifests, and the only way to find out is to let the fetch run.
+    // The block is enforced inside FetchAsync instead - free sources first, the sign-in-gated fix offer
+    // only as the fallback when none of them has the game.
+    private bool CanFetch() => HasDetails && !IsChecking;
 
     [RelayCommand(CanExecute = nameof(CanFetch))]
     private async Task FetchAsync()
@@ -633,12 +637,20 @@ public partial class DownloadViewModel : ObservableObject
             }
             else
             {
-                // Enforce the manifest-fix block HERE, not just via the button's CanExecute: the protocol
-                // and plugin paths call this command directly (bypassing CanExecute), and a manual click
-                // could land before the async fix check returns. Wait for that check, then bail if the
-                // game is a manifest-fix - the banner already offers "Add via the fix".
+                // Wait for the async manifest-fix check so BlockFetch is settled before we decide.
                 if (_fixCheck is { } fc) { try { await fc; } catch { /* offline: no block */ } }
-                if (BlockFetch) return;
+
+                // The free sources are the default and need neither an account nor the lua.tools backend.
+                // Probe them FIRST so a manifest-fix (Denuvo) tag no longer hard-blocks a guest when a
+                // free source already ships the base game - mirrors the depot path's "free first, account
+                // or fix only as a fallback". They insert on top; the paid rows below are appended after.
+                var (freeRows, addonRows) = await AddFreeSourceAsync(Details.AppId);
+
+                // Manifest-fix game that NO free source covers: fall back to the sign-in-gated "Add via
+                // the fix" offer the banner shows, and bail so that offer is the only path - as before.
+                // When a free source does cover it, we keep going and also list the lua.tools rows, so
+                // the guest gets the base game for free while the fix stays on offer for who wants it.
+                if (BlockFetch && freeRows == 0 && addonRows == 0) return;
 
                 // lua.tools' own source list. Allowed to fail on its own: it needs their backend and an
                 // account, the free sources need neither, and an outage there used to take every free
@@ -664,9 +676,10 @@ public partial class DownloadViewModel : ObservableObject
                     backendFailed = ex;
                 }
 
-                // The free sources are the default: added last but inserted on top, off their own checks.
-                // Separate from the lua.tools list above, and reached even when that list threw.
-                await AddFreeSourceAsync(Details.AppId);
+                // The "switch to lua.tools" notice: no free source has the game, but a paid one is
+                // downloadable. Computed here now that both the free and paid rows are in.
+                FreeSourceUnavailable = freeRows == 0 && addonRows == 0
+                    && Sources.Any(s => !s.IsFree && s.CanDownload);
 
                 // Only now is a backend failure fatal, and only if nothing else answered.
                 if (backendFailed is not null && Sources.Count is 0)
@@ -840,7 +853,7 @@ public partial class DownloadViewModel : ObservableObject
     /// can't be reached, the free source is simply treated as not covering this game, and the lua.tools
     /// rows carry on as before.
     /// </remarks>
-    private async Task AddFreeSourceAsync(long appId)
+    private async Task<(int freeRows, int addonRows)> AddFreeSourceAsync(long appId)
     {
         // Every free source is probed at once, then each covered one becomes a row on top of the paid
         // list, labelled "No limit".
@@ -871,10 +884,9 @@ public partial class DownloadViewModel : ObservableObject
         int freeRows = (sushiHas ? 1 : 0) + (hubHas ? 1 : 0) + (ryuuHas ? 1 : 0) + (cacheHas ? 1 : 0);
         int addonRows = await AddAddonSourcesAsync(appId, freeRowCount: freeRows);
 
-        // The notice AND its button share one condition: only offer to switch when no free source has
-        // the game AND a lua.tools row is actually downloadable, so the banner never shows a dead button.
-        FreeSourceUnavailable = freeRows == 0 && addonRows == 0
-            && Sources.Any(s => !s.IsFree && s.CanDownload);
+        // The caller sets FreeSourceUnavailable once the lua.tools rows are in too: the "switch to
+        // lua.tools" notice needs to know whether a paid row is downloadable, which isn't decided yet.
+        return (freeRows, addonRows);
     }
 
     /// <summary>
