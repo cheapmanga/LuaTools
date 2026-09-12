@@ -74,7 +74,7 @@
   <data name="Main_RestartSteam_Ask" xml:space="preserve"><value>Starta om Steam nu? Detta stänger Steam och alla spel som körs och startar sedan om det.</value></data>
   <data name="Settings_Title" xml:space="preserve"><value>Inställningar</value></data>
   <data name="Settings_BanNote_Title" xml:space="preserve"><value>How bans actually work</value></data>
-  <data name="Settings_BanNote_Body" xml:space="preserve"><value>Steam identifies you by your account and your machine's hardware, not your IP. A ban for a lua or unlocker comes from detecting those on the account — a VPN or proxy changes your IP and hides none of it. The only real protection is a throwaway account you don't mind losing, ideally on a separate machine or VM, since Steam can link accounts that share the same hardware.</value></data>
+  <data name="Settings_BanNote_Body" xml:space="preserve"><value>Steam identifies you by your account and your machine's hardware, not your IP — a VPN or proxy changes your IP and hides none of it. A ban for a lua or unlocker comes from detecting those on the account. The safest setup is a throwaway account inside a disposable VM: the VM has its own hardware identity, so a ban there can't reach your main account or machine. On your main machine a throwaway account still helps, but Steam can link accounts that share hardware, so a VM is the better choice.</value></data>
   <data name="Settings_Section_Account" xml:space="preserve"><value>KONTO</value></data>
   <data name="Settings_Section_General" xml:space="preserve"><value>ALLMÄNT</value></data>
   <data name="Settings_Section_Steam" xml:space="preserve"><value>STEAM</value></data>
