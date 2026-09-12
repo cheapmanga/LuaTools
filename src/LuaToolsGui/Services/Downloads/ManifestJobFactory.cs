@@ -237,7 +237,11 @@ public class ManifestJobFactory(
             title,
             Resources.Strings.Downloads_Kind_Dlc,
             covers.GetLocalPath(appId),
-            (_, progress, ct) => api.GenerateDlcAsync(appId.ToString(), baseAppId, gameName, progress, ct),
+            // Built locally from Steam app info + the free key database, so a DLC unlock needs no
+            // lua.tools account: the entitlements and any keyed content depot, same as a base game's DLCs.
+            (_, _, ct) => long.TryParse(baseAppId, out long baseId)
+                ? manifestHub.BuildDlcLuaAsync(appId, baseId, ct)
+                : throw new DownloadAbortedException(Resources.Strings.Add_Err_BaseGame),
             (file, _, _) => Task.FromResult(InstallManifest(file, appId, title)),
             ConfirmAsync: null,
             OnFinished: onFinished,

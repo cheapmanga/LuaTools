@@ -609,8 +609,6 @@ public partial class DownloadViewModel : ObservableObject
     private async Task FetchAsync()
     {
         if (Details is null) return;
-        // DLC info is login-only; manifest source checking is public (guests allowed).
-        if (Details.IsDlc && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Dlc)) return;
         ResetResults();
         IsChecking = true;
         try
@@ -622,7 +620,12 @@ public partial class DownloadViewModel : ObservableObject
                     Error = Resources.Strings.Add_Err_BaseGame;
                     return;
                 }
-                DlcInfo = await _api.GetDlcInfoAsync(Details.AppId.ToString(), Details.BaseAppId);
+                // Built locally from Steam app info + the free key database: a guest sees which of the
+                // DLC's depots are unlockable, no lua.tools account. A store-only DLC comes back with no
+                // depots, which the picker reads as "just entitle it".
+                DlcInfo = long.TryParse(Details.BaseAppId, out long baseId)
+                    ? await _manifestHub.BuildDlcInfoAsync(Details.AppId, baseId, Details.Name)
+                    : null;
                 DlcDepots.Clear();
                 // Included depots first, then missing: mirrors the website ordering
                 foreach (var d in DlcInfo?.Depots.OrderByDescending(d => d.Included) ?? Enumerable.Empty<DlcDepot>())
@@ -1073,10 +1076,10 @@ public partial class DownloadViewModel : ObservableObject
 
     /// <summary>DLC lua: download and install silently (it's just an unlock, no confirm).</summary>
     [RelayCommand]
-    private async Task GenerateDlcAsync()
+    private Task GenerateDlcAsync()
     {
-        if (Details?.BaseAppId is null) return;
-        if (await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return;
+        // Fully local now (the lua is built from Steam app info + free keys), so nothing to await here.
+        if (Details?.BaseAppId is null) return Task.CompletedTask;
 
         Error = null;
         LastDownload = null;
@@ -1089,6 +1092,7 @@ public partial class DownloadViewModel : ObservableObject
             onReveal: () => NavigateToGame?.Invoke(appId));
 
         DlcQueueItem = _lastEnqueued = _queue.Enqueue(job);
+        return Task.CompletedTask;
     }
 
     /// <summary>
