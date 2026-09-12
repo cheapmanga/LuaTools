@@ -87,6 +87,31 @@ public class CefInjectorService : IHostedService
         }
     }
 
+    /// <summary>Force every open Steam store tab to reload, so a freshly installed frontend takes effect
+    /// right away. A frontend-only plugin update does NOT restart Steam, and the injection loop won't
+    /// re-inject into a tab that already ran the previous luatools.js (its <c>__LuaToolsReady</c> is still
+    /// set), so without this the new UI wouldn't appear until the user navigated. Best-effort per tab.</summary>
+    public async Task ReloadStoreTabsAsync()
+    {
+        var ct = _cts?.Token ?? CancellationToken.None;
+        try
+        {
+            var tabsJson = await _http.GetStringAsync(CefDebugUrl, ct);
+            if (string.IsNullOrWhiteSpace(tabsJson)) return;
+            var tabs = JsonSerializer.Deserialize<List<CefTabInfo>>(tabsJson, JsonOpts) ?? new();
+            foreach (var tab in tabs)
+            {
+                if (tab.Url?.Contains("store.steampowered.com", StringComparison.OrdinalIgnoreCase) == true
+                    && !string.IsNullOrEmpty(tab.WebSocketDebuggerUrl) && !string.IsNullOrEmpty(tab.Id))
+                {
+                    try { await EvaluateAsync(tab.Id!, tab.WebSocketDebuggerUrl!, "location.reload()", ct); }
+                    catch { /* best effort per tab */ }
+                }
+            }
+        }
+        catch { /* injector or CDP not up; nothing to reload */ }
+    }
+
     public Task StopAsync(CancellationToken cancellationToken)
     {
         _cts?.Cancel();

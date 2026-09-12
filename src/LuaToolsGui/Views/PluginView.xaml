@@ -175,6 +175,41 @@
                                 IsEnabled="{Binding NotBusy}" />
                         </StackPanel>
 
+                        <!-- Plugin source: the fork's own vs madoiscool's official -->
+                        <Border
+                            Margin="0,16,0,0"
+                            Padding="14,12"
+                            Background="#141018"
+                            BorderBrush="#33f5a623"
+                            BorderThickness="1"
+                            CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="#e5e7eb"
+                                        Text="{x:Static res:Strings.Plugin_Source_Title}" />
+                                    <TextBlock
+                                        Margin="0,3,0,0"
+                                        FontSize="11.5"
+                                        Foreground="#7c8593"
+                                        Text="{x:Static res:Strings.Plugin_Source_Desc}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                                <ui:ToggleSwitch
+                                    Grid.Column="1"
+                                    Margin="12,0,0,0"
+                                    VerticalAlignment="Center"
+                                    IsChecked="{Binding UseOfficialPlugin, Mode=TwoWay}"
+                                    IsEnabled="{Binding NotBusy}" />
+                            </Grid>
+                        </Border>
+
                         <!-- Progress -->
                         <ProgressBar
                             Height="6"
