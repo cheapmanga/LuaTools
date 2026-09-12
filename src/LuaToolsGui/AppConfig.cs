@@ -224,6 +224,12 @@ public static class AppConfig
     // /releases/latest) because the app's OWN release (v1.1.3-fork) lives in this same repo.
     public const string PluginReleaseTag = "plugin";
 
+    // The upstream/official plugin source (madoiscool/LTSP), offered as an opt-in alternative to the fork's
+    // own plugin via the UseOfficialPlugin setting. Fetched with /releases/latest (its own convention),
+    // whereas the fork's channel is fetched by the fixed tag above.
+    public const string OfficialPluginOwner = "madoiscool";
+    public const string OfficialPluginRepo = "LTSP";
+
     // ── GitHub proxy mirrors (for blocked/throttled regions, e.g. China) ──────────────
     // github.com / api.github.com are often unreachable in some countries. Any GitHub request is tried
     // DIRECT first, then prefixed onto the MATCHING mirrors ("<mirror>https://<github-url>") until one works.

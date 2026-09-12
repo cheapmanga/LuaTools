@@ -39,11 +39,20 @@ public sealed record PluginStatus(
 /// "launch LuaTools.exe when Steam opens", with no CDP hook, no load-timing race, and no dual-slot
 /// redundancy needed anymore.
 /// </summary>
-public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjectorService injector)
+public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjectorService injector, SettingsService settings)
 {
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
     private const string PluginZipAsset = "plugin.zip";
+
+    // Which release the plugin (frontend + loader) is fetched from, per the user's setting: the fork's own
+    // channel (default) or madoiscool/LTSP's official one. The fork's is a fixed tag; the official uses
+    // /releases/latest. UsingOfficialPlugin also gates the embedded-frontend fallback (which is OURS, so it
+    // must not stand in for a failed OFFICIAL download).
+    private bool UsingOfficialPlugin => settings.UseOfficialPlugin;
+    private (string Owner, string Repo) PluginRepo => UsingOfficialPlugin
+        ? (AppConfig.OfficialPluginOwner, AppConfig.OfficialPluginRepo)
+        : (AppConfig.PluginReleasesOwner, AppConfig.PluginReleasesRepo);
 
     /// <summary>The one DLL-proxy slot the loader ships as. <c>winmm.dll</c> is loaded dynamically (audio)
     /// by steam.exe, is never a KnownDLL on Win10 or Win11, and isn't claimed by Millennium (wsock32/
@@ -198,6 +207,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         SteamDir is { } s && File.Exists(Path.Combine(s, DllUpdateDisabledMarker));
 
     private GithubRelease? _cachedLatest;
+    private bool _cachedForOfficial; // which source _cachedLatest was fetched from, so a switch invalidates it
 
     public bool MillenniumPresent =>
         SteamDir is { } s && File.Exists(Path.Combine(s, "millennium", "lib", "millennium.dll"));
@@ -259,16 +269,21 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     // ── GitHub ──
     public async Task<GithubRelease?> FetchLatestAsync(bool force, CancellationToken ct = default)
     {
-        if (!force && _cachedLatest is not null) return _cachedLatest;
-        // Fetch the plugin release by its fixed tag, not /releases/latest: the app's own standalone release
-        // lives in this same repo, so "latest" would be ambiguous between the two channels.
-        string url = $"https://api.github.com/repos/{AppConfig.PluginReleasesOwner}/{AppConfig.PluginReleasesRepo}/releases/tags/{AppConfig.PluginReleaseTag}";
+        // The cache is per-source: ignore it when the user has switched between the fork and official
+        // plugin since it was filled, so a stale release from the other channel is never reused.
+        if (!force && _cachedLatest is not null && _cachedForOfficial == UsingOfficialPlugin) return _cachedLatest;
+        var (owner, repo) = PluginRepo;
+        // The fork's channel is a fixed tag (the app's own standalone release shares that repo, so "latest"
+        // would be ambiguous); the official upstream uses its own /releases/latest convention.
+        string url = UsingOfficialPlugin
+            ? $"https://api.github.com/repos/{owner}/{repo}/releases/latest"
+            : $"https://api.github.com/repos/{owner}/{repo}/releases/tags/{AppConfig.PluginReleaseTag}";
         try
         {
             using var res = await gh.SendAsync(url, ct);
             if (res is null || !res.IsSuccessStatusCode) return null;
             var rel = JsonSerializer.Deserialize<GithubRelease>(await res.Content.ReadAsStringAsync(ct), JsonOpts);
-            if (rel is not null) _cachedLatest = rel;
+            if (rel is not null) { _cachedLatest = rel; _cachedForOfficial = UsingOfficialPlugin; }
             return rel;
         }
         catch { return null; }
@@ -354,10 +369,12 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         Dictionary<string, List<string>>? disabledMillenniumEntries = null;
         try
         {
-            // The frontend comes from OUR plugin release (plugin.zip), so it can be updated without a new
-            // app build. Download + verify by the release asset's sha256 digest, exactly like the loader.
-            // If the release is unreachable or the asset fails to verify, fall back to the copy embedded in
-            // this build, so a first run still works offline and a bad release can never brick the plugin.
+            // The frontend comes from the selected plugin release (plugin.zip), so it can be updated without
+            // a new app build. Download + verify by the release asset's sha256 digest, exactly like the
+            // loader. For the FORK's channel, fall back to the copy embedded in this build if the release is
+            // unreachable or the asset fails to verify, so a first run still works offline and a bad release
+            // can never brick the plugin. The embedded copy is OURS, so it is NOT used as a fallback when the
+            // user picked the OFFICIAL plugin - that download must succeed or the whole install fails.
             string zipPath = Path.Combine(tmp, PluginZipAsset);
             bool zipFromRelease = false;
             if (zipAsset is not null && !string.IsNullOrEmpty(zipAsset.DownloadUrl))
@@ -369,9 +386,14 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                     if (want is null || AssetHash.OfFile(zipPath) == want) zipFromRelease = true;
                 }
                 catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
-                catch { /* fall back to the embedded frontend below */ }
+                catch { /* fork: fall back to the embedded frontend below; official: handled next */ }
             }
-            if (!zipFromRelease) WriteBundledFrontend(zipPath);
+            if (!zipFromRelease)
+            {
+                if (UsingOfficialPlugin)
+                    return (false, string.Format(Resources.Strings.Plugin_Err_MissingAssets, latest.TagName, PluginZipAsset, Slots[0].DllAsset));
+                WriteBundledFrontend(zipPath);
+            }
             var slotDlPaths = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, asset) in slotAssets)
             {
@@ -448,6 +470,13 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 }
 
                 if (wasRunning) steam.StartSteam();
+            }
+            else
+            {
+                // Frontend-only update: Steam was NOT restarted, so its open store tabs still run the
+                // previous luatools.js. Reload them so the new UI shows right away (the injection loop
+                // won't re-inject over a tab whose __LuaToolsReady is still set).
+                await injector.ReloadStoreTabsAsync();
             }
 
             // Ensure the CDP marker junction exists: independent of whether the DLL itself changed (a

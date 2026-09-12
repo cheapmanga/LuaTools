@@ -1524,12 +1524,13 @@
 
   function generateThemeStyles(theme) {
     return `
-            /* Force overlay backdrops to follow the active theme (overrides inline styles) */
+            /* A proper dark scrim behind every modal: dims the store page and puts the focus on the
+               dialog, with a faint warm tint from the theme accent. Overrides the inline backdrops. */
             .luatools-settings-overlay,
             .luatools-overlay,
             .luatools-loadedapps-overlay {
-                background: rgba(${theme.rgbString}, 0.12) !important;
-                backdrop-filter: blur(8px) !important;
+                background: radial-gradient(120% 120% at 50% 0%, rgba(${theme.rgbString}, 0.10) 0%, rgba(6, 5, 9, 0.74) 55%) !important;
+                backdrop-filter: blur(10px) saturate(1.05) !important;
             }
 
             /* Prefer overlay-scoped select rules to override theme CSS files */
@@ -1742,6 +1743,62 @@
                 color: ${theme.accentLight} !important;
                 box-shadow: 0 6px 18px ${theme.shadow}, inset 0 1px 0 rgba(255,255,255,0.08) !important;
                 transform: translateY(-1px) !important;
+            }
+
+            /* ── Professional polish: one consistent system for the inline-built components ──
+               Rows, progress, pills and titles are created with inline styles scattered through the JS;
+               these class rules override that skin (hence !important) so radii, borders, shadows and
+               typography all match the modal and buttons instead of each being a one-off. */
+            .luatools-title {
+                font-size: 18px !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.2px !important;
+                padding-bottom: 14px !important;
+                margin-bottom: 18px !important;
+                border-bottom: 1px solid rgba(${theme.rgbString}, 0.12) !important;
+            }
+            .luatools-api-item {
+                padding: 12px 14px !important;
+                margin-bottom: 8px !important;
+                border-radius: 10px !important;
+                background: ${theme.bgTertiary} !important;
+                border: 1px solid rgba(${theme.rgbString}, 0.14) !important;
+                transition: transform .18s cubic-bezier(.34,1.56,.64,1), border-color .18s ease, background .18s ease, box-shadow .18s ease !important;
+            }
+            .luatools-api-item:hover {
+                border-color: ${theme.borderHover} !important;
+                background: ${theme.bgHover} !important;
+                transform: translateY(-1px) !important;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.32) !important;
+            }
+            .luatools-progress-wrap {
+                height: 10px !important;
+                border-radius: 999px !important;
+                background: rgba(0,0,0,0.35) !important;
+                border: 1px solid rgba(${theme.rgbString}, 0.18) !important;
+            }
+            .luatools-progress-bar {
+                border-radius: 999px !important;
+                background: ${theme.gradient} !important;
+                box-shadow: 0 0 12px ${theme.shadow} !important;
+            }
+            .luatools-pill {
+                border-radius: 999px !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.2px !important;
+                border: 1px solid rgba(${theme.rgbString}, 0.35) !important;
+            }
+            .luatools-status {
+                letter-spacing: 0.1px !important;
+                line-height: 1.5 !important;
+            }
+            /* Section labels inside the settings modal read as small gold eyebrows. */
+            .luatools-section-label {
+                font-size: 12px !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.8px !important;
+                text-transform: uppercase !important;
+                color: ${theme.accent} !important;
             }
         `;
   }

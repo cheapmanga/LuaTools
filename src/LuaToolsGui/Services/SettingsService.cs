@@ -65,6 +65,10 @@ public class AppSettings
     // Addon ids the user switched off, by id. Only the OFF list is stored: an addon the user has never
     // touched is on, so a newly installed one works without an entry having to appear here first.
     public List<string>? DisabledAddons { get; set; }
+
+    // Store-page plugin source: null/false = the fork's own plugin (our logo, themes, free sources);
+    // true = madoiscool/LTSP's official plugin. Lets the user opt back onto upstream if they prefer it.
+    public bool? UseOfficialPlugin { get; set; }
 }
 
 public class SettingsService
@@ -204,6 +208,13 @@ public class SettingsService
     {
         get => _settings.BlockFetchWhenFixManifests ?? true; // default ON
         set { _settings.BlockFetchWhenFixManifests = value; Save(); }
+    }
+
+    /// <summary>Use madoiscool/LTSP's official store-page plugin instead of the fork's own (default OFF = the fork's).</summary>
+    public bool UseOfficialPlugin
+    {
+        get => _settings.UseOfficialPlugin ?? false; // default: the fork's own plugin
+        set { _settings.UseOfficialPlugin = value; Save(); }
     }
 
     private static readonly string TmpPath = FilePath + ".tmp";

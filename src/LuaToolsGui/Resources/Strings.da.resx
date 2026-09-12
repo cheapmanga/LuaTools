@@ -752,4 +752,6 @@ Vil du indløse den alligevel?</value></data>
   <data name="Addons_State_Disabled" xml:space="preserve"><value>Deaktiveret</value></data>
   <data name="Addons_State_Failed" xml:space="preserve"><value>Kunne ikke indlæses</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Opdater</value></data>
+  <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
+  <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
 </root>

@@ -15,11 +15,28 @@ public partial class PluginViewModel : ObservableObject
 {
     private readonly PluginInstallerService _installer;
     private readonly ToastService _toast;
+    private readonly SettingsService _settings;
 
-    public PluginViewModel(PluginInstallerService installer, ToastService toast)
+    public PluginViewModel(PluginInstallerService installer, ToastService toast, SettingsService settings)
     {
         _installer = installer;
         _toast = toast;
+        _settings = settings;
+    }
+
+    /// <summary>Which store-page plugin to install: the fork's own (default) or madoiscool/LTSP's official
+    /// one. Bound to a toggle on the Plugin page. Switching re-checks against the newly selected source, so
+    /// an update surfaces when the installed plugin differs from it - the user then clicks Update to switch.</summary>
+    public bool UseOfficialPlugin
+    {
+        get => _settings.UseOfficialPlugin;
+        set
+        {
+            if (_settings.UseOfficialPlugin == value) return;
+            _settings.UseOfficialPlugin = value;
+            OnPropertyChanged();
+            _ = RefreshAsync(force: true);
+        }
     }
 
     [ObservableProperty] private string _installedVersion = "—";
@@ -119,7 +136,11 @@ public partial class PluginViewModel : ObservableObject
     private async Task Install()
     {
         if (IsBusy) return;
-        if (!ConfirmSteamRestart()) return;
+        // Only a DLL change (a fresh install that places the loader, or an out-of-date loader) restarts
+        // Steam. A frontend-only update - the common case on our plugin channel - applies live and reloads
+        // the open store tabs, so don't warn about (and don't imply) a Steam restart that won't happen.
+        bool willRestartSteam = DllNotInstalled || DllOutOfDate;
+        if (willRestartSteam && !ConfirmSteamRestart()) return;
 
         IsBusy = true;
         IsProgressIndeterminate = true;

@@ -368,6 +368,8 @@ public static class Strings
     public static string Confirm_Replace => Get(nameof(Confirm_Replace));
         public static string Plugin_Title => Get(nameof(Plugin_Title));
         public static string Plugin_Subtitle => Get(nameof(Plugin_Subtitle));
+        public static string Plugin_Source_Title => Get(nameof(Plugin_Source_Title));
+        public static string Plugin_Source_Desc => Get(nameof(Plugin_Source_Desc));
         public static string Plugin_CardTitle => Get(nameof(Plugin_CardTitle));
         public static string Plugin_Badge_UpdateAvailable => Get(nameof(Plugin_Badge_UpdateAvailable));
         public static string Plugin_Row_InstalledVersion => Get(nameof(Plugin_Row_InstalledVersion));
