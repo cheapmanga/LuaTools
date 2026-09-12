@@ -223,6 +223,42 @@ public class ManifestJobFactory(
             onReveal);
     }
 
+    /// <summary>
+    /// A manifest job for a caller that has only a source NAME and cannot know which builder that name
+    /// belongs to: the store-page plugin's add pipeline and the loopback HTTP API, both driven from
+    /// outside the app.
+    /// </summary>
+    /// <remarks>
+    /// <para>Mirrors the dispatch in <c>DownloadViewModel.DownloadFromSourceAsync</c>. Without it those
+    /// callers sent every name to <see cref="CreateManifestJob"/>, i.e. through the lua.tools proxy - so
+    /// picking a free source from the store-page popup or an external client asked the proxy for a source
+    /// it does not serve, and the user saw "download failed, check your connection".</para>
+    ///
+    /// <para>The comparison is ORDINAL and case-sensitive on purpose: <c>"Ryuu"</c> is the metered
+    /// lua.tools source and <c>"ryuu"</c> is the free one, and the case is the only thing that tells them
+    /// apart. An ignore-case match here would quietly send paid traffic down the free path, and back.</para>
+    /// </remarks>
+    public DownloadJob CreateForSource(
+        long appId, string? gameName, string sourceName, bool needsKey,
+        Func<DownloadedFile, DownloadItem, CancellationToken, Task<bool>>? confirm = null,
+        Action<DownloadItem, JobResult?>? onFinished = null,
+        Action? onReveal = null)
+    {
+        if (string.Equals(sourceName, RyuuService.SourceName, StringComparison.Ordinal))
+            return CreateRyuuJob(appId, gameName, confirm, onFinished, onReveal);
+
+        if (string.Equals(sourceName, ManifestCacheService.SourceName, StringComparison.Ordinal))
+            return CreateManifestCacheJob(appId, gameName, confirm, onFinished, onReveal);
+
+        if (string.Equals(sourceName, SushiService.SourceName, StringComparison.Ordinal))
+            return CreateSushiJob(appId, gameName, confirm, onFinished, onReveal);
+
+        if (string.Equals(sourceName, ManifestHubService.SourceName, StringComparison.Ordinal))
+            return CreateManifestHubJob(appId, gameName, confirm, onFinished, onReveal);
+
+        return CreateManifestJob(appId, gameName, sourceName, needsKey, confirm, onFinished, onReveal);
+    }
+
     /// <summary>DLC unlock lua. Installed silently: it's an unlock, so there's nothing to confirm.</summary>
     public DownloadJob CreateDlcJob(
         long appId, string baseAppId, string? gameName,

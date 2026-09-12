@@ -18,7 +18,11 @@ public class PluginAddService(
     SettingsService settings,
     AuthService auth,
     DownloadQueue queue,
-    ManifestJobFactory jobs)
+    ManifestJobFactory jobs,
+    RyuuService ryuu,
+    ManifestCacheService manifestCache,
+    SushiService sushi,
+    ManifestHubService manifestHub)
 {
     private const string HubcapSourceName = "Sadie (Morrenus)";
 
@@ -140,7 +144,12 @@ public class PluginAddService(
                 // Hubcap is out of daily quota → fall through and let a lua.tools source take over.
             }
 
-            var statuses = await api.CheckSourcesAsync(appId.ToString());
+            // lua.tools' own source list. Allowed to fail on its own so an outage there doesn't take the
+            // free sources down with it - they need neither its backend nor an account.
+            Dictionary<string, string> statuses;
+            try { statuses = await api.CheckSourcesAsync(appId.ToString()); }
+            catch (OperationCanceledException) { throw; }
+            catch { statuses = new(); }
 
             // Synthesize the Hubcap/Sadie row from the availability already checked above (or "unknown"
             // when no key is set, so it shows locked with the "needs a key" hint).
@@ -162,6 +171,11 @@ public class PluginAddService(
                         NeedsKey = meta.RequiresUserKey,
                     };
                 }).ToList();
+
+            // The built-in free sources, which the backend's list knows nothing about. Without them this
+            // pipeline could only ever offer metered lua.tools rows, so the store-page plugin had no way
+            // to reach the sources that ship their own manifests, no account and no daily cap.
+            await AddFreeRowsAsync(appId, rows);
 
             // No-key premium rows lock immediately (they show the "needs a key" hint). Keyed rows get their
             // real lock state from the Hubcap stats call in FillBadgesAsync.
@@ -198,6 +212,52 @@ public class PluginAddService(
             state.Checking = false;
             PluginLog.Log($"PluginAdd.Check appid={appId} EXCEPTION: {ex}");
         }
+    }
+
+    /// <summary>
+    /// Put a row on top for each built-in free source that covers this game, freshest last so the
+    /// inserts reverse to Ryuu first on screen (and under FastFetch, Ryuu is what gets picked).
+    /// </summary>
+    /// <remarks>
+    /// The same four sources, probed the same way and in the same order, as
+    /// <c>DownloadViewModel.AddFreeSourceAsync</c>. They are not in <c>CheckSourcesAsync</c>'s answer -
+    /// that is the manifest backend's own list - and they carry their own manifests, no account and no
+    /// daily cap. Best-effort: a source that can't be reached is treated as not covering the game.
+    /// </remarks>
+    private async Task AddFreeRowsAsync(long appId, List<SourceRow> rows)
+    {
+        var ryuuProbe = SafeHasAsync(ryuu.HasGameAsync(appId), keepOnRateLimit: true);
+        var cacheProbe = SafeHasAsync(manifestCache.HasGameAsync(appId));
+        var sushiProbe = SafeHasAsync(sushi.HasGameAsync(appId));
+        var hubProbe = SafeHasAsync(manifestHub.HasGameAsync(appId));
+
+        bool ryuuHas = await ryuuProbe;
+        bool cacheHas = await cacheProbe;
+        bool sushiHas = await sushiProbe;
+        bool hubHas = await hubProbe;
+
+        if (hubHas) rows.Insert(0, FreeRow(ManifestHubService.SourceName));
+        if (sushiHas) rows.Insert(0, FreeRow(SushiService.SourceName));
+        if (cacheHas) rows.Insert(0, FreeRow(ManifestCacheService.SourceName));
+        if (ryuuHas) rows.Insert(0, FreeRow(RyuuService.SourceName));
+
+        PluginLog.Log($"PluginAdd.Free appid={appId} ryuu={ryuuHas} manifestcache={cacheHas} sushi={sushiHas} manifesthub={hubHas}");
+    }
+
+    private static SourceRow FreeRow(string sourceName) => new()
+    {
+        Name = sourceName,
+        DisplayName = SourceMeta.Get(sourceName).DisplayName ?? sourceName,
+        Status = "available",
+        NeedsKey = false,
+        Stats = Resources.Strings.Free_NoLimit,
+    };
+
+    private static async Task<bool> SafeHasAsync(Task<bool> probe, bool keepOnRateLimit = false)
+    {
+        try { return await probe; }
+        catch (RateLimitedException) { return keepOnRateLimit; }
+        catch { return false; }
     }
 
     private void PublishSources(AddState state, List<SourceRow> rows, long appId)
@@ -281,7 +341,8 @@ public class PluginAddService(
 
         try
         {
-            var job = jobs.CreateManifestJob(appId, state.GameName, row.Name, row.NeedsKey);
+            // Dispatch by name so a free source reaches its own builder instead of the lua.tools proxy.
+            var job = jobs.CreateForSource(appId, state.GameName, row.Name, row.NeedsKey);
             var item = queue.Enqueue(job);
 
             void OnChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

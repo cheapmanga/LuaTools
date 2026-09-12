@@ -374,7 +374,9 @@ public class HttpServerService : IHostedService
             return (409, JsonErr("Download already in progress for this app"));
 
         var jobs = _services.GetRequiredService<Services.Downloads.ManifestJobFactory>();
-        _downloads[appId] = queue.Enqueue(jobs.CreateManifestJob(appId, null, source, needsKey: false));
+        // Dispatch by name so a free source name (ryuu, manifestcache, sushi, manifesthub) reaches its
+        // own builder instead of the lua.tools proxy, which does not carry it.
+        _downloads[appId] = queue.Enqueue(jobs.CreateForSource(appId, null, source, needsKey: false));
 
         return (200, Json(new { success = true }));
     }
