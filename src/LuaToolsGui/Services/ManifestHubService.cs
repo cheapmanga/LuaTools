@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using LuaToolsGui.Models;
 using LuaToolsGui.Services.Downloads;
 using Microsoft.Extensions.Logging;
 
@@ -328,5 +329,86 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
         await File.WriteAllTextAsync(path, lua.ToString(), new UTF8Encoding(false), ct);
 
         return new DownloadedFile(path, $"{appId}.lua");
+    }
+
+    /// <summary>
+    /// Build the DLC picker's info locally from Steam app info + the free key database, so a guest can
+    /// see which of a DLC's content depots are unlockable without signing in to lua.tools.
+    /// </summary>
+    /// <remarks>
+    /// A store-only DLC (a pure entitlement, no content depot) comes back with zero depots, which the
+    /// picker reads as "nothing to fetch, just entitle it" (its Generate button enables on
+    /// MissingCount == 0). A depot counts as "included" when its key is in the database.
+    /// </remarks>
+    public async Task<DlcInfo> BuildDlcInfoAsync(long dlcAppId, long baseAppId, string dlcName, CancellationToken ct = default)
+    {
+        var keys = await EnsureKeysAsync(ct);
+        var depots = await DlcDepotsAsync(dlcAppId, baseAppId, ct);
+
+        var rows = new List<DlcDepot>();
+        int have = 0;
+        foreach (var d in depots)
+        {
+            bool included = keys is not null && keys.ContainsKey(d.Id);
+            if (included) have++;
+            rows.Add(new DlcDepot { DepotId = d.Id.ToString(), OsList = d.Os, Language = d.Language, Included = included });
+        }
+
+        return new DlcInfo
+        {
+            AppId = dlcAppId.ToString(),
+            Name = dlcName,
+            Type = "dlc",
+            DepotCount = rows.Count,
+            HaveCount = have,
+            MissingCount = rows.Count - have,
+            Depots = rows,
+        };
+    }
+
+    /// <summary>
+    /// Build a DLC unlock lua locally: the base app and DLC entitlements, plus any content depot of the
+    /// DLC we hold a key for. No lua.tools account, the same shape a base game's DLCs already get.
+    /// </summary>
+    public async Task<DownloadedFile> BuildDlcLuaAsync(long dlcAppId, long baseAppId, CancellationToken ct = default)
+    {
+        var keys = await EnsureKeysAsync(ct);
+        var lua = new StringBuilder();
+        var added = new HashSet<long>();
+        void AddApp(long id) { if (added.Add(id)) lua.Append("addappid(").Append(id).Append(")\n"); }
+
+        AddApp(baseAppId);
+        AddApp(dlcAppId);
+
+        if (keys is not null)
+            foreach (var d in await DlcDepotsAsync(dlcAppId, baseAppId, ct))
+            {
+                if (!keys.TryGetValue(d.Id, out string? key)) continue;
+                lua.Append("addappid(").Append(d.Id).Append(",1,\"").Append(key).Append("\")\n");
+                if (!string.IsNullOrWhiteSpace(d.PublicManifestId))
+                    lua.Append("setManifestid(").Append(d.Id).Append(",\"").Append(d.PublicManifestId).Append("\",0)\n");
+            }
+
+        string path = Path.Combine(Path.GetTempPath(), $"{dlcAppId}.lua");
+        await File.WriteAllTextAsync(path, lua.ToString(), new UTF8Encoding(false), ct);
+        return new DownloadedFile(path, $"{dlcAppId}.lua");
+    }
+
+    /// <summary>The content depots a DLC ships: those tagged with its id on the base app, plus any the
+    /// DLC app declares itself. Store-only DLCs have none.</summary>
+    private async Task<List<ContentDepot>> DlcDepotsAsync(long dlcAppId, long baseAppId, CancellationToken ct)
+    {
+        var list = new List<ContentDepot>();
+        var baseInfo = await depotInfo.GetAsync(baseAppId, ct);
+        if (baseInfo is not null)
+            list.AddRange(baseInfo.Depots.Where(d => d.DlcAppId == dlcAppId));
+
+        var ownInfo = await depotInfo.GetAsync(dlcAppId, ct);
+        if (ownInfo is not null)
+            foreach (var d in ownInfo.Depots)
+                if (!d.IsShared && list.All(x => x.Id != d.Id))
+                    list.Add(d);
+
+        return list;
     }
 }
