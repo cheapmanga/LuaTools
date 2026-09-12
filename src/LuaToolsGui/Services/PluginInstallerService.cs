@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
@@ -223,6 +224,32 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         catch { return null; }
     }
 
+    /// <summary>
+    /// Write the store-page frontend bundled into this build (<c>Assets\plugin.zip</c>, our own with the
+    /// logo and themes) to <paramref name="dest"/>. This is installed in place of madoiscool/LTSP's
+    /// plugin.zip; only the loader DLL still comes from their release.
+    /// </summary>
+    private static void WriteBundledFrontend(string dest)
+    {
+        using var res = Assembly.GetExecutingAssembly().GetManifestResourceStream("bundled-plugin.zip")
+            ?? throw new InvalidOperationException("Bundled plugin frontend is missing from the build.");
+        using var file = File.Create(dest);
+        res.CopyTo(file);
+    }
+
+    /// <summary>SHA-256 of the frontend bundled in this build, in the same lowercase-hex form the manifest
+    /// stores, so a status check can tell an up-to-date install of OUR frontend from any other.</summary>
+    private static string? _bundledSha;
+    private static string BundledFrontendSha => _bundledSha ??= ComputeBundledSha();
+
+    private static string ComputeBundledSha()
+    {
+        using var res = Assembly.GetExecutingAssembly().GetManifestResourceStream("bundled-plugin.zip");
+        return res is null
+            ? ""
+            : Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(res)).ToLowerInvariant();
+    }
+
     private static void WriteManifest(Manifest m)
     {
         Directory.CreateDirectory(FrontendDir);
@@ -289,7 +316,11 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             AssetHash.OfFile(p) == digest);
         bool installed = frontend && loader;
         // `|| legacy` keeps a leftover/locked legacy dll getting swept on subsequent auto-updates until gone.
-        bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy);
+        // The last clause fires when the installed frontend isn't the one bundled in THIS build - so
+        // updating LuaTools (a new logo, a new theme, a fixed plugin) surfaces as a plugin update, and an
+        // old install of madoiscool's frontend is replaced by ours on the next Install/Update.
+        bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy
+            || !string.Equals(manifest?.ZipSha, BundledFrontendSha, StringComparison.OrdinalIgnoreCase));
 
         return new PluginStatus(frontend, loader, dllMatches, manifest?.Tag, latest.TagName, updateAvailable,
             MillenniumPresent, Offline: false, port8080Busy);
@@ -319,8 +350,11 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         Dictionary<string, List<string>>? disabledMillenniumEntries = null;
         try
         {
+            // The frontend is OUR own, bundled into this build (logo + themes), not madoiscool/LTSP's.
+            // The zipAsset lookup above stays only as a sanity check that their release is well-formed;
+            // we install the loader DLL from it, but the frontend comes from here.
             string zipPath = Path.Combine(tmp, PluginZipAsset);
-            await gh.DownloadAsync(zipAsset.DownloadUrl, zipPath, progress, ct);
+            WriteBundledFrontend(zipPath);
             var slotDlPaths = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, asset) in slotAssets)
             {
@@ -329,10 +363,10 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 slotDlPaths[slot] = p;
             }
 
-            // Verify each against its release asset digest before touching anything on disk.
+            // The frontend is our bundled file, so there is nothing to verify against a release digest;
+            // hash it only so the manifest records what was installed. The loader DLLs, which DO come
+            // from the release, are still verified below.
             string zipSha = AssetHash.OfFile(zipPath);
-            if (AssetDigest(latest, PluginZipAsset) is { } zd && zipSha != zd)
-                return (false, string.Format(Resources.Strings.Plugin_Err_VerifyFailed, PluginZipAsset));
             var slotShas = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, p) in slotDlPaths)
             {

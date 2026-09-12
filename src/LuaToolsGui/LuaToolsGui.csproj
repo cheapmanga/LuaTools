@@ -44,6 +44,15 @@
     <Resource Include="icon.ico" />
   </ItemGroup>
 
+  <!-- Our own store-page plugin frontend, bundled into the build. PluginInstallerService installs THIS
+       (logo + themes) instead of downloading madoiscool/LTSP's plugin.zip; only the loader DLL still
+       comes from their release. Publishing our own plugin repo is not needed this way. -->
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\plugin.zip">
+      <LogicalName>bundled-plugin.zip</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <!-- Nothing in public/ is bundled anymore. The frontend (luatools.js) is fetched from GitHub releases
        by PluginInstallerService into %AppData%\LuaToolsGui\plugin; the Millennium-aware polyfill is inline
        (CefInjectorService.BuildInlinePolyfill); and the manifest-source list falls back to the hardcoded
