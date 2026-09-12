@@ -260,7 +260,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     public async Task<GithubRelease?> FetchLatestAsync(bool force, CancellationToken ct = default)
     {
         if (!force && _cachedLatest is not null) return _cachedLatest;
-        string url = $"https://api.github.com/repos/{AppConfig.PluginReleasesOwner}/{AppConfig.PluginReleasesRepo}/releases/latest";
+        // Fetch the plugin release by its fixed tag, not /releases/latest: the app's own standalone release
+        // lives in this same repo, so "latest" would be ambiguous between the two channels.
+        string url = $"https://api.github.com/repos/{AppConfig.PluginReleasesOwner}/{AppConfig.PluginReleasesRepo}/releases/tags/{AppConfig.PluginReleaseTag}";
         try
         {
             using var res = await gh.SendAsync(url, ct);
@@ -315,12 +317,14 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             AssetDigest(latest, slot.DllAsset) is { } digest &&
             AssetHash.OfFile(p) == digest);
         bool installed = frontend && loader;
-        // `|| legacy` keeps a leftover/locked legacy dll getting swept on subsequent auto-updates until gone.
-        // The last clause fires when the installed frontend isn't the one bundled in THIS build - so
-        // updating LuaTools (a new logo, a new theme, a fixed plugin) surfaces as a plugin update, and an
-        // old install of madoiscool's frontend is replaced by ours on the next Install/Update.
+        // Target frontend hash: the plugin.zip published to our release (so a new plugin.zip surfaces as an
+        // update WITHOUT a new app build), falling back to the frontend embedded in this build when the
+        // release carries no plugin.zip. `|| legacy` keeps a leftover/locked legacy dll getting swept on
+        // subsequent auto-updates until gone; the ZipSha clause also replaces any old madoiscool frontend
+        // with ours on the next Install/Update.
+        string targetZipSha = AssetDigest(latest, PluginZipAsset) ?? BundledFrontendSha;
         bool updateAvailable = installed && (manifest?.Tag != latest.TagName || !dllMatches || legacy
-            || !string.Equals(manifest?.ZipSha, BundledFrontendSha, StringComparison.OrdinalIgnoreCase));
+            || !string.Equals(manifest?.ZipSha, targetZipSha, StringComparison.OrdinalIgnoreCase));
 
         return new PluginStatus(frontend, loader, dllMatches, manifest?.Tag, latest.TagName, updateAvailable,
             MillenniumPresent, Offline: false, port8080Busy);
@@ -334,9 +338,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         var latest = await FetchLatestAsync(force: true, ct);
         if (latest is null) return (false, Resources.Strings.Plugin_Err_GithubUnreachable);
 
+        // plugin.zip is optional: if the release doesn't carry it (or it's unreachable), InstallAsync
+        // falls back to the frontend embedded in this build. The loader DLL, below, has no such fallback.
         var zipAsset = FindAsset(latest, PluginZipAsset);
-        if (zipAsset is null)
-            return (false, string.Format(Resources.Strings.Plugin_Err_MissingAssets, latest.TagName, PluginZipAsset, Slots[0].DllAsset));
         var slotAssets = new Dictionary<LoaderSlot, GithubAsset>();
         foreach (var slot in Slots)
         {
@@ -350,11 +354,24 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
         Dictionary<string, List<string>>? disabledMillenniumEntries = null;
         try
         {
-            // The frontend is OUR own, bundled into this build (logo + themes), not madoiscool/LTSP's.
-            // The zipAsset lookup above stays only as a sanity check that their release is well-formed;
-            // we install the loader DLL from it, but the frontend comes from here.
+            // The frontend comes from OUR plugin release (plugin.zip), so it can be updated without a new
+            // app build. Download + verify by the release asset's sha256 digest, exactly like the loader.
+            // If the release is unreachable or the asset fails to verify, fall back to the copy embedded in
+            // this build, so a first run still works offline and a bad release can never brick the plugin.
             string zipPath = Path.Combine(tmp, PluginZipAsset);
-            WriteBundledFrontend(zipPath);
+            bool zipFromRelease = false;
+            if (zipAsset is not null && !string.IsNullOrEmpty(zipAsset.DownloadUrl))
+            {
+                try
+                {
+                    await gh.DownloadAsync(zipAsset.DownloadUrl, zipPath, progress, ct);
+                    var want = AssetDigest(latest, PluginZipAsset);
+                    if (want is null || AssetHash.OfFile(zipPath) == want) zipFromRelease = true;
+                }
+                catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+                catch { /* fall back to the embedded frontend below */ }
+            }
+            if (!zipFromRelease) WriteBundledFrontend(zipPath);
             var slotDlPaths = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, asset) in slotAssets)
             {
@@ -363,9 +380,9 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
                 slotDlPaths[slot] = p;
             }
 
-            // The frontend is our bundled file, so there is nothing to verify against a release digest;
-            // hash it only so the manifest records what was installed. The loader DLLs, which DO come
-            // from the release, are still verified below.
+            // Record the installed frontend's hash in the manifest (already verified above when it came
+            // from the release; just recorded when it came from the embedded fallback). The loader DLLs,
+            // which always come from the release, are verified below.
             string zipSha = AssetHash.OfFile(zipPath);
             var slotShas = new Dictionary<LoaderSlot, string>();
             foreach (var (slot, p) in slotDlPaths)

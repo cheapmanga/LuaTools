@@ -214,8 +214,15 @@ public static class AppConfig
     // Separate from the app's own Velopack self-update repo above. Each release of this repo carries
     // `plugin.zip` (the frontend) + `winmm.dll` (the loader); the tag is the version (e.g. "v1.2").
     // Fetched + verified (by asset sha256 digest) through GithubProxy like everything else.
-    public const string PluginReleasesOwner = "madoiscool";
-    public const string PluginReleasesRepo = "LTSP";
+    // Our own plugin channel: the frontend (plugin.zip) and the loader (winmm.dll) are both published to
+    // a fixed tag on the fork, so the store-page plugin can be updated on its own WITHOUT shipping a new
+    // app build. Fully replaces madoiscool/LTSP as the plugin source. The app still keeps an embedded copy
+    // of the frontend as an offline/first-run fallback (see PluginInstallerService).
+    public const string PluginReleasesOwner = "cheapmanga";
+    public const string PluginReleasesRepo = "LuaTools";
+    // Fixed, moving tag that always carries the current plugin.zip + winmm.dll. Fetched by tag (not
+    // /releases/latest) because the app's OWN release (v1.1.3-fork) lives in this same repo.
+    public const string PluginReleaseTag = "plugin";
 
     // ── GitHub proxy mirrors (for blocked/throttled regions, e.g. China) ──────────────
     // github.com / api.github.com are often unreachable in some countries. Any GitHub request is tried
