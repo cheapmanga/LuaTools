@@ -24,3 +24,17 @@ already-installed app and just restart LuaTools:
 
 Only the embedded crescent logo (served over the app's `/icon` route) needs a full app build; everything
 else — layout, colours, themes, text — applies instantly this way.
+
+## Shipping a plugin update to everyone (no app rebuild)
+
+The app fetches this frontend from the fixed `plugin` release on `cheapmanga/LuaTools` (asset
+`plugin.zip`, verified by its GitHub digest) and keeps the embedded copy only as an offline fallback. So a
+plugin update is just a new `plugin.zip` on that release:
+
+```bash
+bash scripts/publish-plugin.sh
+```
+
+Installed apps compare the release's `plugin.zip` digest against what they have and update the store-page
+plugin on their own — no new app build, no 76 MB re-download. The loader `winmm.dll` on that release is
+stable and is left untouched.
