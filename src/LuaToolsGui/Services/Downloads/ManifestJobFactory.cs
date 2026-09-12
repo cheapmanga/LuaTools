@@ -333,6 +333,9 @@ public class ManifestJobFactory(
         long appId, string gameName, IReadOnlyList<DepotSelection> selections, string outDir,
         Action<DownloadItem, JobResult?>? onFinished = null)
     {
+        // Shared by the run and the completion lambda: RunDepotsAsync records how many depots it skipped
+        // (a guest whose free sources didn't cover every selected depot), and the message reflects it.
+        var report = new DepotRunReport();
         return new DownloadJob(
             DownloadKind.Depot,
             $"depot:{appId}",
@@ -340,14 +343,19 @@ public class ManifestJobFactory(
             gameName,
             Resources.Strings.Downloads_Kind_Depot,
             covers.GetLocalPath(appId),
-            (item, progress, ct) => RunDepotsAsync(item, appId, gameName, selections, outDir, progress, ct),
+            (item, progress, ct) => RunDepotsAsync(item, appId, gameName, selections, outDir, report, progress, ct),
             // Nothing to install: the depots were written straight to outDir.
             (_, _, _) => Task.FromResult(new JobResult(true,
-                string.Format(Resources.Strings.Depot_Status_Done, selections.Count, outDir), outDir)),
+                report.Skipped > 0
+                    ? string.Format(Resources.Strings.Depot_Status_DonePartial, selections.Count - report.Skipped, outDir, report.Skipped)
+                    : string.Format(Resources.Strings.Depot_Status_Done, selections.Count, outDir), outDir)),
             ConfirmAsync: null,
             OnFinished: onFinished,
             OutputPath: outDir);
     }
+
+    /// <summary>Mutable tally shared between a depot job's run and completion callbacks.</summary>
+    private sealed class DepotRunReport { public int Skipped; }
 
     /// <summary>
     /// Fetch SteamAutoCrack (installing the .NET runtime it needs first) and open it.
@@ -416,7 +424,7 @@ public class ManifestJobFactory(
 
     private async Task<DownloadedFile> RunDepotsAsync(
         DownloadItem item, long appId, string gameName, IReadOnlyList<DepotSelection> selections,
-        string outDir, IProgress<DownloadProgress> progress, CancellationToken ct)
+        string outDir, DepotRunReport report, IProgress<DownloadProgress> progress, CancellationToken ct)
     {
         var keys = depotTool.ResolveKeys(appId);
         if (keys.Count == 0) throw new DownloadAbortedException(Resources.Strings.Depot_Err_NoKeys);
@@ -469,20 +477,33 @@ public class ManifestJobFactory(
             // row mid-pre-flight as though depots were already downloading.
             if (!item.CompletedDepots.Contains(sized.DepotId))
             {
-                sized = sized with { ManifestPath = await EnsureManifestAsync(item, sized, prep, ct) };
+                try
+                {
+                    sized = sized with { ManifestPath = await EnsureManifestAsync(item, sized, prep, ct) };
 
-                // Without a key the tool cannot decrypt a single chunk, and a depot that fails aborts the
-                // whole job below — so refuse here, before anything is written, naming the depot instead
-                // of surfacing the downloader's own "No valid depot key" much later.
-                if (!keys.TryGetValue(sized.DepotId, out string? hex) || !TryParseKey(hex, out byte[] key))
-                    throw new DownloadAbortedException(
-                        string.Format(Resources.Strings.Depot_Err_NoKeyFor, sized.DepotId));
+                    // Without a key the tool cannot decrypt a single chunk, and a depot that fails aborts the
+                    // whole job below — so refuse here, before anything is written, naming the depot instead
+                    // of surfacing the downloader's own "No valid depot key" much later.
+                    if (!keys.TryGetValue(sized.DepotId, out string? hex) || !TryParseKey(hex, out byte[] key))
+                        throw new DownloadAbortedException(
+                            string.Format(Resources.Strings.Depot_Err_NoKeyFor, sized.DepotId));
 
-                // A key that exists but is WRONG can only be caught when the manifest still has its
-                // filenames encrypted, which is the small minority — see ManifestFile.KeyLooksValid.
-                if (!ManifestFile.KeyLooksValid(sized.ManifestPath, key))
-                    throw new DownloadAbortedException(
-                        string.Format(Resources.Strings.Depot_Err_BadKey, sized.DepotId));
+                    // A key that exists but is WRONG can only be caught when the manifest still has its
+                    // filenames encrypted, which is the small minority — see ManifestFile.KeyLooksValid.
+                    if (!ManifestFile.KeyLooksValid(sized.ManifestPath, key))
+                        throw new DownloadAbortedException(
+                            string.Format(Resources.Strings.Depot_Err_BadKey, sized.DepotId));
+                }
+                // Guest picking several depots: the free sources ship most of a game's depots but not
+                // always every optional/language one. Rather than abort the whole download because ONE
+                // selected depot has no free manifest (or no key), skip that depot and keep the rest. A
+                // signed-in user (CanFetchManifests) still gets the precise error, and so does a
+                // single-depot job, where there is nothing else to fall back to.
+                catch (DownloadAbortedException) when (!depotTool.CanFetchManifests && selections.Count > 1)
+                {
+                    report.Skipped++;
+                    continue;
+                }
             }
 
             // The manifest's own cb_disk_original beats app info's size: it is exact, and app info may
@@ -493,6 +514,11 @@ public class ManifestJobFactory(
 
             resolved.Add(sized);
         }
+
+        // Every selected depot was skipped (guest, and no free source has any of them): there is nothing
+        // to download, so surface the sign-in wall rather than reporting a hollow "0 depots" success.
+        if (resolved.Count == 0)
+            throw new DownloadAbortedException(Resources.Strings.Depot_Err_SignIn);
 
         // ── Phase 2: budget, now that the sizes are real ─────────────────────────────────────────────
         // Refuse up front rather than part-way through. The downloader pre-allocates every file at its

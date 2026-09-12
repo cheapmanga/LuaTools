@@ -621,7 +621,7 @@ This deletes the .lua files from Steam\config\stplug-in.</value></data>
   <data name="Builds_Select_SaveTo" xml:space="preserve"><value>Save to</value></data>
   <data name="Builds_Select_Space" xml:space="preserve"><value>Needs {0} · {1} free on {2}</value></data>
   <data name="Builds_Select_SignIn" xml:space="preserve"><value>Sign in to download this depot.</value></data>
-  <data name="Depot_Err_SignIn" xml:space="preserve"><value>Sign in to download depots.</value></data>
+  <data name="Depot_Err_SignIn" xml:space="preserve"><value>No free source has this depot. Sign in to download it via lua.tools.</value></data>
   <data name="Downloads_Depot_FetchingManifest" xml:space="preserve"><value>fetching manifest</value></data>
   <data name="Depot_Err_NoManifest" xml:space="preserve"><value>Couldn't get this depot's manifest.</value></data>
   <data name="Downloads_Depots_Preparing" xml:space="preserve"><value>Preparing · {0} of {1}</value></data>
@@ -789,4 +789,5 @@ Redeem anyway?</value></data>
   <data name="Addons_Refresh" xml:space="preserve"><value>Refresh</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
+  <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
 </root>
