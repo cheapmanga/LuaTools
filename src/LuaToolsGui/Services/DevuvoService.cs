@@ -63,7 +63,7 @@ public class DevuvoService(ILogger<DevuvoService> log)
         } catch { Write-Host "[!] Could not change Smart App Control: $_" }
         """;
 
-    private readonly HttpClient _http = new()
+    private readonly HttpClient _http = new(AppHttp.SharedHandler, disposeHandler: false)
     {
         Timeout = TimeSpan.FromSeconds(30),
         DefaultRequestHeaders = { { "User-Agent", "LuaTools" } },

@@ -20,7 +20,7 @@ public class AchievementIconCache
     private static string UrlFor(long appId, string icon) =>
         $"https://cdn.steamstatic.com/steamcommunity/public/images/apps/{appId}/{icon}";
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(20) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(20));
 
     // A game can have 300 achievements, and "unlock all" flips every icon to its other variant at once.
     // Without a gate that's 300 simultaneous CDN requests; eight at a time fills the list just as fast

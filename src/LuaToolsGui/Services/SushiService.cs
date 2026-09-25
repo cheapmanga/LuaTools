@@ -28,7 +28,7 @@ public class SushiService(GithubProxy gh, ILogger<SushiService> log)
 
     // HEAD is a bare existence probe; the real download uses GithubProxy. Its own client so the probe
     // never inherits a long download timeout.
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(15));
 
     /// <summary>
     /// Does the repo have a zip for this game? A HEAD that answers 200; 404 (or any failure) means no.

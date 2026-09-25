@@ -34,7 +34,7 @@ public class TokeerService(ILogger<TokeerService> log)
     /// The User-Agent is not decoration: the store sits behind Cloudflare, .NET sends none by default,
     /// and an absent one is exactly what a WAF rule drops. Their client sends requests' own.
     /// </remarks>
-    private readonly HttpClient _http = new()
+    private readonly HttpClient _http = new(AppHttp.SharedHandler, disposeHandler: false)
     {
         Timeout = TimeSpan.FromSeconds(25),
         DefaultRequestHeaders = { { "User-Agent", "LuaTools" } },
