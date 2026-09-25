@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>اللغة</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>اختر لغة عرض التطبيق. تُطبَّق بعد إعادة التشغيل.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>افتراضي النظام</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>تحليل DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>إذا كان مزوّد خدمتك يحجب lua.tools، يمكن للتطبيق تحليل العناوين عبر Cloudflare (1.1.1.1) بدلاً من محلّل النظام. الوضع «تلقائي» لا ينتقل إلا بعد فشل DNS المعتاد.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>تلقائي</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>استخدم Cloudflare دائمًا</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>استخدم DNS النظام فقط</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>موقع Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>تغيير…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>فتح</value></data>

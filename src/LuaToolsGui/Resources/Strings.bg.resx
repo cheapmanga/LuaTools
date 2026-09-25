@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Език</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Изберете езика на приложението. Прилага се след рестартиране.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>По подразбиране от системата</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS разрешаване</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Ако доставчикът ви блокира lua.tools, приложението може да разрешава адреси през Cloudflare (1.1.1.1) вместо системния разрешител. „Автоматично“ превключва само след неуспех на обичайния DNS.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Автоматично</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Винаги използвай Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Само системен DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Местоположение на Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Промяна…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Отваряне</value></data>

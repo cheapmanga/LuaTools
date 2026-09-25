@@ -52,6 +52,11 @@ public class AppSettings
     // When true, FastFetch auto-picks the first available source and downloads immediately.
     // Nullable so "never set" (→ default OFF) is distinguishable from an explicit choice.
     public bool? FastFetch { get; set; }
+
+    // How host names are resolved: "Auto" (default), "Always" or "Never". Stored in English because
+    // it is matched in code; the Settings page localizes the display only. Null = never set → "Auto".
+    // See AppHttp for what each mode does.
+    public string? DnsMode { get; set; }
 }
 
 public class SettingsService
@@ -151,6 +156,21 @@ public class SettingsService
     {
         get => _settings.FastFetch ?? false; // default OFF
         set { _settings.FastFetch = value; Save(); }
+    }
+
+    /// <summary>
+    /// How host names are resolved: "Auto" (default), "Always" or "Never". See <see cref="AppHttp"/>.
+    /// </summary>
+    /// <remarks>
+    /// Defaults to Auto rather than off on purpose. A user whose ISP DNS-blocks lua.tools cannot reach
+    /// anything in the app to discover that a setting would fix it, so an opt-in toggle would be found
+    /// by everyone except the people who need it. Auto costs unaffected users nothing: the system
+    /// resolver is still tried first and DoH only engages once it has actually failed.
+    /// </remarks>
+    public string DnsMode
+    {
+        get => _settings.DnsMode is "Always" or "Never" ? _settings.DnsMode : "Auto";
+        set { _settings.DnsMode = value; Save(); }
     }
 
     private static readonly string TmpPath = FilePath + ".tmp";

@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>語言</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>選擇應用程式的顯示語言。重新啟動後生效。</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>跟隨系統</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS 解析</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>如果你的網路業者封鎖了 lua.tools，應用程式可以改用 Cloudflare (1.1.1.1) 查詢位址，而不使用系統解析器。「自動」僅在一般 DNS 失敗後才切換。</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>自動</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>一律使用 Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>僅使用系統 DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam 位置</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>變更…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>開啟</value></data>
