@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Kieli</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Valitse sovelluksen näyttökieli. Otetaan käyttöön uudelleenkäynnistyksen jälkeen.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Järjestelmän oletus</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-selvitys</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Jos operaattorisi estää lua.tools-sivuston, sovellus voi selvittää osoitteet Cloudflaren (1.1.1.1) kautta järjestelmän selvittäjän sijaan. ”Automaattinen” vaihtaa vasta, kun tavallinen DNS epäonnistuu.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automaattinen</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Käytä aina Cloudflarea</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Käytä vain järjestelmän DNS:ää</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steamin sijainti</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Muuta…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Avaa</value></data>

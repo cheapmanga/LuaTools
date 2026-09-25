@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Limbă</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Alege limba de afișare a aplicației. Se aplică după repornire.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Implicit din sistem</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Rezolvare DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Dacă furnizorul tău blochează lua.tools, aplicația poate rezolva adresele prin Cloudflare (1.1.1.1) în loc de rezolvatorul sistemului. „Automat” comută doar după ce DNS-ul obișnuit eșuează.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automat</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Folosește mereu Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Folosește doar DNS-ul sistemului</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Locația Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Schimbă…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Deschide</value></data>

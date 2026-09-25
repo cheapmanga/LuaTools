@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Nyelv</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Válaszd ki az alkalmazás megjelenítési nyelvét. Újraindítás után lép érvénybe.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Rendszer alapértelmezett</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-feloldás</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Ha a szolgáltatód blokkolja a lua.tools-t, az alkalmazás a rendszer feloldója helyett a Cloudflare-en (1.1.1.1) keresztül oldhatja fel a címeket. Az „Automatikus” csak a szokásos DNS hibája után vált át.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatikus</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Mindig a Cloudflare használata</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Csak a rendszer DNS-e</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam helye</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Módosítás…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Megnyitás</value></data>

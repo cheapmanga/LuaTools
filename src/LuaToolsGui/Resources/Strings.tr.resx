@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Dil</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Uygulamanın görüntüleme dilini seçin. Yeniden başlatmadan sonra uygulanır.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Sistem varsayılanı</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS çözümleme</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Sağlayıcınız lua.tools'u engelliyorsa, uygulama adresleri sistem çözümleyicisi yerine Cloudflare (1.1.1.1) üzerinden arayabilir. «Otomatik» yalnızca normal DNS başarısız olduktan sonra devreye girer.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Otomatik</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Her zaman Cloudflare kullan</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Yalnızca sistem DNS'ini kullan</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam konumu</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Değiştir…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Aç</value></data>

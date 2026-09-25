@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +15,7 @@ public class AuthService
     private static readonly string AuthFile = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LuaToolsGui", "auth.dat");
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(30) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(30));
     private readonly SemaphoreSlim _refreshLock = new(1, 1);
 
     private string? _accessToken;

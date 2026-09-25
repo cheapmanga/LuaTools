@@ -69,6 +69,11 @@ public class AppSettings
     // Store-page plugin source: null/false = the fork's own plugin (our logo, themes, free sources);
     // true = madoiscool/LTSP's official plugin. Lets the user opt back onto upstream if they prefer it.
     public bool? UseOfficialPlugin { get; set; }
+
+    // How host names are resolved: "Auto" (default), "Always" or "Never". Stored in English because
+    // it is matched in code; the Settings page localizes the display only. Null = never set → "Auto".
+    // See AppHttp for what each mode does.
+    public string? DnsMode { get; set; }
 }
 
 public class SettingsService
@@ -215,6 +220,21 @@ public class SettingsService
     {
         get => _settings.UseOfficialPlugin ?? false; // default: the fork's own plugin
         set { _settings.UseOfficialPlugin = value; Save(); }
+    }
+
+    /// <summary>
+    /// How host names are resolved: "Auto" (default), "Always" or "Never". See <see cref="AppHttp"/>.
+    /// </summary>
+    /// <remarks>
+    /// Defaults to Auto rather than off on purpose. A user whose ISP DNS-blocks lua.tools cannot reach
+    /// anything in the app to discover that a setting would fix it, so an opt-in toggle would be found
+    /// by everyone except the people who need it. Auto costs unaffected users nothing: the system
+    /// resolver is still tried first and DoH only engages once it has actually failed.
+    /// </remarks>
+    public string DnsMode
+    {
+        get => _settings.DnsMode is "Always" or "Never" ? _settings.DnsMode : "Auto";
+        set { _settings.DnsMode = value; Save(); }
     }
 
     private static readonly string TmpPath = FilePath + ".tmp";

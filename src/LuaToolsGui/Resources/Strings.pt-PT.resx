@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Idioma</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Escolha o idioma de apresentação da aplicação. Aplicado após reiniciar.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Predefinição do sistema</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Resolução de DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Se o seu fornecedor bloqueia lua.tools, a aplicação pode resolver endereços pela Cloudflare (1.1.1.1) em vez do sistema. «Automático» só muda depois de o seu DNS normal falhar.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automático</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Usar sempre a Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Usar apenas o DNS do sistema</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Localização do Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Alterar…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Abrir</value></data>

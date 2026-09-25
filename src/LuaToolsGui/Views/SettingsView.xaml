@@ -442,24 +442,48 @@
             <!-- General (language) -->
             <TextBlock Style="{StaticResource SectionHeader}" Text="{x:Static res:Strings.Settings_Section_General}" />
             <Border Style="{StaticResource SettingsCard}">
-                <StackPanel Margin="14,12">
-                    <TextBlock
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Text="{x:Static res:Strings.Settings_Language}" />
-                    <ComboBox
-                        Margin="0,8,0,0"
-                        MinWidth="220"
-                        HorizontalAlignment="Left"
-                        DisplayMemberPath="Display"
-                        ItemsSource="{Binding LanguageOptions}"
-                        SelectedItem="{Binding SelectedLanguage}" />
-                    <TextBlock
-                        Margin="0,8,0,0"
-                        FontSize="12"
-                        Foreground="#6b7280"
-                        Text="{x:Static res:Strings.Settings_Language_Hint}"
-                        TextWrapping="Wrap" />
+                <StackPanel>
+                    <!-- Language -->
+                    <StackPanel Margin="14,12">
+                        <TextBlock
+                            FontSize="13"
+                            FontWeight="Medium"
+                            Text="{x:Static res:Strings.Settings_Language}" />
+                        <ComboBox
+                            Margin="0,8,0,0"
+                            MinWidth="220"
+                            HorizontalAlignment="Left"
+                            DisplayMemberPath="Display"
+                            ItemsSource="{Binding LanguageOptions}"
+                            SelectedItem="{Binding SelectedLanguage}" />
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            FontSize="12"
+                            Foreground="#6b7280"
+                            Text="{x:Static res:Strings.Settings_Language_Hint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Border Style="{StaticResource RowDivider}" />
+                    <!-- DNS resolution. Defaults to Automatic; see AppHttp for what each mode does. -->
+                    <StackPanel Margin="14,12">
+                        <TextBlock
+                            FontSize="13"
+                            FontWeight="Medium"
+                            Text="{x:Static res:Strings.Settings_Dns}" />
+                        <ComboBox
+                            Margin="0,8,0,0"
+                            MinWidth="220"
+                            HorizontalAlignment="Left"
+                            DisplayMemberPath="Display"
+                            ItemsSource="{Binding DnsModeOptions}"
+                            SelectedItem="{Binding SelectedDnsMode}" />
+                        <TextBlock
+                            Margin="0,8,0,0"
+                            FontSize="12"
+                            Foreground="#6b7280"
+                            Text="{x:Static res:Strings.Settings_Dns_Hint}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
 

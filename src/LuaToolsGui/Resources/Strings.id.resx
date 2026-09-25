@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Bahasa</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Pilih bahasa tampilan aplikasi. Diterapkan setelah memulai ulang.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Bawaan sistem</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Resolusi DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Jika penyedia Anda memblokir lua.tools, aplikasi dapat mencari alamat melalui Cloudflare (1.1.1.1) alih-alih resolver sistem. «Otomatis» hanya beralih setelah DNS biasa gagal.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Otomatis</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Selalu gunakan Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Hanya gunakan DNS sistem</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Lokasi Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Ubah…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Buka</value></data>

@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -17,11 +17,8 @@ namespace LuaToolsGui.Services;
 public partial class HubcapService
 {
     // Hubcap-keyed downloads can be large manifest zips; allow a generous timeout like the lua.tools client.
-    private readonly HttpClient _http = new()
-    {
-        BaseAddress = new Uri(AppConfig.HubcapBaseUrl),
-        Timeout = TimeSpan.FromMinutes(5),
-    };
+    private readonly HttpClient _http =
+        AppHttp.Create(TimeSpan.FromMinutes(5), new Uri(AppConfig.HubcapBaseUrl));
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 
