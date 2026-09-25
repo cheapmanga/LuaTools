@@ -41,7 +41,7 @@ public class RyuuService(ILogger<RyuuService> log)
     // One client: the host ignores Range (Accept-Ranges: none) and returns the whole file for any GET,
     // so a "cheap" ranged probe would pull the entire zip. Existence is checked with HEAD, which the
     // host does honour, and HEAD shares the one connection budget with the download.
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromMinutes(5) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromMinutes(5));
 
     /// <summary>Serializes every call to the host and paces it, because the ban is per-IP and long.</summary>
     private static readonly HostGate Gate = new();

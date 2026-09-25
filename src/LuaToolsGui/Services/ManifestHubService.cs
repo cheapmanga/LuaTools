@@ -47,7 +47,7 @@ public class ManifestHubService(GithubProxy gh, SteamDepotInfo depotInfo, SteamA
 
     // A bare existence probe, with its own short timeout so it never inherits a download's. The real
     // fetch goes through GithubProxy for the usual mirror fallback.
-    private readonly HttpClient _probe = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _probe = AppHttp.Create(TimeSpan.FromSeconds(15));
 
     private readonly SemaphoreSlim _gate = new(1, 1);
 

@@ -36,7 +36,7 @@ public partial class ManifestCacheService(GithubProxy gh, ManifestHubService hub
     private static string ZipUrl(long appId) => string.Format(AppConfig.ManifestCacheZipUrl, appId);
 
     // Existence probe only, with its own short timeout so it never inherits a download's.
-    private readonly HttpClient _probe = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _probe = AppHttp.Create(TimeSpan.FromSeconds(15));
 
     /// <summary>A depotcache file name: <c>&lt;depot&gt;_&lt;manifest&gt;.manifest</c>.</summary>
     [GeneratedRegex(@"^(\d+)_(\d+)\.manifest$", RegexOptions.IgnoreCase)]

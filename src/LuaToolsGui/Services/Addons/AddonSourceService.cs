@@ -27,7 +27,7 @@ public class AddonSourceService(
     private readonly SemaphoreSlim _keyGate = new(1, 1);
 
     // Its own client so a probe never inherits a long download timeout.
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(15));
 
     /// <summary>Does this source cover the game? Any failure answers "no", never an error.</summary>
     public async Task<bool> HasGameAsync(ManifestSourceDescriptor source, long appId, CancellationToken ct = default)
