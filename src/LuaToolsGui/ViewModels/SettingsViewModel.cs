@@ -12,6 +12,10 @@ namespace LuaToolsGui.ViewModels;
 /// "follow the system display language".</summary>
 public record LanguageOption(string Display, string? Tag);
 
+/// <summary>A DNS resolution mode. <see cref="Tag"/> is the stored value and stays English ("Auto",
+/// "Always", "Never") because it is matched in code; only <see cref="Display"/> is localized.</summary>
+public record DnsModeOption(string Display, string Tag);
+
 public partial class SettingsViewModel : ObservableObject
 {
     private readonly SettingsService _settings;
@@ -154,6 +158,24 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty] private LanguageOption _selectedLanguage = null!;
 
+    // ── DNS ─────────────────────────────────────────────────────────
+    /// <summary>How host names are resolved. See <see cref="Services.AppHttp"/>.</summary>
+    public ObservableCollection<DnsModeOption> DnsModeOptions { get; } =
+    [
+        new(Resources.Strings.Settings_Dns_Auto, "Auto"),
+        new(Resources.Strings.Settings_Dns_Always, "Always"),
+        new(Resources.Strings.Settings_Dns_Never, "Never"),
+    ];
+
+    [ObservableProperty] private DnsModeOption _selectedDnsMode = null!;
+
+    // Takes effect on new connections; pooled ones turn over within AppHttp's connection lifetime, so
+    // there is no restart prompt here (unlike the language switch, which is baked in at parse time).
+    partial void OnSelectedDnsModeChanged(DnsModeOption value)
+    {
+        if (value is not null) _settings.DnsMode = value.Tag;
+    }
+
     private bool _suppressLanguagePrompt; // true during ctor init so we don't prompt on first bind
 
     partial void OnSelectedLanguageChanged(LanguageOption value)
@@ -249,6 +271,10 @@ public partial class SettingsViewModel : ObservableObject
         _suppressLanguagePrompt = true;
         _selectedLanguage = LanguageOptions.FirstOrDefault(o => o.Tag == settings.Language) ?? LanguageOptions[0];
         _suppressLanguagePrompt = false;
+
+        // Assign the backing field, not the property: going through the setter would fire the change
+        // handler and write the default straight back to disk on first open.
+        _selectedDnsMode = DnsModeOptions.FirstOrDefault(o => o.Tag == settings.DnsMode) ?? DnsModeOptions[0];
     }
 
     private void RefreshSteam()

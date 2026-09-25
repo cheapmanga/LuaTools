@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -17,11 +17,9 @@ public record DownloadedFile(string FilePath, string FileName);
 /// <summary>Typed client for the lua.tools web API, authenticated with a Supabase bearer token.</summary>
 public class LuaToolsApiClient(AuthService auth, SteamAppInfoCache appInfo, CoverCache covers)
 {
-    private readonly HttpClient _http = new()
-    {
-        BaseAddress = new Uri(AppConfig.ApiBaseUrl),
-        Timeout = TimeSpan.FromMinutes(5), // large manifest zips on slow connections
-    };
+    private readonly HttpClient _http = AppHttp.Create(
+        TimeSpan.FromMinutes(5), // large manifest zips on slow connections
+        new Uri(AppConfig.ApiBaseUrl));
 
     private static readonly JsonSerializerOptions JsonOpts = new() { PropertyNameCaseInsensitive = true };
 

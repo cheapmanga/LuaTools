@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Jazyk</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Vyberte jazyk zobrazení aplikace. Použije se po restartu.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Výchozí systému</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Překlad DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Pokud váš poskytovatel blokuje lua.tools, aplikace může adresy překládat přes Cloudflare (1.1.1.1) místo systémového překladače. „Automaticky“ se přepne až po selhání běžného DNS.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automaticky</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Vždy použít Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Používat jen systémové DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Umístění Steamu</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Změnit…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Otevřít</value></data>

@@ -111,6 +111,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Språk</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Velg appens visningsspråk. Tas i bruk etter en omstart.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Systemstandard</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-oppslag</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Hvis leverandøren din blokkerer lua.tools, kan appen slå opp adresser via Cloudflare (1.1.1.1) i stedet for systemets oppslag. «Automatisk» bytter først når vanlig DNS feiler.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatisk</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Bruk alltid Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Bruk bare systemets DNS</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam-plassering</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Endre…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Åpne</value></data>
