@@ -72,6 +72,11 @@ public static class Strings
     public static string Settings_Language => Get(nameof(Settings_Language));
     public static string Settings_Language_Hint => Get(nameof(Settings_Language_Hint));
     public static string Settings_Language_SystemDefault => Get(nameof(Settings_Language_SystemDefault));
+    public static string Settings_Dns => Get(nameof(Settings_Dns));
+    public static string Settings_Dns_Hint => Get(nameof(Settings_Dns_Hint));
+    public static string Settings_Dns_Auto => Get(nameof(Settings_Dns_Auto));
+    public static string Settings_Dns_Always => Get(nameof(Settings_Dns_Always));
+    public static string Settings_Dns_Never => Get(nameof(Settings_Dns_Never));
     public static string Settings_SteamLocation => Get(nameof(Settings_SteamLocation));
     public static string Settings_Change => Get(nameof(Settings_Change));
     public static string Settings_Open => Get(nameof(Settings_Open));

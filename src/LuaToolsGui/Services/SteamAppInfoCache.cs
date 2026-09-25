@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -67,7 +67,7 @@ public class SteamAppInfoCache
     // (the fast in-RAM index below) are derived from these on demand; there is no separate appinfo.json.
     private static readonly string DetailsDir = Path.Combine(Dir, "details");
 
-    private readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private readonly HttpClient _http = AppHttp.Create(TimeSpan.FromSeconds(15));
     // In-memory fast path for name/header-image. Populated by network resolves, and lazily rehydrated from
     // the /details blobs on a GetCached miss. A null value means "looked, no usable details" (negative
     // cache) so we don't re-read a missing/empty blob on every grid render.

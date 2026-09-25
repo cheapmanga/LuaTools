@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>ภาษา</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>เลือกภาษาที่แสดงของแอป จะมีผลหลังจากรีสตาร์ท</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>ค่าเริ่มต้นของระบบ</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>การแปลงชื่อ DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>หากผู้ให้บริการของคุณบล็อก lua.tools แอปสามารถค้นหาที่อยู่ผ่าน Cloudflare (1.1.1.1) แทนตัวแปลงของระบบได้ โหมด “อัตโนมัติ” จะสลับเมื่อ DNS ปกติล้มเหลวเท่านั้น</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>อัตโนมัติ</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>ใช้ Cloudflare เสมอ</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>ใช้ DNS ของระบบเท่านั้น</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>ตำแหน่ง Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>เปลี่ยน…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>เปิด</value></data>

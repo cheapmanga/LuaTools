@@ -225,6 +225,12 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        // Point the shared HTTP handler at the DNS setting before anything makes a request. It calls
+        // this per connection rather than reading it now, so the order is not load-bearing — but doing
+        // it first means the very first call of the session already honours the user's choice.
+        var dnsSettings = _host.Services.GetRequiredService<SettingsService>();
+        AppHttp.ModeProvider = () => dnsSettings.DnsMode;
+
         // Legacy cleanup: older builds staged downloads in ~/Downloads/LuaTools (they now stage in
         // %TEMP% and self-delete). Remove any leftovers from that user-visible folder, best-effort.
         // Also sweep the current %TEMP% staging folder: a crash mid-download, or an overwrite confirm

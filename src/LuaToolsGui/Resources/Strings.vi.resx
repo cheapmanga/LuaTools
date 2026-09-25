@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Ngôn ngữ</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Chọn ngôn ngữ hiển thị của ứng dụng. Áp dụng sau khi khởi động lại.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Mặc định của hệ thống</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Phân giải DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Nếu nhà mạng chặn lua.tools, ứng dụng có thể tra cứu địa chỉ qua Cloudflare (1.1.1.1) thay cho bộ phân giải hệ thống. «Tự động» chỉ chuyển sang sau khi DNS thông thường thất bại.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Tự động</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Luôn dùng Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Chỉ dùng DNS hệ thống</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Vị trí Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Thay đổi…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Mở</value></data>

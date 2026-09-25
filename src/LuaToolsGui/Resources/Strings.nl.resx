@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Taal</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Kies de weergavetaal van de app. Wordt toegepast na een herstart.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Systeemstandaard</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>DNS-resolutie</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Als je provider lua.tools blokkeert, kan de app adressen opzoeken via Cloudflare (1.1.1.1) in plaats van je systeemresolver. 'Automatisch' schakelt pas over nadat je normale DNS faalt.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Automatisch</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Altijd Cloudflare gebruiken</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Alleen systeem-DNS gebruiken</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Steam-locatie</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Wijzigen…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Openen</value></data>

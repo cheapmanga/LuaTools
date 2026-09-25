@@ -109,6 +109,11 @@
   <data name="Settings_Language" xml:space="preserve"><value>Γλώσσα</value></data>
   <data name="Settings_Language_Hint" xml:space="preserve"><value>Επιλέξτε τη γλώσσα εμφάνισης της εφαρμογής. Εφαρμόζεται μετά από επανεκκίνηση.</value></data>
   <data name="Settings_Language_SystemDefault" xml:space="preserve"><value>Προεπιλογή συστήματος</value></data>
+  <data name="Settings_Dns" xml:space="preserve"><value>Ανάλυση DNS</value></data>
+  <data name="Settings_Dns_Hint" xml:space="preserve"><value>Αν ο πάροχός σας μπλοκάρει το lua.tools, η εφαρμογή μπορεί να αναλύει διευθύνσεις μέσω Cloudflare (1.1.1.1) αντί για τον αναλυτή του συστήματος. Η «Αυτόματη» λειτουργία αλλάζει μόνο αφού αποτύχει το κανονικό DNS.</value></data>
+  <data name="Settings_Dns_Auto" xml:space="preserve"><value>Αυτόματα</value></data>
+  <data name="Settings_Dns_Always" xml:space="preserve"><value>Πάντα Cloudflare</value></data>
+  <data name="Settings_Dns_Never" xml:space="preserve"><value>Μόνο DNS συστήματος</value></data>
   <data name="Settings_SteamLocation" xml:space="preserve"><value>Τοποθεσία Steam</value></data>
   <data name="Settings_Change" xml:space="preserve"><value>Αλλαγή…</value></data>
   <data name="Settings_Open" xml:space="preserve"><value>Άνοιγμα</value></data>
