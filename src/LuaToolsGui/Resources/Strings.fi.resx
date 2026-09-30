@@ -760,4 +760,21 @@ Lunastetaanko silti?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA-tunnus</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA:n Denuvo-tunnus</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Kirjoittaa Denuvo-tunnuksen EA-pelin anadius.cfg- ja token.ini-tiedostoihin. Tiedostoja muokataan tällä tietokoneella; mitään ei lähetetä minnekään.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Pelikansio</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Kansio, johon peli on asennettu</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Selaa…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Valitse pelin kansio</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Löydetyt asetustiedostot: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Tässä kansiossa ei ole anadius.cfg- tai token.ini-tiedostoa.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo-tunnus</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Liitä tunnus tähän</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Kirjoita tunnus</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Tunnus kirjoitettu {0} tiedostoon.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0} tiedostoa löytyi, mutta missään ei ole korvattavaa tunnusta.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Tunnus ei voi sisältää lainausmerkkejä tai rivinvaihtoja.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Tiedostoja ei voitu kirjoittaa: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA-tunnus kirjoitettu</value></data>
 </root>

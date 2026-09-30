@@ -786,4 +786,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>رمز EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>رمز Denuvo لـ EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>يكتب رمز Denuvo في ملفي anadius.cfg و token.ini للعبة من EA. يتم تعديل الملفات على هذا الجهاز؛ لا يُرسل أي شيء إلى أي مكان.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>مجلد اللعبة</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>المجلد الذي ثُبتت فيه اللعبة</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>استعراض…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>اختر مجلد اللعبة</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>ملفات الإعداد التي عُثر عليها: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>لا يوجد anadius.cfg أو token.ini في هذا المجلد.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>رمز Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>الصق الرمز هنا</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>كتابة الرمز</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>تمت كتابة الرمز في {0} ملف.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>تم العثور على {0} ملف، لكن لا يحتوي أي منها على رمز لاستبداله.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>لا يمكن أن يحتوي الرمز على علامات اقتباس أو فواصل أسطر.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>تعذرت كتابة الملفات: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>تمت كتابة رمز EA</value></data>
 </root>

@@ -1,0 +1,101 @@
+﻿<UserControl
+    x:Class="LuaToolsGui.Views.EaTokenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="clr-namespace:LuaToolsGui.Resources"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:LuaToolsGui.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vm:EaTokenViewModel}"
+    TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24">
+            <!--  Header  -->
+            <TextBlock
+                FontSize="22"
+                FontWeight="Bold"
+                Text="{x:Static res:Strings.Ea_Title}" />
+            <TextBlock
+                Margin="0,4,0,0"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="{x:Static res:Strings.Ea_Subtitle}"
+                TextWrapping="Wrap" />
+
+            <!--  Game folder. The config files found in it are listed right under the box, so a wrong
+                  folder is visible before anything is written.  -->
+            <TextBlock
+                Margin="0,18,0,6"
+                FontWeight="SemiBold"
+                Text="{x:Static res:Strings.Ea_Folder}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:TextBox
+                    Grid.Column="0"
+                    IsEnabled="{Binding NotApplying}"
+                    PlaceholderText="{x:Static res:Strings.Ea_Folder_Placeholder}"
+                    Text="{Binding GameFolder}" />
+                <ui:Button
+                    Grid.Column="1"
+                    Margin="8,0,0,0"
+                    Command="{Binding BrowseCommand}"
+                    Content="{x:Static res:Strings.Ea_Browse}"
+                    Icon="{ui:SymbolIcon Folder24}"
+                    IsEnabled="{Binding NotApplying}" />
+            </Grid>
+            <TextBlock
+                Margin="0,6,0,0"
+                FontSize="12"
+                Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                Text="{Binding FoundText}"
+                TextWrapping="Wrap" />
+
+            <!--  Token + apply  -->
+            <TextBlock
+                Margin="0,16,0,6"
+                FontWeight="SemiBold"
+                Text="{x:Static res:Strings.Ea_Token}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:TextBox
+                    Grid.Column="0"
+                    FontFamily="Consolas"
+                    IsEnabled="{Binding NotApplying}"
+                    PlaceholderText="{x:Static res:Strings.Ea_Token_Placeholder}"
+                    Text="{Binding Token, UpdateSourceTrigger=PropertyChanged}" />
+                <ui:Button
+                    Grid.Column="1"
+                    Margin="8,0,0,0"
+                    Appearance="Primary"
+                    Command="{Binding ApplyCommand}"
+                    Content="{x:Static res:Strings.Ea_Apply}"
+                    Icon="{ui:SymbolIcon Checkmark24}" />
+            </Grid>
+
+            <TextBlock
+                Margin="0,10,0,0"
+                Text="{Binding Status}"
+                TextWrapping="Wrap"
+                Visibility="{Binding HasStatus, Converter={StaticResource BoolToVis}}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#22c55e" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding StatusIsError}" Value="True">
+                                <Setter Property="Foreground" Value="#f87171" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

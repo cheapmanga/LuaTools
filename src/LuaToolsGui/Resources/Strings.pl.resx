@@ -760,4 +760,21 @@ Zrealizować mimo to?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>Token EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Token Denuvo EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Zapisuje token Denuvo w plikach anadius.cfg i token.ini gry EA. Pliki są edytowane na tym komputerze; nic nie jest nigdzie wysyłane.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Folder gry</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Folder, w którym zainstalowano grę</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Przeglądaj…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Wybierz folder gry</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Znalezione pliki konfiguracyjne: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Brak anadius.cfg ani token.ini w tym folderze.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Token Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Wklej tutaj token</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Zapisz token</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Zapisano token w {0} plikach.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>Znaleziono {0} plików, ale żaden nie ma tokenu do zastąpienia.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Token nie może zawierać cudzysłowów ani znaków nowej linii.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Nie udało się zapisać plików: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>Zapisano token EA</value></data>
 </root>

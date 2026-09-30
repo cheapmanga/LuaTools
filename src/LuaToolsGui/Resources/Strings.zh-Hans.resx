@@ -780,4 +780,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA 令牌</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA Denuvo 令牌</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>将 Denuvo 令牌写入 EA 游戏的 anadius.cfg 和 token.ini。文件在本机上修改，不会发送到任何地方。</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>游戏文件夹</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>游戏的安装文件夹</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>浏览…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>选择游戏文件夹</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>找到的配置文件：{0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>此文件夹中没有 anadius.cfg 或 token.ini。</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo 令牌</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>在此粘贴令牌</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>写入令牌</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>已将令牌写入 {0} 个文件。</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>找到 {0} 个文件，但没有可替换的令牌。</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>令牌不能包含引号或换行符。</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>无法写入文件：{0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA 令牌已写入</value></data>
 </root>

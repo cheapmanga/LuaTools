@@ -739,4 +739,23 @@ public static class Strings
     public static string Addons_State_Disabled => Get(nameof(Addons_State_Disabled));
     public static string Addons_State_Failed => Get(nameof(Addons_State_Failed));
     public static string Addons_Refresh => Get(nameof(Addons_Refresh));
+
+    // ── EA token (Denuvo page) ──
+    public static string Ea_Tab => Get(nameof(Ea_Tab));
+    public static string Ea_Title => Get(nameof(Ea_Title));
+    public static string Ea_Subtitle => Get(nameof(Ea_Subtitle));
+    public static string Ea_Folder => Get(nameof(Ea_Folder));
+    public static string Ea_Folder_Placeholder => Get(nameof(Ea_Folder_Placeholder));
+    public static string Ea_Browse => Get(nameof(Ea_Browse));
+    public static string Ea_ChooseFolder => Get(nameof(Ea_ChooseFolder));
+    public static string Ea_Found => Get(nameof(Ea_Found));
+    public static string Ea_NotFound => Get(nameof(Ea_NotFound));
+    public static string Ea_Token => Get(nameof(Ea_Token));
+    public static string Ea_Token_Placeholder => Get(nameof(Ea_Token_Placeholder));
+    public static string Ea_Apply => Get(nameof(Ea_Apply));
+    public static string Ea_Status_Done => Get(nameof(Ea_Status_Done));
+    public static string Ea_Status_NothingToReplace => Get(nameof(Ea_Status_NothingToReplace));
+    public static string Ea_Status_Invalid => Get(nameof(Ea_Status_Invalid));
+    public static string Ea_Status_Failed => Get(nameof(Ea_Status_Failed));
+    public static string Ea_Toast_Done => Get(nameof(Ea_Toast_Done));
 }

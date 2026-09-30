@@ -760,4 +760,21 @@ Resgatar mesmo assim?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>Token da EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Token Denuvo da EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Escreve um token Denuvo nos ficheiros anadius.cfg e token.ini de um jogo da EA. Os ficheiros são editados neste PC; nada é enviado para lado nenhum.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Pasta do jogo</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Pasta onde o jogo está instalado</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Procurar…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Escolhe a pasta do jogo</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Ficheiros de configuração encontrados: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Nenhum anadius.cfg ou token.ini nesta pasta.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Token Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Cola o token aqui</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Escrever o token</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Token escrito em {0} ficheiro(s).</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0} ficheiro(s) encontrado(s), mas nenhum tem um token para substituir.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>O token não pode conter aspas nem quebras de linha.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Não foi possível escrever os ficheiros: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>Token da EA escrito</value></data>
 </root>

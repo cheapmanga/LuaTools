@@ -795,4 +795,21 @@ Redeem anyway?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA token</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA Denuvo token</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Writes a Denuvo token into an EA game's anadius.cfg and token.ini. The files are edited on this PC; nothing is sent anywhere.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Game folder</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Folder where the game is installed</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Browse…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Choose the game's folder</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Config files found: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>No anadius.cfg or token.ini in this folder.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo token</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Paste the token here</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Write the token</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Token written to {0} file(s).</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0} file(s) found, but none has a token to replace.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>The token can't contain quotes or line breaks.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Couldn't write the files: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA token written</value></data>
 </root>

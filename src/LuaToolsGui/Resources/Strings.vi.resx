@@ -760,4 +760,21 @@ Vẫn đổi chứ?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>Token EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Token Denuvo của EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Ghi token Denuvo vào các tệp anadius.cfg và token.ini của một trò chơi EA. Các tệp được chỉnh sửa trên máy này; không có gì được gửi đi.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Thư mục trò chơi</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Thư mục cài đặt trò chơi</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Duyệt…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Chọn thư mục của trò chơi</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Đã tìm thấy tệp cấu hình: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Không có anadius.cfg hoặc token.ini trong thư mục này.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Token Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Dán token vào đây</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Ghi token</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Đã ghi token vào {0} tệp.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>Tìm thấy {0} tệp, nhưng không tệp nào có token để thay thế.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Token không được chứa dấu ngoặc kép hoặc xuống dòng.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Không thể ghi tệp: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>Đã ghi token EA</value></data>
 </root>
