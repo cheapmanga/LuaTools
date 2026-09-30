@@ -760,4 +760,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA токен</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Denuvo токен за EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Записва Denuvo токен във файловете anadius.cfg и token.ini на игра от EA. Файловете се редактират на този компютър; нищо не се изпраща никъде.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Папка на играта</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Папка, в която е инсталирана играта</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Преглед…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Изберете папката на играта</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Намерени конфигурационни файлове: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>В тази папка няма anadius.cfg или token.ini.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo токен</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Поставете токена тук</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Запиши токена</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Токенът е записан в {0} файл(а).</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>Намерени са {0} файл(а), но в никой няма токен за замяна.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Токенът не може да съдържа кавички или нови редове.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Файловете не можаха да бъдат записани: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA токенът е записан</value></data>
 </root>

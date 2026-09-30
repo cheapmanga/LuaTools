@@ -760,4 +760,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>Токен EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Токен Denuvo для EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Записывает токен Denuvo в файлы anadius.cfg и token.ini игры EA. Файлы изменяются на этом ПК; ничего никуда не отправляется.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Папка игры</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Папка, в которую установлена игра</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Обзор…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Выберите папку игры</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Найдены файлы конфигурации: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>В этой папке нет anadius.cfg или token.ini.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Токен Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Вставьте токен сюда</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Записать токен</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Токен записан в файлов: {0}.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>Найдено файлов: {0}, но ни в одном нет токена для замены.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Токен не может содержать кавычки или переводы строк.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Не удалось записать файлы: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>Токен EA записан</value></data>
 </root>

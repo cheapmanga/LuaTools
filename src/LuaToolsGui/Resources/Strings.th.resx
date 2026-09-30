@@ -760,4 +760,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>โทเค็น EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>โทเค็น Denuvo ของ EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>เขียนโทเค็น Denuvo ลงในไฟล์ anadius.cfg และ token.ini ของเกม EA ไฟล์จะถูกแก้ไขบนพีซีเครื่องนี้ ไม่มีการส่งข้อมูลไปที่ใด</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>โฟลเดอร์เกม</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>โฟลเดอร์ที่ติดตั้งเกม</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>เรียกดู…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>เลือกโฟลเดอร์ของเกม</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>พบไฟล์การตั้งค่า: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>ไม่มี anadius.cfg หรือ token.ini ในโฟลเดอร์นี้</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>โทเค็น Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>วางโทเค็นที่นี่</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>เขียนโทเค็น</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>เขียนโทเค็นลงใน {0} ไฟล์แล้ว</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>พบ {0} ไฟล์ แต่ไม่มีไฟล์ใดมีโทเค็นให้แทนที่</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>โทเค็นต้องไม่มีเครื่องหมายคำพูดหรือการขึ้นบรรทัดใหม่</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>ไม่สามารถเขียนไฟล์ได้: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>เขียนโทเค็น EA แล้ว</value></data>
 </root>

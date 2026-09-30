@@ -40,6 +40,7 @@ public partial class App : Application
                 services.AddSingleton<PrivateDotnetRuntime>();
                 services.AddSingleton<DevuvoService>();
                 services.AddSingleton<TokeerService>();
+                services.AddSingleton<EaConfigService>();
                 services.AddSingleton<ToastService>();
                 services.AddSingleton<SteamDepotInfo>();
                 services.AddSingleton<LuaVault>();
@@ -92,6 +93,7 @@ public partial class App : Application
                 services.AddSingleton<PluginViewModel>();
                 services.AddSingleton<ValidatorViewModel>();
                 services.AddSingleton<TokeerViewModel>();
+                services.AddSingleton<EaTokenViewModel>();
                 services.AddSingleton<AddonsViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
                 services.AddSingleton<MainViewModel>();
@@ -106,6 +108,7 @@ public partial class App : Application
                 services.AddSingleton<AchievementsView>();
                 services.AddSingleton<ValidatorView>(); // hosted inside DenuvoView
                 services.AddSingleton<TokeerView>();     // hosted inside DenuvoView
+                services.AddSingleton<EaTokenView>();    // hosted inside DenuvoView
                 services.AddSingleton<DenuvoView>();
                 services.AddSingleton<PluginView>();
                 services.AddSingleton<AddonsView>();

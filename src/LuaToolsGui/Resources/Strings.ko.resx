@@ -760,4 +760,21 @@ Steam\config\stplug-in에서 .lua 파일을 삭제합니다.</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA 토큰</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA Denuvo 토큰</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>EA 게임의 anadius.cfg와 token.ini에 Denuvo 토큰을 기록합니다. 파일은 이 PC에서 수정되며, 아무것도 외부로 전송되지 않습니다.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>게임 폴더</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>게임이 설치된 폴더</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>찾아보기…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>게임 폴더 선택</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>찾은 설정 파일: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>이 폴더에 anadius.cfg 또는 token.ini가 없습니다.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo 토큰</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>여기에 토큰 붙여넣기</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>토큰 기록</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>{0}개 파일에 토큰을 기록했습니다.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0}개 파일을 찾았지만 교체할 토큰이 없습니다.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>토큰에는 따옴표나 줄바꿈을 넣을 수 없습니다.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>파일을 기록할 수 없습니다: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA 토큰 기록됨</value></data>
 </root>

@@ -760,4 +760,21 @@ Toch inwisselen?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA-token</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA Denuvo-token</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Schrijft een Denuvo-token in de anadius.cfg en token.ini van een EA-game. De bestanden worden op deze pc bewerkt; er wordt niets verstuurd.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Gamemap</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Map waarin de game is geïnstalleerd</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Bladeren…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Kies de map van de game</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Gevonden configuratiebestanden: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Geen anadius.cfg of token.ini in deze map.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo-token</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Plak het token hier</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Token schrijven</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Token geschreven naar {0} bestand(en).</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0} bestand(en) gevonden, maar geen enkel bevat een token om te vervangen.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Het token mag geen aanhalingstekens of regeleinden bevatten.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Kan de bestanden niet schrijven: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA-token geschreven</value></data>
 </root>

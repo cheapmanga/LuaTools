@@ -760,4 +760,21 @@ Yine de kullanmak ister misin?</value></data>
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>EA token'ı</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>EA Denuvo token'ı</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Bir EA oyununun anadius.cfg ve token.ini dosyalarına Denuvo token'ı yazar. Dosyalar bu bilgisayarda düzenlenir; hiçbir yere bir şey gönderilmez.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Oyun klasörü</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Oyunun kurulu olduğu klasör</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Gözat…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Oyunun klasörünü seçin</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Bulunan yapılandırma dosyaları: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Bu klasörde anadius.cfg veya token.ini yok.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Denuvo token'ı</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Token'ı buraya yapıştırın</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Token'ı yaz</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Token {0} dosyaya yazıldı.</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>{0} dosya bulundu, ancak hiçbirinde değiştirilecek token yok.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Token tırnak işareti veya satır sonu içeremez.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Dosyalar yazılamadı: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>EA token'ı yazıldı</value></data>
 </root>

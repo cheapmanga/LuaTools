@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Sub-tabs. The two panels stay mounted and we toggle visibility, so switching never
+        <!-- Sub-tabs. The panels stay mounted and we toggle visibility, so switching never
              re-runs their Loaded/LoadAsync and never drops what the user has typed. -->
         <StackPanel
             Grid.Row="0"
@@ -32,11 +32,18 @@
                 Appearance="Secondary"
                 Click="TabTokeer_Click"
                 Content="Tokeer" />
+            <ui:Button
+                x:Name="TabEaToken"
+                Margin="8,0,0,0"
+                Appearance="Secondary"
+                Click="TabEaToken_Click"
+                Content="{x:Static res:Strings.Ea_Tab}" />
         </StackPanel>
 
         <Grid Grid.Row="1">
             <ContentControl x:Name="ValidatorHost" />
             <ContentControl x:Name="TokeerHost" Visibility="Collapsed" />
+            <ContentControl x:Name="EaTokenHost" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </UserControl>

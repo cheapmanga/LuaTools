@@ -760,4 +760,21 @@
   <data name="Plugin_Source_Title" xml:space="preserve"><value>Use the official plugin</value></data>
   <data name="Plugin_Source_Desc" xml:space="preserve"><value>Install madoiscool's upstream plugin instead of this fork's own (its crescent logo, themes and free-source rows). Off = the fork's plugin.</value></data>
   <data name="Depot_Status_DonePartial" xml:space="preserve"><value>{0} depots downloaded to {1} · {2} skipped (no free source has them — sign in to download those).</value></data>
+  <data name="Ea_Tab" xml:space="preserve"><value>Token EA</value></data>
+  <data name="Ea_Title" xml:space="preserve"><value>Token Denuvo της EA</value></data>
+  <data name="Ea_Subtitle" xml:space="preserve"><value>Γράφει ένα token Denuvo στα αρχεία anadius.cfg και token.ini ενός παιχνιδιού της EA. Τα αρχεία επεξεργάζονται σε αυτόν τον υπολογιστή· τίποτα δεν αποστέλλεται πουθενά.</value></data>
+  <data name="Ea_Folder" xml:space="preserve"><value>Φάκελος παιχνιδιού</value></data>
+  <data name="Ea_Folder_Placeholder" xml:space="preserve"><value>Φάκελος όπου είναι εγκατεστημένο το παιχνίδι</value></data>
+  <data name="Ea_Browse" xml:space="preserve"><value>Αναζήτηση…</value></data>
+  <data name="Ea_ChooseFolder" xml:space="preserve"><value>Επιλέξτε τον φάκελο του παιχνιδιού</value></data>
+  <data name="Ea_Found" xml:space="preserve"><value>Αρχεία ρυθμίσεων που βρέθηκαν: {0}</value></data>
+  <data name="Ea_NotFound" xml:space="preserve"><value>Δεν υπάρχει anadius.cfg ή token.ini σε αυτόν τον φάκελο.</value></data>
+  <data name="Ea_Token" xml:space="preserve"><value>Token Denuvo</value></data>
+  <data name="Ea_Token_Placeholder" xml:space="preserve"><value>Επικολλήστε το token εδώ</value></data>
+  <data name="Ea_Apply" xml:space="preserve"><value>Εγγραφή token</value></data>
+  <data name="Ea_Status_Done" xml:space="preserve"><value>Το token γράφτηκε σε {0} αρχείο(α).</value></data>
+  <data name="Ea_Status_NothingToReplace" xml:space="preserve"><value>Βρέθηκαν {0} αρχείο(α), αλλά κανένα δεν έχει token για αντικατάσταση.</value></data>
+  <data name="Ea_Status_Invalid" xml:space="preserve"><value>Το token δεν μπορεί να περιέχει εισαγωγικά ή αλλαγές γραμμής.</value></data>
+  <data name="Ea_Status_Failed" xml:space="preserve"><value>Δεν ήταν δυνατή η εγγραφή των αρχείων: {0}</value></data>
+  <data name="Ea_Toast_Done" xml:space="preserve"><value>Το token EA γράφτηκε</value></data>
 </root>
